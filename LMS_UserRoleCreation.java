@@ -35,7 +35,7 @@ public class LMS_UserRoleCreation extends SeleneseTestCase {
     public Object[][] createData1() throws Exception{		
 		String filePathToUse = new File("resources/data/data1.xls").getAbsolutePath();
 		System.out.println("path: "+filePathToUse);
-        Object[][] retObjArr=getTableArray(filePathToUse,"DataPool", "dataUserCreation");
+        Object[][] retObjArr=getTableArray(filePathToUse,"DataPool", "LMS_UserRoleCreation");
         return(retObjArr);
     }	
 	

@@ -45,7 +45,7 @@ public class SclGrp_TopRecentNews extends SeleneseTestCase {
     public Object[][] createData1() throws Exception{		
 		String filePathToUse = new File("resources/data/data1.xls").getAbsolutePath();
 		System.out.println("path: "+filePathToUse);
-        Object[][] retObjArr=getTableArray(filePathToUse,"DataPool", "dataLMS");
+        Object[][] retObjArr=getTableArray(filePathToUse,"DataPool", "SclGrp_TopRecentNews");
         return(retObjArr);
     }	
 	
