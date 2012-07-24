@@ -20,6 +20,19 @@ import org.testng.annotations.Test;
 
 import com.thoughtworks.selenium.SeleneseTestCase;
 
+/**
+ * @author somesh.bansal
+ * Functionalities covered
+ * 1> Teacher logs in, Navigate to student's wall & post URL
+ * 2> Teacher post URL on course wall, creates a Social Group & Live Session
+ * 3> Student logs in, find/join & posts in Teacher's Social Group
+ * 4> Student creates a Social Group & Live Session
+ * 5> Student navigates to its wall and verifies all posts(wall & course) posted by Teacher
+ * 6> Teacher again logs in, join/leave student's Social Group
+ * 7> Teacher verifies all posts on its wall and recent news section
+ * 8> Teacher delete self created Social Group
+ */
+ 
 @SuppressWarnings("deprecation")
 public class SclGrp_TopRecentNews extends SeleneseTestCase {
 	

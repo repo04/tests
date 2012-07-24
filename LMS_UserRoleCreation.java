@@ -18,6 +18,13 @@ import org.testng.annotations.Test;
 
 import com.thoughtworks.selenium.SeleneseTestCase;
 
+/**
+ * @author somesh.bansal
+ * Functionalities covered
+ * 1> PES admin creates two users  
+ * 2> Enroll them as non-editing teacher & student in same course 
+ */
+ 
 @SuppressWarnings("deprecation")
 public class LMS_UserRoleCreation extends SeleneseTestCase {
 	
