@@ -39,7 +39,7 @@ public class LMS_UserRoleCreation extends SeleneseTestCase {
 	}
 
 	@Test (dataProvider = "DP1")
-	public void testLMS_POC(String url, String	usrPES, String	pswdPES, String tchrUserNm, String	tchrUsrPswd, 
+	public void testLMS_UserRoleCreation(String url, String	usrPES, String	pswdPES, String tchrUserNm, String	tchrUsrPswd, 
 		String tchrFNm, String	tchrSNm, String tchrEmailID, String city, String cntry, String timeZone,
 		String stdtUserNm, String	stdtUsrPswd, String stdtFNm, String	stdtSNm, String stdtEmailID) throws Exception 
 		{
@@ -176,10 +176,6 @@ public class LMS_UserRoleCreation extends SeleneseTestCase {
 			Thread.sleep(1000);
 		}
 		
-		//selenium.type("id=enrolusersearch", tchrFullName);
-		//selenium.keyDown("id=enrolusersearch", "\\13");
-		//selenium.keyPress("id=enrolusersearch", "\\13");
-		
 		driver.findElement(By.id("enrolusersearch")).sendKeys(tchrFullName);
 		driver.findElement(By.id("enrolusersearch")).sendKeys(Keys.RETURN);
 		for (int second = 0;; second++) {
@@ -200,32 +196,6 @@ public class LMS_UserRoleCreation extends SeleneseTestCase {
 		}
 		selenium.click("//div[3]/div[2]/input");
 		assertTrue(selenium.isTextPresent("Enrolled users"));
-		
-		/*actionBuilder("Profile","//ul[@id='nav']/li[2]/ul/li[4]/a");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Courses screen");
-			try { if (selenium.isTextPresent("Wall")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Courses screen");
-			try { if (selenium.isElementPresent("link=Section 3- Test group")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		selenium.click("link=Section 3- Test group");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Accessing specific course");
-			try { if (selenium.isElementPresent("//li[3]/p/span")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		selenium.click("//li[3]/p/span");
-		selenium.click("link=Enrolled users");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Enrolled users screen");
-			try { if (selenium.isElementPresent("css=input[type=\"submit\"]")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}*/
 		
 		for (int second = 0;; second++) {
 			if (second >= 60) fail("Timeout: Enrolled users screen");
@@ -322,113 +292,6 @@ public class LMS_UserRoleCreation extends SeleneseTestCase {
 			try { if (selenium.isTextPresent("TEST-Pankov")) break; } catch (Exception e) {}
 			Thread.sleep(1000);
 		}
-		
-		//Create Student
-		/*selenium.click("link=Home");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Accessing home screen");
-			try { if (selenium.isTextPresent("Top news feed is not available for system roles.")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		
-		selenium.click("//div/ul/li[3]/p");
-		selenium.click("//div/ul/li[3]/ul/li/p");
-		selenium.click("//li[3]/ul/li/ul/li/p");
-		selenium.click("link=Add a new user");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Add a new user");
-			try { if (selenium.isElementPresent("id=id_username")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		selenium.click("id=id_username");
-		selenium.type("id=id_username", stdtUserNm);
-		selenium.type("id=id_newpassword", stdtUsrPswd);
-		selenium.type("id=id_firstname", stdtFNm);
-		selenium.type("id=id_lastname", stdtSNm);
-		selenium.type("id=id_email", stdtEmailID);
-		selenium.type("id=id_city", city);
-		selenium.select("id=id_country", "label="+ cntry);
-		selenium.select("id=id_timezone", "label="+ timeZone);
-		selenium.click("id=id_submitbutton");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Create a new user");
-			try { if (selenium.isElementPresent("id=id_realname_op")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-
-		selenium.select("id=id_realname_op", "label=is equal to");
-		selenium.type("id=id_realname", stdtFullName);
-		selenium.click("id=id_addfilter");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Find a new user");
-			try { if (selenium.isElementPresent("link="+stdtFullName)) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		
-		// Add course to student
-		actionBuilder("Profile","//ul[@id='nav']/li[2]/ul/li[4]/a");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Courses screen");
-			try { if (selenium.isTextPresent("Wall")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Courses screen");
-			try { if (selenium.isElementPresent("link=Section 3- Test group")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		selenium.click("link=Section 3- Test group");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Accessing specific course");
-			try { if (selenium.isElementPresent("//li[3]/p/span")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		selenium.click("//li[3]/p/span");
-		selenium.click("link=Enrolled users");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Enrolled users screen");
-			try { if (selenium.isElementPresent("css=input[type=\"submit\"]")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		
-		selenium.click("css=input[type=\"submit\"]");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Enroll user");
-			try { if (selenium.isTextPresent("Enrolment options")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Enrolling user popup");
-			try { if (selenium.isElementPresent("id=enrolusersearch")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: Enrolling user popup");
-			try { if (selenium.isTextPresent("users found")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		
-		driver.findElement(By.id("enrolusersearch")).sendKeys(stdtFullName);
-		driver.findElement(By.id("enrolusersearch")).sendKeys(Keys.RETURN);
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: User not found");
-			try { if (selenium.isTextPresent("1 user found")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}		
-		
-		selenium.select("id=menuroleid", "label=Student");
-		selenium.removeSelection("//div[@id='groupids']/select", "label=None");
-		selenium.addSelection("//div[@id='groupids']/select", "label=TEST-Pankov");
-		selenium.click("//div[@id='useroptions']/input");
-		selenium.click("//div[3]/input");
-		for (int second = 0;; second++) {
-			if (second >= 60) fail("Timeout: User not enrolled");
-			try { if (!selenium.isVisible("//div[@id='useroptions']/input")) break; } catch (Exception e) {}
-			Thread.sleep(1000);
-		}
-		selenium.click("//div[3]/div[2]/input");
-		assertTrue(selenium.isTextPresent("Enrolled users"));*/
 		
 		//Verify Group
 		selenium.click("link=Home");
