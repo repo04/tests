@@ -25,7 +25,7 @@ import com.thoughtworks.selenium.SeleneseTestCase;
  * Functionalities covered
  * 1> Teacher logs in, Navigate to student's wall & post URL
  * 2> Teacher post URL on course wall, creates a Social Group & Live Session
- * 3> Student logs in, find/join & posts in Teacher's Social Group
+ * 3> Student logs in, find/join & posts in Teacher's Social Group Wall
  * 4> Student creates a Social Group & Live Session
  * 5> Student navigates to its wall and verifies all posts(wall & course) posted by Teacher
  * 6> Teacher again logs in, join/leave student's Social Group
@@ -52,7 +52,8 @@ public class SclGrp_TopRecentNews extends SeleneseTestCase {
 	@BeforeClass
 	public void setUp() throws Exception {
 		System.out.println("SclGrp_TopRecentNews RUN!");
-		driver = new FirefoxDriver();		
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();		
 	}
 	
 	

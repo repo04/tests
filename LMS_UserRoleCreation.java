@@ -42,7 +42,8 @@ public class LMS_UserRoleCreation extends SeleneseTestCase {
 	@BeforeClass
 	public void setUp() throws Exception {
 		System.out.println("LMS_UserRoleCreation RUN!");
-		driver = new FirefoxDriver();		
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
 	}
 
 	@Test (dataProvider = "DP1")
