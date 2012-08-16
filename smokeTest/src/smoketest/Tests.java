@@ -4,13 +4,9 @@
  */
 package smoketest;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-public class Tests 
+public class Tests
 {
+    
     public void testLogin( String university, String user ) throws Exception
     {
         Login l = new Login( university );
@@ -34,5 +30,18 @@ public class Tests
 //        {
 //            Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+    }
+    
+    public void testTextWallPost(String university) throws Exception  {
+        
+        wallPosts wp = new wallPosts();
+        wp.textPost(university);   
+        
+    
+    }
+    
+    public void testURLWallPost(String university) throws Exception  {
+        wallPosts wp = new wallPosts();
+        wp.urlPost(university);     
     }
 }
