@@ -10,6 +10,7 @@ package smoketest;
  */
 public class SmokeTest {
 
+      
     /**
      * @param args the command line arguments
      */
@@ -17,6 +18,11 @@ public class SmokeTest {
     {
         Tests t = new Tests();
         t.testLogin("guAccountProperty", "student");
+
         t.testLogin("guAccountProperty", "teacher");
+
+        t.testTextWallPost("guAccountProperty");
+        t.testURLWallPost("guAccountProperty");
+
     }
 }

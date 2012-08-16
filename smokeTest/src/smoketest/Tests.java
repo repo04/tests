@@ -4,12 +4,7 @@
  */
 package smoketest;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-public class Tests 
+public class Tests
 {
     /*
      * Test verifies successful login
@@ -24,5 +19,18 @@ public class Tests
         // Compares expected to actual page
         Utility.myVerifyCurrentPage( login.driver, login.av.getTokenValue("homePageTitle") );
         
+    }
+    
+    public void testTextWallPost(String university) throws Exception  {
+        
+        wallPosts wp = new wallPosts();
+        wp.textPost(university);   
+        
+    
+    }
+    
+    public void testURLWallPost(String university) throws Exception  {
+        wallPosts wp = new wallPosts();
+        wp.urlPost(university);     
     }
 }

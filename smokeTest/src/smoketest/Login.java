@@ -9,12 +9,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-
-public class Login 
+public class Login
 {
     protected WebDriver driver = new FirefoxDriver();
     protected AccountValues av;
-    
+
+    //WebDriver driver=new FirefoxDriver();
+    //private AccountValues av;
+   
     // Constructor that attempts to navigate to login page
     public Login( String university )
     {  
@@ -32,23 +34,25 @@ public class Login
         LoginPage lp = new LoginPage( driver, av.getTokenValue("loginPageTitle") );
         
         // Holds the XPATH location for name, password and login button
-        WebElement userName = driver.findElement( By.xpath(av.getTokenValue("stdntUserNameXPATH")) );
-        WebElement passWord = driver.findElement( By.xpath(av.getTokenValue("stdntPassXPATH")) );
+        WebElement userName = driver.findElement( By.xpath(av.getTokenValue("userNameXPATH")) );
+        WebElement passWord = driver.findElement( By.xpath(av.getTokenValue("pswdXPATH")) );
         WebElement btnLogin = driver.findElement( By.xpath(av.getTokenValue("btnLoginXPATH")) );
         
         switch( user )
         {
             case "student":
                 Utility.mySendKeys( userName, av.getTokenValue("stdntUserName") );
-                Utility.mySendKeys( passWord, av.getTokenValue("stdntPass") );
+                Utility.mySendKeys( passWord, av.getTokenValue("stdntPswd") );
                 break;
                 
             case "teacher":
-
-                // Same logic as student
+                Utility.mySendKeys( userName, av.getTokenValue("tchrUserName") );
+                Utility.mySendKeys( passWord, av.getTokenValue("tchrPswd") );
                 break;
             
             case "pesAdmin":
+                Utility.mySendKeys( userName, av.getTokenValue("pesUserName") );
+                Utility.mySendKeys( passWord, av.getTokenValue("pesPswd") );
                 break;
         }
         
