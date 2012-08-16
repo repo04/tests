@@ -16,7 +16,7 @@ public class LoginPage
         if( !pageTitle.equals(driver.getTitle()) )
         {
             throw new IllegalStateException( "Did not navigate to correct Login page. "
-                                           + "Current page: " + driver.getTitle() );
+                                           + "\nCurrent page: " + driver.getTitle() );
         }
     }
 }

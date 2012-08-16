@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package smoketest;
 
 import org.openqa.selenium.By;
@@ -12,7 +9,9 @@ import com.thoughtworks.selenium.SeleneseTestBase;
  *
  * @author somesh.bansal
  */
-public class IsPresent extends SeleneseTestBase{
+
+public class IsPresent extends SeleneseTestBase
+{
     
     public void isTextPresent(WebDriver driver, String textPosted, String wallCSS) throws Exception
     {           

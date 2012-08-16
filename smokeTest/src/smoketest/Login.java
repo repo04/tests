@@ -13,9 +13,7 @@ public class Login
 {
     protected WebDriver driver = new FirefoxDriver();
     protected AccountValues av;
-
-    //WebDriver driver=new FirefoxDriver();
-    //private AccountValues av;
+    protected LoginPage lp;
    
     // Constructor that attempts to navigate to login page
     public Login( String university )
@@ -28,16 +26,17 @@ public class Login
     }
     
     // Fills in necessary fields on Login Page and clicks button to attempt login
-    public void attemptLogin( String user ) throws Exception
+    public void attemptLogin( String user ) //throws Exception
     {
-        // LoginPage class verifies the loaded page is correct.  Throws an exception if fails  
-        LoginPage lp = new LoginPage( driver, av.getTokenValue("loginPageTitle") );
-        
+        // LoginPage class verifies the loaded page is correct.
+        lp = new LoginPage( driver, av.getTokenValue("loginPageTitle") );
+
         // Holds the XPATH location for name, password and login button
         WebElement userName = driver.findElement( By.xpath(av.getTokenValue("userNameXPATH")) );
         WebElement passWord = driver.findElement( By.xpath(av.getTokenValue("pswdXPATH")) );
         WebElement btnLogin = driver.findElement( By.xpath(av.getTokenValue("btnLoginXPATH")) );
-        
+
+        // Types key's from property file based on user tuype
         switch( user )
         {
             case "student":
@@ -55,10 +54,9 @@ public class Login
                 Utility.mySendKeys( passWord, av.getTokenValue("pesPswd") );
                 break;
         }
-        
         // Simulates click on Login button
-        Utility.myButtonClick( btnLogin, av.getTokenValue("btnLoginXPATH") );
-    }
-
+        Utility.myButtonClick( btnLogin );
+   }
+  
 }
 

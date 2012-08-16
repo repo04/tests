@@ -12,44 +12,55 @@ public class Utility
         
     }
     
-    public static void mySendKeys(WebElement e, String s ) throws Exception
+    public static void mySendKeys( WebElement e, String s )
     {
-        try
-        {
-            e.sendKeys(s);
-        }
-        
-        catch( Exception ex )
-        {
-            System.out.println("Failed to send keys to: " + e );
-            System.out.println( "Exception: " + ex );
-        }        
+        e.sendKeys(s);
     }
     
-    public static void myButtonClick( WebElement e, String s ) throws Exception
+    public static void myButtonClick( WebElement e )
     {
-        try
-        {
-            e.click();
-        }
-        
-        catch( Exception ex )
-        {
-            System.out.println( "Failed to click button: " + s );
-            System.out.println( "Exception: " + ex );
-        }
+        e.click();
     }
+//    public static void mySendKeys(WebElement e, String s ) throws Exception
+//    {
+//        try
+//        {
+//            e.sendKeys(s);
+//        }
+//        
+//        catch( Exception ex )
+//        {
+//            System.out.println("Failed to send keys to: " + e );
+//            System.out.println( "\nException: " + ex );
+//        }        
+//    }
+//    
+//    public static void myButtonClick( WebElement e, String s ) //throws Exception
+//    {
+//        try
+//        {
+//            e.click();
+//        }
+//        
+//        catch( Exception ex )
+//        {
+//            System.out.println( "Failed to click button: " + s );
+//            System.out.println( "\nException: " + ex );
+//        }
+//    }
     
-    public static void myVerifyCurrentPage( WebDriver driver, String page ) throws Exception
+    public static void myVerifyCurrentPage( WebDriver driver, String page )
     {
         if( !page.equals(driver.getTitle()) )
         {
-            throw new IllegalStateException( "Did not successfuly navigate to" + page
-                                           + " Current Page: " + driver.getTitle() );
+            throw new IllegalStateException( "Did not successfuly navigate to " + page
+                                           + ".  \nThe Current Page: " + driver.getTitle() );
         }
-        else
-            System.out.println( "Pass" );
     }
     
+    public static void myTearDown( WebDriver driver )
+    {
+        driver.quit();
+    }
     // POSSIBLY HAVE A TEARDOWN FUNCTION
 }
