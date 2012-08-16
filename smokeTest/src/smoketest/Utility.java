@@ -40,5 +40,16 @@ public class Utility
         }
     }
     
+    public static void myVerifyCurrentPage( WebDriver driver, String page ) throws Exception
+    {
+        if( !page.equals(driver.getTitle()) )
+        {
+            throw new IllegalStateException( "Did not successfuly navigate to" + page
+                                           + " Current Page: " + driver.getTitle() );
+        }
+        else
+            System.out.println( "Pass" );
+    }
+    
     // POSSIBLY HAVE A TEARDOWN FUNCTION
 }

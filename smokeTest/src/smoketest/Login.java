@@ -13,7 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class Login 
 {
     protected WebDriver driver = new FirefoxDriver();
-    private AccountValues av;
+    protected AccountValues av;
     
     // Constructor that attempts to navigate to login page
     public Login( String university )
@@ -25,9 +25,10 @@ public class Login
         driver.get( av.getTokenValue("programURL") );
     }
     
+    // Fills in necessary fields on Login Page and clicks button to attempt login
     public void attemptLogin( String user ) throws Exception
     {
-        // LoginPage class verifies the loaded page is correct 
+        // LoginPage class verifies the loaded page is correct.  Throws an exception if fails  
         LoginPage lp = new LoginPage( driver, av.getTokenValue("loginPageTitle") );
         
         // Holds the XPATH location for name, password and login button
@@ -53,9 +54,6 @@ public class Login
         
         // Simulates click on Login button
         Utility.myButtonClick( btnLogin, av.getTokenValue("btnLoginXPATH") );
-        
-        // Verifies new home page
-        HomePage hp = new HomePage( driver, av.getTokenValue("homePageTitle") );
     }
 
 }

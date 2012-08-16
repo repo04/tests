@@ -17,6 +17,6 @@ public class SmokeTest {
     {
         Tests t = new Tests();
         t.testLogin("guAccountProperty", "student");
-        
+        t.testLogin("guAccountProperty", "teacher");
     }
 }

@@ -11,28 +11,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Tests 
 {
+    /*
+     * Test verifies successful login
+     * University is the name of the properties file
+     * User is the role; student, teacher, pesadmin
+     */
     public void testLogin( String university, String user ) throws Exception
     {
-        Login l = new Login( university );
+        Login login = new Login( university );
+        login.attemptLogin( user );
+
+        // Compares expected to actual page
+        Utility.myVerifyCurrentPage( login.driver, login.av.getTokenValue("homePageTitle") );
         
-        l.attemptLogin(user);
-        
-        
-        
-        
-//        WebDriver driver = new FirefoxDriver();
-//        AccountValues v = new AccountValues( university );
-//        HomePage h = new HomePage( driver, v.getTokenValue("homePageTitle") );
-//        
-//        try 
-//        {
-//            Login l = new Login( university, user );
-//            
-//            
-//        } 
-//        catch (Exception ex) 
-//        {
-//            Logger.getLogger(Tests.class.getName()).log(Level.SEVERE, null, ex);
-//        }
     }
 }
