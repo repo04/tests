@@ -11,21 +11,15 @@ public class Tests
      * University is the name of the properties file
      * User is the role; student, teacher, pesadmin
      */
-    public void testLogin( String university, String user ) //throws Exception
+    public void testLogin( String university, String user )
     {
         Login login = new Login( university );
-//        
-//        try
-//        {
-            login.attemptLogin( user );
-            Utility.myVerifyCurrentPage( login.driver, login.av.getTokenValue("homePageTitle") );
-        //}
-
-//        catch( Exception ex )
-//        {
-         //   System.out.println( "Login not successful and / or page title value is incorrect:  " + ex );
-        //}
         
+        // Executes login attempt based on user type
+        login.attemptLogin( user );
+        
+        Utility.myVerifyCurrentPage( login.driver, login.av.getTokenValue("homePageTitle") );
+
         login.driver.quit();
     }
     

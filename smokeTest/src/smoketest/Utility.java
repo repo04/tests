@@ -21,33 +21,6 @@ public class Utility
     {
         e.click();
     }
-//    public static void mySendKeys(WebElement e, String s ) throws Exception
-//    {
-//        try
-//        {
-//            e.sendKeys(s);
-//        }
-//        
-//        catch( Exception ex )
-//        {
-//            System.out.println("Failed to send keys to: " + e );
-//            System.out.println( "\nException: " + ex );
-//        }        
-//    }
-//    
-//    public static void myButtonClick( WebElement e, String s ) //throws Exception
-//    {
-//        try
-//        {
-//            e.click();
-//        }
-//        
-//        catch( Exception ex )
-//        {
-//            System.out.println( "Failed to click button: " + s );
-//            System.out.println( "\nException: " + ex );
-//        }
-//    }
     
     public static void myVerifyCurrentPage( WebDriver driver, String page )
     {
@@ -62,5 +35,4 @@ public class Utility
     {
         driver.quit();
     }
-    // POSSIBLY HAVE A TEARDOWN FUNCTION
 }

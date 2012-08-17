@@ -16,11 +16,18 @@ public class SmokeTest
         {
                 System.out.println( "ERROR: " + ex );
         }
-        System.exit(1);
-       // t.testLogin("guAccountProperty", "teacher");
-
+       
+        try
+        {
+            t.testLogin("guAccountProperty", "teacher");
+        }
+        catch( Exception ex )
+        {
+            System.out.println( "ERROR: " + ex);
+        }
       // t.testTextWallPost("guAccountProperty");
        // t.testURLWallPost("guAccountProperty");
 
+        System.exit( 0 );
     }
 }
