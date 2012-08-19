@@ -4,35 +4,39 @@
  */
 package smoketest;
 
-public class Tests
-{
-    /*
-     * Test verifies successful login
-     * University is the name of the properties file
-     * User is the role; student, teacher, pesadmin
-     */
-    public void testLogin( String university, String user )
-    {
-        Login login = new Login( university );
-        
-        // Executes login attempt based on user type
-        login.attemptLogin( user );
-        
-        Utility.myVerifyCurrentPage( login.driver, login.av.getTokenValue("homePageTitle") );
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-        login.driver.quit();
-    }
+public class Tests {
     
-    public void testTextWallPost(String university) throws Exception  {
+    AccountValues av;
+    WebDriver driver;
+    
+    public void testLogin( String user ) {
         
-        wallPosts wp = new wallPosts();
-       // wp.textPost(university);   
+        LoginPage lp = new LoginPage( driver, av );
         
+        lp.attemptLogin( user );
+    } 
     
+    public void navigateToMyWall( String university, String user ) {
+        
+        LoginPage lp = new LoginPage( driver, av );
+            
+        lp.attemptLogin( user );
+        
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue( "homePageTitle") );
     }
     
-    public void testURLWallPost(String university) throws Exception  {
-        wallPosts wp = new wallPosts();
-        //wp.urlPost(university);     
+    public void setUp( String university ) {
+        
+        driver = new FirefoxDriver();
+        av = new AccountValues( university );
+        
     }
+    
+    public void tearDown() {
+        driver.quit();
+    }
+            
 }

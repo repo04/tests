@@ -30,9 +30,5 @@ public class Utility
                                            + ".  \nThe Current Page: " + driver.getTitle() );
         }
     }
-    
-    public static void myTearDown( WebDriver driver )
-    {
-        driver.quit();
-    }
+
 }

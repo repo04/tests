@@ -1,23 +1,38 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package smoketest;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-//import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class LoginPage 
-{
+public class LoginPage extends Page {
+    
     // Verifies the loaded page is successful LoginPage 
-    public LoginPage( WebDriver driver, String pageTitle )
-    {        
-        // Grabs the page title from the browser and compares to the expected from Property file
-        if( !pageTitle.equals(driver.getTitle()) )
-        {
-            throw new IllegalStateException( "Did not navigate to correct Login page. "
-                                           + "\nCurrent page: " + driver.getTitle() );
+    public LoginPage( WebDriver driver, AccountValues av ) {        
+        
+        super( driver, av );
+        
+        driver.get( av.getTokenValue("programURL") );     
+    }
+    
+    public void attemptLogin( String user ) {
+        
+        WebElement userName = driver.findElement( By.xpath(av.getTokenValue("userNameXPATH")) );
+        WebElement passWord = driver.findElement( By.xpath(av.getTokenValue("pswdXPATH")) );
+        WebElement loginBtn = driver.findElement( By.xpath(av.getTokenValue("loginBtnXPATH")) );
+        
+        switch( user ) {
+            
+            case "student":
+                Utility.mySendKeys( userName, av.getTokenValue("stdntUserName") );
+                Utility.mySendKeys( passWord, av.getTokenValue("stdntPswd") );
+                break;
         }
+        
+        Utility.myButtonClick( loginBtn );
+        
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue("homePageTitle") );
+            
     }
 }
 
