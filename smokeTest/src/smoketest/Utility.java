@@ -2,6 +2,7 @@
 package smoketest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -30,5 +31,12 @@ public class Utility
                                            + ".  \nThe Current Page: " + driver.getTitle() );
         }
     }
+
+    public static void navigateToSubMenu(WebDriver driver, String menuXPath) {
+		
+	WebElement hiddenElement = driver.findElement(By.xpath(menuXPath));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
+		
+   }
 
 }

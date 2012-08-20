@@ -1,13 +1,10 @@
 
 package smoketest;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 
 public class SmokeTest 
 { 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
         Tests t = new Tests();
 
@@ -23,7 +20,16 @@ public class SmokeTest
         
         // Test navigation to wall
 
-            t.setUp( "guAccountProperty" );
-            t.navigateToMyWall( "student", "stdntMyWallURL" );
+            t.setUp("guAccountProperty");
+            
+            //2nd parameter not required anymore
+            //t.navigateToMyWall("student", "stdntMyWallURL");
+            t.navigateToMyWall("student");
+            //t.testTextWallPost();
+            //t.testURLWallPost();
+            t.testCreateSclGrp("sclGrpName");
+            t.testCreateLiveSsn("sclGrpName", "liveSessionName");
+            t.tearDown();
+            
     }
 }

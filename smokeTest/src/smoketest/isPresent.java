@@ -1,36 +1,44 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package smoketest;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.thoughtworks.selenium.SeleneseTestBase;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 /**
  *
  * @author somesh.bansal
  */
-
-public class IsPresent extends SeleneseTestBase
-{
+public class IsPresent {
     
-    public void isTextPresent(WebDriver driver, String textPosted, String wallCSS) throws Exception
+    public void isTextPresentByCSS(WebDriver driver, String textPostCSS, String txtByCSS) throws Exception
     {           
-        for (int second = 0;; second++) {
-            if (second >= 60) fail("Did not find Text: "+ textPosted +" posted on wall");
-            try { if (textPosted.equals(driver.findElement(By.cssSelector(wallCSS)).getText())) break; } catch (Exception e) {}
-            Thread.sleep(1000);
-	}
-        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.cssSelector(textPostCSS), txtByCSS));        
     }
     
-    public void isElementPresent(WebDriver driver, String urlPosted) throws Exception
+    public void isTextPresentByXpath(WebDriver driver, String headingTextPath, String txtByXPath) throws Exception
+    {    
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath(headingTextPath), txtByXPath));        
+    }
+    
+    public void isElementPresentByLink(WebDriver driver, String elmntByLink) throws Exception
     {           
-        for (int second = 0;; second++) {
-            if (second >= 60) fail("Did not find URL: "+ urlPosted +" posted on wall");
-            try { if (urlPosted.equals(driver.findElement(By.xpath("//a[contains(text(),'"+urlPosted+"')]")).getText())) break; } catch (Exception e) {}
-            Thread.sleep(1000);
-	}        
-        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elmntByLink)));       
+    }
+    
+    public void isElementPresentByXpath(WebDriver driver, String elmntByXPath) throws Exception
+    {           
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'"+elmntByXPath+"')]")));	        
+    }
+    
+    public void isElementPresentByID(WebDriver driver, String elmntByID) {
+	new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.id(elmntByID)));		
     }  
     
 }
