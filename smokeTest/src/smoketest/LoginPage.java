@@ -18,7 +18,7 @@ public class LoginPage extends Page {
         
         WebElement userName = driver.findElement( By.xpath(av.getTokenValue("userNameXPATH")) );
         WebElement passWord = driver.findElement( By.xpath(av.getTokenValue("pswdXPATH")) );
-        WebElement loginBtn = driver.findElement( By.xpath(av.getTokenValue("loginBtnXPATH")) );
+        WebElement loginBtn = driver.findElement( By.xpath(av.getTokenValue("btnLoginXPATH")) );
         
         switch( user ) {
             

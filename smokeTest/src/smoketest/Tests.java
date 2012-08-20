@@ -19,16 +19,28 @@ public class Tests {
         lp.attemptLogin( user );
     } 
     
-    public void navigateToMyWall( String user, String myWall ) {
+    public void navigateToMyWall( String user ) {
         
         LoginPage lp = new LoginPage( driver, av );
             
         lp.attemptLogin( user );
         
+        // Verifies login is successful
         Utility.myVerifyCurrentPage( driver, av.getTokenValue( "homePageTitle") );
         
-        MyWallPage wall = new MyWallPage( driver, av, myWall );
+        // Uses js to click on hidden element by element XPATH
+        Utility.navigateToSubMenu( driver, av.getTokenValue( "linkToWallXPATH") );
+        
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );
+              
     }
+    
+    public void textToWall() {
+        
+        WallPage wp = new WallPage( driver, av );
+        wp.textPost();;
+    }
+    
     
     public void setUp( String university ) {
         
