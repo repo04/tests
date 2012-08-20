@@ -7,7 +7,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class LoginPage extends Page {
     
-    // Verifies the loaded page is successful LoginPage 
     public LoginPage( WebDriver driver, AccountValues av ) {        
         
         super( driver, av );

@@ -10,14 +10,22 @@ public class SmokeTest
     public static void main(String[] args) {
         
         Tests t = new Tests();
-        
-     
-            t.setUp( "guAccountProperty" );
-            t.testLogin( "student" );
-            t.tearDown();
+
+        // Test Login as student
+//        try {
+//            t.setUp( "guAccountProperty" );
+//            t.login( "student" );
+//            t.tearDown();
 //        }
 //        catch( Exception ex ) {
 //            System.out.println( ex );
 //        }
+        
+        // Test navigation to wall
+        
+        
+            t.setUp( "guAccountProperty" );
+            t.navigateToMyWall( "student", "stdntMyWallURL" );
+            System.out.println("balls");
     }
 }
