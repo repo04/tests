@@ -22,10 +22,8 @@ public class SmokeTest
 //        }
         
         // Test navigation to wall
-        
-        
+
             t.setUp( "guAccountProperty" );
             t.navigateToMyWall( "student", "stdntMyWallURL" );
-            System.out.println("balls");
     }
 }
