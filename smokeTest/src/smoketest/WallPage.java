@@ -12,21 +12,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WallPage extends Page {
     
-    public WallPage( WebDriver driver, AccountValues av )
-    {
+    Date now = new Date();  // Used to include date & time in Wall Post
+    WebElement textArea;
+    WebElement btnWallShare;
+    IsPresent ip;
+    
+    public WallPage( WebDriver driver, AccountValues av ) {
+        
         super( driver, av );
     }
 
     public void textPost() {
- 
-        Date now = new Date();  // Used to include date / time in Wall Post for traceability
-        
-        // Waits 10 seconds for Wall Publishers Panel to become clickable
-        WebElement textArea = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
-        textArea.click();
-   
-        // Share button that submits post to wall
-        WebElement btnWallShare = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
+
+        setUpWallPost();
+
         List<WebElement> iframes = driver.findElements( By.tagName("iframe") ); 
         
         // Grabs the first iframe because the textArea is always the first iframe
@@ -35,7 +34,6 @@ public class WallPage extends Page {
             driver.switchTo().frame( frame.getAttribute("name") );
             break;
         }
-        
         // Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         
@@ -45,7 +43,6 @@ public class WallPage extends Page {
         
         driver.switchTo().defaultContent();  // Switches back to default focus
         btnWallShare.click();
-        IsPresent ip = new IsPresent();
         
         // Verifies string / text is posted on wall, verified with time stamp
         ip.isTextPresentByCSS(driver, av.getTokenValue("textWallCSS"), textPost);  
@@ -53,23 +50,27 @@ public class WallPage extends Page {
     
     public void urlPost()
     {
-        Date now = new Date();
+        setUpWallPost();  
         
-        WebElement textArea = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
-        textArea.click();
-        
-        WebElement linkBtn = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkBtnXPATH"))));
+        WebElement linkBtn = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkBtnXPATH"))));
         linkBtn.click();
         
+        WebElement linkTextBox = driver.findElement(By.xpath(av.getTokenValue("linkTextBoxXPATH")));
+        linkTextBox.clear();
         
+        String urlPost = av.getTokenValue( "urlPostOnWall") + DateFormat.getInstance().format(now) + ".com";
+        linkTextBox.sendKeys( urlPost );
+        btnWallShare.click();
+        
+        ip.isElementPresentByXPATH( driver, urlPost );
         
     }
     
     public void setUpWallPost()
     {
-        Date now = new Date();
-        
-        WebElement textArea = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
-        textArea.click(); 
+        ip = new IsPresent();
+        textArea = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
+        textArea.click();
+        btnWallShare = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
     }
 }

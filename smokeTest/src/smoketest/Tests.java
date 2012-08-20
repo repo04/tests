@@ -29,16 +29,19 @@ public class Tests {
         wp.textPost();;
     }
     
+    public void urlToWall() {
+        WallPage wp = new WallPage( driver, av );
+        wp.urlPost();
+    }
+    
     
     public void setUp( String university ) {
         
         driver = new FirefoxDriver();
         av = new AccountValues( university );
-        
     }
     
     public void tearDown() {
         driver.quit();
     }
-            
 }

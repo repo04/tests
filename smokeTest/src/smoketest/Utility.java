@@ -13,6 +13,7 @@ public class Utility
         
     }
     
+
     // Compares actual to expected page title to determine if Current Page is correct
     public static void myVerifyCurrentPage( WebDriver driver, String page )
     {

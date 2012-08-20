@@ -26,6 +26,7 @@ public class SmokeTest
             t.setUp( "guAccountProperty" );
             t.login( "student" );
             t.navigateToMyWall( "student" );
-            t.textToWall();
+            t.urlToWall();
+            //t.tearDown();
     }
 }
