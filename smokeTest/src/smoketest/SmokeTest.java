@@ -24,6 +24,7 @@ public class SmokeTest
         // Test navigation to wall
 
             t.setUp( "guAccountProperty" );
+            t.login( "student" );
             t.navigateToMyWall( "student" );
             t.textToWall();
     }

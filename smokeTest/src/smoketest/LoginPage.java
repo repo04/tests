@@ -14,6 +14,7 @@ public class LoginPage extends Page {
         driver.get( av.getTokenValue("programURL") );     
     }
     
+    // Attemps to login based on user type and values from property file
     public void attemptLogin( String user ) {
         
         WebElement userName = driver.findElement( By.xpath(av.getTokenValue("userNameXPATH")) );
@@ -23,15 +24,16 @@ public class LoginPage extends Page {
         switch( user ) {
             
             case "student":
-                Utility.mySendKeys( userName, av.getTokenValue("stdntUserName") );
-                Utility.mySendKeys( passWord, av.getTokenValue("stdntPswd") );
+                userName.sendKeys( av.getTokenValue("stdntUserName") );
+                passWord.sendKeys( av.getTokenValue("stdntPswd") );
+                break;
+            
+            case "teacher":
+                // stuff
                 break;
         }
-        
-        Utility.myButtonClick( loginBtn );
-        
+        loginBtn.click();
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("homePageTitle") );
-            
     }
 }
 

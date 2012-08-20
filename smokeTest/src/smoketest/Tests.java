@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package smoketest;
 
 import org.openqa.selenium.WebDriver;
@@ -12,25 +8,17 @@ public class Tests {
     AccountValues av;
     WebDriver driver;
     
+    // Login as user: student, teacher or PES
     public void login( String user ) {
         
-        LoginPage lp = new LoginPage( driver, av );
-        
+        LoginPage lp = new LoginPage( driver, av );        
         lp.attemptLogin( user );
     } 
     
     public void navigateToMyWall( String user ) {
         
-        LoginPage lp = new LoginPage( driver, av );
-            
-        lp.attemptLogin( user );
-        
-        // Verifies login is successful
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue( "homePageTitle") );
-        
         // Uses js to click on hidden element by element XPATH
-        Utility.navigateToSubMenu( driver, av.getTokenValue( "linkToWallXPATH") );
-        
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );
               
     }
