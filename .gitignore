@@ -1,3 +1,4 @@
 /smokeTest/build/*
 /smokeTest/nbproject/*
-/
+/build/*
+/nbproject/*
