@@ -4,12 +4,10 @@
  */
 package smoketest;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 
 /**
  *
@@ -17,28 +15,39 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class IsPresent {
     
-    public void isTextPresentByCSS(WebDriver driver, String textPostCSS, String txtByCSS) throws Exception
+    public void isTextPresentByCSS(WebDriver driver, String textPostCSS, String txtByCSS) 
     {           
         new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.cssSelector(textPostCSS), txtByCSS));        
     }
     
-    public void isTextPresentByXpath(WebDriver driver, String headingTextPath, String txtByXPath) throws Exception
+    public void isTextPresentByXPATH(WebDriver driver, String headingTextPath, String txtByXPATH) 
     {    
-        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath(headingTextPath), txtByXPath));        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath(headingTextPath), txtByXPATH));        
     }
     
-    public void isElementPresentByLink(WebDriver driver, String elmntByLink) throws Exception
+    public void isElementPresentContainsTextByXPATH(WebDriver driver, String elmntByXPATH) 
     {           
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elmntByLink)));       
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'"+elmntByXPATH+"')]")));	        
     }
     
-    public void isElementPresentByXpath(WebDriver driver, String elmntByXPath) throws Exception
+    public void isElementPresentStartsWithTextByXPATH(WebDriver driver, String elmntByXPATH) 
     {           
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'"+elmntByXPath+"')]")));	        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[starts-with(text(),'"+elmntByXPATH+"')]")));	        
     }
     
-    public void isElementPresentByID(WebDriver driver, String elmntByID) {
-	new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.id(elmntByID)));		
-    }  
+    public void isElementPresentByLink(WebDriver driver, String elmntByLINK) 
+    {           
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elmntByLINK)));       
+    }
+    
+    public void isElementPresentByID(WebDriver driver, String elmntByID) 
+    {
+    	new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.id(elmntByID)));		
+    }
+    
+    public void isElementPresentByXPATH(WebDriver driver, String elmtByXPATH) 
+    {           
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(elmtByXPATH)));     
+    }
     
 }

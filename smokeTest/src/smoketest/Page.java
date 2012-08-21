@@ -13,6 +13,5 @@ public class Page {
         
         this.driver = driver;
         this.av = av;
-    }
-           
+    }           
 }
