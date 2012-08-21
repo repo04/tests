@@ -58,12 +58,11 @@ public class WallPage extends Page {
         WebElement linkTextBox = driver.findElement(By.xpath(av.getTokenValue("linkTextBoxXPATH")));
         linkTextBox.clear();
         
-        String urlPost = av.getTokenValue( "urlPostOnWall") + DateFormat.getInstance().format(now) + ".com";
+        String urlPost = av.getTokenValue( "urlPostOnWall") + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now) + ".com";
         linkTextBox.sendKeys( urlPost );
         btnWallShare.click();
         
         ip.isElementPresentByXPATH( driver, urlPost );
-        
     }
     
     public void setUpWallPost()

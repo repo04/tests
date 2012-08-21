@@ -19,8 +19,7 @@ public class Actions {
         
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );
-              
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );  
     }
     
     public void textToWall() {
@@ -28,15 +27,33 @@ public class Actions {
         WallPage wp = new WallPage( driver, av );
         wp.textPost();;
     }
-    
-    public void urlToWall() {
+     
+   public void urlToWall() {
         WallPage wp = new WallPage( driver, av );
         wp.urlPost();
     }
     
-    public void navigateToMySocialGroups() {
+    public void navigateToSocialGroups() {
         
         // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToSclGrpXPATH") );
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
+    }
+    
+    public String createSocialGroup() {
+        
+        SocialGroup sg = new SocialGroup( driver, av );
+        sg.createSocialGroup();
+        
+        // Returns name of Social Group
+        return sg.getSclGrpName();
+    }
+    
+    public void logOut() {
+        
+        // Uses js to click on the hidden element by XPATH
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToLogOut") );
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue("loginPageTitle"));
     }
     
     public void setUp( String university ) {

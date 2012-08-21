@@ -9,7 +9,7 @@ public class SmokeTest
 { 
     public static void main(String[] args) {
         
-        Actions t = new Actions();
+        Actions a = new Actions();
 
         // Test Login as student
 //        try {
@@ -23,10 +23,13 @@ public class SmokeTest
         
         // Test navigation to wall
 
-            t.setUp( "guAccountProperty" );
-            t.login( "student" );
-            t.navigateToMyWall( "student" );
-            t.urlToWall();
+            a.setUp( "guAccountProperty" );
+            a.login( "student" );
+            //a.navigateToMyWall("student");
+            //a.urlToWall();
+            a.navigateToSocialGroups();
+            a.logOut();
+            //a.createSocialGroup();
             //t.tearDown();
     }
 }
