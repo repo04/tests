@@ -9,7 +9,7 @@ public class SmokeTest
 { 
     public static void main(String[] args) {
         
-        Tests t = new Tests();
+        Actions t = new Actions();
 
         // Test Login as student
 //        try {

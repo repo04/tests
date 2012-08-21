@@ -3,7 +3,7 @@ package smoketest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class Tests {
+public class Actions {
     
     AccountValues av;
     WebDriver driver;
@@ -17,7 +17,7 @@ public class Tests {
     
     public void navigateToMyWall( String user ) {
         
-        // Uses js to click on hidden element by element XPATH
+        // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );
               
@@ -34,6 +34,10 @@ public class Tests {
         wp.urlPost();
     }
     
+    public void navigateToMySocialGroups() {
+        
+        // Uses js to click on hidden element by XPATH
+    }
     
     public void setUp( String university ) {
         
