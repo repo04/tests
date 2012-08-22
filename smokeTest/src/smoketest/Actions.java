@@ -39,7 +39,14 @@ public class Actions {
     public void navigateToSocialGroups() {
         
         // Uses js to click on hidden element by XPATH
-        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToSclGrpXPATH") );
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWrkgGrpXPATH") );
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
+    }
+    
+    public void navigateToWorkingGroups() {
+        
+        // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWrkgGrpXPATH") );
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
     }
     
@@ -67,11 +74,20 @@ public class Actions {
         ls.buildLiveSession( sclGrpName );
     }
     
-//    public String createCourse( String crseName) {
-//        
-//        Course cr = new Course( driver, av );
-//        
-//    }
+    public String createCourse() {
+        Course cr = new Course( driver, av );
+        cr.createCourse();
+        
+        return cr.getCrsName();
+    }
+    
+    public String createGrpCourse( String courseName ) {
+        
+        Course cr = new Course( driver, av );
+        cr.createGrpCourse( courseName );
+        return cr.getGrpCrsName();
+    }
+         
     
     public void logOut() {
         

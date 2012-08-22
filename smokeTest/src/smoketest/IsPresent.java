@@ -33,5 +33,13 @@ public class IsPresent {
     public void isElementPresentByID( WebDriver driver, String elementByID ) {
         new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.id(elementByID)));
     }
+    
+    public void isElementPresentContainsTextByXPATH(WebDriver driver, String elmntByXPATH) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'" + elmntByXPATH + "')]")));
+    }
+    
+    public void isElementPresentStartsWithTextByXPATH(WebDriver driver, String elmntByXPATH) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[starts-with(text(),'" + elmntByXPATH + "')]")));
+    }
 }
 

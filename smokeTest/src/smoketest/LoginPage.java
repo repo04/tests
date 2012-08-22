@@ -32,6 +32,11 @@ public class LoginPage extends Page {
                 userName.sendKeys( av.getTokenValue("tchrUserName") );
                 passWord.sendKeys( av.getTokenValue("tchrPswd") );
                 break;
+                
+            case "contentAdmin":
+                userName.sendKeys( av.getTokenValue("adminUserName") );
+                passWord.sendKeys( av.getTokenValue("adminPswd") );
+                break;
         }
         loginBtn.click();
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("homePageTitle") );
