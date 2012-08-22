@@ -47,11 +47,19 @@ public class SocialGroup extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtSrchGrp"))).click();;
         
         ip.isTextPresentByXPATH(driver, av.getTokenValue("txtSrchRsltsXPATH"), av.getTokenValue("txtSrchRslts"));
-        //ip.isTextPresentByXPATH(driver, av.getTokenValue("linkFrstSrchRslt"), s);
         
-        driver.findElement(By.linkText("Join Now"));
+        //ip.isTextPresentByXPATH(driver, av.getTokenValue("linkFrstSrchRslt"), s);
+        //driver.findElement(By.linkText("Join Now"));
         //driver.findElement(By.id(av.getTokenValue("linkJoinSclGrp"))).click();
-        driver.findElement(By.xpath(av.getTokenValue("btnYesJoinGrp"))).click();
+        //driver.findElement(By.xpath(av.getTokenValue("btnYesJoinGrp"))).click();
+    }
+    
+    public void leaveSocialGroup( String s ) {
+        
+    }
+    
+    public void removeSocialGroup( String s ) {
+        
     }
     
     public String getSclGrpName() {

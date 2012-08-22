@@ -52,14 +52,26 @@ public class Actions {
         return sg.getSclGrpName();
     }
     
-    public void findSocialGroup( String s ) {
+    public void findSocialGroup( String sclGrpName ) {
         SocialGroup sg = new SocialGroup( driver, av );
-        sg.joinSocialGroup(s);
+        sg.joinSocialGroup(sclGrpName);
     }
     
     public void deleteSocialGroup( String s ) {
         
     }
+    
+    public void createLiveSsn( String sclGrpName ) {
+        
+        LiveSession ls = new LiveSession( driver, av );
+        ls.buildLiveSession( sclGrpName );
+    }
+    
+//    public String createCourse( String crseName) {
+//        
+//        Course cr = new Course( driver, av );
+//        
+//    }
     
     public void logOut() {
         
