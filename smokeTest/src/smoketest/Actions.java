@@ -28,7 +28,7 @@ public class Actions {
     public void textToWall() {
         
         WallPage wp = new WallPage( driver, av );
-        wp.textPost();;
+        wp.textPost();
     }
      
    public void urlToWall() {
@@ -53,11 +53,12 @@ public class Actions {
     }
     
     public void findSocialGroup( String s ) {
+        SocialGroup sg = new SocialGroup( driver, av );
+        sg.joinSocialGroup(s);
+    }
+    
+    public void deleteSocialGroup( String s ) {
         
-        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
-        ip.isTextPresentByXPATH( driver,  av.getTokenValue("headerAreaXPATH"), av.getTokenValue("headerTxtXPATH"));
-        
-        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(s);
     }
     
     public void logOut() {

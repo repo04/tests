@@ -21,7 +21,7 @@ public class SocialGroup extends Page {
     public void buildSocialGroup() {
             
         this.grpName = "SmokeTest " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        String srtName = "short " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        String srtName = "ShortName " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         
         driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH")) ).click();
     
@@ -33,12 +33,25 @@ public class SocialGroup extends Page {
         driver.findElement(By.xpath(av.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
         
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtSclGrp"))).click();
+        
        
         ip.isElementPresentByLink( driver, grpName );   // Verifies new Group
     }
     
-    public void joinSocialGroup() {
-            
+    public void joinSocialGroup(String s) {
+        
+        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
+        ip.isTextPresentByXPATH( driver,  av.getTokenValue("headerAreaXPATH"), av.getTokenValue("headerTxtXPATH"));
+        
+        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(s);
+        driver.findElement(By.xpath(av.getTokenValue("btnSbmtSrchGrp"))).click();;
+        
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("txtSrchRsltsXPATH"), av.getTokenValue("txtSrchRslts"));
+        //ip.isTextPresentByXPATH(driver, av.getTokenValue("linkFrstSrchRslt"), s);
+        
+        driver.findElement(By.linkText("Join Now"));
+        //driver.findElement(By.id(av.getTokenValue("linkJoinSclGrp"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("btnYesJoinGrp"))).click();
     }
     
     public String getSclGrpName() {

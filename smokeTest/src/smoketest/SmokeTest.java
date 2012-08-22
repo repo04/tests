@@ -24,14 +24,14 @@ public class SmokeTest
         // Test navigation to wall
 
             a.setUp( "guAccountProperty" );
-            a.login( "student" );
+            //a.login( "student" );
             //a.navigateToMyWall("student");
             //a.urlToWall();
-            a.navigateToSocialGroups();
+            //a.navigateToSocialGroups();
             
-           String sclGrpName;
-            sclGrpName = a.createSocialGroups();
-            a.logOut();
+            String sclGrpName = "smoketest Aug 22, 2012 12:47";
+            //sclGrpName = a.createSocialGroups();
+            //a.logOut();
             a.login( "teacher" );
             a.navigateToSocialGroups();
             a.findSocialGroup(sclGrpName);
