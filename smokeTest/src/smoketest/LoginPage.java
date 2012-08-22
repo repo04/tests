@@ -5,43 +5,50 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage extends Page {
+    
+    IsPresent ip = new IsPresent();
 
-	public LoginPage(WebDriver driver, AccountValues av) {
+    public LoginPage(WebDriver driver, AccountValues av) {
 
-		super(driver, av);
+        super(driver, av);
+        driver.get(av.getTokenValue("programURL"));        
+    }
 
-		driver.get(av.getTokenValue("programURL"));
-	}
+    // Attemps to login based on user type and values from property file
+    public void attemptLogin(String user) {
 
-	// Attemps to login based on user type and values from property file
-	public void attemptLogin(String user) {
+        WebElement userName = driver.findElement(By.xpath(av
+                .getTokenValue("userNameXPATH")));
+        WebElement passWord = driver.findElement(By.xpath(av
+                .getTokenValue("pswdXPATH")));
+        WebElement loginBtn = driver.findElement(By.xpath(av
+                .getTokenValue("btnLoginXPATH")));
 
-		WebElement userName = driver.findElement(By.xpath(av
-				.getTokenValue("userNameXPATH")));
-		WebElement passWord = driver.findElement(By.xpath(av
-				.getTokenValue("pswdXPATH")));
-		WebElement loginBtn = driver.findElement(By.xpath(av
-				.getTokenValue("btnLoginXPATH")));
+        switch (user) {
 
-		switch (user) {
+            case "contentAdmin":
+                userName.sendKeys(av.getTokenValue("ctntAdminUserName"));
+                passWord.sendKeys(av.getTokenValue("ctntAdminPswd"));
+                break;
 
-		case "student":
-			userName.sendKeys(av.getTokenValue("stdntUserName"));
-			passWord.sendKeys(av.getTokenValue("stdntPswd"));
-			break;
+            case "pesAdmin":
+                userName.sendKeys(av.getTokenValue("pesUserName"));
+                passWord.sendKeys(av.getTokenValue("pesPswd"));
+                break;
 
-		case "teacher":
-			userName.sendKeys(av.getTokenValue("stdntUserName"));
-			passWord.sendKeys(av.getTokenValue("stdntPswd"));
-			break;
+            case "teacher":
+                userName.sendKeys(av.getTokenValue("tchrUserName"));
+                passWord.sendKeys(av.getTokenValue("tchrPswd"));
+                break;
 
-		case "contentAdmin":
-			userName.sendKeys(av.getTokenValue("ctntAdminUserName"));
-			passWord.sendKeys(av.getTokenValue("ctntAdminPswd"));
-			break;
-		}
-		
-		loginBtn.click();
-		Utility.myVerifyCurrentPage(driver, av.getTokenValue("homePageTitle"));
-	}
+            case "student":
+                userName.sendKeys(av.getTokenValue("stdntUserName"));
+                passWord.sendKeys(av.getTokenValue("stdntPswd"));
+                break;
+
+        }
+
+        loginBtn.click();
+        ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
+    }
 }

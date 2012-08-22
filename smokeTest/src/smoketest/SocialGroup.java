@@ -1,19 +1,17 @@
 package smoketest;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SocialGroup extends Page {
 
-    DateFormat dateFormat;
-    Date now;
+    Date now = new Date();
     IsPresent ip = new IsPresent();
+    private String grpName;
 
     /**
-     *
      * @param driver
      * @param av
      */
@@ -21,34 +19,31 @@ public class SocialGroup extends Page {
         super(driver, av);
     }
 
-    public void createSocialGroup(String sclGrpName){
-    	
-    	//Navigate to SocialGroup Page
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToSclGrpXPATH"));
+    // Assumes user is at 'My Social Groups'
+    public void buildSocialGroup() {
 
-        //Verify My Social Group Page
-        ip.isElementPresentByID(driver, av.getTokenValue("fndSclGrpID"));
+        this.grpName = "SmkTstSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        String srtName = "ShrtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
-        driver.findElement(By.linkText(av.getTokenValue("strtSclGrpBtnLINK"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH"))).click();
 
-        //Verify Navigated to Social Group creation page
-        ip.isElementPresentByID(driver, av.getTokenValue("sclGrpNameID"));
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGrpNameXPATH"));
 
-        //Create New Social Group
-        driver.findElement(By.id(av.getTokenValue("sclGrpNameID"))).sendKeys(av.getTokenValue(sclGrpName));
-        
-        dateFormat = new SimpleDateFormat("ddMMMyy KKmma");
-		now = new Date();
-        String sclGrpShrtName = av.getTokenValue(sclGrpName) + dateFormat.format(now);
-        driver.findElement(By.id(av.getTokenValue("sclGrpShrtNameID"))).sendKeys(sclGrpShrtName);
-        driver.findElement(By.id(av.getTokenValue("sclGrpAbtGrpID"))).sendKeys("About the group");
-        driver.findElement(By.id(av.getTokenValue("sclGrpWhoShudJoinID"))).sendKeys("other student should join");
-        driver.findElement(By.id(av.getTokenValue("sclGrpTpc1ID"))).sendKeys("Global Warming");
-        driver.findElement(By.id(av.getTokenValue("sclGrpTpc2ID"))).sendKeys("Social N/W sites");
+        driver.findElement(By.xpath(av.getTokenValue("fieldGrpNameXPATH"))).sendKeys(grpName);
+        driver.findElement(By.xpath(av.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
+        driver.findElement(By.xpath(av.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
+        driver.findElement(By.xpath(av.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
 
-        driver.findElement(By.id(av.getTokenValue("sclGrpSbmtID"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("btnSbmtSclGrp"))).click();
 
-        ip.isElementPresentByLink(driver, av.getTokenValue(sclGrpName));
+        // Verifies new Group
+        ip.isElementPresentByLINK(driver, grpName);   
+    }
 
+    public void joinSocialGroup() {
+    }
+
+    public String getSclGrpName() {
+        return this.grpName;
     }
 }
