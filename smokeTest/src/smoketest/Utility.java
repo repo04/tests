@@ -2,9 +2,11 @@
 package smoketest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Utility 
 {
@@ -17,11 +19,9 @@ public class Utility
     // Compares actual to expected page title to determine if Current Page is correct
     public static void myVerifyCurrentPage( WebDriver driver, String page )
     {
-        if( !page.equals(driver.getTitle()) )
-        {
-            throw new IllegalStateException( "Did not successfuly navigate to " + page
-                                           + ".  \nThe Current Page: " + driver.getTitle() );
-        }
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.titleIs(page));
+        
     }
     
     // Uses js to click on hidden elements on the page

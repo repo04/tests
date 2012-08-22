@@ -15,7 +15,7 @@ public class WallPage extends Page {
     Date now = new Date();  // Used to include date & time in Wall Post
     WebElement textArea;
     WebElement btnWallShare;
-    IsPresent ip;
+    IsPresent ip = new IsPresent();
     
     public WallPage( WebDriver driver, AccountValues av ) {
         

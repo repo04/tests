@@ -1,12 +1,15 @@
 package smoketest;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Actions {
     
     AccountValues av;
     WebDriver driver;
+    IsPresent ip = new IsPresent();
     
     // Login as user: student, teacher or PES
     public void login( String user ) {
@@ -40,13 +43,21 @@ public class Actions {
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
     }
     
-    public String createSocialGroup() {
+    public String createSocialGroups() {
         
         SocialGroup sg = new SocialGroup( driver, av );
-        sg.createSocialGroup();
+        sg.buildSocialGroup();
         
         // Returns name of Social Group
         return sg.getSclGrpName();
+    }
+    
+    public void findSocialGroup( String s ) {
+        
+        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
+        ip.isTextPresentByXPATH( driver,  av.getTokenValue("headerAreaXPATH"), av.getTokenValue("headerTxtXPATH"));
+        
+        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(s);
     }
     
     public void logOut() {

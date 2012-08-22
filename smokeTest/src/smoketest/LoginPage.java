@@ -29,7 +29,8 @@ public class LoginPage extends Page {
                 break;
             
             case "teacher":
-                // stuff
+                userName.sendKeys( av.getTokenValue("tchrUserName") );
+                passWord.sendKeys( av.getTokenValue("tchrPswd") );
                 break;
         }
         loginBtn.click();
