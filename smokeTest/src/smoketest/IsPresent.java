@@ -45,6 +45,6 @@ public class IsPresent {
     }
 
     public void isTitlePresent(WebDriver driver, String isTitle) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.titleIs(isTitle));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.titleIs(isTitle));        
     }
 }

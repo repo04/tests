@@ -114,17 +114,14 @@ public class Actions {
 
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu(driver, av.getTokenValue("linkToCourseXPATH"));
-
-        //Verify the Text 'Current Courses'
         ip.isTitlePresent(driver, av.getTokenValue("coursePageTitle"));
     }
 
-    public void selectGrpCourse(String crsName) {
+    public void selectGrpCourse(String grpCrsName) {
 
-        ip.isElementPresentContainsTextByXPATH(driver, crsName);
-        driver.findElement(By.xpath("//*[contains(text(),'" + crsName + "')]")).click();
-        ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue("lnkLftPnlTEXT"));
-        driver.findElement(By.xpath("//*[contains(text(),'" + av.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
+        ip.isElementPresentContainsTextByXPATH(driver, grpCrsName);
+        driver.findElement(By.xpath("//*[contains(text(),'" + grpCrsName + "')]")).click();
+        ip.isTextPresentByCSS(driver, av.getTokenValue("lblCrsLftPnlCSS"), grpCrsName.toUpperCase());
     }
 
     public void createForumActivity() {
@@ -147,7 +144,27 @@ public class Actions {
         actvty.createPageResource();
     }
 
+    public String createUser(String user) {
+        User usr = new User(driver, av);
+        usr.createUser(user);
+        return usr.getUsrName();
+    }
+
     public void tearDown() {
         driver.quit();
+    }
+
+    public void navigateToContact() {
+
+        // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToContactXPATH"));
+        ip.isTitlePresent(driver, av.getTokenValue("contactPageTitle"));
+    }
+
+    //Enroll User as 'Teacher/Student to a Course'
+    public void enrollUsrToRole_GrpCrs(String user, String grpCrs) {
+        
+        EnrollUser enrlUsr = new EnrollUser(driver, av);
+        enrlUsr.toRole_Crs(user, grpCrs);        
     }
 }
