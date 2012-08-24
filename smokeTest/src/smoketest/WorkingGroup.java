@@ -25,5 +25,11 @@ public class WorkingGroup extends Page {
         driver.findElement(By.xpath(av.getTokenValue("linkAddWrkGrp"))).click();
         
         ip.isTextPresentByXPATH(driver, av.getTokenValue("headerCreateWrkGrp"), av.getTokenValue("txtCreateWrkGrp")  );
+        
+        driver.findElement(By.xpath(av.getTokenValue("fieldWrkgGrpName"))).sendKeys(this.wrkgGrpName);
+        driver.findElement(By.xpath(av.getTokenValue("fieldWrkgGrpShrtName"))).sendKeys(srtName);
+        driver.findElement(By.xpath(av.getTokenValue("fieldWrkgGrpAbout"))).sendKeys("this is a test");
+        
+        driver.findElement(By.xpath(av.getTokenValue("btnSbmtWrkgGrp"))).click();
     }
 }
