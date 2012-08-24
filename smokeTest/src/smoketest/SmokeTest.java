@@ -24,11 +24,17 @@ public class SmokeTest
         // Test navigation to wall
 
             a.setUp( "guAccountProperty" );
-            a.login( "contentAdmin" );
-            //a.navigateToMyWall("student");
-            //a.urlToWall();
+            a.login( "pesAdmin" );
             a.navigateToWorkingGroups();
-            
+           a.addWorkingGroup();
+            //a.navigateToMyWall("student");    
+            //a.urlToWall();\
+//            a.navigateToCourse();
+//            String crsName = a.createCourse();
+//        a.navigateToCourse();
+//        String grpCrsName = a.createGrpCourse(crsName);
+//        
+//        a.navigateToCourse();
 //            String sclGrpName;
 //            sclGrpName = a.createSocialGroups();
 //            a.logOut();

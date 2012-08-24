@@ -33,13 +33,24 @@ public class LoginPage extends Page {
                 passWord.sendKeys( av.getTokenValue("tchrPswd") );
                 break;
                 
+            case "pesAdmin":
+                userName.sendKeys( av.getTokenValue("pesUserName") );
+                passWord.sendKeys( av.getTokenValue("pesPswd") );
+                break;
+                
             case "contentAdmin":
-                userName.sendKeys( av.getTokenValue("adminUserName") );
-                passWord.sendKeys( av.getTokenValue("adminPswd") );
+                userName.sendKeys( av.getTokenValue("ctntAdminUserName") );
+                passWord.sendKeys( av.getTokenValue("ctntAdminPswd") );
                 break;
         }
         loginBtn.click();
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue("homePageTitle") );
+        
+        if ( user.equals("pesAdmin") ) {
+            Utility.myVerifyCurrentPage( driver, av.getTokenValue("crsPageTitle") );
+        }
+        else {
+            Utility.myVerifyCurrentPage( driver, av.getTokenValue("homePageTitle"));
+        }
     }
 }
 

@@ -10,7 +10,7 @@ public class SocialGroup extends Page {
     
     Date now = new Date();
     IsPresent ip = new IsPresent();
-    private String grpName;
+    private String sclGrpName;
     
     public SocialGroup( WebDriver driver, AccountValues av ) {
         
@@ -20,14 +20,14 @@ public class SocialGroup extends Page {
     // Assumes user is at 'My Social Groups'
     public void buildSocialGroup() {
             
-        this.grpName = "SmokeTest " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.sclGrpName = "SmokeTest " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String srtName = "ShortName " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         
         driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH")) ).click();
     
         ip.isElementPresentByID(driver, av.getTokenValue("sclGrpNameID"));
         
-        driver.findElement(By.xpath(av.getTokenValue("fieldGrpNameXPATH"))).sendKeys(grpName);
+        driver.findElement(By.xpath(av.getTokenValue("fieldGrpNameXPATH"))).sendKeys(sclGrpName);
         driver.findElement(By.xpath(av.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
         driver.findElement(By.xpath(av.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
         driver.findElement(By.xpath(av.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
@@ -35,7 +35,7 @@ public class SocialGroup extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtSclGrp"))).click();
         
        
-        ip.isElementPresentByLink( driver, grpName );   // Verifies new Group
+        ip.isElementPresentByLink( driver, sclGrpName );   // Verifies new Group
     }
     
     public void joinSocialGroup(String s) {
@@ -63,6 +63,6 @@ public class SocialGroup extends Page {
     }
     
     public String getSclGrpName() {
-        return this.grpName;
+        return this.sclGrpName;
     }
 }

@@ -14,14 +14,12 @@ public class Utility
     {
         
     }
-    
 
     // Compares actual to expected page title to determine if Current Page is correct
     public static void myVerifyCurrentPage( WebDriver driver, String page )
     {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.titleIs(page));
-        
     }
     
     // Uses js to click on hidden elements on the page

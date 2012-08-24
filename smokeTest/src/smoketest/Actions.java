@@ -19,10 +19,10 @@ public class Actions {
     } 
     
     public void navigateToMyWall( String user ) {
-        
-        // Uses js to click on hidden element by XPATH
-        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );  
+
+            // Uses js to click on hidden element by XPATH
+            Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
+            Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );  
     }
     
     public void textToWall() {
@@ -50,6 +50,12 @@ public class Actions {
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
     }
     
+    public void addWorkingGroup() {
+            
+        WorkingGroup wg = new WorkingGroup(driver, av );
+        wg.BuildWorkingGroup();
+ 
+    }
     public String createSocialGroups() {
         
         SocialGroup sg = new SocialGroup( driver, av );
@@ -87,7 +93,13 @@ public class Actions {
         cr.createGrpCourse( courseName );
         return cr.getGrpCrsName();
     }
-         
+    
+    public void navigateToCourse() {
+
+        // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToCourseXPATH"));
+        ip.isTitlePresent(driver, av.getTokenValue("coursePageTitle"));
+    }
     
     public void logOut() {
         

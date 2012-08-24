@@ -41,5 +41,9 @@ public class IsPresent {
     public void isElementPresentStartsWithTextByXPATH(WebDriver driver, String elmntByXPATH) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[starts-with(text(),'" + elmntByXPATH + "')]")));
     }
+    
+    public void isTitlePresent(WebDriver driver, String isTitle) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.titleIs(isTitle));        
+    }
 }
 
