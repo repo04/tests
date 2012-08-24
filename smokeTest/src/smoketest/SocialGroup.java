@@ -22,8 +22,8 @@ public class SocialGroup extends Page {
     // Assumes user is at 'My Social Groups'
     public void buildSocialGroup() {
 
-        this.grpName = "SmkTstSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        String srtName = "ShrtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.grpName = "SmkTst"+LoginPage.getUser()+"SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        String srtName = "Shrt"+LoginPage.getUser()+"SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH"))).click();
 
@@ -38,9 +38,6 @@ public class SocialGroup extends Page {
 
         // Verifies new Group
         ip.isElementPresentByLINK(driver, grpName);   
-    }
-
-    public void joinSocialGroup() {
     }
 
     public String getSclGrpName() {

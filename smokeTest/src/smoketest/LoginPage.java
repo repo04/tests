@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 public class LoginPage extends Page {
     
     IsPresent ip = new IsPresent();
+    private static String usr;
 
     public LoginPage(WebDriver driver, AccountValues av) {
 
@@ -17,6 +18,7 @@ public class LoginPage extends Page {
     // Attemps to login based on user type and values from property file
     public void attemptLogin(String user) {
 
+        LoginPage.usr = user;
         WebElement userName = driver.findElement(By.xpath(av
                 .getTokenValue("userNameXPATH")));
         WebElement passWord = driver.findElement(By.xpath(av
@@ -50,5 +52,9 @@ public class LoginPage extends Page {
 
         loginBtn.click();
         ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
+    }
+    
+    public static String getUser() {
+        return usr;
     }
 }

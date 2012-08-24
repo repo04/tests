@@ -17,7 +17,7 @@ public class IsPresent {
 
     // Appears it checks for the first instance of the CSS, starting from top of page working down.
     public void isTextPresentByCSS(WebDriver driver, String textPostCSS, String txtByCSS) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.cssSelector(textPostCSS), txtByCSS));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.cssSelector(textPostCSS), txtByCSS));        
     }
 
     public void isTextPresentByXPATH(WebDriver driver, String headingTextPath, String txtByXPATH) {

@@ -18,6 +18,10 @@ public class Activity extends Page {
 
     Date now = new Date();
     IsPresent ip = new IsPresent();
+    private String forumName;
+    private String quizName;
+    private String allInOneAsgnmntName;
+    private String pageName;
 
     public Activity(WebDriver driver, AccountValues av) {
         super(driver, av);
@@ -25,9 +29,9 @@ public class Activity extends Page {
 
     public void crtForumActvty() {
 
-        String forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String forumIntro = "SmkTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-                
+
         ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue("lnkLftPnlTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + av.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctAddAnActvtyXPATH"));
@@ -38,7 +42,7 @@ public class Activity extends Page {
     }
 
     public void crtQuizActvty() {
-        String quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue("lnkLftPnlTEXT"));
@@ -51,7 +55,7 @@ public class Activity extends Page {
     }
 
     public void crtAllInOneAsgnmntActvty() {
-        String allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String allInOneAsgnmntIntro = "SmkTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue("lnkLftPnlTEXT"));
@@ -64,7 +68,7 @@ public class Activity extends Page {
     }
 
     public void createPageResource() {
-        String pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String pageContent = "SmkTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue("lnkLftPnlTEXT"));
@@ -84,5 +88,21 @@ public class Activity extends Page {
         driver.findElement(By.xpath(av.getTokenValue("fieldActvyNameXPATH"))).sendKeys(forumName);
         driver.findElement(By.xpath(av.getTokenValue("fieldActvyIntroXPATH"))).sendKeys(forumIntro);
         driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
+    }
+
+    public String getFrmActvyName() {
+        return this.forumName;
+    }
+
+    public String getQzActvyName() {
+        return this.quizName;
+    }
+
+    public String getAllInOneAsgnmntActvyName() {
+        return this.allInOneAsgnmntName;
+    }
+
+    public String getPageActvyName() {
+        return this.pageName;
     }
 }

@@ -63,7 +63,7 @@ public class User extends Page {
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
 
         //Need to check and perform functionality if Element is present or not 
-        //Limitation - Webdriver throws 'NoSuchElementException' Exception incase element is not found
+        //Limitation - Webdriver throws 'NoSuchElementException' incase element is not found
         Boolean wait = null;
         try {
             driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter")));
