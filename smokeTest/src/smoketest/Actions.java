@@ -19,16 +19,16 @@ public class Actions {
         lp.attemptLogin( user );
     } 
     
-    public void navigateToMyWall( String user ) {
+    public void navigateToMyWall()  {
 
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );  
+        ip.isTitlePresent(driver, av.getTokenValue("wallPageTitle"));
     }
     
     public void navigateToContacts() {
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToContactsXPATH"));
-        Utility.myVerifyCurrentPage(driver, av.getTokenValue("myContactsTitle"));
+        ip.isTitlePresent(driver, av.getTokenValue("myContactsTitle"));
     } 
     
     public void goToContactWall() {
@@ -63,14 +63,14 @@ public class Actions {
         
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToSclGrpXPATH") );
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMySclGrpTEXT"));
     }
     
     public void navigateToWorkingGroups() {
         
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWrkgGrpXPATH") );
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMyWrkngGrpTEXT"));
     }
     
     public void addWorkingGroup() {
@@ -128,7 +128,7 @@ public class Actions {
         
         // Uses js to click on the hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToLogOut") );
-        Utility.myVerifyCurrentPage( driver, av.getTokenValue("loginPageTitle"));
+        ip.isTitlePresent( driver, av.getTokenValue("loginPageTitle"));
     }
     
     public void setUp( String university ) {

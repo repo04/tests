@@ -7,6 +7,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class LoginPage extends Page {
     
+    IsPresent ip = new IsPresent();
+    static String usr;
+    
     public LoginPage( WebDriver driver, AccountValues av ) {        
         
         super( driver, av );
@@ -17,6 +20,8 @@ public class LoginPage extends Page {
     // Attemps to login based on user type and values from property file
     public void attemptLogin( String user ) {
         
+    
+        LoginPage.usr = user;
         WebElement userName = driver.findElement( By.xpath(av.getTokenValue("userNameXPATH")) );
         WebElement passWord = driver.findElement( By.xpath(av.getTokenValue("pswdXPATH")) );
         WebElement loginBtn = driver.findElement( By.xpath(av.getTokenValue("btnLoginXPATH")) );
@@ -46,11 +51,15 @@ public class LoginPage extends Page {
         loginBtn.click();
         
         if ( user.equals("pesAdmin") ) {
-            Utility.myVerifyCurrentPage( driver, av.getTokenValue("crsPageTitle") );
+            ip.isTitlePresent( driver, av.getTokenValue("crsPageTitle") );
         }
         else {
-            Utility.myVerifyCurrentPage( driver, av.getTokenValue("homePageTitle"));
+            ip.isTitlePresent( driver, av.getTokenValue("homePageTitle"));
         }
+    }
+    
+    public String getUser() {
+        return usr;
     }
 }
 
