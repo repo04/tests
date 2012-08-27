@@ -27,11 +27,11 @@ public class Actions {
     }
     
     public void navigateToContacts() {
-        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToContactsXPATH"));
+        
         ip.isTitlePresent(driver, av.getTokenValue("myContactsTitle"));
     } 
     
-    public void goToContactWall() {
+    public void navigateToContactWall() {
         driver.findElement(By.xpath("//*[@id='txtSearchContacts']")).sendKeys(av.getTokenValue("stdntFirstName"));
         driver.findElement(By.xpath(av.getTokenValue("btnSrchCntct"))).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("btnRmveContact"), "Remove Contact");
@@ -89,6 +89,7 @@ public class Actions {
     }
     
     public void findSocialGroup( String sclGrpName ) {
+        
         SocialGroup sg = new SocialGroup( driver, av );
         sg.joinSocialGroup(sclGrpName);
     }
@@ -116,6 +117,30 @@ public class Actions {
         cr.createGrpCourse( courseName );
         return cr.getGrpCrsName();
     }
+    
+    public String createForumActivity() {
+        Activity activity = new Activity(driver, av);
+        activity.crtForumActvty();
+        return activity.getFrmActvyName();
+    }
+
+    public String createQuizActivity() {
+        Activity activity = new Activity(driver, av);
+        activity.crtQuizActvty();
+        return activity.getQzActvyName();
+    }
+
+    public String createAllInOneAsgnmntActivity() {
+        Activity activity = new Activity(driver, av);
+        activity.crtAllInOneAsgnmntActvty();
+        return activity.getAllInOneAsgnmntActvyName();
+    }
+    
+    public String createPageResource() {
+        Activity activity = new Activity(driver, av);
+        activity.createPageResource();
+        return activity.getPageActvyName();
+    }    
     
     public void navigateToCourse() {
 

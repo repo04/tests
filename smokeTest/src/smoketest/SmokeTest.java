@@ -23,11 +23,11 @@ public class SmokeTest
        * Verify Text
        */
         a.setUp( "guAccountProperty");
-        a.login( "pesAdmin" );
-        a.navigateToWorkingGroups();
-        a.addWorkingGroup();
+        a.login( "student" );
+        //a.navigateToWorkingGroups();
+        //a.addWorkingGroup();
         
-//        a.navigateToMyWall( "student" );
+//        a.navigateToMyWall();
 //        a.urlToWall();
 //        a.navigateToSocialGroups();
 //        nameOfSclGrp = a.createSocialGroups();
