@@ -26,52 +26,6 @@ public class WallPage extends Page {
         super(driver, av);
     }
 
-    //@deprecated
-    public void textPost() {
-
-        /*setUpWallPost();
-
-         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-
-         // Grabs the first iframe because the textArea is always the first iframe
-         for (WebElement frame : iframes) {
-         driver.switchTo().frame(frame.getAttribute("name"));
-         break;
-         }
-         // Switch focus
-         WebElement editableTxtArea = driver.switchTo().activeElement();
-
-         // Stores string that will post to wall. Date need to be in specific format as Getinstance include special characters   
-         dateFormat = new SimpleDateFormat("ddMMMyy KKmma");
-         now = new Date();
-         String textPost = av.getTokenValue("txtPostOnWall") + " " + dateFormat.format(now);
-         editableTxtArea.sendKeys(textPost);
-
-         driver.switchTo().defaultContent();  // Switches back to default focus
-         btnWallShare.click();
-         ip.isTextPresentByCSS(driver, av.getTokenValue("textWallCSS"), textPost);*/
-    }
-
-    //@deprecated
-    public void urlPost() {
-        /*setUpWallPost();
-
-         WebElement linkBtn = new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkBtnXPATH"))));
-         linkBtn.click();
-
-         WebElement linkTextBox = driver.findElement(By.xpath(av.getTokenValue("linkTextBoxXPATH")));
-         linkTextBox.clear();
-
-         // Stores string that will post to wall. Date need to be in specific format as Getinstance include special characters   
-         dateFormat = new SimpleDateFormat("ddMMMyyKKmma");
-         now = new Date();
-         String urlPost = av.getTokenValue("urlPostOnWall") + dateFormat.format(now) + ".com";
-         linkTextBox.sendKeys(urlPost);
-         btnWallShare.click();
-         ip.isElementPresentContainsTextByXPATH(driver, urlPost);*/
-    }
-
-    //New Class
     public void textPost(String textPst) {
 
         setUpWallPost();
@@ -89,9 +43,6 @@ public class WallPage extends Page {
         String user = LoginPage.getUser();
 
         switch (textPst) {
-            default:
-                SeleneseTestBase.fail("Not a valid TextPost " + textPst);
-                break;
             case "txtWallPost":
                 this.textPost = av.getTokenValue(textPst) + "by" + user + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
@@ -107,6 +58,8 @@ public class WallPage extends Page {
             case "txtPostOnStdtWall":
                 this.textPost = av.getTokenValue(textPst) + "by" + user + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
+            default:
+                SeleneseTestBase.fail("Not a valid TextPost " + textPst);            
         }
 
 
@@ -130,14 +83,11 @@ public class WallPage extends Page {
         linkTextBox.clear();
 
         //Date need to be in specific format as Getinstance include special characters   
-        dateFormat = new SimpleDateFormat("ddMMMyyKKmma");
+        dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
 
         String user = LoginPage.getUser();
 
         switch (urlPst) {
-            default:
-                SeleneseTestBase.fail("Not a valid URL Post " + urlPst);
-                break;
             case "urlWallPost":
                 this.urlPost = "http://" + av.getTokenValue(urlPst) + "by" + user + dateFormat.format(now) + ".com";
                 break;
@@ -147,12 +97,14 @@ public class WallPage extends Page {
             case "urlSclGrpPost":
                 this.urlPost = "http://" + av.getTokenValue(urlPst) + "by" + user + dateFormat.format(now) + ".com";
                 break;
-            case "WrkngGrpPost":
+            case "urlWrkngGrpPost":
                 this.urlPost = "http://" + av.getTokenValue(urlPst) + "by" + user + dateFormat.format(now) + ".com";
                 break;
             case "urlPostOnStdtWall":
                 this.urlPost = "http://" + av.getTokenValue(urlPst) + "by" + user + dateFormat.format(now) + ".com";
                 break;
+            default:
+                SeleneseTestBase.fail("Not a valid URL Post " + urlPst);            
         }
 
         linkTextBox.sendKeys(urlPost);
@@ -164,13 +116,6 @@ public class WallPage extends Page {
     public void setUpWallPost() {
         textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
         textArea.click();
-
-        /*WebElement element = driver.findElement(By.id("wall_publisher_textarea_noedit"));
-         JavascriptExecutor executor = (JavascriptExecutor) driver;
-         executor.executeScript("arguments[0].click();", element);
-
-         JavascriptExecutor js = (JavascriptExecutor) driver;
-         js.executeScript("window.document.getElementById('wall_publisher_textarea_noedit').click()");*/
         btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
     }
 

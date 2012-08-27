@@ -1,5 +1,6 @@
 package smoketest;
 
+import com.thoughtworks.selenium.SeleneseTestBase;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
@@ -21,8 +22,20 @@ public class SocialGroup extends Page {
 
     // Assumes user is at 'My Social Groups'
     public void buildSocialGroup() {
-
-        this.grpName = "SmkTst"+LoginPage.getUser()+"SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        
+        String user = LoginPage.getUser();
+        
+        switch (user.substring(6, 10)) {
+            case "stdt":
+                this.grpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                break;
+            case "tchr":
+                this.grpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                break;
+            default:
+                SeleneseTestBase.fail("Invalid user to create Social Group: "+user);
+        }
+     
         String srtName = "Shrt"+LoginPage.getUser()+"SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH"))).click();

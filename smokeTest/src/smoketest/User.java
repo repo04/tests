@@ -38,9 +38,8 @@ public class User extends Page {
                 this.userName = "smktststdt" + dateFormat.format(now);
                 break;
 
-            case "teacher":
+            default:
                 this.userName = "smktsttchr" + dateFormat.format(now);
-                break;
         }
 
         driver.findElement(By.xpath(av.getTokenValue("lftPnlSiteAdminXPATH"))).click();

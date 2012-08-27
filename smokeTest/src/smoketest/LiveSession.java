@@ -9,23 +9,27 @@ public class LiveSession extends Page {
 
     Date now = new Date();
     IsPresent ip = new IsPresent();
-    
+
     public LiveSession(WebDriver driver, AccountValues av) {
         super(driver, av);
     }
 
     public void buildLiveSession(String sclGrpName) {
 
-        String liveSsnNm = "SmkTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        String user = LoginPage.getUser();
+        String liveSsnNm = null;
+
+        switch (user.substring(6, 10)) {
+            case "stdt":
+                liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                break;
+            default:
+                liveSsnNm = "SmkTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                
+        }
+
         String liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         
-        driver.findElement(By.linkText(sclGrpName)).click();
-
-        //Verify Live Session Panel present or not
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnleftPnlLvMtng"));
-
-        driver.findElement(By.xpath(av.getTokenValue("btnleftPnlLvMtng"))).click();
-
         //Verify Navigated to Live Meeting creation page
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtSsn"));
 
@@ -41,7 +45,12 @@ public class LiveSession extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnLvnSsnSbmt")))
                 .click();
 
-        ip.isTextPresentByCSS(driver, av.getTokenValue("lvSsnCSS"), liveSsnNm);
-
+        switch (user.substring(6, 10)) {
+            case "stdt":
+                ip.isTextPresentByXPATH(driver, av.getTokenValue("stdtLvSsnInTchrSclGrpXPATH"), liveSsnNm);
+                break;
+            default:
+                ip.isTextPresentByXPATH(driver, av.getTokenValue("tchrLvSsnXPATH"), liveSsnNm);                
+        }
     }
 }

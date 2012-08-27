@@ -1,117 +1,173 @@
 package smoketest;
 
 public class SmokeTest {
-
+    
     static Actions a = new Actions();
     static String crsName = null;
     static String grpCrsName = null;
-    static String stdtUsrName = null;
     static String tchrUsrName = null;
+    static String stdtUsrName = null;
     static String tchrSclGrpName = null;
-    static String stdtSclGrpName = null;    
+    static String stdtSclGrpName = null;
     static String frmActvyName = null;
     static String quizActvtyName = null;
     static String allInOneAsgnmntAvtvtyName = null;
     static String pageActvtyName = null;
-    
-    
+    static String tchrTxtWallPost = null;
+    static String tchrUrlWallPost = null;
+    static String tchrUrlPostOnStdtWall = null;
+    static String tchrUrlCrsPost = null;
+    static String stdtUrlPostOnTchrSclGrp = null;
+    static String wrkngGrp = null;
+
     public static void main(String[] args) throws Exception {
 
         a.setUp("guAccountProperty");
-        
+
         testCourse_ActivityCreation();
         testUserCreation_AsgnRoleGrpCourse();
         testTchrPost_SclGrpLvSsnCreation();
         testStdtPost_SclGrpLvSSnCreation();
-        testJoin_LeftSclGrp();       
+        testJoin_LeaveDeleteSclGrp();
 
         a.tearDown();
     }
 
     /* COMPLETED
-     * a> Content Admin logs in 
-     * b> Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
-     * c> Logs out
+     * Content Admin logs in 
+     * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
+     * Verify Activity & resource items will appear in activity report
+     * Logs out
      */
     private static void testCourse_ActivityCreation() {
         a.login("contentAdmin");
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         crsName = a.createCourse();
+        System.out.println("crsName: " + crsName);
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         grpCrsName = a.createGrpCourse(crsName);
+        System.out.println("grpCrsName: " + grpCrsName);
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         frmActvyName = a.createForumActivity();
+        System.out.println("frmActvyName: " + frmActvyName);
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         quizActvtyName = a.createQuizActivity();
+        System.out.println("quizActvtyName: " + quizActvtyName);
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         allInOneAsgnmntAvtvtyName = a.createAllInOneAsgnmntActivity();
+        System.out.println("allInOneAsgnmntAvtvtyName: " + allInOneAsgnmntAvtvtyName);
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         pageActvtyName = a.createPageResource();
+        System.out.println("pageActvtyName: " + pageActvtyName);
+
+        //Verify that activity & resource items will appear in activity report (Content) Admin 
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToActvtyRprt();
+        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
 
         a.logOut();
     }
 
     /* COMPLETED
      * Not included in Smoke TestRail but as a prerequisite, the same is automated
-     * a> Create Two Users
-     * b> Assign / Enroll users to newly created GrpCourse as Teacher / Student roles
-     * c> Logs out 
+     * Create Two Users
+     * Assign / Enroll users to newly created GrpCourse as Teacher / Student roles
+     * Create & Add members to Working Group
+     * Logs out 
      */
     private static void testUserCreation_AsgnRoleGrpCourse() {
         a.login("pesAdmin");
 
         a.navigateToMyContacts();
         tchrUsrName = a.createUser("teacher");
+        System.out.println("tchrUsrName: " + tchrUsrName);
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         a.enrollUsrToRole_GrpCrs(tchrUsrName, grpCrsName);
 
         a.navigateToMyContacts();
         stdtUsrName = a.createUser("student");
+        System.out.println("stdtUsrName: " + stdtUsrName);
 
-        a.navigateToCourse();
+        a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         a.enrollUsrToRole_GrpCrs(stdtUsrName, grpCrsName);
+
+        a.navigateToWorkingGroups();
+        wrkngGrp = a.createWorkingGroup();
+        System.out.println("wrkngGrp: " + wrkngGrp);
+
+        a.navigateToWorkingGroups();
+        a.accessWrknGrp(wrkngGrp);
+        a.addMbrsToWrkngGrp(wrkngGrp, tchrUsrName, stdtUsrName);
 
         a.logOut();
     }
 
     /* COMPLETED
      * Teacher LOGS in
-     * Post Text , URL on its wall
-     * Post Text , URL on STDT's wall
+     * Post/Verify Text ,URL on its wall
+     * Post/Verify URL on Course Wall
+     * Post/Verify URL on Stdt's wall
      * Create SocialGroup
-     * Find SclGroup & Create Live Session within SclGroup
+     * Find SclGroup & Create LiveSession within SclGroup
+     * Verify All Posts on TopNews / RecentNews Section
+     * Verify Activity & resource items will appear in activity report
      */
     private static void testTchrPost_SclGrpLvSsnCreation() {
-        a.login("teacher");
-        a.navigateToMyWall();
-        a.textPost("txtWallPost");
-        a.urlPost("urlWallPost");
+        a.login(tchrUsrName);
 
-        a.navigateToMyContacts();
+        a.navigateToMyWall();
+        tchrTxtWallPost = a.textPost("txtWallPost");
+        System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
+        tchrUrlWallPost = a.urlPost("urlWallPost");
+        System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
+
+        a.selectGrpCourse(grpCrsName);
+        tchrUrlCrsPost = a.urlPost("urlCrsPost");
+        System.out.println("tchrUrlCrsPost: " + tchrUrlCrsPost);
+
+        //This will fail as User are not in each other MyContacts list
+        /*a.navigateToMyContacts();
         a.findContact(stdtUsrName);
         a.navigateToContactsWall(stdtUsrName);
-        a.textPost("txtPostOnStdtWall");
-        a.urlPost("urlPostOnStdtWall");
+        tchrUrlPostOnStdtWall = a.urlPost("urlPostOnStdtWall");
+        System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);*/
 
-        a.navigateToSocialGroups();
+        a.navigateToMySocialGroups();
         tchrSclGrpName = a.createSocialGroups();
+        System.out.println("tchrSclGrpName: " + tchrSclGrpName);
 
-        a.navigateToSocialGroups();
-        a.findSocialGroup(tchrSclGrpName);
+        a.navigateToMySocialGroups();
+        a.acessSclGrpWall(tchrSclGrpName);
+        a.acessLvSsnWall();
         a.createLiveSsn(tchrSclGrpName);
+
+        //Verify the activity report view for Teacher
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToActvtyRprt();
+        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+
+        a.navigateToWorkingGroups();
+        a.verifyWrkngGrp(wrkngGrp);
+
+        //Verify All posts on Home / Recent Page
+        //Limitation - Texts cannot be verified as position is not known on Page
+        a.navigateToMyHome();
+        a.VrfyPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall);
 
         a.logOut();
     }
@@ -119,54 +175,77 @@ public class SmokeTest {
     /*
      * Student logs in
      * Find & Join Teacher's Scl Grp
-     * Create his/her Scl Grp
-     * URL on Tchr's Scl Grp
-     * Creates his/her Social Grp & Live Ssn
+     * Post/Verify URL on Tchr's Scl Grp
+     * Create Live Session in Teacher's Social Group
+     * Creates his/her Social Group
+     * Verify All Posts on TopNews / RecentNews Section
+     * Verify Activity & resource items will appear in activity report
      */
     private static void testStdtPost_SclGrpLvSSnCreation() {
-        
-        a.login("student");
-        
-        a.navigateToSocialGroups();
+
+        a.login(stdtUsrName);
+
+        a.navigateToMySocialGroups();
         a.findSocialGroup(tchrSclGrpName);
         a.joinSocialGroup(tchrSclGrpName);
 
         //Pre-requisite User already have joined the social group
         //Post URL on Teacher's Social Group
-        a.navigateToSocialGroups();
+        a.navigateToMySocialGroups();
         a.acessSclGrpWall(tchrSclGrpName);
-        a.urlPost("urlSclGrpPost");
+        stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
+        System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
 
-                
-        a.navigateToSocialGroups();
+        //Stdt creates live Ssn in Tchr's Scl Grp
+        a.navigateToMySocialGroups();
+        a.acessSclGrpWall(tchrSclGrpName);
+        a.acessLvSsnWall();
+        a.createLiveSsn(tchrSclGrpName);
+
+        //Stdt creates Scl Grp
+        a.navigateToMySocialGroups();
         stdtSclGrpName = a.createSocialGroups();
-        
-        a.navigateToSocialGroups();
-        a.findSocialGroup(stdtSclGrpName);
-        a.createLiveSsn(stdtSclGrpName);
-        
-        //Verify POSTS is pending
-        
+        System.out.println("stdtSclGrpName: " + stdtSclGrpName);
+
+        //Verify the activity report view for Student
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToActvtyRprt();
+        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+
+        a.navigateToWorkingGroups();
+        a.verifyWrkngGrp(wrkngGrp);
+
+        //Verify POSTS
+        a.navigateToMyHome();
+        a.VrfyPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
+
         a.logOut();
     }
 
     /*
      * Teacher Login
-     * Find & Join Stdt Social Group        
+     * Find, Join, Leave Stdt Social Group
+     * Verify All Posts on TopNews / RecentNews Section
      */
-    private static void testJoin_LeftSclGrp() {
-        
-        a.login("teacher");
-        a.navigateToSocialGroups();
+    private static void testJoin_LeaveDeleteSclGrp() {
+
+        a.login(tchrUsrName);
+        a.navigateToMySocialGroups();
         a.findSocialGroup(stdtSclGrpName);
         a.joinSocialGroup(stdtSclGrpName);
-        
+
         //Leave Stdt Social Group 
         //Limitation - Student must have only one group to leave on his/her Social Group page
-        //Otherwise script will click on first 'Leave Group' found & will fail thereafter
-        a.navigateToSocialGroups();
+        //Otherwise script will click on first 'Leave Group' Link & will fail thereafter
+        a.navigateToMySocialGroups();
         a.leaveSocialGroup(stdtSclGrpName);
-        
-        //Verify POSTS is pending
+
+        a.navigateToMySocialGroups();
+        a.deleteSocialGroup(tchrSclGrpName);
+
+        //Verify POSTS
+        a.navigateToMyHome();
+        a.VrfyPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
     }
 }

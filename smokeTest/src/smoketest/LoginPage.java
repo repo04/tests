@@ -5,14 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class LoginPage extends Page {
-    
+
     IsPresent ip = new IsPresent();
     private static String usr;
 
     public LoginPage(WebDriver driver, AccountValues av) {
 
         super(driver, av);
-        driver.get(av.getTokenValue("programURL"));        
+        driver.get(av.getTokenValue("programURL"));
     }
 
     // Attemps to login based on user type and values from property file
@@ -38,22 +38,36 @@ public class LoginPage extends Page {
                 passWord.sendKeys(av.getTokenValue("pesPswd"));
                 break;
 
-            case "teacher":
-                userName.sendKeys(av.getTokenValue("tchrUserName"));
-                passWord.sendKeys(av.getTokenValue("tchrPswd"));
-                break;
+            //Not required anymore
+            /*case "teacher":
+             userName.sendKeys(av.getTokenValue("tchrUserName"));
+             passWord.sendKeys(av.getTokenValue("tchrPswd"));
+             break;
 
-            case "student":
-                userName.sendKeys(av.getTokenValue("stdntUserName"));
-                passWord.sendKeys(av.getTokenValue("stdntPswd"));
-                break;
+             case "student":
+             userName.sendKeys(av.getTokenValue("stdntUserName"));
+             passWord.sendKeys(av.getTokenValue("stdntPswd"));
+             break;*/
 
+            default:
+                userName.sendKeys(user);
+                passWord.sendKeys("Tech@123");
+                break;
         }
 
         loginBtn.click();
-        ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
+
+        //PES Admin gets Course Page after login
+        switch (user) {
+            case "pesAdmin":
+                ip.isTitlePresent(driver, av.getTokenValue("coursePageTitle"));
+                break;
+            default:
+                ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
+
+        }
     }
-    
+
     public static String getUser() {
         return usr;
     }
