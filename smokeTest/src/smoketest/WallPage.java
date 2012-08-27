@@ -22,7 +22,7 @@ public class WallPage extends Page {
         super( driver, av );
     }
 
-    public void textPost() {
+    public String textPost() {
 
         setUpWallPost();
 
@@ -46,6 +46,7 @@ public class WallPage extends Page {
         
         // Verifies string / text is posted on wall, verified with time stamp
         ip.isTextPresentByCSS(driver, av.getTokenValue("textWallCSS"), textPost);  
+        return textPost;
     }
     
     public void urlPost()

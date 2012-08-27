@@ -14,22 +14,45 @@ public class Actions {
     // Login as user: student, teacher or PES
     public void login( String user ) {
         
-        LoginPage lp = new LoginPage( driver, av );        
+        LoginPage lp = new LoginPage( driver, av );     
+        ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
         lp.attemptLogin( user );
     } 
     
     public void navigateToMyWall( String user ) {
 
-            // Uses js to click on hidden element by XPATH
-            Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
-            Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );  
+        // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWallXPATH") );
+        Utility.myVerifyCurrentPage( driver, av.getTokenValue("wallPageTitle") );  
     }
     
-    public void textToWall() {
+    public void navigateToContacts() {
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToContactsXPATH"));
+        Utility.myVerifyCurrentPage(driver, av.getTokenValue("myContactsTitle"));
+    } 
+    
+    public void goToContactWall() {
+        driver.findElement(By.xpath("//*[@id='txtSearchContacts']")).sendKeys(av.getTokenValue("stdntFirstName"));
+        driver.findElement(By.xpath(av.getTokenValue("btnSrchCntct"))).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("btnRmveContact"), "Remove Contact");
+        
+        driver.findElement(By.partialLinkText(av.getTokenValue("stdntFirstName"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("linkToContactWall"))).click();
+        
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("textContactWallXPATH"), av.getTokenValue("textContactWall"));
+    }
+    
+    public void verifyTopWallPost(String text) {
+        ip.isElementPresentContainsTextByXPATH(driver, text );
+    }
+    
+    public String textToWall() {
         
         WallPage wp = new WallPage( driver, av );
-        wp.textPost();
+        String wallText = wp.textPost();
+        return wallText;
     }
+    
      
    public void urlToWall() {
         WallPage wp = new WallPage( driver, av );
@@ -39,7 +62,7 @@ public class Actions {
     public void navigateToSocialGroups() {
         
         // Uses js to click on hidden element by XPATH
-        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWrkgGrpXPATH") );
+        Utility.navigateToSubMenu( driver, av.getTokenValue("linkToSclGrpXPATH") );
         Utility.myVerifyCurrentPage( driver, av.getTokenValue("sclGrpTitle") );
     }
     
