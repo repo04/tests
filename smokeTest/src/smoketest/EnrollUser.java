@@ -7,6 +7,7 @@ package smoketest;
 import com.thoughtworks.selenium.SeleneseTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -81,11 +82,18 @@ public class EnrollUser extends Page {
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAcntsLnkUsrRoleCrsXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("lftPnlBrwsUsrVrfyUsrRoleCrsXPATH"))).click();
 
-        if (driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter"))).isDisplayed()) {
-            driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter"))).click();
+        Boolean wait = null;
+        try {
+            driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter")));
+            wait = false;
+        } catch (NoSuchElementException e) {
+            wait = true;
         }
 
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
+        if (!wait) {
+            driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter"))).click();
+            ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
+        }
 
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
         driver.findElement(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))).sendKeys(user);

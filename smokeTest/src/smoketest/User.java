@@ -51,7 +51,7 @@ public class User extends Page {
 
         driver.findElement(By.xpath(av.getTokenValue("fieldUsrnmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(av.getTokenValue("fieldPswdXPATH"))).sendKeys("Tech@123");
-        driver.findElement(By.xpath(av.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName + "frstNm");
+        driver.findElement(By.xpath(av.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName + "fstNm");
         driver.findElement(By.xpath(av.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName + "sndNm");
         driver.findElement(By.xpath(av.getTokenValue("fieldEmailXPATH"))).sendKeys(userName + "@gmail.com");
         driver.findElement(By.xpath(av.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
@@ -81,7 +81,6 @@ public class User extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnFindUsr"))).click();
 
         ip.isElementPresentStartsWithTextByXPATH(driver, userName);
-
     }
 
     public String getUsrName() {

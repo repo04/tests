@@ -1,15 +1,8 @@
 package smoketest;
 
-import java.util.List;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Actions {
 
@@ -17,19 +10,11 @@ public class Actions {
     WebDriver driver;
     IsPresent ip = new IsPresent();
 
-    // Login as user: student, teacher or PES
     public void login(String user) {
 
         LoginPage lp = new LoginPage(driver, av);
         ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
         lp.attemptLogin(user);
-    }
-
-    public void navigateToMyWall() {
-
-        // Uses js to click on hidden element by XPATH
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToWallXPATH"));
-        Utility.myVerifyCurrentPage(driver, av.getTokenValue("wallPageTitle"));
     }
 
     public String textPost(String textPst) {
@@ -45,26 +30,14 @@ public class Actions {
         return wp.getURLPost();
     }
 
-    public String createSocialGroups() {
-
-        SocialGroup sg = new SocialGroup(driver, av);
-        sg.buildSocialGroup();
-
-        // Returns name of Social Group
-        return sg.getSclGrpName();
-    }
-
     public void createLiveSsn(String sclGrpName) {
         LiveSession ls = new LiveSession(driver, av);
         ls.buildLiveSession(sclGrpName);
     }
 
-    //Login with ContentAdmin and create Course
     public String createCourse() {
         Course cr = new Course(driver, av);
         cr.createCourse();
-
-        // Returns name of Course
         return cr.getCrsName();
     }
 
@@ -80,22 +53,7 @@ public class Actions {
     public String createGrpCourse(String courseName) {
         Course cr = new Course(driver, av);
         cr.createGrpCourse(courseName);
-
-        // Returns name of GroupCourse
         return cr.getGrpCrsName();
-    }
-
-    public void findSocialGroup(String s) {
-
-        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
-
-        //Verify 'Find a Social Group' Text
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("headerTxt"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(s);
-        driver.findElement(By.xpath(av.getTokenValue("btnSrchSclGrp"))).click();
-
-        //Verify Social Group Present or not
-        ip.isElementPresentByLINK(driver, s);
     }
 
     public void logOut() {
@@ -115,11 +73,18 @@ public class Actions {
         av = new AccountValues(university);
     }
 
+    public void navigateToMyWall() {
+
+        // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToWallXPATH"));
+        Utility.myVerifyCurrentPage(driver, av.getTokenValue("wallPageTitle"));
+    }
+
     public void navigateToMyCourse() {
 
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu(driver, av.getTokenValue("linkToCourseXPATH"));
-        ip.isTitlePresent(driver, av.getTokenValue("coursePageTitle"));
+        ip.isTitlePresent(driver, av.getTokenValue("crsPageTitle"));
     }
 
     public void navigateToMyHome() {
@@ -133,7 +98,7 @@ public class Actions {
 
         driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
         String s = cntct.substring(0, 1).toUpperCase();
-        String usrFullNm = s + cntct.substring(1) + "frstNm " + s + cntct.substring(1) + "sndNm";
+        String usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyCntctXPATH"), usrFullNm);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
@@ -141,10 +106,7 @@ public class Actions {
 
     public void navigateToWorkingGroups() {
 
-        // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu(driver, av.getTokenValue("linkToWrkgGrpXPATH"));
-        
-        //Verify the Text as My Social/Working Groups gets the same Title
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMyWrkngGrpTEXT"));
     }
 
@@ -152,9 +114,8 @@ public class Actions {
 
         String user = LoginPage.getUser();
         String linkToContactXPATH;
-        
-        if(user.equalsIgnoreCase("pesAdmin"))
-        {
+
+        if (user.equalsIgnoreCase("pesAdmin")) {
             user = user + "   ";
         }
 
@@ -177,10 +138,7 @@ public class Actions {
 
     public void navigateToMySocialGroups() {
 
-        // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu(driver, av.getTokenValue("linkToSclGrpXPATH"));
-
-        //Verify the Text as My Social/Working Groups gets the same Title
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMySclGrpTEXT"));
     }
 
@@ -194,9 +152,8 @@ public class Actions {
     public void selectGrpCourse(String grpCrsName) {
 
         String user = LoginPage.getUser();
-        
-        if(user.equalsIgnoreCase("pesAdmin"))
-        {
+
+        if (user.equalsIgnoreCase("pesAdmin")) {
             user = user + "   ";
         }
 
@@ -268,18 +225,41 @@ public class Actions {
         ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
     }
 
-    public void joinSocialGroup(String sclGrp) {
-        ip.isElementPresentContainsTextByXPATH(driver, "Join Now");
-        driver.findElement(By.xpath("//*[contains(text(),'Join Now')]")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyJndSclGrpXPATH"), "Are you sure you want to join the group \"" + sclGrp + "\"?");
+    public String createSocialGroups() {
 
-        //XPATH didn't work
-        List<WebElement> buttons = driver.findElements(By.tagName("button"));
-        String btnID = buttons.get(1).getAttribute("id");
-        driver.findElement(By.xpath("//button[@id='" + btnID + "']")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyJndSclGrpXPATH"), "You have successfully joined the group \"" + sclGrp + "\".");
-        driver.findElement(By.xpath(av.getTokenValue("btnOkJnSclGrp"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyTxtJoined"), "Joined");
+        SocialGroup sg = new SocialGroup(driver, av);
+        sg.buildSocialGroup();
+        return sg.getSclGrpName();
+    }
+
+    public void findSocialGroup(String sclGrp) {
+
+        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
+
+        //Verify 'Find a Social Group' Text
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("headerTxt"));
+        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(sclGrp);
+        driver.findElement(By.xpath(av.getTokenValue("btnSrchSclGrp"))).click();
+
+        //Verify Social Group Present or not
+        ip.isElementPresentByLINK(driver, sclGrp);
+    }
+
+    public void joinSocialGroup(String sclGrp) {
+        SocialGroup sg = new SocialGroup(driver, av);
+        sg.joinSocialGroup(sclGrp);
+    }
+
+    public void leaveSocialGroup(String stdtSclGrpName) {
+
+        SocialGroup sg = new SocialGroup(driver, av);
+        sg.leaveSocialGroup(stdtSclGrpName);
+    }
+
+    public void deleteSocialGroup(String stdtSclGrpName) {
+
+        SocialGroup sg = new SocialGroup(driver, av);
+        sg.deleteSocialGroup(stdtSclGrpName);
     }
 
     public void acessSclGrpWall(String sclGrp) {
@@ -289,71 +269,15 @@ public class Actions {
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
     }
 
-    public void leaveSocialGroup(String stdtSclGrpName) {
-        ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
-        ip.isElementPresentContainsTextByXPATH(driver, "Leave Group");
-        driver.findElement(By.xpath("//*[contains(text(),'Leave Group')]")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyRmvSclGrpXPATH"), "Are you sure you want to remove yourself from the group " + stdtSclGrpName + "?");
+    public void VrfyURLPstsAsTopNews_RcntNews(String... posts) {
 
-        //XPATH didn't work
-        List<WebElement> buttons = driver.findElements(By.tagName("button"));
-
-        String btnID = buttons.get(1).getAttribute("id");
-        driver.findElement(By.xpath("//button[@id='" + btnID + "']")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyRmvSclGrpXPATH"), "You have successfully left the group " + stdtSclGrpName);
-        driver.findElement(By.xpath(av.getTokenValue("btnOkLvSclGrp"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
-    }
-
-    public void deleteSocialGroup(String stdtSclGrpName) {
-
-        ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
-        driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
-
-        ip.isElementPresentByXPATH(driver, "//input[@id='sgroup_delete']");
-
-        driver.findElement(By.xpath("//input[@id='sgroup_delete']")).click();
-
-        //Get a handle to the open alert, prompt or confirmation
-        final Alert alert = driver.switchTo().alert();
-
-        (new WebDriverWait(driver, 60)).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return alert.getText().contentEquals("Do you really want to delete this group?");
-            }
-        });
-
-        //And acknowledge the alert (equivalent to clicking "OK")
-        alert.accept();
-
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
-
-    }
-
-    public void VrfyPstsAsTopNews_RcntNews(String tchrUrlWallPost, String tchrUrlCrsPost, String tchrUrlPostOnStdtWall) {
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlWallPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlCrsPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlPostOnStdtWall);
-        driver.findElement(By.linkText("link=Recent News")).click();
-
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlWallPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlCrsPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlPostOnStdtWall);
-    }
-
-    public void VrfyPstsAsTopNews_RcntNews(String tchrUrlWallPost, String tchrUrlCrsPost, String tchrUrlPostOnStdtWall, String stdtUrlPostOnTchrSclGrp) {
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlWallPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlCrsPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlPostOnStdtWall);
-        ip.isElementPresentContainsTextByXPATH(driver, stdtUrlPostOnTchrSclGrp);
-
-        driver.findElement(By.xpath("//*[contains(text(),'Recent News')]")).click();
-
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlWallPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlCrsPost);
-        ip.isElementPresentContainsTextByXPATH(driver, tchrUrlPostOnStdtWall);
-        ip.isElementPresentContainsTextByXPATH(driver, stdtUrlPostOnTchrSclGrp);
+        for (String post : posts) {
+            ip.isElementPresentContainsTextByXPATH(driver, post);
+        }
+        Utility.navigateToSubMenu(driver, av.getTokenValue("linkRecentNewsXPATH"));
+        for (String post : posts) {
+            ip.isElementPresentContainsTextByXPATH(driver, post);
+        }
     }
 
     public void navigateToActvtyRprt() {
@@ -362,12 +286,11 @@ public class Actions {
         ip.isTextPresentByCSS(driver, av.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
     }
 
-    public void verifyActivities(String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) {
+    public void verifyActivities(String... activities) {
         ip.isTextPresentByCSS(driver, av.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
-        ip.isElementPresentContainsTextByXPATH(driver, frmActvyName);
-        ip.isElementPresentContainsTextByXPATH(driver, quizActvtyName);
-        ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
-        ip.isElementPresentContainsTextByXPATH(driver, pageActvtyName);
+        for (String activity : activities) {
+            ip.isElementPresentContainsTextByXPATH(driver, activity);
+        }
     }
 
     public void accessWrknGrp(String wrkngGrp) {
@@ -375,29 +298,10 @@ public class Actions {
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
     }
 
-    public void addMbrsToWrkngGrp(String wrkngGrp, String tchrUsrName, String stdtUsrName) {
+    public void addMbrsToWrkngGrp(String... members) {
 
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnEditWrkngGrpXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("btnEditWrkngGrpXPATH"))).click();
-        ip.isElementPresentContainsTextByXPATH(driver, "Manage Members");
-        driver.findElement(By.xpath("//*[contains(text(),'Manage Members')]")).click();
-
-        //ip.isTextPresentByXPATH(driver, av.getTokenValue("addMbrsWrkGrpTxtXPATH"), "My Contacts \n Users Associated to the Course");
-        ip.isTextPresentByXPATH(driver, "//td[2]/h3", "Members");
-        ip.isTextPresentByXPATH(driver, "//td[4]/h3", "Non Members");        
-
-        Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("slctMbrsXPATH"))));
-
-        String tchrFullNm = tchrUsrName + "frstNm " + tchrUsrName + "sndNm(Non-editing teacher)";
-        select.selectByVisibleText(tchrFullNm);
-        driver.findElement(By.xpath(av.getTokenValue("lnkAddMbrXPATH"))).click();
-
-        String stdtFullNm = stdtUsrName + "frstNm " + stdtUsrName + "sndNm(Student)";
-        select.selectByVisibleText(stdtFullNm);
-        driver.findElement(By.xpath(av.getTokenValue("lnkAddMbrXPATH"))).click();
-
-        driver.findElement(By.xpath(av.getTokenValue("btnSaveMbrsXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The members updated for the group.");
+        WorkingGroup wg = new WorkingGroup(driver, av);
+        wg.addMbrsToWrkngGrp(members);
     }
 
     public void verifyWrkngGrp(String wrkngGrp) {

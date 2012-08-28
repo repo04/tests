@@ -1,34 +1,51 @@
 package smoketest;
 
+import org.junit.Test;
+
+
 public class SmokeTest {
     
     static Actions a = new Actions();
     static String crsName = null;
-    static String grpCrsName = null;
-    static String tchrUsrName = null;
+    static String grpCrsName = "SmkTstGrpCrs Aug 27, 2012 4:09 PM";
+    static String tchrUsrName = "smktsttchr2708-1651";
     static String stdtUsrName = null;
     static String tchrSclGrpName = null;
     static String stdtSclGrpName = null;
-    static String frmActvyName = null;
-    static String quizActvtyName = null;
-    static String allInOneAsgnmntAvtvtyName = null;
-    static String pageActvtyName = null;
-    static String tchrTxtWallPost = null;
-    static String tchrUrlWallPost = null;
+    static String frmActvyName = "SmkTstForum Aug 27, 2012 7:03 PM";
+    static String quizActvtyName = "SmkTstQuiz Aug 27, 2012 7:04 PM";
+    static String allInOneAsgnmntAvtvtyName = "SmkTstAllInOneAsgnmnt Aug 27, 2012 7:04 PM";
+    static String pageActvtyName = "SmkTstPage Aug 27, 2012 7:05 PM";
+    static String tchrTxtWallPost = "txtwallpostbysmktsttchr2708-1651 Aug 27, 2012 6:34 PM";
+    static String tchrUrlWallPost = "http://urlwallpostbysmktsttchr2708-165127Aug121834.com";
     static String tchrUrlPostOnStdtWall = null;
-    static String tchrUrlCrsPost = null;
+    static String tchrUrlCrsPost = "http://urlcrspostbysmktsttchr2708-165127Aug121834.com";
     static String stdtUrlPostOnTchrSclGrp = null;
-    static String wrkngGrp = null;
-
-    public static void main(String[] args) throws Exception {
+    static String wrkngGrp = "SmkeTstWrkngGrp Aug 27, 2012 4:59 PM";
+    
+    /*public static void main(String[] args) throws Exception {
 
         a.setUp("guAccountProperty");
 
-        testCourse_ActivityCreation();
-        testUserCreation_AsgnRoleGrpCourse();
+        //testCourse_ActivityCreation();
+        //testUserCreation_AsgnRoleGrpCourse();
         testTchrPost_SclGrpLvSsnCreation();
-        testStdtPost_SclGrpLvSSnCreation();
-        testJoin_LeaveDeleteSclGrp();
+        //testStdtPost_SclGrpLvSSnCreation();
+        //testJoin_LeaveDeleteSclGrp();
+
+        a.tearDown();
+    }*/
+    
+    @Test
+    public void testMain() throws Exception {
+
+        a.setUp("guAccountProperty");
+
+        //testCourse_ActivityCreation();
+        //testUserCreation_AsgnRoleGrpCourse();
+        testTchrPost_SclGrpLvSsnCreation();
+        //testStdtPost_SclGrpLvSSnCreation();
+        //testJoin_LeaveDeleteSclGrp();
 
         a.tearDown();
     }
@@ -109,9 +126,13 @@ public class SmokeTest {
         wrkngGrp = a.createWorkingGroup();
         System.out.println("wrkngGrp: " + wrkngGrp);
 
+        /* 
+         * Dynamically adding variable number of users to WrkngGrp
+         * Parameters: Users to be added to WrkngGrp
+         */
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrp);
-        a.addMbrsToWrkngGrp(wrkngGrp, tchrUsrName, stdtUsrName);
+        a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
 
         a.logOut();
     }
@@ -132,6 +153,8 @@ public class SmokeTest {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
         System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
+        
+        a.navigateToMyWall();
         tchrUrlWallPost = a.urlPost("urlWallPost");
         System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
 
@@ -154,6 +177,10 @@ public class SmokeTest {
         a.acessSclGrpWall(tchrSclGrpName);
         a.acessLvSsnWall();
         a.createLiveSsn(tchrSclGrpName);
+        
+        a.navigateToWorkingGroups();
+        a.verifyWrkngGrp(wrkngGrp);        
+        //Pending Create Google Doc 
 
         //Verify the activity report view for Teacher
         a.navigateToMyCourse();
@@ -161,13 +188,10 @@ public class SmokeTest {
         a.navigateToActvtyRprt();
         a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
 
-        a.navigateToWorkingGroups();
-        a.verifyWrkngGrp(wrkngGrp);
-
-        //Verify All posts on Home / Recent Page
+        //Verify n number of URL Posts on TopNews/RecentNews Page
         //Limitation - Texts cannot be verified as position is not known on Page
         a.navigateToMyHome();
-        a.VrfyPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall);
+        a.VrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall);
 
         a.logOut();
     }
@@ -206,6 +230,10 @@ public class SmokeTest {
         a.navigateToMySocialGroups();
         stdtSclGrpName = a.createSocialGroups();
         System.out.println("stdtSclGrpName: " + stdtSclGrpName);
+        
+        a.navigateToWorkingGroups();
+        a.verifyWrkngGrp(wrkngGrp);
+        //Verify Google Doc is pending
 
         //Verify the activity report view for Student
         a.navigateToMyCourse();
@@ -213,12 +241,9 @@ public class SmokeTest {
         a.navigateToActvtyRprt();
         a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
 
-        a.navigateToWorkingGroups();
-        a.verifyWrkngGrp(wrkngGrp);
-
-        //Verify POSTS
+        //Verify n number of URL Posts on TopNews/RecentNews Page
         a.navigateToMyHome();
-        a.VrfyPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
+        a.VrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
 
         a.logOut();
     }
@@ -244,8 +269,8 @@ public class SmokeTest {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(tchrSclGrpName);
 
-        //Verify POSTS
+        //Verify n number of URL Posts on TopNews/RecentNews Page
         a.navigateToMyHome();
-        a.VrfyPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
+        a.VrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
     }
 }

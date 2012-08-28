@@ -3,8 +3,14 @@ package smoketest;
 import com.thoughtworks.selenium.SeleneseTestBase;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SocialGroup extends Page {
 
@@ -22,9 +28,9 @@ public class SocialGroup extends Page {
 
     // Assumes user is at 'My Social Groups'
     public void buildSocialGroup() {
-        
+
         String user = LoginPage.getUser();
-        
+
         switch (user.substring(6, 10)) {
             case "stdt":
                 this.grpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -33,10 +39,10 @@ public class SocialGroup extends Page {
                 this.grpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             default:
-                SeleneseTestBase.fail("Invalid user to create Social Group: "+user);
+                SeleneseTestBase.fail("Invalid user to create Social Group: " + user);
         }
-     
-        String srtName = "Shrt"+LoginPage.getUser()+"SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+
+        String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH"))).click();
 
@@ -50,7 +56,61 @@ public class SocialGroup extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtSclGrp"))).click();
 
         // Verifies new Group
-        ip.isElementPresentByLINK(driver, grpName);   
+        ip.isElementPresentByLINK(driver, grpName);
+    }
+    
+    public void joinSocialGroup(String sclGrp) {
+
+        ip.isElementPresentContainsTextByXPATH(driver, "Join Now");
+        driver.findElement(By.xpath("//*[contains(text(),'Join Now')]")).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyJndSclGrpXPATH"), "Are you sure you want to join the group \"" + sclGrp + "\"?");
+
+        //XPATH didn't work
+        List<WebElement> buttons = driver.findElements(By.tagName("button"));
+        String btnID = buttons.get(1).getAttribute("id");
+        driver.findElement(By.xpath("//button[@id='" + btnID + "']")).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyJndSclGrpXPATH"), "You have successfully joined the group \"" + sclGrp + "\".");
+        driver.findElement(By.xpath(av.getTokenValue("btnOkJnSclGrp"))).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyTxtJoined"), "Joined");
+    }
+
+    public void leaveSocialGroup(String stdtSclGrpName) {
+
+        ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
+        ip.isElementPresentContainsTextByXPATH(driver, "Leave Group");
+        driver.findElement(By.xpath("//*[contains(text(),'Leave Group')]")).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyRmvSclGrpXPATH"), "Are you sure you want to remove yourself from the group " + stdtSclGrpName + "?");
+
+        //XPATH didn't work
+        List<WebElement> buttons = driver.findElements(By.tagName("button"));
+
+        String btnID = buttons.get(1).getAttribute("id");
+        driver.findElement(By.xpath("//button[@id='" + btnID + "']")).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyRmvSclGrpXPATH"), "You have successfully left the group " + stdtSclGrpName);
+        driver.findElement(By.xpath(av.getTokenValue("btnOkLvSclGrp"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
+    }
+
+    public void deleteSocialGroup(String stdtSclGrpName) {
+        ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
+        driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
+        ip.isElementPresentByXPATH(driver, "//input[@id='sgroup_delete']");
+        driver.findElement(By.xpath("//input[@id='sgroup_delete']")).click();
+
+        //Get a handle to the open alert, prompt or confirmation
+        final Alert alert = driver.switchTo().alert();
+
+        //Verify alert popup
+        (new WebDriverWait(driver, 60)).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return alert.getText().contentEquals("Do you really want to delete this group?");
+            }
+        });
+
+        //And acknowledge the alert (equivalent to clicking "OK")
+        alert.accept();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
     }
 
     public String getSclGrpName() {

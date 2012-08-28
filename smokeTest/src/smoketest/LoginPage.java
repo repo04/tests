@@ -19,12 +19,9 @@ public class LoginPage extends Page {
     public void attemptLogin(String user) {
 
         LoginPage.usr = user;
-        WebElement userName = driver.findElement(By.xpath(av
-                .getTokenValue("userNameXPATH")));
-        WebElement passWord = driver.findElement(By.xpath(av
-                .getTokenValue("pswdXPATH")));
-        WebElement loginBtn = driver.findElement(By.xpath(av
-                .getTokenValue("btnLoginXPATH")));
+        WebElement userName = driver.findElement(By.xpath(av.getTokenValue("userNameXPATH")));
+        WebElement passWord = driver.findElement(By.xpath(av.getTokenValue("pswdXPATH")));
+        WebElement loginBtn = driver.findElement(By.xpath(av.getTokenValue("btnLoginXPATH")));
 
         switch (user) {
 
@@ -58,13 +55,11 @@ public class LoginPage extends Page {
         loginBtn.click();
 
         //PES Admin gets Course Page after login
-        switch (user) {
-            case "pesAdmin":
-                ip.isTitlePresent(driver, av.getTokenValue("coursePageTitle"));
-                break;
-            default:
-                ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
-
+        if (user.equals("pesAdmin") ) {
+            ip.isTitlePresent( driver, av.getTokenValue("crsPageTitle") );
+        }
+        else {
+            ip.isTitlePresent( driver, av.getTokenValue("homePageTitle"));
         }
     }
 
