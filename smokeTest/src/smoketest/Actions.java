@@ -19,6 +19,48 @@ public class Actions {
         lp.attemptLogin( user );
     } 
     
+    public String textToWall() {
+        
+        WallPage wp = new WallPage( driver, av );
+        String wallText = wp.textPost();
+        return wallText;
+    }
+  
+    public void urlToWall() {
+        
+        WallPage wp = new WallPage( driver, av );
+        wp.urlPost();
+    }
+    
+    public void createLiveSsn( String sclGrpName ) {
+        
+        LiveSession ls = new LiveSession( driver, av );
+        ls.buildLiveSession( sclGrpName );
+    }
+    
+    public String createCourse() {
+        
+        Course cr = new Course( driver, av );
+        cr.createCourse();
+        return cr.getCrsName();
+    }
+    
+    public void accessLvSsnWall() {
+        
+        // Verifies if Live Session Panel is Present or Not
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnleftPnlLvMtng"));
+        driver.findElement(By.xpath(av.getTokenValue("btnleftPnlLvMtng"))).click();
+        //Verify Navigated to Live Meeting creation page
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtSsn"));
+    }
+    
+    public String createGrpCourse( String courseName ) {
+        
+        Course cr = new Course( driver, av );
+        cr.createGrpCourse( courseName );
+        return cr.getGrpCrsName();
+    }
+    
     public void navigateToMyWall()  {
 
         // Uses js to click on hidden element by XPATH
@@ -26,12 +68,22 @@ public class Actions {
         ip.isTitlePresent(driver, av.getTokenValue("wallPageTitle"));
     }
     
-    public void navigateToContacts() {
-        
-        ip.isTitlePresent(driver, av.getTokenValue("myContactsTitle"));
-    } 
+    public void navigateToMyCourse() {
+
+        // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToCourseXPATH"));
+        ip.isTitlePresent(driver, av.getTokenValue("crsPageTitle"));
+    }
     
-    public void navigateToContactWall() {
+    public void navigateToMyHome() {
+        
+        // Uses js to click on hidden element by XPATH
+        Utility.navigateToSubMenu(driver, av.getTokenValue("lnkToHomeXPATH"));
+        ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
+    }
+    
+    public void navigateToContactsWall() {
+        
         driver.findElement(By.xpath("//*[@id='txtSearchContacts']")).sendKeys(av.getTokenValue("stdntFirstName"));
         driver.findElement(By.xpath(av.getTokenValue("btnSrchCntct"))).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("btnRmveContact"), "Remove Contact");
@@ -41,37 +93,39 @@ public class Actions {
         
         ip.isTextPresentByXPATH(driver, av.getTokenValue("textContactWallXPATH"), av.getTokenValue("textContactWall"));
     }
-    
-    public void verifyTopWallPost(String text) {
-        ip.isElementPresentContainsTextByXPATH(driver, text );
-    }
-    
-    public String textToWall() {
-        
-        WallPage wp = new WallPage( driver, av );
-        String wallText = wp.textPost();
-        return wallText;
-    }
-    
-     
-   public void urlToWall() {
-        WallPage wp = new WallPage( driver, av );
-        wp.urlPost();
-    }
-    
-    public void navigateToSocialGroups() {
+
+    public void navigateToMySocialGroups() {
         
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToSclGrpXPATH") );
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMySclGrpTEXT"));
     }
     
+    public void createWorkingGroup() {
+        
+        WorkingGroup wg = new WorkingGroup( driver, av);
+        wg.BuildWorkingGroup();
+    }
+    
+        
     public void navigateToWorkingGroups() {
         
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu( driver, av.getTokenValue("linkToWrkgGrpXPATH") );
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMyWrkngGrpTEXT"));
     }
+
+
+    
+
+    
+    public void verifyTopWallPost(String text) {
+        ip.isElementPresentContainsTextByXPATH(driver, text );
+    }
+    
+
+    
+
     
     public void addWorkingGroup() {
             
@@ -98,25 +152,11 @@ public class Actions {
         
     }
     
-    public void createLiveSsn( String sclGrpName ) {
-        
-        LiveSession ls = new LiveSession( driver, av );
-        ls.buildLiveSession( sclGrpName );
-    }
+
     
-    public String createCourse() {
-        Course cr = new Course( driver, av );
-        cr.createCourse();
-        
-        return cr.getCrsName();
-    }
     
-    public String createGrpCourse( String courseName ) {
-        
-        Course cr = new Course( driver, av );
-        cr.createGrpCourse( courseName );
-        return cr.getGrpCrsName();
-    }
+    
+    
     
     public String createForumActivity() {
         Activity activity = new Activity(driver, av);
@@ -142,12 +182,7 @@ public class Actions {
         return activity.getPageActvyName();
     }    
     
-    public void navigateToCourse() {
-
-        // Uses js to click on hidden element by XPATH
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToCourseXPATH"));
-        ip.isTitlePresent(driver, av.getTokenValue("coursePageTitle"));
-    }
+    
     
     public void logOut() {
         

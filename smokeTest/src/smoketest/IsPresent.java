@@ -25,7 +25,7 @@ public class IsPresent {
  
     }
     
-    public void isElementPresentByLink( WebDriver driver, String elementByLINK) {
+    public void isElementPresentByLINK( WebDriver driver, String elementByLINK) {
         
         new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elementByLINK)));
     }

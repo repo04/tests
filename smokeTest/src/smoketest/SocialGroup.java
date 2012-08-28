@@ -33,9 +33,8 @@ public class SocialGroup extends Page {
         driver.findElement(By.xpath(av.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
         
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtSclGrp"))).click();
-        
        
-        ip.isElementPresentByLink( driver, sclGrpName );   // Verifies new Group
+        ip.isElementPresentByLINK( driver, sclGrpName );   // Verifies new Group
     }
     
     public void joinSocialGroup(String s) {
