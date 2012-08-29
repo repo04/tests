@@ -2,50 +2,52 @@ package smoketest;
 
 import org.junit.Test;
 
-
 public class SmokeTest {
     
     static Actions a = new Actions();
-    static String crsName = null;
-    static String grpCrsName = "SmkTstGrpCrs Aug 27, 2012 4:09 PM";
-    static String tchrUsrName = "smktsttchr2708-1651";
+    static String crsName = "SmkTstCrs Aug 29, 2012 11:35 PM";
+    static String grpCrsName = "SmkTstGrpCrs Aug 29, 2012 11:36 PM";
+    static String tchrUsrName = "teacher2908-2342";
     static String stdtUsrName = null;
     static String tchrSclGrpName = null;
     static String stdtSclGrpName = null;
-    static String frmActvyName = "SmkTstForum Aug 27, 2012 7:03 PM";
-    static String quizActvtyName = "SmkTstQuiz Aug 27, 2012 7:04 PM";
-    static String allInOneAsgnmntAvtvtyName = "SmkTstAllInOneAsgnmnt Aug 27, 2012 7:04 PM";
-    static String pageActvtyName = "SmkTstPage Aug 27, 2012 7:05 PM";
+    static String frmActvyName = "SmkTstForum Aug 29, 2012 11:37 PM";
+    static String quizActvtyName = "SmkTstQuiz Aug 29, 2012 11:38 PM";
+    static String allInOneAsgnmntAvtvtyName = "SmkTstAllInOneAsgnmnt Aug 29, 2012 11:38 PM";
+    static String pageActvtyName = "SmkTstPage Aug 29, 2012 11:39 PM";
     static String tchrTxtWallPost = "txtwallpostbysmktsttchr2708-1651 Aug 27, 2012 6:34 PM";
     static String tchrUrlWallPost = "http://urlwallpostbysmktsttchr2708-165127Aug121834.com";
     static String tchrUrlPostOnStdtWall = null;
     static String tchrUrlCrsPost = "http://urlcrspostbysmktsttchr2708-165127Aug121834.com";
     static String stdtUrlPostOnTchrSclGrp = null;
-    static String wrkngGrp = "SmkeTstWrkngGrp Aug 27, 2012 4:59 PM";
-    
+    static String wrkngGrpName = "testWrkngGrp";
+    static String gglDocName = "testWrkngGrp";
+
+    //This is to run from netbeans
     /*public static void main(String[] args) throws Exception {
 
         a.setUp("guAccountProperty");
 
-        //testCourse_ActivityCreation();
-        //testUserCreation_AsgnRoleGrpCourse();
+        testCourse_ActivityCreation();
+        testUserCreation_AsgnRoleGrpCourse();
         testTchrPost_SclGrpLvSsnCreation();
-        //testStdtPost_SclGrpLvSSnCreation();
-        //testJoin_LeaveDeleteSclGrp();
+        testStdtPost_SclGrpLvSSnCreation();
+        testJoin_LeaveDeleteSclGrp();
 
         a.tearDown();
     }*/
-    
+
+    //This is to run from ANT
     @Test
     public void testMain() throws Exception {
 
         a.setUp("guAccountProperty");
 
-        //testCourse_ActivityCreation();
-        //testUserCreation_AsgnRoleGrpCourse();
+        testCourse_ActivityCreation();
+        testUserCreation_AsgnRoleGrpCourse();
         testTchrPost_SclGrpLvSsnCreation();
-        //testStdtPost_SclGrpLvSSnCreation();
-        //testJoin_LeaveDeleteSclGrp();
+        testStdtPost_SclGrpLvSSnCreation();
+        testJoin_LeaveDeleteSclGrp();
 
         a.tearDown();
     }
@@ -87,11 +89,12 @@ public class SmokeTest {
         pageActvtyName = a.createPageResource();
         System.out.println("pageActvtyName: " + pageActvtyName);
 
-        //Verify that activity & resource items will appear in activity report (Content) Admin 
-        a.navigateToMyCourse();
+        //Verify that activity & resource items will appear in activity report (Content) Admin
+        //Functionally: This cannot be verified unless Student is added to Course
+        /*a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         a.navigateToActvtyRprt();
-        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);*/
 
         a.logOut();
     }
@@ -123,15 +126,15 @@ public class SmokeTest {
         a.enrollUsrToRole_GrpCrs(stdtUsrName, grpCrsName);
 
         a.navigateToWorkingGroups();
-        wrkngGrp = a.createWorkingGroup();
-        System.out.println("wrkngGrp: " + wrkngGrp);
+        wrkngGrpName = a.createWorkingGroup();
+        System.out.println("wrkngGrp: " + wrkngGrpName);
 
         /* 
          * Dynamically adding variable number of users to WrkngGrp
          * Parameters: Users to be added to WrkngGrp
          */
         a.navigateToWorkingGroups();
-        a.accessWrknGrp(wrkngGrp);
+        a.accessWrknGrp(wrkngGrpName);
         a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
 
         a.logOut();
@@ -153,7 +156,7 @@ public class SmokeTest {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
         System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
-        
+
         a.navigateToMyWall();
         tchrUrlWallPost = a.urlPost("urlWallPost");
         System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
@@ -164,10 +167,10 @@ public class SmokeTest {
 
         //This will fail as User are not in each other MyContacts list
         /*a.navigateToMyContacts();
-        a.findContact(stdtUsrName);
-        a.navigateToContactsWall(stdtUsrName);
-        tchrUrlPostOnStdtWall = a.urlPost("urlPostOnStdtWall");
-        System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);*/
+         a.findContact(stdtUsrName);
+         a.navigateToContactsWall(stdtUsrName);
+         tchrUrlPostOnStdtWall = a.urlPost("urlPostOnStdtWall");
+         System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);*/
 
         a.navigateToMySocialGroups();
         tchrSclGrpName = a.createSocialGroups();
@@ -177,10 +180,10 @@ public class SmokeTest {
         a.acessSclGrpWall(tchrSclGrpName);
         a.acessLvSsnWall();
         a.createLiveSsn(tchrSclGrpName);
-        
+
         a.navigateToWorkingGroups();
-        a.verifyWrkngGrp(wrkngGrp);        
-        //Pending Create Google Doc 
+        gglDocName = a.createGoogleDoc(wrkngGrpName);
+        System.out.println("gglDocName: " + gglDocName);       
 
         //Verify the activity report view for Teacher
         a.navigateToMyCourse();
@@ -230,10 +233,9 @@ public class SmokeTest {
         a.navigateToMySocialGroups();
         stdtSclGrpName = a.createSocialGroups();
         System.out.println("stdtSclGrpName: " + stdtSclGrpName);
-        
+
         a.navigateToWorkingGroups();
-        a.verifyWrkngGrp(wrkngGrp);
-        //Verify Google Doc is pending
+        a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
 
         //Verify the activity report view for Student
         a.navigateToMyCourse();

@@ -112,25 +112,23 @@ public class Actions {
 
     public void navigateToMyContacts() {
 
-        String user = LoginPage.getUser();
         String linkToContactXPATH;
 
-        if (user.equalsIgnoreCase("pesAdmin")) {
-            user = user + "   ";
+        //Contacts link XPATH varies across users (Admin & Tchr/Std)
+        //Checking for 'Contacts' TEXT in href
+        String url = driver.findElement(By.xpath(av.getTokenValue("linkToCntctByAdminXPATH"))).getAttribute("href");
+        int i = url.lastIndexOf("/");
+        
+        if("Contacts".equalsIgnoreCase(url.substring(i+1, i+9)))
+        {
+            System.out.println("linkToCntctByAdminXPATH");
+            linkToContactXPATH = av.getTokenValue("linkToCntctByAdminXPATH");
         }
-
-        // Contacts link XPATH varies across users (Admin & Tchr/Std)
-        switch (user.substring(6, 10)) {
-
-            case "stdt":
-            case "tchr":
-                linkToContactXPATH = av.getTokenValue("linkToCntctXPATH");
-                break;
-
-            default:
-                linkToContactXPATH = av.getTokenValue("linkToCntctByAdminXPATH");
+        else{
+            System.out.println("linkToCntctXPATH");
+            linkToContactXPATH = av.getTokenValue("linkToCntctXPATH");
         }
-
+        
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu(driver, linkToContactXPATH);
         ip.isTitlePresent(driver, av.getTokenValue("contactPageTitle"));
@@ -153,22 +151,17 @@ public class Actions {
 
         String user = LoginPage.getUser();
 
-        if (user.equalsIgnoreCase("pesAdmin")) {
-            user = user + "   ";
-        }
-
         //Teacher/Student can select Course but not Group Course as compared to Admin users
-        switch (user.substring(6, 10)) {
+        switch (user) {
 
-            case "stdt":
-            case "tchr":
+            default:
                 Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + grpCrsName + "')]");
                 break;
 
-            default:
+            case "pesAdmin":
+            case "contentAdmin":            
                 ip.isElementPresentContainsTextByXPATH(driver, grpCrsName);
-                driver.findElement(By.xpath("//*[contains(text(),'" + grpCrsName + "')]")).click();
-                break;
+                driver.findElement(By.xpath("//*[contains(text(),'" + grpCrsName + "')]")).click();                
         }
         ip.isTextPresentByCSS(driver, av.getTokenValue("lblCrsLftPnlCSS"), grpCrsName.toUpperCase());
     }
@@ -304,7 +297,19 @@ public class Actions {
         wg.addMbrsToWrkngGrp(members);
     }
 
-    public void verifyWrkngGrp(String wrkngGrp) {
+    public void vrfyWrkngGrp_GglDoc(String wrkngGrp, String gglDocName) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
+        driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("lnkLftPnlFilesXPATH"));
+        driver.findElement(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))).click();
+        ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }
+    
+    public String createGoogleDoc(String wrkngGrp) {
+        WorkingGroup wg = new WorkingGroup(driver, av);
+        wg.createGoogleDoc(wrkngGrp);
+        return wg.getGoogleDocName();
+    }
+
+    
 }

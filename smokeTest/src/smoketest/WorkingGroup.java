@@ -2,6 +2,7 @@ package smoketest;
 
 import com.thoughtworks.selenium.SeleneseTestBase;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ public class WorkingGroup extends Page {
     Date now = new Date();
     IsPresent ip = new IsPresent();
     private String wrkgGrpName;
+    private String gglDocName;
 
     public WorkingGroup(WebDriver driver, AccountValues av) {
         super(driver, av);
@@ -49,19 +51,20 @@ public class WorkingGroup extends Page {
 
         Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("slctMbrsXPATH"))));
         String fullNm = null;
-
+        
         for (String mbr : members) {
             sw:
-            switch (mbr.substring(6, 10)) {
-                case "tchr":
-                    fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
-                    break sw;
-                case "stdt":
-                    fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
-                    break sw;
-                default:
-                    SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(6, 10));
-            }
+                switch (mbr.substring(0, 7))  {
+                    case "teacher":
+                        fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
+                        break sw;
+                    case "student":
+                        fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
+                        break sw;
+                    default:
+                        SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
+                }
+            
             select.selectByVisibleText(fullNm);
         }
         driver.findElement(By.xpath(av.getTokenValue("lnkAddMbrXPATH"))).click();
@@ -69,7 +72,43 @@ public class WorkingGroup extends Page {
         ip.isTextPresentByXPATH(driver, av.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The members updated for the group.");
     }
 
+    public void createGoogleDoc(String wrkngGrp) {
+        ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
+        driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("lnkLftPnlFilesXPATH"));
+        driver.findElement(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))).click();
+        ip.isElementPresentContainsTextByXPATH(driver, "Start a Collaborative Document");
+        driver.findElement(By.xpath("//*[contains(text(),'Start a Collaborative Document')]")).click();
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocNameXPATH"));
+        new Select(driver.findElement(By.xpath(av.getTokenValue("slctGglTypeXPATH")))).selectByVisibleText("Document");
+        DateFormat dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
+
+        this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);
+        String gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
+        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(gglDocName);
+        driver.findElement(By.xpath(av.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
+        Boolean bool = driver.findElement(By.xpath(av.getTokenValue("chckbxCllbrtrsXPATH"))).isSelected();
+
+        if (!bool) {
+            driver.findElement(By.xpath(av.getTokenValue("chckbxCllbrtrsXPATH"))).click();
+        }
+        driver.findElement(By.xpath(av.getTokenValue("btnSbmtGglDoc"))).click();
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
+        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH"))).sendKeys("tutordemo2");
+        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH"))).sendKeys("Newuser@123");
+        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocSignInXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocGrntAccessXPATH"));
+        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
+
+        ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
+
+    }
+
     public String getWrkngGrp() {
         return this.wrkgGrpName;
+    }
+
+    public String getGoogleDocName() {
+        return this.gglDocName;
     }
 }
