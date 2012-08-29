@@ -19,7 +19,7 @@ public class WorkingGroup extends Page {
     public void BuildWorkingGroup() {
         
         this.wrkgGrpName = "SmokeTest " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        String srtName = "ShoretName " +  DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        String srtName = "ShortName " +  DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         
         driver.findElement(By.xpath(av.getTokenValue("link2torAdminXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("linkAddWrkGrp"))).click();
@@ -33,8 +33,8 @@ public class WorkingGroup extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtWrkgGrp"))).click();
         
         ip.isTextPresentByXPATH(driver, av.getTokenValue("headerLstWrkGrp"), av.getTokenValue("txtLstWrkGrp"));
-        
-        driver.findElement(By.linkText(wrkgGrpName));
+
+        ip.isElementPresentByLINK(driver, wrkgGrpName);
         
     }
 }

@@ -107,7 +107,46 @@ public class Actions {
         wg.BuildWorkingGroup();
     }
     
-        
+    public String createForumActivity() {
+        Activity activity = new Activity(driver, av);
+        activity.crtForumActvty();
+        return activity.getFrmActvyName();
+    }
+    
+    public String createQuizActivity() {
+        Activity activity = new Activity(driver, av);
+        activity.crtQuizActvty();
+        return activity.getQzActvyName();
+    }
+
+    public String createAllInOneAsgnmntActivity() {
+        Activity activity = new Activity(driver, av);
+        activity.crtAllInOneAsgnmntActvty();
+        return activity.getAllInOneAsgnmntActvyName();
+    }
+    
+    public String createPageResource() {
+        Activity activity = new Activity(driver, av);
+        activity.createPageResource();
+        return activity.getPageActvyName();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
+       
     public void navigateToWorkingGroups() {
         
         // Uses js to click on hidden element by XPATH
@@ -158,29 +197,9 @@ public class Actions {
     
     
     
-    public String createForumActivity() {
-        Activity activity = new Activity(driver, av);
-        activity.crtForumActvty();
-        return activity.getFrmActvyName();
-    }
 
-    public String createQuizActivity() {
-        Activity activity = new Activity(driver, av);
-        activity.crtQuizActvty();
-        return activity.getQzActvyName();
-    }
 
-    public String createAllInOneAsgnmntActivity() {
-        Activity activity = new Activity(driver, av);
-        activity.crtAllInOneAsgnmntActvty();
-        return activity.getAllInOneAsgnmntActvyName();
-    }
     
-    public String createPageResource() {
-        Activity activity = new Activity(driver, av);
-        activity.createPageResource();
-        return activity.getPageActvyName();
-    }    
     
     
     
