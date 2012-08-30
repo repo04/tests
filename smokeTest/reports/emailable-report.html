@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>TestNG:  Unit Test</title>
+<style type="text/css">
+table caption,table.info_table,table.param,table.passed,table.failed {margin-bottom:10px;border:1px solid #000099;border-collapse:collapse;empty-cells:show;}
+table.info_table td,table.info_table th,table.param td,table.param th,table.passed td,table.passed th,table.failed td,table.failed th {
+border:1px solid #000099;padding:.25em .5em .25em .5em
+}
+table.param th {vertical-align:bottom}
+td.numi,th.numi,td.numi_attn {
+text-align:right
+}
+tr.total td {font-weight:bold}
+table caption {
+text-align:center;font-weight:bold;
+}
+table.passed tr.stripe td,table tr.passedodd td {background-color: #00AA00;}
+table.passed td,table tr.passedeven td {background-color: #33FF33;}
+table.passed tr.stripe td,table tr.skippedodd td {background-color: #cccccc;}
+table.passed td,table tr.skippedodd td {background-color: #dddddd;}
+table.failed tr.stripe td,table tr.failedodd td,table.param td.numi_attn {background-color: #FF3333;}
+table.failed td,table tr.failedeven td,table.param tr.stripe td.numi_attn {background-color: #DD0000;}
+tr.stripe td,tr.stripe th {background-color: #E6EBF9;}
+p.totop {font-size:85%;text-align:center;border-bottom:2px black solid}
+div.shootout {padding:2em;border:3px #4854A8 solid}
+</style>
+</head>
+<body>
+<table cellspacing=0 cellpadding=0 class="param">
+<tr><th>Test</th><th class="numi">Methods<br/>Passed</th><th class="numi">Scenarios<br/>Passed</th><th class="numi"># skipped</th><th class="numi"># failed</th><th class="numi">Total<br/>Time</th><th class="numi">Included<br/>Groups</th><th class="numi">Excluded<br/>Groups</th></tr>
+<tr><td style="text-align:left;padding-right:2em">CrsGrpCrsCreation</td><td class="numi">3</td><td class="numi">3</td><td class="numi">0</td><td class="numi">0</td><td class="numi">200.0 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr class="stripe"><td style="text-align:left;padding-right:2em">UsrCrtnAsgnRoleWrkngGrp</td><td class="numi">5</td><td class="numi">5</td><td class="numi">0</td><td class="numi">0</td><td class="numi">238.1 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">TchrPostsSclGrpGglDoc</td><td class="numi">5</td><td class="numi">5</td><td class="numi">0</td><td class="numi_attn">2</td><td class="numi">202.3 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr class="stripe"><td style="text-align:left;padding-right:2em">StdtPostsSclGrpGglDoc</td><td class="numi">5</td><td class="numi">5</td><td class="numi_attn">1</td><td class="numi_attn">2</td><td class="numi">206.7 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr><td style="text-align:left;padding-right:2em">TchrJoinDeleteSclGrp</td><td class="numi">4</td><td class="numi">4</td><td class="numi">0</td><td class="numi_attn">1</td><td class="numi">103.4 seconds</td><td class="numi"></td><td class="numi"></td></tr>
+<tr class="total"><td>Total</td>
+<td class="numi">22</td><td class="numi">22</td><td class="numi_attn">1</td><td class="numi_attn">5</td><td class="numi">950.5 seconds</td><td colspan="2">&nbsp;</td></tr>
+</table>
+<a id="summary"></a>
+<table cellspacing=0 cellpadding=0 class="passed">
+<tr><th>Class</th><th>Method</th><th># of<br/>Scenarios</th><th>Start</th><th>Time<br/>(ms)</th></tr>
+<tr><th colspan="4">CrsGrpCrsCreation &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="3">runThrghTestNG.Crs_GrpCrsCreation<td><a href="#m1"><b>testActivities_Creation</b>  </a></td><td class="numi">1</td><td>1346347264588</td><td class="numi">117920</td></tr><tr class="passedodd"><td><a href="#m2"><b>testCntntAdminLgn</b>  </a></td><td class="numi">1</td><td>1346347195114</td><td class="numi">12718</td></tr><tr class="passedodd"><td><a href="#m3"><b>testCrsGrpCrs_Creation</b>  </a></td><td class="numi">1</td><td>1346347207835</td><td class="numi">56752</td></tr>
+<tr><th colspan="4">UsrCrtnAsgnRoleWrkngGrp &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="5">runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp<td><a href="#m4"><b>testAddMbrsToWrkngGrp</b>  </a></td><td class="numi">1</td><td>1346347530591</td><td class="numi">91072</td></tr><tr class="passedodd"><td><a href="#m5"><b>testAsgnRole</b>  </a></td><td class="numi">1</td><td>1346347465125</td><td class="numi">65465</td></tr><tr class="passedodd"><td><a href="#m6"><b>testCrtWrkgnGrp</b>  </a></td><td class="numi">1</td><td>1346347400923</td><td class="numi">12543</td></tr><tr class="passedodd"><td><a href="#m7"><b>testPESAdminLgn</b>  </a></td><td class="numi">1</td><td>1346347387202</td><td class="numi">13720</td></tr><tr class="passedodd"><td><a href="#m8"><b>testUsrCrtn</b>  </a></td><td class="numi">1</td><td>1346347413467</td><td class="numi">51657</td></tr>
+<tr><th colspan="4">TchrPostsSclGrpGglDoc &#8212; failed</th></tr>
+<tr class="failedodd"><td rowspan="2">runThrghTestNG.TchrPosts_SclGrp_GglDoc<td><a href="#m9"><b>testTchrCrtLvSsn</b>  </a></td><td class="numi">1</td><td>1346347691860</td><td class="numi">67987</td></tr><tr class="failedodd"><td><a href="#m10"><b>testTchrVrfyURLPsts_TopNews_RcntNews</b>  </a></td><td class="numi">1</td><td>1346347759894</td><td class="numi">63196</td></tr>
+<tr><th colspan="4">TchrPostsSclGrpGglDoc &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="5">runThrghTestNG.TchrPosts_SclGrp_GglDoc<td><a href="#m11"><b>testTchrCrtGglDoc</b>  </a></td><td class="numi">1</td><td>1346347634963</td><td class="numi">20019</td></tr><tr class="passedodd"><td><a href="#m12"><b>testTchrCrtSclGrp</b>  </a></td><td class="numi">1</td><td>1346347654983</td><td class="numi">13095</td></tr><tr class="passedodd"><td><a href="#m13"><b>testTchrLgn</b>  </a></td><td class="numi">1</td><td>1346347625237</td><td class="numi">9725</td></tr><tr class="passedodd"><td><a href="#m14"><b>testTchrPostsOn_Wall_CrsWall</b>  </a></td><td class="numi">1</td><td>1346347668079</td><td class="numi">17554</td></tr><tr class="passedodd"><td><a href="#m15"><b>testTchrVrfyActivities</b>  </a></td><td class="numi">1</td><td>1346347685634</td><td class="numi">6225</td></tr>
+<tr><th colspan="4">StdtPostsSclGrpGglDoc &#8212; failed</th></tr>
+<tr class="failedodd"><td rowspan="2">runThrghTestNG.StdtPosts_SclGrp_GglDoc<td><a href="#m16"><b>testStdtCrtLvSsn</b>  </a></td><td class="numi">1</td><td>1346347892590</td><td class="numi">70732</td></tr><tr class="failedodd"><td><a href="#m17"><b>testStdtPostURLOnTchrSclGrp</b>  </a></td><td class="numi">1</td><td>1346347963325</td><td class="numi">66358</td></tr>
+<tr><th colspan="4">StdtPostsSclGrpGglDoc &#8212; skipped</th></tr>
+<tr class="skippedodd"><td rowspan="1">runThrghTestNG.StdtPosts_SclGrp_GglDoc<td><a href="#m18"><b>testStdtVrfyURLPsts_TopNews_RcntNews</b>  </a></td><td class="numi">1</td><td>1346348029685</td><td class="numi">0</td></tr>
+<tr><th colspan="4">StdtPostsSclGrpGglDoc &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="5">runThrghTestNG.StdtPosts_SclGrp_GglDoc<td><a href="#m19"><b>testStdtCrtSclGrp</b>  </a></td><td class="numi">1</td><td>1346347838396</td><td class="numi">15946</td></tr><tr class="passedodd"><td><a href="#m20"><b>testStdtJoinsTchrSclGrp</b>  </a></td><td class="numi">1</td><td>1346347854343</td><td class="numi">16776</td></tr><tr class="passedodd"><td><a href="#m21"><b>testStdtLgn</b>  </a></td><td class="numi">1</td><td>1346347828166</td><td class="numi">10229</td></tr><tr class="passedodd"><td><a href="#m22"><b>testStdtVrfyActivities</b>  </a></td><td class="numi">1</td><td>1346347871120</td><td class="numi">10766</td></tr><tr class="passedodd"><td><a href="#m23"><b>testStdtVrfyWrkGrp</b>  </a></td><td class="numi">1</td><td>1346347881887</td><td class="numi">10702</td></tr>
+<tr><th colspan="4">TchrJoinDeleteSclGrp &#8212; failed</th></tr>
+<tr class="failedodd"><td rowspan="1">runThrghTestNG.TchrJoin_Delete_SclGrp<td><a href="#m24"><b>testTchrVrfyURLPsts_TopNews_RcntNews</b>  </a></td><td class="numi">1</td><td>1346348066099</td><td class="numi">62746</td></tr>
+<tr><th colspan="4">TchrJoinDeleteSclGrp &#8212; passed</th></tr>
+<tr class="passedodd"><td rowspan="4">runThrghTestNG.TchrJoin_Delete_SclGrp<td><a href="#m25"><b>testTchrDeleteSclGrp</b>  </a></td><td class="numi">1</td><td>1346348043755</td><td class="numi">8106</td></tr><tr class="passedodd"><td><a href="#m26"><b>testTchrJoinsStdtSclGrp</b>  </a></td><td class="numi">1</td><td>1346348051862</td><td class="numi">14236</td></tr><tr class="passedodd"><td><a href="#m27"><b>testTchrLeavesStdtSclGrp</b>  </a></td><td class="numi">1</td><td>1346348128846</td><td class="numi">5217</td></tr><tr class="passedodd"><td><a href="#m28"><b>testTchrLgn</b>  </a></td><td class="numi">1</td><td>1346348034873</td><td class="numi">8881</td></tr>
+</table>
+<h1>CrsGrpCrsCreation</h1>
+<a id="m1"></a><h2>runThrghTestNG.Crs_GrpCrsCreation:testCrsGrpCrs_Creation</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m2"></a><h2>runThrghTestNG.Crs_GrpCrsCreation:testCntntAdminLgn</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m3"></a><h2>runThrghTestNG.Crs_GrpCrsCreation:testActivities_Creation</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h1>UsrCrtnAsgnRoleWrkngGrp</h1>
+<a id="m4"></a><h2>runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp:testCrtWrkgnGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m5"></a><h2>runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp:testAsgnRole</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m6"></a><h2>runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp:testUsrCrtn</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m7"></a><h2>runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp:testAddMbrsToWrkngGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m8"></a><h2>runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp:testPESAdminLgn</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h1>TchrPostsSclGrpGglDoc</h1>
+<a id="m9"></a><h2>runThrghTestNG.TchrPosts_SclGrp_GglDoc:testTchrVrfyURLPsts_TopNews_RcntNews</h2>
+<div style="padding-left:3em">
+<p>Timed out after 60 seconds waiting for presence of element located by: By.xpath: //*[contains(text(),&apos;http://urlcrspostbyteacher3008-132330Aug121328.com&apos;)]
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:255)
+<br/>at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:270)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:222)
+<br/>at smoketest.IsPresent.isElementPresentContainsTextByXPATH(IsPresent.java:28)
+<br/>at smoketest.Actions.vrfyURLPstsAsTopNews_RcntNews(Actions.java:265)
+<br/>at runThrghTestNG.TchrPosts_SclGrp_GglDoc.testTchrVrfyURLPsts_TopNews_RcntNews(TchrPosts_SclGrp_GglDoc.java:45)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[contains(text(),&apos;http://urlcrspostbyteacher3008-132330Aug121328.com&apos;)]&quot;}
+Command duration or timeout: 8 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: RemoteWebDriver
+Session ID: 12880ad6-2195-9043-a174-c37f8502e67f</p>
+sun.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+<br/>at java.lang.reflect.Constructor.newInstance(Constructor.java:525)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:188)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:145)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:498)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:268)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:353)
+<br/>at org.openqa.selenium.By$ByXPath.findElement(By.java:343)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:260)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:426)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.access$0(ExpectedConditions.java:424)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$3.apply(ExpectedConditions.java:103)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$3.apply(ExpectedConditions.java:1)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:201)
+<br/>at smoketest.IsPresent.isElementPresentContainsTextByXPATH(IsPresent.java:28)
+<br/>at smoketest.Actions.vrfyURLPstsAsTopNews_RcntNews(Actions.java:265)
+<br/>at runThrghTestNG.TchrPosts_SclGrp_GglDoc.testTchrVrfyURLPsts_TopNews_RcntNews(TchrPosts_SclGrp_GglDoc.java:45)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[contains(text(),&apos;http://urlcrspostbyteacher3008-132330Aug121328.com&apos;)]&quot;}
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+&lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6607)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6615)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10131)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10136)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10074)
+<br/>1 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m10"></a><h2>runThrghTestNG.TchrPosts_SclGrp_GglDoc:testTchrCrtLvSsn</h2>
+<div style="padding-left:3em">
+<p>Timed out after 60 seconds waiting for text (&apos;SmkTstLvSsn Aug 30, 2012 1:28 PM&apos;) to be present in element found by By.xpath: //td/span[2]
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:255)
+<br/>at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:270)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:222)
+<br/>at smoketest.IsPresent.isTextPresentByXPATH(IsPresent.java:24)
+<br/>at smoketest.LiveSession.buildLiveSession(LiveSession.java:53)
+<br/>at smoketest.Actions.createLiveSsn(Actions.java:35)
+<br/>at runThrghTestNG.TchrPosts_SclGrp_GglDoc.testTchrCrtLvSsn(TchrPosts_SclGrp_GglDoc.java:60)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//td/span[2]&quot;}
+Command duration or timeout: 8 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: RemoteWebDriver
+Session ID: 12880ad6-2195-9043-a174-c37f8502e67f</p>
+sun.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+<br/>at java.lang.reflect.Constructor.newInstance(Constructor.java:525)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:188)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:145)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:498)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:268)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:353)
+<br/>at org.openqa.selenium.By$ByXPath.findElement(By.java:343)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:260)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:426)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.access$0(ExpectedConditions.java:424)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:200)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:1)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:201)
+<br/>at smoketest.IsPresent.isTextPresentByXPATH(IsPresent.java:24)
+<br/>at smoketest.LiveSession.buildLiveSession(LiveSession.java:53)
+<br/>at smoketest.Actions.createLiveSsn(Actions.java:35)
+<br/>at runThrghTestNG.TchrPosts_SclGrp_GglDoc.testTchrCrtLvSsn(TchrPosts_SclGrp_GglDoc.java:60)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//td/span[2]&quot;}
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+&lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6607)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6615)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10131)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10136)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4344824726031229517webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10074)
+<br/>1 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m11"></a><h2>runThrghTestNG.TchrPosts_SclGrp_GglDoc:testTchrVrfyActivities</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m12"></a><h2>runThrghTestNG.TchrPosts_SclGrp_GglDoc:testTchrPostsOn_Wall_CrsWall</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m13"></a><h2>runThrghTestNG.TchrPosts_SclGrp_GglDoc:testTchrCrtGglDoc</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m14"></a><h2>runThrghTestNG.TchrPosts_SclGrp_GglDoc:testTchrCrtSclGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m15"></a><h2>runThrghTestNG.TchrPosts_SclGrp_GglDoc:testTchrLgn</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h1>StdtPostsSclGrpGglDoc</h1>
+<a id="m16"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtPostURLOnTchrSclGrp</h2>
+<div style="padding-left:3em">
+<p>Timed out after 60 seconds waiting for element to be clickable: By.xpath: //*[@id=&apos;wall_publisher_btn&apos;]/tbody/tr[2]/td[2]/em/button
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:255)
+<br/>at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:270)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:222)
+<br/>at smoketest.WallPage.setUpWallPost(WallPage.java:78)
+<br/>at smoketest.WallPage.urlPost(WallPage.java:55)
+<br/>at smoketest.Actions.urlPost(Actions.java:29)
+<br/>at runThrghTestNG.StdtPosts_SclGrp_GglDoc.testStdtPostURLOnTchrSclGrp(StdtPosts_SclGrp_GglDoc.java:47)
+<br/>24 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m17"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtCrtLvSsn</h2>
+<div style="padding-left:3em">
+<p>Timed out after 60 seconds waiting for text (&apos;SmkTstLvSsnInTchrSclGrpBYStdt Aug 30, 2012 1:31 PM&apos;) to be present in element found by By.xpath: //div[2]/div[3]/table/tbody/tr[2]/td/span[2]
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:255)
+<br/>at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:270)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:222)
+<br/>at smoketest.IsPresent.isTextPresentByXPATH(IsPresent.java:24)
+<br/>at smoketest.LiveSession.buildLiveSession(LiveSession.java:50)
+<br/>at smoketest.Actions.createLiveSsn(Actions.java:35)
+<br/>at runThrghTestNG.StdtPosts_SclGrp_GglDoc.testStdtCrtLvSsn(StdtPosts_SclGrp_GglDoc.java:56)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[2]/div[3]/table/tbody/tr[2]/td/span[2]&quot;}
+Command duration or timeout: 8 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: RemoteWebDriver
+Session ID: 293a47f7-4313-ce43-b0f1-c2eb65defad6</p>
+sun.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+<br/>at java.lang.reflect.Constructor.newInstance(Constructor.java:525)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:188)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:145)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:498)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:268)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:353)
+<br/>at org.openqa.selenium.By$ByXPath.findElement(By.java:343)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:260)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:426)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.access$0(ExpectedConditions.java:424)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:200)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$7.apply(ExpectedConditions.java:1)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:201)
+<br/>at smoketest.IsPresent.isTextPresentByXPATH(IsPresent.java:24)
+<br/>at smoketest.LiveSession.buildLiveSession(LiveSession.java:50)
+<br/>at smoketest.Actions.createLiveSsn(Actions.java:35)
+<br/>at runThrghTestNG.StdtPosts_SclGrp_GglDoc.testStdtCrtLvSsn(StdtPosts_SclGrp_GglDoc.java:56)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//div[2]/div[3]/table/tbody/tr[2]/td/span[2]&quot;}
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+&lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4222287174634727347webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6607)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4222287174634727347webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6615)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4222287174634727347webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10131)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4222287174634727347webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10136)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous4222287174634727347webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10074)
+<br/>1 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m18"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtVrfyURLPsts_TopNews_RcntNews</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m19"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtVrfyActivities</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m20"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtCrtSclGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m21"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtJoinsTchrSclGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m22"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtVrfyWrkGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m23"></a><h2>runThrghTestNG.StdtPosts_SclGrp_GglDoc:testStdtLgn</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<h1>TchrJoinDeleteSclGrp</h1>
+<a id="m24"></a><h2>runThrghTestNG.TchrJoin_Delete_SclGrp:testTchrVrfyURLPsts_TopNews_RcntNews</h2>
+<div style="padding-left:3em">
+<p>Timed out after 60 seconds waiting for presence of element located by: By.xpath: //*[contains(text(),&apos;http://urlcrspostbyteacher3008-132330Aug121328.com&apos;)]
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:255)
+<br/>at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:270)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:222)
+<br/>at smoketest.IsPresent.isElementPresentContainsTextByXPATH(IsPresent.java:28)
+<br/>at smoketest.Actions.vrfyURLPstsAsTopNews_RcntNews(Actions.java:265)
+<br/>at runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrVrfyURLPsts_TopNews_RcntNews(TchrJoin_Delete_SclGrp.java:42)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[contains(text(),&apos;http://urlcrspostbyteacher3008-132330Aug121328.com&apos;)]&quot;}
+Command duration or timeout: 8 milliseconds
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: RemoteWebDriver
+Session ID: 6c3863a8-0878-c04c-a25f-c3a229dca0bd</p>
+sun.reflect.GeneratedConstructorAccessor13.newInstance(Unknown Source)
+<br/>at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+<br/>at java.lang.reflect.Constructor.newInstance(Constructor.java:525)
+<br/>at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:188)
+<br/>at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:145)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:498)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:268)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:353)
+<br/>at org.openqa.selenium.By$ByXPath.findElement(By.java:343)
+<br/>at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:260)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.findElement(ExpectedConditions.java:426)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions.access$0(ExpectedConditions.java:424)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$3.apply(ExpectedConditions.java:103)
+<br/>at org.openqa.selenium.support.ui.ExpectedConditions$3.apply(ExpectedConditions.java:1)
+<br/>at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:201)
+<br/>at smoketest.IsPresent.isElementPresentContainsTextByXPATH(IsPresent.java:28)
+<br/>at smoketest.Actions.vrfyURLPstsAsTopNews_RcntNews(Actions.java:265)
+<br/>at runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrVrfyURLPsts_TopNews_RcntNews(TchrJoin_Delete_SclGrp.java:42)
+<br/>24 lines not shown
+<p>Caused by Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[contains(text(),&apos;http://urlcrspostbyteacher3008-132330Aug121328.com&apos;)]&quot;}
+Build info: version: &apos;2.25.0&apos;, revision: &apos;17482&apos;, time: &apos;2012-07-18 21:09:54&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;x86_64&apos;, os.version: &apos;10.7.4&apos;, java.version: &apos;1.7.0_05&apos;
+Driver info: driver.version: unknown</p>
+&lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous8219905416821675399webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6607)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous8219905416821675399webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:6615)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous8219905416821675399webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10131)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous8219905416821675399webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10136)
+<br/>at &lt;anonymous class&gt;.&lt;anonymous method&gt;(file:///var/folders/8c/lypc9lzs07n37wy77r7459jx1kgtsj/T/anonymous8219905416821675399webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10074)
+<br/>1 lines not shown
+</div>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m25"></a><h2>runThrghTestNG.TchrJoin_Delete_SclGrp:testTchrLeavesStdtSclGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m26"></a><h2>runThrghTestNG.TchrJoin_Delete_SclGrp:testTchrDeleteSclGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m27"></a><h2>runThrghTestNG.TchrJoin_Delete_SclGrp:testTchrLgn</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+<a id="m28"></a><h2>runThrghTestNG.TchrJoin_Delete_SclGrp:testTchrJoinsStdtSclGrp</h2>
+<p class="totop"><a href="#summary">back to summary</a></p>
+</body></html>

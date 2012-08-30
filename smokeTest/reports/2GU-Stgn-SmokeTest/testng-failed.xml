@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [2GU-Stgn-SmokeTest]">
+  <test name="TchrPostsSclGrpGglDoc(failed)" preserve-order="true">
+    <classes>
+      <class name="runThrghTestNG.Crs_GrpCrsCreation">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.Crs_GrpCrsCreation -->
+      <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp -->
+      <class name="runThrghTestNG.TchrJoin_Delete_SclGrp">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.TchrJoin_Delete_SclGrp -->
+      <class name="runThrghTestNG.TchrPosts_SclGrp_GglDoc">
+        <methods>
+          <include name="testTchrVrfyURLPsts_TopNews_RcntNews"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testTchrCrtLvSsn"/>
+          <include name="testTchrPostsOn_Wall_CrsWall"/>
+          <include name="testTchrLgn"/>
+          <include name="testTchrCrtSclGrp"/>
+        </methods>
+      </class> <!-- runThrghTestNG.TchrPosts_SclGrp_GglDoc -->
+      <class name="runThrghTestNG.StdtPosts_SclGrp_GglDoc">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.StdtPosts_SclGrp_GglDoc -->
+    </classes>
+  </test> <!-- TchrPostsSclGrpGglDoc(failed) -->
+  <test name="StdtPostsSclGrpGglDoc(failed)" preserve-order="true">
+    <classes>
+      <class name="runThrghTestNG.Crs_GrpCrsCreation">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.Crs_GrpCrsCreation -->
+      <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp -->
+      <class name="runThrghTestNG.TchrPosts_SclGrp_GglDoc">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.TchrPosts_SclGrp_GglDoc -->
+      <class name="runThrghTestNG.TchrJoin_Delete_SclGrp">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.TchrJoin_Delete_SclGrp -->
+      <class name="runThrghTestNG.StdtPosts_SclGrp_GglDoc">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testStdtCrtLvSsn"/>
+          <include name="testStdtJoinsTchrSclGrp"/>
+          <include name="testStdtVrfyURLPsts_TopNews_RcntNews"/>
+          <include name="testStdtLgn"/>
+          <include name="testStdtPostURLOnTchrSclGrp"/>
+        </methods>
+      </class> <!-- runThrghTestNG.StdtPosts_SclGrp_GglDoc -->
+    </classes>
+  </test> <!-- StdtPostsSclGrpGglDoc(failed) -->
+  <test name="TchrJoinDeleteSclGrp(failed)" preserve-order="true">
+    <classes>
+      <class name="runThrghTestNG.Crs_GrpCrsCreation">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.Crs_GrpCrsCreation -->
+      <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp -->
+      <class name="runThrghTestNG.TchrPosts_SclGrp_GglDoc">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.TchrPosts_SclGrp_GglDoc -->
+      <class name="runThrghTestNG.TchrJoin_Delete_SclGrp">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="testTchrLgn"/>
+          <include name="testTchrVrfyURLPsts_TopNews_RcntNews"/>
+        </methods>
+      </class> <!-- runThrghTestNG.TchrJoin_Delete_SclGrp -->
+      <class name="runThrghTestNG.StdtPosts_SclGrp_GglDoc">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- runThrghTestNG.StdtPosts_SclGrp_GglDoc -->
+    </classes>
+  </test> <!-- TchrJoinDeleteSclGrp(failed) -->
+</suite> <!-- Failed suite [2GU-Stgn-SmokeTest] -->
