@@ -3,3 +3,7 @@
 /build/*
 /nbproject/*
 /smokeTest/dist/
+/bin/*
+/reports/*
+/smokeTest/bin/*
+/smokeTest/reports/*
