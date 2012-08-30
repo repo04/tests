@@ -1,25 +1,22 @@
-
 package smoketest;
 
-import java.util.Date;
 import java.text.DateFormat;
+import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 
 public class Course extends Page {
-    
+
     Date now = new Date();
     IsPresent ip = new IsPresent();
     private String crsName;
     private String grpCrsName;
-    
-    public Course( WebDriver driver, AccountValues av) {
-        super( driver, av );
+
+    public Course(WebDriver driver, AccountValues av) {
+        super(driver, av);
     }
-    
+
     public void createCourse() {
 
         //Navigate to course page
@@ -48,16 +45,18 @@ public class Course extends Page {
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctCrsEndDtDyXPATH")))).selectByValue("31");
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctXrsEndDtMnthXPATH")))).selectByValue("7");
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctCrsEndDtYrXPATH")))).selectByValue("2013");
-        driver.findElement(By.xpath(av.getTokenValue("btnSbmtCrs"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
 
         //Verify Course is created or not
         ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue(crsName));
+
     }
-    
-    public void createGrpCourse( String courseName ) {
-        
+
+    public void createGrpCourse(String courseName) {
+
+        //Navigate to course page
         setUpCrsPage();
-        
+
         this.grpCrsName = "SmkTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         ip.isElementPresentStartsWithTextByXPATH(driver, courseName);
@@ -81,18 +80,20 @@ public class Course extends Page {
 
         //Verify group course is created or not
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtGrpCrs"));
+
     }
-    
+
     public void setUpCrsPage() {
-        
+
+        //Navigate to Add/Edit Course Page
         driver.findElement(By.xpath(av.getTokenValue("lftPnlCrsLinkXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAddEditCrsXPATH"))).click();
     }
-    
+
     public String getCrsName() {
         return this.crsName;
     }
-    
+
     public String getGrpCrsName() {
         return this.grpCrsName;
     }

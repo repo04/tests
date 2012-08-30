@@ -1,7 +1,6 @@
 package smoketest;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 // Page parent class
 public class Page {

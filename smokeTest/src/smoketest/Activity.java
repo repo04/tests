@@ -1,4 +1,7 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package smoketest;
 
 import java.text.DateFormat;
@@ -7,20 +10,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+/**
+ *
+ * @author somesh.bansal
+ */
 public class Activity extends Page {
-    
+
     Date now = new Date();
     IsPresent ip = new IsPresent();
-    
     private String forumName;
     private String quizName;
     private String allInOneAsgnmntName;
     private String pageName;
-    
+
     public Activity(WebDriver driver, AccountValues av) {
         super(driver, av);
     }
-    
+
     public void crtForumActvty() {
 
         this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -34,7 +40,7 @@ public class Activity extends Page {
         createActivity(forumName, forumIntro);
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngActvtyTextXPATH"), forumIntro);
     }
-    
+
     public void crtQuizActvty() {
         this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -99,5 +105,4 @@ public class Activity extends Page {
     public String getPageActvyName() {
         return this.pageName;
     }
-    
 }
