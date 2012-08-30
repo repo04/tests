@@ -19,8 +19,8 @@ public class LiveSession extends Page {
         String user = LoginPage.getUser();
         String liveSsnNm = null;
 
-        switch (user.substring(6, 10)) {
-            case "stdt":
+        switch (user.substring(0, 7)) {
+            case "student":
                 liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             default:
@@ -45,8 +45,8 @@ public class LiveSession extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnLvnSsnSbmt")))
                 .click();
 
-        switch (user.substring(6, 10)) {
-            case "stdt":
+        switch (user.substring(0, 7)) {
+            case "student":
                 ip.isTextPresentByXPATH(driver, av.getTokenValue("stdtLvSsnInTchrSclGrpXPATH"), liveSsnNm);
                 break;
             default:

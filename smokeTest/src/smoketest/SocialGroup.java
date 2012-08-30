@@ -31,11 +31,11 @@ public class SocialGroup extends Page {
 
         String user = LoginPage.getUser();
 
-        switch (user.substring(6, 10)) {
-            case "stdt":
+        switch (user.substring(0, 7)) {
+            case "student":
                 this.grpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
-            case "tchr":
+            case "teacher":
                 this.grpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             default:

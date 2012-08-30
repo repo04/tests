@@ -43,14 +43,15 @@ public class EnrollUser extends Page {
         driver.findElement(By.xpath(av.getTokenValue("fieldSrchUsrXPATH"))).sendKeys(Keys.RETURN);
         ip.isTextPresentByXPATH(driver, av.getTokenValue("lblUsrFndXPATH"), "1 user found");
 
-        switch (user.substring(6, 10)) {
-
-            case "tchr":
+        // 4 - NonEditing Teacher
+        // 5 - Student
+        switch (user.substring(0, 7)) {
+            case "teacher":
                 userRole = "4";
                 new Select(driver.findElement(By.xpath(av.getTokenValue("slctRoleXPATH")))).selectByValue(userRole);
                 break;
 
-            case "stdt":
+            case "student":
                 userRole = "5";
                 new Select(driver.findElement(By.xpath(av.getTokenValue("slctRoleXPATH")))).selectByValue(userRole);
                 break;

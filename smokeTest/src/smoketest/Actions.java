@@ -118,17 +118,13 @@ public class Actions {
         //Checking for 'Contacts' TEXT in href
         String url = driver.findElement(By.xpath(av.getTokenValue("linkToCntctByAdminXPATH"))).getAttribute("href");
         int i = url.lastIndexOf("/");
-        
-        if("Contacts".equalsIgnoreCase(url.substring(i+1, i+9)))
-        {
-            System.out.println("linkToCntctByAdminXPATH");
+
+        if ("Contacts".equalsIgnoreCase(url.substring(i + 1, i + 9))) {
             linkToContactXPATH = av.getTokenValue("linkToCntctByAdminXPATH");
-        }
-        else{
-            System.out.println("linkToCntctXPATH");
+        } else {
             linkToContactXPATH = av.getTokenValue("linkToCntctXPATH");
         }
-        
+
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu(driver, linkToContactXPATH);
         ip.isTitlePresent(driver, av.getTokenValue("contactPageTitle"));
@@ -154,14 +150,15 @@ public class Actions {
         //Teacher/Student can select Course but not Group Course as compared to Admin users
         switch (user) {
 
-            default:
-                Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + grpCrsName + "')]");
+            case "pesAdmin":
+            case "contentAdmin":
+                ip.isElementPresentContainsTextByXPATH(driver, grpCrsName);
+                driver.findElement(By.xpath("//*[contains(text(),'" + grpCrsName + "')]")).click();
                 break;
 
-            case "pesAdmin":
-            case "contentAdmin":            
-                ip.isElementPresentContainsTextByXPATH(driver, grpCrsName);
-                driver.findElement(By.xpath("//*[contains(text(),'" + grpCrsName + "')]")).click();                
+            default:
+                Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + grpCrsName + "')]");
+
         }
         ip.isTextPresentByCSS(driver, av.getTokenValue("lblCrsLftPnlCSS"), grpCrsName.toUpperCase());
     }
@@ -262,7 +259,7 @@ public class Actions {
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
     }
 
-    public void VrfyURLPstsAsTopNews_RcntNews(String... posts) {
+    public void vrfyURLPstsAsTopNews_RcntNews(String... posts) {
 
         for (String post : posts) {
             ip.isElementPresentContainsTextByXPATH(driver, post);
@@ -304,12 +301,10 @@ public class Actions {
         driver.findElement(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }
-    
+
     public String createGoogleDoc(String wrkngGrp) {
         WorkingGroup wg = new WorkingGroup(driver, av);
         wg.createGoogleDoc(wrkngGrp);
         return wg.getGoogleDocName();
     }
-
-    
 }

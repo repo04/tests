@@ -1,5 +1,7 @@
 package smoketest;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,17 +37,6 @@ public class LoginPage extends Page {
                 passWord.sendKeys(av.getTokenValue("pesPswd"));
                 break;
 
-            //Not required anymore
-            /*case "teacher":
-             userName.sendKeys(av.getTokenValue("tchrUserName"));
-             passWord.sendKeys(av.getTokenValue("tchrPswd"));
-             break;
-
-             case "student":
-             userName.sendKeys(av.getTokenValue("stdntUserName"));
-             passWord.sendKeys(av.getTokenValue("stdntPswd"));
-             break;*/
-
             default:
                 userName.sendKeys(user);
                 passWord.sendKeys("Tech@123");
@@ -55,11 +46,10 @@ public class LoginPage extends Page {
         loginBtn.click();
 
         //PES Admin gets Course Page after login
-        if (user.equals("pesAdmin") ) {
-            ip.isTitlePresent( driver, av.getTokenValue("crsPageTitle") );
-        }
-        else {
-            ip.isTitlePresent( driver, av.getTokenValue("homePageTitle"));
+        if (user.equals("pesAdmin")) {
+            ip.isTitlePresent(driver, av.getTokenValue("crsPageTitle"));
+        } else {
+            ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
         }
     }
 
