@@ -24,18 +24,18 @@ public class SmokeTest {
     static String gglDocName = "testWrkngGrp";
 
     //This is to run from netbeans
-    /*public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-        a.setUp("guAccountProperty");
+        a.setUp("gAccountProperty");
 
-        //testCourse_ActivityCreation();
+        testCourse_ActivityCreation();
         //testUserCreation_AsgnRoleGrpCourse();
-        testTchrPost_SclGrpLvSsnCreation();
+        //testTchrPost_SclGrpLvSsnCreation();
         //testStdtPost_SclGrpLvSSnCreation();
         //testJoin_LeaveDeleteSclGrp();
 
         a.tearDown();
-    }*/
+    }
 
     //This is to run from ANT
     @Test
@@ -43,7 +43,7 @@ public class SmokeTest {
 
         a.setUp("guAccountProperty");
 
-        testCourse_ActivityCreation();
+        //testCourse_ActivityCreation();
         //testUserCreation_AsgnRoleGrpCourse();
         //testTchrPost_SclGrpLvSsnCreation();
         //testStdtPost_SclGrpLvSSnCreation();

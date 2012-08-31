@@ -6,26 +6,29 @@ package runThrghTestNG;
 
 import org.testng.annotations.Test;
 
-/**
- *
- * @author somesh.bansal
+/* 
+ * Content Admin logs in 
+ * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
+ * Logs out
  */
 public class Crs_GrpCrsCreation extends BaseClass {
 
-    static String crsName = null;
-    static String grpCrsName = null;
-    static String frmActvyName = null;
-    static String quizActvtyName = null;
-    static String allInOneAsgnmntAvtvtyName = null;
-    static String pageActvtyName = null;
+    static String crsName;
+    static String grpCrsName;
+    static String frmActvyName;
+    static String quizActvtyName;
+    static String allInOneAsgnmntAvtvtyName;
+    static String pageActvtyName;
 
+    //Content Admin logs in 
     @Test
-    public void testCntntAdminLgn() throws Exception{
+    public void testCntntAdminLgn() throws Exception {
         a.login("contentAdmin");
     }
 
+    //Create - Course & GrpCourse
     @Test(dependsOnMethods = {"testCntntAdminLgn"})
-    public void testCrsGrpCrs_Creation() throws Exception{
+    public void testCrsGrpCrs_Creation() throws Exception {
 
         a.navigateToMyCourse();
         crsName = a.createCourse();
@@ -36,8 +39,9 @@ public class Crs_GrpCrsCreation extends BaseClass {
         System.out.println("grpCrsName: " + grpCrsName);
     }
 
+    //Create - Activities like Forum, Quiz, All In One Assignment & Page
     @Test(dependsOnMethods = {"testCrsGrpCrs_Creation"})
-    public void testActivities_Creation() throws Exception{
+    public void testActivities_Creation() throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         frmActvyName = a.createForumActivity();

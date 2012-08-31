@@ -40,7 +40,7 @@ public class WallPage extends Page {
         WebElement editableTxtArea = driver.switchTo().activeElement();
         String user = LoginPage.getUser();
         
-        this.textPost = av.getTokenValue(textPst) + "by" + user + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.textPost = av.getTokenValue(textPst) + "by" + user.substring(0, 7) + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         editableTxtArea.sendKeys(textPost);
         
         // Switches back to default focus
@@ -65,7 +65,7 @@ public class WallPage extends Page {
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
 
         String user = LoginPage.getUser();
-        this.urlPost = "http://" + av.getTokenValue(urlPst) + "by" + user + dateFormat.format(now) + ".com";
+        this.urlPost = "http://" + av.getTokenValue(urlPst) + "by" + user.substring(0, 7) + dateFormat.format(now) + ".com";
         linkTextBox.sendKeys(urlPost);
         btnWallShare.click();
         ip.isElementPresentContainsTextByXPATH(driver, urlPost);

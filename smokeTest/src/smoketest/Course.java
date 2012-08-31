@@ -48,7 +48,7 @@ public class Course extends Page {
         driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
 
         //Verify Course is created or not
-        ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue(crsName));
+        ip.isElementPresentContainsTextByXPATH(driver, crsName);
 
     }
 
