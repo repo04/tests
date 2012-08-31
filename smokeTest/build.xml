@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="smoketest" default="run" basedir=".">
+
+    <property name="classes.dir" value="bin" />
+    <property name="src.dir" value="src" />
+    <property name="report.dir" value="reports" />
+    <property name="browser" value="C:/Program Files/Mozilla Firefox/firefox.exe"/>
+    
+    <path id="libs">
+        <fileset dir="lib">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${basedir}\${classes.dir}"/>
+    </path>
+    
+    <target name="run">
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="copy-resources"/>
+        <antcall target="runTests"/>
+        <antcall target="openReport"/>
+    </target>
+
+    <!-- Delete old data and create new directories -->
+    <target name="init" >
+        <echo>Initlizing...</echo>
+        <delete dir="${classes.dir}" />
+        <mkdir dir="${classes.dir}"/>
+        <delete dir="${report.dir}" />
+        <mkdir dir="${report.dir}"/>
+    </target>
+
+    <!-- Complies the java files -->
+    <target name="compile">
+        <echo>Compiling...</echo>
+        <javac debug="true" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="libs" />
+    </target>
+    
+    <target name="copy-resources" description="Copies resources.">
+        <copy todir="${basedir}\${classes.dir}">
+            <fileset dir="${src.dir}">
+                <include name="**/*.properties" />
+            </fileset>
+        </copy>
+    </target>
+    
+    <!-- Runs the file and generates Reportng report -->
+    <target name="runTests" description="Running tests" >
+        <echo>Running Tests...</echo>
+        <taskdef resource="testngtasks" classpathref="libs"/>
+        <testng outputDir="${report.dir}" classpathref="libs">
+            <xmlfileset dir="${basedir}" includes="testng.xml"/> 
+            <!--classfileset dir="${classes.dir}" includes="**/*.class" /-->
+        </testng>
+    </target>
+
+    <!-- Open the report in browser.-->
+    <target name="openReport"> 
+        <exec executable="${browser}" spawn="yes"> 
+            <arg line="'${report.dir}\index.html'" /> 
+        </exec>
+    </target>
+</project>  
