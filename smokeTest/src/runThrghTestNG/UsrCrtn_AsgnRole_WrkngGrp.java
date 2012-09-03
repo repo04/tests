@@ -4,6 +4,8 @@
  */
 package runThrghTestNG;
 
+import org.testng.Reporter;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
@@ -15,6 +17,7 @@ import org.testng.annotations.Test;
  * Logs out
  * @author somesh.bansal
  */
+@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     static String tchrUsrName;
@@ -33,10 +36,12 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         a.navigateToMyContacts();
         tchrUsrName = a.createUser("teacher");
         System.out.println("tchrUsrName: " + tchrUsrName);
+        Reporter.log("tchrUsrName: " + tchrUsrName);
 
         a.navigateToMyContacts();
         stdtUsrName = a.createUser("student");
         System.out.println("stdtUsrName: " + stdtUsrName);
+        Reporter.log("stdtUsrName: " + stdtUsrName);
     }
 
     //Assign/Enroll users to GrpCourse as Teacher/Student roles
@@ -57,6 +62,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         a.navigateToWorkingGroups();
         wrkngGrpName = a.createWorkingGroup();
         System.out.println("wrkngGrp: " + wrkngGrpName);
+        Reporter.log("wrkngGrp: " + wrkngGrpName);
     }
 
     //Add users as members to Working Group

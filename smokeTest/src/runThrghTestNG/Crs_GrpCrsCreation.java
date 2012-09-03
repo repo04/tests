@@ -4,6 +4,8 @@
  */
 package runThrghTestNG;
 
+import org.testng.Reporter;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 /* 
@@ -11,6 +13,7 @@ import org.testng.annotations.Test;
  * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
  * Logs out
  */
+@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class Crs_GrpCrsCreation extends BaseClass {
 
     static String crsName;
@@ -33,10 +36,12 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.navigateToMyCourse();
         crsName = a.createCourse();
         System.out.println("crsName: " + crsName);
+        Reporter.log("crsName: " + crsName);
 
         a.navigateToMyCourse();
         grpCrsName = a.createGrpCourse(crsName);
         System.out.println("grpCrsName: " + grpCrsName);
+        Reporter.log("grpCrsName: " + grpCrsName);
     }
 
     //Create - Activities like Forum, Quiz, All In One Assignment & Page
@@ -46,20 +51,24 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.selectGrpCourse(grpCrsName);
         frmActvyName = a.createForumActivity();
         System.out.println("frmActvyName: " + frmActvyName);
+        Reporter.log("frmActvyName: " + frmActvyName);
 
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         quizActvtyName = a.createQuizActivity();
         System.out.println("quizActvtyName: " + quizActvtyName);
+        Reporter.log("quizActvtyName: " + quizActvtyName);
 
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         allInOneAsgnmntAvtvtyName = a.createAllInOneAsgnmntActivity();
         System.out.println("allInOneAsgnmntAvtvtyName: " + allInOneAsgnmntAvtvtyName);
+        Reporter.log("allInOneAsgnmntAvtvtyName: " + allInOneAsgnmntAvtvtyName);
 
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         pageActvtyName = a.createPageResource();
         System.out.println("pageActvtyName: " + pageActvtyName);
+        Reporter.log("pageActvtyName: " + pageActvtyName);
     }
 }

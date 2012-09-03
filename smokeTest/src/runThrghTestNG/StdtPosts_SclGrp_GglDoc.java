@@ -4,6 +4,8 @@
  */
 package runThrghTestNG;
 
+import org.testng.Reporter;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 /**
@@ -18,6 +20,7 @@ import org.testng.annotations.Test;
  *
  * @author somesh.bansal
  */
+@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class StdtPosts_SclGrp_GglDoc extends BaseClass {
 
     static String stdtSclGrpName;
@@ -35,6 +38,7 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
         a.navigateToMySocialGroups();
         stdtSclGrpName = a.createSocialGroups();
         System.out.println("stdtSclGrpName: " + stdtSclGrpName);
+        Reporter.log("stdtSclGrpName: " + stdtSclGrpName);
     }
 
     //Find & Join Teacher's Social Group 
@@ -59,6 +63,7 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
         a.acessSclGrpWall(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
         System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
+        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
     }
 
     //Create Live Session in Teacher's Social Group

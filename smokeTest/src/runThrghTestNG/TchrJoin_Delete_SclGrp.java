@@ -5,6 +5,7 @@
 package runThrghTestNG;
 
 
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 /**
@@ -15,6 +16,7 @@ import org.testng.annotations.Test;
  *
  * @author somesh.bansal
  */
+@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class TchrJoin_Delete_SclGrp extends BaseClass {
 
     //Teacher Logs in

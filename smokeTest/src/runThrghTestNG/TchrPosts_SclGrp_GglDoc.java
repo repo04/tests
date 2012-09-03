@@ -4,6 +4,8 @@
  */
 package runThrghTestNG;
 
+import org.testng.Reporter;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 
@@ -21,6 +23,7 @@ import org.testng.annotations.Test;
  *
  * @author somesh.bansal
  */
+@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class TchrPosts_SclGrp_GglDoc extends BaseClass {
 
     static String tchrTxtWallPost;
@@ -43,14 +46,17 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
         System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
+        Reporter.log("tchrTxtWallPost: " + tchrTxtWallPost);
 
         a.navigateToMyWall();
         tchrUrlWallPost = a.urlPost("urlWallPost");
         System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
+        Reporter.log("tchrUrlWallPost: " + tchrUrlWallPost);
 
         a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
         tchrUrlCrsPost = a.urlPost("urlCrsPost");
         System.out.println("tchrUrlCrsPost: " + tchrUrlCrsPost);
+        Reporter.log("tchrUrlCrsPost: " + tchrUrlCrsPost);
     }
 
     //Verify All URL Posts on Top & RecentNews
@@ -66,6 +72,7 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
         a.navigateToMySocialGroups();
         tchrSclGrpName = a.createSocialGroups();
         System.out.println("tchrSclGrpName: " + tchrSclGrpName);
+        Reporter.log("tchrSclGrpName: " + tchrSclGrpName);
     }
 
     //Find SclGroup & Create LiveSession in SclGroup
@@ -83,6 +90,7 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
         a.navigateToWorkingGroups();
         gglDocName = a.createGoogleDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName);
         System.out.println("gglDocName: " + gglDocName);
+        Reporter.log("gglDocName: " + gglDocName);
     }
 
     //Verify Activities & resource appear items on activity report

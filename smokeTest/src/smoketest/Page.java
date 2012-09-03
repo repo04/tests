@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class Page {
     
     AccountValues av;
-    WebDriver driver;
+    public static WebDriver driver;
     
     // Page constructor
     public Page( WebDriver driver, AccountValues av ) {
