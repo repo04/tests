@@ -194,7 +194,7 @@ public class SmokeTest {
         //Verify n number of URL Posts on TopNews/RecentNews Page
         //Limitation - Texts cannot be verified as position is not known on Page
         a.navigateToMyHome();
-        a.VrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall);
+        a.vrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall);
 
         a.logOut();
     }
@@ -245,7 +245,7 @@ public class SmokeTest {
 
         //Verify n number of URL Posts on TopNews/RecentNews Page
         a.navigateToMyHome();
-        a.VrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
+        a.vrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
 
         a.logOut();
     }
@@ -273,6 +273,6 @@ public class SmokeTest {
 
         //Verify n number of URL Posts on TopNews/RecentNews Page
         a.navigateToMyHome();
-        a.VrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
+        a.vrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost, tchrUrlPostOnStdtWall, stdtUrlPostOnTchrSclGrp);
     }
 }

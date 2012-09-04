@@ -262,7 +262,7 @@ public class Actions {
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
     }
 
-    public void VrfyURLPstsAsTopNews_RcntNews(String... posts) {
+    public void vrfyURLPstsAsTopNews_RcntNews(String... posts) {
 
         for (String post : posts) {
             ip.isElementPresentContainsTextByXPATH(driver, post);
