@@ -5,8 +5,11 @@
 package runThrghTestNG;
 
 import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import smoketest.Actions;
 
 /* 
  * Content Admin logs in 
@@ -22,15 +25,16 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String quizActvtyName;
     static String allInOneAsgnmntAvtvtyName;
     static String pageActvtyName;
+    Actions a = new Actions();
 
     //Content Admin logs in 
-    @Test
+    @BeforeClass
     public void testCntntAdminLgn() throws Exception {
         a.login("contentAdmin");
     }
 
     //Create - Course & GrpCourse
-    @Test(dependsOnMethods = {"testCntntAdminLgn"})
+    @Test
     public void testCrsGrpCrs_Creation() throws Exception {
 
         a.navigateToMyCourse();
@@ -70,5 +74,10 @@ public class Crs_GrpCrsCreation extends BaseClass {
         pageActvtyName = a.createPageResource();
         System.out.println("pageActvtyName: " + pageActvtyName);
         Reporter.log("pageActvtyName: " + pageActvtyName);
+    }
+
+    @AfterClass
+    public void testCntntAdminLogOut() throws Exception {
+        a.logOut();
     }
 }

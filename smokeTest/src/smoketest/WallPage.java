@@ -5,25 +5,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import runThrghTestNG.BaseClass;
 
-public class WallPage extends Page {
+public class WallPage extends BaseClass {
 
     // Used to include date & time in Wall Post
     Date now = new Date();
     WebElement textArea;
     WebElement btnWallShare;
-    IsPresent ip = new IsPresent();
     String textPost = null;
     String urlPost = null;
-
-    public WallPage(WebDriver driver, AccountValues av) {
-
-        super(driver, av);
-    }
 
     public void textPost(String textPst) {
 

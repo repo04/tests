@@ -5,17 +5,15 @@
 package runThrghTestNG;
 
 import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
+import smoketest.Actions;
 
 /**
- * PES Admin Logs in
- * Create Two Users 
- * Assign/Enroll users to GrpCourse as Teacher/Student roles 
- * Create Working Group & add users as members
- * Logs out
- * @author somesh.bansal
+ * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
+ * Teacher/Student roles Create Working Group & add users as members Logs out
  */
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
@@ -23,15 +21,16 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     static String tchrUsrName;
     static String stdtUsrName;
     static String wrkngGrpName;
+    Actions a = new Actions();
 
     //PES Admin Logs in
-    @Test
+    @BeforeClass
     public void testPESAdminLgn() throws Exception {
         a.login("pesAdmin");
     }
 
     //Create Two Users
-    @Test(dependsOnMethods = {"testPESAdminLgn"})
+    @Test
     public void testUsrCrtn() throws Exception {
         a.navigateToMyContacts();
         tchrUsrName = a.createUser("teacher");
@@ -57,7 +56,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     }
 
     //Create Working Group
-    @Test(dependsOnMethods = {"testPESAdminLgn"})
+    @Test
     public void testCrtWrkgnGrp() throws Exception {
         a.navigateToWorkingGroups();
         wrkngGrpName = a.createWorkingGroup();
@@ -71,5 +70,10 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
         a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
+    }
+
+    @AfterClass
+    public void testPESAdminLogOut() throws Exception {
+        a.logOut();
     }
 }

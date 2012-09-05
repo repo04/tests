@@ -5,35 +5,37 @@
 package runThrghTestNG;
 
 import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import smoketest.Actions;
 
 /**
- * Student logs in 
- * Find & Join Teacher's Scl Grp 
- * Post/Verify URL on Tchr's Scl Grp 
+ * Student logs in
+ * Find & Join Teacher's Scl Grp
+ * Post/Verify URL on Tchr's SclGrp 
  * Create Live Session in Teacher's Social Group 
- * Creates own Social Group 
- * Verify Google Doc
- * Verify All Posts on Top/Recent News  
+ * Creates own Social Group
+ * Verify Google Doc 
+ * Verify All Posts on Top/Recent News 
  * Verify Activities & resource items appear in activity report
- *
- * @author somesh.bansal
  */
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class StdtPosts_SclGrp_GglDoc extends BaseClass {
 
     static String stdtSclGrpName;
     static String stdtUrlPostOnTchrSclGrp;
+    Actions a = new Actions();
 
     //Student logs in
-    @Test
+    @BeforeClass
     public void testStdtLgn() throws Exception {
         a.login(UsrCrtn_AsgnRole_WrkngGrp.stdtUsrName);
     }
 
     //Creates own Social Group
-    @Test(dependsOnMethods = {"testStdtLgn"})
+    @Test
     public void testStdtCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         stdtSclGrpName = a.createSocialGroups();
@@ -42,16 +44,16 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
     }
 
     //Find & Join Teacher's Social Group 
-    @Test(dependsOnMethods = {"testStdtLgn"})
+    @Test
     public void testStdtJoinsTchrSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
         a.joinSocialGroup(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
     }
 
-    //Verify Google Doc
-    @Test(dependsOnMethods = {"testStdtLgn"})
-    public void testStdtVrfyWrkGrp() throws Exception {
+    //Verify WrkngGrp & Google Doc
+    @Test
+    public void testStdtVrfyWrkGrp_GglDoc() throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName, TchrPosts_SclGrp_GglDoc.gglDocName);
     }
@@ -79,15 +81,20 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
     @Test(dependsOnMethods = {"testStdtPostURLOnTchrSclGrp"})
     public void testStdtVrfyURLPsts_Top_RcntNews() throws Exception {
         a.navigateToMyHome();
-        a.vrfyURLPstsAsTopNews_RcntNews(stdtUrlPostOnTchrSclGrp, TchrPosts_SclGrp_GglDoc.tchrUrlCrsPost, TchrPosts_SclGrp_GglDoc.tchrUrlPostOnStdtWall, TchrPosts_SclGrp_GglDoc.tchrUrlWallPost);
+        a.vrfyURLPstsAsTopNews_RcntNews(stdtUrlPostOnTchrSclGrp, TchrPosts_SclGrp_GglDoc.tchrUrlCrsPost, TchrPosts_SclGrp_GglDoc.tchrUrlWallPost);
     }
 
     //Verify Activities & resource items appear in activity report
-    @Test(dependsOnMethods = {"testStdtLgn"})
+    @Test
     public void testStdtVrfyActivities() throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
         a.navigateToActvtyRprt();
         a.verifyActivities(Crs_GrpCrsCreation.frmActvyName, Crs_GrpCrsCreation.quizActvtyName, Crs_GrpCrsCreation.allInOneAsgnmntAvtvtyName, Crs_GrpCrsCreation.pageActvtyName);
+    }
+
+    @AfterClass
+    public void testStdtLogOut() throws Exception {
+        a.logOut();
     }
 }

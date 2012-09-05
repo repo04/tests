@@ -1,19 +1,12 @@
 package smoketest;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import runThrghTestNG.BaseClass;
 
-public class LoginPage extends Page {
+public class LoginPage extends BaseClass {
 
-    IsPresent ip = new IsPresent();
     private static String usr;
-
-    public LoginPage(WebDriver driver, AccountValues av) {
-
-        super(driver, av);
-        driver.get(av.getTokenValue("programURL"));
-    }
 
     // Attemps to login based on user type and values from property file
     public void attemptLogin(String user) {

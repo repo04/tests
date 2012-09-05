@@ -9,10 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- *
- * @author somesh.bansal
- */
 public class IsPresent {
 
     // Appears it checks for the first instance of the CSS, starting from top of page working down.

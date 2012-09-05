@@ -5,19 +5,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import runThrghTestNG.BaseClass;
 
-public class WorkingGroup extends Page {
+public class WorkingGroup extends BaseClass {
 
     Date now = new Date();
-    IsPresent ip = new IsPresent();
     private String wrkgGrpName;
     private String gglDocName;
-
-    public WorkingGroup(WebDriver driver, AccountValues av) {
-        super(driver, av);
-    }
 
     public void BuildWorkingGroup() {
 

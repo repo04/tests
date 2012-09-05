@@ -11,20 +11,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import runThrghTestNG.BaseClass;
 
-public class SocialGroup extends Page {
+public class SocialGroup extends BaseClass {
 
     Date now = new Date();
-    IsPresent ip = new IsPresent();
     private String grpName;
-
-    /**
-     * @param driver
-     * @param av
-     */
-    public SocialGroup(WebDriver driver, AccountValues av) {
-        super(driver, av);
-    }
 
     // Assumes user is at 'My Social Groups'
     public void buildSocialGroup() {
