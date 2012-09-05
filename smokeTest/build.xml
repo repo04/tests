@@ -49,7 +49,7 @@
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
         <testng outputDir="${report.dir}" classpathref="libs">
-            <xmlfileset dir="${basedir}" includes="testng.xml"/> 
+            <xmlfileset dir="${basedir}" includes="smokeTest.xml"/> 
             <!--classfileset dir="${classes.dir}" includes="**/*.class" /-->
         </testng>
     </target>

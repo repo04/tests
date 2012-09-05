@@ -1,0 +1,5 @@
+/smokeTest/bin/*
+/smokeTest/build/*
+/smokeTest/dist/*
+/smokeTest/nbproject/*
+/smokeTest/reports/*

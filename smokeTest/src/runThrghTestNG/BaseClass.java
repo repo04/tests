@@ -4,28 +4,33 @@
  */
 package runThrghTestNG;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import smoketest.Actions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import smoketest.AccountValues;
+import smoketest.IsPresent;
 
-/**
- *
- * @author somesh.bansal
- */
 public class BaseClass {
 
-    Actions a = new Actions();
+    public static AccountValues av;
+    public static WebDriver driver;
+    public IsPresent ip = new IsPresent();
     
     //The annotated method will be run before the first test method in the class is invoked
-    @BeforeClass
+    @BeforeTest
     public void setUp() throws Exception {
-        a.setUp("guAccountProperty");
+        driver = new FirefoxDriver();
+
+        driver.manage().window().maximize();
+        av = new AccountValues("guAccountProperty");
+        driver.get(av.getTokenValue("programURL"));
+        ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
     }
     
     //The annotated method will be run after all the test methods in the class have been run. 
-    @AfterClass
+    @AfterTest
     public void tearDown() throws Exception {
-        a.logOut();
-        a.tearDown();
+        driver.quit();
     }    
 }

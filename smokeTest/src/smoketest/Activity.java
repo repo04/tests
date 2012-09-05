@@ -7,25 +7,16 @@ package smoketest;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import runThrghTestNG.BaseClass;
 
-/**
- *
- * @author somesh.bansal
- */
-public class Activity extends Page {
+public class Activity extends BaseClass {
 
     Date now = new Date();
-    IsPresent ip = new IsPresent();
     private String forumName;
     private String quizName;
     private String allInOneAsgnmntName;
     private String pageName;
-
-    public Activity(WebDriver driver, AccountValues av) {
-        super(driver, av);
-    }
 
     public void crtForumActvty() {
 

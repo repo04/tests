@@ -1,42 +1,36 @@
 package smoketest;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import runThrghTestNG.BaseClass;
 
-public class Actions {
-
-    AccountValues av;
-    WebDriver driver;
-    IsPresent ip = new IsPresent();
+public class Actions extends BaseClass {
 
     public void login(String user) {
 
-        LoginPage lp = new LoginPage(driver, av);
-        ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
+        LoginPage lp = new LoginPage();
         lp.attemptLogin(user);
     }
 
     public String textPost(String textPst) {
 
-        WallPage wp = new WallPage(driver, av);
+        WallPage wp = new WallPage();
         wp.textPost(textPst);
         return wp.getTxtPost();
     }
 
     public String urlPost(String urlPst) {
-        WallPage wp = new WallPage(driver, av);
+        WallPage wp = new WallPage();
         wp.urlPost(urlPst);
         return wp.getURLPost();
     }
 
     public void createLiveSsn(String sclGrpName) {
-        LiveSession ls = new LiveSession(driver, av);
+        LiveSession ls = new LiveSession();
         ls.buildLiveSession(sclGrpName);
     }
 
     public String createCourse() {
-        Course cr = new Course(driver, av);
+        Course cr = new Course();
         cr.createCourse();
         return cr.getCrsName();
     }
@@ -51,7 +45,7 @@ public class Actions {
 
     //Login with ContentAdmin and create Group to newly created course 
     public String createGrpCourse(String courseName) {
-        Course cr = new Course(driver, av);
+        Course cr = new Course();
         cr.createGrpCourse(courseName);
         return cr.getGrpCrsName();
     }
@@ -63,21 +57,12 @@ public class Actions {
         ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
     }
 
-    public void setUp(String university) {
-
-        //Initiate Firefox Driver        
-        driver = new FirefoxDriver();
-
-        //Maximise the window
-        driver.manage().window().maximize();
-        av = new AccountValues(university);
-    }
-
     public void navigateToMyWall() {
 
         // Uses js to click on hidden element by XPATH
         Utility.navigateToSubMenu(driver, av.getTokenValue("linkToWallXPATH"));
-        Utility.myVerifyCurrentPage(driver, av.getTokenValue("wallPageTitle"));
+        //Utility.myVerifyCurrentPage(driver, av.getTokenValue("wallPageTitle"));
+        ip.isTitlePresent(driver, av.getTokenValue("wallPageTitle"));
     }
 
     public void navigateToMyCourse() {
@@ -138,7 +123,7 @@ public class Actions {
 
     public String createWorkingGroup() {
 
-        WorkingGroup wg = new WorkingGroup(driver, av);
+        WorkingGroup wg = new WorkingGroup();
         wg.BuildWorkingGroup();
         return wg.getWrkngGrp();
     }
@@ -164,43 +149,39 @@ public class Actions {
     }
 
     public String createForumActivity() {
-        Activity actvty = new Activity(driver, av);
+        Activity actvty = new Activity();
         actvty.crtForumActvty();
         return actvty.getFrmActvyName();
     }
 
     public String createQuizActivity() {
-        Activity actvty = new Activity(driver, av);
+        Activity actvty = new Activity();
         actvty.crtQuizActvty();
         return actvty.getQzActvyName();
     }
 
     public String createAllInOneAsgnmntActivity() {
-        Activity actvty = new Activity(driver, av);
+        Activity actvty = new Activity();
         actvty.crtAllInOneAsgnmntActvty();
         return actvty.getAllInOneAsgnmntActvyName();
     }
 
     public String createPageResource() {
-        Activity actvty = new Activity(driver, av);
+        Activity actvty = new Activity();
         actvty.createPageResource();
         return actvty.getPageActvyName();
     }
 
     public String createUser(String user) {
-        User usr = new User(driver, av);
+        User usr = new User();
         usr.createUser(user);
         return usr.getUsrName();
-    }
-
-    public void tearDown() {
-        driver.quit();
     }
 
     //Enroll User as 'Teacher/Student to a Course'
     public void enrollUsrToRole_GrpCrs(String user, String grpCrs) {
 
-        EnrollUser enrlUsr = new EnrollUser(driver, av);
+        EnrollUser enrlUsr = new EnrollUser();
         enrlUsr.toRole_Crs(user, grpCrs);
     }
 
@@ -217,7 +198,7 @@ public class Actions {
 
     public String createSocialGroups() {
 
-        SocialGroup sg = new SocialGroup(driver, av);
+        SocialGroup sg = new SocialGroup();
         sg.buildSocialGroup();
         return sg.getSclGrpName();
     }
@@ -236,19 +217,19 @@ public class Actions {
     }
 
     public void joinSocialGroup(String sclGrp) {
-        SocialGroup sg = new SocialGroup(driver, av);
+        SocialGroup sg = new SocialGroup();
         sg.joinSocialGroup(sclGrp);
     }
 
     public void leaveSocialGroup(String stdtSclGrpName) {
 
-        SocialGroup sg = new SocialGroup(driver, av);
+        SocialGroup sg = new SocialGroup();
         sg.leaveSocialGroup(stdtSclGrpName);
     }
 
     public void deleteSocialGroup(String stdtSclGrpName) {
 
-        SocialGroup sg = new SocialGroup(driver, av);
+        SocialGroup sg = new SocialGroup();
         sg.deleteSocialGroup(stdtSclGrpName);
     }
 
@@ -262,10 +243,12 @@ public class Actions {
     public void vrfyURLPstsAsTopNews_RcntNews(String... posts) {
 
         for (String post : posts) {
+            post.isEmpty();
             ip.isElementPresentContainsTextByXPATH(driver, post);
         }
         Utility.navigateToSubMenu(driver, av.getTokenValue("linkRecentNewsXPATH"));
         for (String post : posts) {
+            post.isEmpty();
             ip.isElementPresentContainsTextByXPATH(driver, post);
         }
     }
@@ -290,7 +273,7 @@ public class Actions {
 
     public void addMbrsToWrkngGrp(String... members) {
 
-        WorkingGroup wg = new WorkingGroup(driver, av);
+        WorkingGroup wg = new WorkingGroup();
         wg.addMbrsToWrkngGrp(members);
     }
 
@@ -303,7 +286,7 @@ public class Actions {
     }
 
     public String createGoogleDoc(String wrkngGrp) {
-        WorkingGroup wg = new WorkingGroup(driver, av);
+        WorkingGroup wg = new WorkingGroup();
         wg.createGoogleDoc(wrkngGrp);
         return wg.getGoogleDocName();
     }

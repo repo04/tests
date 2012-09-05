@@ -3,17 +3,12 @@ package smoketest;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import runThrghTestNG.BaseClass;
 
-public class LiveSession extends Page {
+public class LiveSession extends BaseClass {
 
     Date now = new Date();
-    IsPresent ip = new IsPresent();
-
-    public LiveSession(WebDriver driver, AccountValues av) {
-        super(driver, av);
-    }
-
+    
     public void buildLiveSession(String sclGrpName) {
 
         String user = LoginPage.getUser();

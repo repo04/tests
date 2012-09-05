@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="2GU-Stgn-SmokeTest" suite-preserve-order="true" parallel="false">
+    <test name="CrsGrpCrsCreation">
+        <classes>
+            <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
+        </classes>
+    </test>
+    <test name="UsrCrtnAsgnRoleWrkngGrp">
+        <classes>
+            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
+        </classes>
+    </test>
+    <test name="TchrPostsSclGrpGglDoc">
+        <classes>
+            <class name="runThrghTestNG.TchrPosts_SclGrp_GglDoc"/>
+        </classes>
+    </test>
+    <test name="StdtPostsSclGrpGglDoc">
+        <classes>
+            <class name="runThrghTestNG.StdtPosts_SclGrp_GglDoc"/>
+        </classes>
+    </test>
+    <test name="TchrJoinDeleteSclGrp">
+        <classes>
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
+        </classes>
+    </test>
+</suite>

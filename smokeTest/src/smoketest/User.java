@@ -9,23 +9,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import runThrghTestNG.BaseClass;
 
-/**
- *
- * @author somesh.bansal
- */
-public class User extends Page {
+public class User extends BaseClass {
 
     DateFormat dateFormat;
     Date now;
-    IsPresent ip = new IsPresent();
     private String userName;
-
-    public User(WebDriver driver, AccountValues av) {
-        super(driver, av);
-    }
 
     public void createUser(String user) {
 

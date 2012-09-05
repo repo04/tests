@@ -8,22 +8,12 @@ import com.thoughtworks.selenium.SeleneseTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import runThrghTestNG.BaseClass;
 
-/**
- *
- * @author somesh.bansal
- */
-public class EnrollUser extends Page {
-
-    IsPresent ip = new IsPresent();
-
-    public EnrollUser(WebDriver driver, AccountValues av) {
-        super(driver, av);
-    }
+public class EnrollUser extends BaseClass {
 
     public void toRole_Crs(String user, String grpCrs) {
 
