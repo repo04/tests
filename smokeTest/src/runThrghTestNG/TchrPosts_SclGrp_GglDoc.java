@@ -75,8 +75,8 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
     @Test(dependsOnMethods = {"testTchrCrtSclGrp"})
     public void testTchrCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
-        a.acessSclGrpWall(tchrSclGrpName);
-        a.acessLvSsnWall();
+        a.accessSclGrpWall(tchrSclGrpName);
+        a.accessLvSsnWall();
         a.createLiveSsn(tchrSclGrpName);
     }
 

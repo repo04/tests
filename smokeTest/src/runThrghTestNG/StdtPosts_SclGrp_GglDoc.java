@@ -62,7 +62,7 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
     @Test(dependsOnMethods = {"testStdtJoinsTchrSclGrp"})
     public void testStdtPostURLOnTchrSclGrp() throws Exception {
         a.navigateToMySocialGroups();
-        a.acessSclGrpWall(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
+        a.accessSclGrpWall(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
         System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
         Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
@@ -72,8 +72,8 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
     @Test(dependsOnMethods = {"testStdtJoinsTchrSclGrp"})
     public void testStdtCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
-        a.acessSclGrpWall(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
-        a.acessLvSsnWall();
+        a.accessSclGrpWall(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
+        a.accessLvSsnWall();
         a.createLiveSsn(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
     }
 

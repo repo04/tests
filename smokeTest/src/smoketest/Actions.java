@@ -35,7 +35,7 @@ public class Actions extends BaseClass {
         return cr.getCrsName();
     }
 
-    public void acessLvSsnWall() {
+    public void accessLvSsnWall() {
         //Verify Live Session Panel present or not
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnleftPnlLvMtng"));
         driver.findElement(By.xpath(av.getTokenValue("btnleftPnlLvMtng"))).click();
@@ -233,7 +233,7 @@ public class Actions extends BaseClass {
         sg.deleteSocialGroup(stdtSclGrpName);
     }
 
-    public void acessSclGrpWall(String sclGrp) {
+    public void accessSclGrpWall(String sclGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, sclGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + sclGrp + "')]")).click();
         String uprCS = sclGrp.substring(0, 1).toUpperCase();
