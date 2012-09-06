@@ -24,7 +24,6 @@ public class Course extends BaseClass {
 
         //Navigate to Create Course Screen
         driver.findElement(By.xpath(av.getTokenValue("btnAddNewCrs"))).click();
-
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctCrsCtgryXPATH"));
 
         //Create Course
