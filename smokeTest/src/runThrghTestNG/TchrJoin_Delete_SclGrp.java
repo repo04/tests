@@ -51,7 +51,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
     @Test
     public void testTchrVrfyStdtURLPsts_Top_RcntNews() throws Exception {
         a.navigateToMyHome();
-        a.vrfyURLPstsAsTopNews_RcntNews(TchrPosts_SclGrp_GglDoc.tchrUrlWallPost, TchrPosts_SclGrp_GglDoc.tchrUrlCrsPost, StdtPosts_SclGrp_GglDoc.stdtUrlPostOnTchrSclGrp);
+        a.vrfyURLPstsAsTop_RcntNews(TchrPosts_SclGrp_GglDoc.tchrUrlWallPost, TchrPosts_SclGrp_GglDoc.tchrUrlCrsPost, StdtPosts_SclGrp_GglDoc.stdtUrlPostOnTchrSclGrp);
     }
 
     @AfterClass

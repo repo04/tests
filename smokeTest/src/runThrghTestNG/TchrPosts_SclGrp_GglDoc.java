@@ -29,7 +29,7 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
     static String gglDocName;
     Actions a = new Actions();
 
-    //Teacher LOGS in
+    //Teacher Logs in
     @BeforeClass
     public void testTchrLgn() throws Exception {
         a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
@@ -59,7 +59,7 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
     @Test(dependsOnMethods = {"testTchrPostsOn_Wall_CrsWall"})
     public void testTchrVrfyURLPsts_Top_RcntNews() throws Exception {
         a.navigateToMyHome();
-        a.vrfyURLPstsAsTopNews_RcntNews(tchrUrlWallPost, tchrUrlCrsPost);
+        a.vrfyURLPstsAsTop_RcntNews(tchrUrlWallPost, tchrUrlCrsPost);
     }
 
     //Create SocialGroup
@@ -75,8 +75,8 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
     @Test(dependsOnMethods = {"testTchrCrtSclGrp"})
     public void testTchrCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
-        a.acessSclGrpWall(tchrSclGrpName);
-        a.acessLvSsnWall();
+        a.accessSclGrpWall(tchrSclGrpName);
+        a.accessLvSsnWall();
         a.createLiveSsn(tchrSclGrpName);
     }
 

@@ -35,7 +35,7 @@ public class Actions extends BaseClass {
         return cr.getCrsName();
     }
 
-    public void acessLvSsnWall() {
+    public void accessLvSsnWall() {
         //Verify Live Session Panel present or not
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnleftPnlLvMtng"));
         driver.findElement(By.xpath(av.getTokenValue("btnleftPnlLvMtng"))).click();
@@ -233,14 +233,14 @@ public class Actions extends BaseClass {
         sg.deleteSocialGroup(stdtSclGrpName);
     }
 
-    public void acessSclGrpWall(String sclGrp) {
+    public void accessSclGrpWall(String sclGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, sclGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + sclGrp + "')]")).click();
         String uprCS = sclGrp.substring(0, 1).toUpperCase();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
     }
 
-    public void vrfyURLPstsAsTopNews_RcntNews(String... posts) {
+    public void vrfyURLPstsAsTop_RcntNews(String... posts) {
 
         for (String post : posts) {
             post.isEmpty();
