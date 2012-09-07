@@ -16,43 +16,46 @@ import runThrghTestNG.BaseClass;
 public class SocialGroup extends BaseClass {
 
     Date now = new Date();
-    private String grpName;
+    private String sclGrpName;
 
-    // Assumes user is at 'My Social Groups'
+    /**
+     * Create & verify SocialGroup
+     */
     public void buildSocialGroup() {
 
         String user = LoginPage.getUser();
 
+        //Split username
         switch (user.substring(0, 7)) {
             case "student":
-                this.grpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             case "teacher":
-                this.grpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             default:
                 SeleneseTestBase.fail("Invalid user to create Social Group: " + user);
         }
 
         String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-
         driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH"))).click();
-
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGrpNameXPATH"));
-
-        driver.findElement(By.xpath(av.getTokenValue("fieldGrpNameXPATH"))).sendKeys(grpName);
+        driver.findElement(By.xpath(av.getTokenValue("fieldGrpNameXPATH"))).sendKeys(sclGrpName);
         driver.findElement(By.xpath(av.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
         driver.findElement(By.xpath(av.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
         driver.findElement(By.xpath(av.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
-
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtSclGrp"))).click();
 
-        // Verifies new Group
-        ip.isElementPresentByLINK(driver, grpName);
+        //Verify SocialGroup creation
+        ip.isElementPresentByLINK(driver, sclGrpName);
     }
-    
-    public void joinSocialGroup(String sclGrp) {
 
+    /**
+     * Join SocialGroup
+     *
+     * @param sclGrp
+     */
+    public void joinSocialGroup(String sclGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, "Join Now");
         driver.findElement(By.xpath("//*[contains(text(),'Join Now')]")).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyJndSclGrpXPATH"), "Are you sure you want to join the group \"" + sclGrp + "\"?");
@@ -66,8 +69,12 @@ public class SocialGroup extends BaseClass {
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyTxtJoined"), "Joined");
     }
 
+    /**
+     * Leave Social Group
+     *
+     * @param stdtSclGrpName
+     */
     public void leaveSocialGroup(String stdtSclGrpName) {
-
         ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, "Leave Group");
         driver.findElement(By.xpath("//*[contains(text(),'Leave Group')]")).click();
@@ -83,6 +90,11 @@ public class SocialGroup extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
     }
 
+    /**
+     * Delete SocialGroup
+     *
+     * @param stdtSclGrpName
+     */
     public void deleteSocialGroup(String stdtSclGrpName) {
         ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
         driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
@@ -105,7 +117,10 @@ public class SocialGroup extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
     }
 
+    /**
+     * @return SclGrpName
+     */
     public String getSclGrpName() {
-        return this.grpName;
+        return this.sclGrpName;
     }
 }

@@ -8,6 +8,11 @@ public class AccountValues {
 
     Properties p = new Properties();
 
+    /**
+     * Access property file
+     *
+     * @param testPropertiesName
+     */
     public AccountValues(String testPropertiesName) {
 
         try {
@@ -16,6 +21,12 @@ public class AccountValues {
         }
     }
 
+    /**
+     * Get property value
+     *
+     * @param t
+     * @return
+     */
     public String getTokenValue(String t) {
 
         if (p.getProperty(t) == null) {

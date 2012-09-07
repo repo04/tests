@@ -19,13 +19,21 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
 
     Actions a = new Actions();
 
-    //Teacher Logs in
+    /**
+     * Teacher Logs in
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public void testTchrLgn() throws Exception {
         a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
     }
 
-    //Find & Join Student's Social Group 
+    /**
+     * Find & Join Student's Social Group
+     *
+     * @throws Exception
+     */
     @Test
     public void testTchrJoinsStdtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
@@ -33,27 +41,46 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
         a.joinSocialGroup(StdtPosts_SclGrp_GglDoc.stdtSclGrpName);
     }
 
-    //Leaves Student's Social Group 
+    /**
+     * Leaves Student's Social Group
+     *
+     * @throws Exception
+     */
     @Test(dependsOnMethods = {"testTchrJoinsStdtSclGrp"})
     public void testTchrLeavesStdtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(StdtPosts_SclGrp_GglDoc.stdtSclGrpName);
     }
 
-    //Deletes own Social Group
-    @Test
-    public void testTchrDeleteSclGrp() throws Exception {
-        a.navigateToMySocialGroups();
-        a.deleteSocialGroup(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
-    }
-
-    //Verify All Posts on Top/Recent News
+    /**
+     * Verify All Posts (tchrUrlWallPost,tchrUrlCrsPost,stdtUrlPostOnTchrSclGrp)
+     * on Top/Recent News
+     *
+     * @throws Exception
+     */
     @Test
     public void testTchrVrfyStdtURLPsts_Top_RcntNews() throws Exception {
         a.navigateToMyHome();
         a.vrfyURLPstsAsTop_RcntNews(TchrPosts_SclGrp_GglDoc.tchrUrlWallPost, TchrPosts_SclGrp_GglDoc.tchrUrlCrsPost, StdtPosts_SclGrp_GglDoc.stdtUrlPostOnTchrSclGrp);
     }
 
+    /**
+     * Deletes own Social Group
+     *
+     * @throws Exception
+     */
+    @Test(dependsOnMethods = {"testTchrVrfyStdtURLPsts_Top_RcntNews"}, alwaysRun = true)
+    public void testTchrDeleteSclGrp() throws Exception {
+        a.navigateToMySocialGroups();
+        a.deleteSocialGroup(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
+    }
+
+    /**
+     * The annotated method will be run after all the test methods in the
+     * current class have been run
+     *
+     * @throws Exception
+     */
     @AfterClass
     public void testTchrLogOut() throws Exception {
         a.logOut();

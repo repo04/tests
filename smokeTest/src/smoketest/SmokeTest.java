@@ -1,5 +1,6 @@
 package smoketest;
 
+import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class SmokeTest {
@@ -173,6 +174,34 @@ public class SmokeTest {
 //        a.navigateToContactsWall(stdtUsrName);
 //        tchrUrlPostOnStdtWall = a.urlPost("urlPostOnStdtWall");
 //        System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
+    
+          /**
+            * Navigate to My Contacts Wall
+            * @param cntct 
+            */
+           /*public void navigateToContactsWall(String cntct) {
+               driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
+               String s = cntct.substring(0, 1).toUpperCase();
+               String usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
+               ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyCntctXPATH"), usrFullNm);
+               driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
+               ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
+           }*/
+    
+           /**
+            * Find Contact
+            * @param cntct 
+            */
+           /*public void findContact(String cntct) {
+
+               ip.isElementPresentByXPATH(driver, av.getTokenValue("lnkMyCntctXPATH"));
+               driver.findElement(By.xpath(av.getTokenValue("lnkMyCntctXPATH"))).click();
+               ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldFndCntct"));
+               driver.findElement(By.xpath(av.getTokenValue("fieldFndCntct"))).sendKeys(cntct);
+               driver.findElement(By.xpath(av.getTokenValue("btnFnCntct"))).click();
+               ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
+           }*/
+    
 //
 //        a.navigateToMySocialGroups();
 //        tchrSclGrpName = a.createSocialGroups();

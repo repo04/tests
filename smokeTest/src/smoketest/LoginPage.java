@@ -8,7 +8,10 @@ public class LoginPage extends BaseClass {
 
     private static String usr;
 
-    // Attemps to login based on user type and values from property file
+    /**
+     * Attemps to login based on user type and values from property file
+     * @param user 
+     */
     public void attemptLogin(String user) {
 
         LoginPage.usr = user;
@@ -28,6 +31,7 @@ public class LoginPage extends BaseClass {
                 passWord.sendKeys(av.getTokenValue("pesPswd"));
                 break;
 
+            //Teacher/Student
             default:
                 userName.sendKeys(user);
                 passWord.sendKeys("Tech@123");
@@ -36,7 +40,7 @@ public class LoginPage extends BaseClass {
 
         loginBtn.click();
 
-        //PES Admin gets Course Page after login
+        //PesAdmin navigates to Course page after login
         if (user.equals("pesAdmin")) {
             ip.isTitlePresent(driver, av.getTokenValue("crsPageTitle"));
         } else {
@@ -44,6 +48,9 @@ public class LoginPage extends BaseClass {
         }
     }
 
+    /**
+     * @return userName
+     */
     public static String getUser() {
         return usr;
     }

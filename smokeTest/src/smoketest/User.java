@@ -9,7 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class User extends BaseClass {
@@ -18,6 +20,11 @@ public class User extends BaseClass {
     Date now;
     private String userName;
 
+    /**
+     * PesAdmin creates user
+     *
+     * @param user
+     */
     public void createUser(String user) {
 
         dateFormat = new SimpleDateFormat("ddMM-HHmm");
@@ -52,7 +59,7 @@ public class User extends BaseClass {
 
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
 
-        //Need to check and perform functionality if Element is present or not 
+        //Check and perform functionality if Element is present or not 
         //Limitation - Webdriver throws 'NoSuchElementException' incase element is not found
         Boolean wait = null;
         try {
@@ -64,7 +71,7 @@ public class User extends BaseClass {
 
         if (!wait) {
             driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter"))).click();
-            ip.isElementPresentByXPATH(driver, av.getTokenValue("btnFindUsr"));
+            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(av.getTokenValue("btnRmvUsrFilter"))));
         }
 
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
@@ -74,6 +81,9 @@ public class User extends BaseClass {
         ip.isElementPresentStartsWithTextByXPATH(driver, userName);
     }
 
+    /**
+     * @return UsrName
+     */
     public String getUsrName() {
         return this.userName;
     }

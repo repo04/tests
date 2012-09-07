@@ -18,6 +18,7 @@ public class TestNGCustomReport extends TestListenerAdapter {
         ScreenShot(tr);
     }
 
+    //Capture screenshot on TestFailure
     public void ScreenShot(ITestResult result) {
 
         try {
@@ -27,18 +28,15 @@ public class TestNGCustomReport extends TestListenerAdapter {
 
             // Get the dir path
             File directory = new File(".");
-            //System.out.println(directory.getCanonicalPath());
-
+            
             //Get current date time with Date() to create unique file name
             SimpleDateFormat dateFormat = new SimpleDateFormat(
                     "ddMMMyy__hhmmaa");
             // get current date time with Date()
             Date date = new Date();
-            //System.out.println(dateFormat.format(date));
-
+            
 
             if (!(new File(directory.getCanonicalPath() + File.separator + "reports"+ File.separator + "screenshots")).exists()) {
-                //System.out.println("make dir");
                 new File(directory.getCanonicalPath() + File.separator + "reports"+ File.separator + "screenshots").mkdir();
             }
 

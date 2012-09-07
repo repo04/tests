@@ -17,7 +17,7 @@ public class BaseClass {
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
     
-    //The annotated method will be run before the first test method in the class is invoked
+    //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest
     public void setUp() throws Exception {
         driver = new FirefoxDriver();
@@ -28,7 +28,7 @@ public class BaseClass {
         ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
     }
     
-    //The annotated method will be run after all the test methods in the class have been run. 
+    //The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run 
     @AfterTest
     public void tearDown() throws Exception {
         driver.quit();

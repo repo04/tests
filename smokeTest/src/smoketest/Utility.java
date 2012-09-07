@@ -7,7 +7,12 @@ import org.openqa.selenium.WebElement;
 
 public class Utility{
 
-    // Uses js to click on hidden elements on the page
+    /**
+     * Uses js to click on hidden element on the page by XPATH
+     * 
+     * @param driver
+     * @param menuXPATH 
+     */
     public static void navigateToSubMenu(WebDriver driver, String menuXPATH) {
         WebElement hiddenElement = driver.findElement(By.xpath(menuXPATH));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);

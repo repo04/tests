@@ -12,26 +12,24 @@ public class Course extends BaseClass {
     private String crsName;
     private String grpCrsName;
 
+    /**
+     * Create & verify Course
+     */
     public void createCourse() {
-
-        //Navigate to course page
+        //Navigate to Add/Edit Course Page
         setUpCrsPage();
 
         this.crsName = "SmkTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String crsShrtName = "ShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnAddNewCrs"));
 
         //Navigate to Create Course Screen
         driver.findElement(By.xpath(av.getTokenValue("btnAddNewCrs"))).click();
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctCrsCtgryXPATH"));
 
-        //Create Course
+        //Input Values
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctCrsCtgryXPATH")))).selectByVisibleText("Active");
-
         driver.findElement(By.xpath(av.getTokenValue("fieldCrsFullNmXPATH"))).sendKeys(crsName);
-
-        //Date need to be in specific format as getinstance include special characters
         driver.findElement(By.xpath(av.getTokenValue("fieldCrsShrtNmXPATH"))).sendKeys(crsShrtName);
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctCrsStrtDtDyXPATH")))).selectByValue("1");
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctCrsStrtDtMnthXPATH")))).selectByValue("8");
@@ -46,48 +44,56 @@ public class Course extends BaseClass {
 
     }
 
+    /**
+     * Create & verify GroupCourse
+     *
+     * @param courseName
+     */
     public void createGrpCourse(String courseName) {
-
-        //Navigate to course page
+        //Navigate to Add/Edit Course Page
         setUpCrsPage();
 
         this.grpCrsName = "SmkTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-
         ip.isElementPresentStartsWithTextByXPATH(driver, courseName);
 
         //Click on newly created Course
         driver.findElement(By.xpath("//*[starts-with(text(),'" + courseName + "')]")).click();
-
         ip.isElementPresentContainsTextByXPATH(driver, courseName);
 
         //Naviagte to Group Course page
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrsLnkXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("lftPnlGrpsLinkXPATH"))).click();
-
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtGrpCrs"));
-
-        //Create group course
         driver.findElement(By.xpath(av.getTokenValue("btnCrtGrpCrs"))).click();
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGrpCrsNameXPATH"));
+
+        //Input Values
         driver.findElement(By.xpath(av.getTokenValue("fieldGrpCrsNameXPATH"))).sendKeys(grpCrsName);
         driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
 
-        //Verify group course is created or not
+        //Verify GroupCourse is created or not
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtGrpCrs"));
 
     }
 
+    /**
+     * Navigate to Add/Edit Course Page
+     */
     public void setUpCrsPage() {
-
-        //Navigate to Add/Edit Course Page
         driver.findElement(By.xpath(av.getTokenValue("lftPnlCrsLinkXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAddEditCrsXPATH"))).click();
     }
 
+    /**
+     * @return CourseName
+     */
     public String getCrsName() {
         return this.crsName;
     }
 
+    /**
+     * @return GroupCourseName
+     */
     public String getGrpCrsName() {
         return this.grpCrsName;
     }

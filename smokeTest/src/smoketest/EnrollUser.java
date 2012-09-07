@@ -26,9 +26,9 @@ public class EnrollUser extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("btnEnrlUsrs"))).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("lblEnrlmntOptnsXPATH"), "Enrolment options");
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldSrchUsrXPATH"));
-        
+
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("chckBxUsrXPATH"))));
-        
+
         driver.findElement(By.xpath(av.getTokenValue("fieldSrchUsrXPATH"))).sendKeys(user);
         driver.findElement(By.xpath(av.getTokenValue("fieldSrchUsrXPATH"))).sendKeys(Keys.RETURN);
         ip.isTextPresentByXPATH(driver, av.getTokenValue("lblUsrFndXPATH"), "1 user found");
@@ -56,7 +56,7 @@ public class EnrollUser extends BaseClass {
 
         driver.findElement(By.xpath(av.getTokenValue("chckBxUsrXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("btnEnrlSlctdUsrXPATH"))).click();
-        
+
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(av.getTokenValue("chckBxUsrXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("btnFnshEnrlngUsrXPATH"))).click();
 
@@ -83,7 +83,7 @@ public class EnrollUser extends BaseClass {
 
         if (!wait) {
             driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter"))).click();
-            ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
+            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(av.getTokenValue("btnRmvUsrFilter"))));
         }
 
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");

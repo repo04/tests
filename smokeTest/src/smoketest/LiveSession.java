@@ -13,11 +13,17 @@ public class LiveSession extends BaseClass {
 
     Date now = new Date();
 
+    /**
+     * Create & verify Live Session in
+     * 
+     * @param sclGrpName 
+     */
     public void buildLiveSession(String sclGrpName) {
 
         String user = LoginPage.getUser();
         String liveSsnNm = null;
-
+        
+        //Split username
         switch (user.substring(0, 7)) {
             case "student":
                 liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -32,10 +38,10 @@ public class LiveSession extends BaseClass {
         //Verify Navigated to Live Meeting creation page
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtSsn"));
         driver.findElement(By.xpath(av.getTokenValue("btnCrtSsn"))).click();
-
         WebElement lvSsnNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldLvSsnXPATH"))));
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldLvSsnDescXPATH"))));
         
+        //This is to verify lvSsnName field passes correct value 
         value:
         while (true) {
             lvSsnNm.clear();
@@ -51,6 +57,7 @@ public class LiveSession extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("btnLvnSsnSbmt")))
                 .click();
 
+        //Verify LiveSession created or not
         switch (user.substring(0, 7)) {
             case "student":
                 ip.isTextPresentByXPATH(driver, av.getTokenValue("stdtLvSsnInTchrSclGrpXPATH"), liveSsnNm);

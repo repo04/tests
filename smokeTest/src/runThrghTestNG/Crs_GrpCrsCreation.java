@@ -27,13 +27,22 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String pageActvtyName;
     Actions a = new Actions();
 
-    //Content Admin logs in 
+    /**
+     * The annotated method will be run before the first test method in the
+     * current class is invoked, Content Admin logs in
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public void testCntntAdminLgn() throws Exception {
         a.login("contentAdmin");
     }
 
-    //Create - Course & GrpCourse
+    /**
+     * Create - Course & GrpCourse
+     *
+     * @throws Exception
+     */
     @Test
     public void testCrsGrpCrs_Creation() throws Exception {
 
@@ -48,9 +57,14 @@ public class Crs_GrpCrsCreation extends BaseClass {
         Reporter.log("grpCrsName: " + grpCrsName);
     }
 
-    //Create - Activities like Forum, Quiz, All In One Assignment & Page
+    /**
+     * Create - Activities like Forum, Quiz, All In One Assignment & Page
+     *
+     * @throws Exception
+     */
     @Test(dependsOnMethods = {"testCrsGrpCrs_Creation"})
     public void testActivities_Creation() throws Exception {
+
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         frmActvyName = a.createForumActivity();
@@ -76,6 +90,12 @@ public class Crs_GrpCrsCreation extends BaseClass {
         Reporter.log("pageActvtyName: " + pageActvtyName);
     }
 
+    /**
+     * The annotated method will be run after all the test methods in the
+     * current class have been run, User logsOut
+     *
+     * @throws Exception
+     */
     @AfterClass
     public void testCntntAdminLogOut() throws Exception {
         a.logOut();

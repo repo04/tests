@@ -19,17 +19,26 @@ import smoketest.Actions;
 public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     static String tchrUsrName;
-    static String stdtUsrName;
-    static String wrkngGrpName;
+    static String stdtUsrName = "student0709-1715";
+    static String wrkngGrpName = "SmkTstWrkngGrp Sep 7, 2012 5:14 PM";
     Actions a = new Actions();
 
-    //PES Admin Logs in
+    /**
+     * The annotated method will be run before the first test method in the
+     * current class is invoked, Student logs in, PES Admin Logs in
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public void testPESAdminLgn() throws Exception {
         a.login("pesAdmin");
     }
 
-    //Create Two Users
+    /**
+     * Create Two Users
+     *
+     * @throws Exception
+     */
     @Test
     public void testUsrCrtn() throws Exception {
         a.navigateToMyContacts();
@@ -43,7 +52,11 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         Reporter.log("stdtUsrName: " + stdtUsrName);
     }
 
-    //Assign/Enroll users to GrpCourse as Teacher/Student roles
+    /**
+     * Assign/Enroll users to GrpCourse as Teacher/Student roles
+     *
+     * @throws Exception
+     */
     @Test(dependsOnMethods = {"testUsrCrtn"})
     public void testAsgnRole() throws Exception {
         a.navigateToMyCourse();
@@ -55,7 +68,11 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         a.enrollUsrToRole_GrpCrs(stdtUsrName, Crs_GrpCrsCreation.grpCrsName);
     }
 
-    //Create Working Group
+    /**
+     * Create Working Group
+     *
+     * @throws Exception
+     */
     @Test
     public void testCrtWrkgnGrp() throws Exception {
         a.navigateToWorkingGroups();
@@ -64,7 +81,11 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         Reporter.log("wrkngGrp: " + wrkngGrpName);
     }
 
-    //Add users as members to Working Group
+    /**
+     * Add users as members to Working Group
+     *
+     * @throws Exception
+     */
     @Test(dependsOnMethods = {"testCrtWrkgnGrp", "testAsgnRole"})
     public void testAddMbrsToWrkngGrp() throws Exception {
         a.navigateToWorkingGroups();
@@ -72,6 +93,12 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
     }
 
+    /**
+     * The annotated method will be run after all the test methods in the
+     * current class have been run
+     *
+     * @throws Exception
+     */
     @AfterClass
     public void testPESAdminLogOut() throws Exception {
         a.logOut();

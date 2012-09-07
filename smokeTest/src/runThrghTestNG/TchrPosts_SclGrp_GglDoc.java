@@ -29,14 +29,22 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
     static String gglDocName;
     Actions a = new Actions();
 
-    //Teacher Logs in
+    /**
+     * The annotated method will be run before the first test method in the
+     * current class is invoked, Student logs in, Teacher Logs in
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public void testTchrLgn() throws Exception {
         a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
     }
 
-    //Post/Verify Text,URL on own wall 
-    //Post/Verify URL on Course Wall 
+    /**
+     * Post & verify Text,URL on own & Course Wall
+     *
+     * @throws Exception
+     */
     @Test
     public void testTchrPostsOn_Wall_CrsWall() throws Exception {
         a.navigateToMyWall();
@@ -55,23 +63,24 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
         Reporter.log("tchrUrlCrsPost: " + tchrUrlCrsPost);
     }
 
-    //Verify All URL Posts on Top & RecentNews
-    @Test(dependsOnMethods = {"testTchrPostsOn_Wall_CrsWall"})
-    public void testTchrVrfyURLPsts_Top_RcntNews() throws Exception {
-        a.navigateToMyHome();
-        a.vrfyURLPstsAsTop_RcntNews(tchrUrlWallPost, tchrUrlCrsPost);
-    }
-
-    //Create SocialGroup
+    /**
+     * Create SocialGroup
+     *
+     * @throws Exception
+     */
     @Test
     public void testTchrCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
-        tchrSclGrpName = a.createSocialGroups();
+        tchrSclGrpName = a.createSocialGroup();
         System.out.println("tchrSclGrpName: " + tchrSclGrpName);
         Reporter.log("tchrSclGrpName: " + tchrSclGrpName);
     }
 
-    //Find SclGroup & Create LiveSession in SclGroup
+    /**
+     * Find SclGroup & Create LiveSession in SclGroup
+     *
+     * @throws Exception
+     */
     @Test(dependsOnMethods = {"testTchrCrtSclGrp"})
     public void testTchrCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
@@ -80,7 +89,11 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
         a.createLiveSsn(tchrSclGrpName);
     }
 
-    //Create GoogleDoc in Working Group
+    /**
+     * Create GoogleDoc in Working Group
+     *
+     * @throws Exception
+     */
     @Test
     public void testTchrCrtGglDoc() throws Exception {
         a.navigateToWorkingGroups();
@@ -89,7 +102,11 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
         Reporter.log("gglDocName: " + gglDocName);
     }
 
-    //Verify Activities & resource appear items on activity report
+    /**
+     * Verify Activities & resource appear items on activity report
+     *
+     * @throws Exception
+     */
     @Test
     public void testTchrVrfyActivities() throws Exception {
         a.navigateToMyCourse();
@@ -98,6 +115,12 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
         a.verifyActivities(Crs_GrpCrsCreation.frmActvyName, Crs_GrpCrsCreation.quizActvtyName, Crs_GrpCrsCreation.allInOneAsgnmntAvtvtyName, Crs_GrpCrsCreation.pageActvtyName);
     }
 
+    /**
+     * The annotated method will be run after all the test methods in the
+     * current class have been run
+     *
+     * @throws Exception
+     */
     @AfterClass
     public void testTchrLogOut() throws Exception {
         a.logOut();
