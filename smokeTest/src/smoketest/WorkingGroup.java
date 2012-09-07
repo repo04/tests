@@ -41,8 +41,10 @@ public class WorkingGroup extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, "Manage Members");
         driver.findElement(By.xpath("//*[contains(text(),'Manage Members')]")).click();
 
-        ip.isTextPresentByXPATH(driver, "//td[2]/h3", "Members");
-        ip.isTextPresentByXPATH(driver, "//td[4]/h3", "Non Members");
+        // GU servers can take up to 6 minutes for this to load.  Known issue.
+        int wait = 360;
+        ip.isTextPresentByXPATH(driver, "//td[2]/h3", "Members", wait);
+        ip.isTextPresentByXPATH(driver, "//td[4]/h3", "Non Members", wait);
 
         Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("slctMbrsXPATH"))));
         String fullNm = null;

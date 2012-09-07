@@ -19,6 +19,10 @@ public class IsPresent {
     public void isTextPresentByXPATH(WebDriver driver, String headingTextPath, String txtByXPATH) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath(headingTextPath), txtByXPATH));
     }
+    
+    public void isTextPresentByXPATH(WebDriver driver, String headingTextPath, String txtByXPATH, int wait) {
+        new WebDriverWait(driver, wait).until(ExpectedConditions.textToBePresentInElement(By.xpath(headingTextPath), txtByXPATH));
+    }
 
     public void isElementPresentContainsTextByXPATH(WebDriver driver, String elmntByXPATH) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'" + elmntByXPATH + "')]")));
