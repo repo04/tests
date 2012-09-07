@@ -17,4 +17,17 @@ public class Utility{
         WebElement hiddenElement = driver.findElement(By.xpath(menuXPATH));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
     }
+    
+    public static void optionalClickByXPATH(WebDriver driver, String path) {
+        try {
+            if( driver.findElement(By.linkText(path)).isDisplayed() )
+            {
+                driver.findElement(By.linkText(path)).click();
+            }
+        }
+        catch( Exception ex ) {
+            // Do nothing
+        }
+    }
 }
+//driver.findElement(By.linkText("Show More Groups")).click();

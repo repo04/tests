@@ -404,6 +404,8 @@ public class Actions extends BaseClass {
      * @param wrkngGrp
      */
     public void accessWrknGrp(String wrkngGrp) {
+        ip.isElementPresentByID(driver, av.getTokenValue("headerFrstWrkGrp"));
+        Utility.optionalClickByXPATH(driver, av.getTokenValue("btnShwMreRslts"));
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
     }

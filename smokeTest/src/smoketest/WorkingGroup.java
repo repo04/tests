@@ -45,7 +45,7 @@ public class WorkingGroup extends BaseClass {
         driver.findElement(By.xpath("//*[contains(text(),'Manage Members')]")).click();
 
         //GU servers can take up to 6 minutes for this to load.  Known issue.
-        int wait = 360;
+        int wait = 600;
         ip.isTextPresentByXPATH(driver, "//td[2]/h3", "Members", wait);
         ip.isTextPresentByXPATH(driver, "//td[4]/h3", "Non Members", wait);
 
