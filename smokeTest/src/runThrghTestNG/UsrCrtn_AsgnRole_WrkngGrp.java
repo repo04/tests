@@ -19,8 +19,8 @@ import smoketest.Actions;
 public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     static String tchrUsrName;
-    static String stdtUsrName = "student0709-1715";
-    static String wrkngGrpName = "SmkTstWrkngGrp Sep 7, 2012 5:14 PM";
+    static String stdtUsrName;
+    static String wrkngGrpName;
     Actions a = new Actions();
 
     /**
