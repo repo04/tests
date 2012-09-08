@@ -16,13 +16,10 @@ public class TempTest extends BaseClass {
     
     @BeforeClass
     public void testPESAdminLgn() throws Exception {
-        a.login("pesAdmin");
+        a.login("student0709-1906");
     }
     @Test
     public void stuff() throws Exception {
-    String check = "balls";
-    a.navigateToWorkingGroups();
-    a.accessWrknGrp(check);
-    //a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
+
     }   
 }

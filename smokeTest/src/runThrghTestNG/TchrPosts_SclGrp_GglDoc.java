@@ -37,6 +37,7 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
      */
     @BeforeClass
     public void testTchrLgn() throws Exception {
+        //a.login("teacher0709-1905");
         a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
     }
 

@@ -17,13 +17,14 @@
         <classes>
             <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
         </classes>
-    </test>
+    </test>-->
     
     <test name="TchrPostsSclGrpGglDoc">
         <classes>
             <class name="runThrghTestNG.TchrPosts_SclGrp_GglDoc"/>
         </classes>
     </test>
+    <!--
     <test name="StdtPostsSclGrpGglDoc">
         <classes>
             <class name="runThrghTestNG.StdtPosts_SclGrp_GglDoc"/>
