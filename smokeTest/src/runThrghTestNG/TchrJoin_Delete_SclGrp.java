@@ -37,8 +37,8 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
     @Test
     public void testTchrJoinsStdtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
-        a.findSocialGroup(StdtPosts_SclGrp_GglDoc.stdtSclGrpName);
-        a.joinSocialGroup(StdtPosts_SclGrp_GglDoc.stdtSclGrpName);
+        a.findSocialGroup(StdtLvSsn_SclGrp_GglDoc.stdtSclGrpName);
+        a.joinSocialGroup(StdtLvSsn_SclGrp_GglDoc.stdtSclGrpName);
     }
 
     /**
@@ -49,7 +49,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
     @Test(dependsOnMethods = {"testTchrJoinsStdtSclGrp"})
     public void testTchrLeavesStdtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
-        a.leaveSocialGroup(StdtPosts_SclGrp_GglDoc.stdtSclGrpName);
+        a.leaveSocialGroup(StdtLvSsn_SclGrp_GglDoc.stdtSclGrpName);
     }
 
     /**
@@ -61,7 +61,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
     @Test
     public void testTchrVrfyStdtURLPsts_Top_RcntNews() throws Exception {
         a.navigateToMyHome();
-        a.vrfyURLPstsAsTop_RcntNews(TchrPosts_SclGrp_GglDoc.tchrUrlWallPost, TchrPosts_SclGrp_GglDoc.tchrUrlCrsPost, StdtPosts_SclGrp_GglDoc.stdtUrlPostOnTchrSclGrp);
+        a.vrfyURLPstsAsTop_RcntNews(TchrPosts_SclGrp.tchrUrlWallPost, TchrPosts_SclGrp.tchrUrlCrsPost, StdtJnSclGrp_Post.stdtUrlPostOnTchrSclGrp);
     }
 
     /**
@@ -72,7 +72,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
     @Test(dependsOnMethods = {"testTchrVrfyStdtURLPsts_Top_RcntNews"}, alwaysRun = true)
     public void testTchrDeleteSclGrp() throws Exception {
         a.navigateToMySocialGroups();
-        a.deleteSocialGroup(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
+        a.deleteSocialGroup(TchrPosts_SclGrp.tchrSclGrpName);
     }
 
     /**

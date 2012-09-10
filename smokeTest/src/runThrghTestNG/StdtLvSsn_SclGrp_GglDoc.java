@@ -12,16 +12,15 @@ import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
- * Student logs in Find & Join Teacher's Scl Grp Post/Verify URL on Tchr's
- * SclGrp Create Live Session in Teacher's Social Group Creates own Social Group
+ * Student logs in, Create Live Session in Teacher's Social Group,
+ * Creates own Social Group
  * Verify Google Doc Verify All Posts on Top/Recent News Verify Activities &
  * resource items appear in activity report
  */
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
-public class StdtPosts_SclGrp_GglDoc extends BaseClass {
+public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
     static String stdtSclGrpName;
-    static String stdtUrlPostOnTchrSclGrp;
     Actions a = new Actions();
 
     /**
@@ -36,42 +35,16 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
     }
 
     /**
-     * Find & Join Teacher's Social Group
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testStdtJoinsTchrSclGrp() throws Exception {
-        a.navigateToMySocialGroups();
-        a.findSocialGroup(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
-        a.joinSocialGroup(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
-    }
-
-    /**
-     * Post/Verify URL on Teacher's SocialGroup
-     *
-     * @throws Exception
-     */
-    @Test(dependsOnMethods = {"testStdtJoinsTchrSclGrp"})
-    public void testStdtPostURLOnTchrSclGrp() throws Exception {
-        a.navigateToMySocialGroups();
-        a.accessSclGrpWall(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
-        stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
-        System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
-        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
-    }
-
-    /**
      * Create Live Session in Teacher's Social Group
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testStdtPostURLOnTchrSclGrp"}, alwaysRun = true)
+    @Test(groups="runLast")
     public void testStdtCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
+        a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
         a.accessLvSsnWall();
-        a.createLiveSsn(TchrPosts_SclGrp_GglDoc.tchrSclGrpName);
+        a.createLiveSsn(TchrPosts_SclGrp.tchrSclGrpName);
     }
 
     /**
@@ -79,7 +52,7 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testStdtCrtLvSsn"}, alwaysRun = true)
+    @Test(groups="runLast")
     public void testStdtCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         stdtSclGrpName = a.createSocialGroup();
@@ -92,10 +65,10 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testStdtCrtSclGrp"}, alwaysRun = true)
+    @Test(groups="runLast")
     public void testStdtVrfyWrkGrp_GglDoc() throws Exception {
         a.navigateToWorkingGroups();
-        a.vrfyWrkngGrp_GglDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName, TchrPosts_SclGrp_GglDoc.gglDocName);
+        a.vrfyWrkngGrp_GglDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName, TchrLvSsn_GglDoc.gglDocName);
     }
 
     /**
@@ -103,7 +76,7 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testStdtVrfyWrkGrp_GglDoc"}, alwaysRun = true)
+    @Test(groups="runLast")
     public void testStdtVrfyActivities() throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
@@ -112,15 +85,15 @@ public class StdtPosts_SclGrp_GglDoc extends BaseClass {
     }
 
     /**
-     * Verify All Posts (stdtUrlPostOnTchrSclGrp, tchrUrlWallPost,
-     * tchrUrlCrsPost) on Top/Recent News
+     * Verify All Posts (stdtUrlPostOnTchrSclGrp, tchrUrlCrsPost) 
+     * on Top/Recent News
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testStdtPostURLOnTchrSclGrp", "testStdtVrfyActivities"})
+    @Test(dependsOnGroups={"runLast"}, alwaysRun=true)
     public void testStdtVrfyURLPsts_Top_RcntNews() throws Exception {
         a.navigateToMyHome();
-        a.vrfyURLPstsAsTop_RcntNews(stdtUrlPostOnTchrSclGrp, TchrPosts_SclGrp_GglDoc.tchrUrlWallPost, TchrPosts_SclGrp_GglDoc.tchrUrlCrsPost);
+        a.vrfyURLPstsAsTop_RcntNews(StdtJnSclGrp_Post.stdtUrlPostOnTchrSclGrp, TchrPosts_SclGrp.tchrUrlCrsPost);
     }
 
     /**

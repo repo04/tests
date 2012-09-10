@@ -51,7 +51,24 @@ public class SocialGroup extends BaseClass {
     }
 
     /**
-     * Join SocialGroup
+     * Find Social Group
+     *
+     * @param sclGrp
+     */
+    public void findSocialGroup(String sclGrp) {
+        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
+
+        //Verify 'Find a Social Group' Text
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("headerTxt"));
+        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(sclGrp);
+        driver.findElement(By.xpath(av.getTokenValue("btnSrchSclGrp"))).click();
+
+        //Verify Social Group Present or not
+        ip.isElementPresentByLINK(driver, sclGrp);
+    }
+
+    /**
+     * Join Social Group
      *
      * @param sclGrp
      */
@@ -75,6 +92,7 @@ public class SocialGroup extends BaseClass {
      * @param stdtSclGrpName
      */
     public void leaveSocialGroup(String stdtSclGrpName) {
+        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, "Leave Group");
         driver.findElement(By.xpath("//*[contains(text(),'Leave Group')]")).click();
@@ -96,6 +114,7 @@ public class SocialGroup extends BaseClass {
      * @param stdtSclGrpName
      */
     public void deleteSocialGroup(String stdtSclGrpName) {
+        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
         driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
         ip.isElementPresentByXPATH(driver, "//input[@id='sgroup_delete']");

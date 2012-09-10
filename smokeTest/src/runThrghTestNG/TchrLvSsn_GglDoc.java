@@ -13,19 +13,14 @@ import smoketest.Actions;
 
 /**
  *
- * Teacher LOGS in Post/Verify Text ,URL on own wall Post/Verify URL on Course
- * Wall Post/Verify URL on Stdt's wall - PENDING Create SocialGroup Find
- * SclGroup & Create LiveSession in SclGroup Create GoogleDoc in Working Group
+ * Teacher LOGS in, Find SclGroup & Create LiveSession in SclGroup,
+ * Create GoogleDoc in Working Group
  * Verify All Posts on Top & RecentNews Verify Activities & resource appear
  * items on activity report
  */
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
-public class TchrPosts_SclGrp_GglDoc extends BaseClass {
+public class TchrLvSsn_GglDoc extends BaseClass {
 
-    static String tchrTxtWallPost;
-    static String tchrUrlWallPost;
-    static String tchrUrlCrsPost;
-    static String tchrSclGrpName;
     static String gglDocName;
     Actions a = new Actions();
 
@@ -37,44 +32,7 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
      */
     @BeforeClass
     public void testTchrLgn() throws Exception {
-        //a.login("teacher0709-1905");
         a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
-    }
-
-    /**
-     * Post & verify Text,URL on own & Course Wall
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testTchrPostsOn_Wall_CrsWall() throws Exception {
-        a.navigateToMyWall();
-        tchrTxtWallPost = a.textPost("txtWallPost");
-        System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
-        Reporter.log("tchrTxtWallPost: " + tchrTxtWallPost);
-
-        a.navigateToMyWall();
-        tchrUrlWallPost = a.urlPost("urlWallPost");
-        System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
-        Reporter.log("tchrUrlWallPost: " + tchrUrlWallPost);
-
-        a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
-        tchrUrlCrsPost = a.urlPost("urlCrsPost");
-        System.out.println("tchrUrlCrsPost: " + tchrUrlCrsPost);
-        Reporter.log("tchrUrlCrsPost: " + tchrUrlCrsPost);
-    }
-
-    /**
-     * Create SocialGroup
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testTchrCrtSclGrp() throws Exception {
-        a.navigateToMySocialGroups();
-        tchrSclGrpName = a.createSocialGroup();
-        System.out.println("tchrSclGrpName: " + tchrSclGrpName);
-        Reporter.log("tchrSclGrpName: " + tchrSclGrpName);
     }
 
     /**
@@ -82,12 +40,12 @@ public class TchrPosts_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testTchrCrtSclGrp"})
+    @Test
     public void testTchrCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(tchrSclGrpName);
+        a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
         a.accessLvSsnWall();
-        a.createLiveSsn(tchrSclGrpName);
+        a.createLiveSsn(TchrPosts_SclGrp.tchrSclGrpName);
     }
 
     /**

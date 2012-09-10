@@ -302,15 +302,8 @@ public class Actions extends BaseClass {
      * @param sclGrp
      */
     public void findSocialGroup(String sclGrp) {
-        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
-
-        //Verify 'Find a Social Group' Text
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("headerTxt"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(sclGrp);
-        driver.findElement(By.xpath(av.getTokenValue("btnSrchSclGrp"))).click();
-
-        //Verify Social Group Present or not
-        ip.isElementPresentByLINK(driver, sclGrp);
+        SocialGroup sg = new SocialGroup();
+        sg.findSocialGroup(sclGrp);
     }
 
     /**
@@ -350,15 +343,15 @@ public class Actions extends BaseClass {
      * @param sclGrp
      */
     public void accessSclGrpWall(String sclGrp) {
-        ip.isElementPresentContainsTextByXPATH(driver, sclGrp);
+        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), sclGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + sclGrp + "')]")).click();
         String uprCS = sclGrp.substring(0, 1).toUpperCase();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
     }
 
     /**
-     * Verify 'n' number of posts on Top/Recent News Link
-     * Throw exception incase post is empty
+     * Verify 'n' number of posts on Top/Recent News Link Throw exception incase
+     * post is empty
      *
      * @param posts
      */
@@ -404,9 +397,8 @@ public class Actions extends BaseClass {
      * @param wrkngGrp
      */
     public void accessWrknGrp(String wrkngGrp) {
-        ip.isElementPresentByID(driver, av.getTokenValue("headerFrstWrkGrp"));
-        Utility.optionalClickByXPATH(driver, av.getTokenValue("btnShwMreRslts"));
-        ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
+        //Show all WorkingGroups
+        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
     }
 

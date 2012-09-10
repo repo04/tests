@@ -89,7 +89,6 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @Test(dependsOnMethods = {"testCrtWrkgnGrp", "testAsgnRole"})
     public void testAddMbrsToWrkngGrp() throws Exception {
         a.navigateToWorkingGroups();
-        System.out.println(wrkngGrpName);
         a.accessWrknGrp(wrkngGrpName);
         a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
     }
