@@ -8,10 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class User extends BaseClass {
@@ -58,21 +55,8 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
 
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
-
-        //Check and perform functionality if Element is present or not 
-        //Limitation - Webdriver throws 'NoSuchElementException' incase element is not found
-        Boolean wait = null;
-        try {
-            driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter")));
-            wait = false;
-        } catch (NoSuchElementException e) {
-            wait = true;
-        }
-
-        if (!wait) {
-            driver.findElement(By.xpath(av.getTokenValue("btnRmvUsrFilter"))).click();
-            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(av.getTokenValue("btnRmvUsrFilter"))));
-        }
+        
+        Utility.btnRmUsrFilter(driver, av.getTokenValue("btnRmvUsrFilter"));        
 
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
         driver.findElement(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))).sendKeys(userName);
