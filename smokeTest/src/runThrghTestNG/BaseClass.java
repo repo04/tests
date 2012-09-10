@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import smoketest.AccountValues;
 import smoketest.IsPresent;
 
@@ -19,11 +20,12 @@ public class BaseClass {
     
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest
-    public void setUp() throws Exception {
+    @Parameters(value="program")
+    public void setUp( String program ) throws Exception {
         driver = new FirefoxDriver();
 
         driver.manage().window().maximize();
-        av = new AccountValues("guAccountProperty");
+        av = new AccountValues(program);
         driver.get(av.getTokenValue("programURL"));
         ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
     }
