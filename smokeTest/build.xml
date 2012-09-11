@@ -48,9 +48,11 @@
     <target name="runTests" description="Running tests" >
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
-        <testng outputDir="${report.dir}" classpathref="libs">
-            <xmlfileset dir="${basedir}" includes="smokeTest.xml"/> 
-            <!--classfileset dir="${classes.dir}" includes="**/*.class" /-->
+        <testng outputDir="${report.dir}" classpathref="libs">  
+            <xmlfileset dir="${basedir}" includes="smokeTest.xml"/>
+            <!--xmlfileset dir="${basedir}" includes="2GU.xml"/>
+            <testng outputDir="${report.dir}" classpathref="libs" suitethreadpoolsize="2">  
+            <xmlfileset dir="${basedir}" includes="UNC.xml"/-->            
         </testng>
     </target>
 

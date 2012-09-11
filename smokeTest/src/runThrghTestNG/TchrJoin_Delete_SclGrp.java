@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
- * Teacher Logs in Find, Join & Leave Student's Social Group Deletes own Social
- * Group Verify All Posts on Top/Recent News
+ * Teacher Logs in Find, Join & Leave Student's Social Group, Deletes own Social
+ * Group
  */
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class TchrJoin_Delete_SclGrp extends BaseClass {
@@ -53,23 +53,11 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
     }
 
     /**
-     * Verify All Posts (tchrUrlWallPost,tchrUrlCrsPost,stdtUrlPostOnTchrSclGrp)
-     * on Top/Recent News
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testTchrVrfyStdtURLPsts_Top_RcntNews() throws Exception {
-        a.navigateToMyHome();
-        a.vrfyURLPstsAsTop_RcntNews(TchrPosts_SclGrp.tchrUrlWallPost, TchrPosts_SclGrp.tchrUrlCrsPost, StdtJnSclGrp_Post.stdtUrlPostOnTchrSclGrp);
-    }
-
-    /**
      * Deletes own Social Group
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testTchrVrfyStdtURLPsts_Top_RcntNews"}, alwaysRun = true)
+    @Test
     public void testTchrDeleteSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(TchrPosts_SclGrp.tchrSclGrpName);

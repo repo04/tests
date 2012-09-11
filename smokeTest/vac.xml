@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="2GU-Stgng-SmokeTest" preserve-order="true" parallel="false">
+   <parameter name="program" value="vacAccountProperty"/>
+   <!--test name="CrsGrpCrsCreation">
+        <classes>
+            <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
+        </classes>
+    </test-->
+    <test name="UsrCrtnAsgnRoleWrkngGrp">
+        <classes>
+            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
+        </classes>
+    </test>
+    <test name="TchrPostsSclGrp">
+        <classes>
+            <class name="runThrghTestNG.TchrPosts_SclGrp"/>
+        </classes>
+    </test>
+    <test name="StdtJnSclGrpPost">
+        <classes>
+            <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
+        </classes>
+    </test>    
+    <test name="TchrLvSsnGglDoc">
+        <classes>
+            <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
+        </classes>
+    </test>
+    <test name="StdtLvSsnSclGrpGglDoc">
+        <classes>
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>
+        </classes>
+    </test>
+    <test name="TchrJoinDeleteSclGrp">
+        <classes>
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
+        </classes>
+    </test>
+</suite>

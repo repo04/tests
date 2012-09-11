@@ -39,7 +39,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups="runLast")
+    @Test
     public void testStdtCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
@@ -52,7 +52,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups="runLast")
+    @Test
     public void testStdtCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         stdtSclGrpName = a.createSocialGroup();
@@ -65,7 +65,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups="runLast")
+    @Test
     public void testStdtVrfyWrkGrp_GglDoc() throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName, TchrLvSsn_GglDoc.gglDocName);
@@ -76,24 +76,12 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups="runLast")
+    @Test
     public void testStdtVrfyActivities() throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
         a.navigateToActvtyRprt();
         a.verifyActivities(Crs_GrpCrsCreation.frmActvyName, Crs_GrpCrsCreation.quizActvtyName, Crs_GrpCrsCreation.allInOneAsgnmntAvtvtyName, Crs_GrpCrsCreation.pageActvtyName);
-    }
-
-    /**
-     * Verify All Posts (stdtUrlPostOnTchrSclGrp, tchrUrlCrsPost) 
-     * on Top/Recent News
-     *
-     * @throws Exception
-     */
-    @Test(dependsOnGroups={"runLast"}, alwaysRun=true)
-    public void testStdtVrfyURLPsts_Top_RcntNews() throws Exception {
-        a.navigateToMyHome();
-        a.vrfyURLPstsAsTop_RcntNews(StdtJnSclGrp_Post.stdtUrlPostOnTchrSclGrp, TchrPosts_SclGrp.tchrUrlCrsPost);
     }
 
     /**
