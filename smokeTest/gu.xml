@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="2GU-Stgng-SmokeTest" preserve-order="true" parallel="false">
+<suite name="GU-Stgng-SmokeTest" preserve-order="true" parallel="false">
    <parameter name="program" value="guAccountProperty"/>
+   <parameter name="drvr" value="Firefox"/>
    <test name="CrsGrpCrsCreation">
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>

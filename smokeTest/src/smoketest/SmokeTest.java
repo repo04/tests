@@ -202,6 +202,21 @@ public class SmokeTest {
                ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
            }*/
     
+        /*Boolean wait;
+         try {
+         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(btnRmvUsrFilter)));
+         wait = true;
+         } catch (TimeoutException e) {
+         wait = false;
+         }
+
+         if (!wait) {
+         driver.findElement(By.xpath(btnRmvUsrFilter)).click();
+         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(btnRmvUsrFilter)));
+         }*/
+
+        
+    
 //
 //        a.navigateToMySocialGroups();
 //        tchrSclGrpName = a.createSocialGroups();

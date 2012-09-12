@@ -7,6 +7,7 @@ import java.util.Date;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
@@ -14,10 +15,19 @@ public class TestNGCustomReport extends TestListenerAdapter {
 
     @Override
     public void onTestFailure(ITestResult tr) {
-
         ScreenShot(tr);
     }
 
+    @Override
+    public void onStart(ITestContext testContext) {
+        System.out.print("Class: " + testContext.getName());
+    }
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        System.out.print("TestInvoking: " + result.getName());
+    }
+    
     //Capture screenshot on TestFailure
     public void ScreenShot(ITestResult result) {
 
@@ -28,19 +38,19 @@ public class TestNGCustomReport extends TestListenerAdapter {
 
             // Get the dir path
             File directory = new File(".");
-            
+
             //Get current date time with Date() to create unique file name
             SimpleDateFormat dateFormat = new SimpleDateFormat(
                     "ddMMMyy__hhmmaa");
             // get current date time with Date()
             Date date = new Date();
-            
 
-            if (!(new File(directory.getCanonicalPath() + File.separator + "reports"+ File.separator + "screenshots")).exists()) {
-                new File(directory.getCanonicalPath() + File.separator + "reports"+ File.separator + "screenshots").mkdir();
+
+            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots")).exists()) {
+                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots").mkdir();
             }
 
-            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports"+ File.separator + "screenshots"
+            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots"
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);
@@ -51,5 +61,5 @@ public class TestNGCustomReport extends TestListenerAdapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }    
 }

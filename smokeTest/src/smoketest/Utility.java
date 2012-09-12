@@ -26,13 +26,13 @@ public class Utility {
 
     /**
      * Find Group from whole list
-     * 
+     *
      * @param driver
      * @param path
      * @param grp
      */
     public static void optionalClickByLINK(WebDriver driver, String path, String grp) {
-       
+
         loopGrp:
         while (true) {
             try {
@@ -54,7 +54,7 @@ public class Utility {
 
     /**
      * Remove user to check for another filter
-     * 
+     *
      * @param driver
      * @param btnRmvUsrFilter
      */
@@ -62,17 +62,11 @@ public class Utility {
 
         //Check and perform functionality if Element is present or not 
         //Limitation - Webdriver throws 'NoSuchElementException' incase element is not found
-        Boolean wait;
         try {
-            driver.findElement(By.xpath(btnRmvUsrFilter));
-            wait = false;
+            driver.findElement(By.xpath(btnRmvUsrFilter)).click();
         } catch (NoSuchElementException e) {
-            wait = true;
         }
 
-        if (!wait) {
-            driver.findElement(By.xpath(btnRmvUsrFilter)).click();
-            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(btnRmvUsrFilter)));
-        }
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(btnRmvUsrFilter)));
     }
 }

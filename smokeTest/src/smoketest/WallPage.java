@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,7 +40,7 @@ public class WallPage extends BaseClass {
         this.textPost = av.getTokenValue(textPst) + "by" + user.substring(0, 7) + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         editableTxtArea.sendKeys(textPost);
         
-        // Switches back to default focus
+        //Switches back to default focus
         driver.switchTo().defaultContent();  
         btnWallShare.click();
         ip.isTextPresentByCSS(driver, av.getTokenValue("textWallCSS"), textPost);
@@ -75,7 +76,7 @@ public class WallPage extends BaseClass {
      */
     public void setUpWallPost() {
         textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
-        textArea.click();
+        textArea.sendKeys(Keys.ENTER);
         btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
     }
 
