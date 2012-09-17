@@ -5,7 +5,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class WorkingGroup extends BaseClass {
@@ -100,8 +104,22 @@ public class WorkingGroup extends BaseClass {
         
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtGglDoc"))).click();
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH"))).sendKeys("tutordemo2");
-        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH"))).sendKeys("Newuser@123");
+        WebElement gglUsrNm = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")));
+        WebElement gglPswd =  driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH")));
+        
+        //This is to verify gglUsrID field passes correct value 
+        value:
+        while (true) {
+            gglUsrNm.clear();
+            gglPswd.clear();
+            gglUsrNm.sendKeys("tutordemo2");
+            gglPswd.sendKeys("Newuser@123");
+            try {
+                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")), "tutordemo2"));
+                break value;
+            } catch (TimeoutException e) {
+            }
+        }
         driver.findElement(By.xpath(av.getTokenValue("fieldGglDocSignInXPATH"))).click();
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocGrntAccessXPATH"));
         driver.findElement(By.xpath(av.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();

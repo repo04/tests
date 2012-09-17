@@ -4,6 +4,7 @@
  */
 package runThrghTestNG;
 
+import java.io.File;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -23,15 +24,18 @@ public class BaseClass {
     @BeforeTest
     @Parameters({"program", "drvr"})
     public void setUp(String program, String drvr) throws Exception {
-
+        
+        av = new AccountValues(program);
+        File directory = new File(".");
         switch (drvr) {
             case "Chrome":
+                System.setProperty("webdriver.chrome.driver", directory.getCanonicalPath() + File.separator + "chromedriver.exe");
                 driver = new ChromeDriver();
+                break;
             default:
                 driver = new FirefoxDriver();
         }
-        driver.manage().window().maximize();
-        av = new AccountValues(program);
+        driver.manage().window().maximize();   
         driver.get(av.getTokenValue("programURL"));
         ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
     }

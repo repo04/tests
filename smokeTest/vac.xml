@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="VAC-Stgng-SmokeTest" preserve-order="true" parallel="false">
    <parameter name="program" value="vacAccountProperty"/>
-   <parameter name="drvr" value="Firefox"/>
+   <parameter name="drvr" value="Chrome"/>
    <test name="CrsGrpCrsCreation">
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>

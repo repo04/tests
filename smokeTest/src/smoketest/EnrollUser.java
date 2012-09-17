@@ -21,7 +21,7 @@ public class EnrollUser extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
 
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnEnrlUsrs"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnEnrlUsrs"))));
         driver.findElement(By.xpath(av.getTokenValue("btnEnrlUsrs"))).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("lblEnrlmntOptnsXPATH"), "Enrolment options");
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldSrchUsrXPATH"));
@@ -71,6 +71,8 @@ public class EnrollUser extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrsLnkVrfyUsrRoleCrsXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAcntsLnkUsrRoleCrsXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("lftPnlBrwsUsrVrfyUsrRoleCrsXPATH"))).click();
+        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))));
 
         Utility.btnRmUsrFilter(driver, av.getTokenValue("btnRmvUsrFilter"));
 

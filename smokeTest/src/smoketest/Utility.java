@@ -60,13 +60,17 @@ public class Utility {
      */
     public static void btnRmUsrFilter(WebDriver driver, String btnRmvUsrFilter) {
 
-        //Check and perform functionality if Element is present or not 
-        //Limitation - Webdriver throws 'NoSuchElementException' incase element is not found
         try {
-            driver.findElement(By.xpath(btnRmvUsrFilter)).click();
-        } catch (NoSuchElementException e) {
+            driver.findElement(By.name("filter[realname][0]")).click();
+            driver.findElement(By.id("id_removeselected")).click();
+        } catch (Exception e) {
+            System.out.println("button not found:");
         }
 
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(btnRmvUsrFilter)));
+    }
+
+    public static void illegalStateException(String msg) {
+        throw new IllegalStateException(msg);
     }
 }
