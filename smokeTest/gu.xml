@@ -3,6 +3,7 @@
 <suite name="GU-Stgng-SmokeTest" preserve-order="true" parallel="false">
    <parameter name="program" value="guAccountProperty"/>
    <parameter name="drvr" value="Chrome"/>
+   <parameter name="os" value="Linux32"/>
    <test name="CrsGrpCrsCreation">
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
