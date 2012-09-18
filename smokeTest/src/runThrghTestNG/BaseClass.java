@@ -57,8 +57,8 @@ public class BaseClass {
             default:
                 driver = new FirefoxDriver();
         }
-        System.out.println("max");
         if (os.equalsIgnoreCase("win")) {
+            System.out.println("max");
             driver.manage().window().maximize();
         }
         driver.get(av.getTokenValue("programURL"));
