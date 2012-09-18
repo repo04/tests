@@ -23,27 +23,32 @@ public class BaseClass {
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest
     @Parameters({"program", "drvr", "os"})
-    public void setUp(String program, String os, String drvr) throws Exception {
+    public void setUp(String program, String drvr, String os) throws Exception {
 
         av = new AccountValues(program);
-        File directory = new File(".");
         switch (drvr) {
-            case "Chrome":
+            case "chrome":
+                File directory = new File(".");
+
                 os:
                 switch (os) {
-                    case "Linux32":
+                    case "linux32":
+                        System.out.println("linux32");
                         System.setProperty("webdriver.chrome.driver", directory.getCanonicalPath() + File.separator + "lib" + File.separator + "chromedriver_linux32"
-                                + File.separator + "chromedriver.exe");
+                                + File.separator + "chromedriver");
                         break os;
-                    case "Linux64":
+                    case "linux64":
+                        System.out.println("linux64");
                         System.setProperty("webdriver.chrome.driver", directory.getCanonicalPath() + File.separator + "lib" + File.separator + "chromedriver_linux64"
-                                + File.separator + "chromedriver.exe");
+                                + File.separator + "chromedriver");
                         break os;
-                    case "Mac":
+                    case "mac":
+                        System.out.println("mac");
                         System.setProperty("webdriver.chrome.driver", directory.getCanonicalPath() + File.separator + "lib" + File.separator + "chromedriver_mac"
                                 + File.separator + "chromedriver.exe");
                         break os;
                     default:
+                        System.out.println("win");
                         System.setProperty("webdriver.chrome.driver", directory.getCanonicalPath() + File.separator + "lib" + File.separator + "chromedriver_win"
                                 + File.separator + "chromedriver.exe");
                 }
@@ -52,7 +57,10 @@ public class BaseClass {
             default:
                 driver = new FirefoxDriver();
         }
-        driver.manage().window().maximize();
+        System.out.println("max");
+        if (os.equalsIgnoreCase("win")) {
+            driver.manage().window().maximize();
+        }
         driver.get(av.getTokenValue("programURL"));
         ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
     }

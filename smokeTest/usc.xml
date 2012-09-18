@@ -2,8 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="USC-Stgng-SmokeTest" preserve-order="true" parallel="false">
    <parameter name="program" value="uscAccountProperty"/>
-   <parameter name="drvr" value="Chrome"/>
-   <parameter name="os" value="Linux32"/>
    <test name="CrsGrpCrsCreation">
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>

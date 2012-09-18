@@ -4,7 +4,15 @@
     <property name="classes.dir" value="bin" />
     <property name="src.dir" value="src" />
     <property name="report.dir" value="reports" />
-    <property name="browser" value="C:/Program Files/Mozilla Firefox/firefox.exe"/>
+    <property name="browser" value="C:/Program Files/Mozilla Firefox/firefox.exe"/>  
+    
+    <property name="drvr" value="${antBrwsr}"/>
+    <property name="os" value="${antOS}"/>
+	
+    <propertyset id="propset">
+        <propertyref name="drvr"/>
+        <propertyref name="os"/>
+    </propertyset>  
     
     <path id="libs">
         <fileset dir="lib">
@@ -17,7 +25,7 @@
         <antcall target="init"/>
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
-        <antcall target="runTests"/>
+        <antcall target="runTests"/>        
         <antcall target="openReport"/>
     </target>
 
@@ -48,11 +56,12 @@
     <target name="runTests" description="Running tests" >
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
-        <testng outputDir="${report.dir}" classpathref="libs">  
+        <testng outputDir="${report.dir}" classpathref="libs" >  
             <xmlfileset dir="${basedir}" includes="smokeTest.xml"/>
+            <propertyset refid="propset"/>
             <!--xmlfileset dir="${basedir}" includes="2GU.xml"/>
             <testng outputDir="${report.dir}" classpathref="libs" suitethreadpoolsize="2">  
-            <xmlfileset dir="${basedir}" includes="UNC.xml"/-->            
+            <xmlfileset dir="${basedir}" includes="UNC.xml" delegatecommandsystemproperties="true"/-->            
         </testng>
     </target>
 
