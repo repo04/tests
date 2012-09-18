@@ -45,7 +45,7 @@ public class BaseClass {
                     case "mac":
                         System.out.println("mac");
                         System.setProperty("webdriver.chrome.driver", directory.getCanonicalPath() + File.separator + "lib" + File.separator + "chromedriver_mac"
-                                + File.separator + "chromedriver.exe");
+                                + File.separator + "chromedriver");
                         break os;
                     default:
                         System.out.println("win");
