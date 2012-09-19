@@ -7,7 +7,6 @@ package runThrghTestNG;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -17,7 +16,6 @@ import smoketest.Actions;
  * Verify Google Doc Verify All Posts on Top/Recent News Verify Activities &
  * resource items appear in activity report
  */
-@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
     static String stdtSclGrpName;

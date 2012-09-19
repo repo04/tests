@@ -7,7 +7,6 @@ package runThrghTestNG;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -18,7 +17,6 @@ import smoketest.Actions;
  * Verify All Posts on Top & RecentNews Verify Activities & resource appear
  * items on activity report
  */
-@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class TchrLvSsn_GglDoc extends BaseClass {
 
     static String gglDocName;

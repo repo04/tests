@@ -7,7 +7,6 @@ package runThrghTestNG;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -16,7 +15,6 @@ import smoketest.Actions;
  * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
  * Logs out
  */
-@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class Crs_GrpCrsCreation extends BaseClass {
 
     static String crsName;

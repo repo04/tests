@@ -7,7 +7,6 @@ package runThrghTestNG;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -15,7 +14,6 @@ import smoketest.Actions;
  * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
  * Teacher/Student roles Create Working Group & add users as members Logs out
  */
-@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     static String tchrUsrName;

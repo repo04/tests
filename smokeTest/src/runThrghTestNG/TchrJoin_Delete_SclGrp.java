@@ -6,7 +6,6 @@ package runThrghTestNG;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -14,7 +13,6 @@ import smoketest.Actions;
  * Teacher Logs in Find, Join & Leave Student's Social Group, Deletes own Social
  * Group
  */
-@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class TchrJoin_Delete_SclGrp extends BaseClass {
 
     Actions a = new Actions();

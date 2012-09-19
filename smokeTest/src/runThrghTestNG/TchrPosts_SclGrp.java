@@ -7,7 +7,6 @@ package runThrghTestNG;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -17,7 +16,6 @@ import smoketest.Actions;
  * Creates Social Group
  * 
  */
-@Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class TchrPosts_SclGrp extends BaseClass{
 
     static String tchrTxtWallPost;
