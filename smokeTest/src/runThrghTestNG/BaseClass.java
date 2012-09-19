@@ -51,6 +51,7 @@ public class BaseClass {
                 }
                 driver = new ChromeDriver();
                 Reporter.log("Browser: " + drvr);
+                Reporter.log("OS:" + os);
                 break;
             default:
                 driver = new FirefoxDriver();
