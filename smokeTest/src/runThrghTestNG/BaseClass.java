@@ -5,9 +5,12 @@
 package runThrghTestNG;
 
 import java.io.File;
+import java.util.Arrays;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -23,13 +26,14 @@ public class BaseClass {
     public static AccountValues av;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
+    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
     String chromDrvrPath;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest
     @Parameters({"program", "drvr", "os"})
     public void setUp(String program, String drvr, String os) throws Exception {
-
+        
         av = new AccountValues(program);
         switch (drvr) {
             case "chrome":
@@ -49,6 +53,10 @@ public class BaseClass {
                     default:
                         Utility.illegalStateException("Invalid OS paramter passed, expected values {linux32||linux64||mac||win}");
                 }
+                //capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
+                //driver = new ChromeDriver(capabilities);
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("start-maxmized");
                 driver = new ChromeDriver();
                 Reporter.log("Browser: " + drvr);
                 Reporter.log("OS:" + os);
