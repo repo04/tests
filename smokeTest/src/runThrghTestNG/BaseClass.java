@@ -5,7 +5,7 @@
 package runThrghTestNG;
 
 import java.io.File;
-import java.util.Arrays;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -33,7 +33,7 @@ public class BaseClass {
     @BeforeTest
     @Parameters({"program", "drvr", "os"})
     public void setUp(String program, String drvr, String os) throws Exception {
-        
+
         av = new AccountValues(program);
         switch (drvr) {
             case "chrome":
@@ -51,25 +51,28 @@ public class BaseClass {
                         System.setProperty("webdriver.chrome.driver", chromDrvrPath + "chromedriver_" + os + File.separator + "chromedriver.exe");
                         break os;
                     default:
-                        Utility.illegalStateException("Invalid OS paramter passed, expected values {linux32||linux64||mac||win}");
+                        Utility.illegalStateException("Invalid OS paramter, expected values 'linux32||linux64||mac||win'");
                 }
-                //capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
-                //driver = new ChromeDriver(capabilities);
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("start-maxmized");
-                driver = new ChromeDriver();
+                
+                //ChromeOptions feature does not work on 'MAC' OS
+                if (os.equalsIgnoreCase("mac")) {
+                    driver = new ChromeDriver();
+                    ((JavascriptExecutor) driver).executeScript("window.open('','chromeBrwsr','width=1280,height=800,top=0,left‌​=0')");
+                    driver.close();
+                    driver.switchTo().window("chromeBrwsr");
+                } else {
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--start-maximized");
+                    driver = new ChromeDriver(options);
+                }
                 Reporter.log("Browser: " + drvr);
-                Reporter.log("OS:" + os);
+                Reporter.log("OS: " + os);
                 break;
             default:
                 driver = new FirefoxDriver();
+                driver.manage().window().maximize();
                 Reporter.log("Browser: firefox");
         }
-        if (os.equalsIgnoreCase("win") || os.equalsIgnoreCase("${antOS}")) {
-            driver.manage().window().maximize();
-            Reporter.log("OS: windows");
-        }
-        
         driver.get(av.getTokenValue("programURL"));
         ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
     }
