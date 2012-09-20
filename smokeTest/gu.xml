@@ -7,7 +7,7 @@
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
         </classes>
     </test>
-    <!--test name="UsrCrtnAsgnRoleWrkngGrp">
+    <test name="UsrCrtnAsgnRoleWrkngGrp">
         <classes>
             <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
         </classes>
@@ -36,5 +36,5 @@
         <classes>
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
         </classes>
-    </test-->
+    </test>
 </suite>

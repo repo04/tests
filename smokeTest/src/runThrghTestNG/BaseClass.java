@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -26,7 +25,6 @@ public class BaseClass {
     public static AccountValues av;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
-    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
     String chromDrvrPath;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
