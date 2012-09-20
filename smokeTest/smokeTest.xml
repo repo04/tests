@@ -6,4 +6,5 @@
     <suite-files><suite-file path="./usc.xml"/></suite-files>
     <suite-files><suite-file path="./vac.xml"/></suite-files>
     <suite-files><suite-file path="./llm.xml"/></suite-files>   
+    <suite-files><suite-file path="./mpa.xml"/></suite-files>
 </suite>
