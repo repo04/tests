@@ -70,7 +70,24 @@ public class Utility {
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(btnRmvUsrFilter)));
     }
 
+    /**
+     * Throw IllegalStateException with user message
+     * 
+     * @param msg 
+     */
     public static void illegalStateException(String msg) {
         throw new IllegalStateException(msg);
+    }
+
+    /**
+     * Click using Webdriver AdavnceUserInterations API
+     * 
+     * @param driver
+     * @param path 
+     */
+    public static void actionBuilderClick(WebDriver driver, String path) {
+        WebElement elm = driver.findElement(By.xpath(path));
+        org.openqa.selenium.interactions.Actions builder = new org.openqa.selenium.interactions.Actions(driver);
+        builder.click(elm).perform();
     }
 }

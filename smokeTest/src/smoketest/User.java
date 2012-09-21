@@ -48,15 +48,20 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("fieldPswdXPATH"))).sendKeys("Tech@123");
         driver.findElement(By.xpath(av.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName + "fstNm");
         driver.findElement(By.xpath(av.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName + "sndNm");
-        driver.findElement(By.xpath(av.getTokenValue("fieldEmailXPATH"))).sendKeys(userName + "@gmail.com");
+        if (user.equalsIgnoreCase("teacher")) {
+            driver.findElement(By.xpath(av.getTokenValue("fieldEmailXPATH"))).sendKeys("2torteacher+"+userName.substring(7) + "@gmail.com");
+        }
+        else{
+            driver.findElement(By.xpath(av.getTokenValue("fieldEmailXPATH"))).sendKeys(userName + "@gmail.com");
+        }
         driver.findElement(By.xpath(av.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctCntryXPATH")))).selectByValue("US");
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctTimeZnXPATH")))).selectByValue("America/New_York");
         driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
 
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
-        
-        Utility.btnRmUsrFilter(driver, av.getTokenValue("btnRmvUsrFilter"));        
+
+        Utility.btnRmUsrFilter(driver, av.getTokenValue("btnRmvUsrFilter"));
 
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
         driver.findElement(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))).sendKeys(userName);

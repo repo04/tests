@@ -19,6 +19,7 @@ public class WallPage extends BaseClass {
     WebElement btnWallShare;
     String textPost = null;
     String urlPost = null;
+    String cmntPost = null;
 
     /**
      * Post Text on Wall
@@ -66,12 +67,11 @@ public class WallPage extends BaseClass {
         WebElement linkBtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkBtnXPATH"))));
         linkBtn.click();
         WebElement linkTextBox = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div/input[3]")));
-        org.openqa.selenium.interactions.Actions builder = new org.openqa.selenium.interactions.Actions(driver);
-                        
+        
         int i = 1;
         value:
         while (i < 6) {
-            builder.click(linkTextBox).perform();
+            Utility.actionBuilderClick(driver, "//div/input[3]");
             linkTextBox.sendKeys(urlPost);
             if (i < 5) {
                 try {
@@ -81,13 +81,29 @@ public class WallPage extends BaseClass {
                     System.out.println("i: " + i);
                     i++;
                 }
-            }
-            else{
+            } else {
                 Utility.illegalStateException("Unable to get focus on URL Textboxfield after multiple tries also");
             }
         }
         btnWallShare.click();
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlPost);
+    }
+
+    /**
+     * Comment on Tchr's Course post
+     *
+     * @param urlCrsPost
+     * @param txtCmntOnTchrCrsPst
+     */
+    public void textCmntPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
+        ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlCrsPost);
+        driver.findElement(By.xpath("//a/label")).click();
+        WebElement cmntTxtArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//li/div/div/div/textarea")));
+        this.cmntPost = av.getTokenValue(txtCmntOnTchrCrsPst) + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        cmntTxtArea.click();
+        cmntTxtArea.sendKeys(cmntPost);
+        driver.findElement(By.xpath("//div[2]/a[2]")).click();
+        ip.isTextPresentByXPATH(driver, "//div[3]/div[3]", cmntPost);
     }
 
     /**
@@ -114,5 +130,12 @@ public class WallPage extends BaseClass {
      */
     public String getURLPost() {
         return this.urlPost;
+    }
+
+    /**
+     * @return CommentOnTchrCrsPost
+     */
+    public String getTextCmntPost() {
+        return this.cmntPost;
     }
 }

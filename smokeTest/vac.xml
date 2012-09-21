@@ -37,4 +37,9 @@
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
         </classes>
     </test>
+    <test name="VrfyEml_Ntfctn">
+        <classes>
+            <class name="runThrghTestNG.VrfyEml_Ntfctn"/>
+        </classes>
+    </test>
 </suite>

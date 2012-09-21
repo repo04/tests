@@ -3,7 +3,7 @@
 <suite name="SmokeTest-Staging" parallel="false" preserve-order="true">
     <suite-files><suite-file path="./gu.xml"/></suite-files>
     <suite-files><suite-file path="./unc.xml"/></suite-files>   
-    <suite-files><suite-file path="./usc.xml"/></suite-files>
+    <!--suite-files><suite-file path="./usc.xml"/></suite-files>
     <suite-files><suite-file path="./vac.xml"/></suite-files>
-    <suite-files><suite-file path="./llm.xml"/></suite-files>   
+    <suite-files><suite-file path="./llm.xml"/></suite-files-->   
 </suite>

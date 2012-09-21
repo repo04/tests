@@ -11,14 +11,14 @@ import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
- * Student logs in,
- * Find & Join Teacher's Social Group,
- * Post/Verify URL on Teacher's SocialGroup,
- *  
+ * Student logs in, Find & Join Teacher's Social Group, Post/Verify URL on
+ * Teacher's SocialGroup,
+ *
  */
-public class StdtJnSclGrp_Post extends BaseClass{
+public class StdtJnSclGrp_Post extends BaseClass {
 
     static String stdtUrlPostOnTchrSclGrp;
+    static String stdtTxtCmntOnTchrCrsPost;
     Actions a = new Actions();
 
     /**
@@ -56,6 +56,19 @@ public class StdtJnSclGrp_Post extends BaseClass{
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
         System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
         Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
+    }
+
+    /**
+     * Add Comment on Teacher's CoursePost
+     * 
+     * @throws Exception 
+     */
+    @Test(dependsOnMethods = {"testStdtPostURLOnTchrSclGrp"}, alwaysRun = true)
+    public void testStdtCmntOnTchrCrsPost() throws Exception {
+        a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
+        stdtTxtCmntOnTchrCrsPost = a.textCmntPost(TchrPosts_SclGrp.tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
+        System.out.println("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
+        Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
     }
 
     /**

@@ -42,6 +42,19 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * Add comment on Teacher's course post
+     *
+     * @param urlCrsPost
+     * @param txtCmntOnTchrCrsPst
+     * @return
+     */
+    public String textCmntPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
+        WallPage wp = new WallPage();
+        wp.textCmntPost(urlCrsPost, txtCmntOnTchrCrsPst);
+        return wp.getTextCmntPost();
+    }
+
+    /**
      * Create LiveSession in
      *
      * @param sclGrpName
