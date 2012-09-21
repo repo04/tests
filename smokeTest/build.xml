@@ -4,10 +4,21 @@
     <property name="classes.dir" value="bin" />
     <property name="src.dir" value="src" />
     <property name="report.dir" value="reports" />
+    <!--property name="browser" value="/Applications/Firefox.app"/-->
     <property name="browser" value="C:/Program Files/Mozilla Firefox/firefox.exe"/>  
     
     <property name="drvr" value="${antBrwsr}"/>
     <property name="os" value="${antOS}"/>
+    
+    <target name="setupFF">
+        <property name="drvr" value="firefox"/>
+        <property name="os" value="mac"/>
+    </target>
+    
+    <target name="setupChrm">
+        <property name="drvr" value="chrome"/>
+        <property name="os" value="mac"/>
+    </target>
 	
     <propertyset id="propset">
         <propertyref name="drvr"/>
@@ -27,6 +38,16 @@
         <antcall target="copy-resources"/>
         <antcall target="runTests"/>        
         <antcall target="openReport"/>
+    </target>
+    
+    <target name="runDemo">
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="copy-resources"/>
+        <antcall target="setupFF"/>    
+        <antcall target="runDemoTests"/>
+        <antcall target="setupChrm"/>
+        <antcall target="runDemoTests"/>
     </target>
 
     <!-- Delete old data and create new directories -->
@@ -51,6 +72,23 @@
             </fileset>
         </copy>
     </target>
+
+    <target name="runDemoTests" description="Running tests" >
+        <echo>Running Demo...</echo>
+        <antcall target="demo"/>
+    </target>
+    
+    <target name="demo">
+        <echo>Running Tests...</echo>
+        <taskdef resource="testngtasks" classpathref="libs"/>
+        <testng outputDir="${report.dir}" classpathref="libs" >  
+            <xmlfileset dir="${basedir}" includes="smokeTest.xml"/>
+            <propertyset refid="propset"/>
+            <!--xmlfileset dir="${basedir}" includes="2GU.xml"/>
+            <testng outputDir="${report.dir}" classpathref="libs" suitethreadpoolsize="2">  
+            <xmlfileset dir="${basedir}" includes="UNC.xml" delegatecommandsystemproperties="true"/-->            
+        </testng>
+    </target>    
     
     <!-- Runs the file and generates Reportng report -->
     <target name="runTests" description="Running tests" >
