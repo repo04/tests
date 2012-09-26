@@ -27,7 +27,7 @@ public class TestNGCustomReport extends TestListenerAdapter {
     public void onTestStart(ITestResult result) {
         System.out.print("TestInvoking: " + result.getName());
     }
-    
+
     //Capture screenshot on TestFailure
     public void ScreenShot(ITestResult result) {
 
@@ -44,13 +44,21 @@ public class TestNGCustomReport extends TestListenerAdapter {
                     "ddMMMyy__hhmmaa");
             // get current date time with Date()
             Date date = new Date();
+            String rprtPrgm;
 
+            if(BaseClass.program.substring(0, 3).equalsIgnoreCase("guA"))
+            {
+                rprtPrgm = "gu"; 
+            }
+            else{
+                rprtPrgm = BaseClass.program.substring(0, 3); 
+            }            
 
-            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots")).exists()) {
-                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots").mkdir();
+            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.drvr + File.separator + "screenshots")).exists()) {
+                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.drvr + File.separator + "screenshots").mkdir();
             }
 
-            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots"
+            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.drvr + File.separator + "screenshots"
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);
@@ -61,5 +69,5 @@ public class TestNGCustomReport extends TestListenerAdapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }    
+    }
 }

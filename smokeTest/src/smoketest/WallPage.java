@@ -82,7 +82,7 @@ public class WallPage extends BaseClass {
                     i++;
                 }
             } else {
-                Utility.illegalStateException("Unable to get focus on URL Textboxfield after multiple tries also");
+                Utility.illegalStateException("Selenium is unable to get focus on URL Textboxfield after multiple tries also, this is an automation limitation");
             }
         }
         btnWallShare.click();
@@ -115,7 +115,11 @@ public class WallPage extends BaseClass {
             driver.switchTo().window(handle);
         }
         textArea.sendKeys(Keys.ENTER);
-        btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
+        try {
+            btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
+        }catch(TimeoutException e){
+            Utility.illegalStateException("Selenium is unable to click on TextArea, this is an automation limitation");
+        }
     }
 
     /**

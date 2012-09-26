@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -26,7 +25,8 @@ public class BaseClass {
     public static AccountValues av;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
-    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+    public static String program;
+    public static String drvr;
     String chromDrvrPath;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
@@ -34,7 +34,12 @@ public class BaseClass {
     @Parameters({"program", "drvr", "os"})
     public void setUp(String program, String drvr, String os) throws Exception {
 
-        av = new AccountValues(program);
+        this.program = program;
+        this.drvr = drvr;
+        av = new AccountValues(this.program);
+        System.out.println("program: " + this.program);
+        System.out.println("drvr: " + this.drvr);
+        System.out.println("os: " + os);
         switch (drvr) {
             case "chrome":
                 File directory = new File(".");
@@ -45,15 +50,17 @@ public class BaseClass {
                     case "linux32":
                     case "linux64":
                     case "mac":
+                        System.out.println("initialize OS: " + os);
                         System.setProperty("webdriver.chrome.driver", chromDrvrPath + "chromedriver_" + os + File.separator + "chromedriver");
                         break os;
                     case "win":
+                        System.out.println("initialize  OS: " + os);
                         System.setProperty("webdriver.chrome.driver", chromDrvrPath + "chromedriver_" + os + File.separator + "chromedriver.exe");
                         break os;
                     default:
                         Utility.illegalStateException("Invalid OS paramter, expected values 'linux32||linux64||mac||win'");
                 }
-                
+
                 //ChromeOptions feature does not work on 'MAC' OS
                 if (os.equalsIgnoreCase("mac")) {
                     driver = new ChromeDriver();
