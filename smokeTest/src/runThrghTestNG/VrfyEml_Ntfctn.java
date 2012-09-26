@@ -60,7 +60,8 @@ public class VrfyEml_Ntfctn extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp", "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp",
+        "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost", "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp"})
     public void testVerifyEmail() throws Exception {
 
         stdtFllNm = UsrCrtn_AsgnRole_WrkngGrp.stdtUsrName.substring(0, 1).toUpperCase() + UsrCrtn_AsgnRole_WrkngGrp.stdtUsrName.substring(1);

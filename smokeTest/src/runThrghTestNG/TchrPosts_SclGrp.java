@@ -11,12 +11,10 @@ import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
- * Teacher Login, 
- * Posts on Wall & Course Wall,
- * Creates Social Group
- * 
+ * Teacher Login, Posts on Wall & Course Wall, Creates Social Group
+ *
  */
-public class TchrPosts_SclGrp extends BaseClass{
+public class TchrPosts_SclGrp extends BaseClass {
 
     static String tchrTxtWallPost;
     static String tchrUrlWallPost;
@@ -40,7 +38,7 @@ public class TchrPosts_SclGrp extends BaseClass{
      *
      * @throws Exception
      */
-    @Test
+    @Test(dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation"})
     public void testTchrPostsOn_Wall_CrsWall() throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");

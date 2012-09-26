@@ -37,7 +37,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn"})
     public void testStdtCrtLvSsn() throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
@@ -63,7 +63,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtGglDoc"})
     public void testStdtVrfyWrkGrp_GglDoc() throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName, TchrLvSsn_GglDoc.gglDocName);
@@ -74,7 +74,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole","runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
     public void testStdtVrfyActivities() throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);

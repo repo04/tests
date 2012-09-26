@@ -37,7 +37,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
     public void testStdtJoinsTchrSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(TchrPosts_SclGrp.tchrSclGrpName);
@@ -55,15 +55,15 @@ public class StdtJnSclGrp_Post extends BaseClass {
         a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
         System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
-        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
+        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);        
     }
 
     /**
      * Add Comment on Teacher's CoursePost
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
-    @Test(dependsOnMethods = {"testStdtPostURLOnTchrSclGrp"}, alwaysRun = true)
+    @Test(dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrPostsOn_Wall_CrsWall"})
     public void testStdtCmntOnTchrCrsPost() throws Exception {
         a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
         stdtTxtCmntOnTchrCrsPost = a.textCmntPost(TchrPosts_SclGrp.tchrUrlCrsPost, "txtCmntOnTchrCrsPst");

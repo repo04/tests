@@ -55,7 +55,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testUsrCrtn"})
+    @Test(dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation", "testUsrCrtn"})
     public void testAsgnRole() throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
@@ -84,7 +84,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testCrtWrkgnGrp", "testAsgnRole"})
+    @Test(dependsOnMethods = {"testCrtWrkgnGrp", "testUsrCrtn"})
     public void testAddMbrsToWrkngGrp() throws Exception {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
