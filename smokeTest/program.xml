@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Staging-SmokeSuite">
-    <test name="Staging-SmokeTest" preserve-order="true" parallel="false">
+    <!--test name="Staging-SmokeTest" preserve-order="true" parallel="false">
+        <parameter name="tstNm" value="SmokeTest"/>
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
             <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
@@ -11,6 +12,16 @@
             <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.VrfyEml_Ntfctn"/>
+        </classes>
+    </test-->
+    <test name="Staging-CriticalTest" preserve-order="true" parallel="false">
+        <parameter name="tstNm" value="CriticalTest"/>
+        <parameter name="crsNam" value="Somesh"/>
+        <parameter name="grpCrsNam" value="Bansal"/>
+        <classes>
+            <class name="runThrghTestNG.Crs_GrpCrsCreation">
+                <methods><exclude name="testCrsGrpCrs_Creation"/></methods>
+            </class>                
         </classes>
     </test>    
 </suite>

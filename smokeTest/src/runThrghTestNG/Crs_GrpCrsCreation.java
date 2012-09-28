@@ -4,9 +4,12 @@
  */
 package runThrghTestNG;
 
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -24,6 +27,10 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String allInOneAsgnmntAvtvtyName;
     static String pageActvtyName;
     Actions a = new Actions();
+    public String xyz;
+    String[][] tabArray=null;
+
+    
 
     /**
      * The annotated method will be run before the first test method in the
@@ -31,39 +38,82 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
-    public void testCntntAdminLgn() throws Exception {
+    /*@BeforeClass
+    @Parameters({"abc"})
+    public void testCntntAdminLgn(String xyz) throws Exception {
+
+        this.xyz = xyz;
         a.login("contentAdmin");
+    }*/
+    
+    @Parameters({"tstNm"})
+    @BeforeClass
+    public void testCntntAdminLgn(String TN) throws Exception {
+            this.xyz = TN; 
+            System.out.println("testName: " + TN);
+            a.login("contentAdmin");
     }
+    
+    
+    @DataProvider(name = "DP")
+    public Object[][] createData(ITestContext context) throws Exception {        
+        
+        if(xyz.equalsIgnoreCase("SmokeTest"))
+        {
+            System.out.println("Inside testName: " + xyz);
+            Object[][] abc = createData1();
+            return(abc);   
+        }else{
+            System.out.println("Inside testName: " + xyz);
+            Object[][] def = createData2(context);
+            return(def);
+        }       
+    }
+    
+    /*@DataProvider(name = "DP1")
+    public Object[][] createData() throws Exception {
+        Object[][] retObjArr=getCrsArray();
+        return(retObjArr);        
+    }*/
+    
+    /*@DataProvider(name = "DP2")
+    public Object[][] createData(ITestContext context) throws Exception {
+        return new Object[][]{{context.getCurrentXmlTest().getParameter("crsNam"), context.getCurrentXmlTest().getParameter("grpCrsNam")}};
+    }*/
 
     /**
      * Create - Course & GrpCourse
      *
      * @throws Exception
      */
-    @Test
+    /*@Test
     public void testCrsGrpCrs_Creation() throws Exception {
+        
+        tabArray=new String[1][2];
 
         a.navigateToMyCourse();
-        crsName = a.createCourse();
-        System.out.println("crsName: " + crsName);
-        Reporter.log("crsName: " + crsName);
+        tabArray[0][0] = a.createCourse();
+        System.out.println("crsName: " + tabArray[0][0]);
+        Reporter.log("crsName: " + tabArray[0][0]);
 
         a.navigateToMyCourse();
-        grpCrsName = a.createGrpCourse(crsName);
-        System.out.println("grpCrsName: " + grpCrsName);
-        Reporter.log("grpCrsName: " + grpCrsName);
-    }
+        tabArray[0][1] = a.createGrpCourse(tabArray[0][0]);
+        System.out.println("grpCrsName: " + tabArray[0][1]);
+        Reporter.log("grpCrsName: " + tabArray[0][1]);
+    }*/
 
     /**
      * Create - Activities like Forum, Quiz, All In One Assignment & Page
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testCrsGrpCrs_Creation"})
-    public void testActivities_Creation() throws Exception {
-
-        a.navigateToMyCourse();
+    @Test(dataProvider = "DP", dependsOnMethods = {"testCrsGrpCrs_Creation"}, ignoreMissingDependencies=true)
+    public void testActivities_Creation(String c, String d) throws Exception { 
+        
+        System.out.println("crsName: " + c);
+        System.out.println("grpCrsName: " + d);
+        
+        /*a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         frmActvyName = a.createForumActivity();
         System.out.println("frmActvyName: " + frmActvyName);
@@ -85,7 +135,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.selectGrpCourse(grpCrsName);
         pageActvtyName = a.createPageResource();
         System.out.println("pageActvtyName: " + pageActvtyName);
-        Reporter.log("pageActvtyName: " + pageActvtyName);
+        Reporter.log("pageActvtyName: " + pageActvtyName);*/
     }
 
     /**
@@ -97,5 +147,18 @@ public class Crs_GrpCrsCreation extends BaseClass {
     @AfterClass
     public void testCntntAdminLogOut() throws Exception {
         a.logOut();
+    }
+
+    private Object[][] getCrsArray() {
+        return(tabArray);  
+    }
+
+    private Object[][] createData1() {
+        Object[][] retObjArr=getCrsArray();
+        return(retObjArr);
+    }    
+
+    private Object[][] createData2(ITestContext context) {
+        return new Object[][]{{context.getCurrentXmlTest().getParameter("crsNam"), context.getCurrentXmlTest().getParameter("grpCrsNam")}};
     }
 }
