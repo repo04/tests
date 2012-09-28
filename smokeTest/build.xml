@@ -55,11 +55,12 @@
                 <ac:for list="${antBrwsr}" param = "drvr">
                     <sequential>
                         <echo>Driver: @{drvr}</echo>
-                        <testng outputDir="${report.dir}\@{program}_@{drvr}" classpathref="libs" delegatecommandsystemproperties="true">  
+                        <testng outputDir="${report.dir}\@{program}_@{drvr}" testnames = "SmokeTests" classpathref="libs" delegatecommandsystemproperties="true">  
                             <xmlfileset dir="${basedir}" includes="program.xml"/>
                             <sysproperty key="program" value="@{program}AccountProperty"/>   
                             <sysproperty key="drvr" value="@{drvr}"/>
                             <sysproperty key="os" value="${antOS}"/>
+                            <sysproperty key="test" value="CriticalTests"/>
                         </testng>
                     </sequential>
                 </ac:for> 

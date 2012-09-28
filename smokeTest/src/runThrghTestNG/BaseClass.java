@@ -27,15 +27,18 @@ public class BaseClass {
     public IsPresent ip = new IsPresent();
     public static String program;
     public static String drvr;
+    public static String test;
     String chromDrvrPath;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest
-    @Parameters({"program", "drvr", "os"})
-    public void setUp(String program, String drvr, String os) throws Exception {
+    @Parameters({"program", "drvr", "os", "test"})
+    public void setUp(String program, String drvr, String os, String test) throws Exception {
 
         this.program = program;
         this.drvr = drvr;
+        this.test = test;
+        
         av = new AccountValues(this.program);
         System.out.println("program: " + this.program);
         System.out.println("drvr: " + this.drvr);
