@@ -4,6 +4,7 @@
  */
 package runThrghTestNG;
 
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -28,8 +29,12 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @BeforeClass
-    public void testStdtLgn() throws Exception {
-        a.login(UsrCrtn_AsgnRole_WrkngGrp.stdtUsrName);
+    public void testStdtLgn(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
+        } else {
+            a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
+        }
     }
 
     /**
@@ -37,11 +42,11 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
-    public void testStdtJoinsTchrSclGrp() throws Exception {
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
+    public void testStdtJoinsTchrSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.findSocialGroup(TchrPosts_SclGrp.tchrSclGrpName);
-        a.joinSocialGroup(TchrPosts_SclGrp.tchrSclGrpName);
+        a.findSocialGroup(tchrSclGrpName);
+        a.joinSocialGroup(tchrSclGrpName);
     }
 
     /**
@@ -49,13 +54,13 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testStdtJoinsTchrSclGrp"})
-    public void testStdtPostURLOnTchrSclGrp() throws Exception {
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"testStdtJoinsTchrSclGrp"})
+    public void testStdtPostURLOnTchrSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
+        a.accessSclGrpWall(tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
         System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
-        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);        
+        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
     }
 
     /**
@@ -63,10 +68,10 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrPostsOn_Wall_CrsWall"})
-    public void testStdtCmntOnTchrCrsPost() throws Exception {
-        a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
-        stdtTxtCmntOnTchrCrsPost = a.textCmntPost(TchrPosts_SclGrp.tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrPostsOn_Wall_CrsWall"})
+    public void testStdtCmntOnTchrCrsPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+        a.selectGrpCourse(grpCrsName);
+        stdtTxtCmntOnTchrCrsPost = a.textCmntPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
         System.out.println("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
         Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
     }

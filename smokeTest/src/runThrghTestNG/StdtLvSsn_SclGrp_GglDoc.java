@@ -4,22 +4,38 @@
  */
 package runThrghTestNG;
 
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
- * Student logs in, Create Live Session in Teacher's Social Group,
- * Creates own Social Group
- * Verify Google Doc Verify All Posts on Top/Recent News Verify Activities &
- * resource items appear in activity report
+ * Student logs in, Create Live Session in Teacher's Social Group, Creates own
+ * Social Group Verify Google Doc Verify All Posts on Top/Recent News Verify
+ * Activities & resource items appear in activity report
  */
 public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
-    static String stdtSclGrpName;
+    static String[][] stdtSclGrpArray = new String[1][1];
     Actions a = new Actions();
+
+    @DataProvider(name = "StdtSclGrp")
+    public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
+
+        System.out.println("init StdtSclGrp");
+        return (stdtSclGrpArray);
+
+        /*if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("if StdtSclGrp: " + test);
+            return (stdtSclGrpArray);
+        } else {
+            System.out.println("else StdtSclGrp: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("stdtSclGrpName")}};
+        }*/
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -28,8 +44,12 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @BeforeClass
-    public void testStdtLgn() throws Exception {
-        a.login(UsrCrtn_AsgnRole_WrkngGrp.stdtUsrName);
+    public void testStdtLgn(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
+        } else {
+            a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
+        }
     }
 
     /**
@@ -37,12 +57,12 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn"})
-    public void testStdtCrtLvSsn() throws Exception {
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn"})
+    public void testStdtCrtLvSsn(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
+        a.accessSclGrpWall(tchrSclGrpName);
         a.accessLvSsnWall();
-        a.createLiveSsn(TchrPosts_SclGrp.tchrSclGrpName);
+        a.createLiveSsn(tchrSclGrpName);
     }
 
     /**
@@ -53,9 +73,9 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
     @Test
     public void testStdtCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
-        stdtSclGrpName = a.createSocialGroup();
-        System.out.println("stdtSclGrpName: " + stdtSclGrpName);
-        Reporter.log("stdtSclGrpName: " + stdtSclGrpName);
+        stdtSclGrpArray[0][0] = a.createSocialGroup();
+        System.out.println("stdtSclGrpName: " + stdtSclGrpArray[0][0]);
+        Reporter.log("stdtSclGrpName: " + stdtSclGrpArray[0][0]);
     }
 
     /**
@@ -63,10 +83,10 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtGglDoc"})
-    public void testStdtVrfyWrkGrp_GglDoc() throws Exception {
+    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class, dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtGglDoc"})
+    public void testStdtVrfyWrkGrp_GglDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
-        a.vrfyWrkngGrp_GglDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName, TchrLvSsn_GglDoc.gglDocName);
+        a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
     }
 
     /**
@@ -74,12 +94,12 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole","runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
-    public void testStdtVrfyActivities() throws Exception {
+    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole", "runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
+    public void testStdtVrfyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
+        a.selectGrpCourse(grpCrsName);
         a.navigateToActvtyRprt();
-        a.verifyActivities(Crs_GrpCrsCreation.frmActvyName, Crs_GrpCrsCreation.quizActvtyName, Crs_GrpCrsCreation.allInOneAsgnmntAvtvtyName, Crs_GrpCrsCreation.pageActvtyName);
+        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
     }
 
     /**

@@ -19,10 +19,10 @@ public class MyTransformer implements IAnnotationTransformer{
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
         
-        System.out.println("Inside transform");
-        if ("testActivities_Creation".equals(testMethod.getName())) {
-            System.out.println("Inside testActivities_Creation");
+        if ("testTchrPostsOn_Wall_CrsWall".equals(testMethod.getName())) {
+            System.out.println("Inside testTchrPostsOn_Wall_CrsWall");
             annotation.setDependsOnMethods(null);            
         }
+       
     }
 }

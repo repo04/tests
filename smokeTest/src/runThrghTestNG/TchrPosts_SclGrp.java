@@ -4,9 +4,12 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -16,11 +19,48 @@ import smoketest.Actions;
  */
 public class TchrPosts_SclGrp extends BaseClass {
 
-    static String tchrTxtWallPost;
-    static String tchrUrlWallPost;
-    static String tchrUrlCrsPost;
-    static String tchrSclGrpName;
+    String tchrTxtWallPost;
+    String tchrUrlWallPost;
+    static String[][] tchrUrlCrsPostArray = new String[1][1];
+    static String[][] tchrSclGrpArray = new String[1][1];
     Actions a = new Actions();
+
+    @DataProvider(name = "tchrUrlCrsPost")
+    public static Object[][] tchrUrlCrsPost(ITestContext context) throws Exception {
+
+        System.out.println("init tchrUrlCrsPost");
+        
+        return (tchrUrlCrsPostArray);
+
+        /*if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("if tchrUrlCrsPost: " + test);
+            return (tchrUrlCrsPost);
+        } else {
+            System.out.println("else tchrUrlCrsPost: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrUrlCrsPost")}};
+        }*/
+    }
+
+    @DataProvider(name = "TchrSclGrp")
+    public static Object[][] TchrSclGrp(ITestContext context) throws Exception {
+
+        System.out.println("init TchrSclGrp");        
+        return (tchrSclGrpArray);
+
+        /*if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("if TchrSclGrp: " + test);
+            return (tchrSclGrpArray);
+        } else {
+            System.out.println("else TchrSclGrp: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrSclGrpName")}};
+        }*/
+    }
+
+    @DataProvider(name = "GrpCrsTchrUrlCrsPst")
+    public static Iterator<Object[]> GrpCrsTchrUrlCrsPst(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsTchrUrlCrsPst");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), tchrUrlCrsPost(context));
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -29,8 +69,12 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass
-    public void testTchrLgn() throws Exception {
-        a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
+    public void testTchrLgn(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+        } else {
+            a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
+        }
     }
 
     /**
@@ -38,8 +82,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation"})
-    public void testTchrPostsOn_Wall_CrsWall() throws Exception {
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation"})
+    public void testTchrPostsOn_Wall_CrsWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
         System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
@@ -50,10 +94,10 @@ public class TchrPosts_SclGrp extends BaseClass {
         System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
         Reporter.log("tchrUrlWallPost: " + tchrUrlWallPost);
 
-        a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
-        tchrUrlCrsPost = a.urlPost("urlCrsPost");
-        System.out.println("tchrUrlCrsPost: " + tchrUrlCrsPost);
-        Reporter.log("tchrUrlCrsPost: " + tchrUrlCrsPost);
+        a.selectGrpCourse(grpCrsName);
+        tchrUrlCrsPostArray[0][0] = a.urlPost("urlCrsPost");
+        System.out.println("tchrUrlCrsPost: " + tchrUrlCrsPostArray[0][0]);
+        Reporter.log("tchrUrlCrsPost: " + tchrUrlCrsPostArray[0][0]);
     }
 
     /**
@@ -64,9 +108,9 @@ public class TchrPosts_SclGrp extends BaseClass {
     @Test(dependsOnMethods = {"testTchrPostsOn_Wall_CrsWall"}, alwaysRun = true)
     public void testTchrCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
-        tchrSclGrpName = a.createSocialGroup();
-        System.out.println("tchrSclGrpName: " + tchrSclGrpName);
-        Reporter.log("tchrSclGrpName: " + tchrSclGrpName);
+        tchrSclGrpArray[0][0] = a.createSocialGroup();
+        System.out.println("tchrSclGrpName: " + tchrSclGrpArray[0][0]);
+        Reporter.log("tchrSclGrpName: " + tchrSclGrpArray[0][0]);
     }
 
     /**

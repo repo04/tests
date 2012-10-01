@@ -4,6 +4,7 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -19,15 +20,43 @@ import smoketest.Actions;
  */
 public class Crs_GrpCrsCreation extends BaseClass {
 
-    //static String crsName;
-    static String grpCrsName;
-    static String frmActvyName;
-    static String quizActvtyName;
-    static String allInOneAsgnmntAvtvtyName;
-    static String pageActvtyName;
+    static String crsName;
     Actions a = new Actions();
-    static String[][] crsArray = new String[1][2];
+    static String[][] crsArray = new String[1][1];
     static String[][] actvtsArray = new String[1][4];
+
+    @DataProvider(name = "Course")
+    public static Object[][] Course(ITestContext context) throws Exception {
+        System.out.println("init Course");
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("Inside Course: " + test);
+            return (crsArray);
+        } else {
+            System.out.println("Inside Course: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("grpCrsName")}};
+        }
+    }
+
+    @DataProvider(name = "Activites")
+    public static Object[][] Activites(ITestContext context) throws Exception {
+
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("Inside Activites: " + test);
+            return (actvtsArray);
+        } else {
+            System.out.println("Inside Activites: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("frmActvyName"),
+                            context.getCurrentXmlTest().getParameter("quizActvtyName"),
+                            context.getCurrentXmlTest().getParameter("allInOneAsgnmntAvtvtyName"),
+                            context.getCurrentXmlTest().getParameter("pageActvtyName")}};
+        }
+    }
+
+    @DataProvider(name = "GrpCrsActivities")
+    public static Iterator<Object[]> GrpCrsActivities(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsActivities");
+        return DataProviderUtil.cartesianProviderFrom(Course(context), Activites(context));
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -37,35 +66,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      */
     @BeforeClass
     public void testCntntAdminLgn() throws Exception {
-        System.out.println("testName: " + test);
         a.login("contentAdmin");
-    }
-
-    @DataProvider(name = "Course")
-    public static Object[][] Course(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("Inside testName: " + test);
-            Object[][] abc = createData1();
-            return (abc);
-        } else {
-            System.out.println("Inside testName: " + test);
-            //Object[][] def = createData2(context);
-            //return (def);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("crsNam"), context.getCurrentXmlTest().getParameter("grpCrsNam")}};
-        }
-    }
-
-    @DataProvider(name = "Activites")
-    public static Object[][] Activites(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("Inside testName: " + test);
-            return (actvtsArray);
-        } else {
-            System.out.println("Inside testName: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("crsNam"), context.getCurrentXmlTest().getParameter("grpCrsNam")}};
-        }
     }
 
     /**
@@ -75,19 +76,19 @@ public class Crs_GrpCrsCreation extends BaseClass {
      */
     @Test
     public void testCrsGrpCrs_Creation() throws Exception {
-        
-        crsArray[0][0]="crs1";
-        crsArray[0][1]="crs2";
-
-        /*a.navigateToMyCourse();
-        crsArray[0][0] = a.createCourse();
-        System.out.println("crsName: " + crsArray[0][0]);
-        Reporter.log("crsName: " + crsArray[0][0]);
+        /*System.out.println("init testCrsGrpCrs_Creation");
+         crsArray[0][0]="crs1";
+         crsArray[0][1]="crs2";*/
 
         a.navigateToMyCourse();
-        crsArray[0][1] = a.createGrpCourse(crsArray[0][0]);
-        System.out.println("grpCrsName: " + crsArray[0][1]);
-        Reporter.log("grpCrsName: " + crsArray[0][1]);*/
+        crsName = a.createCourse();
+        System.out.println("crsName: " + crsName);
+        Reporter.log("crsName: " + crsName);
+
+        a.navigateToMyCourse();
+        crsArray[0][0] = a.createGrpCourse(crsName);
+        System.out.println("grpCrsName: " + crsArray[0][0]);
+        Reporter.log("grpCrsName: " + crsArray[0][0]);
     }
 
     /**
@@ -95,8 +96,8 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    /*@Test(dataProvider = "Activites", dependsOnMethods = {"testCrsGrpCrs_Creation"})
-    public void testActivities_Creation(String crsNm, String grpCrsName) throws Exception {
+    @Test(dataProvider = "Course", dependsOnMethods = {"testCrsGrpCrs_Creation"})
+    public void testActivities_Creation(String grpCrsName) throws Exception {
 
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -121,7 +122,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
         actvtsArray[0][3] = a.createPageResource();
         System.out.println("pageActvtyName: " + actvtsArray[0][3]);
         Reporter.log("pageActvtyName: " + actvtsArray[0][4]);
-    }*/
+    }
 
     /**
      * The annotated method will be run after all the test methods in the
@@ -132,13 +133,5 @@ public class Crs_GrpCrsCreation extends BaseClass {
     @AfterClass
     public void testCntntAdminLogOut() throws Exception {
         a.logOut();
-    }
-
-    public static Object[][] createData1() {
-        return (crsArray);
-    }
-
-    public Object[][] createData2(ITestContext context) {
-        return new Object[][]{{context.getCurrentXmlTest().getParameter("crsNam"), context.getCurrentXmlTest().getParameter("grpCrsNam")}};
     }
 }

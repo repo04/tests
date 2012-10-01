@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="Staging-SmokeSuite">
+    <listeners>
+        <listener class-name="runThrghTestNG.MyTransformer"/>
+    </listeners>
+    <test name="CriticalTests" preserve-order="true" parallel="false">
+        <parameter name="tchrUsrName" value="teacher2909-1839"/>
+        <parameter name="stdtUsrName" value="student2909-1840"/>
+        <parameter name="grpCrsName" value="SmkTstGrpCrs Sep 29, 2012 6:37 PM"/>
+        <classes>
+            <class name="runThrghTestNG.TchrPosts_SclGrp"/>  
+            <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
+            <class name="runThrghTestNG.TchrLvSsn_GglDoc">
+                <methods>
+                    <exclude name="testTchrCrtGglDoc"/>
+                    <exclude name="testTchrVrfyActivities"/>
+                </methods>
+            </class>
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
+                <methods>
+                    <exclude name="testStdtVrfyWrkGrp_GglDoc"/>
+                    <exclude name="testStdtVrfyActivities"/>
+                </methods>
+            </class>
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>                                  
+        </classes>
+    </test>    
+</suite>

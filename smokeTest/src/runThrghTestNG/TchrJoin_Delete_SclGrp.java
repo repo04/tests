@@ -4,6 +4,7 @@
  */
 package runThrghTestNG;
 
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -23,8 +24,12 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass
-    public void testTchrLgn() throws Exception {
-        a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
+    public void testTchrLgn(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+        } else {
+            a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
+        }
     }
 
     /**
@@ -32,11 +37,11 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp"})
-    public void testTchrJoinsStdtSclGrp() throws Exception {
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class, dependsOnMethods = {"runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp"})
+    public void testTchrJoinsStdtSclGrp(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.findSocialGroup(StdtLvSsn_SclGrp_GglDoc.stdtSclGrpName);
-        a.joinSocialGroup(StdtLvSsn_SclGrp_GglDoc.stdtSclGrpName);
+        a.findSocialGroup(stdtSclGrpName);
+        a.joinSocialGroup(stdtSclGrpName);
     }
 
     /**
@@ -44,10 +49,10 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testTchrJoinsStdtSclGrp"})
-    public void testTchrLeavesStdtSclGrp() throws Exception {
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class, dependsOnMethods = {"testTchrJoinsStdtSclGrp"})
+    public void testTchrLeavesStdtSclGrp(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.leaveSocialGroup(StdtLvSsn_SclGrp_GglDoc.stdtSclGrpName);
+        a.leaveSocialGroup(stdtSclGrpName);
     }
 
     /**
@@ -55,10 +60,10 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
-    public void testTchrDeleteSclGrp() throws Exception {
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
+    public void testTchrDeleteSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.deleteSocialGroup(TchrPosts_SclGrp.tchrSclGrpName);
+        a.deleteSocialGroup(tchrSclGrpName);
     }
 
     /**

@@ -4,9 +4,7 @@
  */
 package runThrghTestNG;
 
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -21,22 +19,20 @@ import smoketest.Actions;
  */
 public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
-    static String tchrUsrName;
-    static String stdtUsrName;
-    static String wrkngGrpName;
     Actions a = new Actions();
-    static String[][] usrArray = new String[1][2];
+    static String[][] usrsArray = new String[1][2];
     static String[][] wrkngGrpArray = new String[1][1];
-    static List<Object[][]> UsersWrkngGrp;
 
     @DataProvider(name = "Users")
     public static Object[][] Users(ITestContext context) throws Exception {
 
+        System.out.println("init Users");
+
         if (test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("Inside testName: " + test);
-            return (usrArray);
+            System.out.println("if Users: " + test);
+            return (usrsArray);
         } else {
-            System.out.println("Inside testName: " + test);
+            System.out.println("else Users: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrUsrName"), context.getCurrentXmlTest().getParameter("stdtUsrName")}};
         }
     }
@@ -44,31 +40,27 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @DataProvider(name = "WrkngGrp")
     public static Object[][] WrkngGrp(ITestContext context) throws Exception {
 
+        System.out.println("init WrkngGrp");
+
         if (test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("Inside testName: " + test);
-            return (usrArray);
+            System.out.println("if WrkngGrp: " + test);
+            return (wrkngGrpArray);
         } else {
-            System.out.println("Inside testName: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrUsrName"), context.getCurrentXmlTest().getParameter("stdtUsrName")}};
+            System.out.println("else WrkngGrp: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("wrkngGrpName")}};
         }
     }
 
-    @DataProvider(name = "UsersWrkngGrp")
-    public static Iterator<Object[][]> UsersWrkngGrp(ITestContext context) throws Exception {
+    @DataProvider(name = "WrkngGrpUsers")
+    public static Iterator<Object[]> WrkngGrpUsers(ITestContext context) throws Exception {
+        System.out.println("init WrkngGrpUsers");
+        return DataProviderUtil.cartesianProviderFrom(WrkngGrp(context), Users(context));
+    }
 
-        if (test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("Inside testName: " + test);
-            UsersWrkngGrp.add(usrArray);
-            UsersWrkngGrp.add(Crs_GrpCrsCreation.createData1());
-            UsersWrkngGrp.toArray();
-            System.out.println(UsersWrkngGrp.size());
-            //return (UsersWrkngGrp);
-            return null;
-        } else {
-            System.out.println("Inside testName: " + test);
-            return null;
-            //return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrUsrName"), context.getCurrentXmlTest().getParameter("stdtUsrName")}};
-        }
+    @DataProvider(name = "GrpCrsUsers")
+    public static Iterator<Object[]> GrpCrsUsers(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsUsers");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Users(context));
     }
 
     /**
@@ -89,19 +81,20 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      */
     @Test
     public void testUsrCrtn() throws Exception {
-        
-        usrArray[0][0]="user1";
-        usrArray[0][1]="user2";
-        
-        /*a.navigateToMyContacts();
-        usrArray[0][0] = a.createUser("teacher");
-        System.out.println("tchrUsrName: " + usrArray[0][0]);
-        Reporter.log("tchrUsrName: " + usrArray[0][0]);
+
+        /*System.out.println("init testUsrCrtn");
+         usrArray[0][0] = "user1";
+         usrArray[0][1] = "user2";*/
 
         a.navigateToMyContacts();
-        usrArray[0][1] = a.createUser("student");
-        System.out.println("stdtUsrName: " + usrArray[0][1]);
-        Reporter.log("stdtUsrName: " + usrArray[0][1]);*/
+        usrsArray[0][0] = a.createUser("teacher");
+        System.out.println("tchrUsrName: " + usrsArray[0][0]);
+        Reporter.log("tchrUsrName: " + usrsArray[0][0]);
+
+        a.navigateToMyContacts();
+        usrsArray[0][1] = a.createUser("student");
+        System.out.println("stdtUsrName: " + usrsArray[0][1]);
+        Reporter.log("stdtUsrName: " + usrsArray[0][1]);
     }
 
     /**
@@ -109,20 +102,20 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "UsersWrkngGrp", dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation", "testUsrCrtn"})
-    public void testAsgnRole(String g, String h, String i, String j) throws Exception {
-        
-        System.out.println("1st: " + g);
-        System.out.println("2nd: " + h);
-        System.out.println("3rd: " + i);
-        System.out.println("4th: " + j);
-        /*a.navigateToMyCourse();
-         a.selectGrpCourse(UsersWrkngGrp.get(0));
-         a.enrollUsrToRole_GrpCrs(tchrUsrName, grpCrsName);
+    @Test(dataProvider = "GrpCrsUsers", dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation", "testUsrCrtn"})
+    public void testAsgnRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
 
-         a.navigateToMyCourse();
-         a.selectGrpCourse(grpCrsName);
-         a.enrollUsrToRole_GrpCrs(stdtUsrName, grpCrsName);*/
+        System.out.println("1st: " + grpCrsName);
+        System.out.println("2nd: " + tchrUsrName);
+        System.out.println("3rd: " + stdtUsrName);
+
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.enrollUsrToRole_GrpCrs(tchrUsrName, grpCrsName);
+
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.enrollUsrToRole_GrpCrs(stdtUsrName, grpCrsName);
     }
 
     /**
@@ -130,24 +123,30 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    /*@Test
-     public void testCrtWrkgnGrp() throws Exception {
-     a.navigateToWorkingGroups();
-     wrkngGrpArray[0][0] = a.createWorkingGroup();
-     System.out.println("wrkngGrp: " + wrkngGrpArray[0][0]);
-     Reporter.log("wrkngGrp: " + wrkngGrpArray[0][0]);
-     }*/
+    @Test
+    public void testCrtWrkgnGrp() throws Exception {
+
+        /*System.out.println("init testCrtWrkgnGrp");
+         wrkngGrpArray[0][0] = "wrkngGrp1";*/
+
+        a.navigateToWorkingGroups();
+        wrkngGrpArray[0][0] = a.createWorkingGroup();
+        System.out.println("wrkngGrp: " + wrkngGrpArray[0][0]);
+        Reporter.log("wrkngGrp: " + wrkngGrpArray[0][0]);
+    }
+
     /**
      * Add users as members to Working Group
      *
      * @throws Exception
      */
-    /*@Test(dependsOnMethods = {"testCrtWrkgnGrp", "testUsrCrtn"})
-     public void testAddMbrsToWrkngGrp() throws Exception {
-     a.navigateToWorkingGroups();
-     a.accessWrknGrp(wrkngGrpName);
-     a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
-     }*/
+    @Test(dataProvider = "WrkngGrpUsers", dependsOnMethods = {"testCrtWrkgnGrp", "testUsrCrtn"})
+    public void testAddMbrsToWrkngGrp(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+        a.navigateToWorkingGroups();
+        a.accessWrknGrp(wrkngGrpName);
+        a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
+    }
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

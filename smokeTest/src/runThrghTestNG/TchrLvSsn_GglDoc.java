@@ -4,23 +4,45 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
  *
- * Teacher LOGS in, Find SclGroup & Create LiveSession in SclGroup,
- * Create GoogleDoc in Working Group
- * Verify All Posts on Top & RecentNews Verify Activities & resource appear
- * items on activity report
+ * Teacher LOGS in, Find SclGroup & Create LiveSession in SclGroup, Create
+ * GoogleDoc in Working Group Verify All Posts on Top & RecentNews Verify
+ * Activities & resource appear items on activity report
  */
 public class TchrLvSsn_GglDoc extends BaseClass {
 
-    static String gglDocName;
+    static String[][] gglDocArray = new String[1][1];
     Actions a = new Actions();
+
+    @DataProvider(name = "GglDoc")
+    public static Object[][] GglDoc(ITestContext context) throws Exception {
+
+        System.out.println("init GglDoc");
+
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("if GglDoc: " + test);
+            return (gglDocArray);
+        } else {
+            System.out.println("else GglDoc: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("gglDocName")}};
+        }
+    }
+
+    @DataProvider(name = "WrkngGrpGgleDoc")
+    public static Iterator<Object[]> WrkngGrpGgleDoc(ITestContext context) throws Exception {
+        System.out.println("init WrkngGrpGgleDoc");
+        return DataProviderUtil.cartesianProviderFrom(UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), GglDoc(context));
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -29,8 +51,12 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @BeforeClass
-    public void testTchrLgn() throws Exception {
-        a.login(UsrCrtn_AsgnRole_WrkngGrp.tchrUsrName);
+    public void testTchrLgn(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+        } else {
+            a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
+        }
     }
 
     /**
@@ -38,12 +64,12 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
-    public void testTchrCrtLvSsn() throws Exception {
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
+    public void testTchrCrtLvSsn(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(TchrPosts_SclGrp.tchrSclGrpName);
+        a.accessSclGrpWall(tchrSclGrpName);
         a.accessLvSsnWall();
-        a.createLiveSsn(TchrPosts_SclGrp.tchrSclGrpName);
+        a.createLiveSsn(tchrSclGrpName);
     }
 
     /**
@@ -51,12 +77,12 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp"})
-    public void testTchrCrtGglDoc() throws Exception {
+    @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp"})
+    public void testTchrCrtGglDoc(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
-        gglDocName = a.createGoogleDoc(UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName);
-        System.out.println("gglDocName: " + gglDocName);
-        Reporter.log("gglDocName: " + gglDocName);
+        gglDocArray[0][0] = a.createGoogleDoc(wrkngGrpName);
+        System.out.println("gglDocName: " + gglDocArray[0][0]);
+        Reporter.log("gglDocName: " + gglDocArray[0][0]);
     }
 
     /**
@@ -64,12 +90,12 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole","runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
-    public void testTchrVrfyActivities() throws Exception {
+    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole", "runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
+    public void testTchrVrfyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(Crs_GrpCrsCreation.grpCrsName);
+        a.selectGrpCourse(grpCrsName);
         a.navigateToActvtyRprt();
-        a.verifyActivities(Crs_GrpCrsCreation.frmActvyName, Crs_GrpCrsCreation.quizActvtyName, Crs_GrpCrsCreation.allInOneAsgnmntAvtvtyName, Crs_GrpCrsCreation.pageActvtyName);
+        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
     }
 
     /**

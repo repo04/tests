@@ -2,30 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Staging-SmokeSuite">
     <test name="SmokeTests" preserve-order="true" parallel="false">
-        <parameter name="tstNm" value="SmokeTest"/>
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
             <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
-            <!--class name="runThrghTestNG.TchrPosts_SclGrp"/>
+            <class name="runThrghTestNG.TchrPosts_SclGrp"/>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
             <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
-            <class name="runThrghTestNG.VrfyEml_Ntfctn"/-->
+            <class name="runThrghTestNG.VrfyEml_Ntfctn"/>
         </classes>
     </test>
-    <listeners>
-        <listener class-name="runThrghTestNG.MyTransformer"/>
-    </listeners>
-    <test name="CriticalTests" preserve-order="true" parallel="false">
-        <parameter name="crsNam" value="Somesh"/>
-        <parameter name="grpCrsNam" value="Bansal"/>
-        <classes>
-            <class name="runThrghTestNG.Crs_GrpCrsCreation">
-                <methods>
-                    <exclude name="testCrsGrpCrs_Creation"/>
-                </methods>
-            </class>                
-        </classes>
-    </test>    
 </suite>

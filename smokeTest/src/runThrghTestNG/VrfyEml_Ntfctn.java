@@ -64,13 +64,13 @@ public class VrfyEml_Ntfctn extends BaseClass {
         "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost", "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp"})
     public void testVerifyEmail() throws Exception {
 
-        stdtFllNm = UsrCrtn_AsgnRole_WrkngGrp.stdtUsrName.substring(0, 1).toUpperCase() + UsrCrtn_AsgnRole_WrkngGrp.stdtUsrName.substring(1);
-        vrfy1 = "You are now a member of " + StdtLvSsn_SclGrp_GglDoc.stdtSclGrpName;
-        vrfy2 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + TchrPosts_SclGrp.tchrSclGrpName + ".";
+        stdtFllNm = UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1].substring(0, 1).toUpperCase() + UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1].substring(1);
+        vrfy1 = "You are now a member of " + StdtLvSsn_SclGrp_GglDoc.stdtSclGrpArray[0][0];
+        vrfy2 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + TchrPosts_SclGrp.tchrSclGrpArray[0][0] + ".";
         vrfy3 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm commented on your post.";
-        vrfy4 = "You are now a member of " + TchrPosts_SclGrp.tchrSclGrpName;
-        vrfy5 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName + ".";
-        vrfy6 = "You are now a member of " + UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpName;
+        vrfy4 = "You are now a member of " + TchrPosts_SclGrp.tchrSclGrpArray[0][0];
+        vrfy5 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpArray[0][0] + ".";
+        vrfy6 = "You are now a member of " + UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpArray[0][0];
 
         String[] words = {vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6};
         List<String> wordList = Arrays.asList(words);
