@@ -26,15 +26,15 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
     public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
 
         System.out.println("init StdtSclGrp");
-        return (stdtSclGrpArray);
 
-        /*if (test.equalsIgnoreCase("SmokeTests")) {
+
+        if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
             System.out.println("if StdtSclGrp: " + test);
             return (stdtSclGrpArray);
         } else {
             System.out.println("else StdtSclGrp: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("stdtSclGrpName")}};
-        }*/
+        }
     }
 
     /**
@@ -57,7 +57,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn"})
+    //@Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn"})
+    @Test
     public void testStdtCrtLvSsn(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(tchrSclGrpName);
@@ -83,7 +84,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class, dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtGglDoc"})
+    //@Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class, dependsOnMethods = {"runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtGglDoc"})
+    @Test
     public void testStdtVrfyWrkGrp_GglDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
@@ -94,7 +96,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole", "runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
+    //@Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole", "runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
+    @Test
     public void testStdtVrfyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);

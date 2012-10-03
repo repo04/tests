@@ -82,9 +82,8 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @Test
     public void testUsrCrtn() throws Exception {
 
-        /*System.out.println("init testUsrCrtn");
-         usrArray[0][0] = "user1";
-         usrArray[0][1] = "user2";*/
+        /*usrsArray[0][0] = "teacher0310-1433";
+         usrsArray[0][1] = "student0310-1433";*/
 
         a.navigateToMyContacts();
         usrsArray[0][0] = a.createUser("teacher");
@@ -102,12 +101,9 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation", "testUsrCrtn"})
+    //@Test(dataProvider = "GrpCrsUsers", dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation", "testUsrCrtn"})
+    @Test
     public void testAsgnRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
-
-        System.out.println("1st: " + grpCrsName);
-        System.out.println("2nd: " + tchrUsrName);
-        System.out.println("3rd: " + stdtUsrName);
 
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -126,8 +122,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @Test
     public void testCrtWrkgnGrp() throws Exception {
 
-        /*System.out.println("init testCrtWrkgnGrp");
-         wrkngGrpArray[0][0] = "wrkngGrp1";*/
+        //wrkngGrpArray[0][0] = "SmkTstWrkngGrp Oct 3, 2012 2:32 PM";
 
         a.navigateToWorkingGroups();
         wrkngGrpArray[0][0] = a.createWorkingGroup();
@@ -140,7 +135,8 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpUsers", dependsOnMethods = {"testCrtWrkgnGrp", "testUsrCrtn"})
+    //@Test(dataProvider = "WrkngGrpUsers", dependsOnMethods = {"testCrtWrkgnGrp", "testAsgnRole"})
+    @Test
     public void testAddMbrsToWrkngGrp(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);

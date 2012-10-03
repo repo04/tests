@@ -64,7 +64,8 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
+    //@Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
+    @Test
     public void testTchrCrtLvSsn(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(tchrSclGrpName);
@@ -77,7 +78,8 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp"})
+    //@Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp"})
+    @Test
     public void testTchrCrtGglDoc(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         gglDocArray[0][0] = a.createGoogleDoc(wrkngGrpName);
@@ -90,7 +92,8 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole", "runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
+    //@Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole", "runThrghTestNG.Crs_GrpCrsCreation.testActivities_Creation"})
+    @Test
     public void testTchrVrfyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);

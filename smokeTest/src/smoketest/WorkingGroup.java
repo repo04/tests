@@ -73,7 +73,7 @@ public class WorkingGroup extends BaseClass {
         }
         driver.findElement(By.xpath(av.getTokenValue("lnkAddMbrXPATH"))).click();
         driver.findElement(By.xpath(av.getTokenValue("btnSaveMbrsXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The members updated for the group.");
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The group members were updated successfully.");
     }
 
     /**

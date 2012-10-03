@@ -37,7 +37,8 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class, dependsOnMethods = {"runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp"})
+    //@Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class, dependsOnMethods = {"runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp"})
+    @Test
     public void testTchrJoinsStdtSclGrp(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(stdtSclGrpName);
@@ -49,7 +50,8 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class, dependsOnMethods = {"testTchrJoinsStdtSclGrp"})
+    //@Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class, dependsOnMethods = {"testTchrJoinsStdtSclGrp"})
+    @Test
     public void testTchrLeavesStdtSclGrp(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(stdtSclGrpName);
@@ -60,7 +62,8 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
+    //@Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
+    @Test
     public void testTchrDeleteSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(tchrSclGrpName);

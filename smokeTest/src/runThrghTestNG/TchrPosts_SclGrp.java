@@ -29,31 +29,29 @@ public class TchrPosts_SclGrp extends BaseClass {
     public static Object[][] tchrUrlCrsPost(ITestContext context) throws Exception {
 
         System.out.println("init tchrUrlCrsPost");
-        
-        return (tchrUrlCrsPostArray);
 
-        /*if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
             System.out.println("if tchrUrlCrsPost: " + test);
-            return (tchrUrlCrsPost);
+            return (tchrUrlCrsPostArray);
         } else {
             System.out.println("else tchrUrlCrsPost: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrUrlCrsPost")}};
-        }*/
+        }
     }
 
     @DataProvider(name = "TchrSclGrp")
     public static Object[][] TchrSclGrp(ITestContext context) throws Exception {
 
-        System.out.println("init TchrSclGrp");        
-        return (tchrSclGrpArray);
+        System.out.println("init TchrSclGrp");
 
-        /*if (test.equalsIgnoreCase("SmokeTests")) {
+
+        if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
             System.out.println("if TchrSclGrp: " + test);
             return (tchrSclGrpArray);
         } else {
             System.out.println("else TchrSclGrp: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrSclGrpName")}};
-        }*/
+        }
     }
 
     @DataProvider(name = "GrpCrsTchrUrlCrsPst")
@@ -82,7 +80,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation"})
+    //@Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation"})
+    @Test
     public void testTchrPostsOn_Wall_CrsWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
@@ -105,7 +104,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dependsOnMethods = {"testTchrPostsOn_Wall_CrsWall"}, alwaysRun = true)
+    //@Test(dependsOnMethods = {"testTchrPostsOn_Wall_CrsWall"}, alwaysRun = true)
+    @Test
     public void testTchrCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         tchrSclGrpArray[0][0] = a.createSocialGroup();

@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Staging-SmokeSuite">
     <listeners>
-        <listener class-name="runThrghTestNG.MyTransformer"/>
+        <listener class-name="runThrghTestNG.TransformCritical"/>
     </listeners>
     <test name="CriticalTests" preserve-order="true" parallel="false">
         <parameter name="tchrUsrName" value="teacher2909-1839"/>

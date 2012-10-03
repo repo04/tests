@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Staging-SmokeSuite">
+    <listeners>
+        <listener class-name="runThrghTestNG.TransformSmoke"/>
+    </listeners>
     <test name="SmokeTests" preserve-order="true" parallel="false">
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
