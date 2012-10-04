@@ -76,10 +76,6 @@ public class Crs_GrpCrsCreation extends BaseClass {
      */
     @Test
     public void testCrsGrpCrs_Creation() throws Exception {
-        
-        /*System.out.println("init testCrsGrpCrs_Creation");
-         crsArray[0][0]="crs1";
-         crsArray[0][1]="crs2";*/
 
         a.navigateToMyCourse();
         crsName = a.createCourse();
@@ -97,8 +93,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "Course", dependsOnMethods = {"testCrsGrpCrs_Creation"})
-    @Test
+    @Test(dataProvider = "Course")
     public void testActivities_Creation(String grpCrsName) throws Exception {
 
         a.navigateToMyCourse();

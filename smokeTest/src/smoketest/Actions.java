@@ -285,6 +285,16 @@ public class Actions extends BaseClass {
     }
 
     /**
+     *
+     * @param tchrUsrName
+     * @param grpCrsName
+     */
+    public void unenrolUsers(String stdtUsrName, String tchrUsrName) {
+        EnrollUser enrlUsr = new EnrollUser();
+        enrlUsr.frmCourse(stdtUsrName, tchrUsrName);
+    }
+
+    /**
      * Find Contact
      *
      * @param cntct
@@ -416,7 +426,7 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * PesAdmin can add 'n' number of member's to Working Group
+     * PesAdmin adds 'n' number of member's to Working Group
      *
      * @param members
      */
@@ -424,6 +434,17 @@ public class Actions extends BaseClass {
 
         WorkingGroup wg = new WorkingGroup();
         wg.addMbrsToWrkngGrp(members);
+    }
+
+    /**
+     * PesAdmin removes 'n' number of member's to Working Group
+     *
+     * @param members
+     */
+    public void rmvMbrsFrmWrkngGrp(String... members) {
+
+        WorkingGroup wg = new WorkingGroup();
+        wg.rmvMbrsFrmWrkngGrp(members);
     }
 
     /**

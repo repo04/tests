@@ -80,8 +80,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class, dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation"})
-    @Test
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class)
     public void testTchrPostsOn_Wall_CrsWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
@@ -104,7 +103,6 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dependsOnMethods = {"testTchrPostsOn_Wall_CrsWall"}, alwaysRun = true)
     @Test
     public void testTchrCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();

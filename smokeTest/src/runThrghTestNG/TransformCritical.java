@@ -33,18 +33,10 @@ public class TransformCritical implements IAnnotationTransformer {
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
 
-        if ("testTchrPostsOn_Wall_CrsWall".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrPostsOn_Wall_CrsWall");
-            annotation.setDataProvider("Course");
-            annotation.setDataProviderClass(Crs_GrpCrsCreation.class);
-        }
-
         if ("testStdtJoinsTchrSclGrp".equals(testMethod.getName())) {
             System.out.println("Inside testStdtJoinsTchrSclGrp");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp";
-            annotation.setDataProvider("TchrSclGrp");
-            annotation.setDataProviderClass(TchrPosts_SclGrp.class);
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -52,8 +44,6 @@ public class TransformCritical implements IAnnotationTransformer {
             System.out.println("Inside testStdtPostURLOnTchrSclGrp");
             DependentMethods = new String[1];
             DependentMethods[0] = "testStdtJoinsTchrSclGrp";
-            annotation.setDataProvider("TchrSclGrp");
-            annotation.setDataProviderClass(TchrPosts_SclGrp.class);
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -61,17 +51,13 @@ public class TransformCritical implements IAnnotationTransformer {
             System.out.println("Inside testStdtCmntOnTchrCrsPost");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrPostsOn_Wall_CrsWall";
-            annotation.setDataProvider("GrpCrsTchrUrlCrsPst");
-            annotation.setDataProviderClass(TchrPosts_SclGrp.class);
             annotation.setDependsOnMethods(DependentMethods);
         }
-        
+
         if ("testTchrCrtLvSsn".equals(testMethod.getName())) {
             System.out.println("Inside testTchrCrtLvSsn");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp";
-            annotation.setDataProvider("TchrSclGrp");
-            annotation.setDataProviderClass(TchrPosts_SclGrp.class);
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -79,8 +65,6 @@ public class TransformCritical implements IAnnotationTransformer {
             System.out.println("Inside testStdtCrtLvSsn");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn";
-            annotation.setDataProvider("TchrSclGrp");
-            annotation.setDataProviderClass(TchrPosts_SclGrp.class);
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -88,8 +72,6 @@ public class TransformCritical implements IAnnotationTransformer {
             System.out.println("Inside testTchrJoinsStdtSclGrp");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp";
-            annotation.setDataProvider("StdtSclGrp");
-            annotation.setDataProviderClass(StdtLvSsn_SclGrp_GglDoc.class);
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -97,8 +79,6 @@ public class TransformCritical implements IAnnotationTransformer {
             System.out.println("Inside testTchrLeavesStdtSclGrp");
             DependentMethods = new String[1];
             DependentMethods[0] = "testTchrJoinsStdtSclGrp";
-            annotation.setDataProvider("StdtSclGrp");
-            annotation.setDataProviderClass(StdtLvSsn_SclGrp_GglDoc.class);
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -106,8 +86,13 @@ public class TransformCritical implements IAnnotationTransformer {
             System.out.println("Inside testTchrDeleteSclGrp");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp";
-            annotation.setDataProvider("TchrSclGrp");
-            annotation.setDataProviderClass(TchrPosts_SclGrp.class);
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStdtDeleteSclGrp".equals(testMethod.getName())) {
+            System.out.println("Inside testStdtDeleteSclGrp");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

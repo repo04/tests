@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
+import runThrghTestNG.PES_CleanTestData;
 
 public class WorkingGroup extends BaseClass {
 
@@ -38,37 +39,30 @@ public class WorkingGroup extends BaseClass {
     }
 
     /**
-     * PesAdmin can add 'n' number of members to Working Group
-     * 
-     * @param members 
+     * PesAdmin adds 'n' number of members to Working Group
+     *
+     * @param members
      */
     public void addMbrsToWrkngGrp(String[] members) {
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnEditWrkngGrpXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("btnEditWrkngGrpXPATH"))).click();
-        ip.isElementPresentContainsTextByXPATH(driver, "Manage Members");
-        driver.findElement(By.xpath("//*[contains(text(),'Manage Members')]")).click();
 
-        //GU servers can take up to 6 minutes for this to load.  Known issue.
-        int wait = 600;
-        ip.isTextPresentByXPATH(driver, "//td[2]/h3", "Members", wait);
-        ip.isTextPresentByXPATH(driver, "//td[4]/h3", "Non Members", wait);
+        mbrsToWrkngGrp();
 
-        Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("slctMbrsXPATH"))));
+        Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("addMbrsXPATH"))));
         String fullNm = null;
-        
+
         for (String mbr : members) {
             sw:
-                switch (mbr.substring(0, 7))  {
-                    case "teacher":
-                        fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
-                        break sw;
-                    case "student":
-                        fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
-                        break sw;
-                    default:
-                        SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
-                }
-            
+            switch (mbr.substring(0, 7)) {
+                case "teacher":
+                    fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
+                    break sw;
+                case "student":
+                    fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
+                    break sw;
+                default:
+                    SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
+            }
+
             select.selectByVisibleText(fullNm);
         }
         driver.findElement(By.xpath(av.getTokenValue("lnkAddMbrXPATH"))).click();
@@ -77,9 +71,49 @@ public class WorkingGroup extends BaseClass {
     }
 
     /**
+     * PesAdmin removes 'n' number of members from Working Group
+     *
+     * @param members
+     */
+    public void rmvMbrsFrmWrkngGrp(String[] members) {
+
+        mbrsToWrkngGrp();
+
+        Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("rmvMbrsXPATH"))));
+        String fullNm = null;
+        
+        for (String mbr : members) {
+            sw:
+            switch (mbr.substring(0, 7)) {
+                case "teacher":
+                    if (PES_CleanTestData.status) {
+                        fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
+                    } else {
+                        fullNm = mbr + "fstNm " + mbr + "sndNm()";
+                    }
+                    break sw;
+                case "student":
+                    if (PES_CleanTestData.status) {
+                        fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
+                    } else {
+                        fullNm = mbr + "fstNm " + mbr + "sndNm()";
+                    }
+                    break sw;
+                default:
+                    SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
+            }
+
+            select.selectByVisibleText(fullNm);
+        }
+        driver.findElement(By.xpath(av.getTokenValue("lnkRmvMbrXPATH"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("btnSaveMbrsXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The group members were updated successfully.");
+    }
+
+    /**
      * Creates GoogleDoc
-     * 
-     * @param wrkngGrp 
+     *
+     * @param wrkngGrp
      */
     public void createGoogleDoc(String wrkngGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
@@ -95,18 +129,18 @@ public class WorkingGroup extends BaseClass {
         String gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
         driver.findElement(By.xpath(av.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(gglDocName);
         driver.findElement(By.xpath(av.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
-        
+
         //Incase checkbox for Collaborators is not selected
         Boolean bool = driver.findElement(By.xpath(av.getTokenValue("chckbxCllbrtrsXPATH"))).isSelected();
         if (!bool) {
             driver.findElement(By.xpath(av.getTokenValue("chckbxCllbrtrsXPATH"))).click();
         }
-        
+
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtGglDoc"))).click();
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
         WebElement gglUsrNm = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")));
-        WebElement gglPswd =  driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH")));
-        
+        WebElement gglPswd = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH")));
+
         //This is to verify gglUsrID field passes correct value 
         value:
         while (true) {
@@ -125,6 +159,23 @@ public class WorkingGroup extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
 
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
+    }
+
+    /**
+     * Navigate to Working Group Add/Remove Screen
+     */
+    private void mbrsToWrkngGrp() {
+
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnEditWrkngGrpXPATH"));
+        driver.findElement(By.xpath(av.getTokenValue("btnEditWrkngGrpXPATH"))).click();
+        ip.isElementPresentContainsTextByXPATH(driver, "Manage Members");
+        driver.findElement(By.xpath("//*[contains(text(),'Manage Members')]")).click();
+
+        //GU servers can take up to 6 minutes for this to load.  Known issue.
+        int wait = 600;
+        ip.isTextPresentByXPATH(driver, "//td[2]/h3", "Members", wait);
+        ip.isTextPresentByXPATH(driver, "//td[4]/h3", "Non Members", wait);
+
     }
 
     /**

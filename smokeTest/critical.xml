@@ -23,7 +23,8 @@
                     <exclude name="testStdtVrfyActivities"/>
                 </methods>
             </class>
-            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>                                  
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/> 
+            <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>                                              
         </classes>
     </test>    
 </suite>

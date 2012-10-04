@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="Staging-SmokeSuite">
-    <listeners>
-        <listener class-name="runThrghTestNG.TransformDebug"/>
-    </listeners>
-    <test name="SmokeTests" preserve-order="true" parallel="false">
+<suite name="Staging-DebugSuite">
+    <test name="DebugTests" preserve-order="true" parallel="false">
         <parameter name="grpCrsName" value="SmkTstGrpCrs Sep 29, 2012 6:37 PM"/>
         <parameter name="tchrUsrName" value="teacher2909-1839"/>
         <parameter name="stdtUsrName" value="student2909-1840"/>
-        <parameter name="wrkngGrpName" value=""/>
+        <parameter name="wrkngGrpName" value="working group 26 september"/>
         <parameter name="tchrUrlCrsPost" value=""/>
         <parameter name="tchrSclGrpName" value=""/>
         <parameter name="frmActvyName" value=""/>
@@ -60,18 +57,24 @@
                     <include name="testStdtVrfyWrkGrp_GglDoc"/>
                 </methods>
             </class>
-            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp">
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp">                
                 <methods>
                     <include name="testTchrJoinsStdtSclGrp"/>
                     <include name="testTchrDeleteSclGrp"/>
                     <include name="testTchrLeavesStdtSclGrp"/>
                 </methods>
             </class>
-            <class name="runThrghTestNG.VrfyEml_Ntfctn">
+            <class name="runThrghTestNG.Stdt_DeleteSclGrp">                
                 <methods>
-                    <include name="testVerifyEmail"/>
+                    <include name="testStdtDeleteSclGrp"/>                    
                 </methods>
             </class>
+            <class name="runThrghTestNG.PES_CleanTestData">                
+                <methods>
+                    <include name="testUnerolUsers"/>
+                    <include name="testRemoveMbrsFrmWrkngGrp"/>                    
+                </methods>
+            </class>            
         </classes>
     </test>
 </suite>

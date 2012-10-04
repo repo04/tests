@@ -42,8 +42,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp"})
-    @Test
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class)
     public void testStdtJoinsTchrSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(tchrSclGrpName);
@@ -55,8 +54,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"testStdtJoinsTchrSclGrp"})
-    @Test
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class)
     public void testStdtPostURLOnTchrSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(tchrSclGrpName);
@@ -70,8 +68,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class, dependsOnMethods = {"runThrghTestNG.TchrPosts_SclGrp.testTchrPostsOn_Wall_CrsWall"})
-    @Test
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class)
     public void testStdtCmntOnTchrCrsPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.selectGrpCourse(grpCrsName);
         stdtTxtCmntOnTchrCrsPost = a.textCmntPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");

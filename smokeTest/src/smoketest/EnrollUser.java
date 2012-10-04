@@ -14,6 +14,12 @@ import runThrghTestNG.BaseClass;
 
 public class EnrollUser extends BaseClass {
 
+    /**
+     * Enroll/Assign user to group course
+     * 
+     * @param user
+     * @param grpCrs 
+     */
     public void toRole_Crs(String user, String grpCrs) {
 
         String userRole = null;
@@ -64,7 +70,46 @@ public class EnrollUser extends BaseClass {
         //Verify user's role & course
         verifyUsrRole_Course(user, userRole, grpCrs);
     }
+    
+    /**
+     * Unassign users from group course
+     * 
+     * @param stdtUsrName
+     * @param tchrUsrName 
+     */
+    public void frmCourse(String stdtUsrName, String tchrUsrName) {
+        
+        String stdtFllNm = stdtUsrName + "fstNm " + stdtUsrName + "sndNm";
+        String tchrFllNm = tchrUsrName + "fstNm " + tchrUsrName + "sndNm";
+        
+        driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnEnrlUsrs"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("slctEnrlmntMthd"))));
+        new Select(driver.findElement(By.xpath(av.getTokenValue("slctEnrlmntMthd")))).selectByVisibleText("Manual enrolments");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkScndNameXPATH"))));
+        driver.findElement(By.xpath(av.getTokenValue("linkScndNameXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(av.getTokenValue("chckBxUnrolFrstUsrXpath"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(av.getTokenValue("chckBxUnrolScndUsrXpath"))));
+        driver.findElement(By.xpath(av.getTokenValue("chckBxUnrolFrstUsrXpath"))).click();
+        driver.findElement(By.xpath(av.getTokenValue("chckBxUnrolScndUsrXpath"))).click();
+        new Select(driver.findElement(By.xpath(av.getTokenValue("slctUnrolUsers")))).selectByValue("deleteselectedusers");
+        driver.findElement(By.xpath(av.getTokenValue("goUnrolUsers"))).click();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblEnrollUsersXPATH"), "Delete selected user enrolments");
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("txtStdtUnrolXPATH"), stdtFllNm);
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("txtTchrUnrolXPATH"), tchrFllNm);
+        driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(av.getTokenValue("chckBxUnrolFrstUsrXpath"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(av.getTokenValue("chckBxUnrolScndUsrXpath"))));        
+    }
 
+    /**
+     * Verify user's role & course
+     * 
+     * @param user
+     * @param userRole
+     * @param grpCrs 
+     */
     private void verifyUsrRole_Course(String user, String userRole, String grpCrs) {
 
         driver.findElement(By.xpath(av.getTokenValue("lftPnlSiteAdminLnkVrfyUsrRoleCrsXPATH"))).click();
@@ -102,5 +147,5 @@ public class EnrollUser extends BaseClass {
         }
 
         ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyUsrGrpCrsXPATH"), grpCrs);
-    }
+    }    
 }

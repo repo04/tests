@@ -63,6 +63,12 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Users(context));
     }
 
+    @DataProvider(name = "GrpCrsWrkngGrpUsers")
+    public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsUsers");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), WrkngGrp(context), Users(context));
+    }
+
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Student logs in, PES Admin Logs in
@@ -82,9 +88,6 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @Test
     public void testUsrCrtn() throws Exception {
 
-        /*usrsArray[0][0] = "teacher0310-1433";
-         usrsArray[0][1] = "student0310-1433";*/
-
         a.navigateToMyContacts();
         usrsArray[0][0] = a.createUser("teacher");
         System.out.println("tchrUsrName: " + usrsArray[0][0]);
@@ -101,8 +104,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "GrpCrsUsers", dependsOnMethods = {"runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation", "testUsrCrtn"})
-    @Test
+    @Test(dataProvider = "GrpCrsUsers")
     public void testAsgnRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
 
         a.navigateToMyCourse();
@@ -122,8 +124,6 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @Test
     public void testCrtWrkgnGrp() throws Exception {
 
-        //wrkngGrpArray[0][0] = "SmkTstWrkngGrp Oct 3, 2012 2:32 PM";
-
         a.navigateToWorkingGroups();
         wrkngGrpArray[0][0] = a.createWorkingGroup();
         System.out.println("wrkngGrp: " + wrkngGrpArray[0][0]);
@@ -135,8 +135,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "WrkngGrpUsers", dependsOnMethods = {"testCrtWrkgnGrp", "testAsgnRole"})
-    @Test
+    @Test(dataProvider = "WrkngGrpUsers")
     public void testAddMbrsToWrkngGrp(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
