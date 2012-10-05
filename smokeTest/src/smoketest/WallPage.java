@@ -96,6 +96,7 @@ public class WallPage extends BaseClass {
      * @param txtCmntOnTchrCrsPst
      */
     public void textCmntPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
+        textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlCrsPost);
         driver.findElement(By.xpath("//a/label")).click();
         WebElement cmntTxtArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//li/div/div/div/textarea")));
