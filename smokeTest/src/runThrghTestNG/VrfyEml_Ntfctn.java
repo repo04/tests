@@ -35,7 +35,7 @@ public class VrfyEml_Ntfctn extends BaseClass {
      * @throws Exception
      */
     @BeforeClass
-    public void testCntntAdminLgn() throws Exception {
+    public void testTchrEmailLgn() throws Exception {
         driver.get("https://mail.google.com/");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
         WebElement gglUsrNm = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")));
