@@ -7,9 +7,12 @@ package smoketest;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
-
 
 public class Activity extends BaseClass {
 
@@ -30,7 +33,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Forum");
         createActivity(forumName, forumIntro);
-        
+
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngActvtyTextXPATH"), forumIntro);
     }
 
@@ -45,7 +48,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
         createActivity(quizName, quizIntro);
-        
+
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
     }
 
@@ -60,7 +63,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
         createActivity(allInOneAsgnmntName, allInOneAsgnmntIntro);
-        
+
         ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngActvtyTextXPATH"), allInOneAsgnmntIntro);
     }
 
@@ -75,7 +78,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, av.getTokenValue("slctAddRescXPATH"));
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctAddRescXPATH")))).selectByVisibleText("Page");
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldActvyNameXPATH"));
-        
+
         driver.findElement(By.xpath(av.getTokenValue("fieldActvyNameXPATH"))).sendKeys(pageName);
         driver.findElement(By.xpath(av.getTokenValue("fieldRescContentXPATH"))).sendKeys(pageContent);
         driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
@@ -84,14 +87,28 @@ public class Activity extends BaseClass {
 
     /**
      * Create Activity
-     * 
+     *
      * @param forumName
-     * @param forumIntro 
+     * @param forumIntro
      */
     private void createActivity(String forumName, String forumIntro) {
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldActvyNameXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldActvyNameXPATH"))).sendKeys(forumName);
-        driver.findElement(By.xpath(av.getTokenValue("fieldActvyIntroXPATH"))).sendKeys(forumIntro);
+        WebElement actvtyNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldActvyNameXPATH"))));
+        WebElement actvtyIntroNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldActvyIntroXPATH"))));
+
+        //This is to verify actvtyName passes correct value 
+        value:
+        while (true) {
+            actvtyNm.clear();
+            actvtyIntroNm.clear();
+            actvtyNm.sendKeys(forumName);
+            actvtyIntroNm.sendKeys(forumIntro);
+            try {
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(av.getTokenValue("fieldActvyNameXPATH")), forumName));
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(av.getTokenValue("fieldActvyIntroXPATH")), forumIntro));
+                break value;
+            } catch (TimeoutException e) {
+            }
+        }
         driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
     }
 

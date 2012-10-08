@@ -1,6 +1,8 @@
 package smoketest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class Actions extends BaseClass {
@@ -397,7 +399,7 @@ public class Actions extends BaseClass {
      * Navigate to Activity Report page
      */
     public void navigateToActvtyRprt() {
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnLftPnlActvyRprtXPATH"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnLftPnlActvyRprtXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
         ip.isTextPresentByCSS(driver, av.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
     }
@@ -456,7 +458,8 @@ public class Actions extends BaseClass {
     public void vrfyWrkngGrp_GglDoc(String wrkngGrp, String gglDocName) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("lnkLftPnlFilesXPATH"));
+        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }

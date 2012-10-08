@@ -3,7 +3,9 @@ package smoketest;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class Course extends BaseClass {
@@ -21,6 +23,7 @@ public class Course extends BaseClass {
 
         this.crsName = "SmkTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String crsShrtName = "ShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnAddNewCrs"))));
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnAddNewCrs"));
 
         //Navigate to Create Course Screen
@@ -61,7 +64,9 @@ public class Course extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, courseName);
 
         //Naviagte to Group Course page
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsrsLnkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrsLnkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlGrpsLinkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlGrpsLinkXPATH"))).click();
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtGrpCrs"));
         driver.findElement(By.xpath(av.getTokenValue("btnCrtGrpCrs"))).click();
@@ -80,7 +85,9 @@ public class Course extends BaseClass {
      * Navigate to Add/Edit Course Page
      */
     public void setUpCrsPage() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlCrsLinkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlCrsLinkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAddEditCrsXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAddEditCrsXPATH"))).click();
     }
 

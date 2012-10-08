@@ -59,7 +59,9 @@ public class PES_CleanTestData extends BaseClass {
     public void testRemoveMbrsFrmWrkngGrp(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkScndNameXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("linkScndNameXPATH"))).click();

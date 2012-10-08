@@ -24,7 +24,9 @@ public class EnrollUser extends BaseClass {
 
         String userRole = null;
 
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
 
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnEnrlUsrs"))));
@@ -82,8 +84,11 @@ public class EnrollUser extends BaseClass {
         String stdtFllNm = stdtUsrName + "fstNm " + stdtUsrName + "sndNm";
         String tchrFllNm = tchrUsrName + "fstNm " + tchrUsrName + "sndNm";
         
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
+
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnEnrlUsrs"))));
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("slctEnrlmntMthd"))));
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctEnrlmntMthd")))).selectByVisibleText("Manual enrolments");
@@ -112,9 +117,13 @@ public class EnrollUser extends BaseClass {
      */
     private void verifyUsrRole_Course(String user, String userRole, String grpCrs) {
 
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlSiteAdminLnkVrfyUsrRoleCrsXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlSiteAdminLnkVrfyUsrRoleCrsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsrsLnkVrfyUsrRoleCrsXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrsLnkVrfyUsrRoleCrsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAcntsLnkUsrRoleCrsXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAcntsLnkUsrRoleCrsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlBrwsUsrVrfyUsrRoleCrsXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlBrwsUsrVrfyUsrRoleCrsXPATH"))).click();
         
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))));

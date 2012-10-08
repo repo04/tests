@@ -59,7 +59,7 @@ public class TransformSmoke implements IAnnotationTransformer {
         if ("testTchrPostsOn_Wall_CrsWall".equals(testMethod.getName())) {
             System.out.println("Inside testTchrPostsOn_Wall_CrsWall");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Crs_GrpCrsCreation.testCrsGrpCrs_Creation";
+            DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 

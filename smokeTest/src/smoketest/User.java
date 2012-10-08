@@ -8,7 +8,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class User extends BaseClass {
@@ -37,9 +39,13 @@ public class User extends BaseClass {
                 this.userName = "teacher" + dateFormat.format(now);
         }
 
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlSiteAdminXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlSiteAdminXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsersXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlUsersXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAccntsXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAccntsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAddNwUsrXPATH"))));
         driver.findElement(By.xpath(av.getTokenValue("lftPnlAddNwUsrXPATH"))).click();
 
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldUsrnmXPATH"));

@@ -121,7 +121,7 @@ public class VrfyEml_Ntfctn extends BaseClass {
      * @throws Exception
      */
     @AfterClass
-    public void testCntntAdminLogOut() throws Exception {
+    public void testTchrEmailLogOut() throws Exception {
         Utility.navigateToSubMenu(driver, "//td[2]/a");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
     }
