@@ -34,7 +34,7 @@ public class LoginPage extends BaseClass {
             //Teacher/Student
             default:
                 userName.sendKeys(user);
-                passWord.sendKeys("Tech@123");
+                passWord.sendKeys("Moodle1!");
                 break;
         }
 

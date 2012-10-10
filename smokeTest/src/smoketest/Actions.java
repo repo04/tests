@@ -415,6 +415,16 @@ public class Actions extends BaseClass {
             ip.isElementPresentContainsTextByXPATH(driver, activity);
         }
     }
+    
+    /**
+     * Student submits True/False quiz
+     * 
+     * @param quizActvtyName 
+     */
+    public void submitQuiz(String quizActvtyName) {
+        Activity actvty = new Activity();
+        actvty.submitQuiz(quizActvtyName);
+    }
 
     /**
      * Navigate to WorkingGroup's Wall

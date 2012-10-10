@@ -28,9 +28,11 @@ public class SocialGroup extends BaseClass {
         //Split username
         switch (user.substring(0, 7)) {
             case "student":
+            case "autostu":
                 this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             case "teacher":
+            case "autotea":
                 this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             default:

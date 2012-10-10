@@ -19,15 +19,14 @@ import smoketest.Actions;
  */
 public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
-    static String[][] stdtSclGrpArray = new String[1][1];
+    static String[][] stdtSclGrpArray = new String[1][1];    
     Actions a = new Actions();
 
     @DataProvider(name = "StdtSclGrp")
     public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
 
         System.out.println("init StdtSclGrp");
-
-
+        
         if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
             System.out.println("if StdtSclGrp: " + test);
             return (stdtSclGrpArray);
@@ -100,6 +99,19 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
         a.selectGrpCourse(grpCrsName);
         a.navigateToActvtyRprt();
         a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+    }
+
+    /**
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsQz", dataProviderClass = Crs_GrpCrsCreation.class)
+    public void testSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToActvtyRprt();
+        a.submitQuiz(quizActvtyName);
     }
 
     /**

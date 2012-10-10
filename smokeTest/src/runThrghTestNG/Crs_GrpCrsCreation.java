@@ -23,6 +23,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String crsName;
     Actions a = new Actions();
     static String[][] crsArray = new String[1][1];
+    static String[][] qzNameArray = new String[1][1];
     static String[][] actvtsArray = new String[1][4];
 
     @DataProvider(name = "Course")
@@ -52,10 +53,28 @@ public class Crs_GrpCrsCreation extends BaseClass {
         }
     }
 
+    @DataProvider(name = "QuizName")
+    public static Object[][] QuizName(ITestContext context) throws Exception {
+
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("Inside QuizName: " + test);
+            return (qzNameArray);
+        } else {
+            System.out.println("Inside QuizName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("quizActvtyName")}};
+        }
+    }
+
     @DataProvider(name = "GrpCrsActivities")
     public static Iterator<Object[]> GrpCrsActivities(ITestContext context) throws Exception {
         System.out.println("init GrpCrsActivities");
         return DataProviderUtil.cartesianProviderFrom(Course(context), Activites(context));
+    }
+    
+    @DataProvider(name = "GrpCrsQz")
+    public static Iterator<Object[]> GrpCrsQz(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsQz");
+        return DataProviderUtil.cartesianProviderFrom(Course(context), QuizName(context));
     }
 
     /**
@@ -105,6 +124,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         actvtsArray[0][1] = a.createQuizActivity();
+        qzNameArray[0][0] = actvtsArray[0][1];
         System.out.println("quizActvtyName: " + actvtsArray[0][1]);
         Reporter.log("quizActvtyName: " + actvtsArray[0][1]);
 

@@ -54,9 +54,11 @@ public class WorkingGroup extends BaseClass {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
+                case "autotea":
                     fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
                     break sw;
                 case "student":
+                case "autostu":
                     fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
                     break sw;
                 default:
@@ -81,11 +83,12 @@ public class WorkingGroup extends BaseClass {
 
         Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("rmvMbrsXPATH"))));
         String fullNm = null;
-        
+
         for (String mbr : members) {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
+                case "autotea":
                     if (PES_CleanTestData.status) {
                         fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
                     } else {
@@ -93,6 +96,7 @@ public class WorkingGroup extends BaseClass {
                     }
                     break sw;
                 case "student":
+                case "autostu":
                     if (PES_CleanTestData.status) {
                         fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
                     } else {

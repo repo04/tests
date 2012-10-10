@@ -16,18 +16,19 @@ public class LiveSession extends BaseClass {
 
     /**
      * Create & verify Live Session in
-     * 
-     * @param sclGrpName 
+     *
+     * @param sclGrpName
      */
     public void buildLiveSession(String sclGrpName) {
 
         String user = LoginPage.getUser();
-        String liveSsnNm = null;  
+        String liveSsnNm = null;
         DateFormat dateFormat;
-        
+
         //Split username
         switch (user.substring(0, 7)) {
             case "student":
+            case "autostu":
                 liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 break;
             default:
@@ -45,7 +46,7 @@ public class LiveSession extends BaseClass {
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldLvSsnDescXPATH"))));
         dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println(dateFormat.format(now));
-        
+
         //This is to verify lvSsnName field passes correct value 
         value:
         while (true) {
@@ -66,6 +67,7 @@ public class LiveSession extends BaseClass {
         //Verify LiveSession created or not
         switch (user.substring(0, 7)) {
             case "student":
+            case "autostu":
                 ip.isTextPresentByXPATH(driver, av.getTokenValue("stdtLvSsnInTchrSclGrpXPATH"), liveSsnNm);
                 break;
             default:

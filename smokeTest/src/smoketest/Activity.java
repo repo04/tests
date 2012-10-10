@@ -113,6 +113,45 @@ public class Activity extends BaseClass {
     }
 
     /**
+     * Submits true/false quiz
+     * 
+     * @param quizActvtyName
+     */
+    public void submitQuiz(String quizActvtyName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActvtyName + "')]")).click();
+        
+        int i;
+        click:
+        for (i = 1; i < 100; i++) {
+            try {
+                new WebDriverWait(driver, 60).until(ExpectedConditions.
+                        presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
+                System.out.println("i value: " + i);
+            } catch (TimeoutException e) {
+                System.out.println("catch i value: " + i);
+                break click;
+            }
+        }
+        
+        ip.isElementPresentByXPATH(driver, "//div/input");
+        driver.findElement(By.xpath("//div/input")).click();
+        ip.isTextPresentByXPATH(driver, "//form/div/div/div[2]/div/div", "NewYork is capital of USA?");
+        driver.findElement(By.xpath("//div[2]/input")).click();
+        driver.findElement(By.xpath("//div[2]/div[2]/a")).click();
+        ip.isTextPresentByXPATH(driver, "//h3", "Summary of attempt");
+        driver.findElement(By.xpath("//div/input")).click();
+        ip.isTextPresentByXPATH(driver, "//div/div[2]", "Once you submit, you will no longer be able to "
+                + "change your answers for this attempt.");
+        driver.findElement(By.xpath("//button[2]")).click();
+        ip.isTextPresentByXPATH(driver, "//tr[4]/td", "1.00 out of a maximum of 1.00 (100%)");
+        ip.isElementPresentByXPATH(driver, "//div[2]/img");
+        driver.findElement(By.xpath("//*[contains(text(),'Finish review')]")).click();
+        ip.isTextPresentByXPATH(driver, "//tr[" + i + "]/td[3]", "(100%)");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.
+                presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));      
+    }
+
+    /**
      * @return ForumName
      */
     public String getFrmActvyName() {

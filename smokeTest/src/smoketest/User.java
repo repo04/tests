@@ -32,6 +32,7 @@ public class User extends BaseClass {
         switch (user) {
 
             case "student":
+            case "autostu":
                 this.userName = "student" + dateFormat.format(now);
                 break;
 

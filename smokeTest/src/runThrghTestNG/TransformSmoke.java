@@ -55,20 +55,14 @@ public class TransformSmoke implements IAnnotationTransformer {
             DependentMethods[1] = "testAsgnRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
-             
-        if ("testTchrPostsOn_Wall_CrsWall".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrPostsOn_Wall_CrsWall");
+
+        if ("testTchrPostsOn_Wall_CrsWall".equals(testMethod.getName())
+                || "testTchrCrtSclGrp".equals(testMethod.getName())
+                || "testStdtCrtSclGrp".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole";
             annotation.setDependsOnMethods(DependentMethods);
-        }
-
-        if ("testTchrCrtSclGrp".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrCrtSclGrp");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "testTchrPostsOn_Wall_CrsWall";
-            annotation.setDependsOnMethods(DependentMethods);
-            annotation.setAlwaysRun(true);
         }
 
         if ("testStdtJoinsTchrSclGrp".equals(testMethod.getName())) {
@@ -106,7 +100,8 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTchrVrfyActivities".equals(testMethod.getName()) || "testStdtVrfyActivities".equals(testMethod.getName())) {
+        if ("testTchrVrfyActivities".equals(testMethod.getName())
+                || "testStdtVrfyActivities".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole";
@@ -116,8 +111,9 @@ public class TransformSmoke implements IAnnotationTransformer {
 
         if ("testStdtCrtLvSsn".equals(testMethod.getName())) {
             System.out.println("Inside testStdtCrtLvSsn");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn";
+            DependentMethods = new String[2];
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
+            DependentMethods[1] = "runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -148,7 +144,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
-        
+
         if ("testStdtDeleteSclGrp".equals(testMethod.getName())) {
             System.out.println("Inside testStdtDeleteSclGrp");
             DependentMethods = new String[1];
