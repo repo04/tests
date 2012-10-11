@@ -152,9 +152,8 @@ public class Crs_GrpCrsCreation extends BaseClass {
     public void testAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
-        a.navigateToActvtyRprt();
         a.addQuizQuestion(quizActvtyName);
-    }  
+    }
     
 
     /**
