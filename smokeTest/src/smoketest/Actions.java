@@ -417,7 +417,17 @@ public class Actions extends BaseClass {
     }
     
     /**
-     * Student submits True/False quiz
+     * Add True/False question to Quiz Activity
+     * 
+     * @param quizActvtyName 
+     */
+    public void addQuizQuestion(String quizActvtyName) {
+        Activity actvty = new Activity();
+        actvty.addQuizQuestion(quizActvtyName);
+    }
+    
+    /**
+     * User attempt to 'True/False' question in Quiz Assignment
      * 
      * @param quizActvtyName 
      */

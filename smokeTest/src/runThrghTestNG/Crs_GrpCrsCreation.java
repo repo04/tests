@@ -140,6 +140,22 @@ public class Crs_GrpCrsCreation extends BaseClass {
         System.out.println("pageActvtyName: " + actvtsArray[0][3]);
         Reporter.log("pageActvtyName: " + actvtsArray[0][3]);
     }
+    
+    /**
+     * Add True/False question to Quiz Activity
+     * 
+     * @param grpCrsName
+     * @param quizName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsQz")
+    public void testAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToActvtyRprt();
+        a.addQuizQuestion(quizActvtyName);
+    }  
+    
 
     /**
      * The annotated method will be run after all the test methods in the

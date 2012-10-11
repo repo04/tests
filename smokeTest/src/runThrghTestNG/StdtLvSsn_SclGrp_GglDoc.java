@@ -102,7 +102,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
     }
 
     /**
-     *
+     * User attempt to 'True/False' question in Quiz Assignment
+     * 
      * @param grpCrsName
      * @throws Exception
      */

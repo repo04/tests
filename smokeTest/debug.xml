@@ -18,13 +18,14 @@
         <parameter name="gglDocName" value=""/>
         <parameter name="stdtSclGrpName" value="SmkTstStdtSclGrp Oct 3, 2012 5:42 PM"/>
         <classes>
-            <!--class name="runThrghTestNG.Crs_GrpCrsCreation">
+            <class name="runThrghTestNG.Crs_GrpCrsCreation">
                 <methods>
-                    <include name="testCrsGrpCrs_Creation"/>
-                    <include name="testActivities_Creation"/>
+                    <!--include name="testCrsGrpCrs_Creation"/>
+                    <include name="testActivities_Creation"/-->
+                    <include name="testAddQuizQuestion"/>
                 </methods>
-            </class>            
-            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
+            </class>           
+            <!--class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
                 <methods>
                     <include name="testCrtWrkgnGrp"/>
                     <include name="testUsrCrtn"/>

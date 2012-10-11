@@ -11,10 +11,7 @@
             <class name="runThrghTestNG.TchrPosts_SclGrp"/>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>
-            <methods>
-                <exclude name="testSubmitQuiz"/>
-            </methods>
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <!--class name="runThrghTestNG.VrfyEml_Ntfctn"/-->
