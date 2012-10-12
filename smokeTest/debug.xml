@@ -8,7 +8,7 @@
         <parameter name="tchrUsrName" value="autoteacher1"/>
         <parameter name="stdtUsrName" value="autostudent1"/>
         <parameter name="grpCrsName" value="AutoGroupCourse"/>
-        <parameter name="wrkngGrpName" value="working group 26 september"/>
+        <parameter name="wrkngGrpName" value="SmkTstWrkngGrp Oct 11, 2012 7:40 PM"/>
         <parameter name="tchrUrlCrsPost" value=""/>
         <parameter name="tchrSclGrpName" value=""/>
         <parameter name="frmActvyName" value=""/>
@@ -18,14 +18,14 @@
         <parameter name="gglDocName" value=""/>
         <parameter name="stdtSclGrpName" value="SmkTstStdtSclGrp Oct 3, 2012 5:42 PM"/>
         <classes>
-            <class name="runThrghTestNG.Crs_GrpCrsCreation">
+            <!--class name="runThrghTestNG.Crs_GrpCrsCreation">
                 <methods>
-                    <!--include name="testCrsGrpCrs_Creation"/>
-                    <include name="testActivities_Creation"/-->
+                    <include name="testCrsGrpCrs_Creation"/>
+                    <include name="testActivities_Creation"/>
                     <include name="testAddQuizQuestion"/>
                 </methods>
             </class>           
-            <!--class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
+            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
                 <methods>
                     <include name="testCrtWrkgnGrp"/>
                     <include name="testUsrCrtn"/>
@@ -45,24 +45,24 @@
                     <include name="testStdtJoinsTchrSclGrp"/>
                     <include name="testStdtPostURLOnTchrSclGrp"/>
                 </methods>
-            </class>
+            </class-->
             <class name="runThrghTestNG.TchrLvSsn_GglDoc">
                 <methods>
-                    <include name="testTchrCrtLvSsn"/>
-                    <include name="testTchrVrfyActivities"/>
+                    <!--include name="testTchrCrtLvSsn"/>
+                    <include name="testTchrVrfyActivities"/-->
                     <include name="testTchrCrtGglDoc"/>
                 </methods>
-            </class-->
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
+            </class>
+            <!--class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
                 <methods>
-                    <!--include name="testStdtCrtSclGrp"/>
+                    <include name="testStdtCrtSclGrp"/>
                     <include name="testStdtCrtLvSsn"/>
-                    <include name="testStdtVrfyActivities"/-->
+                    <include name="testStdtVrfyActivities"/>
                     <include name="testSubmitQuiz"/>
-                    <!--include name="testStdtVrfyWrkGrp_GglDoc"/-->                    
+                    <include name="testStdtVrfyWrkGrp_GglDoc"/>                    
                 </methods>
             </class>
-            <!--class name="runThrghTestNG.TchrJoin_Delete_SclGrp">                
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp">                
                 <methods>
                     <include name="testTchrJoinsStdtSclGrp"/>
                     <include name="testTchrDeleteSclGrp"/>

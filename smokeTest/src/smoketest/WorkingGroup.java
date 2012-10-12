@@ -165,15 +165,18 @@ public class WorkingGroup extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
 
         String HandleBefore = driver.getWindowHandle();
+        int i = 1;
         for (String handle : driver.getWindowHandles()) {
             System.out.println("window handle: " + handle);
             driver.switchTo().window(handle);
-            if (driver.getTitle().contains(gglDocName + " - Google Docs")) {
+            if (i == driver.getWindowHandles().size()) {
+                ip.isTitlePresent(driver, gglDocName + " - Google Docs");
                 ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
                 Utility.navigateToSubMenu(driver, av.getTokenValue("btnGglDocSgnOutXPATH"));
                 ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
                 driver.close();
             }
+            i++;
         }
         driver.switchTo().window(HandleBefore);
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
