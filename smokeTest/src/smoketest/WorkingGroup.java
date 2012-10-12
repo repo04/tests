@@ -170,11 +170,19 @@ public class WorkingGroup extends BaseClass {
             System.out.println("window handle: " + handle);
             driver.switchTo().window(handle);
             if (i == driver.getWindowHandles().size()) {
-                ip.isTitlePresent(driver, gglDocName + " - Google Docs");
-                ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
-                Utility.navigateToSubMenu(driver, av.getTokenValue("btnGglDocSgnOutXPATH"));
-                ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
-                driver.close();
+                try {
+                    System.out.println("inside google window");
+                    ip.isTitlePresent(driver, gglDocName + " - Google Dcs");
+                    ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
+                    Utility.navigateToSubMenu(driver, av.getTokenValue("btnGglDocSgnOutXPATH"));
+                    ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
+                    driver.close();
+                } catch (Exception e) {
+                    System.out.println("GglDoc exptn");
+                    driver.close();
+                    driver.switchTo().window(HandleBefore);
+                    throw e;
+                }
             }
             i++;
         }

@@ -16,7 +16,7 @@
         <parameter name="allInOneAsgnmntAvtvtyName" value=""/>
         <parameter name="pageActvtyName" value=""/>
         <parameter name="gglDocName" value=""/>
-        <parameter name="stdtSclGrpName" value="SmkTstStdtSclGrp Oct 3, 2012 5:42 PM"/>
+        <parameter name="stdtSclGrpName" value="SmkTstStdtSclGrp Oct 12, 2012 8:03 PM"/>
         <classes>
             <!--class name="runThrghTestNG.Crs_GrpCrsCreation">
                 <methods>
@@ -68,13 +68,13 @@
                     <include name="testTchrDeleteSclGrp"/>
                     <include name="testTchrLeavesStdtSclGrp"/>
                 </methods>
-            </class>
+            </class-->
             <class name="runThrghTestNG.Stdt_DeleteSclGrp">                
                 <methods>
                     <include name="testStdtDeleteSclGrp"/>                    
                 </methods>
             </class>
-            <class name="runThrghTestNG.PES_CleanTestData">                
+            <!--class name="runThrghTestNG.PES_CleanTestData">                
                 <methods>
                     <include name="testUnerolUsers"/>
                     <include name="testRemoveMbrsFrmWrkngGrp"/>                    
