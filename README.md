@@ -10,7 +10,7 @@ In order to execute Automation Project, you need to install JDK 1.7 or higher
 	 i> Download & install JDK 1.7 or higher specific to machine
 	    http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html
     ii> Set PATH & CLASSPATH
-   iii> Verify JDK is installed running 
+    iii> Verify JDK is installed running 
         a> java -version, RESULT as 
 		   java version "1.7.0_01"
 		   Java(TM) SE Runtime Environment (build 1.7.0_01-b08)
@@ -25,8 +25,8 @@ In order to execute Automation Project, you need to install ANT 1.8 or higher
 	 i> Download ANT 1.8 or higher specific to machine 
 		http://ant.apache.org/bindownload.cgi
     ii> After download ANT,extract zip package in (for example) C:\
-   iii> Set ANT_HOME
-        Ref: http://omrudi.wordpress.com/2008/11/08/how-to-install-ant-in-windows-xp/
+    iii> Set ANT_HOME
+         Ref: http://omrudi.wordpress.com/2008/11/08/how-to-install-ant-in-windows-xp/
     iv> Verify, running 
 	    a> ant -version, RESULT as 
 		Apache Ant(TM) version 1.8.4 compiled on May 22 2012
@@ -35,16 +35,16 @@ In order to execute Automation Project, you need to install ANT 1.8 or higher
 -------------------
 In order to execute Automation Project, you need to install GitBash
 
-	i> Download & install GIT BASH specific to machine
-	   https://help.github.com/articles/set-up-git#platform-all
-   ii> Verify GIT BASH is installed
-  iii> You must be the member of 2tor/tests project 
-       Ref: https://github.com/2tor/tests
-   iv> Navigate to directory using GIT BASH where you want to download the project. Once, at specific path execute following command
-       git clone https://github.com/2tor/tests.git OR
-       git clone git@github.com:2tor/tests.git <Enter your Login credentials>	   
-    v> Verify, project <tests> is downloaded
-   vi> Navigate to project, path where BUILD.XML is located is referred as BASEDIR  
+	 i> Download & install GIT BASH specific to machine
+	    https://help.github.com/articles/set-up-git#platform-all
+    ii> Verify GIT BASH is installed
+    iii> You must be the member of 2tor/tests project 
+         Ref: https://github.com/2tor/tests
+    iv> Navigate to directory using GIT BASH where you want to download the project. Once, at specific path execute following command
+        git clone https://github.com/2tor/tests.git OR
+        git clone git@github.com:2tor/tests.git <Enter your Login credentials>	   
+     v> Verify, project <tests> is downloaded
+    vi> Navigate to project, path where BUILD.XML is located is referred as BASEDIR  
 	
 4> Setup ANT's project specific JARS
 ------------------------------------
@@ -59,25 +59,26 @@ In order to execute Automation project, you need to copy jars to your Ant's clas
 In order to execute Automation project using CHROME Browser, you need to make file on unix server available to read, write, etc.
 
     i> Using GitBash, navigate to project <Basedir/lib/chromedriver_*>. '*' refer to machine/os (linux32 / linux64 / mac / win)
-   ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
-       http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux
+    ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
+        http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux
 	   
 6> Good to run Automation
 -------------------------
 After successfully executing above steps, you are good to run Automation
 
     i> Using GitBash, navigate to <Basedir>
-   ii> Run ANT command as follows
-       1> run target : runsmoke / runcritical / rundebug  –> Accepts only one target name at a time
-       2> parameters
+    ii> Run ANT command as follows
+        1> run target : runsmoke / runcritical / rundebug  –> Accepts only one target name at a time
+        2> parameters
 
          a> antPrgrm : gu / unc / usc / llm / vac / mpa {Program short name}  –> n number of program's delimited by ","
          b> antBrwsr: ff / chrome {browser name} –> n number of browser's delimited by ","
          c> antOS: win / linux32 / linux64 / mac {OS name} –> Only one OS name can be passed
-         Ant Command to run Suite:
+         
+		 Ant Command to run Suite:
 
-               ant runsmoke -DantPrgrm=gu,usc -DantBrwsr=chrome,ff -DantOS=win
-   iii> Each run will have separate reports folder {Basedir}\reports\{program}_{browser}
+         ant runsmoke -DantPrgrm=gu,usc -DantBrwsr=chrome,ff -DantOS=win
+    iii> Each run will have separate reports folder {Basedir}\reports\{program}_{browser}
     iv> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
 	
 -----------------------------------------------END--------------------------------------------------------------------------------------    
