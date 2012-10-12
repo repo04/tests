@@ -141,6 +141,7 @@ public class WorkingGroup extends BaseClass {
         }
 
         driver.findElement(By.xpath(av.getTokenValue("btnSbmtGglDoc"))).click();
+        ip.isTitlePresent(driver, "Google Accounts");
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
         WebElement gglUsrNm = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")));
         WebElement gglPswd = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH")));
@@ -159,9 +160,22 @@ public class WorkingGroup extends BaseClass {
             }
         }
         driver.findElement(By.xpath(av.getTokenValue("fieldGglDocSignInXPATH"))).click();
+        ip.isTitlePresent(driver, "My Account");
         ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocGrntAccessXPATH"));
         driver.findElement(By.xpath(av.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
 
+        String HandleBefore = driver.getWindowHandle();
+        for (String handle : driver.getWindowHandles()) {
+            System.out.println("window handle: " + handle);
+            driver.switchTo().window(handle);
+            if (driver.getTitle().contains(gglDocName + " - Google Docs")) {
+                ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
+                Utility.navigateToSubMenu(driver, av.getTokenValue("btnGglDocSgnOutXPATH"));
+                ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
+                driver.close();
+            }
+        }
+        driver.switchTo().window(HandleBefore);
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }
 

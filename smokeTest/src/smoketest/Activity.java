@@ -121,10 +121,8 @@ public class Activity extends BaseClass {
 
         ip.isElementPresentContainsTextByXPATH(driver, av.getTokenValue("lnkLftPnlTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + av.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("(//a[contains(text(),'Show Contents')])[1]")));
-        Utility.navigateToSubMenu(driver, "(//a[contains(text(),'Show Contents')])[1]");
         ip.isElementPresentContainsTextByXPATH(driver, quizActvtyName);
-        driver.findElement(By.xpath("//*[contains(text(),'" + quizActvtyName + "')]")).click();
+        Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + quizActvtyName + "')]");        
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnEditQzXPATH"));
         driver.findElement(By.xpath(av.getTokenValue("btnEditQzXPATH"))).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("txtEditQzScrnXPATH"), "Editing quiz: "+quizActvtyName);
