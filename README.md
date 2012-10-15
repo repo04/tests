@@ -1,6 +1,6 @@
  README
 --------------------------------------------------------------------------------------------------------------------------------------
-Welcome to QA Automation Project README.
+Welcome to QA Automation Project README.<br />
 The objective of the document is to describe the steps required to execute Automation vide multiple machines (OS's: WIN / LINUX / MAC)
 
 1> Install JDK 1.7 or higher
@@ -24,7 +24,7 @@ In order to execute Automation Project, you need to install JDK 1.7 or higher
 ----------------------------
 In order to execute Automation Project, you need to install ANT 1.8 or higher
 
-	  i> Download AN	T 1.8 or higher specific to machine 
+	  i> Download ANT 1.8 or higher specific to machine 
 		 http://ant.apache.org/bindownload.cgi
      ii> After download ANT,extract zip package in (for example) C:\
     iii> Set ANT_HOME
@@ -51,8 +51,8 @@ In order to execute Automation Project, you need to install GitBash
 	
 4> Setup ANT's project specific JARS
 ------------------------------------
-In order to execute Automation project, you need to copy jars to your machine specific ANT's classpath
-PS: Path where BUILD.XML is located is referred as <BASEDIR>
+In order to execute Automation project, you need to copy jars to your machine specific ANT's classpath. <br />
+**PS:** Path where BUILD.XML is located is referred as *<BASEDIR>*
 
       i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
 		 a> Windows: C:\Program Files\apache-ant-1.8.4-bin\apache-ant-1.8.4
@@ -73,7 +73,7 @@ After successfully executing above steps, you are good to run Automation
      i> Using GitBash, navigate to <Basedir>
     ii> Sample ANT Command to run Suite:
 	
-		ant runsmoke -DantPrgrm=gu,usc -DantBrwsr=chrome,ff -DantOS=win //with below mentioned parameters
+		*ant runsmoke -DantPrgrm=gu,usc -DantBrwsr=chrome,ff -DantOS=win* //with below mentioned parameters
 	
 	Applicable Parameters (Case Sensitive)
 		1> run Target<Test type>: runsmoke / runcritical / rundebug  –> Accepts only one target name at a time
