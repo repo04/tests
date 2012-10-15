@@ -77,6 +77,37 @@ public class User extends BaseClass {
     }
 
     /**
+     *
+     * @param user
+     */
+    public void deleteUser(String... users) {
+
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlSiteAdminLnkVrfyUsrRoleCrsXPATH"))));
+        driver.findElement(By.xpath(av.getTokenValue("lftPnlSiteAdminLnkVrfyUsrRoleCrsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsrsLnkVrfyUsrRoleCrsXPATH"))));
+        driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrsLnkVrfyUsrRoleCrsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAcntsLnkUsrRoleCrsXPATH"))));
+        driver.findElement(By.xpath(av.getTokenValue("lftPnlAcntsLnkUsrRoleCrsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlBrwsUsrVrfyUsrRoleCrsXPATH"))));
+        driver.findElement(By.xpath(av.getTokenValue("lftPnlBrwsUsrVrfyUsrRoleCrsXPATH"))).click();
+
+        for (String user : users) {
+            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))));
+
+            Utility.btnRmUsrFilter(driver, av.getTokenValue("btnRmvUsrFilter"));
+            new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
+            driver.findElement(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))).sendKeys(user);
+            driver.findElement(By.xpath(av.getTokenValue("btnFindUsr"))).click();
+            ip.isElementPresentStartsWithTextByXPATH(driver, user);
+            driver.findElement(By.xpath("//td[7]/a")).click();
+            ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div/p", "Are you absolutely sure you want to completely delete '" + user + "' ?");
+            ip.isElementPresentByXPATH(driver, "//div/input");
+            driver.findElement(By.xpath("//div/input")).click();
+            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + user + "')]")));    
+        }
+    }
+
+    /**
      * @return UsrName
      */
     public String getUsrName() {

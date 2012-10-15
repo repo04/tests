@@ -275,6 +275,11 @@ public class Actions extends BaseClass {
         return usr.getUsrName();
     }
 
+    
+    public void deleteUsers(String tchrUsr, String stdtUsr) {
+        User usr = new User();
+        usr.deleteUser(tchrUsr, stdtUsr);
+    }
     /**
      * Enroll User as 'Teacher/Student' to 'GroupCourse'
      *
@@ -467,6 +472,16 @@ public class Actions extends BaseClass {
 
         WorkingGroup wg = new WorkingGroup();
         wg.rmvMbrsFrmWrkngGrp(members);
+    }    
+    
+    /**
+     * Delete Working Group
+     * 
+     * @param wrkngGrp 
+     */
+    public void deleteWrkngGrp(String wrkngGrp) {
+        WorkingGroup wg = new WorkingGroup();
+        wg.deleteWrkngGrp(wrkngGrp);
     }
 
     /**

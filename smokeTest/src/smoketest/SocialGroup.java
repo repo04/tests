@@ -119,8 +119,8 @@ public class SocialGroup extends BaseClass {
         Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
         driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
-        ip.isElementPresentByXPATH(driver, "//input[@id='sgroup_delete']");
-        driver.findElement(By.xpath("//input[@id='sgroup_delete']")).click();
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnDeleteGrp"));
+        driver.findElement(By.xpath(av.getTokenValue("btnDeleteGrp"))).click();
 
         //Get a handle to the open alert, prompt or confirmation
         final Alert alert = driver.switchTo().alert();

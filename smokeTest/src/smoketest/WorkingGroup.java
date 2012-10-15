@@ -4,9 +4,12 @@ import com.thoughtworks.selenium.SeleneseTestBase;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -188,6 +191,32 @@ public class WorkingGroup extends BaseClass {
         }
         driver.switchTo().window(HandleBefore);
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
+    }
+
+    /**
+     * Delete Working Group
+     * 
+     * @param wrkngGrp 
+     */
+    public void deleteWrkngGrp(String wrkngGrp) {
+        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnDeleteGrp"));
+        driver.findElement(By.xpath(av.getTokenValue("btnDeleteGrp"))).click();
+
+        //Get a handle to the open alert, prompt or confirmation
+        final Alert alert = driver.switchTo().alert();
+
+        //Verify alert popup
+        (new WebDriverWait(driver, 60)).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return alert.getText().contentEquals("Do you really want to delete this group?");
+            }
+        });
+
+        //And acknowledge the alert (equivalent to clicking "OK")
+        alert.accept();
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblTxtVrfyDelGrp"), "The group was deleted successfully.");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")));    
     }
 
     /**

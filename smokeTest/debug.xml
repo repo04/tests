@@ -8,7 +8,7 @@
         <parameter name="tchrUsrName" value="autoteacher1"/>
         <parameter name="stdtUsrName" value="autostudent1"/>
         <parameter name="grpCrsName" value="AutoGroupCourse"/>
-        <parameter name="wrkngGrpName" value="SmkTstWrkngGrp Oct 11, 2012 7:40 PM"/>
+        <parameter name="wrkngGrpName" value="SmkTstWrkngGrp Oct 12, 2012 4:33 PM"/>
         <parameter name="tchrUrlCrsPost" value=""/>
         <parameter name="tchrSclGrpName" value=""/>
         <parameter name="frmActvyName" value=""/>
@@ -45,15 +45,15 @@
                     <include name="testStdtJoinsTchrSclGrp"/>
                     <include name="testStdtPostURLOnTchrSclGrp"/>
                 </methods>
-            </class-->
+            </class>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc">
                 <methods>
-                    <!--include name="testTchrCrtLvSsn"/>
-                    <include name="testTchrVrfyActivities"/-->
+                    <include name="testTchrCrtLvSsn"/>
+                    <include name="testTchrVrfyActivities"/>
                     <include name="testTchrCrtGglDoc"/>
                 </methods>
             </class>
-            <!--class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
                 <methods>
                     <include name="testStdtCrtSclGrp"/>
                     <include name="testStdtCrtLvSsn"/>
@@ -68,18 +68,19 @@
                     <include name="testTchrDeleteSclGrp"/>
                     <include name="testTchrLeavesStdtSclGrp"/>
                 </methods>
-            </class-->
+            </class>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp">                
                 <methods>
                     <include name="testStdtDeleteSclGrp"/>                    
                 </methods>
-            </class>
-            <!--class name="runThrghTestNG.PES_CleanTestData">                
+            </class-->
+            <class name="runThrghTestNG.PES_CleanTestData">                
                 <methods>
-                    <include name="testUnerolUsers"/>
-                    <include name="testRemoveMbrsFrmWrkngGrp"/>                    
+                    <!--include name="testUnerolUsers"/-->
+                    <include name="testDeleteWrkngGrp"/>    
+                    <!--include name="testRemoveMbrsFrmWrkngGrp"/-->                    
                 </methods>
-            </class-->            
+            </class>            
         </classes>
     </test>
 </suite>

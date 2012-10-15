@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,13 +35,13 @@ public class PES_CleanTestData extends BaseClass {
     }
 
     /**
-     * 
+     *
      * @param grpCrsName
      * @param tchrUsrName
      * @param stdtUsrName
-     * @throws Exception 
+     * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", dataProviderClass=UsrCrtn_AsgnRole_WrkngGrp.class)
+    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class)
     public void testUnerolUsers(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -48,14 +49,27 @@ public class PES_CleanTestData extends BaseClass {
     }
 
     /**
-     * 
+     * Delete Working Group
+     *
+     * @param wrkngGrpName
+     * @throws Exception
+     */
+    @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class)
+    public void testDeleteWrkngGrp(String wrkngGrpName) throws Exception {
+        a.navigateToWorkingGroups();
+        a.accessWrknGrp(wrkngGrpName);
+        a.deleteWrkngGrp(wrkngGrpName);
+    }
+
+    /**
+     *
      * @param grpCrsName
      * @param wrkngGrpName
      * @param tchrUsrName
      * @param stdtUsrName
-     * @throws Exception 
+     * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass=UsrCrtn_AsgnRole_WrkngGrp.class)
+    @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class)
     public void testRemoveMbrsFrmWrkngGrp(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -79,6 +93,18 @@ public class PES_CleanTestData extends BaseClass {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
         a.rmvMbrsFrmWrkngGrp(tchrUsrName, stdtUsrName);
+    }
+
+    /**
+     * Create Two Users
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class)
+    public void testDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
+
+        a.navigateToMyContacts();
+        a.deleteUsers(tchrUsr, stdtUsr);
     }
 
     /**

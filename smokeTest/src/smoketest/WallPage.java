@@ -115,7 +115,8 @@ public class WallPage extends BaseClass {
         for (String handle : driver.getWindowHandles()) {
             driver.switchTo().window(handle);
         }
-        textArea.sendKeys(Keys.ENTER);
+        //textArea.sendKeys(Keys.ENTER);
+        Utility.actionBuilderClick(driver, av.getTokenValue("wallPublishPanelXPATH"));
         try {
             btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
         }catch(TimeoutException e){
