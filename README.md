@@ -1,25 +1,19 @@
 # Automation Environment Installation
 
+Install Core Dependencies
+
 * [Download](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html) & Install JDK 1.7 or higher
 
 *  Windows 
-   * [Path](http://java.com/en/download/help/path.xml)
-		 a> Windows 
-		 	*  [Path](http://java.com/en/download/help/path.xml)
-		 	*  instuctions for classpath
-		 b> Linux/Mac <auto configured>
-    iii. Verify JDK is installed correctly
-    	 a> open terminal 
-         b> java -version
-         	________________________________________________________________
-		    java version "1.7.0_01"
-		    Java(TM) SE Runtime Environment (build 1.7.0_01-b08)
-		    Java HotSpot(TM) Client VM (build 21.1-b02, mixed mode, sharing)
+   * [Set Path](http://java.com/en/download/help/path.xml)
 
-	     c> javac -version
-	        _______________
-		    javac 1.7.0_01
+*  Mac & Linux
+   * Auto configured		 
 
+Verify JDK is configured correctly
+	java -version
+	javac -version
+	        
 Install ANT 1.8 or higher (Windows Only)
 ----------------------------
 Requirement: ANT 1.8 or higher
