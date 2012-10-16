@@ -11,8 +11,8 @@ Requirement: JDK 1.7 or higher
 	     [JDK](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html)
      ii> Set Environment Variables: PATH & CLASSPATH
 		 a> Windows <manually configured>
-		 	* [Path](http://java.com/en/download/help/path.xml)
-		 	* instuctions for classpath
+		 	*  [Path](http://java.com/en/download/help/path.xml)
+		 	*  instuctions for classpath
 		 b> Linux/Mac <auto configured>
     iii> Verify JDK is installed correctly
     	 a> open terminal 
