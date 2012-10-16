@@ -275,10 +275,15 @@ public class Actions extends BaseClass {
         return usr.getUsrName();
     }
 
-    
+    /**
+     * Delete Users
+     * 
+     * @param tchrUsr
+     * @param stdtUsr 
+     */
     public void deleteUsers(String tchrUsr, String stdtUsr) {
         User usr = new User();
-        usr.deleteUser(tchrUsr, stdtUsr);
+        usr.deleteUsers(tchrUsr, stdtUsr);
     }
     /**
      * Enroll User as 'Teacher/Student' to 'GroupCourse'

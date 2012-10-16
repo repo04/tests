@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,7 +34,8 @@ public class PES_CleanTestData extends BaseClass {
     }
 
     /**
-     *
+     * Un-enroll users from Working Group
+     * 
      * @param grpCrsName
      * @param tchrUsrName
      * @param stdtUsrName
@@ -62,7 +62,8 @@ public class PES_CleanTestData extends BaseClass {
     }
 
     /**
-     *
+     * Remove members from Working Group
+     * 
      * @param grpCrsName
      * @param wrkngGrpName
      * @param tchrUsrName
@@ -96,7 +97,7 @@ public class PES_CleanTestData extends BaseClass {
     }
 
     /**
-     * Create Two Users
+     * Delete Users
      *
      * @throws Exception
      */

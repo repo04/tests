@@ -52,7 +52,7 @@ In order to execute Automation Project, you need to install GitBash
 4> Setup ANT's project specific JARS
 ------------------------------------
 In order to execute Automation project, you need to copy jars to your machine specific ANT's classpath. <br />
-**PS:** Path where BUILD.XML is located is referred as *<BASEDIR>*
+**PS:** Path where BUILD.XML is located is referred as **BASEDIR**
 
       i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
 		 a> Windows: C:\Program Files\apache-ant-1.8.4-bin\apache-ant-1.8.4
