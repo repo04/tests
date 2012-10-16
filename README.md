@@ -7,14 +7,14 @@ The objective of the document is to outline the steps required to configure and 
 ----------------------------
 Requirement: JDK 1.7 or higher
 
-	  i> Download & install JDK 1.7 or higher (OS specific)
+	  i. Download & install JDK 1.7 or higher (OS specific)
 	     [JDK](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html)
-     ii> Set Environment Variables: PATH & CLASSPATH
+     ii. Set Environment Variables: PATH & CLASSPATH
 		 a> Windows <manually configured>
 		 	*  [Path](http://java.com/en/download/help/path.xml)
 		 	*  instuctions for classpath
 		 b> Linux/Mac <auto configured>
-    iii> Verify JDK is installed correctly
+    iii. Verify JDK is installed correctly
     	 a> open terminal 
          b> java -version
          	________________________________________________________________
