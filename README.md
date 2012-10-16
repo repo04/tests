@@ -1,14 +1,14 @@
 # Automation Environment Installation
 
 Install Core Dependencies
+----------------------------
 
 * [Download](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html) & Install JDK 1.7 or higher
-
 *  Windows 
-   * [Set Path](http://java.com/en/download/help/path.xml)
+ * [Set Path](http://java.com/en/download/help/path.xml)
 
 *  Mac & Linux
-   * Auto configured		 
+ * Auto configured		 
 
 Verify JDK is configured correctly
 	java -version
