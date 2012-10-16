@@ -1,15 +1,8 @@
- README
---------------------------------------------------------------------------------------------------------------------------------------
-Welcome to QA Automation Project README.<br />
-The objective of the document is to outline the steps required to configure and run the Automation Suite any system (OS's: WIN / LINUX / MAC)
+# Automation Environment Installation
 
-1. Install JDK 1.7 or higher
-----------------------------
-Requirement: JDK 1.7 or higher
-
-	  i. Download & install JDK 1.7 or higher (OS specific)
-	     [JDK](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html)
-     ii. Set Environment Variables: PATH & CLASSPATH
+Install JDK 1.7 or higher
+*  [JDK](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html)
+Set Environment Variables: PATH & CLASSPATH
 		 a> Windows <manually configured>
 		 	*  [Path](http://java.com/en/download/help/path.xml)
 		 	*  instuctions for classpath
@@ -26,7 +19,7 @@ Requirement: JDK 1.7 or higher
 	        _______________
 		    javac 1.7.0_01
 
-2. Install ANT 1.8 or higher (Windows Only)
+Install ANT 1.8 or higher (Windows Only)
 ----------------------------
 Requirement: ANT 1.8 or higher
 
@@ -43,7 +36,7 @@ Requirement: ANT 1.8 or higher
 		    ____________________________________________________
 		    Apache Ant(TM) version 1.8.4 compiled on May 22 2012
 		   
-3. Install Git
+Install Git
 -------------------
 Requirement: Git
 
@@ -60,7 +53,7 @@ Requirement: Git
          git clone git@github.com:2tor/tests.git <Enter your Login credentials>	   
       v> Verify, project <tests> is downloaded     
 	
-4. Setup JARS
+Setup JARS
 ------------------------------------
 Requirement: The appropriate JAR's will need to be copied to the machine specific ANT's classpath. <br />
 **Note:** Path where BUILD.XML is located is referred as **BASEDIR**
@@ -69,7 +62,7 @@ Requirement: The appropriate JAR's will need to be copied to the machine specifi
 		 a> Windows: C:\Program Files\apache-ant-1.8.4-bin\apache-ant-1.8.4
 		 b> MAC: /usr/share/ant/lib
 		
-5. Setup to execute on Chrome Browser
+Setup to execute on Chrome Browser
 -------------------------------------
 In order to execute Automation project using CHROME Browser, you need to make file on unix server available to read, write, etc.
 
@@ -77,7 +70,7 @@ In order to execute Automation project using CHROME Browser, you need to make fi
     ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
     * [Tutorial](http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux)
 	   
-6. Run Automation
+Run Automation
 -------------------------
 Automation can run when above steps are followed in order.
 
@@ -116,8 +109,7 @@ Automation can run when above steps are followed in order.
                 a> chrome  b> ff
 	 iv> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{browser}
       v> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
-	
------------------------------------------------END--------------------------------------------------------------------------------------    
+
 	
 	
 	 
