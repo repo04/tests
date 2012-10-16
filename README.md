@@ -1,9 +1,10 @@
 # Automation Environment Installation
 
-Install JDK 1.7 or higher
-*  [JDK](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html)
-Set Environment Variables: PATH & CLASSPATH
-		 a> Windows <manually configured>
+* [Download](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html) & Install JDK 1.7 or higher
+
+*  Windows 
+** [Path](http://java.com/en/download/help/path.xml)
+		 a> Windows 
 		 	*  [Path](http://java.com/en/download/help/path.xml)
 		 	*  instuctions for classpath
 		 b> Linux/Mac <auto configured>
