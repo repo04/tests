@@ -15,20 +15,20 @@ public class LoginPage extends BaseClass {
     public void attemptLogin(String user) {
 
         LoginPage.usr = user;
-        WebElement userName = driver.findElement(By.xpath(av.getTokenValue("userNameXPATH")));
-        WebElement passWord = driver.findElement(By.xpath(av.getTokenValue("pswdXPATH")));
-        WebElement loginBtn = driver.findElement(By.xpath(av.getTokenValue("btnLoginXPATH")));
+        WebElement userName = driver.findElement(By.xpath(xpv.getTokenValue("userNameXPATH")));
+        WebElement passWord = driver.findElement(By.xpath(xpv.getTokenValue("pswdXPATH")));
+        WebElement loginBtn = driver.findElement(By.xpath(xpv.getTokenValue("btnLoginXPATH")));
 
         switch (user) {
 
             case "contentAdmin":
-                userName.sendKeys(av.getTokenValue("ctntAdminUserName"));
-                passWord.sendKeys(av.getTokenValue("ctntAdminPswd"));
+                userName.sendKeys(pv.getTokenValue("ctntAdminUserName"));
+                passWord.sendKeys(pv.getTokenValue("ctntAdminPswd"));
                 break;
 
             case "pesAdmin":
-                userName.sendKeys(av.getTokenValue("pesUserName"));
-                passWord.sendKeys(av.getTokenValue("pesPswd"));
+                userName.sendKeys(pv.getTokenValue("pesUserName"));
+                passWord.sendKeys(pv.getTokenValue("pesPswd"));
                 break;
 
             //Teacher/Student
@@ -42,9 +42,9 @@ public class LoginPage extends BaseClass {
 
         //PesAdmin navigates to Course page after login
         if (user.equals("pesAdmin")) {
-            ip.isTitlePresent(driver, av.getTokenValue("crsPageTitle"));
+            ip.isTitlePresent(driver, pv.getTokenValue("crsPageTitle"));
         } else {
-            ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
+            ip.isTitlePresent(driver, pv.getTokenValue("homePageTitle"));
         }
     }
 

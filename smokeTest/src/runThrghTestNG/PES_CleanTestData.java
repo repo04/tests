@@ -74,18 +74,18 @@ public class PES_CleanTestData extends BaseClass {
     public void testRemoveMbrsFrmWrkngGrp(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlUsrLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkScndNameXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("linkScndNameXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))).click();
 
         String stdtFllNm = stdtUsrName + "fstNm " + stdtUsrName + "sndNm";
         String tchrFllNm = tchrUsrName + "fstNm " + tchrUsrName + "sndNm";
         try {
-            ip.isTextPresentByXPATH(driver, av.getTokenValue("txtStdtEnrolXPATH"), stdtFllNm, 30);
-            ip.isTextPresentByXPATH(driver, av.getTokenValue("txtTchrEnrolXPATH"), tchrFllNm, 30);
+            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtStdtEnrolXPATH"), stdtFllNm, 30);
+            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtTchrEnrolXPATH"), tchrFllNm, 30);
             status = true;
         } catch (TimeoutException e) {
             status = false;

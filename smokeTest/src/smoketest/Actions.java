@@ -81,9 +81,9 @@ public class Actions extends BaseClass {
      * Verify Navigated to Live Meeting creation page
      */
     public void accessLvSsnWall() {
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnleftPnlLvMtng"));
-        driver.findElement(By.xpath(av.getTokenValue("btnleftPnlLvMtng"))).click();
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtSsn"));
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnleftPnlLvMtng"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnleftPnlLvMtng"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtSsn"));
     }
 
     /**
@@ -102,32 +102,32 @@ public class Actions extends BaseClass {
      * User logs out
      */
     public void logOut() {
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToLogOut"));
-        ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
+        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToLogOut"));
+        ip.isTitlePresent(driver, pv.getTokenValue("loginPageTitle"));
     }
 
     /**
      * Navigate to MyWall page
      */
     public void navigateToMyWall() {
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToWallXPATH"));
-        ip.isTitlePresent(driver, av.getTokenValue("wallPageTitle"));
+        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
+        ip.isTitlePresent(driver, pv.getTokenValue("wallPageTitle"));
     }
 
     /**
      * Navigates to MyCourse Page
      */
     public void navigateToMyCourse() {
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToCourseXPATH"));
-        ip.isTitlePresent(driver, av.getTokenValue("crsPageTitle"));
+        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToCourseXPATH"));
+        ip.isTitlePresent(driver, pv.getTokenValue("crsPageTitle"));
     }
 
     /**
      * Navigate to Home Page
      */
     public void navigateToMyHome() {
-        Utility.navigateToSubMenu(driver, av.getTokenValue("lnkToHomeXPATH"));
-        ip.isTitlePresent(driver, av.getTokenValue("homePageTitle"));
+        Utility.navigateToSubMenu(driver, xpv.getTokenValue("lnkToHomeXPATH"));
+        ip.isTitlePresent(driver, pv.getTokenValue("homePageTitle"));
     }
 
     /**
@@ -139,17 +139,17 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
         String s = cntct.substring(0, 1).toUpperCase();
         String usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyCntctXPATH"), usrFullNm);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyCntctXPATH"), usrFullNm);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
     }
 
     /**
      * Navigate to Working Groups page
      */
     public void navigateToWorkingGroups() {
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToWrkgGrpXPATH"));
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMyWrkngGrpTEXT"));
+        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWrkgGrpXPATH"));
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMyWrkngGrpTEXT"));
     }
 
     /**
@@ -161,17 +161,17 @@ public class Actions extends BaseClass {
 
         //Contacts link XPATH varies across users (Admin's & Tchr/Stdt)
         //Checking for 'contacts' TEXT in href
-        String url = driver.findElement(By.xpath(av.getTokenValue("linkToCntctByAdminXPATH"))).getAttribute("href");
+        String url = driver.findElement(By.xpath(xpv.getTokenValue("linkToCntctByAdminXPATH"))).getAttribute("href");
         int i = url.lastIndexOf("/");
 
         if ("Contacts".equalsIgnoreCase(url.substring(i + 1, i + 9))) {
-            linkToContactXPATH = av.getTokenValue("linkToCntctByAdminXPATH");
+            linkToContactXPATH = xpv.getTokenValue("linkToCntctByAdminXPATH");
         } else {
-            linkToContactXPATH = av.getTokenValue("linkToCntctXPATH");
+            linkToContactXPATH = xpv.getTokenValue("linkToCntctXPATH");
         }
 
         Utility.navigateToSubMenu(driver, linkToContactXPATH);
-        ip.isTitlePresent(driver, av.getTokenValue("contactPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue("contactPageTitle"));
     }
 
     /**
@@ -179,8 +179,8 @@ public class Actions extends BaseClass {
      */
     public void navigateToMySocialGroups() {
 
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkToSclGrpXPATH"));
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("hdngMySclGrpTEXT"));
+        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
 
     /**
@@ -216,7 +216,7 @@ public class Actions extends BaseClass {
                 Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + grpCrsName + "')]");
 
         }
-        ip.isTextPresentByCSS(driver, av.getTokenValue("lblCrsLftPnlCSS"), grpCrsName.toUpperCase());
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("lblCrsLftPnlCSS"), grpCrsName.toUpperCase());
     }
 
     /**
@@ -312,11 +312,11 @@ public class Actions extends BaseClass {
      * @param cntct
      */
     public void findContact(String cntct) {
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("lnkMyCntctXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("lnkMyCntctXPATH"))).click();
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldFndCntct"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldFndCntct"))).sendKeys(cntct);
-        driver.findElement(By.xpath(av.getTokenValue("btnFnCntct"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("lnkMyCntctXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkMyCntctXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldFndCntct"));
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldFndCntct"))).sendKeys(cntct);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnFnCntct"))).click();
         ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
     }
 
@@ -378,10 +378,10 @@ public class Actions extends BaseClass {
      * @param sclGrp
      */
     public void accessSclGrpWall(String sclGrp) {
-        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), sclGrp);
+        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), sclGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + sclGrp + "')]")).click();
         String uprCS = sclGrp.substring(0, 1).toUpperCase();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
     }
 
     /**
@@ -397,7 +397,7 @@ public class Actions extends BaseClass {
             ip.isElementPresentContainsTextByXPATH(driver, post);
         }
 
-        Utility.navigateToSubMenu(driver, av.getTokenValue("linkRecentNewsXPATH"));
+        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkRecentNewsXPATH"));
 
         for (String post : posts) {
             post.isEmpty();
@@ -409,9 +409,9 @@ public class Actions extends BaseClass {
      * Navigate to Activity Report page
      */
     public void navigateToActvtyRprt() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnLftPnlActvyRprtXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
-        ip.isTextPresentByCSS(driver, av.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
     }
 
     /**
@@ -420,7 +420,7 @@ public class Actions extends BaseClass {
      * @param activities
      */
     public void verifyActivities(String... activities) {
-        ip.isTextPresentByCSS(driver, av.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
         for (String activity : activities) {
             ip.isElementPresentContainsTextByXPATH(driver, activity);
         }
@@ -453,7 +453,7 @@ public class Actions extends BaseClass {
      */
     public void accessWrknGrp(String wrkngGrp) {
         //Show all WorkingGroups
-        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), wrkngGrp);
+        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
     }
 
@@ -499,8 +499,8 @@ public class Actions extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
         
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }
 

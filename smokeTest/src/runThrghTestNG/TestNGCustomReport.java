@@ -45,20 +45,21 @@ public class TestNGCustomReport extends TestListenerAdapter {
             // get current date time with Date()
             Date date = new Date();
             String rprtPrgm;
+            String rprtEnv;
 
-            if(BaseClass.program.substring(0, 3).equalsIgnoreCase("guA"))
-            {
-                rprtPrgm = "gu"; 
-            }
-            else{
-                rprtPrgm = BaseClass.program.substring(0, 3); 
-            }            
-
-            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.drvr + File.separator + "screenshots")).exists()) {
-                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.drvr + File.separator + "screenshots").mkdir();
+            if (BaseClass.program.substring(0, 2).contains("gu")) {
+                rprtPrgm = "gu";
+                rprtEnv = BaseClass.program.substring(2);
+            } else {
+                rprtPrgm = BaseClass.program.substring(0, 3);
+                rprtEnv = BaseClass.program.substring(3);
             }
 
-            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.drvr + File.separator + "screenshots"
+            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots")).exists()) {
+                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots").mkdir();
+            }
+
+            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots"
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);

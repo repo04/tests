@@ -29,15 +29,15 @@ public class WorkingGroup extends BaseClass {
 
         this.wrkgGrpName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         String srtName = "ShrtNmWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        driver.findElement(By.xpath(av.getTokenValue("link2torAdminXPATH"))).click();
-        driver.findElement(By.xpath(av.getTokenValue("linkAddWrkGrp"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("headerCreateWrkGrp"), av.getTokenValue("txtCreateWrkGrp"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldWrkgGrpName"))).sendKeys(this.wrkgGrpName);
-        driver.findElement(By.xpath(av.getTokenValue("fieldWrkgGrpShrtName"))).sendKeys(srtName);
-        driver.findElement(By.xpath(av.getTokenValue("fieldWrkgGrpAbout"))).sendKeys("this is a test");
-        driver.findElement(By.xpath(av.getTokenValue("btnSbmtWrkgGrp"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("link2torAdminXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("linkAddWrkGrp"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("headerCreateWrkGrp"), xpv.getTokenValue("txtCreateWrkGrp"));
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldWrkgGrpName"))).sendKeys(this.wrkgGrpName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldWrkgGrpShrtName"))).sendKeys(srtName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldWrkgGrpAbout"))).sendKeys("this is a test");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtWrkgGrp"))).click();
 
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("headerLstWrkGrp"), av.getTokenValue("txtLstWrkGrp"));
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("headerLstWrkGrp"), xpv.getTokenValue("txtLstWrkGrp"));
         ip.isElementPresentByLINK(driver, wrkgGrpName);
     }
 
@@ -50,7 +50,7 @@ public class WorkingGroup extends BaseClass {
 
         mbrsToWrkngGrp();
 
-        Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("addMbrsXPATH"))));
+        Select select = new Select(driver.findElement(By.xpath(xpv.getTokenValue("addMbrsXPATH"))));
         String fullNm = null;
 
         for (String mbr : members) {
@@ -70,9 +70,9 @@ public class WorkingGroup extends BaseClass {
 
             select.selectByVisibleText(fullNm);
         }
-        driver.findElement(By.xpath(av.getTokenValue("lnkAddMbrXPATH"))).click();
-        driver.findElement(By.xpath(av.getTokenValue("btnSaveMbrsXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The group members were updated successfully.");
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkAddMbrXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSaveMbrsXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The group members were updated successfully.");
     }
 
     /**
@@ -84,7 +84,7 @@ public class WorkingGroup extends BaseClass {
 
         mbrsToWrkngGrp();
 
-        Select select = new Select(driver.findElement(By.xpath(av.getTokenValue("rmvMbrsXPATH"))));
+        Select select = new Select(driver.findElement(By.xpath(xpv.getTokenValue("rmvMbrsXPATH"))));
         String fullNm = null;
 
         for (String mbr : members) {
@@ -112,9 +112,9 @@ public class WorkingGroup extends BaseClass {
 
             select.selectByVisibleText(fullNm);
         }
-        driver.findElement(By.xpath(av.getTokenValue("lnkRmvMbrXPATH"))).click();
-        driver.findElement(By.xpath(av.getTokenValue("btnSaveMbrsXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The group members were updated successfully.");
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkRmvMbrXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSaveMbrsXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblMbrsUpdtdTxtXPATH"), "The group members were updated successfully.");
     }
 
     /**
@@ -125,29 +125,29 @@ public class WorkingGroup extends BaseClass {
     public void createGoogleDoc(String wrkngGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lnkLftPnlFilesXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, "Start a Collaborative Document");
         driver.findElement(By.xpath("//*[contains(text(),'Start a Collaborative Document')]")).click();
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocNameXPATH"));
-        new Select(driver.findElement(By.xpath(av.getTokenValue("slctGglTypeXPATH")))).selectByVisibleText("Document");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocNameXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctGglTypeXPATH")))).selectByVisibleText("Document");
         DateFormat dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);
         String gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
-        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(gglDocName);
-        driver.findElement(By.xpath(av.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(gglDocName);
+        driver.findElement(By.xpath(xpv.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
 
         //Incase checkbox for Collaborators is not selected
-        Boolean bool = driver.findElement(By.xpath(av.getTokenValue("chckbxCllbrtrsXPATH"))).isSelected();
+        Boolean bool = driver.findElement(By.xpath(xpv.getTokenValue("chckbxCllbrtrsXPATH"))).isSelected();
         if (!bool) {
-            driver.findElement(By.xpath(av.getTokenValue("chckbxCllbrtrsXPATH"))).click();
+            driver.findElement(By.xpath(xpv.getTokenValue("chckbxCllbrtrsXPATH"))).click();
         }
 
-        driver.findElement(By.xpath(av.getTokenValue("btnSbmtGglDoc"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtGglDoc"))).click();
         ip.isTitlePresent(driver, "Google Accounts");
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
-        WebElement gglUsrNm = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")));
-        WebElement gglPswd = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH")));
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
+        WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
+        WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
 
         //This is to verify gglUsrID field passes correct value 
         value:
@@ -157,15 +157,15 @@ public class WorkingGroup extends BaseClass {
             gglUsrNm.sendKeys("tutordemo2");
             gglPswd.sendKeys("Newuser@123");
             try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")), "tutordemo2"));
+                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), "tutordemo2"));
                 break value;
             } catch (TimeoutException e) {
             }
         }
-        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocSignInXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
         ip.isTitlePresent(driver, "My Account");
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocGrntAccessXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocGrntAccessXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
 
         String HandleBefore = driver.getWindowHandle();
         int i = 1;
@@ -176,9 +176,9 @@ public class WorkingGroup extends BaseClass {
                 try {
                     System.out.println("inside google window");
                     ip.isTitlePresent(driver, gglDocName + " - Google Dcs");
-                    ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
-                    Utility.navigateToSubMenu(driver, av.getTokenValue("btnGglDocSgnOutXPATH"));
-                    ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGglDocUsrIdXPATH"));
+                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
+                    Utility.navigateToSubMenu(driver, xpv.getTokenValue("btnGglDocSgnOutXPATH"));
+                    ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
                     driver.close();
                 } catch (Exception e) {
                     System.out.println("GglDoc exptn");
@@ -199,8 +199,8 @@ public class WorkingGroup extends BaseClass {
      * @param wrkngGrp 
      */
     public void deleteWrkngGrp(String wrkngGrp) {
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnDeleteGrp"));
-        driver.findElement(By.xpath(av.getTokenValue("btnDeleteGrp"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnDeleteGrp"))).click();
 
         //Get a handle to the open alert, prompt or confirmation
         final Alert alert = driver.switchTo().alert();
@@ -215,7 +215,7 @@ public class WorkingGroup extends BaseClass {
 
         //And acknowledge the alert (equivalent to clicking "OK")
         alert.accept();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("lblTxtVrfyDelGrp"), "The group was deleted successfully.");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblTxtVrfyDelGrp"), "The group was deleted successfully.");
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")));    
     }
 
@@ -224,8 +224,8 @@ public class WorkingGroup extends BaseClass {
      */
     private void mbrsToWrkngGrp() {
 
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnEditWrkngGrpXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("btnEditWrkngGrpXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditWrkngGrpXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnEditWrkngGrpXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, "Manage Members");
         driver.findElement(By.xpath("//*[contains(text(),'Manage Members')]")).click();
 

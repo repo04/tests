@@ -40,13 +40,13 @@ public class SocialGroup extends BaseClass {
         }
 
         String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        driver.findElement(By.xpath(av.getTokenValue("linkStrtSclGrpXPATH"))).click();
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldGrpNameXPATH"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldGrpNameXPATH"))).sendKeys(sclGrpName);
-        driver.findElement(By.xpath(av.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
-        driver.findElement(By.xpath(av.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
-        driver.findElement(By.xpath(av.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
-        driver.findElement(By.xpath(av.getTokenValue("btnSbmtSclGrp"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("linkStrtSclGrpXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpNameXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpNameXPATH"))).sendKeys(sclGrpName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtSclGrp"))).click();
 
         //Verify SocialGroup creation
         ip.isElementPresentByLINK(driver, sclGrpName);
@@ -58,12 +58,12 @@ public class SocialGroup extends BaseClass {
      * @param sclGrp
      */
     public void findSocialGroup(String sclGrp) {
-        driver.findElement(By.xpath(av.getTokenValue("btnFindSclGrp"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnFindSclGrp"))).click();
 
         //Verify 'Find a Social Group' Text
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("hdngPageXPATH"), av.getTokenValue("headerTxt"));
-        driver.findElement(By.xpath(av.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(sclGrp);
-        driver.findElement(By.xpath(av.getTokenValue("btnSrchSclGrp"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("headerTxt"));
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpSrchXPATH"))).sendKeys(sclGrp);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSrchSclGrp"))).click();
 
         //Verify Social Group Present or not
         ip.isElementPresentByLINK(driver, sclGrp);
@@ -77,15 +77,15 @@ public class SocialGroup extends BaseClass {
     public void joinSocialGroup(String sclGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, "Join Now");
         driver.findElement(By.xpath("//*[contains(text(),'Join Now')]")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyJndSclGrpXPATH"), "Are you sure you want to join the group \"" + sclGrp + "\"?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyJndSclGrpXPATH"), "Are you sure you want to join the group \"" + sclGrp + "\"?");
 
         //XPATH didn't work
         List<WebElement> buttons = driver.findElements(By.tagName("button"));
         String btnID = buttons.get(1).getAttribute("id");
         driver.findElement(By.xpath("//button[@id='" + btnID + "']")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyJndSclGrpXPATH"), "You have successfully joined the group \"" + sclGrp + "\".");
-        driver.findElement(By.xpath(av.getTokenValue("btnOkJnSclGrp"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyTxtJoined"), "Joined");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyJndSclGrpXPATH"), "You have successfully joined the group \"" + sclGrp + "\".");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnOkJnSclGrp"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyTxtJoined"), "Joined");
     }
 
     /**
@@ -94,19 +94,19 @@ public class SocialGroup extends BaseClass {
      * @param stdtSclGrpName
      */
     public void leaveSocialGroup(String stdtSclGrpName) {
-        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
+        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, "Leave Group");
         driver.findElement(By.xpath("//*[contains(text(),'Leave Group')]")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyRmvSclGrpXPATH"), "Are you sure you want to remove yourself from the group " + stdtSclGrpName + "?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyRmvSclGrpXPATH"), "Are you sure you want to remove yourself from the group " + stdtSclGrpName + "?");
 
         //XPATH didn't work
         List<WebElement> buttons = driver.findElements(By.tagName("button"));
 
         String btnID = buttons.get(1).getAttribute("id");
         driver.findElement(By.xpath("//button[@id='" + btnID + "']")).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("vrfyRmvSclGrpXPATH"), "You have successfully left the group " + stdtSclGrpName);
-        driver.findElement(By.xpath(av.getTokenValue("btnOkLvSclGrp"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyRmvSclGrpXPATH"), "You have successfully left the group " + stdtSclGrpName);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnOkLvSclGrp"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
     }
 
@@ -116,11 +116,11 @@ public class SocialGroup extends BaseClass {
      * @param stdtSclGrpName
      */
     public void deleteSocialGroup(String stdtSclGrpName) {
-        Utility.optionalClickByLINK(driver, av.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
+        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
         ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
         driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnDeleteGrp"));
-        driver.findElement(By.xpath(av.getTokenValue("btnDeleteGrp"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnDeleteGrp"))).click();
 
         //Get a handle to the open alert, prompt or confirmation
         final Alert alert = driver.switchTo().alert();

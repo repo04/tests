@@ -38,8 +38,8 @@ public class VrfyEml_Ntfctn extends BaseClass {
     public void testTchrEmailLgn() throws Exception {
         driver.get("https://mail.google.com/");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
-        WebElement gglUsrNm = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")));
-        WebElement gglPswd = driver.findElement(By.xpath(av.getTokenValue("fieldGglDocPswdXPATH")));
+        WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
+        WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
         value:
         while (true) {
             gglUsrNm.clear();
@@ -47,12 +47,12 @@ public class VrfyEml_Ntfctn extends BaseClass {
             gglUsrNm.sendKeys("2torteacher");
             gglPswd.sendKeys("Newuser321");
             try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(av.getTokenValue("fieldGglDocUsrIdXPATH")), "2torteacher"));
+                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), "2torteacher"));
                 break value;
             } catch (TimeoutException e) {
             }
         }
-        driver.findElement(By.xpath(av.getTokenValue("fieldGglDocSignInXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
         ip.isTitlePresent(driver, "Gmail");
     }
 

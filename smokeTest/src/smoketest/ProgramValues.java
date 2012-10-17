@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Properties;
 import javax.el.PropertyNotFoundException;
 
-public class AccountValues {
+public class ProgramValues extends Properties{
 
     Properties p = new Properties();
 
@@ -13,12 +13,12 @@ public class AccountValues {
      *
      * @param testPropertiesName
      */
-    public AccountValues(String testPropertiesName) {
+    public ProgramValues(String testPropertiesName) {
 
         try {
             p.load(this.getClass().getClassLoader().getResourceAsStream(testPropertiesName + ".properties"));
         } catch (IOException e) {
-        }
+        }        
     }
 
     /**

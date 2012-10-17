@@ -40,38 +40,38 @@ public class User extends BaseClass {
                 this.userName = "teacher" + dateFormat.format(now);
         }
 
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlSiteAdminXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlSiteAdminXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsersXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlUsersXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAccntsXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlAccntsXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAddNwUsrXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlAddNwUsrXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlAddNwUsrXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAddNwUsrXPATH"))).click();
 
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("fieldUsrnmXPATH"));
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldUsrnmXPATH"));
 
-        driver.findElement(By.xpath(av.getTokenValue("fieldUsrnmXPATH"))).sendKeys(userName);
-        driver.findElement(By.xpath(av.getTokenValue("fieldPswdXPATH"))).sendKeys("Moodle1!");
-        driver.findElement(By.xpath(av.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName + "fstNm");
-        driver.findElement(By.xpath(av.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName + "sndNm");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldUsrnmXPATH"))).sendKeys(userName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys("Moodle1!");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName + "fstNm");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName + "sndNm");
         if (user.equalsIgnoreCase("teacher")) {
-            driver.findElement(By.xpath(av.getTokenValue("fieldEmailXPATH"))).sendKeys("2torteacher+" + userName.substring(7) + "@gmail.com");
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("2torteacher+" + userName.substring(7) + "@gmail.com");
         } else {
-            driver.findElement(By.xpath(av.getTokenValue("fieldEmailXPATH"))).sendKeys("2torstudent+" + userName.substring(7) + "@gmail.com");
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("2torstudent+" + userName.substring(7) + "@gmail.com");
         }
-        driver.findElement(By.xpath(av.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
-        new Select(driver.findElement(By.xpath(av.getTokenValue("slctCntryXPATH")))).selectByValue("US");
-        new Select(driver.findElement(By.xpath(av.getTokenValue("slctTimeZnXPATH")))).selectByValue("America/New_York");
-        driver.findElement(By.xpath(av.getTokenValue("btnSbmt"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCntryXPATH")))).selectByValue("US");
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctTimeZnXPATH")))).selectByValue("America/New_York");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
 
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("slctFindUsrXPATH"));
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctFindUsrXPATH"));
 
-        Utility.btnRmUsrFilter(driver, av.getTokenValue("btnRmvUsrFilter"));
+        Utility.btnRmUsrFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
 
-        new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
-        driver.findElement(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))).sendKeys(userName);
-        driver.findElement(By.xpath(av.getTokenValue("btnFindUsr"))).click();
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldFindUsrXPATH"))).sendKeys(userName);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnFindUsr"))).click();
 
         ip.isElementPresentStartsWithTextByXPATH(driver, userName);
     }
@@ -83,28 +83,28 @@ public class User extends BaseClass {
      */
     public void deleteUsers(String... users) {
 
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlSiteAdminXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlSiteAdminXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlUsersXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlUsersXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlAccntsXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlAccntsXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("lftPnlBrwsNwUsrXPATH"))));
-        driver.findElement(By.xpath(av.getTokenValue("lftPnlBrwsNwUsrXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlBrwsNwUsrXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlBrwsNwUsrXPATH"))).click();
 
         for (String user : users) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))));
+            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldFindUsrXPATH"))));
 
-            Utility.btnRmUsrFilter(driver, av.getTokenValue("btnRmvUsrFilter"));
-            new Select(driver.findElement(By.xpath(av.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
-            driver.findElement(By.xpath(av.getTokenValue("fieldFindUsrXPATH"))).sendKeys(user);
-            driver.findElement(By.xpath(av.getTokenValue("btnFindUsr"))).click();
+            Utility.btnRmUsrFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
+            new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldFindUsrXPATH"))).sendKeys(user);
+            driver.findElement(By.xpath(xpv.getTokenValue("btnFindUsr"))).click();
             ip.isElementPresentStartsWithTextByXPATH(driver, user);
-            driver.findElement(By.xpath(av.getTokenValue("lnkDltUsrXPATH"))).click();
+            driver.findElement(By.xpath(xpv.getTokenValue("lnkDltUsrXPATH"))).click();
             String userFullNm = user + "fstNm " + user + "sndNm";
-            ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyCmpltlyDltUsrXPATH"), "Are you absolutely sure you want to completely delete '" + userFullNm + "' ?");
-            ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCntnDltUsrXPATH"));
-            driver.findElement(By.xpath(av.getTokenValue("btnCntnDltUsrXPATH"))).click();
+            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyCmpltlyDltUsrXPATH"), "Are you absolutely sure you want to completely delete '" + userFullNm + "' ?");
+            ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCntnDltUsrXPATH"));
+            driver.findElement(By.xpath(xpv.getTokenValue("btnCntnDltUsrXPATH"))).click();
             new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + userFullNm + "')]")));
         }
     }

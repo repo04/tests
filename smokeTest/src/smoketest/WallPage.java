@@ -39,13 +39,13 @@ public class WallPage extends BaseClass {
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         String user = LoginPage.getUser();
-        this.textPost = av.getTokenValue(textPst) + "by" + user.substring(0, 7) + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.textPost = xpv.getTokenValue(textPst) + "by" + user.substring(0, 7) + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         editableTxtArea.sendKeys(textPost);
 
         //Switches back to default focus
         driver.switchTo().defaultContent();
         btnWallShare.click();
-        ip.isTextPresentByCSS(driver, av.getTokenValue("textWallCSS"), textPost);
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("textWallCSS"), textPost);
 
     }
 
@@ -62,9 +62,9 @@ public class WallPage extends BaseClass {
         //Date need to be in specific format as Getinstance include special characters   
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String user = LoginPage.getUser();
-        this.urlPost = av.getTokenValue(urlPst) + "by" + user.substring(0, 7) + dateFormat.format(now) + ".com";
+        this.urlPost = xpv.getTokenValue(urlPst) + "by" + user.substring(0, 7) + dateFormat.format(now) + ".com";
 
-        WebElement linkBtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("linkBtnXPATH"))));
+        WebElement linkBtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("linkBtnXPATH"))));
         linkBtn.click();
         WebElement linkTextBox = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div/input[3]")));
         
@@ -96,11 +96,11 @@ public class WallPage extends BaseClass {
      * @param txtCmntOnTchrCrsPst
      */
     public void textCmntPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
-        textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
+        textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlCrsPost);
         driver.findElement(By.xpath("//a/label")).click();
         WebElement cmntTxtArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//li/div/div/div/textarea")));
-        this.cmntPost = av.getTokenValue(txtCmntOnTchrCrsPst) + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.cmntPost = xpv.getTokenValue(txtCmntOnTchrCrsPst) + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         cmntTxtArea.click();
         cmntTxtArea.sendKeys(cmntPost);
         driver.findElement(By.xpath("//div[2]/a[2]")).click();
@@ -111,14 +111,14 @@ public class WallPage extends BaseClass {
      * Click on TextArea & enable share button
      */
     public void setUpWallPost() {
-        textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("wallPublishPanelXPATH"))));
+        textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
         for (String handle : driver.getWindowHandles()) {
             driver.switchTo().window(handle);
         }
         //textArea.sendKeys(Keys.ENTER);
-        Utility.actionBuilderClick(driver, av.getTokenValue("wallPublishPanelXPATH"));
+        Utility.actionBuilderClick(driver, xpv.getTokenValue("wallPublishPanelXPATH"));
         try {
-            btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnWallShareXPATH"))));
+            btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnWallShareXPATH"))));
         }catch(TimeoutException e){
             Utility.illegalStateException("Selenium is unable to click on TextArea, this is an automation limitation");
         }

@@ -39,11 +39,11 @@ public class LiveSession extends BaseClass {
         String liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         //Verify Navigated to Live Meeting creation page
-        ip.isElementPresentByXPATH(driver, av.getTokenValue("btnCrtSsn"));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("btnCrtSsn"))));
-        driver.findElement(By.xpath(av.getTokenValue("btnCrtSsn"))).click();
-        WebElement lvSsnNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldLvSsnXPATH"))));
-        WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(av.getTokenValue("fieldLvSsnDescXPATH"))));
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtSsn"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCrtSsn"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnCrtSsn"))).click();
+        WebElement lvSsnNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH"))));
+        WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
         dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println(dateFormat.format(now));
 
@@ -56,22 +56,22 @@ public class LiveSession extends BaseClass {
             lvSsnNmDesc.sendKeys(liveSsnDesc);
             try {
                 new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.id("startdate"), dateFormat.format(now)));
-                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(av.getTokenValue("fieldLvSsnXPATH")), liveSsnNm));
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH")), liveSsnNm));
                 break value;
             } catch (TimeoutException e) {
             }
         }
-        driver.findElement(By.xpath(av.getTokenValue("btnLvnSsnSbmt")))
+        driver.findElement(By.xpath(xpv.getTokenValue("btnLvnSsnSbmt")))
                 .click();
 
         //Verify LiveSession created or not
         switch (user.substring(0, 7)) {
             case "student":
             case "autostu":
-                ip.isTextPresentByXPATH(driver, av.getTokenValue("stdtLvSsnInTchrSclGrpXPATH"), liveSsnNm);
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("stdtLvSsnInTchrSclGrpXPATH"), liveSsnNm);
                 break;
             default:
-                ip.isTextPresentByXPATH(driver, av.getTokenValue("tchrLvSsnXPATH"), liveSsnNm);
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("tchrLvSsnXPATH"), liveSsnNm);
         }
     }
 }

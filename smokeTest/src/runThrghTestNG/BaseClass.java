@@ -15,35 +15,38 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
-import smoketest.AccountValues;
+import smoketest.XpathValues;
 import smoketest.IsPresent;
+import smoketest.ProgramValues;
 import smoketest.Utility;
 
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class BaseClass {
 
-    public static AccountValues av;
+    public static XpathValues xpv;
+    public static ProgramValues pv;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
     public static String program;
-    public static String drvr;
+    public static String brwsr;
     public static String test;
     String chromDrvrPath;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest
-    @Parameters({"program", "drvr", "os", "test"})
-    public void setUp(String program, String drvr, String os, String test) throws Exception {
+    @Parameters({"program", "brwsr", "os", "test"})
+    public void setUp(String program, String brwsr, String os, String test) throws Exception {
 
         this.program = program;
-        this.drvr = drvr;
+        this.brwsr = brwsr;
         this.test = test;
         
-        av = new AccountValues(this.program);
+        pv = new ProgramValues(this.program);
+        xpv = new XpathValues("xPathAccountProperty");
         System.out.println("program: " + this.program);
-        System.out.println("drvr: " + this.drvr);
+        System.out.println("brwsr: " + this.brwsr);
         System.out.println("os: " + os);
-        switch (drvr) {
+        switch (brwsr) {
             case "chrome":
                 File directory = new File(".");
                 chromDrvrPath = directory.getCanonicalPath() + File.separator + "lib" + File.separator;
@@ -75,7 +78,7 @@ public class BaseClass {
                     options.addArguments("--start-maximized");
                     driver = new ChromeDriver(options);
                 }
-                Reporter.log("Browser: " + drvr);
+                Reporter.log("Browser: " + brwsr);
                 Reporter.log("OS: " + os);
                 break;
             default:
@@ -83,8 +86,8 @@ public class BaseClass {
                 driver.manage().window().maximize();
                 Reporter.log("Browser: firefox");
         }
-        driver.get(av.getTokenValue("programURL"));
-        ip.isTitlePresent(driver, av.getTokenValue("loginPageTitle"));
+        driver.get(pv.getTokenValue("programURL"));
+        ip.isTitlePresent(driver, pv.getTokenValue("loginPageTitle"));
     }
 
     //The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run 
