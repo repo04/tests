@@ -138,10 +138,10 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(av.getTokenValue("btnNxtScrnXPATH"))).click();
         ip.isTextPresentByXPATH(driver, av.getTokenValue("txtAddQzQstnScrnXPATH"), "Adding a True/False question");
         driver.findElement(By.xpath(av.getTokenValue("fieldQzQstnNmXPATH"))).sendKeys("Capital");
-        driver.findElement(By.xpath(av.getTokenValue("fieldQzQstnTxtXPATH"))).sendKeys("NewYork is capital of USA?");
+        driver.findElement(By.xpath(av.getTokenValue("fieldQzQstnTxtXPATH"))).sendKeys("New York City is the capital of the United States");
         new Select(driver.findElement(By.xpath(av.getTokenValue("slctCrrctAnsXPATH")))).selectByVisibleText("False");
         driver.findElement(By.xpath(av.getTokenValue("btnSvQzQstnXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyQzQstnXPATH"), "NewYork is capital of USA?");
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("txtVrfyQzQstnXPATH"), "New York City is the capital of the United States");
     }
 
     /**
@@ -177,7 +177,7 @@ public class Activity extends BaseClass {
 
         ip.isElementPresentByXPATH(driver, av.getTokenValue("btnEditQzXPATH"));
         driver.findElement(By.xpath(av.getTokenValue("btnEditQzXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, av.getTokenValue("txtSbmtQzQstnXPATH"), "NewYork is capital of USA?");
+        ip.isTextPresentByXPATH(driver, av.getTokenValue("txtSbmtQzQstnXPATH"), "New York City is the capital of the United States");
 
         WebElement yesRadioButton = driver.findElement(By.xpath(av.getTokenValue("radioBtnFlsOptnXPATH")));
         yesRadioButton.click();
