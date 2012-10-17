@@ -100,7 +100,7 @@ Automation can run when above steps are followed in order.
 			* linux32
 			* linux64
 			* Only one OS name can be passed
-     iv> Sequence of TEST Run:
+     iv> Flow of TEST:
      	1> gu
             a> stgng 
 			   a> chrome  b> ff
@@ -111,7 +111,7 @@ Automation can run when above steps are followed in order.
 			   a> chrome  b> ff
 			b> prod
 			   a> chrome  b> ff
-	  v> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{browser}
+	  v> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{env}_{browser}
      vi> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
 
 	
