@@ -68,11 +68,11 @@ Run Automation
 -------------------------
 Automation can run when above steps are followed in order.
 
-      i> Open terminal
-     ii> Navigate to folder <BASEDIR>
-	iii> Run automation
+      i> Open Terminal
+     ii> Navigate to <BASEDIR>
+	iii> Run Automation
 	    _______________________________________________________________
-		ant runsmoke -DantPrgrm=gu,usc -DantBrwsr=chrome,ff -DantOS=win 
+		ant runsmoke -DantPrgrm=gu,usc -DantEnv=stgng,prod -DantBrwsr=chrome,ff -DantOS=win 
 	
 	Applicable Parameters (Case Sensitive)
 		1> Targets: runsmoke / runcritical / rundebug
@@ -85,6 +85,11 @@ Automation can run when above steps are followed in order.
         	* vac
         	* mpa 
         	* Program's delimiter: ","
+		3> antEnv: 
+			* qa
+			* prod
+			* stgng
+			* Environment's delimiter: ","
 		3> antBrwsr: 
 			* ff
 			* chrome
@@ -95,11 +100,17 @@ Automation can run when above steps are followed in order.
 			* linux32
 			* linux64
 			* Only one OS name can be passed
-     iv> Sequence of test run:
-     	1> Target program 'gu'
-            a> chrome  b> ff
-        2> Target program 'usc'
-            a> chrome  b> ff
+     iv> Sequence of TEST Run:
+     	1> gu
+            a> stgng 
+			   a> chrome  b> ff
+			b> prod
+			   a> chrome  b> ff
+        2> usc
+            a> stgng 
+			   a> chrome  b> ff
+			b> prod
+			   a> chrome  b> ff
 	  v> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{browser}
      vi> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
 
