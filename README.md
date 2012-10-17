@@ -95,13 +95,13 @@ Automation can run when above steps are followed in order.
 			* linux32
 			* linux64
 			* Only one OS name can be passed
-    iii> Sequence of test run:
-     	1> Target program <gu>
+     iv> Sequence of test run:
+     	1> Target program 'gu'
             a> chrome  b> ff
-        2> Target program <usc>
+        2> Target program 'usc'
             a> chrome  b> ff
-	 iv> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{browser}
-      v> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
+	  v> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{browser}
+     vi> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
 
 	
 	
