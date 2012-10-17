@@ -38,19 +38,18 @@ Requirement: Git
 	  i> Download & install Git (OS specific)
 	  	* [Git](https://help.github.com/articles/set-up-git#platform-all)
      ii> Generate SSH Key
-     	* [Tutorial](https://help.github.com/articles/generating-ssh-keys)
-
-     	Is this section necessary?
-    iii> You must be the member of 2tor/tests project 
-         Ref: https://github.com/2tor/tests
-     iv> Navigate to directory using GIT BASH where you want to download the project. Once, at specific path execute following command
-         git clone https://github.com/2tor/tests.git OR
-         git clone git@github.com:2tor/tests.git <Enter your Login credentials>	   
-      v> Verify, project <tests> is downloaded     
+     	* [Tutorial](https://help.github.com/articles/generating-ssh-keys)     	
+    iii> Get Automation project locally
+		a> You must be the member of 2tor/tests project
+        b> Fork [Automation](https://github.com/2tor/tests) project using your login credentials
+        c> Clone project to your local machine, run 
+		   git clone https://github.com/2tor/tests.git OR
+           git clone git@github.com:2tor/tests.git
+     iv> Verify, project is downloaded     
 	
 Setup JARS
 ------------------------------------
-Requirement: The appropriate JAR's will need to be copied to the machine specific ANT's classpath. <br />
+Requirement: The appropriate JAR's are need to be copied to machine specific ANT's classpath. <br />
 **Note:** Path where BUILD.XML is located is referred as **BASEDIR**
 
       i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
@@ -69,10 +68,9 @@ Run Automation
 -------------------------
 Automation can run when above steps are followed in order.
 
-     i> Open terminal
-    ii> Checkout master
-   iii> Navigate to folder containing build.xml
-	iv> Run automation
+      i> Open terminal
+     ii> Navigate to folder <BASEDIR>
+	iii> Run automation
 	    _______________________________________________________________
 		ant runsmoke -DantPrgrm=gu,usc -DantBrwsr=chrome,ff -DantOS=win 
 	
@@ -99,9 +97,9 @@ Automation can run when above steps are followed in order.
 			* Only one OS name can be passed
     iii> Sequence of test run:
      	1> Target program <gu>
-                a> chrome  b> ff
+            a> chrome  b> ff
         2> Target program <usc>
-                a> chrome  b> ff
+            a> chrome  b> ff
 	 iv> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{browser}
       v> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
 
