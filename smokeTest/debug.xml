@@ -73,15 +73,15 @@
                 <methods>
                     <include name="testStdtDeleteSclGrp"/>                    
                 </methods>
-            </class-->
+            </class>
             <class name="runThrghTestNG.PES_CleanTestData">                
                 <methods>
-                    <!--include name="testUnerolUsers"/>
+                    <include name="testUnerolUsers"/>
                     <include name="testDeleteWrkngGrp"/>    
-                    <include name="testRemoveMbrsFrmWrkngGrp"/-->
+                    <include name="testRemoveMbrsFrmWrkngGrp"/>
                     <include name="testDeleteUsers"/>              
                 </methods>
-            </class>
+            </class-->
         </classes>
     </test>
 </suite>

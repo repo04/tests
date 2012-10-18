@@ -4,6 +4,7 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -19,14 +20,14 @@ import smoketest.Actions;
  */
 public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
-    static String[][] stdtSclGrpArray = new String[1][1];    
+    static String[][] stdtSclGrpArray = new String[1][1];
     Actions a = new Actions();
 
     @DataProvider(name = "StdtSclGrp")
     public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
 
         System.out.println("init StdtSclGrp");
-        
+
         if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
             System.out.println("if StdtSclGrp: " + test);
             return (stdtSclGrpArray);
@@ -34,6 +35,12 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
             System.out.println("else StdtSclGrp: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("stdtSclGrpName")}};
         }
+    }
+
+    @DataProvider(name = "TchrStdtSclGrps")
+    public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsUsers");
+        return DataProviderUtil.cartesianProviderFrom(TchrPosts_SclGrp.TchrSclGrp(context), StdtSclGrp(context));
     }
 
     /**
@@ -103,7 +110,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
     /**
      * User attempt to 'True/False' question in Quiz Assignment
-     * 
+     *
      * @param grpCrsName
      * @throws Exception
      */

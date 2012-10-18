@@ -109,4 +109,14 @@ public class IsPresent {
     public void isTitlePresent(WebDriver driver, String isTitle) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.titleIs(isTitle));
     }
+    
+    /**
+     * Driver checks if the current title contains isTitle
+     * 
+     * @param driver
+     * @param isTitle 
+     */
+    public void isTitleContains(WebDriver driver, String isTitle) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.titleContains(isTitle));
+    }
 }
