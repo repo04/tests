@@ -166,5 +166,24 @@ public class TransformSmoke implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testTchrVerifyEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testTchrVerifyEmails");
+            DependentMethods = new String[4];
+            DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp";
+            DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
+            DependentMethods[2] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost";
+            DependentMethods[3] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStdtVerifyEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testStdtVerifyEmails");
+            DependentMethods = new String[3];
+            DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp";
+            DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
+            DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

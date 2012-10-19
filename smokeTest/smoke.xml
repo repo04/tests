@@ -14,7 +14,8 @@
             <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
-            <!--class name="runThrghTestNG.VrfyEml_Ntfctn"/-->
+            <class name="runThrghTestNG.TchrEmlNtfctn_SmkTests"/>
+            <class name="runThrghTestNG.StdtEmlNtfctn_SmkTests"/>
         </classes>
     </test>
 </suite>

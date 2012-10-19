@@ -171,7 +171,7 @@ public class Actions extends BaseClass {
         }
 
         Utility.navigateToSubMenu(driver, linkToContactXPATH);
-        ip.isTitlePresent(driver, xpv.getTokenValue("contactPageTitle"));
+        ip.isTitlePresent(driver, pv.getTokenValue("contactPageTitle"));
     }
 
     /**

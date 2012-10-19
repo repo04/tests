@@ -175,7 +175,8 @@ public class WorkingGroup extends BaseClass {
             if (i == driver.getWindowHandles().size()) {
                 try {
                     System.out.println("inside google window");
-                    ip.isTitlePresent(driver, gglDocName + " - Google Dcs");
+                    //ip.isTitlePresent(driver, gglDocName + " - Google Dcs");
+                    ip.isTitleContains(driver, gglDocName);
                     ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
                     Utility.navigateToSubMenu(driver, xpv.getTokenValue("btnGglDocSgnOutXPATH"));
                     ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));

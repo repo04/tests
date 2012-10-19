@@ -63,7 +63,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
-    public void testTchrVerifyEmail(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
+    public void testTchrVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
         stdtFllNm = "Auto Student1";
 
@@ -93,8 +93,8 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
                 if (j < wordList.size()) {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
-                        System.out.println("Email verified for Text: '" + a + "'");
-                        Reporter.log("Email verified for Text: '" + a + "'");
+                        System.out.println("EmailNotification verified: '" + a + "'");
+                        Reporter.log("EmailNotification verified: '" + a + "'");
                         Reporter.log("<br />");
                         Utility.actionBuilderClick(driver, "//div[2]/div/div/div[2]/div[3]/div/div");
                         wordList.remove(j);

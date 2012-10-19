@@ -4,10 +4,10 @@
  */
 package runThrghTestNG;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,9 +20,9 @@ import smoketest.Utility;
 
 /**
  *
- * @author somesh.bansal
+ * 
  */
-public class VrfyEml_Ntfctn extends BaseClass {
+public class TchrEmlNtfctn_SmkTests extends BaseClass {
 
     Actions a = new Actions();
     String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6;
@@ -53,65 +53,70 @@ public class VrfyEml_Ntfctn extends BaseClass {
             }
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
-        ip.isTitlePresent(driver, "Gmail");
+        ip.isTitleContains(driver, "2torteacher@gmail.com - Gmail");
     }
 
     /**
-     *
-     * @throws Exception
+     * 
+     * @param tchrUsrName
+     * @param stdtUsrName
+     * @param wrkngGrpName
+     * @param tchrSclGrpName
+     * @param stdtSclGrpName
+     * @throws Exception 
      */
-    @Test(dependsOnMethods = {"runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp", "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp",
-        "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost", "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp"})
-    public void testVerifyEmail() throws Exception {
+    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    public void testTchrVerifyEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
+            String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
-        stdtFllNm = UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1].substring(0, 1).toUpperCase() + UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1].substring(1);
-        vrfy1 = "You are now a member of " + StdtLvSsn_SclGrp_GglDoc.stdtSclGrpArray[0][0];
-        vrfy2 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + TchrPosts_SclGrp.tchrSclGrpArray[0][0] + ".";
+        stdtFllNm = stdtUsrName.substring(0, 1).toUpperCase() + stdtUsrName.substring(1);
+        vrfy1 = "You are now a member of " + stdtSclGrpName;
+        vrfy2 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + tchrSclGrpName + ".";
         vrfy3 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm commented on your post.";
-        vrfy4 = "You are now a member of " + TchrPosts_SclGrp.tchrSclGrpArray[0][0];
-        vrfy5 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpArray[0][0] + ".";
-        vrfy6 = "You are now a member of " + UsrCrtn_AsgnRole_WrkngGrp.wrkngGrpArray[0][0];
+        vrfy4 = "You are now a member of " + tchrSclGrpName;
+        vrfy5 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + wrkngGrpName + ".";
+        vrfy6 = "You are now a member of " + wrkngGrpName;
 
-        String[] words = {vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6};
-        List<String> wordList = Arrays.asList(words);
-        int x = wordList.size();
+        ArrayList<String> wordList = new ArrayList<>();
+        wordList.add(vrfy1);
+        wordList.add(vrfy2);
+        wordList.add(vrfy3);
+        wordList.add(vrfy4);
+        wordList.add(vrfy5);
+        wordList.add(vrfy6);
 
-        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-        String name = iframes.get(iframes.size() - 1).getAttribute("name");
-        driver.switchTo().frame(name);
-        ip.isElementPresentStartsWithTextByXPATH(driver, "Inbox");
-        driver.findElement(By.xpath("//*[starts-with(text(),'Inbox')]")).click();
+        ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
+        driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
 
-        for (int i = 1; i < 7; i++) {
+        for (int i = 0; i < 6; i++) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[1]/td[5]/div/span")));
             Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
 
-            int j = 1;
+            int j = 0;
+
             verify:
             for (String a : wordList) {
                 System.out.println("j:" + j);
-                if (j < x) {
+                if (j < wordList.size()) {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
-                        System.out.println("Email verified for Text: '" + a + "'");
-                        Reporter.log("Email verified for Text: '" + a + "'");
+                        System.out.println("EmailNotification verified: '" + a + "'");
+                        Reporter.log("EmailNotification verified: '" + a + "'");
                         Reporter.log("<br />");
                         Utility.actionBuilderClick(driver, "//div[2]/div/div/div[2]/div[3]/div/div");
+                        wordList.remove(j);
+                        System.out.println("WordList ka size in b/w: " + wordList.size());
                         break verify;
                     } catch (TimeoutException e) {
                         System.out.println("catch:" + a);
+                        if (wordList.size() == 1) {
+                            throw e;
+                        }
                     }
-                } else {
-                    ip.isTextPresentByXPATH(driver, "//h1/span", a);
-                    System.out.println("Email verified for Text: '" + a + "'");
-                    Reporter.log("Email verified for Text: '" + a + "'");
-                    Reporter.log("<br />");
-                    Utility.actionBuilderClick(driver, "//div[2]/div/div/div[2]/div[3]/div/div");
+                    j++;
                 }
-                j++;
             }
         }
-        driver.switchTo().defaultContent();
     }
 
     /**
@@ -122,7 +127,12 @@ public class VrfyEml_Ntfctn extends BaseClass {
      */
     @AfterClass
     public void testTchrEmailLogOut() throws Exception {
-        Utility.navigateToSubMenu(driver, "//td[2]/a");
+        ip.isElementPresentByXPATH(driver, "//td[2]/a");
+        try {
+            Utility.navigateToSubMenu(driver, "//td[2]/a");
+        } catch (UnhandledAlertException e) {
+            driver.switchTo().alert().accept();
+        }
         ip.isTitlePresent(driver, "Gmail: Email from Google");
     }
 }

@@ -39,8 +39,16 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
     @DataProvider(name = "TchrStdtSclGrps")
     public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsUsers");
+        System.out.println("init TchrStdtSclGrps");
         return DataProviderUtil.cartesianProviderFrom(TchrPosts_SclGrp.TchrSclGrp(context), StdtSclGrp(context));
+    }
+
+    @DataProvider(name = "UsrsWrkngGrpTchrStdtSclGrps")
+    public static Iterator<Object[]> UsrsWrkngGrpTchrStdtSclGrps(ITestContext context) throws Exception {
+        System.out.println("init UsrsWrkngGrpTchrStdtSclGrps");
+        return DataProviderUtil.cartesianProviderFrom(UsrCrtn_AsgnRole_WrkngGrp.Users(context),
+                UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), TchrPosts_SclGrp.TchrSclGrp(context),
+                StdtSclGrp(context));
     }
 
     /**

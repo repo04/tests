@@ -22,10 +22,10 @@ import smoketest.Utility;
  *
  * 
  */
-public class StdtEmlNtfctn_CrtclTests extends BaseClass {
+public class StdtEmlNtfctn_SmkTests extends BaseClass {
 
     Actions a = new Actions();
-    String vrfy1, vrfy2, vrfy3;
+    String vrfy1, vrfy2, vrfy3, vrfy4;
     String tchrFllNm;
 
     /**
@@ -58,28 +58,33 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
 
     /**
      * 
+     * @param tchrUsrName
+     * @param stdtUsrName
+     * @param wrkngGrpName
      * @param tchrSclGrpName
      * @param stdtSclGrpName
      * @throws Exception 
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
-    public void testStdtVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    public void testStdtVerifyEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
+            String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
-        tchrFllNm = "Auto Teacher1";
-
-        vrfy1 = tchrFllNm + " has joined the group " + stdtSclGrpName + ".";
+        tchrFllNm = tchrUsrName.substring(0, 1).toUpperCase() + tchrUsrName.substring(1);
+        vrfy1 = tchrFllNm + "fstNm " + tchrFllNm + "sndNm has joined the group " + stdtSclGrpName + ".";
         vrfy2 = "You are now a member of " + stdtSclGrpName;
         vrfy3 = "You are now a member of " + tchrSclGrpName;
+        vrfy4 = "You are now a member of " + wrkngGrpName;       
 
         ArrayList<String> wordList = new ArrayList<>();
         wordList.add(vrfy1);
         wordList.add(vrfy2);
         wordList.add(vrfy3);
-
+        wordList.add(vrfy4);
+        
         ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[1]/td[5]/div/span")));
             Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
 
