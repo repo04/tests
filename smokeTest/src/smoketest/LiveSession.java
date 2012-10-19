@@ -23,20 +23,30 @@ public class LiveSession extends BaseClass {
 
         String user = LoginPage.getUser();
         String liveSsnNm = null;
+        String liveSsnDesc = null;
         DateFormat dateFormat;
 
         //Split username
         switch (user.substring(0, 7)) {
             case "student":
             case "autostu":
-                liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                if (test.equalsIgnoreCase("SmokeTests")) {
+                    liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else {
+                    liveSsnNm = "CrtclTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "CrtclTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                }
                 break;
             default:
-                liveSsnNm = "SmkTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-
+                if (test.equalsIgnoreCase("SmokeTests")) {
+                    liveSsnNm = "SmkTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else {
+                    liveSsnNm = "CrtclTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "CrtclTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                }
         }
-
-        String liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
 
         //Verify Navigated to Live Meeting creation page
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtSsn"));

@@ -29,11 +29,19 @@ public class SocialGroup extends BaseClass {
         switch (user.substring(0, 7)) {
             case "student":
             case "autostu":
-                this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                if (test.equalsIgnoreCase("SmokeTests")) {
+                    this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else {
+                    this.sclGrpName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                }
                 break;
             case "teacher":
             case "autotea":
-                this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                if (test.equalsIgnoreCase("SmokeTests")) {
+                    this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else {
+                    this.sclGrpName = "CrtclTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                }
                 break;
             default:
                 SeleneseTestBase.fail("Invalid user to create Social Group: " + user);
