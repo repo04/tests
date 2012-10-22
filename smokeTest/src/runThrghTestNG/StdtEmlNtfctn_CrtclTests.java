@@ -25,7 +25,7 @@ import smoketest.Utility;
 public class StdtEmlNtfctn_CrtclTests extends BaseClass {
 
     Actions a = new Actions();
-    String vrfy1, vrfy2, vrfy3;
+    String vrfy1, vrfy2, vrfy3, vrfy4;
     String tchrFllNm;
 
     /**
@@ -69,17 +69,19 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
 
         vrfy1 = tchrFllNm + " has joined the group " + stdtSclGrpName + ".";
         vrfy2 = "You are now a member of " + stdtSclGrpName;
-        vrfy3 = "You are now a member of " + tchrSclGrpName;
+        vrfy3 = "You are now a member of " + tchrSclGrpName;  
+        vrfy4 = "Posted on your Wall.";              
 
         ArrayList<String> wordList = new ArrayList<>();
         wordList.add(vrfy1);
         wordList.add(vrfy2);
         wordList.add(vrfy3);
+        wordList.add(vrfy4);
 
         ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[1]/td[5]/div/span")));
             Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
 
@@ -95,6 +97,7 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
                         Reporter.log("EmailNotification verified: '" + a + "'");
                         Reporter.log("<br />");
                         Utility.actionBuilderClick(driver, "//div[2]/div/div/div[2]/div[3]/div/div");
+                        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[2]/div/div/div[2]/div[3]/div/div")));
                         wordList.remove(j);
                         System.out.println("WordList ka size in b/w: " + wordList.size());
                         break verify;

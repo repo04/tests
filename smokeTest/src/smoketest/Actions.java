@@ -136,9 +136,16 @@ public class Actions extends BaseClass {
      * @param cntct
      */
     public void navigateToContactsWall(String cntct) {
+        ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
         String s = cntct.substring(0, 1).toUpperCase();
-        String usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
+        String usrFullNm = null;
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
+        } else {
+            usrFullNm = cntct.substring(0, 1).toUpperCase() + cntct.substring(1, 5)
+                    + cntct.substring(5, 6).toUpperCase() + cntct.substring(6);
+        }
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyCntctXPATH"), usrFullNm);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
@@ -277,14 +284,15 @@ public class Actions extends BaseClass {
 
     /**
      * Delete Users
-     * 
+     *
      * @param tchrUsr
-     * @param stdtUsr 
+     * @param stdtUsr
      */
     public void deleteUsers(String tchrUsr, String stdtUsr) {
         User usr = new User();
         usr.deleteUsers(tchrUsr, stdtUsr);
     }
+
     /**
      * Enroll User as 'Teacher/Student' to 'GroupCourse'
      *
@@ -425,21 +433,21 @@ public class Actions extends BaseClass {
             ip.isElementPresentContainsTextByXPATH(driver, activity);
         }
     }
-    
+
     /**
      * Add True/False question to Quiz Activity
-     * 
-     * @param quizActvtyName 
+     *
+     * @param quizActvtyName
      */
     public void addQuizQuestion(String quizActvtyName) {
         Activity actvty = new Activity();
         actvty.addQuizQuestion(quizActvtyName);
     }
-    
+
     /**
      * User attempt to 'True/False' question in Quiz Assignment
-     * 
-     * @param quizActvtyName 
+     *
+     * @param quizActvtyName
      */
     public void submitQuiz(String quizActvtyName) {
         Activity actvty = new Activity();
@@ -477,12 +485,12 @@ public class Actions extends BaseClass {
 
         WorkingGroup wg = new WorkingGroup();
         wg.rmvMbrsFrmWrkngGrp(members);
-    }    
-    
+    }
+
     /**
      * Delete Working Group
-     * 
-     * @param wrkngGrp 
+     *
+     * @param wrkngGrp
      */
     public void deleteWrkngGrp(String wrkngGrp) {
         WorkingGroup wg = new WorkingGroup();
@@ -498,7 +506,7 @@ public class Actions extends BaseClass {
     public void vrfyWrkngGrp_GglDoc(String wrkngGrp, String gglDocName) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
-        
+
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);

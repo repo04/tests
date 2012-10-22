@@ -21,6 +21,7 @@ public class TchrPosts_SclGrp extends BaseClass {
 
     String tchrTxtWallPost;
     String tchrUrlWallPost;
+    String tchrUrlPostOnStdtWall;
     static String[][] tchrUrlCrsPostArray = new String[1][1];
     static String[][] tchrSclGrpArray = new String[1][1];
     Actions a = new Actions();
@@ -109,6 +110,21 @@ public class TchrPosts_SclGrp extends BaseClass {
         tchrSclGrpArray[0][0] = a.createSocialGroup();
         System.out.println("tchrSclGrpName: " + tchrSclGrpArray[0][0]);
         Reporter.log("tchrSclGrpName: " + tchrSclGrpArray[0][0]);
+    }
+
+    /**
+     *
+     * @param tchrUsrName
+     * @param stdtUsrName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class)
+    public void testTchrPostURLOnStdtsWall(String tchrUsrName, String stdtUsrName) throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToContactsWall(stdtUsrName.substring(0, 4) + " " + stdtUsrName.substring(4));
+        tchrUrlPostOnStdtWall = a.textPost("tchrUrlPostOnStdtWall");
+        System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
+        Reporter.log("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
     }
 
     /**

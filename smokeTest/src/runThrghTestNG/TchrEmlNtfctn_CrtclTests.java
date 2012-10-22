@@ -97,6 +97,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
                         Reporter.log("EmailNotification verified: '" + a + "'");
                         Reporter.log("<br />");
                         Utility.actionBuilderClick(driver, "//div[2]/div/div/div[2]/div[3]/div/div");
+                        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[2]/div/div/div[2]/div[3]/div/div")));
                         wordList.remove(j);
                         System.out.println("WordList ka size in b/w: " + wordList.size());
                         break verify;

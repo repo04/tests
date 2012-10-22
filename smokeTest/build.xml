@@ -3,8 +3,10 @@
        
     <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
     <tstamp> 
-        <format property="timeStamp" pattern="dd.MMM.yy HHmma" locale="en"/> 
-    </tstamp> 
+        <!--format property="timeStamp" pattern="dd.MMM.yy HH.mma" locale="en"/--> 
+        <format property="timeStamp" pattern="dd.MMM.yy HH.mma" timezone="GMT" 
+                offset="-4" unit="hour"/> 
+    </tstamp>
     
     <property name="classes.dir" value="bin" />
     <property name="src.dir" value="src" />
@@ -20,7 +22,7 @@
     </path>
     
     <target name="runsmoke">
-        <property name="runTarget" value="Smoke Suite"/>            
+        <property name="runTarget" value="FullSmoke Suite"/>            
         <antcall target="init"/>
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
@@ -32,7 +34,7 @@
     </target>
     
     <target name="runcritical">
-        <property name="runTarget" value="Critical Suite"/>
+        <property name="runTarget" value="CriticalSmoke Suite"/>
         <antcall target="init"/>
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
@@ -44,7 +46,7 @@
     </target>
     
     <target name="rundebug">
-        <property name="runTarget" value="Debug Suite"/>
+        <property name="runTarget" value="Debug Test"/>
         <antcall target="init"/>
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
@@ -171,11 +173,7 @@
                     </sequential>
                 </ac:for> 
             </sequential>
-        </ac:for>         
-        <!--propertyset refid="propset"/--> 
-        <!--xmlfileset dir="${basedir}" includes="2GU.xml"/>
-        <testng outputDir="${report.dir}" classpathref="libs" suitethreadpoolsize="2">  
-        <xmlfileset dir="${basedir}" includes="UNC.xml" delegatecommandsystemproperties="true"/-->            
+        </ac:for>                 
     </target>
     
     <!-- Generate XSLT reports -->
@@ -213,7 +211,7 @@
     
     <!-- Generate Report Zip folder -->
     <target name="zip">
-        <zip destfile="${basedir}/${report.dir}/${runTarget}Report-${timeStamp}.zip">
+        <zip destfile="${basedir}/${report.dir}/${runTarget} Report-${timeStamp}.zip">
             <zipfileset dir="${basedir}/${report.dir}" excludes="**/*.zip"/>            
         </zip>        
     </target>       
@@ -221,7 +219,7 @@
     <!-- Autosend Test Report zip folder -->
     <target name="email">
         <if>
-            <available file="${report.dir}/${runTarget}Report-${timeStamp}.zip"/>
+            <available file="${report.dir}/${runTarget} Report-${timeStamp}.zip"/>
             <then> 
                 <mail ssl="false" mailhost="techizen.in" mailport="25" 
                       subject="${runTarget} Execution Report">

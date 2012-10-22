@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="Staging-SmokeSuite">
+<suite name="FullSmoke Suite">
     <listeners>
         <listener class-name="runThrghTestNG.TransformSmoke"/>
     </listeners>
@@ -9,6 +9,9 @@
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
             <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
             <class name="runThrghTestNG.TchrPosts_SclGrp"/>
+            <methods>
+                <exclude name="testTchrPostURLOnStdtsWall"/>
+            </methods>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
             <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            

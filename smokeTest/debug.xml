@@ -32,14 +32,15 @@
                     <include name="testAsgnRole"/>
                     <include name="testAddMbrsToWrkngGrp"/>
                 </methods>
-            </class> 
+            </class--> 
             <class name="runThrghTestNG.TchrPosts_SclGrp">
                 <methods>
-                    <include name="testTchrPostsOn_Wall_CrsWall"/>
-                    <include name="testTchrCrtSclGrp"/>
+                    <!--include name="testTchrPostsOn_Wall_CrsWall"/>
+                    <include name="testTchrCrtSclGrp"/-->
+                    <include name="testTchrPostURLOnStdtsWall"/>
                 </methods>
             </class>
-            <class name="runThrghTestNG.StdtJnSclGrp_Post">
+            <!--class name="runThrghTestNG.StdtJnSclGrp_Post">
                 <methods>
                     <include name="testStdtCmntOnTchrCrsPost"/>
                     <include name="testStdtJoinsTchrSclGrp"/>

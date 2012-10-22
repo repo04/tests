@@ -97,8 +97,8 @@ public class TransformCritical implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTchrVerifyEmail".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrVerifyEmail");
+        if ("testTchrVerifyEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testTchrVerifyEmails");
             DependentMethods = new String[3];
             DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost";
@@ -106,11 +106,12 @@ public class TransformCritical implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
         
-        if ("testStdtVerifyEmail".equals(testMethod.getName())) {
-            System.out.println("Inside testStdtVerifyEmail");
-            DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
-            DependentMethods[1] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
+        if ("testStdtVerifyEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testStdtVerifyEmails");
+            DependentMethods = new String[3];
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testTchrPostURLOnStdtsWall";
+            DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
+            DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

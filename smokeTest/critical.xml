@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="Staging-CriticalSuite">
+<suite name="CriticalSmoke Suite">
     <listeners>
         <listener class-name="runThrghTestNG.TransformCritical"/>
     </listeners>
@@ -10,7 +10,7 @@
         <parameter name="grpCrsName" value="AutoGroupCourse"/>
         <parameter name="quizActvtyName" value="AutoQuiz"/>
         <classes>
-            <class name="runThrghTestNG.TchrPosts_SclGrp"/>  
+            <class name="runThrghTestNG.TchrPosts_SclGrp"/>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc">
                 <methods>
