@@ -109,7 +109,7 @@ public class TransformCritical implements IAnnotationTransformer {
         if ("testStdtVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testStdtVerifyEmails");
             DependentMethods = new String[3];
-            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testTchrPostURLOnStdtsWall";
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrPostURLOnStdtsWall";
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
