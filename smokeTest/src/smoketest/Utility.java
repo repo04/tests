@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -72,8 +73,8 @@ public class Utility {
 
     /**
      * Throw IllegalStateException with user message
-     * 
-     * @param msg 
+     *
+     * @param msg
      */
     public static void illegalStateException(String msg) {
         throw new IllegalStateException(msg);
@@ -81,13 +82,82 @@ public class Utility {
 
     /**
      * Click using Webdriver AdavnceUserInterations API
-     * 
+     *
      * @param driver
-     * @param path 
+     * @param path
      */
     public static void actionBuilderClick(WebDriver driver, String path) {
         WebElement elm = driver.findElement(By.xpath(path));
         org.openqa.selenium.interactions.Actions builder = new org.openqa.selenium.interactions.Actions(driver);
         builder.click(elm).perform();
+    }
+
+    /**
+     * 
+     * @param driver
+     * @param xpv
+     * @param usrNm 
+     */
+    public static void usrEmlLgn(WebDriver driver, XpathValues xpv, String usrNm) {
+        driver.get("https://mail.google.com/");
+        ip.isTitlePresent(driver, "Gmail: Email from Google");
+        WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
+        WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
+        value:
+        while (true) {
+            gglUsrNm.clear();
+            gglPswd.clear();
+            gglUsrNm.sendKeys(usrNm);
+            gglPswd.sendKeys("Newuser321");
+            try {
+                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue
+                        (By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), usrNm));
+                break value;
+            } catch (TimeoutException e) {
+            }
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
+        ip.isTitleContains(driver, usrNm + "@gmail.com - Gmail");
+    }
+
+    /**
+     * User confirms no mail is present before execution
+     *
+     * @param driver
+     */
+    public static void cnfrmNoEmlPrsnt(WebDriver driver) {
+        loopEml:
+        while (true) {
+            try {
+                new WebDriverWait(driver, 30).until(ExpectedConditions.
+                        elementToBeClickable(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")));
+                driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
+
+                new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//tr[1]/td[5]/div/span")));
+                driver.findElement(By.xpath("//div/span/div")).click();
+                new WebDriverWait(driver, 30).until(ExpectedConditions.
+                        elementToBeClickable(By.xpath("//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div")));
+                driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div")).click();
+                new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(
+                        By.xpath("//tr[1]/td[5]/div/span")));
+            } catch (TimeoutException e) {
+                break loopEml;
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param driver 
+     */
+    public static void usrEmlLogout(WebDriver driver) {
+        ip.isElementPresentByXPATH(driver, "//td[2]/a");
+        try {
+            Utility.navigateToSubMenu(driver, "//td[2]/a");
+        } catch (UnhandledAlertException e) {
+            driver.switchTo().alert().accept();
+        }
+        ip.isTitlePresent(driver, "Gmail: Email from Google");
     }
 }

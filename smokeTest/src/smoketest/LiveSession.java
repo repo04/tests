@@ -56,6 +56,7 @@ public class LiveSession extends BaseClass {
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
         dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println(dateFormat.format(now));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))).sendKeys(xpv.getTokenValue("lvSsnDuration"));
 

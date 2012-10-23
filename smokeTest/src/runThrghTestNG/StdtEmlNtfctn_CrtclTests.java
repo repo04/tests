@@ -7,8 +7,6 @@ package runThrghTestNG;
 import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
@@ -20,7 +18,7 @@ import smoketest.Utility;
 
 /**
  *
- * 
+ *
  */
 public class StdtEmlNtfctn_CrtclTests extends BaseClass {
 
@@ -30,37 +28,21 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
 
     /**
      * The annotated method will be run before the first test method in the
-     * current class is invoked, Content Admin logs in
+     * current class is invoked, Student logs in to its email account
      *
      * @throws Exception
      */
     @BeforeClass
     public void testStdtEmailLgn() throws Exception {
-        driver.get("https://mail.google.com/");
-        ip.isTitlePresent(driver, "Gmail: Email from Google");
-        WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
-        WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
-        value:
-        while (true) {
-            gglUsrNm.clear();
-            gglPswd.clear();
-            gglUsrNm.sendKeys("2torstudent");
-            gglPswd.sendKeys("Newuser321");
-            try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), "2torstudent"));
-                break value;
-            } catch (TimeoutException e) {
-            }
-        }
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
-        ip.isTitleContains(driver, "2torstudent@gmail.com - Gmail");
+        Utility.usrEmlLgn(driver, xpv, "2torstudent");
     }
 
     /**
+     * Student verifies email notifications & deletes subsequently
      * 
      * @param tchrSclGrpName
      * @param stdtSclGrpName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
     public void testStdtVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
@@ -69,8 +51,8 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
 
         vrfy1 = tchrFllNm + " has joined the group " + stdtSclGrpName + ".";
         vrfy2 = "You are now a member of " + stdtSclGrpName;
-        vrfy3 = "You are now a member of " + tchrSclGrpName;  
-        vrfy4 = "Posted on your Wall.";              
+        vrfy3 = "You are now a member of " + tchrSclGrpName;
+        vrfy4 = "Posted on your Wall.";
 
         ArrayList<String> wordList = new ArrayList<>();
         wordList.add(vrfy1);
@@ -84,7 +66,7 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
         for (int i = 0; i < 4; i++) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[1]/td[5]/div/span")));
             Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
-
+            
             int j = 0;
 
             verify:
@@ -93,17 +75,31 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
                 if (j < wordList.size()) {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
+                        String prod;
+                        if (BaseClass.program.substring(0, 2).contains("gu")) {
+                            prod = "2GU";
+                        } else if (BaseClass.program.substring(0, 3).contains("vac")) {
+                            prod = "VAC";
+                        } else {
+                            prod = "2" + program.substring(1, 3).toUpperCase();
+                        }
+
+                        if (a.contentEquals(vrfy4)) {
+                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[4]", "Thanks\n" + prod, 15);
+                        } else {
+                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + prod, 15);
+                        }
                         System.out.println("EmailNotification verified: '" + a + "'");
                         Reporter.log("EmailNotification verified: '" + a + "'");
-                        Reporter.log("<br />");
+                        Reporter.log("<br/>");
                         Utility.actionBuilderClick(driver, "//div[2]/div/div/div[2]/div[3]/div/div");
                         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[2]/div/div/div[2]/div[3]/div/div")));
                         wordList.remove(j);
                         System.out.println("WordList ka size in b/w: " + wordList.size());
                         break verify;
-                    } catch (TimeoutException e) {
+                    }catch (TimeoutException e) {
                         System.out.println("catch:" + a);
-                        if (wordList.size() == 1) {
+                        if (wordList.size() == 1 || e.getMessage().contains("//div[6]/div/div")) {
                             throw e;
                         }
                     }
@@ -115,18 +111,12 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
 
     /**
      * The annotated method will be run after all the test methods in the
-     * current class have been run, User logsOut
+     * current class have been run, Student logsOut
      *
      * @throws Exception
      */
     @AfterClass
     public void testStdtEmailLogOut() throws Exception {
-        ip.isElementPresentByXPATH(driver, "//td[2]/a");
-        try {
-            Utility.navigateToSubMenu(driver, "//td[2]/a");
-        } catch (UnhandledAlertException e) {
-            driver.switchTo().alert().accept();
-        }
-        ip.isTitlePresent(driver, "Gmail: Email from Google");
+        Utility.usrEmlLogout(driver);
     }
 }
