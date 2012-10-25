@@ -161,7 +161,8 @@
                         <ac:for list="${antBrwsr}" param = "brwsr">
                             <sequential>
                                 <echo>Driver: @{brwsr}</echo>
-                                <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
+                                <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" 
+                                        delegatecommandsystemproperties="true" listeners="org.uncommons.reportng.HTMLReporter">  
                                     <xmlfileset dir="${basedir}" includes="debug.xml"/>
                                     <sysproperty key="program" value="@{program}@{env}"/>   
                                     <sysproperty key="brwsr" value="@{brwsr}"/>

@@ -2,21 +2,18 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Staging-DebugSuite">
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <!--parameter name="grpCrsName" value="SmkTstGrpCrs Sep 29, 2012 6:37 PM"/>
-        <parameter name="tchrUsrName" value="teacher1010-1242"/>
-        <parameter name="stdtUsrName" value="student1010-1243"/-->
         <parameter name="tchrUsrName" value="autoteacher1"/>
         <parameter name="stdtUsrName" value="autostudent1"/>
         <parameter name="grpCrsName" value="AutoGroupCourse"/>
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
         <parameter name="tchrUrlCrsPost" value=""/>
-        <parameter name="tchrSclGrpName" value=""/>
+        <parameter name="tchrSclGrpName" value="AutoTchrSclGrp"/>
         <parameter name="frmActvyName" value="AutoForum"/>
         <parameter name="quizActvtyName" value="AutoQuiz"/>
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
-        <parameter name="gglDocName" value=""/>
-        <parameter name="stdtSclGrpName" value="SmkTstStdtSclGrp Oct 12, 2012 8:03 PM"/>
+        <parameter name="gglDocName" value="AutoGglDoc"/>
+        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
         <classes>
             <!--class name="runThrghTestNG.Crs_GrpCrsCreation">
                 <methods>
@@ -32,15 +29,15 @@
                     <include name="testAsgnRole"/>
                     <include name="testAddMbrsToWrkngGrp"/>
                 </methods>
-            </class--> 
+            </class> 
             <class name="runThrghTestNG.TchrPosts_SclGrp">
                 <methods>
-                    <!--include name="testTchrPostsOn_Wall_CrsWall"/>
-                    <include name="testTchrCrtSclGrp"/-->
+                    <include name="testTchrPostsOn_Wall_CrsWall"/>
+                    <include name="testTchrCrtSclGrp"/>
                     <include name="testTchrPostURLOnStdtsWall"/>
                 </methods>
             </class>
-            <!--class name="runThrghTestNG.StdtJnSclGrp_Post">
+            <class name="runThrghTestNG.StdtJnSclGrp_Post">
                 <methods>
                     <include name="testStdtCmntOnTchrCrsPost"/>
                     <include name="testStdtJoinsTchrSclGrp"/>
@@ -53,17 +50,17 @@
                     <include name="testTchrVrfyActivities"/>
                     <include name="testTchrCrtGglDoc"/>
                 </methods>
-            </class>
+            </class-->
             <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
                 <methods>
-                    <include name="testStdtCrtSclGrp"/>
+                    <!--include name="testStdtCrtSclGrp"/>
                     <include name="testStdtCrtLvSsn"/>
-                    <include name="testStdtVrfyActivities"/>
+                    <include name="testStdtVrfyActivities"/-->
                     <include name="testSubmitQuiz"/>
-                    <include name="testStdtVrfyWrkGrp_GglDoc"/>                    
+                    <!--include name="testStdtVrfyWrkGrp_GglDoc"/-->                    
                 </methods>
             </class>
-            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp">                
+            <!--class name="runThrghTestNG.TchrJoin_Delete_SclGrp">                
                 <methods>
                     <include name="testTchrJoinsStdtSclGrp"/>
                     <include name="testTchrDeleteSclGrp"/>

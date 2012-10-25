@@ -7,8 +7,6 @@ package runThrghTestNG;
 import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.UnhandledAlertException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
@@ -36,24 +34,7 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
      */
     @BeforeClass
     public void testStdtEmailLgn() throws Exception {
-        driver.get("https://mail.google.com/");
-        ip.isTitlePresent(driver, "Gmail: Email from Google");
-        WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
-        WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
-        value:
-        while (true) {
-            gglUsrNm.clear();
-            gglPswd.clear();
-            gglUsrNm.sendKeys("2torstudent");
-            gglPswd.sendKeys("Newuser321");
-            try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), "2torstudent"));
-                break value;
-            } catch (TimeoutException e) {
-            }
-        }
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
-        ip.isTitleContains(driver, "2torstudent@gmail.com - Gmail");
+        Utility.usrEmlLgn(driver, xpv, "2torstudent");
     }
 
     /**
@@ -96,6 +77,16 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
                 if (j < wordList.size()) {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
+                        String prod;
+                        if (BaseClass.program.substring(0, 2).contains("gu")) {
+                            prod = "2GU";
+                        } else if (BaseClass.program.substring(0, 3).contains("vac")) {
+                            prod = "VAC";
+                        } else {
+                            prod = "2" + program.substring(1, 3).toUpperCase();
+                        }
+                        ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + prod, 15);    
+                        
                         System.out.println("EmailNotification verified: '" + a + "'");
                         Reporter.log("EmailNotification verified: '" + a + "'");
                         Reporter.log("<br />");
@@ -106,7 +97,7 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
                         break verify;
                     } catch (TimeoutException e) {
                         System.out.println("catch:" + a);
-                        if (wordList.size() == 1) {
+                        if (wordList.size() == 1 || e.getMessage().contains("//div[6]/div/div")) {
                             throw e;
                         }
                     }
@@ -124,12 +115,6 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
      */
     @AfterClass
     public void testStdtEmailLogOut() throws Exception {
-        ip.isElementPresentByXPATH(driver, "//td[2]/a");
-        try {
-            Utility.navigateToSubMenu(driver, "//td[2]/a");
-        } catch (UnhandledAlertException e) {
-            driver.switchTo().alert().accept();
-        }
-        ip.isTitlePresent(driver, "Gmail: Email from Google");
+        Utility.usrEmlLogout(driver);
     }
 }

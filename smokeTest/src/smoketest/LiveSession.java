@@ -56,20 +56,21 @@ public class LiveSession extends BaseClass {
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
         dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println(dateFormat.format(now));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))).clear();
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))).sendKeys(xpv.getTokenValue("lvSsnDuration"));
-
-        //This is to verify lvSsnName field passes correct value 
+        WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));        
+        
+        //This is to verify lvSsnName & lvSsnDrtn field passes correct value 
         value:
         while (true) {
             lvSsnNm.clear();
             lvSsnNmDesc.clear();
+            lvSsnDrtn.clear();        
             lvSsnNm.sendKeys(liveSsnNm);
             lvSsnNmDesc.sendKeys(liveSsnDesc);
+            lvSsnDrtn.sendKeys(xpv.getTokenValue("lvSsnDuration"));
             try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.id("startdate"), dateFormat.format(now)));
+                new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.id("startdate"), dateFormat.format(now)));
                 new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH")), liveSsnNm));
+                new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), xpv.getTokenValue("lvSsnDuration")));
                 break value;
             } catch (TimeoutException e) {
             }
