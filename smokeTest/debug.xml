@@ -39,7 +39,7 @@
             </class>
             <class name="runThrghTestNG.StdtJnSclGrp_Post">
                 <methods>
-                    <include name="testStdtCmntOnTchrCrsPost"/>
+                    <exclude name="testStdtCmntOnTchrCrsPost"/>
                     <include name="testStdtJoinsTchrSclGrp"/>
                     <include name="testStdtPostURLOnTchrSclGrp"/>
                 </methods>
@@ -77,7 +77,7 @@
                     <include name="testUnerolUsers"/>
                     <include name="testDeleteWrkngGrp"/>    
                     <include name="testRemoveMbrsFrmWrkngGrp"/>
-                    <include name="testDeleteUsers"/>              
+                    <include name="testDeleteUsers"/>
                 </methods>
             </class-->
         </classes>

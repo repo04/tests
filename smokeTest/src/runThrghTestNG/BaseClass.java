@@ -91,7 +91,7 @@ public class BaseClass {
     }
 
     //The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run 
-    @AfterTest
+    @AfterTest(alwaysRun=true)
     public void tearDown() throws Exception {
         driver.quit();
     }

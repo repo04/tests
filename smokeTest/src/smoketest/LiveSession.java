@@ -57,13 +57,14 @@ public class LiveSession extends BaseClass {
         dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println(dateFormat.format(now));
         WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));        
-        
+        new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), "60"));
+            
         //This is to verify lvSsnName & lvSsnDrtn field passes correct value 
         value:
         while (true) {
             lvSsnNm.clear();
             lvSsnNmDesc.clear();
-            lvSsnDrtn.clear();        
+            lvSsnDrtn.clear();  
             lvSsnNm.sendKeys(liveSsnNm);
             lvSsnNmDesc.sendKeys(liveSsnDesc);
             lvSsnDrtn.sendKeys(xpv.getTokenValue("lvSsnDuration"));
