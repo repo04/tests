@@ -23,7 +23,7 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testStdtLgn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
@@ -37,7 +37,8 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
+          groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.delete"})
     public void testStdtDeleteSclGrp(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(stdtSclGrpName);
@@ -49,8 +50,8 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
-    public void testTchrLogOut() throws Exception {
+    @AfterClass(groups = {"prerequisite"})
+    public void testStdtLogOut() throws Exception {
         a.logOut();
     }
 }

@@ -9,23 +9,22 @@
         <parameter name="stdtUsrName" value="autostudent1"/>
         <parameter name="grpCrsName" value="AutoGroupCourse"/>
         <parameter name="quizActvtyName" value="AutoQuiz"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalsmoke"/>
+            </run>
+        </groups>
         <classes>
+            <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
+            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
             <class name="runThrghTestNG.TchrPosts_SclGrp"/>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
-            <class name="runThrghTestNG.TchrLvSsn_GglDoc">
-                <methods>
-                    <exclude name="testTchrCrtGglDoc"/>
-                    <exclude name="testTchrVrfyActivities"/>
-                </methods>
-            </class>
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
-                <methods>
-                    <exclude name="testStdtVrfyWrkGrp_GglDoc"/>
-                    <exclude name="testStdtVrfyActivities"/>
-                </methods>
-            </class>
-            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/> 
+            <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
+            <class name="runThrghTestNG.PES_CleanTestData"/>
             <class name="runThrghTestNG.TchrEmlNtfctn_CrtclTests"/>
             <class name="runThrghTestNG.StdtEmlNtfctn_CrtclTests"/>                                              
         </classes>

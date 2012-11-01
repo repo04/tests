@@ -25,7 +25,6 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
     @DataProvider(name = "StdtSclGrp")
     public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
-
         System.out.println("init StdtSclGrp");
 
         if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
@@ -50,6 +49,12 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
                 UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), TchrPosts_SclGrp.TchrSclGrp(context),
                 StdtSclGrp(context));
     }
+    
+    @DataProvider(name = "StdtSclGrpDebug")
+    public static Object[][] StdtSclGrpDebug(ITestContext context) throws Exception {
+        System.out.println("init StdtSclGrpDebug");
+        return (stdtSclGrpArray);
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -57,7 +62,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testStdtLgn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
@@ -71,7 +76,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class)
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
+          groups = {"fullsmoke", "criticalsmoke", "stdtLvSsn.create"})
     public void testStdtCrtLvSsn(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(tchrSclGrpName);
@@ -84,7 +90,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.create"})
     public void testStdtCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         stdtSclGrpArray[0][0] = a.createSocialGroup();
@@ -97,7 +103,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class)
+    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class,
+          groups = {"fullsmoke", "wrkngGrp.stdtVrfyGglDoc"})
     public void testStdtVrfyWrkGrp_GglDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
@@ -108,7 +115,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class)
+    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"fullsmoke", "activites.stdtVrfy"})
     public void testStdtVrfyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -122,7 +130,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz", dataProviderClass = Crs_GrpCrsCreation.class)
+    @Test(dataProvider = "GrpCrsQz", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"fullsmoke", "criticalsmoke", "activites.sbmtQuiz"})
     public void testSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -136,7 +145,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testStdtLogOut() throws Exception {
         a.logOut();
     }

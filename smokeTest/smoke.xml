@@ -5,23 +5,22 @@
         <listener class-name="runThrghTestNG.TransformSmoke"/>
     </listeners>
     <test name="SmokeTests" preserve-order="true" parallel="false">
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="fullsmoke"/>
+            </run>
+        </groups>
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
             <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
             <class name="runThrghTestNG.TchrPosts_SclGrp"/>
-            <methods>
-                <exclude name="testTchrPostURLOnStdtsWall"/>
-            </methods>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
             <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.PES_CleanTestData"/>
-            <methods>
-                <include name="testDeleteWrkngGrp"/>
-                <include name="testDeleteUsers"/>
-            </methods>
             <class name="runThrghTestNG.TchrEmlNtfctn_SmkTests"/>
             <class name="runThrghTestNG.StdtEmlNtfctn_SmkTests"/>
         </classes>

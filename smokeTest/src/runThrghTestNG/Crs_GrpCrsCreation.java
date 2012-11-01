@@ -70,7 +70,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
         System.out.println("init GrpCrsActivities");
         return DataProviderUtil.cartesianProviderFrom(Course(context), Activites(context));
     }
-    
+
     @DataProvider(name = "GrpCrsQz")
     public static Iterator<Object[]> GrpCrsQz(ITestContext context) throws Exception {
         System.out.println("init GrpCrsQz");
@@ -83,7 +83,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testCntntAdminLgn() throws Exception {
         a.login("contentAdmin");
     }
@@ -93,7 +93,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(groups = {"fullsmoke", "course.creation"})
     public void testCrsGrpCrs_Creation() throws Exception {
 
         a.navigateToMyCourse();
@@ -112,7 +112,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course")
+    @Test(dataProvider = "Course", groups = {"fullsmoke", "activites.creation"})
     public void testActivities_Creation(String grpCrsName) throws Exception {
 
         a.navigateToMyCourse();
@@ -140,21 +140,20 @@ public class Crs_GrpCrsCreation extends BaseClass {
         System.out.println("pageActvtyName: " + actvtsArray[0][3]);
         Reporter.log("pageActvtyName: " + actvtsArray[0][3]);
     }
-    
+
     /**
      * Add True/False question to Quiz Activity
-     * 
+     *
      * @param grpCrsName
      * @param quizName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz")
+    @Test(dataProvider = "GrpCrsQz", groups = {"fullsmoke", "activites.addQuizQstn"})
     public void testAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
     }
-    
 
     /**
      * The annotated method will be run after all the test methods in the
@@ -162,7 +161,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testCntntAdminLogOut() throws Exception {
         a.logOut();
     }

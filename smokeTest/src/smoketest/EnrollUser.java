@@ -7,6 +7,8 @@ package smoketest;
 import com.thoughtworks.selenium.SeleneseTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -97,17 +99,9 @@ public class EnrollUser extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpv.getTokenValue("chckBxUnrolFrstUsrXpath"))));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpv.getTokenValue("chckBxUnrolScndUsrXpath"))));
-        driver.findElement(By.xpath(xpv.getTokenValue("chckBxUnrolFrstUsrXpath"))).click();
-        driver.findElement(By.xpath(xpv.getTokenValue("chckBxUnrolScndUsrXpath"))).click();
-        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctUnrolUsers")))).selectByValue("deleteselectedusers");
-        driver.findElement(By.xpath(xpv.getTokenValue("goUnrolUsers"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblEnrollUsersXPATH"), "Delete selected user enrolments");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtStdtUnrolXPATH"), stdtFllNm);
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtTchrUnrolXPATH"), tchrFllNm);
-        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpv.getTokenValue("chckBxUnrolFrstUsrXpath"))));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpv.getTokenValue("chckBxUnrolScndUsrXpath"))));
+
+        unenrollUsers(stdtFllNm);
+        unenrollUsers(tchrFllNm);        
     }
 
     /**
@@ -158,5 +152,49 @@ public class EnrollUser extends BaseClass {
         }
 
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrGrpCrsXPATH"), grpCrs);
+    }
+
+    /**
+     * Unassign users from group course
+     * 
+     * @param FllNm 
+     */
+    private void unenrollUsers(String FllNm) {
+
+        int i = 1;
+        int x = 1;
+        while (true) {
+            try {
+                driver.findElement(By.xpath("//tr[" + i + "]/td[2]/div[2]"));
+            } catch (NoSuchElementException e) {
+                System.out.println("Total Elements i: " + i);
+                break;
+            }
+            i++;
+        }
+        
+        loop:
+        do {
+            try {
+                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]/div[2]", FllNm, 5);
+                driver.findElement(By.xpath("//div[4]/div/form/table/tbody/tr[" + x + "]/td/input")).click();
+                break loop;
+            } catch (TimeoutException e) {
+                System.out.println("Text not present at x: " + x);
+                x++;                
+            }
+        } while (x < i);
+        
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctUnrolUsers")))).selectByValue("deleteselectedusers");
+        driver.findElement(By.xpath(xpv.getTokenValue("goUnrolUsers"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblEnrollUsersXPATH"), "Delete selected user enrolments");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtStdtUnrolXPATH"), FllNm);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnEnrlUsrs"))));
+        try {
+            new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(By.xpath("//tr[" + i + "]/td[2]/div[2]"), FllNm));
+            Utility.illegalStateException("Cannot unenrol user from course: " + FllNm);
+        } catch (TimeoutException e) {
+        }
     }
 }

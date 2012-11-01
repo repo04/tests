@@ -32,7 +32,7 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testStdtEmailLgn() throws Exception {
         Utility.usrEmlLgn(driver, xpv, "2torstudent");
     }
@@ -46,7 +46,8 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
      * @param stdtSclGrpName
      * @throws Exception 
      */
-    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
+          groups = {"fullsmoke", "stdtVrfyEmails"})
     public void testStdtVerifyEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
             String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
@@ -105,7 +106,9 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
                 }
             }
         }
-    }
+        ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
+        driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
+   }
 
     /**
      * The annotated method will be run after all the test methods in the
@@ -113,7 +116,7 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testStdtEmailLogOut() throws Exception {
         Utility.usrEmlLogout(driver);
     }

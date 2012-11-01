@@ -28,31 +28,14 @@ public class TchrPosts_SclGrp extends BaseClass {
 
     @DataProvider(name = "tchrUrlCrsPost")
     public static Object[][] tchrUrlCrsPost(ITestContext context) throws Exception {
-
         System.out.println("init tchrUrlCrsPost");
-
-        if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
-            System.out.println("if tchrUrlCrsPost: " + test);
-            return (tchrUrlCrsPostArray);
-        } else {
-            System.out.println("else tchrUrlCrsPost: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrUrlCrsPost")}};
-        }
+        return (tchrUrlCrsPostArray);
     }
 
     @DataProvider(name = "TchrSclGrp")
     public static Object[][] TchrSclGrp(ITestContext context) throws Exception {
-
         System.out.println("init TchrSclGrp");
-
-
-        if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
-            System.out.println("if TchrSclGrp: " + test);
-            return (tchrSclGrpArray);
-        } else {
-            System.out.println("else TchrSclGrp: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrSclGrpName")}};
-        }
+        return (tchrSclGrpArray);
     }
 
     @DataProvider(name = "GrpCrsTchrUrlCrsPst")
@@ -67,7 +50,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testTchrLgn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
@@ -81,7 +64,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class)
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"fullsmoke", "criticalsmoke", "tchrPosts.wallCrs"})
     public void testTchrPostsOn_Wall_CrsWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
@@ -104,7 +88,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.create"})
     public void testTchrCrtSclGrp() throws Exception {
         a.navigateToMySocialGroups();
         tchrSclGrpArray[0][0] = a.createSocialGroup();
@@ -118,7 +102,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class)
+    @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"criticalsmoke", "tchrPosts.stdtWall"})
     public void testTchrPostURLOnStdtsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
         a.navigateToContactsWall(stdtUsrName.substring(0, 4) + " " + stdtUsrName.substring(4));
@@ -133,7 +118,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testTchrLogOut() throws Exception {
         a.logOut();
     }

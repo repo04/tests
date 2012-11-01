@@ -1,85 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Staging-DebugSuite">
+    <listeners>
+        <listener class-name="runThrghTestNG.TransformDebug"/>
+    </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
         <parameter name="tchrUsrName" value="autoteacher1"/>
         <parameter name="stdtUsrName" value="autostudent1"/>
         <parameter name="grpCrsName" value="AutoGroupCourse"/>
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
-        <parameter name="tchrUrlCrsPost" value=""/>
         <parameter name="tchrSclGrpName" value="AutoTchrSclGrp"/>
         <parameter name="frmActvyName" value="AutoForum"/>
         <parameter name="quizActvtyName" value="AutoQuiz"/>
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
-        <parameter name="gglDocName" value="AutoGglDoc"/>
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
+        <groups>
+            <define name="CourseCrtn">
+                <include name="course.creation"/>                
+            </define>            
+            <define name="ActvtsCrtn">
+                <include name="activites.creation"/>              
+            </define>
+            <define name="ActvtsVrfctn">
+                <include name="activites.tchrVrfy"/>
+                <include name="activites.stdtVrfy"/>          
+            </define>            
+            <define name="ActvtsSbmtQz">
+                <include name="activites.sbmtQuiz"/>          
+            </define>            
+            <define name="UsrsCrtn_Role_Dltn">
+                <include name="usrs.creation"/>
+                <include name="usrs.assgnRole"/>
+                <include name="usrs.unAssgnRole"/>
+                <include name="usrs.delete"/>         
+            </define>
+            <define name="WrkngGrpCrtn_AddMbrs_Dltn">
+                <include name="wrkngGrp.create"/>
+                <include name="wrkngGrp.addMbrs"/>
+                <include name="wrkngGrp.rmvMbrs"/>                
+                <include name="wrkngGrp.delete"/>         
+            </define>              
+            <define name="GglDoc_MbrsCrtVrfy">
+                <include name="wrkngGrp.tchrCrtGglDoc"/> 
+                <include name="wrkngGrp.stdtVrfyGglDoc"/>                
+            </define>            
+            <define name="TchrWallCrs_StdtCmntOnPsts">
+                <include name="tchrPosts.wallCrs"/>
+                <include name="tchrPosts.stdtWall"/> 
+                <include name="stdtCmnt.TchrCrsPost"/>                        
+            </define>            
+            <define name="TchrStdt_CrtDlt_SclGrpLvSsn">
+                <include name="tchrSclGrp.create"/>
+                <include name="tchrSclGrp.stdtJoins"/>
+                <include name="tchrSclGrp.stdtPostURL"/>
+                <include name="tchrLvSsn.create"/>
+                <include name="stdtLvSsn.create"/>
+                <include name="tchrSclGrp.delete"/>
+                <include name="stdtSclGrp.create"/>
+                <include name="stdtSclGrp.delete"/>                                                         
+            </define>            
+            <define name="Stdt_JnLvsTchrGrp">
+                <include name="stdtSclGrp.tchrJoins"/>
+                <include name="stdtSclGrp.tchrLeaves"/>                
+            </define>            
+                        
+            <run>
+                <include name="prerequisite"/>
+                <include name="WrkngGrpCrtn_AddMbrs_Dltn"/>                 
+            </run>
+        </groups>
         <classes>
-            <!--class name="runThrghTestNG.Crs_GrpCrsCreation">
-                <methods>
-                    <include name="testCrsGrpCrs_Creation"/>
-                    <include name="testActivities_Creation"/>
-                    <include name="testAddQuizQuestion"/>
-                </methods>
-            </class>           
-            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp">
-                <methods>
-                    <include name="testCrtWrkgnGrp"/>
-                    <include name="testUsrCrtn"/>
-                    <include name="testAsgnRole"/>
-                    <include name="testAddMbrsToWrkngGrp"/>
-                </methods>
-            </class> 
-            <class name="runThrghTestNG.TchrPosts_SclGrp">
-                <methods>
-                    <include name="testTchrPostsOn_Wall_CrsWall"/>
-                    <include name="testTchrCrtSclGrp"/>
-                    <include name="testTchrPostURLOnStdtsWall"/>
-                </methods>
-            </class>
-            <class name="runThrghTestNG.StdtJnSclGrp_Post">
-                <methods>
-                    <exclude name="testStdtCmntOnTchrCrsPost"/>
-                    <include name="testStdtJoinsTchrSclGrp"/>
-                    <include name="testStdtPostURLOnTchrSclGrp"/>
-                </methods>
-            </class>
-            <class name="runThrghTestNG.TchrLvSsn_GglDoc">
-                <methods>
-                    <include name="testTchrCrtLvSsn"/>
-                    <include name="testTchrVrfyActivities"/>
-                    <include name="testTchrCrtGglDoc"/>
-                </methods>
-            </class-->
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc">
-                <methods>
-                    <!--include name="testStdtCrtSclGrp"/>
-                    <include name="testStdtCrtLvSsn"/>
-                    <include name="testStdtVrfyActivities"/-->
-                    <include name="testSubmitQuiz"/>
-                    <!--include name="testStdtVrfyWrkGrp_GglDoc"/-->                    
-                </methods>
-            </class>
-            <!--class name="runThrghTestNG.TchrJoin_Delete_SclGrp">                
-                <methods>
-                    <include name="testTchrJoinsStdtSclGrp"/>
-                    <include name="testTchrDeleteSclGrp"/>
-                    <include name="testTchrLeavesStdtSclGrp"/>
-                </methods>
-            </class>
-            <class name="runThrghTestNG.Stdt_DeleteSclGrp">                
-                <methods>
-                    <include name="testStdtDeleteSclGrp"/>                    
-                </methods>
-            </class>
-            <class name="runThrghTestNG.PES_CleanTestData">                
-                <methods>
-                    <include name="testUnerolUsers"/>
-                    <include name="testDeleteWrkngGrp"/>    
-                    <include name="testRemoveMbrsFrmWrkngGrp"/>
-                    <include name="testDeleteUsers"/>
-                </methods>
-            </class-->
+            <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
+            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
+            <class name="runThrghTestNG.TchrPosts_SclGrp"/>
+            <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
+            <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
+            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
+            <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
+            <class name="runThrghTestNG.PES_CleanTestData"/>
         </classes>
     </test>
 </suite>

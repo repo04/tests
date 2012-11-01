@@ -167,22 +167,40 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
         
+        if ("testDeleteWrkngGrp".equals(testMethod.getName())) {
+            System.out.println("Inside testDeleteWrkngGrp");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtVrfyWrkGrp_GglDoc";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+        
+        if ("testDeleteUsers".equals(testMethod.getName())) {
+            System.out.println("Inside testDeleteUsers");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+        
         if ("testTchrVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testTchrVerifyEmails");
-            DependentMethods = new String[4];
+            DependentMethods = new String[5];
             DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp";
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[2] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost";
             DependentMethods[3] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
+            DependentMethods[4] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
         if ("testStdtVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testStdtVerifyEmails");
-            DependentMethods = new String[3];
+            DependentMethods = new String[4];
             DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp";
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
+            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

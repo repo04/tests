@@ -99,19 +99,21 @@ public class TransformCritical implements IAnnotationTransformer {
 
         if ("testTchrVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testTchrVerifyEmails");
-            DependentMethods = new String[3];
+            DependentMethods = new String[4];
             DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost";
             DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
+            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
         if ("testStdtVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testStdtVerifyEmails");
-            DependentMethods = new String[3];
+            DependentMethods = new String[4];
             DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrPostURLOnStdtsWall";
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
+            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

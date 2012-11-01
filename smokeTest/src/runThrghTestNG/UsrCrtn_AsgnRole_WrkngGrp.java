@@ -69,13 +69,43 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), WrkngGrp(context), Users(context));
     }
 
+    @DataProvider(name = "UsersDebug")
+    public static Object[][] UsersDebug(ITestContext context) throws Exception {
+        System.out.println("init UsersDebug");
+        return (usrsArray);
+    }
+    
+    @DataProvider(name = "WrkngGrpDebug")
+    public static Object[][] WrkngGrpDebug(ITestContext context) throws Exception {
+        System.out.println("init WrkngGrpDebug");
+        return (wrkngGrpArray);
+    }
+    
+    @DataProvider(name = "WrkngGrpDebugUsrs")
+    public static Iterator<Object[]> WrkngGrpDebugUsrs(ITestContext context) throws Exception {
+        System.out.println("init WrkngGrpDebugUsrs");
+        return DataProviderUtil.cartesianProviderFrom(WrkngGrpDebug(context), Users(context));
+    }
+    
+    @DataProvider(name = "GrpCrsWrkngGrpDebugUsers")
+    public static Iterator<Object[]> GrpCrsWrkngGrpDebugUsers(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsWrkngGrpDebugUsers");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), WrkngGrpDebug(context), Users(context));
+    }
+
+    @DataProvider(name = "GrpCrsUsersDebug")
+    public static Iterator<Object[]> GrpCrsUsersDebug(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsUsersDebug");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), UsersDebug(context));
+    }
+
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Student logs in, PES Admin Logs in
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testPESAdminLgn() throws Exception {
         a.login("pesAdmin");
     }
@@ -85,7 +115,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(groups = {"fullsmoke", "usrs.creation"})
     public void testUsrCrtn() throws Exception {
 
         a.navigateToMyContacts();
@@ -104,7 +134,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers")
+    @Test(dataProvider = "GrpCrsUsers", groups = {"fullsmoke", "usrs.assgnRole"})
     public void testAsgnRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
 
         a.navigateToMyCourse();
@@ -121,7 +151,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test
+    @Test(groups = {"fullsmoke", "wrkngGrp.create"})
     public void testCrtWrkgnGrp() throws Exception {
 
         a.navigateToWorkingGroups();
@@ -135,7 +165,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpUsers")
+    @Test(dataProvider = "WrkngGrpUsers", groups = {"fullsmoke", "wrkngGrp.addMbrs"})
     public void testAddMbrsToWrkngGrp(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
@@ -148,7 +178,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testPESAdminLogOut() throws Exception {
         a.logOut();
     }

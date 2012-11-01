@@ -28,7 +28,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testStdtLgn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
@@ -42,7 +42,8 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class)
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
+          groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.stdtJoins"})
     public void testStdtJoinsTchrSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(tchrSclGrpName);
@@ -54,7 +55,8 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class)
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
+          groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.stdtPostURL"})
     public void testStdtPostURLOnTchrSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(tchrSclGrpName);
@@ -68,7 +70,8 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class)
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class,
+          groups = {"fullsmoke", "criticalsmoke", "stdtCmnt.TchrCrsPost"})
     public void testStdtCmntOnTchrCrsPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.selectGrpCourse(grpCrsName);
         stdtTxtCmntOnTchrCrsPost = a.textCmntPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
@@ -82,7 +85,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testStdtLogOut() throws Exception {
         a.logOut();
     }

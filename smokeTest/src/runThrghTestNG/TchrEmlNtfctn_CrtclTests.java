@@ -32,19 +32,20 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testTchrEmailLgn() throws Exception {
         Utility.usrEmlLgn(driver, xpv, "2torteacher");
     }
 
     /**
      * Teacher verifies email notifications & deletes subsequently
-     * 
+     *
      * @param tchrSclGrpName
      * @param stdtSclGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
+          groups = {"criticalsmoke", "tchrVrfyEmails"})
     public void testTchrVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
         stdtFllNm = "Auto Student1";
@@ -99,14 +100,18 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
                         break verify;
                     } catch (TimeoutException e) {
                         System.out.println("catch:" + a);
-                        if (wordList.size() == 1 || e.getMessage().contains("//div[6]/div/div")) {
+                        if (wordList.size() == 1){
                             throw e;
+                        }else if (e.getMessage().contains("//div[6]/div/div")) {
+                            Utility.illegalStateException(e.getMessage().substring(0, 75) + " Notification: " + a);
                         }
                     }
                     j++;
                 }
             }
         }
+        ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
+        driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
     }
 
     /**
@@ -115,7 +120,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testTchrEmailLogOut() throws Exception {
         Utility.usrEmlLogout(driver);
     }

@@ -32,19 +32,20 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testStdtEmailLgn() throws Exception {
         Utility.usrEmlLgn(driver, xpv, "2torstudent");
     }
 
     /**
      * Student verifies email notifications & deletes subsequently
-     * 
+     *
      * @param tchrSclGrpName
      * @param stdtSclGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
+          groups = {"criticalsmoke", "stdtVrfyEmails"})
     public void testStdtVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
         tchrFllNm = "Auto Teacher1";
@@ -66,7 +67,7 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
         for (int i = 0; i < 4; i++) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[1]/td[5]/div/span")));
             Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
-            
+
             int j = 0;
 
             verify:
@@ -97,16 +98,20 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
                         wordList.remove(j);
                         System.out.println("WordList ka size in b/w: " + wordList.size());
                         break verify;
-                    }catch (TimeoutException e) {
+                    } catch (TimeoutException e) {
                         System.out.println("catch:" + a);
-                        if (wordList.size() == 1 || e.getMessage().contains("//div[6]/div/div")) {
+                        if (wordList.size() == 1) {
                             throw e;
+                        } else if (e.getMessage().contains("//div[6]/div/div")) {
+                            Utility.illegalStateException(e.getMessage().substring(0, 75) + " Notification: " + a);
                         }
                     }
                     j++;
                 }
             }
         }
+        ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
+        driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
     }
 
     /**
@@ -115,7 +120,7 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testStdtEmailLogOut() throws Exception {
         Utility.usrEmlLogout(driver);
     }

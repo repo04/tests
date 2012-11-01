@@ -23,7 +23,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @BeforeClass
+    @BeforeClass(groups = {"prerequisite"})
     public void testTchrLgn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
@@ -37,7 +37,8 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
+          groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.tchrJoins"})
     public void testTchrJoinsStdtSclGrp(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(stdtSclGrpName);
@@ -49,7 +50,8 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class)
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
+          groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.tchrLeaves"})
     public void testTchrLeavesStdtSclGrp(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(stdtSclGrpName);
@@ -60,7 +62,8 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class)
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
+          groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.delete"})
     public void testTchrDeleteSclGrp(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(tchrSclGrpName);
@@ -72,7 +75,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @AfterClass
+    @AfterClass(groups = {"prerequisite"})
     public void testTchrLogOut() throws Exception {
         a.logOut();
     }

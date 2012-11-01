@@ -27,7 +27,14 @@ public class WorkingGroup extends BaseClass {
      */
     public void buildWorkingGroup() {
 
-        this.wrkgGrpName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            this.wrkgGrpName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);        
+        } else if (test.equalsIgnoreCase("CriticalTests")) {
+            this.wrkgGrpName = "CrtclTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);        
+        } else {
+            this.wrkgGrpName = "DbgTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);        
+        }
+
         String srtName = "ShrtNmWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         driver.findElement(By.xpath(xpv.getTokenValue("link2torAdminXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("linkAddWrkGrp"))).click();
@@ -57,12 +64,16 @@ public class WorkingGroup extends BaseClass {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
-                case "autotea":
                     fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
                     break sw;
+                case "autotea":
+                    fullNm = "auto teacher1(Non-editing teacher)";
+                    break sw;
                 case "student":
-                case "autostu":
                     fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
+                    break sw;
+                case "autostu":
+                    fullNm = "auto student1(Student)";
                     break sw;
                 default:
                     SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
@@ -91,25 +102,36 @@ public class WorkingGroup extends BaseClass {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
-                case "autotea":
-                    if (PES_CleanTestData.status) {
+                    if (PES_CleanTestData.tchrStatus) {
                         fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
                     } else {
                         fullNm = mbr + "fstNm " + mbr + "sndNm()";
                     }
                     break sw;
+                case "autotea":
+                    if (PES_CleanTestData.tchrStatus) {
+                        fullNm = "auto teacher1(Non-editing teacher)";
+                    } else {
+                        fullNm = "auto teacher1()";
+                    }
+                    break sw;
                 case "student":
-                case "autostu":
-                    if (PES_CleanTestData.status) {
+                    if (PES_CleanTestData.stdtStatus) {
                         fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
                     } else {
                         fullNm = mbr + "fstNm " + mbr + "sndNm()";
                     }
                     break sw;
+                case "autostu":
+                    if (PES_CleanTestData.stdtStatus) {
+                        fullNm = "auto student1(Student)";
+                    } else {
+                        fullNm = "auto student1()";
+                    }
+                    break sw;
                 default:
                     SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
             }
-
             select.selectByVisibleText(fullNm);
         }
         driver.findElement(By.xpath(xpv.getTokenValue("lnkRmvMbrXPATH"))).click();
@@ -132,8 +154,19 @@ public class WorkingGroup extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocNameXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctGglTypeXPATH")))).selectByVisibleText("Document");
         DateFormat dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
-        this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);
-        String gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
+        String gglDocDesc;
+        
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);        
+            gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
+        } else if (test.equalsIgnoreCase("CriticalTests")) {
+            this.gglDocName = "CrtclTstGglDoc " + dateFormat.format(now);
+            gglDocDesc = "CrtclTstGglDocDesc " + dateFormat.format(now);
+        } else {
+            this.gglDocName = "DbgTstGglDoc " + dateFormat.format(now);
+            gglDocDesc = "DbgTstGglDocDesc " + dateFormat.format(now);
+        }
+        
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(gglDocName);
         driver.findElement(By.xpath(xpv.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
 
@@ -175,7 +208,6 @@ public class WorkingGroup extends BaseClass {
             if (i == driver.getWindowHandles().size()) {
                 try {
                     System.out.println("inside google window");
-                    //ip.isTitlePresent(driver, gglDocName + " - Google Dcs");
                     ip.isTitleContains(driver, gglDocName);
                     ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
                     Utility.navigateToSubMenu(driver, xpv.getTokenValue("btnGglDocSgnOutXPATH"));
@@ -196,8 +228,8 @@ public class WorkingGroup extends BaseClass {
 
     /**
      * Delete Working Group
-     * 
-     * @param wrkngGrp 
+     *
+     * @param wrkngGrp
      */
     public void deleteWrkngGrp(String wrkngGrp) {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
@@ -217,7 +249,7 @@ public class WorkingGroup extends BaseClass {
         //And acknowledge the alert (equivalent to clicking "OK")
         alert.accept();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblTxtVrfyDelGrp"), "The group was deleted successfully.");
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")));    
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")));
     }
 
     /**

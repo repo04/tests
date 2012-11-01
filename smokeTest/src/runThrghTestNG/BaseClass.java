@@ -33,7 +33,7 @@ public class BaseClass {
     String chromDrvrPath;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
-    @BeforeTest
+    @BeforeTest(groups = {"prerequisite"})
     @Parameters({"program", "brwsr", "os", "test"})
     public void setUp(String program, String brwsr, String os, String test) throws Exception {
 
@@ -91,7 +91,7 @@ public class BaseClass {
     }
 
     //The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run 
-    @AfterTest(alwaysRun=true)
+    @AfterTest(alwaysRun=true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
         driver.quit();
     }

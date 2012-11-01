@@ -31,16 +31,20 @@ public class SocialGroup extends BaseClass {
             case "autostu":
                 if (test.equalsIgnoreCase("SmokeTests")) {
                     this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-                } else {
+                } else if (test.equalsIgnoreCase("CriticalTests")) {
                     this.sclGrpName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else {
+                    this.sclGrpName = "DbgTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
                 break;
             case "teacher":
             case "autotea":
                 if (test.equalsIgnoreCase("SmokeTests")) {
                     this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-                } else {
+                } else if (test.equalsIgnoreCase("CriticalTests")) {
                     this.sclGrpName = "CrtclTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else {
+                    this.sclGrpName = "DbgTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
                 break;
             default:
