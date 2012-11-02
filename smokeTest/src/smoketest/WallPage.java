@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -17,6 +16,7 @@ public class WallPage extends BaseClass {
     Date now = new Date();
     WebElement textArea;
     WebElement btnWallShare;
+    WebElement linkBtn;
     String textPost = null;
     String urlPost = null;
     String cmntPost = null;
@@ -29,6 +29,7 @@ public class WallPage extends BaseClass {
     public void textPost(String textPst) {
 
         setUpWallPost();
+        linkBtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("linkBtnXPATH"))));
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
 
         //Grabs the first iframe because the textArea is always the first iframe
@@ -57,6 +58,7 @@ public class WallPage extends BaseClass {
     public void urlPost(String urlPst) {
 
         setUpWallPost();
+        linkBtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("linkBtnXPATH"))));
         DateFormat dateFormat;
 
         //Date need to be in specific format as Getinstance include special characters   
@@ -64,10 +66,9 @@ public class WallPage extends BaseClass {
         String user = LoginPage.getUser();
         this.urlPost = xpv.getTokenValue(urlPst) + "by" + user.substring(0, 7) + dateFormat.format(now) + ".com";
 
-        WebElement linkBtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("linkBtnXPATH"))));
         linkBtn.click();
         WebElement linkTextBox = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div/input[3]")));
-        
+
         int i = 1;
         value:
         while (i < 6) {
@@ -90,7 +91,7 @@ public class WallPage extends BaseClass {
     }
 
     /**
-     * Comment on Tchr's Course post
+     * Comment on Teacher's Course post
      *
      * @param urlCrsPost
      * @param txtCmntOnTchrCrsPst
@@ -115,12 +116,11 @@ public class WallPage extends BaseClass {
         for (String handle : driver.getWindowHandles()) {
             driver.switchTo().window(handle);
         }
-        //textArea.sendKeys(Keys.ENTER);
         Utility.actionBuilderClick(driver, xpv.getTokenValue("wallPublishPanelXPATH"));
         try {
             btnWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnWallShareXPATH"))));
-        }catch(TimeoutException e){
-            Utility.illegalStateException("Selenium is unable to click on TextArea, this is an automation limitation");
+        } catch (TimeoutException e) {
+            Utility.illegalStateException("Selenium is unable to click on TextArea, this is an Automation Limitation");
         }
     }
 

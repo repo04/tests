@@ -7,7 +7,7 @@
     <test name="DebugTests" preserve-order="true" parallel="false">
         <parameter name="tchrUsrName" value="autoteacher1"/>
         <parameter name="stdtUsrName" value="autostudent1"/>
-        <parameter name="grpCrsName" value="AutoGroupCourse"/>
+        <parameter name="grpCrsName" value="AutoGroupCourse"/>        
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
         <parameter name="tchrSclGrpName" value="AutoTchrSclGrp"/>
         <parameter name="frmActvyName" value="AutoForum"/>
@@ -16,11 +16,15 @@
         <parameter name="pageActvtyName" value="AutoPage"/>
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
         <groups>
-            <define name="CourseCrtn">
-                <include name="course.creation"/>                
+            <define name="CrsCrtArchv_GrpCrsCrtDlt">
+                <include name="course.creation"/>
+                <include name="groupcourse.deletion"/>
+                <include name="course.archive"/>                 
             </define>            
-            <define name="ActvtsCrtn">
-                <include name="activites.creation"/>              
+            <define name="ActvtsCrt_AddQzQstn_Dlt">
+                <include name="activites.creation"/>
+                <include name="activites.addQuizQstn"/>
+                <include name="activites.deletion"/>              
             </define>
             <define name="ActvtsVrfctn">
                 <include name="activites.tchrVrfy"/>
@@ -67,7 +71,7 @@
                         
             <run>
                 <include name="prerequisite"/>
-                <include name="WrkngGrpCrtn_AddMbrs_Dltn"/>                 
+                <include name="CrsCrtArchv_GrpCrsCrtDlt"/>                 
             </run>
         </groups>
         <classes>
@@ -80,6 +84,8 @@
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.PES_CleanTestData"/>
+            <class name="runThrghTestNG.CntAdmn_CleanTstData"/>
+            <class name="runThrghTestNG.Pes_ArchvCrs"/>
         </classes>
     </test>
 </suite>

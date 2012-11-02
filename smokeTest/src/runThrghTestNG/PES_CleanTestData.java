@@ -44,7 +44,7 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-    groups = {"usrs.unAssgnRole"})
+          groups = {"usrs.unAssgnRole"})
     public void testUnerolUsers(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -61,7 +61,7 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-    groups = {"wrkngGrp.rmvMbrs"})
+          groups = {"wrkngGrp.rmvMbrs"})
     public void testRemoveMbrsFrmWrkngGrp(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -113,7 +113,7 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-    groups = {"fullsmoke", "wrkngGrp.delete"})
+          groups = {"fullsmoke", "wrkngGrp.delete"})
     public void testDeleteWrkngGrp(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
@@ -126,13 +126,13 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-    groups = {"fullsmoke", "usrs.delete"})
+          groups = {"fullsmoke", "usrs.delete"})
     public void testDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
         a.navigateToMyContacts();
         a.deleteUsers(tchrUsr, stdtUsr);
     }
-
-    /**
+    
+     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
      *

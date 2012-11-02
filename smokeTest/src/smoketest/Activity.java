@@ -26,10 +26,16 @@ public class Activity extends BaseClass {
      * Create & Verify Forum Activity
      */
     public void crtForumActvty() {
-        this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        String forumIntro = "SmkTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkLftPnlTEXT"));
-        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
+        String forumIntro;
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            forumIntro = "SmkTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.forumName = "DbgTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            forumIntro = "DbgTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Forum");
         createActivity(forumName, forumIntro);
@@ -41,10 +47,16 @@ public class Activity extends BaseClass {
      * Create & Verify Quiz Activity
      */
     public void crtQuizActvty() {
-        this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        String quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkLftPnlTEXT"));
-        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
+        String quizIntro;
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.quizName = "DbgTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "DbgTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
         createActivity(quizName, quizIntro);
@@ -57,10 +69,16 @@ public class Activity extends BaseClass {
      * Create & Verify AllInOneAsgnmnt Activity
      */
     public void crtAllInOneAsgnmntActvty() {
-        this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        String allInOneAsgnmntIntro = "SmkTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkLftPnlTEXT"));
-        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
+        String allInOneAsgnmntIntro;
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            allInOneAsgnmntIntro = "SmkTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.allInOneAsgnmntName = "DbgTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            allInOneAsgnmntIntro = "DbgTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
         createActivity(allInOneAsgnmntName, allInOneAsgnmntIntro);
@@ -72,10 +90,16 @@ public class Activity extends BaseClass {
      * Create & Verify Page Resource
      */
     public void createPageResource() {
-        this.pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        String pageContent = "SmkTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkLftPnlTEXT"));
-        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
+        String pageContent;
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            this.pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            pageContent = "SmkTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.pageName = "DbgTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            pageContent = "DbgTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddRescXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddRescXPATH")))).selectByVisibleText("Page");
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
@@ -119,13 +143,13 @@ public class Activity extends BaseClass {
      */
     public void addQuizQuestion(String quizActvtyName) {
 
-        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkLftPnlTEXT"));
-        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkLftPnlTEXT") + "')]")).click();
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentContainsTextByXPATH(driver, quizActvtyName);
-        Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + quizActvtyName + "')]");        
+        Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + quizActvtyName + "')]");
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnEditQzXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtEditQzScrnXPATH"), "Editing quiz: "+quizActvtyName);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtEditQzScrnXPATH"), "Editing quiz: " + quizActvtyName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).sendKeys("1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGradeXPATH"))).click();
@@ -195,6 +219,34 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//tr[" + i + "]/td[3]", "(100%)");
         new WebDriverWait(driver, 60).until(ExpectedConditions.
                 presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
+    }
+
+    /**
+     * Delete all Activities
+     * 
+     * @param frmActvyName
+     * @param quizActvtyName
+     * @param allInOneAsgnmntAvtvtyName
+     * @param pageActvtyName
+     */
+    public void deleteActivites(String... activities) {
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        for (String activity : activities) {
+            ip.isElementPresentByXPATH(driver, xpv.getTokenValue("imgDltActvtyXPATH"));
+            Utility.navigateToSubMenu(driver, xpv.getTokenValue("imgDltActvtyXPATH"));
+            if (activity.contains("Forum")) {
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Forum '" + activity + "' ?");
+            } else if (activity.contains("Quiz")) {
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Quiz '" + activity + "' ?");
+            } else if (activity.contains("Asgnmnt")) {
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Assignment '" + activity + "' ?");
+            } else {
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Page '" + activity + "' ?");
+            }
+            ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCnfrmDltActvtyXPATH"));
+            driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmDltActvtyXPATH"))).click();
+        }
     }
 
     /**

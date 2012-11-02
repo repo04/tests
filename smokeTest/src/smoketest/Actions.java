@@ -76,6 +76,16 @@ public class Actions extends BaseClass {
         cr.createCourse();
         return cr.getCrsName();
     }
+    
+    /**
+     * Delete Group Course
+     * 
+     * @param grpCrsName 
+     */
+    public void deleteGrpCrs(String grpCrsName) {
+        Course cr = new Course();
+        cr.deleteGrpCrs(grpCrsName);
+    }
 
     /**
      * Verify Navigated to Live Meeting creation page
@@ -96,6 +106,16 @@ public class Actions extends BaseClass {
         Course cr = new Course();
         cr.createGrpCourse(courseName);
         return cr.getGrpCrsName();
+    }
+    
+    /**
+     * Archive Course
+     * 
+     * @param crsName 
+     */
+    public void archiveCrs(String crsName) {
+        Course cr = new Course();
+        cr.archiveCrs(crsName);
     }
 
     /**
@@ -432,6 +452,20 @@ public class Actions extends BaseClass {
         for (String activity : activities) {
             ip.isElementPresentContainsTextByXPATH(driver, activity);
         }
+    }
+    
+    
+    /**
+     * Delete all Activities
+     * 
+     * @param frmActvyName
+     * @param quizActvtyName
+     * @param allInOneAsgnmntAvtvtyName
+     * @param pageActvtyName 
+     */
+    public void deleteActivites(String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) {
+        Activity actvty = new Activity();
+        actvty.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
     }
 
     /**

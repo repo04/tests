@@ -98,8 +98,10 @@ public class StdtEmlNtfctn_SmkTests extends BaseClass {
                         break verify;
                     } catch (TimeoutException e) {
                         System.out.println("catch:" + a);
-                        if (wordList.size() == 1 || e.getMessage().contains("//div[6]/div/div")) {
+                        if (wordList.size() == 1 || e.getMessage().contains("//div[2]/div/div/div[2]/div[3]/div/div")) {
                             throw e;
+                        }else if (e.getMessage().contains("//div[6]/div/div")) {
+                            Utility.illegalStateException(e.getMessage().substring(0, 75) + " Notification: " + a);
                         }
                     }
                     j++;

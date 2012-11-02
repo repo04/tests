@@ -77,6 +77,36 @@ public class Crs_GrpCrsCreation extends BaseClass {
         return DataProviderUtil.cartesianProviderFrom(Course(context), QuizName(context));
     }
 
+    @DataProvider(name = "GrpCrsDebug")
+    public static Object[][] GrpCrsDebug(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsDebug");
+        return (crsArray);
+    }
+
+    @DataProvider(name = "ActivitiesDebug")
+    public static Object[][] ActivitiesDebug(ITestContext context) throws Exception {
+        System.out.println("init ActivitiesDebug");
+        return (actvtsArray);
+    }
+
+    @DataProvider(name = "GrpCrsActivitiesDebug")
+    public static Iterator<Object[]> GrpCrsActivitiesDebug(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsActivitiesDebug");
+        return DataProviderUtil.cartesianProviderFrom(Course(context), ActivitiesDebug(context));
+    }
+
+    @DataProvider(name = "QzDebug")
+    public static Object[][] QzDebug(ITestContext context) throws Exception {
+        System.out.println("init QzDebug");
+        return (qzNameArray);
+    }
+
+    @DataProvider(name = "GrpCrsQzDebug")
+    public static Iterator<Object[]> GrpCrsQzDebug(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsQzDebug");
+        return DataProviderUtil.cartesianProviderFrom(Course(context), QzDebug(context));
+    }
+
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Content Admin logs in
