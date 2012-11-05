@@ -71,8 +71,12 @@ Automation can run when above steps are followed in order.
       i> Open Terminal
      ii> Navigate to <BASEDIR>
 	iii> Run Automation
-	    _______________________________________________________________
-		ant runsmoke -DantPrgrm=gu,usc -DantEnv=stgng,prod -DantBrwsr=chrome,ff -DantOS=win 
+	       _______________________________________________________________________________________________
+		a> ant runsmoke/runcritical -DantPrgrm=gu,usc -DantEnv=stgng,prod -DantBrwsr=chrome,ff -DantOS=win 
+		
+		b> debugSmoke takes 1 extra paramter i.e group name/s={The list of groups mentioned in ConfluencePage to run separated by comma}
+		   ______________________________________________________________________________________________________________________	
+		   ant rundebug -DantGrp=ActvtsVrfctn,ActvtsSbmtQz -DantPrgrm=gu,usc -DantEnv=stgng,prod -DantBrwsr=chrome,ff -DantOS=win 
 	
 	Applicable Parameters (Case Sensitive)
 		1> Targets: runsmoke / runcritical / rundebug
