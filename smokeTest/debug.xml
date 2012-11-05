@@ -17,44 +17,53 @@
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
         <groups>
             <define name="CrsCrtArchv_GrpCrsCrtDlt">
+                <include name="prerequisite"/>
                 <include name="course.creation"/>
                 <include name="groupcourse.deletion"/>
                 <include name="course.archive"/>                 
             </define>            
             <define name="ActvtsCrt_AddQzQstn_Dlt">
+                <include name="prerequisite"/>
                 <include name="activites.creation"/>
                 <include name="activites.addQuizQstn"/>
                 <include name="activites.deletion"/>              
             </define>
             <define name="ActvtsVrfctn">
+                <include name="prerequisite"/>
                 <include name="activites.tchrVrfy"/>
                 <include name="activites.stdtVrfy"/>          
             </define>            
             <define name="ActvtsSbmtQz">
+                <include name="prerequisite"/>
                 <include name="activites.sbmtQuiz"/>          
             </define>            
             <define name="UsrsCrtn_Role_Dltn">
+                <include name="prerequisite"/>
                 <include name="usrs.creation"/>
                 <include name="usrs.assgnRole"/>
                 <include name="usrs.unAssgnRole"/>
                 <include name="usrs.delete"/>         
             </define>
             <define name="WrkngGrpCrtn_AddMbrs_Dltn">
+                <include name="prerequisite"/>
                 <include name="wrkngGrp.create"/>
                 <include name="wrkngGrp.addMbrs"/>
                 <include name="wrkngGrp.rmvMbrs"/>                
                 <include name="wrkngGrp.delete"/>         
             </define>              
             <define name="GglDoc_MbrsCrtVrfy">
+                <include name="prerequisite"/>
                 <include name="wrkngGrp.tchrCrtGglDoc"/> 
                 <include name="wrkngGrp.stdtVrfyGglDoc"/>                
             </define>            
             <define name="TchrWallCrs_StdtCmntOnPsts">
+                <include name="prerequisite"/>
                 <include name="tchrPosts.wallCrs"/>
                 <include name="tchrPosts.stdtWall"/> 
                 <include name="stdtCmnt.TchrCrsPost"/>                        
             </define>            
             <define name="TchrStdt_CrtDlt_SclGrpLvSsn">
+                <include name="prerequisite"/>
                 <include name="tchrSclGrp.create"/>
                 <include name="tchrSclGrp.stdtJoins"/>
                 <include name="tchrSclGrp.stdtPostURL"/>
@@ -65,14 +74,15 @@
                 <include name="stdtSclGrp.delete"/>                                                         
             </define>            
             <define name="Stdt_JnLvsTchrGrp">
+                <include name="prerequisite"/>
                 <include name="stdtSclGrp.tchrJoins"/>
                 <include name="stdtSclGrp.tchrLeaves"/>                
             </define>            
                         
-            <run>
+            <!--run>
                 <include name="prerequisite"/>
                 <include name="CrsCrtArchv_GrpCrsCrtDlt"/>                 
-            </run>
+            </run-->
         </groups>
         <classes>
             <class name="runThrghTestNG.Crs_GrpCrsCreation"/>

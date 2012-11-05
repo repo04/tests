@@ -183,6 +183,14 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setAlwaysRun(true);
         }
         
+        if ("testArchvCrs".equals(testMethod.getName())) {
+            System.out.println("Inside testArchvCrs");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.PES_CleanTestData.testDeleteUsers";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+        
         if ("testTchrVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testTchrVerifyEmails");
             DependentMethods = new String[5];
@@ -190,7 +198,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[2] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost";
             DependentMethods[3] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
-            DependentMethods[4] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
+            DependentMethods[4] = "runThrghTestNG.Pes_ArchvCrs.testArchvCrs";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
@@ -200,7 +208,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAddMbrsToWrkngGrp";
             DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
             DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
-            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
+            DependentMethods[3] = "runThrghTestNG.Pes_ArchvCrs.testArchvCrs";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

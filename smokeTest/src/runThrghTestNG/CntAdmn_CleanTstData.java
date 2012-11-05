@@ -39,7 +39,7 @@ public class CntAdmn_CleanTstData {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.deletion"})
+          groups = {"activites.deletion"})
     public void testActivities_Deletion(String grpCrsName, String frmActvyName, String quizActvtyName,
             String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -54,7 +54,7 @@ public class CntAdmn_CleanTstData {
      * @throws Exception 
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "groupcourse.deletion"})
+          groups = {"groupcourse.deletion"})
     public void testGrpCrs_Deletion(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
