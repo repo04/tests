@@ -292,9 +292,18 @@ public class Activity extends BaseClass {
         }
         driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmAsgntMrkngXPATH"))).click();
 
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        //Temporary solution as Feedback window is not stable
+        boolean wndwFnd;
+        try {
             Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
+            wndwFnd = true;
+            System.out.println("feedback window found");
+        }catch(TimeoutException e){
+            wndwFnd = false;
+            System.out.println("feedback window not found");
+        }
 
+        if (wndwFnd) {
             int y = 1;
             for (String handle : driver.getWindowHandles()) {
                 System.out.println("window handle: " + handle);
@@ -306,13 +315,16 @@ public class Activity extends BaseClass {
                 y++;
             }
         }
-        
+
         //Temporary solution till the time 'BUG' is resolved
         if (program.contains("prod")) {
+            System.out.println("in prod txtVrfyRspsXPATH");
             driver.switchTo().window(HandleBefore);
             ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyRspsXPATH"), asgmntRspns);
         } else {
-            ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
+            System.out.println("not in prod txtVrfyRspsXPATH");
+            driver.switchTo().window(HandleBefore);
+            ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
         }
 
         /*int i = 1;
