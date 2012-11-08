@@ -71,6 +71,22 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDataProviderClass(Crs_GrpCrsCreation.class);
         }
 
+        //GroupName = StdtTchr_Asgmt_SbmtGrdVrfyResbmt
+        if ("testTchrGradeAsgnmnt".equals(testMethod.getName())
+                || "testTchrAllwResbmtAsgnmnt".equals(testMethod.getName())) {
+            System.out.println("Inside testTchrGradeAsgnmnt");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testSubmitAsgnmnt";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testVrfyAsgnmntGrade".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrLvSsn_GglDoc.testTchrGradeAsgnmnt";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
         //GroupName = UsrsCrtn_Role_Dltn
         if ("testAsgnRole".equals(testMethod.getName())) {
             System.out.println("Inside testAsgnRole");

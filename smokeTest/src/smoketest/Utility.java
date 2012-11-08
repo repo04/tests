@@ -7,6 +7,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -93,10 +94,10 @@ public class Utility {
     }
 
     /**
-     * 
+     *
      * @param driver
      * @param xpv
-     * @param usrNm 
+     * @param usrNm
      */
     public static void usrEmlLgn(WebDriver driver, XpathValues xpv, String usrNm) {
         driver.get("https://mail.google.com/");
@@ -110,8 +111,7 @@ public class Utility {
             gglUsrNm.sendKeys(usrNm);
             gglPswd.sendKeys("Newuser321");
             try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue
-                        (By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), usrNm));
+                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), usrNm));
                 break value;
             } catch (TimeoutException e) {
             }
@@ -148,8 +148,8 @@ public class Utility {
     }
 
     /**
-     * 
-     * @param driver 
+     *
+     * @param driver
      */
     public static void usrEmlLogout(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
@@ -159,5 +159,46 @@ public class Utility {
             driver.switchTo().alert().accept();
         }
         ip.isTitlePresent(driver, "Gmail: Email from Google");
+    }
+
+    /**
+     * Wait max 60sec for specified 'number' of Windows to be present/open
+     * 
+     * @param driver
+     * @param timeout
+     * @param numberOfWindows 
+     */
+    public static void waitForNumberOfWindowsToEqual(WebDriver driver, int timeout, final int numberOfWindows) {
+        new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                return (driver.getWindowHandles().size() == numberOfWindows);
+            }
+        });
+    }
+
+    /**
+     * Wait max 60sec for Alert to be present & with specified text present
+     *
+     * @param driver
+     * @param timeout
+     */
+    public static void waitForAlertToBeAccepted(WebDriver driver, int timeout, final String text) {
+        new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver) {
+                Boolean switched = false;
+                try {
+                    driver.switchTo().alert();
+                    if (driver.switchTo().alert().getText().contains(text)) {
+                        driver.switchTo().alert().accept();
+                        switched = true;
+                    }
+                } catch (Exception Ex) {
+                    // Couldn't switch!
+                }
+                return switched;
+            }
+        });
     }
 }

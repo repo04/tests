@@ -209,6 +209,15 @@ public class Actions extends BaseClass {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
+    
+    /**
+     * Navigate To Grade Page
+     */
+    public void navigateToGrades() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");        
+    }
 
     /**
      * PesAdmin creates Working Group
@@ -486,6 +495,46 @@ public class Actions extends BaseClass {
     public void submitQuiz(String quizActvtyName) {
         Activity actvty = new Activity();
         actvty.submitQuiz(quizActvtyName);
+    }
+    
+    /**
+     * Submit Assignment
+     * 
+     * @param allInOneAsgnmntAvtvtyName 
+     */
+    public void submitAssgnmnt(String allInOneAsgnmntAvtvtyName) {
+        Activity actvty = new Activity();
+        actvty.submitAssgnmnt(allInOneAsgnmntAvtvtyName);
+    }
+    
+    /**
+     * Grade Assignment
+     * 
+     * @param quizActvtyName 
+     */
+    public void gradeAsgnmnt(String allInOneAsgnmntAvtvtyName) {
+        Activity actvty = new Activity();
+        actvty.gradeAsgnmnt(allInOneAsgnmntAvtvtyName);
+    }
+    
+    /**
+     * Verify Assignment Grade
+     * 
+     * @param allInOneAsgnmntAvtvtyName 
+     */
+    public void vrfyAsgnmntGrade(String allInOneAsgnmntAvtvtyName) {
+        Activity actvty = new Activity();
+        actvty.vrfyAsgnmntGrade(allInOneAsgnmntAvtvtyName);
+    }
+    
+    /**
+     * Allow Assignment to be resubmitted
+     * 
+     * @param allInOneAsgnmntAvtvtyName 
+     */
+    public void allwResbmtAsgnmnt(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
+        Activity actvty = new Activity();
+        actvty.allwResbmtAsgnmnt(allInOneAsgnmntAvtvtyName, stdtUsrName);
     }
 
     /**

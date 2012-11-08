@@ -4,11 +4,20 @@
  */
 package smoketest;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -219,11 +228,241 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//tr[" + i + "]/td[3]", "(100%)");
         new WebDriverWait(driver, 60).until(ExpectedConditions.
                 presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        int x = locateElement(quizActvtyName);
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "(100%)");
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "(100%)");
+    }
+
+    /**
+     * Submit Assignment
+     *
+     * @param allInOneAsgnmntAvtvtyName
+     */
+    public void submitAssgnmnt(String allInOneAsgnmntAvtvtyName) {
+        DateFormat dateFormat;
+        dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
+        String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAsgnmntAvtvtyName + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
+
+        String HandleBefore = driver.getWindowHandle();
+        int i = 1;
+        end:
+        while (i < 6) {
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldAsgntRspXPATH"))).clear();
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldAsgntRspXPATH"))).sendKeys(asgmntRspns);
+            List<WebElement> elements = driver.findElements(By.tagName("input"));
+            System.out.println("Total inputs: " + elements.size());
+            Robot robot = null;
+            try {
+                robot = new Robot();
+                robot.delay(1000);
+            } catch (AWTException ex) {
+                System.out.println("excptn:");
+                Logger.getLogger(Activity.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            elements.get(22).click();
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+
+            if (i < 5) {
+                if (brwsr.equalsIgnoreCase("chrome")) {
+                    try {
+                        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"), "Are you sure you want to send this assignment "
+                                + "for marking? After submission, you will not be able to make any changes in any documents or text.", 30);
+                        break end;
+                    } catch (TimeoutException e) {
+                        System.out.println("count: " + i);
+                        driver.navigate().refresh();
+                        ip.isTitleContains(driver, "Assignment: " + allInOneAsgnmntAvtvtyName);
+                        i++;
+                    }
+                } else {
+                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"), "Are you sure you want to send this assignment "
+                            + "for marking? After submission, you will not be able to make any changes in any documents or text.");
+                    break end;
+                }
+            } else {
+                Utility.illegalStateException("Selenium Chrome Browser limitation: Unable to click button with onclick event, works fine for FF");
+            }
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmAsgntMrkngXPATH"))).click();
+
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
+
+            int y = 1;
+            for (String handle : driver.getWindowHandles()) {
+                System.out.println("window handle: " + handle);
+                driver.switchTo().window(handle);
+                if (y == driver.getWindowHandles().size()) {
+                    System.out.println("inside feedback window");
+                    driver.close();
+                }
+                y++;
+            }
+        }
+        
+        //Temporary solution till the time 'BUG' is resolved
+        if (program.contains("prod")) {
+            driver.switchTo().window(HandleBefore);
+            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyRspsXPATH"), asgmntRspns);
+        } else {
+            ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
+        }
+
+        /*int i = 1;
+         value:
+         while (i < 6) {
+         if (i < 5) {
+         try {
+         new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath("//div/input[3]"), "http://" + urlPost));
+         break value;
+         } catch (TimeoutException e) {
+         System.out.println("i: " + i);
+         i++;
+         }
+         } else {
+         Utility.illegalStateException("Selenium is unable to get focus on URL Textboxfield after multiple tries also, this is an automation limitation");
+         }
+         }
+         btnWallShare.click();
+         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlPost);
+         }*/
+
+        //************NOT TO BE DELETED AS OF NOW************//
+        //driver.findElement(By.xpath("//input[@name='formarking']")).click();
+        //driver.findElement(By.name("formarking")).click();
+        //driver.findElement(By.cssSelector("input[name=\"formarking\"]")).click();
+        /*driver.findElement(By.xpath("//div[2]/input[6]")).click();
+         Utility.actionBuilderClick(driver, "//div[2]/input[6]");
+         Utility.navigateToSubMenu(driver, "//div[2]/input[6]");*/
+        //WebElement elmd = driver.findElement(By.xpath("//div[2]/input[6]"));
+        //Utility.actionBuilderClick(driver, "//input[@name='formarking']");
+        // org.openqa.selenium.interactions.Actions builder = new org.openqa.selenium.interactions.Actions(driver);
+        //builder.keyDown(Keys.CONTROL).click(elmd);
+
+        /*int z = 1;
+         while (true) {
+         driver.findElements(By.tagName("input")).get(22).click();
+         try {
+         ip.isTextPresentByXPATH(driver, "//div[2]/span", "Are you sure you want to send this assignment "
+         + "for marking? After submission, you will not be able to make any changes in any documents or text.", 15);
+         break;
+         } catch (TimeoutException e) {
+         System.out.println("count: " + z);
+         driver.navigate().refresh();
+         ip.isTitlePresent(driver, "AutoCourse-DoNotTouch: Assignment: AutoAllInOneAsgnmnt");
+         z++;
+         }
+         }*/
+        //WebElement hiddenElement = driver.findElement(By.cssSelector("input[name=\"formarking\"]"));
+        //((JavascriptExecutor) driver).executeScript("arguments[0].click", hiddenElement);
+        //((JavascriptExecutor) driver).executeScript("sendForMarking(this.form,'Es5rmlssXc')");
+
+        /*
+         * **** javascript:sendForMarking(this.form,'Es5rmlssXc');******
+         * org.openqa.selenium.interactions.Actions builder = new
+         * org.openqa.selenium.interactions.Actions(driver);
+         builder.keyDown(Keys.CONTROL).moveToElement(elements.get(22)).click().keyUp(Keys.CONTROL).build().perform();
+         */
+        //WebElement element = driver.findElements(By.tagName("input")).get(22);        
+        //((JavascriptExecutor) driver).executeScript("arguments[0].click", element);
+        //((JavascriptExecutor) driver).executeScript("'input[name='formarking']').trigger('click')");
+        //((JavascriptExecutor) driver).executeScript("//div[2]/input[6]').trigger('click')");
+        //element.click();
+        //element.sendKeys(Keys.ENTER);
+        /*List<WebElement> allOptions = driver.findElements(By.tagName("input"));
+         System.out.println("Total inputs: " + allOptions.size());
+        
+        
+         click:
+         for (WebElement option : allOptions) {
+         //System.out.println(String.format("Value is: %s", option.getAttribute("value")));
+         int i = 0;
+         System.out.println("value of i:" + i);
+         if (option.getAttribute("name").equalsIgnoreCase("formarking")) {
+         System.out.println("Clicked");
+         option.click();
+         break click;
+         }
+         i++;
+         }*/
+
+        /*WebElement updateButton = driver.findElement(By.xpath("//input[@value='Send for marking']"));
+         ((JavascriptExecutor) driver).executeScript(updateButton.getAttribute("onclick"));*/
+        //************NOT TO BE DELETED AS OF NOW************//        
+    }
+
+    /**
+     * Grade Assignment
+     *
+     * @param allInOneAsgnmntAvtvtyName
+     */
+    public void gradeAsgnmnt(String allInOneAsgnmntAvtvtyName) {
+        ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
+
+        int x = locateElement(allInOneAsgnmntAvtvtyName);
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
+        driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).clear();
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).sendKeys("62");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGrdAsgntXPATH"))).click();
+        Utility.waitForAlertToBeAccepted(driver, 60, "Your grading changes have been saved.");
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "1 of 1");
+    }
+
+    /**
+     * Verify Assignment Grade
+     *
+     * @param allInOneAsgnmntAvtvtyName
+     */
+    public void vrfyAsgnmntGrade(String allInOneAsgnmntAvtvtyName) {
+        ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
+        int x = locateElement(allInOneAsgnmntAvtvtyName);
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "62/100 (62%)");
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "62/100 (62%)");
+    }
+
+    /**
+     * Allow Assignment to be resubmitted
+     *
+     * @param allInOneAsgnmntAvtvtyName
+     */
+    public void allwResbmtAsgnmnt(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
+        String stdtFstName;
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            stdtFstName = stdtUsrName + "fstNm";
+        } else {
+            stdtFstName = stdtUsrName.substring(0, 4);
+        }
+
+        ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
+        int x = locateElement(allInOneAsgnmntAvtvtyName);
+        driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkResbmtAsgntXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkResbmtAsgntXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtFstName + " to resubmit this assignment?");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtFstName + " and mail sent.");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "0 of 1");
+        ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
     }
 
     /**
      * Delete all Activities
-     * 
+     *
      * @param frmActvyName
      * @param quizActvtyName
      * @param allInOneAsgnmntAvtvtyName
@@ -247,6 +486,25 @@ public class Activity extends BaseClass {
             ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCnfrmDltActvtyXPATH"));
             driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmDltActvtyXPATH"))).click();
         }
+    }
+
+    /**
+     *
+     * @param elementName
+     * @return
+     */
+    private int locateElement(String elementName) {
+        int x = 2;
+        while (true) {
+            try {
+                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/a", elementName, 5);
+                break;
+            } catch (TimeoutException e) {
+                System.out.println(elementName + "not present at x: " + x);
+                x = x + 2;
+            }
+        }
+        return x;
     }
 
     /**

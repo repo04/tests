@@ -22,10 +22,11 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     Actions a = new Actions();
     static String[][] usrsArray = new String[1][2];
     static String[][] wrkngGrpArray = new String[1][1];
+    static String[][] stdtName = new String[1][1];
+    static String[][] tchrName = new String[1][1];
 
     @DataProvider(name = "Users")
     public static Object[][] Users(ITestContext context) throws Exception {
-
         System.out.println("init Users");
 
         if (test.equalsIgnoreCase("SmokeTests")) {
@@ -39,7 +40,6 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     @DataProvider(name = "WrkngGrp")
     public static Object[][] WrkngGrp(ITestContext context) throws Exception {
-
         System.out.println("init WrkngGrp");
 
         if (test.equalsIgnoreCase("SmokeTests")) {
@@ -48,6 +48,19 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         } else {
             System.out.println("else WrkngGrp: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("wrkngGrpName")}};
+        }
+    }
+    
+    @DataProvider(name = "StdtName")
+    public static Object[][] StdtName(ITestContext context) throws Exception {
+        System.out.println("init StdtName");
+
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("Inside StdtName: " + test);
+            return (stdtName);
+        } else {
+            System.out.println("Inside StdtName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("stdtUsrName")}};
         }
     }
 
@@ -74,19 +87,19 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         System.out.println("init UsersDebug");
         return (usrsArray);
     }
-    
+
     @DataProvider(name = "WrkngGrpDebug")
     public static Object[][] WrkngGrpDebug(ITestContext context) throws Exception {
         System.out.println("init WrkngGrpDebug");
         return (wrkngGrpArray);
     }
-    
+
     @DataProvider(name = "WrkngGrpDebugUsrs")
     public static Iterator<Object[]> WrkngGrpDebugUsrs(ITestContext context) throws Exception {
         System.out.println("init WrkngGrpDebugUsrs");
         return DataProviderUtil.cartesianProviderFrom(WrkngGrpDebug(context), Users(context));
     }
-    
+
     @DataProvider(name = "GrpCrsWrkngGrpDebugUsers")
     public static Iterator<Object[]> GrpCrsWrkngGrpDebugUsers(ITestContext context) throws Exception {
         System.out.println("init GrpCrsWrkngGrpDebugUsers");
@@ -97,6 +110,12 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     public static Iterator<Object[]> GrpCrsUsersDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsUsersDebug");
         return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), UsersDebug(context));
+    }
+
+    @DataProvider(name = "GrpCrsAsgnmntStdt")
+    public static Iterator<Object[]> GrpCrsAsgnmntStdt(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsAsgnmntStdt");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Crs_GrpCrsCreation.AssgnmntName(context), StdtName(context));
     }
 
     /**
@@ -125,6 +144,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
         a.navigateToMyContacts();
         usrsArray[0][1] = a.createUser("student");
+        stdtName[0][0] = usrsArray[0][1];        
         System.out.println("stdtUsrName: " + usrsArray[0][1]);
         Reporter.log("stdtUsrName: " + usrsArray[0][1]);
     }

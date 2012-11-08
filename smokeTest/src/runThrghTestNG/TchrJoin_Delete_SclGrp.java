@@ -68,7 +68,24 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(tchrSclGrpName);
     }
-
+    
+    /**
+     * Allow Assignment to be resubmitted
+     * 
+     * @param grpCrsName
+     * @param allInOneAsgnmntAvtvtyName
+     * @param stdtUsrName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsAsgnmntStdt", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"fullsmoke", "activites.allwResbmtAsgnmnt"})
+    public void testTchrAllwResbmtAsgnmnt(String grpCrsName, String allInOneAsgnmntAvtvtyName, String stdtUsrName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToGrades();
+        a.allwResbmtAsgnmnt(allInOneAsgnmntAvtvtyName, stdtUsrName);
+    }
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

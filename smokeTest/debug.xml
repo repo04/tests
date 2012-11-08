@@ -36,6 +36,13 @@
             <define name="ActvtsSbmtQz">
                 <include name="prerequisite"/>
                 <include name="activites.sbmtQuiz"/>          
+            </define>
+            <define name="StdtTchr_Asgmt_SbmtGrdVrfyResbmt">
+                <include name="prerequisite"/>
+                <include name="activites.sbmtAsgnmnt"/>
+                <include name="activites.gradeAsgnmnt"/>
+                <include name="activites.vrfyAsgnmntGrade"/>
+                <include name="activites.allwResbmtAsgnmnt"/>
             </define>            
             <define name="UsrsCrtn_Role_Dltn">
                 <include name="prerequisite"/>
@@ -77,7 +84,7 @@
                 <include name="prerequisite"/>
                 <include name="stdtSclGrp.tchrJoins"/>
                 <include name="stdtSclGrp.tchrLeaves"/>                
-            </define>            
+            </define>                        
                         
             <!--run>
                 <include name="prerequisite"/>

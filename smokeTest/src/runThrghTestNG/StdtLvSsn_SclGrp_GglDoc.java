@@ -138,7 +138,23 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
         a.navigateToActvtyRprt();
         a.submitQuiz(quizActvtyName);
     }
-
+    
+    /**
+     * Verify Assignment Grade
+     * 
+     * @param grpCrsName
+     * @param allInOneAsgnmntAvtvtyName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"fullsmoke", "activites.vrfyAsgnmntGrade"})
+    public void testVrfyAsgnmntGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToGrades();
+        a.vrfyAsgnmntGrade(allInOneAsgnmntAvtvtyName);
+    }
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

@@ -78,6 +78,23 @@ public class StdtJnSclGrp_Post extends BaseClass {
         System.out.println("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
         Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
     }
+    
+    /**
+     * Submit Assignment
+     * 
+     * @param grpCrsName
+     * @param allInOneAsgnmntAvtvtyName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"fullsmoke", "activites.sbmtAsgnmnt"})
+    public void testSubmitAsgnmnt(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToActvtyRprt();
+        a.submitAssgnmnt(allInOneAsgnmntAvtvtyName);
+    }
+
 
     /**
      * The annotated method will be run after all the test methods in the

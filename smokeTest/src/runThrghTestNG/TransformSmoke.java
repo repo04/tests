@@ -115,8 +115,23 @@ public class TransformSmoke implements IAnnotationTransformer {
             DependentMethods[1] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testAsgnRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testTchrGradeAsgnmnt".equals(testMethod.getName())
+                || "testTchrAllwResbmtAsgnmnt".equals(testMethod.getName())) {
+            System.out.println("Inside testTchrGradeAsgnmnt");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testSubmitAsgnmnt";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
-        if ("testSubmitQuiz".equals(testMethod.getName())){
+        if ("testVrfyAsgnmntGrade".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrLvSsn_GglDoc.testTchrGradeAsgnmnt";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testSubmitQuiz".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.Crs_GrpCrsCreation.testAddQuizQuestion";
@@ -174,7 +189,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
-        
+
         if ("testDeleteUsers".equals(testMethod.getName())) {
             System.out.println("Inside testDeleteUsers");
             DependentMethods = new String[1];
@@ -182,7 +197,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
-        
+
         if ("testArchvCrs".equals(testMethod.getName())) {
             System.out.println("Inside testArchvCrs");
             DependentMethods = new String[1];
@@ -190,7 +205,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
-        
+
         if ("testTchrVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testTchrVerifyEmails");
             DependentMethods = new String[5];
@@ -201,7 +216,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             DependentMethods[4] = "runThrghTestNG.Pes_ArchvCrs.testArchvCrs";
             annotation.setDependsOnMethods(DependentMethods);
         }
-        
+
         if ("testStdtVerifyEmails".equals(testMethod.getName())) {
             System.out.println("Inside testStdtVerifyEmails");
             DependentMethods = new String[4];

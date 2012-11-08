@@ -20,10 +20,11 @@ import smoketest.Actions;
  */
 public class Crs_GrpCrsCreation extends BaseClass {
 
-    static String crsName;
+    public static String crsName;
     Actions a = new Actions();
     static String[][] crsArray = new String[1][1];
     static String[][] qzNameArray = new String[1][1];
+    static String[][] assgnmntName = new String[1][1];
     static String[][] actvtsArray = new String[1][4];
 
     @DataProvider(name = "Course")
@@ -64,6 +65,18 @@ public class Crs_GrpCrsCreation extends BaseClass {
             return new Object[][]{{context.getCurrentXmlTest().getParameter("quizActvtyName")}};
         }
     }
+    
+    @DataProvider(name = "AssgnmntName")
+    public static Object[][] AssgnmntName(ITestContext context) throws Exception {
+
+        if (test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("Inside AssgnmntName: " + test);
+            return (assgnmntName);
+        } else {
+            System.out.println("Inside AssgnmntName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("allInOneAsgnmntAvtvtyName")}};
+        }
+    }
 
     @DataProvider(name = "GrpCrsActivities")
     public static Iterator<Object[]> GrpCrsActivities(ITestContext context) throws Exception {
@@ -75,6 +88,12 @@ public class Crs_GrpCrsCreation extends BaseClass {
     public static Iterator<Object[]> GrpCrsQz(ITestContext context) throws Exception {
         System.out.println("init GrpCrsQz");
         return DataProviderUtil.cartesianProviderFrom(Course(context), QuizName(context));
+    }
+    
+    @DataProvider(name = "GrpCrsAssgnmnt")
+    public static Iterator<Object[]> GrpCrsAssgnmnt(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsAssgnmnt");
+        return DataProviderUtil.cartesianProviderFrom(Course(context), AssgnmntName(context));
     }
 
     @DataProvider(name = "GrpCrsDebug")
@@ -161,6 +180,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         actvtsArray[0][2] = a.createAllInOneAsgnmntActivity();
+        assgnmntName[0][0] = actvtsArray[0][2];
         System.out.println("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
         Reporter.log("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
 

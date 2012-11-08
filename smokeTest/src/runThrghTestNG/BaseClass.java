@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -30,7 +32,6 @@ public class BaseClass {
     public static String program;
     public static String brwsr;
     public static String test;
-    String chromDrvrPath;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest(groups = {"prerequisite"})
@@ -40,15 +41,16 @@ public class BaseClass {
         this.program = program;
         this.brwsr = brwsr;
         this.test = test;
-        
+
         pv = new ProgramValues(this.program);
         xpv = new XpathValues("xPathAccountProperty");
         System.out.println("program: " + this.program);
         System.out.println("brwsr: " + this.brwsr);
         System.out.println("os: " + os);
+        File directory = new File(".");
         switch (brwsr) {
             case "chrome":
-                File directory = new File(".");
+                String chromDrvrPath;
                 chromDrvrPath = directory.getCanonicalPath() + File.separator + "lib" + File.separator;
 
                 os:
@@ -81,6 +83,13 @@ public class BaseClass {
                 Reporter.log("Browser: " + brwsr);
                 Reporter.log("OS: " + os);
                 break;
+            case "ie":
+                DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
+                caps.setCapability("ignoreZoomSetting", true);
+                driver = new InternetExplorerDriver(caps);
+                ip.isTitlePresent(driver, "WebDriver");
+                Reporter.log("Browser: IE");
+                break;
             default:
                 driver = new FirefoxDriver();
                 driver.manage().window().maximize();
@@ -88,10 +97,10 @@ public class BaseClass {
         }
         driver.get(pv.getTokenValue("programURL"));
         ip.isTitlePresent(driver, pv.getTokenValue("loginPageTitle"));
-    }
+   }
 
     //The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run 
-    @AfterTest(alwaysRun=true, groups = {"prerequisite"})
+    @AfterTest(alwaysRun = true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
         driver.quit();
     }

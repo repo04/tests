@@ -100,7 +100,23 @@ public class TchrLvSsn_GglDoc extends BaseClass {
         a.navigateToActvtyRprt();
         a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
     }
-
+    
+    /**
+     * Grade Assignment 
+     * 
+     * @param grpCrsName
+     * @param allInOneAsgnmntAvtvtyName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"fullsmoke", "activites.gradeAsgnmnt"})
+    public void testTchrGradeAsgnmnt(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGrpCourse(grpCrsName);
+        a.navigateToGrades();
+        a.gradeAsgnmnt(allInOneAsgnmntAvtvtyName);
+    }
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

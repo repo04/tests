@@ -23,8 +23,8 @@
             <class name="runThrghTestNG.PES_CleanTestData"/>
             <class name="runThrghTestNG.CntAdmn_CleanTstData"/>
             <class name="runThrghTestNG.Pes_ArchvCrs"/>
-            <class name="runThrghTestNG.TchrEmlNtfctn_SmkTests"/>
-            <class name="runThrghTestNG.StdtEmlNtfctn_SmkTests"/>
+            <!--class name="runThrghTestNG.TchrEmlNtfctn_SmkTests"/>
+            <class name="runThrghTestNG.StdtEmlNtfctn_SmkTests"/-->
         </classes>
     </test>
 </suite>
