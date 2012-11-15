@@ -15,9 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -298,7 +296,7 @@ public class Activity extends BaseClass {
             Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
             wndwFnd = true;
             System.out.println("feedback window found");
-        }catch(TimeoutException e){
+        } catch (TimeoutException e) {
             wndwFnd = false;
             System.out.println("feedback window not found");
         }
@@ -327,26 +325,8 @@ public class Activity extends BaseClass {
             ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
         }
 
-        /*int i = 1;
-         value:
-         while (i < 6) {
-         if (i < 5) {
-         try {
-         new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath("//div/input[3]"), "http://" + urlPost));
-         break value;
-         } catch (TimeoutException e) {
-         System.out.println("i: " + i);
-         i++;
-         }
-         } else {
-         Utility.illegalStateException("Selenium is unable to get focus on URL Textboxfield after multiple tries also, this is an automation limitation");
-         }
-         }
-         btnWallShare.click();
-         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlPost);
-         }*/
-
         //************NOT TO BE DELETED AS OF NOW************//
+
         //driver.findElement(By.xpath("//input[@name='formarking']")).click();
         //driver.findElement(By.name("formarking")).click();
         //driver.findElement(By.cssSelector("input[name=\"formarking\"]")).click();
@@ -404,9 +384,9 @@ public class Activity extends BaseClass {
          }
          i++;
          }*/
-
         /*WebElement updateButton = driver.findElement(By.xpath("//input[@value='Send for marking']"));
          ((JavascriptExecutor) driver).executeScript(updateButton.getAttribute("onclick"));*/
+
         //************NOT TO BE DELETED AS OF NOW************//        
     }
 
@@ -460,8 +440,8 @@ public class Activity extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkResbmtAsgntXPATH"))));
-        driver.findElement(By.xpath(xpv.getTokenValue("lnkResbmtAsgntXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Allow Resubmit")));
+        driver.findElement(By.linkText("Allow Resubmit")).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtFstName + " to resubmit this assignment?");
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtFstName + " and mail sent.");
