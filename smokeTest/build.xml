@@ -27,10 +27,7 @@
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
         <antcall target="runSmokeTests"/>
-        <antcall target="testng-xslt-report"/>
-        <antcall target="zip"/>
-        <antcall target="email"/>     
-        <antcall target="openReport"/>
+        <antcall target="testng-xslt-report"/>        
     </target>
     
     <target name="runcritical">
@@ -40,9 +37,6 @@
         <antcall target="copy-resources"/>
         <antcall target="runCriticalTests"/>
         <antcall target="testng-xslt-report"/>
-        <antcall target="zip"/>
-        <antcall target="email"/>         
-        <antcall target="openReport"/>
     </target>
     
     <target name="rundebug">
@@ -51,14 +45,7 @@
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
         <antcall target="runDebugTests"/>
-        <antcall target="testng-xslt-report"/>
-        <antcall target="zip"/>
-        <antcall target="email"/>        
-        <antcall target="openReport"/>
-    </target>
-    
-    <target name="runmail">
-        <antcall target="email"/>        
+        <antcall target="testng-xslt-report"/>       
     </target>
     
     <!-- Delete old data and create new directories -->
