@@ -20,17 +20,24 @@ Verify JDK is configured correctly
  * javac -version	
 	
 	        
-Install ANT 1.8 or higher (Windows Only)
+Install ANT 1.8 or higher
 ----------------------------
 Requirement: ANT 1.8 or higher
 
-	  i> Download ANT 1.8 or higher (OS specific) 
-		 [Ant](http://ant.apache.org/bindownload.cgi)
-     ii> Extract package
-    iii> Set Environment Variable: ANT_HOME
-		 a> Windows <manually configured>
-		 	* [Tutorial](http://omrudi.wordpress.com/2008/11/08/how-to-install-ant-in-windows-xp)
-		 b> Linux/Mac <auto configured>
+	  i> Installing Ant on Windows
+		* Enter the URL: http://ant.apache.org/bindownload.cgi.
+		* On the Apache Ant Project page, find the heading Current Release of Ant.
+		* Select apache-ant-1.8.4-bin.zip [PGP] [SHA1] [SHA512] [MD5]
+		* Click Save to unzip and save it to your C:\ directory 
+		* Set Environment Variable; follow from point 4(http://omrudi.wordpress.com/2008/11/08/how-to-install-ant-in-windows-xp)
+     ii> Installing Ant on Linux
+	    * Ant is already installed on Linux, and so it is not necessary to install it yourself.
+		* If not, please follow (http://www.rndblog.com/how-to-install-ant-on-linux/) 
+    iii> Installing Ant on Mac OS X
+		* Ant is already installed on Mac OS X, and so it is not necessary to install it yourself.		 	
+		* If you absolutely want to install it, though, the best way would be to install it through MacPorts (using sudo port install apache-ant)
+		* However, to install it manually, you would need to follow 2nd Answers
+		  http://stackoverflow.com/questions/3222804/how-can-i-install-apache-ant-on-mac-os-x
      iv> Verify ANT installed correctly 
 	     a> open terminal
 		 b> ant -version
