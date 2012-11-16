@@ -26,10 +26,11 @@ Requirement: ANT 1.8.4
 
 	  i> Installing Ant on Windows
 		* Enter the URL: http://ant.apache.org/bindownload.cgi.
-		* On the Apache Ant Project page, find the heading Current Release of Ant.
+		* On the Apache Ant Project page, find the heading 'Current Release of Ant.'
 		* Select apache-ant-1.8.4-bin.zip [PGP] [SHA1] [SHA512] [MD5]
 		* Click Save to unzip and save it to your C:\ directory 
-		* Set Environment Variable; follow from point 4(http://omrudi.wordpress.com/2008/11/08/how-to-install-ant-in-windows-xp)
+		* Set Environment Variable; follow 
+		  http://www.daimi.au.dk/~hbc/technical/ant/setup.html
      ii> Installing Ant on Linux
 	    * Ant is already installed on Linux, and so it is not necessary to install it yourself.
 		* If not, please follow (http://www.rndblog.com/how-to-install-ant-on-linux/) 
