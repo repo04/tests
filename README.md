@@ -1,9 +1,9 @@
-# Automation Environment Installation
+# Automation Environment Installation/Setup
 
 Install Core Dependencies
-----------------------------
+-------------------------
 
-* Download & Install JDK 1.7(Java SE Development Kit 7u9) or higher
+* Download & Install JDK 1.7(Java SE Development Kit 7u9)
 *  Windows
  * [Win 32-Windows x86](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html)
  * [Win 64-Windows x64](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html)
@@ -19,10 +19,10 @@ Verify JDK is configured correctly
  * java -version
  * javac -version	
 	
-	        
-Install ANT 1.8 or higher
-----------------------------
-Requirement: ANT 1.8 or higher
+	
+Install ANT 1.8.4 or higher
+-------------------------
+Requirement: ANT 1.8.4
 
 	  i> Installing Ant on Windows
 		* Enter the URL: http://ant.apache.org/bindownload.cgi.
@@ -44,8 +44,9 @@ Requirement: ANT 1.8 or higher
 		    ____________________________________________________
 		    Apache Ant(TM) version 1.8.4 compiled on May 22 2012
 		   
+
 Install Git
--------------------
+-----------
 Requirement: Git
 
 	  i> Download & install Git (OS specific)
@@ -60,8 +61,9 @@ Requirement: Git
            git clone git@github.com:2tor/tests.git
      iv> Verify, project is downloaded     
 	
+
 Setup JARS
-------------------------------------
+----------
 Requirement: The appropriate JAR's are need to be copied to machine specific ANT's classpath. <br />
 **Note:** Path where BUILD.XML is located is referred as **BASEDIR**
 
@@ -69,20 +71,22 @@ Requirement: The appropriate JAR's are need to be copied to machine specific ANT
 		 a> Windows: C:\Program Files\apache-ant-1.8.4-bin\apache-ant-1.8.4
 		 b> MAC: /usr/share/ant/lib
 		
+
 Setup to execute on Chrome Browser
--------------------------------------
+----------------------------------
 In order to execute Automation project using CHROME Browser, you need to make file on unix server available to read, write, etc.
 
      i> Using GIT, navigate to project <Basedir/lib/chromedriver_*>. '*' refers to machine/os (linux32 / linux64 / mac / win)
     ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
     * [Tutorial](http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux)
 	   
+
 Run Automation
--------------------------
+--------------
 Automation can run when above steps are followed in order.
 
       i> Open Terminal
-     ii> Navigate to <BASEDIR>
+     ii> Navigate to *BASEDIR*
 	iii> Run Automation
 	       _______________________________________________________________________________________________
 		a> ant runsmoke/runcritical -DantPrgrm=gu,usc -DantEnv=stgng,prod -DantBrwsr=chrome,ff -DantOS=win 
@@ -129,9 +133,5 @@ Automation can run when above steps are followed in order.
 			b> prod
 			   a> chrome  b> ff
 	  v> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{env}_{browser}
-     vi> Test report (zip) folder is automatically mailed to recipients <mentioned in build.xml> once the execution is complete. 
-
-	
-	
-	 
-	 
+	  
+	  
