@@ -45,7 +45,7 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"criticalsmoke", "stdtVrfyEmails"})
+    groups = {"criticalsmoke", "stdtVrfyEmails"})
     public void testStdtVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
         tchrFllNm = "Auto Teacher1";
@@ -81,6 +81,10 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
                             prod = "2GU";
                         } else if (BaseClass.program.substring(0, 3).contains("vac")) {
                             prod = "VAC";
+                        } else if (BaseClass.program.substring(0, 3).contains("mpa")) {
+                            prod = "2SG";
+                        } else if (BaseClass.program.substring(0, 3).contains("llm")) {
+                            prod = "@WashuLaw";
                         } else {
                             prod = "2" + program.substring(1, 3).toUpperCase();
                         }

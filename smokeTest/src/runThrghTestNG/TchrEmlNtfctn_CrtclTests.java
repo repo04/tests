@@ -81,6 +81,10 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
                             env = "2GU";
                         } else if (BaseClass.program.substring(0, 3).contains("vac")) {
                             env = "VAC";
+                        } else if (BaseClass.program.substring(0, 3).contains("mpa")) {
+                            env = "2SG";
+                        } else if (BaseClass.program.substring(0, 3).contains("llm")) {
+                            env = "@WashuLaw";
                         } else {
                             env = "2" + program.substring(1, 3).toUpperCase();
                         }

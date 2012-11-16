@@ -3,16 +3,22 @@
 Install Core Dependencies
 ----------------------------
 
-* [Download](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html) & Install JDK 1.7 or higher
-*  Windows 
+* Download & Install JDK 1.7(Java SE Development Kit 7u9) or higher
+*  Windows
+ * [Win 32-Windows x86](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html)
+ * [Win 64-Windows x64](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html)
  * [Set Path](http://java.com/en/download/help/path.xml)
 
 *  Mac & Linux
- * Auto configured		 
+ * [Mac OS X](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html)
+ * [Linux 32-Linux x86](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html)
+ * [Linux 64-Linux x64](http://www.oracle.com/technetwork/java/javase/downloads/jdk7u9-downloads-1859576.html) 
+ * Path Auto configured		 
 
 Verify JDK is configured correctly
-	java -version
-	javac -version
+ * java -version
+ * javac -version	
+	
 	        
 Install ANT 1.8 or higher (Windows Only)
 ----------------------------

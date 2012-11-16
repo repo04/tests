@@ -208,43 +208,6 @@
                 </ac:for>
             </sequential>
         </ac:for>        
-    </target>   
-    
-    <!-- Generate Report Zip folder -->
-    <target name="zip">
-        <zip destfile="${basedir}/${report.dir}/${runTarget} Report-${timeStamp}.zip">
-            <zipfileset dir="${basedir}/${report.dir}" excludes="**/*.zip"/>            
-        </zip>        
-    </target>       
-    
-    <!-- Autosend Test Report zip folder -->
-    <target name="email">
-        <if>
-            <available file="${report.dir}/${runTarget} Report-${timeStamp}.zip"/>
-            <then> 
-                <mail ssl="false" mailhost="techizen.in" mailport="25" 
-                      subject="${runTarget} Execution Report">
-                    <from address="somesh.bansal@techizen.in"/>                    
-                    <to address="tutordemo2@gmail.com"/>                    
-                    <message>Attached is the ${runTarget} Report executed at ${timeStamp}</message>                       
-                    <attachments>
-                        <fileset dir="${report.dir}/">
-                            <include name="**/*.zip"/>
-                        </fileset>
-                    </attachments>                      
-                </mail>   
-            </then>
-            <else>
-                <!--fail message="Zip folder is not found"/-->
-                <echo>Mail is not sent as zip folder is not found</echo>
-            </else>
-        </if>                       
     </target>
-
-    <!-- Open the report in browser.-->
-    <target name="openReport"> 
-        <exec executable="${browser}" spawn="yes"> 
-            <arg line="'${report.dir}\index.html'"/> 
-        </exec>
-    </target>
+    
 </project>  
