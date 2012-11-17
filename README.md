@@ -144,3 +144,9 @@ Automation can run when above steps are followed in order.
 ## Installing Chrome and Firefox
 
     sudo apt-get install chromium-browser firefox
+
+## Ubuntu install instructions for Java, Ant, and other dependencies
+
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-get update
+    sudo apt-get install oracle-java7-installer libgeronimo-activation-1.1-spec-java ant1.7 ant1.7-optional ant-contrib
