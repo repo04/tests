@@ -135,4 +135,12 @@ Automation can run when above steps are followed in order.
 			   a> chrome  b> ff
 	  v> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{env}_{browser}
 	  
-	  
+
+
+## Installing Xvfb and dependencies
+
+    sudo apt-get install xvfb xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic xserver-xorg-core x11-xkb-utils
+
+## Installing Chrome and Firefox
+
+    sudo apt-get install chromium-browser firefox
