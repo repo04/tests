@@ -72,7 +72,7 @@ public class BaseClass {
                 //ChromeOptions feature does not work on 'MAC' OS
                 if (os.equalsIgnoreCase("mac")) {
                     driver = new ChromeDriver();
-                    ((JavascriptExecutor) driver).executeScript("window.open('','chromeBrwsr','width=1280,height=800,top=0,left‌​=0')");
+                    ((JavascriptExecutor) driver).executeScript("window.open('','chromeBrwsr','width=1280,height=800,top=0,left=0')");
                     driver.close();
                     driver.switchTo().window("chromeBrwsr");
                 } else {
