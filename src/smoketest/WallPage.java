@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -74,6 +75,8 @@ public class WallPage extends BaseClass {
         while (i < 6) {
             Utility.actionBuilderClick(driver, "//div/input[3]");
             linkTextBox.sendKeys(urlPost);
+            linkTextBox.clear();
+            linkTextBox.sendKeys("http://" + urlPost);
             if (i < 5) {
                 try {
                     new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath("//div/input[3]"), "http://" + urlPost));
