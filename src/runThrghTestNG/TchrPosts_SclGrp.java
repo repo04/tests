@@ -51,7 +51,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTchrLgn(ITestContext context) throws Exception {
+    public void testTeacherLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
         } else {
@@ -66,7 +66,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
           groups = {"fullsmoke", "criticalsmoke", "tchrPosts.wallCrs"})
-    public void testTchrPostsOn_Wall_CrsWall(String grpCrsName) throws Exception {
+    public void testTeacherPostsOn_Wall_CourseWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
         System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
@@ -89,7 +89,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.create"})
-    public void testTchrCrtSclGrp() throws Exception {
+    public void testTeacherCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
         tchrSclGrpArray[0][0] = a.createSocialGroup();
         System.out.println("tchrSclGrpName: " + tchrSclGrpArray[0][0]);
@@ -104,7 +104,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      */
     @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"criticalsmoke", "tchrPosts.stdtWall"})
-    public void testTchrPostURLOnStdtsWall(String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testTeacherPostURLOnStudentsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
         a.navigateToContactsWall(stdtUsrName.substring(0, 4) + " " + stdtUsrName.substring(4));
         tchrUrlPostOnStdtWall = a.textPost("tchrUrlPostOnStdtWall");
@@ -119,7 +119,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTchrLogOut() throws Exception {
+    public void testTeacherLogOut() throws Exception {
         a.logOut();
     }
 }

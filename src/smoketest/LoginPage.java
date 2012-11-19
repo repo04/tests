@@ -42,9 +42,9 @@ public class LoginPage extends BaseClass {
 
         //PesAdmin navigates to Course page after login
         if (user.equals("pesAdmin")) {
-            ip.isTitlePresent(driver, pv.getTokenValue("crsPageTitle"));
+            ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "crsPageTitle"));
         } else {
-            ip.isTitlePresent(driver, pv.getTokenValue("homePageTitle"));
+            ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "homePageTitle"));
         }
     }
 

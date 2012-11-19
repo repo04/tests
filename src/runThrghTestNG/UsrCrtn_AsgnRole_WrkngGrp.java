@@ -125,17 +125,17 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLgn() throws Exception {
+    public void testPESAdminLogin() throws Exception {
         a.login("pesAdmin");
     }
 
     /**
-     * Create Two Users
+     * Create Two UserstestUsrCrtn
      *
      * @throws Exception
      */
     @Test(groups = {"fullsmoke", "usrs.creation"})
-    public void testUsrCrtn() throws Exception {
+    public void testUserCreation() throws Exception {
 
         a.navigateToMyContacts();
         usrsArray[0][0] = a.createUser("teacher");
@@ -155,7 +155,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsUsers", groups = {"fullsmoke", "usrs.assgnRole"})
-    public void testAsgnRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testAssignRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
 
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
@@ -172,7 +172,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"fullsmoke", "wrkngGrp.create"})
-    public void testCrtWrkgnGrp() throws Exception {
+    public void testCreateWorkingGroup() throws Exception {
 
         a.navigateToWorkingGroups();
         wrkngGrpArray[0][0] = a.createWorkingGroup();
@@ -186,7 +186,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrpUsers", groups = {"fullsmoke", "wrkngGrp.addMbrs"})
-    public void testAddMbrsToWrkngGrp(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testAddMembersToWorkingGroup(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
         a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);

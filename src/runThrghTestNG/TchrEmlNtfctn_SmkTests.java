@@ -33,7 +33,7 @@ public class TchrEmlNtfctn_SmkTests extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTchrEmailLgn() throws Exception {
+    public void testTeacherEmailLogin() throws Exception {
         Utility.usrEmlLgn(driver, xpv, "2torteacher");
     }
 
@@ -48,7 +48,7 @@ public class TchrEmlNtfctn_SmkTests extends BaseClass {
      */
     @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
           groups = {"fullsmoke", "tchrVrfyEmails"})
-    public void testTchrVerifyEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
+    public void testTeacherVerifyEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
             String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
         stdtFllNm = stdtUsrName.substring(0, 1).toUpperCase() + stdtUsrName.substring(1);
@@ -127,7 +127,7 @@ public class TchrEmlNtfctn_SmkTests extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTchrEmailLogOut() throws Exception {
+    public void testTeacherEmailLogOut() throws Exception {
         Utility.usrEmlLogout(driver);
     }
 }

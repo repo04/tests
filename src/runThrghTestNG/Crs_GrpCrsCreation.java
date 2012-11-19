@@ -133,7 +133,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testCntntAdminLgn() throws Exception {
+    public void testContentAdminLogin() throws Exception {
         a.login("contentAdmin");
     }
 
@@ -143,7 +143,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"fullsmoke", "course.creation"})
-    public void testCrsGrpCrs_Creation() throws Exception {
+    public void testCourseGroupCourse_Creation() throws Exception {
 
         a.navigateToMyCourse();
         crsName = a.createCourse();
@@ -212,7 +212,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testCntntAdminLogOut() throws Exception {
+    public void testContentAdminLogOut() throws Exception {
         a.logOut();
     }
 }

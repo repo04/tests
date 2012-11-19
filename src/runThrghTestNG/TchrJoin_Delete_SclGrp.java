@@ -24,7 +24,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTchrLgn(ITestContext context) throws Exception {
+    public void testTeacherLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
         } else {
@@ -39,7 +39,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
           groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.tchrJoins"})
-    public void testTchrJoinsStdtSclGrp(String stdtSclGrpName) throws Exception {
+    public void testTeacherJoinsStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(stdtSclGrpName);
         a.joinSocialGroup(stdtSclGrpName);
@@ -52,7 +52,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
           groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.tchrLeaves"})
-    public void testTchrLeavesStdtSclGrp(String stdtSclGrpName) throws Exception {
+    public void testTeacherLeavesStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(stdtSclGrpName);
     }
@@ -64,7 +64,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
           groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.delete"})
-    public void testTchrDeleteSclGrp(String tchrSclGrpName) throws Exception {
+    public void testTeacherDeleteSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(tchrSclGrpName);
     }
@@ -79,7 +79,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      */
     @Test(dataProvider = "GrpCrsAsgnmntStdt", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"fullsmoke", "activites.allwResbmtAsgnmnt"})
-    public void testTchrAllwResbmtAsgnmnt(String grpCrsName, String allInOneAsgnmntAvtvtyName, String stdtUsrName) throws Exception {
+    public void testTeacherAllowResubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         a.navigateToGrades();
@@ -93,7 +93,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTchrLogOut() throws Exception {
+    public void testTeacherLogOut() throws Exception {
         a.logOut();
     }
 }

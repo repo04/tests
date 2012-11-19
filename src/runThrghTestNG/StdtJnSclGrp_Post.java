@@ -29,7 +29,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testStdtLgn(ITestContext context) throws Exception {
+    public void testStudentLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
         } else {
@@ -44,7 +44,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
           groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.stdtJoins"})
-    public void testStdtJoinsTchrSclGrp(String tchrSclGrpName) throws Exception {
+    public void testStudentJoinsTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(tchrSclGrpName);
         a.joinSocialGroup(tchrSclGrpName);
@@ -57,7 +57,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
           groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.stdtPostURL"})
-    public void testStdtPostURLOnTchrSclGrp(String tchrSclGrpName) throws Exception {
+    public void testStudentPostURLOnTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSclGrpWall(tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
@@ -72,7 +72,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      */
     @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class,
           groups = {"fullsmoke", "criticalsmoke", "stdtCmnt.TchrCrsPost"})
-    public void testStdtCmntOnTchrCrsPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+    public void testStudentCommentOnTeacherCoursePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.selectGrpCourse(grpCrsName);
         stdtTxtCmntOnTchrCrsPost = a.textCmntPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
         System.out.println("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
@@ -88,7 +88,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
           groups = {"fullsmoke", "activites.sbmtAsgnmnt"})
-    public void testSubmitAsgnmnt(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+    public void testSubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         a.navigateToActvtyRprt();
@@ -103,7 +103,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testStdtLogOut() throws Exception {
+    public void testStudentLogOut() throws Exception {
         a.logOut();
     }
 }

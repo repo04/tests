@@ -24,7 +24,7 @@ public class CntAdmn_CleanTstData {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testCntntAdminLgn() throws Exception {
+    public void testContentAdminLogin() throws Exception {
         a.login("contentAdmin");
     }
 
@@ -55,7 +55,7 @@ public class CntAdmn_CleanTstData {
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
           groups = {"groupcourse.deletion"})
-    public void testGrpCrs_Deletion(String grpCrsName) throws Exception {
+    public void testGroupCourse_Deletion(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         a.deleteGrpCrs(grpCrsName);
@@ -68,7 +68,7 @@ public class CntAdmn_CleanTstData {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testCntntAdminLogOut() throws Exception {
+    public void testContentAdminLogOut() throws Exception {
         a.logOut();
     }
 }

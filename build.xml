@@ -81,7 +81,8 @@
                                 <echo>Driver: @{brwsr}</echo>
                                 <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
                                     <xmlfileset dir="${basedir}" includes="smoke.xml"/>
-                                    <sysproperty key="program" value="@{program}@{env}"/>   
+                                    <sysproperty key="program" value="@{program}"/>
+                                    <sysproperty key="env" value="@{env}"/>   
                                     <sysproperty key="brwsr" value="@{brwsr}"/>
                                     <sysproperty key="os" value="${antOS}"/>
                                     <sysproperty key="test" value="SmokeTests"/>
@@ -113,7 +114,8 @@
                                 <echo>Driver: @{brwsr}</echo>
                                 <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
                                     <xmlfileset dir="${basedir}" includes="critical.xml"/>
-                                    <sysproperty key="program" value="@{program}@{env}"/>   
+                                    <sysproperty key="program" value="@{program}"/>
+                                    <sysproperty key="env" value="@{env}"/>   
                                     <sysproperty key="brwsr" value="@{brwsr}"/>
                                     <sysproperty key="os" value="${antOS}"/>
                                     <sysproperty key="test" value="CriticalTests"/>
@@ -146,7 +148,8 @@
                                 <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" 
                                         groups="${antGrp}" delegatecommandsystemproperties="true" listeners="org.uncommons.reportng.HTMLReporter">  
                                     <xmlfileset dir="${basedir}" includes="debug.xml"/>
-                                    <sysproperty key="program" value="@{program}@{env}"/>   
+                                    <sysproperty key="program" value="@{program}"/>
+                                    <sysproperty key="env" value="@{env}"/>   
                                     <sysproperty key="brwsr" value="@{brwsr}"/>
                                     <sysproperty key="os" value="${antOS}"/>
                                     <sysproperty key="test" value="DebugTests"/>

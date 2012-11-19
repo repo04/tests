@@ -123,7 +123,7 @@ public class Actions extends BaseClass {
      */
     public void logOut() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToLogOut"));
-        ip.isTitlePresent(driver, pv.getTokenValue("loginPageTitle"));
+        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "loginPageTitle"));
     }
 
     /**
@@ -131,7 +131,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyWall() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue("wallPageTitle"));
+        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "wallPageTitle"));
     }
 
     /**
@@ -139,7 +139,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyCourse() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToCourseXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue("crsPageTitle"));
+        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "crsPageTitle"));
     }
 
     /**

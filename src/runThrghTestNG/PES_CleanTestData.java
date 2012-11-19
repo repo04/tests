@@ -31,7 +31,7 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLgn() throws Exception {
+    public void testPESAdminLogin() throws Exception {
         a.login("pesAdmin");
     }
 
@@ -62,7 +62,7 @@ public class PES_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"wrkngGrp.rmvMbrs"})
-    public void testRemoveMbrsFrmWrkngGrp(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testRemoveMembersFromWorkngGroup(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGrpCourse(grpCrsName);
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))));
@@ -114,7 +114,7 @@ public class PES_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"fullsmoke", "wrkngGrp.delete"})
-    public void testDeleteWrkngGrp(String wrkngGrpName) throws Exception {
+    public void testDeleteWorkingGroup(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWrknGrp(wrkngGrpName);
         a.deleteWrkngGrp(wrkngGrpName);
