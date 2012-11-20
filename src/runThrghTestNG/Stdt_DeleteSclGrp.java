@@ -38,7 +38,7 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.delete"})
+          groups = {"fullsmoke", "criticalsmoke", "studentSocialGroup.delete"})
     public void testStudentDeleteSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(stdtSclGrpName);

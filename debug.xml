@@ -25,65 +25,65 @@
             <define name="ActvtsCrt_AddQzQstn_Dlt">
                 <include name="prerequisite"/>
                 <include name="activites.creation"/>
-                <include name="activites.addQuizQstn"/>
+                <include name="activites.addQuizQuestion"/>
                 <include name="activites.deletion"/>              
             </define>
             <define name="ActvtsVrfctn">
                 <include name="prerequisite"/>
-                <include name="activites.tchrVrfy"/>
-                <include name="activites.stdtVrfy"/>          
+                <include name="activites.teacherVerify"/>
+                <include name="activites.studentVerify"/>          
             </define>            
             <define name="ActvtsSbmtQz">
                 <include name="prerequisite"/>
-                <include name="activites.sbmtQuiz"/>          
+                <include name="activites.submitQuiz"/>          
             </define>
             <define name="StdtTchr_Asgmt_SbmtGrdVrfyResbmt">
                 <include name="prerequisite"/>
-                <include name="activites.sbmtAsgnmnt"/>
-                <include name="activites.gradeAsgnmnt"/>
-                <include name="activites.vrfyAsgnmntGrade"/>
-                <include name="activites.allwResbmtAsgnmnt"/>
+                <include name="activites.submitAssignment"/>
+                <include name="activites.gradeAssignment"/>
+                <include name="activites.verifyAssignmentGrade"/>
+                <include name="activites.allowResubmitAssignment"/>
             </define>            
             <define name="UsrsCrtn_Role_Dltn">
                 <include name="prerequisite"/>
-                <include name="usrs.creation"/>
-                <include name="usrs.assgnRole"/>
-                <include name="usrs.unAssgnRole"/>
-                <include name="usrs.delete"/>         
+                <include name="users.creation"/>
+                <include name="users.assignRole"/>
+                <include name="users.unAssignRole"/>
+                <include name="users.delete"/>         
             </define>
             <define name="WrkngGrpCrtn_AddMbrs_Dltn">
                 <include name="prerequisite"/>
-                <include name="wrkngGrp.create"/>
-                <include name="wrkngGrp.addMbrs"/>
-                <include name="wrkngGrp.rmvMbrs"/>                
-                <include name="wrkngGrp.delete"/>         
+                <include name="workingGroup.create"/>
+                <include name="workingGroup.addMembers"/>
+                <include name="workingGroup.removeMembers"/>                
+                <include name="workingGroup.delete"/>         
             </define>              
             <define name="GglDoc_MbrsCrtVrfy">
                 <include name="prerequisite"/>
-                <include name="wrkngGrp.tchrCrtGglDoc"/> 
-                <include name="wrkngGrp.stdtVrfyGglDoc"/>                
+                <include name="workingGroup.teacherCreateGoogleDoc"/> 
+                <include name="workingGroup.studentVerifyGoogleDoc"/>                
             </define>            
             <define name="TchrWallCrs_StdtCmntOnPsts">
                 <include name="prerequisite"/>
-                <include name="tchrPosts.wallCrs"/>
-                <include name="tchrPosts.stdtWall"/> 
-                <include name="stdtCmnt.TchrCrsPost"/>                        
+                <include name="teacherPosts.wallCourse"/>
+                <include name="teacherPosts.studentsWall"/> 
+                <include name="studentComment.TeacherCoursePost"/>                        
             </define>            
             <define name="TchrStdt_CrtDlt_SclGrpLvSsn">
                 <include name="prerequisite"/>
-                <include name="tchrSclGrp.create"/>
-                <include name="tchrSclGrp.stdtJoins"/>
-                <include name="tchrSclGrp.stdtPostURL"/>
-                <include name="tchrLvSsn.create"/>
-                <include name="stdtLvSsn.create"/>
-                <include name="tchrSclGrp.delete"/>
-                <include name="stdtSclGrp.create"/>
-                <include name="stdtSclGrp.delete"/>                                                         
+                <include name="teacherSocialGroup.create"/>
+                <include name="teacherSocialGroup.studentJoins"/>
+                <include name="teacherSocialGroup.studentPostURL"/>
+                <include name="teacherLiveSession.create"/>
+                <include name="studentLiveSession.create"/>
+                <include name="teacherSocialGroup.delete"/>
+                <include name="studentSocialGroup.create"/>
+                <include name="studentSocialGroup.delete"/>                                                         
             </define>            
             <define name="Stdt_JnLvsTchrGrp">
                 <include name="prerequisite"/>
-                <include name="stdtSclGrp.tchrJoins"/>
-                <include name="stdtSclGrp.tchrLeaves"/>                
+                <include name="studentSocialGroup.teacherJoins"/>
+                <include name="studentSocialGroup.teacherLeaves"/>                
             </define>                        
                         
             <!--run>

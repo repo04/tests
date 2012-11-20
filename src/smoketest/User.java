@@ -112,7 +112,7 @@ public class User extends BaseClass {
     /**
      * @return UsrName
      */
-    public String getUsrName() {
+    public String getUserName() {
         return this.userName;
     }
 }

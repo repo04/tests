@@ -111,6 +111,7 @@ Automation can run when above steps are followed in order.
 			* qa
 			* prod
 			* stgng
+			* sb(01 till 99)
 			* Environment's delimiter: ","
 		3> antBrwsr: 
 			* ff

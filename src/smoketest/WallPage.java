@@ -99,7 +99,7 @@ public class WallPage extends BaseClass {
      * @param urlCrsPost
      * @param txtCmntOnTchrCrsPst
      */
-    public void textCmntPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
+    public void textCommentPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
         textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlCrsPost);
         driver.findElement(By.xpath("//a/label")).click();
@@ -144,7 +144,7 @@ public class WallPage extends BaseClass {
     /**
      * @return CommentOnTchrCrsPost
      */
-    public String getTextCmntPost() {
+    public String getTextCommentPost() {
         return this.cmntPost;
     }
 }

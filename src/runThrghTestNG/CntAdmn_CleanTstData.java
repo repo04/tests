@@ -30,21 +30,21 @@ public class CntAdmn_CleanTstData {
 
     /**
      * Delete all Activities
-     * 
+     *  
      * @param grpCrsName
      * @param frmActvyName
      * @param quizActvtyName
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAsgnmntActvtyName
      * @param pageActvtyName
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
           groups = {"activites.deletion"})
     public void testActivities_Deletion(String grpCrsName, String frmActvyName, String quizActvtyName,
-            String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+            String allInOneAsgnmntActvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+        a.selectGroupCourse(grpCrsName);
+        a.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntActvtyName, pageActvtyName);
     }
     
     /**
@@ -57,8 +57,8 @@ public class CntAdmn_CleanTstData {
           groups = {"groupcourse.deletion"})
     public void testGroupCourse_Deletion(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.deleteGrpCrs(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
+        a.deleteGroupCourse(grpCrsName);
     }
 
     /**

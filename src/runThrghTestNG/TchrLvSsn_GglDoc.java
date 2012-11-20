@@ -65,12 +65,12 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "tchrLvSsn.create"})
+          groups = {"fullsmoke", "criticalsmoke", "teacherLiveSession.create"})
     public void testTeacherCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(tchrSclGrpName);
-        a.accessLvSsnWall();
-        a.createLiveSsn(tchrSclGrpName);
+        a.accessSocialGroupWall(tchrSclGrpName);
+        a.accessLiveSessionWall();
+        a.createLiveSession(tchrSclGrpName);
     }
 
     /**
@@ -79,7 +79,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "wrkngGrp.tchrCrtGglDoc"})
+          groups = {"fullsmoke", "workingGroup.teacherCreateGoogleDoc"})
     public void testTeacherCreateGoogleDoc(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         gglDocArray[0][0] = a.createGoogleDoc(wrkngGrpName);
@@ -93,11 +93,11 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.tchrVrfy"})
+          groups = {"fullsmoke", "activites.teacherVerify"})
     public void testTeacherVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.navigateToActvtyRprt();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
         a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
     }
     
@@ -109,12 +109,12 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.gradeAsgnmnt"})
+          groups = {"fullsmoke", "activites.gradeAssignment"})
     public void testTeacherGradeAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         a.navigateToGrades();
-        a.gradeAsgnmnt(allInOneAsgnmntAvtvtyName);
+        a.gradeAssignment(allInOneAsgnmntAvtvtyName);
     }
     
     /**

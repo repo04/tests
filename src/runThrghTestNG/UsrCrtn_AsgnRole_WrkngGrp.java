@@ -134,7 +134,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "usrs.creation"})
+    @Test(groups = {"fullsmoke", "users.creation"})
     public void testUserCreation() throws Exception {
 
         a.navigateToMyContacts();
@@ -154,16 +154,16 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", groups = {"fullsmoke", "usrs.assgnRole"})
+    @Test(dataProvider = "GrpCrsUsers", groups = {"fullsmoke", "users.assignRole"})
     public void testAssignRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.enrollUsrToRole_GrpCrs(tchrUsrName, grpCrsName);
+        a.selectGroupCourse(grpCrsName);
+        a.enrollUserToRole_GroupCourse(tchrUsrName, grpCrsName);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.enrollUsrToRole_GrpCrs(stdtUsrName, grpCrsName);
+        a.selectGroupCourse(grpCrsName);
+        a.enrollUserToRole_GroupCourse(stdtUsrName, grpCrsName);
     }
 
     /**
@@ -171,7 +171,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "wrkngGrp.create"})
+    @Test(groups = {"fullsmoke", "workingGroup.create"})
     public void testCreateWorkingGroup() throws Exception {
 
         a.navigateToWorkingGroups();
@@ -185,11 +185,11 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpUsers", groups = {"fullsmoke", "wrkngGrp.addMbrs"})
+    @Test(dataProvider = "WrkngGrpUsers", groups = {"fullsmoke", "workingGroup.addMembers"})
     public void testAddMembersToWorkingGroup(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
-        a.accessWrknGrp(wrkngGrpName);
-        a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
+        a.accessWorkingGroup(wrkngGrpName);
+        a.addMembersToWorkingGroup(tchrUsrName, stdtUsrName);
     }
 
     /**

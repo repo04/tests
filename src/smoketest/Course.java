@@ -97,7 +97,7 @@ public class Course extends BaseClass {
      *
      * @param grpCrsName
      */
-    public void deleteGrpCrs(String grpCrsName) {
+    public void deleteGroupCourse(String grpCrsName) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsrsLnkXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrsLnkXPATH"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlGrpsLinkXPATH"))));
@@ -119,7 +119,7 @@ public class Course extends BaseClass {
      *
      * @param crsName
      */
-    public void archiveCrs(String crsName) {
+    public void archiveCourse(String crsName) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"))));

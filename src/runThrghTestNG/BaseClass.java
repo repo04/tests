@@ -33,21 +33,22 @@ public class BaseClass {
     public static String env;
     public static String brwsr;
     public static String test;
+    public static String sandbox;
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest(groups = {"prerequisite"})
     @Parameters({"program", "env", "brwsr", "os", "test"})
     public void setUp(String program, String env, String brwsr, String os, String test) throws Exception {
 
+        this.sandbox = env;
         this.program = program;
-        this.env = env;
         this.brwsr = brwsr;
         this.test = test;
 
         pv = new ProgramValues(this.program);
         xpv = new XpathValues("xPathAccountProperty");
         System.out.println("program: " + this.program);
-        System.out.println("env: " + this.env);
+        System.out.println("env: " + this.sandbox);
         System.out.println("brwsr: " + this.brwsr);
         System.out.println("os: " + os);
         File directory = new File(".");
@@ -88,7 +89,10 @@ public class BaseClass {
                 break;
             case "ie":
                 DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-                caps.setCapability("ignoreZoomSetting", true);
+                caps.setCapability("nativeEvents", false);
+                //caps.setCapability("nativeEvents", true);
+                //caps.setCapability("ignoreZoomSetting", true);
+                //caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                 driver = new InternetExplorerDriver(caps);
                 ip.isTitlePresent(driver, "WebDriver");
                 Reporter.log("Browser: IE");
@@ -98,23 +102,24 @@ public class BaseClass {
                 driver.manage().window().maximize();
                 Reporter.log("Browser: firefox");
         }
-        if (this.env.contains("sb")) {
+        if (this.sandbox.contains("sb")) {
             sb:
             switch (this.program) {
                 case "gu":
-                    driver.get("https://www-gu-msn-lms-" + this.env + "-qa.2u.com");
+                    driver.get("https://www-gu-msn-lms-" + this.sandbox + "-qa.2u.com");
                     break sb;
                 case "unc":
-                    driver.get("https://www-unc-mba-lms-" + this.env + "-qa.2u.com");
+                    driver.get("https://www-unc-mba-lms-" + this.sandbox + "-qa.2u.com");
                     break sb;
                 case "usc":
-                    driver.get("https://www-usc-mat-lms-" + this.env + "-qa.2u.com");
+                    driver.get("https://www-usc-mat-lms-" + this.sandbox + "-qa.2u.com");
                     break sb;
                 case "vac":
-                    driver.get("https://www-usc-msw-lms-" + this.env + "-qa.2u.com");
+                    driver.get("https://www-usc-msw-lms-" + this.sandbox + "-qa.2u.com");
             }
-            this.env = env.substring(0, 2);
+            this.env = this.sandbox.substring(0, 2);
         } else {
+            this.env = env;
             driver.get(pv.getTokenValue(this.program + this.env + "programURL"));
         }
         ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "loginPageTitle"));

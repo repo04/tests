@@ -99,7 +99,7 @@ public class Utility {
      * @param xpv
      * @param usrNm
      */
-    public static void usrEmlLgn(WebDriver driver, XpathValues xpv, String usrNm) {
+    public static void usrEmailLogin(WebDriver driver, XpathValues xpv, String usrNm) {
         driver.get("https://mail.google.com/");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
         WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
@@ -151,7 +151,7 @@ public class Utility {
      *
      * @param driver
      */
-    public static void usrEmlLogout(WebDriver driver) {
+    public static void usrEmailLogout(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
         try {
             Utility.navigateToSubMenu(driver, "//td[2]/a");

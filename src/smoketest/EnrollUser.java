@@ -22,7 +22,7 @@ public class EnrollUser extends BaseClass {
      * @param user
      * @param grpCrs
      */
-    public void toRole_Crs(String user, String grpCrs) {
+    public void toRole_Course(String user, String grpCrs) {
 
         String userRole = null;
 

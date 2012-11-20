@@ -38,7 +38,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.tchrJoins"})
+          groups = {"fullsmoke", "criticalsmoke", "studentSocialGroup.teacherJoins"})
     public void testTeacherJoinsStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(stdtSclGrpName);
@@ -51,7 +51,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.tchrLeaves"})
+          groups = {"fullsmoke", "criticalsmoke", "studentSocialGroup.teacherLeaves"})
     public void testTeacherLeavesStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(stdtSclGrpName);
@@ -63,7 +63,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.delete"})
+          groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.delete"})
     public void testTeacherDeleteSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(tchrSclGrpName);
@@ -78,12 +78,12 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsAsgnmntStdt", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "activites.allwResbmtAsgnmnt"})
+          groups = {"fullsmoke", "activites.allowResubmitAssignment"})
     public void testTeacherAllowResubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         a.navigateToGrades();
-        a.allwResbmtAsgnmnt(allInOneAsgnmntAvtvtyName, stdtUsrName);
+        a.allowResubmitAssignment(allInOneAsgnmntAvtvtyName, stdtUsrName);
     }
     
     /**

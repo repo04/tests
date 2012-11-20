@@ -165,27 +165,27 @@ public class Crs_GrpCrsCreation extends BaseClass {
     public void testActivities_Creation(String grpCrsName) throws Exception {
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         actvtsArray[0][0] = a.createForumActivity();
         System.out.println("frmActvyName: " + actvtsArray[0][0]);
         Reporter.log("frmActvyName: " + actvtsArray[0][0]);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         actvtsArray[0][1] = a.createQuizActivity();
         qzNameArray[0][0] = actvtsArray[0][1];
         System.out.println("quizActvtyName: " + actvtsArray[0][1]);
         Reporter.log("quizActvtyName: " + actvtsArray[0][1]);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        actvtsArray[0][2] = a.createAllInOneAsgnmntActivity();
+        a.selectGroupCourse(grpCrsName);
+        actvtsArray[0][2] = a.createAllInOneAssignmentActivity();
         assgnmntName[0][0] = actvtsArray[0][2];
         System.out.println("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
         Reporter.log("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         actvtsArray[0][3] = a.createPageResource();
         System.out.println("pageActvtyName: " + actvtsArray[0][3]);
         Reporter.log("pageActvtyName: " + actvtsArray[0][3]);
@@ -198,10 +198,10 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @param quizName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz", groups = {"fullsmoke", "activites.addQuizQstn"})
+    @Test(dataProvider = "GrpCrsQz", groups = {"fullsmoke", "activites.addQuizQuestion"})
     public void testAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
     }
 

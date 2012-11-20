@@ -53,7 +53,7 @@ public class WorkingGroup extends BaseClass {
      *
      * @param members
      */
-    public void addMbrsToWrkngGrp(String[] members) {
+    public void addMembersToWorkingGroup(String[] members) {
 
         mbrsToWrkngGrp();
 
@@ -231,7 +231,7 @@ public class WorkingGroup extends BaseClass {
      *
      * @param wrkngGrp
      */
-    public void deleteWrkngGrp(String wrkngGrp) {
+    public void deleteWorkingGroup(String wrkngGrp) {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnDeleteGrp"))).click();
 

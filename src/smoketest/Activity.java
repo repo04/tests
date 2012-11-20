@@ -75,7 +75,7 @@ public class Activity extends BaseClass {
     /**
      * Create & Verify AllInOneAsgnmnt Activity
      */
-    public void crtAllInOneAsgnmntActvty() {
+    public void createAllInOneAssignmentActivity() {
         String allInOneAsgnmntIntro;
         if (test.equalsIgnoreCase("SmokeTests")) {
             this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -238,7 +238,7 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void submitAssgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void submitAssignment(String allInOneAsgnmntAvtvtyName) {
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
@@ -395,7 +395,7 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void gradeAsgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
 
         int x = locateElement(allInOneAsgnmntAvtvtyName);
@@ -417,7 +417,7 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void vrfyAsgnmntGrade(String allInOneAsgnmntAvtvtyName) {
+    public void verifyAssignmentGrade(String allInOneAsgnmntAvtvtyName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "62/100 (62%)");
@@ -429,7 +429,7 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void allwResbmtAsgnmnt(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
+    public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
         String stdtFstName;
         if (test.equalsIgnoreCase("SmokeTests")) {
             stdtFstName = stdtUsrName + "fstNm";
@@ -516,7 +516,7 @@ public class Activity extends BaseClass {
     /**
      * @return AllInOneAsgnmntName
      */
-    public String getAllInOneAsgnmntActvyName() {
+    public String getAllInOneAssignmentActivityName() {
         return this.allInOneAsgnmntName;
     }
 

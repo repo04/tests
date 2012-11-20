@@ -34,7 +34,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherEmailLogin() throws Exception {
-        Utility.usrEmlLgn(driver, xpv, "2torteacher");
+        Utility.usrEmailLogin(driver, xpv, "2torteacher");
     }
 
     /**
@@ -126,6 +126,6 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testTeacherEmailLogOut() throws Exception {
-        Utility.usrEmlLogout(driver);
+        Utility.usrEmailLogout(driver);
     }
 }

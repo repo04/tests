@@ -153,7 +153,7 @@ public class SocialGroup extends BaseClass {
     /**
      * @return SclGrpName
      */
-    public String getSclGrpName() {
+    public String getSocialGroupName() {
         return this.sclGrpName;
     }
 }

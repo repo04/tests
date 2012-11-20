@@ -65,7 +65,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "criticalsmoke", "tchrPosts.wallCrs"})
+          groups = {"fullsmoke", "criticalsmoke", "teacherPosts.wallCourse"})
     public void testTeacherPostsOn_Wall_CourseWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
@@ -77,7 +77,7 @@ public class TchrPosts_SclGrp extends BaseClass {
         System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
         Reporter.log("tchrUrlWallPost: " + tchrUrlWallPost);
 
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         tchrUrlCrsPostArray[0][0] = a.urlPost("urlCrsPost");
         System.out.println("tchrUrlCrsPost: " + tchrUrlCrsPostArray[0][0]);
         Reporter.log("tchrUrlCrsPost: " + tchrUrlCrsPostArray[0][0]);
@@ -88,7 +88,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.create"})
+    @Test(groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.create"})
     public void testTeacherCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
         tchrSclGrpArray[0][0] = a.createSocialGroup();
@@ -103,7 +103,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"criticalsmoke", "tchrPosts.stdtWall"})
+          groups = {"criticalsmoke", "teacherPosts.studentsWall"})
     public void testTeacherPostURLOnStudentsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
         a.navigateToContactsWall(stdtUsrName.substring(0, 4) + " " + stdtUsrName.substring(4));

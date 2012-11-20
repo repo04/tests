@@ -51,12 +51,19 @@ public class TestNGCustomReport extends TestListenerAdapter {
             } else {
                 rprtPrgm = BaseClass.program.substring(0, 3);
             }
-
-            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.env + "_" + BaseClass.brwsr + File.separator + "screenshots")).exists()) {
-                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.env + "_" + BaseClass.brwsr + File.separator + "screenshots").mkdir();
+            
+            String rprtEnv;
+            if (BaseClass.sandbox.contains("sb")) {
+                rprtEnv = BaseClass.sandbox;
+            }else{
+                rprtEnv = BaseClass.env;
             }
 
-            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + BaseClass.env + "_" + BaseClass.brwsr + File.separator + "screenshots"
+            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots")).exists()) {
+                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots").mkdir();
+            }
+
+            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots"
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);

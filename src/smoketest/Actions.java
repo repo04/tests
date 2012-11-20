@@ -50,10 +50,10 @@ public class Actions extends BaseClass {
      * @param txtCmntOnTchrCrsPst
      * @return
      */
-    public String textCmntPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
+    public String textCommentPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
         WallPage wp = new WallPage();
-        wp.textCmntPost(urlCrsPost, txtCmntOnTchrCrsPst);
-        return wp.getTextCmntPost();
+        wp.textCommentPost(urlCrsPost, txtCmntOnTchrCrsPst);
+        return wp.getTextCommentPost();
     }
 
     /**
@@ -61,7 +61,7 @@ public class Actions extends BaseClass {
      *
      * @param sclGrpName
      */
-    public void createLiveSsn(String sclGrpName) {
+    public void createLiveSession(String sclGrpName) {
         LiveSession ls = new LiveSession();
         ls.buildLiveSession(sclGrpName);
     }
@@ -82,15 +82,15 @@ public class Actions extends BaseClass {
      * 
      * @param grpCrsName 
      */
-    public void deleteGrpCrs(String grpCrsName) {
+    public void deleteGroupCourse(String grpCrsName) {
         Course cr = new Course();
-        cr.deleteGrpCrs(grpCrsName);
+        cr.deleteGroupCourse(grpCrsName);
     }
 
     /**
      * Verify Navigated to Live Meeting creation page
      */
-    public void accessLvSsnWall() {
+    public void accessLiveSessionWall() {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnleftPnlLvMtng"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnleftPnlLvMtng"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtSsn"));
@@ -113,9 +113,9 @@ public class Actions extends BaseClass {
      * 
      * @param crsName 
      */
-    public void archiveCrs(String crsName) {
+    public void archiveCourse(String crsName) {
         Course cr = new Course();
-        cr.archiveCrs(crsName);
+        cr.archiveCourse(crsName);
     }
 
     /**
@@ -235,7 +235,7 @@ public class Actions extends BaseClass {
      *
      * @param grpCrsName
      */
-    public void selectGrpCourse(String grpCrsName) {
+    public void selectGroupCourse(String grpCrsName) {
 
         String user = LoginPage.getUser();
 
@@ -282,10 +282,10 @@ public class Actions extends BaseClass {
      *
      * @return
      */
-    public String createAllInOneAsgnmntActivity() {
+    public String createAllInOneAssignmentActivity() {
         Activity actvty = new Activity();
-        actvty.crtAllInOneAsgnmntActvty();
-        return actvty.getAllInOneAsgnmntActvyName();
+        actvty.createAllInOneAssignmentActivity();
+        return actvty.getAllInOneAssignmentActivityName();
     }
 
     /**
@@ -308,7 +308,7 @@ public class Actions extends BaseClass {
     public String createUser(String user) {
         User usr = new User();
         usr.createUser(user);
-        return usr.getUsrName();
+        return usr.getUserName();
     }
 
     /**
@@ -328,9 +328,9 @@ public class Actions extends BaseClass {
      * @param user
      * @param grpCrs
      */
-    public void enrollUsrToRole_GrpCrs(String user, String grpCrs) {
+    public void enrollUserToRole_GroupCourse(String user, String grpCrs) {
         EnrollUser enrlUsr = new EnrollUser();
-        enrlUsr.toRole_Crs(user, grpCrs);
+        enrlUsr.toRole_Course(user, grpCrs);
     }
 
     /**
@@ -365,7 +365,7 @@ public class Actions extends BaseClass {
     public String createSocialGroup() {
         SocialGroup sg = new SocialGroup();
         sg.buildSocialGroup();
-        return sg.getSclGrpName();
+        return sg.getSocialGroupName();
     }
 
     /**
@@ -414,7 +414,7 @@ public class Actions extends BaseClass {
      *
      * @param sclGrp
      */
-    public void accessSclGrpWall(String sclGrp) {
+    public void accessSocialGroupWall(String sclGrp) {
         Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), sclGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + sclGrp + "')]")).click();
         String uprCS = sclGrp.substring(0, 1).toUpperCase();
@@ -445,7 +445,7 @@ public class Actions extends BaseClass {
     /**
      * Navigate to Activity Report page
      */
-    public void navigateToActvtyRprt() {
+    public void navigateToActivityReport() {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
@@ -463,18 +463,17 @@ public class Actions extends BaseClass {
         }
     }
     
-    
     /**
      * Delete all Activities
      * 
      * @param frmActvyName
      * @param quizActvtyName
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAsgnmntActvtyName
      * @param pageActvtyName 
      */
-    public void deleteActivites(String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) {
+    public void deleteActivites(String frmActvyName, String quizActvtyName, String allInOneAsgnmntActvtyName, String pageActvtyName) {
         Activity actvty = new Activity();
-        actvty.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+        actvty.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntActvtyName, pageActvtyName);
     }
 
     /**
@@ -502,9 +501,9 @@ public class Actions extends BaseClass {
      * 
      * @param allInOneAsgnmntAvtvtyName 
      */
-    public void submitAssgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void submitAssignment(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
-        actvty.submitAssgnmnt(allInOneAsgnmntAvtvtyName);
+        actvty.submitAssignment(allInOneAsgnmntAvtvtyName);
     }
     
     /**
@@ -512,9 +511,9 @@ public class Actions extends BaseClass {
      * 
      * @param quizActvtyName 
      */
-    public void gradeAsgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
-        actvty.gradeAsgnmnt(allInOneAsgnmntAvtvtyName);
+        actvty.gradeAssignment(allInOneAsgnmntAvtvtyName);
     }
     
     /**
@@ -522,9 +521,9 @@ public class Actions extends BaseClass {
      * 
      * @param allInOneAsgnmntAvtvtyName 
      */
-    public void vrfyAsgnmntGrade(String allInOneAsgnmntAvtvtyName) {
+    public void verifyAssignmentGrade(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
-        actvty.vrfyAsgnmntGrade(allInOneAsgnmntAvtvtyName);
+        actvty.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
     }
     
     /**
@@ -532,9 +531,9 @@ public class Actions extends BaseClass {
      * 
      * @param allInOneAsgnmntAvtvtyName 
      */
-    public void allwResbmtAsgnmnt(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
+    public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
         Activity actvty = new Activity();
-        actvty.allwResbmtAsgnmnt(allInOneAsgnmntAvtvtyName, stdtUsrName);
+        actvty.allowResubmitAssignment(allInOneAsgnmntAvtvtyName, stdtUsrName);
     }
 
     /**
@@ -542,7 +541,7 @@ public class Actions extends BaseClass {
      *
      * @param wrkngGrp
      */
-    public void accessWrknGrp(String wrkngGrp) {
+    public void accessWorkingGroup(String wrkngGrp) {
         //Show all WorkingGroups
         Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
@@ -553,10 +552,10 @@ public class Actions extends BaseClass {
      *
      * @param members
      */
-    public void addMbrsToWrkngGrp(String... members) {
+    public void addMembersToWorkingGroup(String... members) {
 
         WorkingGroup wg = new WorkingGroup();
-        wg.addMbrsToWrkngGrp(members);
+        wg.addMembersToWorkingGroup(members);
     }
 
     /**
@@ -575,9 +574,9 @@ public class Actions extends BaseClass {
      *
      * @param wrkngGrp
      */
-    public void deleteWrkngGrp(String wrkngGrp) {
+    public void deleteWorkingGroup(String wrkngGrp) {
         WorkingGroup wg = new WorkingGroup();
-        wg.deleteWrkngGrp(wrkngGrp);
+        wg.deleteWorkingGroup(wrkngGrp);
     }
 
     /**
