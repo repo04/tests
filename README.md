@@ -79,9 +79,9 @@ Requirement: The appropriate JAR's are need to be copied to machine specific ANT
 Setup to execute on CHROME Browser
 ----------------------------------
 Requirement: Chrome browser installed. <br />
-**Note:** Ubuntu(Linux) installing instructions for Chrome and Firefox
-           _____________________________________________
-	    a> sudo apt-get install chromium-browser firefox
+Ubuntu(Linux) installing instructions for Chrome and Firefox
+         
+	  i> sudo apt-get install chromium-browser firefox
 
 In order to execute Automation project using Chrome Browser, you need to make file on unix server available to read, write, etc.
 
