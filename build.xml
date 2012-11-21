@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="smoketest" default="run" basedir="." xmlns:ac="antlib:net.sf.antcontrib"> 
+<project name="smoketest" default="run" basedir="."> 
     
     <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
     <if>
@@ -14,26 +14,16 @@
                 <echo message="The value of property OS is Linux64"/>
                 <property name="ant.dir" value="/usr/share/java/ant-contrib.jar"/>
             </then>
-        </elseif>            
-        <elseif>
-            <equals arg1="${antOS}" arg2="win"/>
-            <then>
-                <echo message="The value of property OS is WIN"/>
-                <property name="ant.dir" value="C:/Program Files/apache-ant-1.8.4-bin/apache-ant-1.8.4/lib/ant-contrib-1.0b3.jar"/>                
-            </then>
-        </elseif>            
-        <else>
-            <echo message="The value of property foo is MAC" />
-            <property name="ant.dir" value="/usr/share/ant/lib/ant-contrib-1.0b3.jar"/>                            
-        </else>
+        </elseif>
     </if>
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
         <classpath>
             <pathelement location="${ant.dir}"/>
         </classpath>
-    </taskdef>
+    </taskdef>   
 
-    <property name="classes.dir" value="bin" />
+    <property name="classes.dir" value="bin" /> 
     <property name="src.dir" value="src" />
     <property name="report.dir" value="reports" />
     <!--property name="browser" value="/Applications/Firefox.app"/-->
