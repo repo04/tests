@@ -44,27 +44,12 @@ public class TestNGCustomReport extends TestListenerAdapter {
                     "ddMMMyy__hhmmaa");
             // get current date time with Date()
             Date date = new Date();
-            String rprtPrgm;
             
-            if (BaseClass.program.substring(0, 2).contains("gu")) {
-                rprtPrgm = "gu";
-            } else {
-                rprtPrgm = BaseClass.program.substring(0, 3);
-            }
-            
-            String rprtEnv;
-            if (BaseClass.sandbox.contains("sb")) {
-                rprtEnv = BaseClass.sandbox;
-            }else{
-                rprtEnv = BaseClass.env;
+            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots")).exists()) {
+                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots").mkdir();
             }
 
-            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots")).exists()) {
-                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots").mkdir();
-            }
-
-            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots"
-                    + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
+            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots" + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);
 
