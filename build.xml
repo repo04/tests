@@ -1,27 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="smoketest" default="run" basedir=".">
-
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
-    <if>
-        <equals arg1="${antOS}" arg2="linux32"/>
-        <then>
-            <echo message="The value of property OS is Linux32" />
-            <property name="ant.dir" value="/usr/share/java/ant-contrib.jar"/>            
-        </then>
-        <elseif>
-            <equals arg1="${antOS}" arg2="linux64"/>
-            <then>
-                <echo message="The value of property OS is Linux64"/>
-                <property name="ant.dir" value="/usr/share/java/ant-contrib.jar"/>
-            </then>
-        </elseif>
-    </if> 
+    
+    <condition property="ant.dir" value="/usr/share/java/ant-contrib.jar">
+        <matches string="${antOS}" pattern="linux*"/>
+    </condition>
     
     <taskdef resource="net/sf/antcontrib/antlib.xml">
         <classpath>
             <pathelement location="${ant.dir}"/>
         </classpath>
-    </taskdef> 
+    </taskdef>
 
     <property name="classes.dir" value="bin" />
     <property name="src.dir" value="src" />
