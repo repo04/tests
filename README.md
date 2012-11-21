@@ -72,9 +72,8 @@ Requirement: The appropriate JAR's are need to be copied to machine specific ANT
       i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
 		 a> Windows: C:/Program Files/apache-ant-1.8.4-bin/apache-ant-1.8.4/lib
 		 b> MAC: /usr/share/ant/lib
-		 
+
 **Linux:** ANT installation 'Sudo' command automatically save dependent jars at location "/usr/share/java/" & is being set as classpath in ANT's build file
-		
 
 Setup to execute on CHROME Browser
 ----------------------------------
