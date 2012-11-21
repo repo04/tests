@@ -80,14 +80,14 @@ Setup to execute on CHROME Browser
 ----------------------------------
 Requirement: Chrome browser installed. <br />
 **Note:** Ubuntu(Linux) installing instructions for Chrome and Firefox
-          _____________________________________________
-		  sudo apt-get install chromium-browser firefox
+        _____________________________________________
+		sudo apt-get install chromium-browser firefox
 
 In order to execute Automation project using Chrome Browser, you need to make file on unix server available to read, write, etc.
 
-     i> Using GIT, navigate to project <Basedir/lib/chromedriver_*>. '*' refers to machine/os (linux32 / linux64 / mac / win)
-    ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
-    * [Tutorial](http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux)
+      i> Using GIT, navigate to project <Basedir/lib/chromedriver_*>. '*' refers to machine/os (linux32 / linux64 / mac / win)
+     ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
+       * [Tutorial](http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux)
 	   
 
 Run Automation
