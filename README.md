@@ -67,7 +67,7 @@ Requirement: Git
 
 Setup JARS
 ----------
-Requirement: The appropriate JAR's are need to be copied to machine specific ANT's classpath. <br/>
+Requirement: The appropriate JAR's are need to be copied to machine specific ANT's classpath. <br />
 **Note:** Path where BUILD.XML is located is referred as **BASEDIR**
 
       i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
