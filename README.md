@@ -79,7 +79,7 @@ Requirement: The appropriate JAR's are need to be copied to machine specific ANT
 Setup to execute on CHROME Browser
 ----------------------------------
 Requirement: Chrome browser installed. <br />
-Ubuntu(Linux) installing instructions for Chrome and Firefox
+**Note:** Ubuntu(Linux) installing instructions for Chrome and Firefox
          
 	  i> sudo apt-get install chromium-browser firefox
 
