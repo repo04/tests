@@ -84,6 +84,16 @@
                 <include name="prerequisite"/>
                 <include name="studentSocialGroup.teacherJoins"/>
                 <include name="studentSocialGroup.teacherLeaves"/>                
+            </define>
+            <define name="Notes">
+                <include name="note.createOnCourseWall"/>
+                <include name="note.createOnProfileWall"/>                
+                <include name="note.verifySorting"/>
+                <include name="note.deleteProfile"/> 
+            </define>
+            <define name="Resources">
+                <include name="prerequisite"/>
+                <include name="resources.verify"/>                                              
             </define>                        
                         
             <!--run>

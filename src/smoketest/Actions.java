@@ -147,7 +147,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyHome() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("lnkToHomeXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue("homePageTitle"));
+        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "homePageTitle"));
     }
 
     /**
@@ -604,5 +604,45 @@ public class Actions extends BaseClass {
         WorkingGroup wg = new WorkingGroup();
         wg.createGoogleDoc(wrkngGrp);
         return wg.getGoogleDocName();
+    }
+
+    /**
+     * Create Note on specific Wall
+     * 
+     * @param wallType
+     * @return
+     */
+    public String createNote(String wallType) {
+        Note nt = new Note();
+        nt.createNote(wallType);
+        return nt.getNoteName();
+    }
+    
+    /**
+     * Verify Note Sorting 
+     * 
+     * @param profileNote 
+     */
+    public void verifyNoteSorting(String profileNote) {
+        Note nt = new Note();
+        nt.verifyNoteSorting(profileNote);
+    }
+    
+    /**
+     * Verify Resources
+     */
+    public void verifyResources() {
+        Resources rs = new Resources();
+        rs.verifyResources();        
+    }
+
+    /**
+     * Delete Note
+     * 
+     * @param profileNote 
+     */
+    public void deleteNote(String profileNote) {
+        Note nt = new Note();
+        nt.deleteNote(profileNote);
     }
 }
