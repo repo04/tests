@@ -214,5 +214,27 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "testTeacherJoinsStudentSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        //GroupName = Notes
+        if ("testCreateNoteOnProfileWall".equals(testMethod.getName())) {
+            System.out.println("Inside testCreateNoteOnProfileWall");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testCreateNoteOnCourseWall";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testVerifyNoteSorting".equals(testMethod.getName())) {
+            System.out.println("Inside testVerifyNoteSorting");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testCreateNoteOnProfileWall";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testDeleteProfileNote".equals(testMethod.getName())) {
+            System.out.println("Inside testDeleteProfileNote");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testVerifyNoteSorting";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

@@ -137,6 +137,8 @@ Automation can run when above steps are followed in order.
 			* linux32
 			* linux64
 			* Only one OS name can be passed
+		5> antGrp:
+			* n number of group/s mentioned in DebugSmoke confluence page can be passed delimited by ","
      iv> Flow of TEST:
      	1> gu
             a> stgng 

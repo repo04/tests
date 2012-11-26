@@ -8,6 +8,7 @@ import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -20,7 +21,14 @@ public class StdtJnSclGrp_Post extends BaseClass {
 
     static String stdtUrlPostOnTchrSclGrp;
     static String stdtTxtCmntOnTchrCrsPost;
+    static String[][] noteCourse = new String[1][1];
+    static String[][] noteWall = new String[1][1];
     Actions a = new Actions();
+
+    @DataProvider(name = "Note")
+    public static Object[][] Note(ITestContext context) throws Exception {
+        return (noteWall);
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -43,7 +51,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.studentJoins"})
+    groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.studentJoins"})
     public void testStudentJoinsTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(tchrSclGrpName);
@@ -56,7 +64,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.studentPostURL"})
+    groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.studentPostURL"})
     public void testStudentPostURLOnTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
@@ -71,23 +79,23 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "studentComment.TeacherCoursePost"})
+    groups = {"fullsmoke", "criticalsmoke", "studentComment.TeacherCoursePost"})
     public void testStudentCommentOnTeacherCoursePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.selectGroupCourse(grpCrsName);
         stdtTxtCmntOnTchrCrsPost = a.textCommentPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
         System.out.println("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
         Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
     }
-    
+
     /**
      * Submit Assignment
-     * 
+     *
      * @param grpCrsName
      * @param allInOneAsgnmntAvtvtyName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.submitAssignment"})
+    groups = {"fullsmoke", "activites.submitAssignment"})
     public void testSubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -95,6 +103,65 @@ public class StdtJnSclGrp_Post extends BaseClass {
         a.submitAssignment(allInOneAsgnmntAvtvtyName);
     }
 
+    /**
+     * Create Note on Course Wall
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    groups = {"regressionsmoke", "note.createOnCourseWall"})
+    public void testCreateNoteOnCourseWall(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        noteCourse[0][0] = a.createNote(grpCrsName);
+    }
+
+    /**
+     * Create Note on Profile Wall
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"regressionsmoke", "note.createOnProfileWall"})
+    public void testCreateNoteOnProfileWall() throws Exception {
+        a.navigateToMyWall();
+        noteWall[0][0] = a.createNote("Profile");
+    }
+    
+    /**
+     * Verify Note Sorting 
+     * 
+     * @param profileNote
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Note", groups = {"regressionsmoke", "note.verifySorting"})
+    public void testVerifyNoteSorting(String profileNote) throws Exception {
+        a.navigateToMyWall();
+        a.verifyNoteSorting(profileNote);
+    }
+
+    /**
+     * Delete Note 
+     * 
+     * @param profileNote
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Note", groups = {"regressionsmoke", "note.deleteProfile"})
+    public void testDeleteProfileNote(String profileNote) throws Exception {
+        a.navigateToMyWall();
+        a.deleteNote(profileNote);
+    }
+    
+    /**
+     * Verify Resources
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionsmoke", "resources.verify"})
+    public void testVerifyResources() throws Exception {
+        a.navigateToMyHome();
+        a.verifyResources();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the
