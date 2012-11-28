@@ -124,9 +124,12 @@ public class Course extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkActive"))));
-        driver.findElement(By.xpath(xpv.getTokenValue("lnkActive"))).click();
+        //new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkActive"))));
+        //driver.findElement(By.xpath(xpv.getTokenValue("lnkActive"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Active")));
+        driver.findElement(By.linkText("Active")).click();
 
+        
         int x = 2;
         loop:
         do {

@@ -251,8 +251,20 @@ public class Activity extends BaseClass {
         int i = 1;
         end:
         while (i < 6) {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldAsgntRspXPATH"))).clear();
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldAsgntRspXPATH"))).sendKeys(asgmntRspns);
+            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Font family")));
+            List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+            for (WebElement frame : iframes) {
+                System.out.println("Iframe ID: " + frame.getAttribute("id"));
+                driver.switchTo().frame(frame.getAttribute("id"));
+                break;
+            }
+            
+            //Switch focus
+            WebElement editableTxtArea = driver.switchTo().activeElement();
+            editableTxtArea.clear();
+            editableTxtArea.sendKeys(asgmntRspns);
+            driver.switchTo().defaultContent();
+            
             List<WebElement> elements = driver.findElements(By.tagName("input"));
             System.out.println("Total inputs: " + elements.size());
             Robot robot = null;
@@ -315,15 +327,19 @@ public class Activity extends BaseClass {
         }
 
         //Temporary solution till the time 'BUG' is resolved
-        if (program.contains("prod")) {
+        /*if (program.contains("prod")) {
             System.out.println("in prod txtVrfyRspsXPATH");
             driver.switchTo().window(HandleBefore);
+            //div/table/tbody/tr[2]/td/div
             ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyRspsXPATH"), asgmntRspns);
         } else {
             System.out.println("not in prod txtVrfyRspsXPATH");
             driver.switchTo().window(HandleBefore);
             ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
-        }
+        }*/
+        
+        driver.switchTo().window(HandleBefore);
+        ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 
         //************NOT TO BE DELETED AS OF NOW************//
 

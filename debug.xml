@@ -5,7 +5,7 @@
         <listener class-name="runThrghTestNG.TransformDebug"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="tchrUsrName" value="autoteacher1"/>
+        <!--parameter name="tchrUsrName" value="autoteacher1"/>
         <parameter name="stdtUsrName" value="autostudent1"/>
         <parameter name="grpCrsName" value="AutoGroupCourse"/>        
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
@@ -14,7 +14,11 @@
         <parameter name="quizActvtyName" value="AutoQuiz"/>
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
-        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
+        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/-->
+        
+        <parameter name="stdtUsrName" value="student2811-1342"/>
+        <parameter name="grpCrsName" value="SmkTstGrpCrs Nov 28, 2012 1:37 PM"/>
+        <parameter name="allInOneAsgnmntAvtvtyName" value="SmkTstAllInOneAsgnmnt Nov 28, 2012 1:39 PM"/>
         <groups>
             <define name="CrsCrtArchv_GrpCrsCrtDlt">
                 <include name="prerequisite"/>
