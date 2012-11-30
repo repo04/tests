@@ -16,8 +16,9 @@
         <parameter name="pageActvtyName" value="AutoPage"/>
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/-->
         
-        <parameter name="stdtUsrName" value="student2811-1342"/>
-        <parameter name="grpCrsName" value="SmkTstGrpCrs Nov 28, 2012 1:37 PM"/>
+        <parameter name="stdtUsrName" value="student2911-1646"/>
+        <parameter name="tchrUsrName" value="teacher2911-1645"/>
+        <parameter name="grpCrsName" value="SmkTstGrpCrs Nov 29, 2012 4:43 PM"/>
         <parameter name="allInOneAsgnmntAvtvtyName" value="SmkTstAllInOneAsgnmnt Nov 28, 2012 1:39 PM"/>
         <groups>
             <define name="CrsCrtArchv_GrpCrsCrtDlt">
@@ -98,11 +99,21 @@
             <define name="Resources">
                 <include name="prerequisite"/>
                 <include name="resources.verify"/>                                              
+            </define>
+            <define name="Wall">
+                <include name="prerequisite"/>
+                <include name="wall.courseSectionPost"/>
+                <include name="wall.announcementPost"/>
+                <include name="wall.coursePostCommentsOn"/>
+                <include name="wall.coursePostCommentsOff"/>
+                <include name="teacherPosts.wallCourse"/>
+                <include name="wall.studentVerifyPESCoursePosts"/>    
+                <include name="wall.teacherVerifyPESCoursePosts"/>                                   
             </define>                        
                         
             <!--run>
                 <include name="prerequisite"/>
-                <include name="CrsCrtArchv_GrpCrsCrtDlt"/>                 
+                <include name="wall.courseSectionPost"/>              
             </run-->
         </groups>
         <classes>

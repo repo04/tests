@@ -5,6 +5,9 @@
 package runThrghTestNG;
 
 import java.util.Iterator;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -24,6 +27,9 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     static String[][] wrkngGrpArray = new String[1][1];
     static String[][] stdtName = new String[1][1];
     static String[][] tchrName = new String[1][1];
+    static String[][] pesTxtCrsSctnPost = new String[1][1];
+    static String[][] pesTxtCrsPostCmntsOn = new String[1][1];
+    static String[][] pesTxtCrsPostCmntsOff = new String[1][1];
 
     @DataProvider(name = "Users")
     public static Object[][] Users(ITestContext context) throws Exception {
@@ -50,7 +56,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
             return new Object[][]{{context.getCurrentXmlTest().getParameter("wrkngGrpName")}};
         }
     }
-    
+
     @DataProvider(name = "StdtName")
     public static Object[][] StdtName(ITestContext context) throws Exception {
         System.out.println("init StdtName");
@@ -118,6 +124,12 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Crs_GrpCrsCreation.AssgnmntName(context), StdtName(context));
     }
 
+    @DataProvider(name = "GrpCrsPESCoursePosts")
+    public static Iterator<Object[]> GrpCrsPESCoursePosts(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsPESCoursePosts");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff);
+    }
+
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Student logs in, PES Admin Logs in
@@ -144,7 +156,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
         a.navigateToMyContacts();
         usrsArray[0][1] = a.createUser("student");
-        stdtName[0][0] = usrsArray[0][1];        
+        stdtName[0][0] = usrsArray[0][1];
         System.out.println("stdtUsrName: " + usrsArray[0][1]);
         Reporter.log("stdtUsrName: " + usrsArray[0][1]);
     }
@@ -190,6 +202,53 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         a.navigateToWorkingGroups();
         a.accessWorkingGroup(wrkngGrpName);
         a.addMembersToWorkingGroup(tchrUsrName, stdtUsrName);
+    }
+
+    /**
+     * Post Text on Course Section
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    groups = {"regressionsmoke", "fullsmoke", "wall.courseSectionPost"})
+    public void testPesAdminPostTextOnCourseSection(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtCrsSctnPost[0][0] = a.textPost("txtCrsSctnPost");
+        Reporter.log("pesTxtCrsSctnPost: " + pesTxtCrsSctnPost[0][0], true);
+    }
+
+    /**
+     * Post Text with Comments enabled on Course Wall
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    groups = {"regressionsmoke", "fullsmoke", "wall.coursePostCommentsOn"})
+    public void testPesAdminPostTextOnCourseCommentsOn(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtCrsPostCmntsOn[0][0] = a.textPost("txtCrsPostCmntsOn");
+        Reporter.log("pesTxtCrsPost: " + pesTxtCrsPostCmntsOn[0][0], true);
+        ip.isElementPresentByXPATH(driver, "//li[1]/div/div[4]/label/a/label");
+    }
+
+    /**
+     * Post Text with Comments disabled on Course Wall
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    groups = {"regressionsmoke", "fullsmoke", "wall.coursePostCommentsOff"})
+    public void testPesAdminPostTextOnCourseCommentsOff(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtCrsPostCmntsOff[0][0] = a.textPost("txtCrsPostCmntsOff");
+        Reporter.log("pesTxtCrsPost: " + pesTxtCrsPostCmntsOff[0][0], true);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
     }
 
     /**

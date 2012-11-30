@@ -76,11 +76,11 @@ public class Actions extends BaseClass {
         cr.createCourse();
         return cr.getCrsName();
     }
-    
+
     /**
      * Delete Group Course
-     * 
-     * @param grpCrsName 
+     *
+     * @param grpCrsName
      */
     public void deleteGroupCourse(String grpCrsName) {
         Course cr = new Course();
@@ -107,11 +107,11 @@ public class Actions extends BaseClass {
         cr.createGrpCourse(courseName);
         return cr.getGrpCrsName();
     }
-    
+
     /**
      * Archive Course
-     * 
-     * @param crsName 
+     *
+     * @param crsName
      */
     public void archiveCourse(String crsName) {
         Course cr = new Course();
@@ -209,14 +209,14 @@ public class Actions extends BaseClass {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
-    
+
     /**
      * Navigate To Grade Page
      */
     public void navigateToGrades() {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");        
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
     }
 
     /**
@@ -452,6 +452,22 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * User verifies PES posts on Course Wall
+     * 
+     * @param courseposts
+     */
+    public void verifyCoursePost(String... courseposts) {
+        int i = 0;
+        for (String coursepost : courseposts) {
+            ip.isElementPresentContainsTextByXPATH(driver, coursepost);
+            i++;
+            if(i==3){
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[2]/div/div[4]/label/a/label")));
+            }
+        }
+    }
+
+    /**
      * Verify 'n' number of Activities
      *
      * @param activities
@@ -462,14 +478,14 @@ public class Actions extends BaseClass {
             ip.isElementPresentContainsTextByXPATH(driver, activity);
         }
     }
-    
+
     /**
      * Delete all Activities
-     * 
+     *
      * @param frmActvyName
      * @param quizActvtyName
      * @param allInOneAsgnmntActvtyName
-     * @param pageActvtyName 
+     * @param pageActvtyName
      */
     public void deleteActivites(String frmActvyName, String quizActvtyName, String allInOneAsgnmntActvtyName, String pageActvtyName) {
         Activity actvty = new Activity();
@@ -495,41 +511,41 @@ public class Actions extends BaseClass {
         Activity actvty = new Activity();
         actvty.submitQuiz(quizActvtyName);
     }
-    
+
     /**
      * Submit Assignment
-     * 
-     * @param allInOneAsgnmntAvtvtyName 
+     *
+     * @param allInOneAsgnmntAvtvtyName
      */
     public void submitAssignment(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
         actvty.submitAssignment(allInOneAsgnmntAvtvtyName);
     }
-    
+
     /**
      * Grade Assignment
-     * 
-     * @param quizActvtyName 
+     *
+     * @param quizActvtyName
      */
     public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
         actvty.gradeAssignment(allInOneAsgnmntAvtvtyName);
     }
-    
+
     /**
      * Verify Assignment Grade
-     * 
-     * @param allInOneAsgnmntAvtvtyName 
+     *
+     * @param allInOneAsgnmntAvtvtyName
      */
     public void verifyAssignmentGrade(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
         actvty.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
     }
-    
+
     /**
      * Allow Assignment to be resubmitted
-     * 
-     * @param allInOneAsgnmntAvtvtyName 
+     *
+     * @param allInOneAsgnmntAvtvtyName
      */
     public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
         Activity actvty = new Activity();
@@ -608,7 +624,7 @@ public class Actions extends BaseClass {
 
     /**
      * Create Note on specific Wall
-     * 
+     *
      * @param wallType
      * @return
      */
@@ -617,29 +633,29 @@ public class Actions extends BaseClass {
         nt.createNote(wallType);
         return nt.getNoteName();
     }
-    
+
     /**
-     * Verify Note Sorting 
-     * 
-     * @param profileNote 
+     * Verify Note Sorting
+     *
+     * @param profileNote
      */
     public void verifyNoteSorting(String profileNote) {
         Note nt = new Note();
         nt.verifyNoteSorting(profileNote);
     }
-    
+
     /**
      * Verify Resources
      */
     public void verifyResources() {
         Resources rs = new Resources();
-        rs.verifyResources();        
+        rs.verifyResources();
     }
 
     /**
      * Delete Note
-     * 
-     * @param profileNote 
+     *
+     * @param profileNote
      */
     public void deleteNote(String profileNote) {
         Note nt = new Note();

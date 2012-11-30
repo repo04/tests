@@ -236,5 +236,41 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "testVerifyNoteSorting";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testPesAdminPostTextOnCourseCommentsOn".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminPostTextOnCourseCommentsOn");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testPesAdminPostTextOnCourseSection";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testPesAdminPostTextOnCourseCommentsOff".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminPostTextOnCourseCommentsOff");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testPesAdminPostTextOnCourseCommentsOn";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        //TO BE DELETED
+        /*if ("testTeacherPostsOn_Wall_CourseWall".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherPostsOn_Wall_CourseWall");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testPesAdminPostTextOnCourseCommentsOff";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentVerifyPESSectionPost".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyPESSectionPost");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherPostsOn_Wall_CourseWall";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherVerifyPESSectionPost".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyPESSectionPost");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherPostsOn_Wall_CourseWall";
+            annotation.setDependsOnMethods(DependentMethods);
+        }*/
     }
 }
