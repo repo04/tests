@@ -156,23 +156,6 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
     }
     
     /**
-     * Student verifies PES posts on Course Wall
-     * 
-     * @param grpCrsName
-     * @param pesTxtCrsSctnPost
-     * @param pesTxtCrsPostCmntsOn
-     * @param pesTxtCrsPostCmntsOff
-     * @throws Exception 
-     */
-    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"regressionsmoke", "fullsmoke", "wall.studentVerifyPESCoursePosts"})
-    public void testStudentVerifyPESSectionPost(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.verifyCoursePost(pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff);
-    }
-    
-    /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
      *

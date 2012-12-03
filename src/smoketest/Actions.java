@@ -55,6 +55,33 @@ public class Actions extends BaseClass {
         wp.textCommentPost(urlCrsPost, txtCmntOnTchrCrsPst);
         return wp.getTextCommentPost();
     }
+    
+    /**
+     * Recommend URL Course Post
+     * 
+     * @param tchrUrlCrsPost 
+     */
+    public void recommendURLCoursePost(String tchrUrlCrsPost) {
+        WallPage wp = new WallPage();
+        wp.recommendURLCoursePost(tchrUrlCrsPost);
+    }
+    
+    /**
+     * Verify Students Post Recommendation
+     */
+    public void verifyPostRecommendation() {
+        ip.isTextPresentByXPATH(driver, "//label[3]", "(1 People Recommend This)");
+    }
+    
+    /**
+     * Delete Post
+     * 
+     * @param tchrUrlCrsPost 
+     */
+    public void deleteCourseURLPost(String tchrUrlCrsPost) {
+        WallPage wp = new WallPage();
+        wp.deleteCourseURLPost(tchrUrlCrsPost);        
+    }
 
     /**
      * Create LiveSession in

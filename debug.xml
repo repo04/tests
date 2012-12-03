@@ -68,12 +68,6 @@
                 <include name="workingGroup.teacherCreateGoogleDoc"/> 
                 <include name="workingGroup.studentVerifyGoogleDoc"/>                
             </define>            
-            <define name="TchrWallCrs_StdtCmntOnPsts">
-                <include name="prerequisite"/>
-                <include name="teacherPosts.wallCourse"/>
-                <include name="teacherPosts.studentsWall"/> 
-                <include name="studentComment.TeacherCoursePost"/>                        
-            </define>            
             <define name="TchrStdt_CrtDlt_SclGrpLvSsn">
                 <include name="prerequisite"/>
                 <include name="teacherSocialGroup.create"/>
@@ -103,17 +97,25 @@
             <define name="Wall">
                 <include name="prerequisite"/>
                 <include name="wall.courseSectionPost"/>
-                <include name="wall.announcementPost"/>
                 <include name="wall.coursePostCommentsOn"/>
                 <include name="wall.coursePostCommentsOff"/>
-                <include name="teacherPosts.wallCourse"/>
-                <include name="wall.studentVerifyPESCoursePosts"/>    
-                <include name="wall.teacherVerifyPESCoursePosts"/>                                   
+                <include name="wall.teacherPostsOnProfileCourseWall"/>
+                <include name="wall.teacherVerifyPESCoursePosts"/> 
+                <include name="wall.studentVerifyPESCoursePosts"/>
+                <include name="wall.studentCommentOnTeacherCoursePost"/> 
+                <include name="wall.studentRecommendPost"/>   
+                <include name="wall.teacherVerifyStudentsPostRecommendation"/> 
+                <include name="wall.teacherDeleteCourseURLPost"/>            
             </define>                        
                         
             <!--run>
                 <include name="prerequisite"/>
-                <include name="wall.courseSectionPost"/>              
+                <include name="wall.courseSectionPost"/>
+                <include name="wall.coursePostCommentsOn"/>
+                <include name="wall.coursePostCommentsOff"/>
+                <include name="teacsherPosts.wallCourse"/>
+                <include name="wall.studentVerifyPESCoursePosts"/>    
+                <include name="wall.teacherVerifyPESCoursePosts"/>               
             </run-->
         </groups>
         <classes>

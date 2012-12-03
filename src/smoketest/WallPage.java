@@ -165,6 +165,32 @@ public class WallPage extends BaseClass {
     }
 
     /**
+     * Recommend URL Course Post
+     * 
+     * @param tchrUrlCrsPost
+     */
+    public void recommendURLCoursePost(String tchrUrlCrsPost) {
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/a", "http://" + tchrUrlCrsPost);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//label[2]/a")));
+        driver.findElement(By.xpath("//label[2]/a")).click();
+        ip.isTextPresentByXPATH(driver, "//label[3]", "(You Recommend This)");
+    }
+    
+    /**
+     * Delete Post
+     * 
+     * @param tchrUrlCrsPost 
+     */
+    public void deleteCourseURLPost(String tchrUrlCrsPost) {
+        ip.isTextPresentByXPATH(driver, "//li/div/div[4]/div/a", tchrUrlCrsPost);
+        Utility.navigateToSubMenu(driver, "//li/div/div/a");                
+        ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Are you sure you want to delete this post");
+        driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table/tbody"
+                + "/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + tchrUrlCrsPost + "')]")));
+    }
+
+    /**
      * @return TxtPost
      */
     public String getTxtPost() {
