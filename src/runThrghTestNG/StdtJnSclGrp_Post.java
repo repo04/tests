@@ -4,6 +4,7 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -20,7 +21,7 @@ import smoketest.Actions;
 public class StdtJnSclGrp_Post extends BaseClass {
 
     static String stdtUrlPostOnTchrSclGrp;
-    static String stdtTxtCmntOnTchrCrsPost;
+    static String[][] stdtTxtCmntOnTchrCrsPost = new String[1][1];
     static String[][] noteCourse = new String[1][1];
     static String[][] noteWall = new String[1][1];
     Actions a = new Actions();
@@ -28,6 +29,11 @@ public class StdtJnSclGrp_Post extends BaseClass {
     @DataProvider(name = "Note")
     public static Object[][] Note(ITestContext context) throws Exception {
         return (noteWall);
+    }
+    
+    @DataProvider(name = "CrsStdtCmnt")
+    public static Iterator<Object[]> StdtTxtCmntOnTchrCrsPost(ITestContext context) throws Exception {
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
     }
 
     /**
@@ -69,8 +75,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
-        System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
-        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
+        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp, true);
     }
 
     /**
@@ -82,9 +87,8 @@ public class StdtJnSclGrp_Post extends BaseClass {
           groups = {"fullsmoke", "criticalsmoke", "wall.studentCommentOnTeacherCoursePost"})
     public void testStudentCommentOnTeacherCoursePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.selectGroupCourse(grpCrsName);
-        stdtTxtCmntOnTchrCrsPost = a.textCommentPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
-        System.out.println("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
-        Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
+        stdtTxtCmntOnTchrCrsPost[0][0] = a.textCommentPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
+        Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost[0][0], true);
     }
     
     /**

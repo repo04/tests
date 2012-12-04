@@ -191,6 +191,17 @@ public class WallPage extends BaseClass {
     }
 
     /**
+     * Verify comment on Post
+     * 
+     * @param stdtTxtCmntOnTchrCrsPost 
+     */
+    public void verifyCommentOnPost(String stdtTxtCmntOnTchrCrsPost) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//a/label")));
+        driver.findElement(By.xpath("//a/label")).click();
+        ip.isTextPresentByXPATH(driver, "//li[2]/div/div[3]/div[3]", stdtTxtCmntOnTchrCrsPost);
+    }
+    
+    /**
      * @return TxtPost
      */
     public String getTxtPost() {

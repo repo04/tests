@@ -74,6 +74,16 @@ public class Actions extends BaseClass {
     }
     
     /**
+     * Verify comment on Post
+     * 
+     * @param stdtTxtCmntOnTchrCrsPost 
+     */
+    public void verifyCommentOnPost(String stdtTxtCmntOnTchrCrsPost) {
+        WallPage wp = new WallPage();
+        wp.verifyCommentOnPost(stdtTxtCmntOnTchrCrsPost);
+    }
+    
+    /**
      * Delete Post
      * 
      * @param tchrUrlCrsPost 

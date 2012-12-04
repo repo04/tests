@@ -99,6 +99,21 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.verifyPostRecommendation();
     }
+    
+    /**
+     * Verify Students comment on Post
+     * 
+     * @param grpCrsName
+     * @param stdtTxtCmntOnTchrCrsPost
+     * @throws Exception 
+     */
+    @Test(dataProvider = "CrsStdtCmnt", dataProviderClass = StdtJnSclGrp_Post.class,
+          groups = {"regressionsmoke", "wall.teacherVerifyStudentsCommentOnPost"})
+    public void testTeacherVerifyStudentsComment(String grpCrsName, String stdtTxtCmntOnTchrCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifyCommentOnPost(stdtTxtCmntOnTchrCrsPost);
+    }
 
     /**
      * Delete Post

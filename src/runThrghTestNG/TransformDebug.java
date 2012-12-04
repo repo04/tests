@@ -286,6 +286,13 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
         
+         if ("testTeacherVerifyStudentsComment".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyStudentsComment");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStudentCommentOnTeacherCoursePost";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
         if ("testTeacherDeletePost".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeletePost");
             DependentMethods = new String[1];
