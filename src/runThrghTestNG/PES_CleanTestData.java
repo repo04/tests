@@ -113,7 +113,7 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "workingGroup.delete"})
+          groups = {"regressionSmoke", "fullSmoke", "workingGroup.delete"})
     public void testDeleteWorkingGroup(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWorkingGroup(wrkngGrpName);
@@ -126,7 +126,7 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "users.delete"})
+          groups = {"regressionSmoke", "fullSmoke", "users.delete"})
     public void testDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
         a.navigateToMyContacts();
         a.deleteUsers(tchrUsr, stdtUsr);

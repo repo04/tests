@@ -29,8 +29,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
 
     @DataProvider(name = "Course")
     public static Object[][] Course(ITestContext context) throws Exception {
-        System.out.println("init Course");
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside Course: " + test);
             return (crsArray);
         } else {
@@ -41,8 +40,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
 
     @DataProvider(name = "Activites")
     public static Object[][] Activites(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside Activites: " + test);
             return (actvtsArray);
         } else {
@@ -56,8 +54,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
 
     @DataProvider(name = "QuizName")
     public static Object[][] QuizName(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside QuizName: " + test);
             return (qzNameArray);
         } else {
@@ -68,8 +65,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
     
     @DataProvider(name = "AssgnmntName")
     public static Object[][] AssgnmntName(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside AssgnmntName: " + test);
             return (assgnmntName);
         } else {
@@ -142,7 +138,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "course.creation"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "course.creation"})
     public void testCourseGroupCourse_Creation() throws Exception {
 
         a.navigateToMyCourse();
@@ -161,7 +157,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"fullsmoke", "activites.creation"})
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "activites.creation"})
     public void testActivities_Creation(String grpCrsName) throws Exception {
 
         a.navigateToMyCourse();
@@ -198,7 +194,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @param quizName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz", groups = {"fullsmoke", "activites.addQuizQuestion"})
+    @Test(dataProvider = "GrpCrsQz", groups = {"regressionSmoke", "fullSmoke", "activites.addQuizQuestion"})
     public void testAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);

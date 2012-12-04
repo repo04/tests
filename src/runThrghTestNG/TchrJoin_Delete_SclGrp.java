@@ -25,7 +25,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogin(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
@@ -38,7 +38,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"fullsmoke", "criticalsmoke", "studentSocialGroup.teacherJoins"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "studentSocialGroup.teacherJoins"})
     public void testTeacherJoinsStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(stdtSclGrpName);
@@ -51,7 +51,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"fullsmoke", "criticalsmoke", "studentSocialGroup.teacherLeaves"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "studentSocialGroup.teacherLeaves"})
     public void testTeacherLeavesStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(stdtSclGrpName);
@@ -63,29 +63,73 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.delete"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "teacherSocialGroup.delete"})
     public void testTeacherDeleteSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(tchrSclGrpName);
     }
-    
+
     /**
      * Allow Assignment to be resubmitted
-     * 
+     *
      * @param grpCrsName
      * @param allInOneAsgnmntAvtvtyName
      * @param stdtUsrName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GrpCrsAsgnmntStdt", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "activites.allowResubmitAssignment"})
+          groups = {"regressionSmoke", "fullSmoke", "activites.allowResubmitAssignment"})
     public void testTeacherAllowResubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.navigateToGrades();
         a.allowResubmitAssignment(allInOneAsgnmntAvtvtyName, stdtUsrName);
     }
+
+    /**
+     * Verify Students Post Recommendation
+     * 
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "wall.teacherVerifyStudentsPostRecommendation"})
+    public void testTeacherVerifyStudentsPostRecommendation(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifyPostRecommendation();
+    }
     
+    /**
+     * Verify Students comment on Post
+     * 
+     * @param grpCrsName
+     * @param stdtTxtCmntOnTchrCrsPost
+     * @throws Exception 
+     */
+    @Test(dataProvider = "CrsStdtCmnt", dataProviderClass = StdtJnSclGrp_Post.class,
+          groups = {"regressionSmoke", "wall.teacherVerifyStudentsCommentOnPost"})
+    public void testTeacherVerifyStudentsComment(String grpCrsName, String stdtTxtCmntOnTchrCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifyCommentOnPost(stdtTxtCmntOnTchrCrsPost);
+    }
+
+    /**
+     * Delete Post
+     * 
+     * @param grpCrsName
+     * @param tchrUrlCrsPost
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class,
+          groups = {"regressionSmoke", "wall.teacherDeleteCourseURLPost"})
+    public void testTeacherDeletePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.deleteCourseURLPost(tchrUrlCrsPost);
+    }
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

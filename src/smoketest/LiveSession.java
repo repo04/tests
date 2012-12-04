@@ -30,7 +30,10 @@ public class LiveSession extends BaseClass {
         switch (user.substring(0, 7)) {
             case "student":
             case "autostu":
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    liveSsnNm = "RgsnTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "RgsnTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                     liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
@@ -39,7 +42,10 @@ public class LiveSession extends BaseClass {
                 }
                 break;
             default:
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    liveSsnNm = "RgsnTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "RgsnTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     liveSsnNm = "SmkTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                     liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
@@ -56,15 +62,15 @@ public class LiveSession extends BaseClass {
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
         dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println(dateFormat.format(now));
-        WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));        
+        WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));
         new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), "60"));
-            
+
         //This is to verify lvSsnName & lvSsnDrtn field passes correct value 
         value:
         while (true) {
             lvSsnNm.clear();
             lvSsnNmDesc.clear();
-            lvSsnDrtn.clear();  
+            lvSsnDrtn.clear();
             lvSsnNm.sendKeys(liveSsnNm);
             lvSsnNmDesc.sendKeys(liveSsnDesc);
             lvSsnDrtn.sendKeys(xpv.getTokenValue("lvSsnDuration"));

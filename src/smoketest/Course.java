@@ -23,7 +23,10 @@ public class Course extends BaseClass {
         //Navigate to Add/Edit Course Page
         setUpCrsPage();
         String crsShrtName;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.crsName = "RgsnTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            crsShrtName = "RgsnShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.crsName = "SmkTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             crsShrtName = "SmkShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -63,7 +66,9 @@ public class Course extends BaseClass {
         //Navigate to Add/Edit Course Page
         setUpCrsPage();
 
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.grpCrsName = "RgsnTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.grpCrsName = "SmkTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
             this.grpCrsName = "DbgTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -124,8 +129,11 @@ public class Course extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkActive"))));
-        driver.findElement(By.xpath(xpv.getTokenValue("lnkActive"))).click();
+        //new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkActive"))));
+        //driver.findElement(By.xpath(xpv.getTokenValue("lnkActive"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Active")));
+        driver.findElement(By.linkText("Active")).click();
+
 
         int x = 2;
         loop:
