@@ -47,7 +47,7 @@ public class TchrEmlNtfctn_SmkTests extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"fullsmoke", "tchrVrfyEmails"})
+          groups = {"fullSmoke", "tchrVrfyEmails"})
     public void testTeacherVerifyEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
             String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 

@@ -52,7 +52,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogin(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
@@ -65,7 +65,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "criticalsmoke", "wall.teacherPostsOnProfileCourseWall"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
@@ -88,7 +88,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "criticalsmoke", "teacherSocialGroup.create"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "teacherSocialGroup.create"})
     public void testTeacherCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
         tchrSclGrpArray[0][0] = a.createSocialGroup();
@@ -122,7 +122,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"regressionsmoke", "wall.teacherVerifyPESCoursePosts"})
+          groups = {"regressionSmoke", "wall.teacherVerifyPESCoursePosts"})
     public void testTeacherVerifyPESCoursePosts(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);

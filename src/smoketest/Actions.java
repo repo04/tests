@@ -55,42 +55,42 @@ public class Actions extends BaseClass {
         wp.textCommentPost(urlCrsPost, txtCmntOnTchrCrsPst);
         return wp.getTextCommentPost();
     }
-    
+
     /**
      * Recommend URL Course Post
-     * 
-     * @param tchrUrlCrsPost 
+     *
+     * @param tchrUrlCrsPost
      */
     public void recommendURLCoursePost(String tchrUrlCrsPost) {
         WallPage wp = new WallPage();
         wp.recommendURLCoursePost(tchrUrlCrsPost);
     }
-    
+
     /**
      * Verify Students Post Recommendation
      */
     public void verifyPostRecommendation() {
         ip.isTextPresentByXPATH(driver, "//label[3]", "(1 People Recommend This)");
     }
-    
+
     /**
      * Verify comment on Post
-     * 
-     * @param stdtTxtCmntOnTchrCrsPost 
+     *
+     * @param stdtTxtCmntOnTchrCrsPost
      */
     public void verifyCommentOnPost(String stdtTxtCmntOnTchrCrsPost) {
         WallPage wp = new WallPage();
         wp.verifyCommentOnPost(stdtTxtCmntOnTchrCrsPost);
     }
-    
+
     /**
      * Delete Post
-     * 
-     * @param tchrUrlCrsPost 
+     *
+     * @param tchrUrlCrsPost
      */
     public void deleteCourseURLPost(String tchrUrlCrsPost) {
         WallPage wp = new WallPage();
-        wp.deleteCourseURLPost(tchrUrlCrsPost);        
+        wp.deleteCourseURLPost(tchrUrlCrsPost);
     }
 
     /**
@@ -197,7 +197,7 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
         String s = cntct.substring(0, 1).toUpperCase();
         String usrFullNm = null;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
         } else {
             usrFullNm = cntct.substring(0, 1).toUpperCase() + cntct.substring(1, 5)
@@ -490,7 +490,7 @@ public class Actions extends BaseClass {
 
     /**
      * User verifies PES posts on Course Wall
-     * 
+     *
      * @param courseposts
      */
     public void verifyCoursePost(String... courseposts) {
@@ -498,7 +498,7 @@ public class Actions extends BaseClass {
         for (String coursepost : courseposts) {
             ip.isElementPresentContainsTextByXPATH(driver, coursepost);
             i++;
-            if(i==3){
+            if (i == 3) {
                 new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[2]/div/div[4]/label/a/label")));
             }
         }

@@ -33,9 +33,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     @DataProvider(name = "Users")
     public static Object[][] Users(ITestContext context) throws Exception {
-        System.out.println("init Users");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("if Users: " + test);
             return (usrsArray);
         } else {
@@ -46,9 +44,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     @DataProvider(name = "WrkngGrp")
     public static Object[][] WrkngGrp(ITestContext context) throws Exception {
-        System.out.println("init WrkngGrp");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("if WrkngGrp: " + test);
             return (wrkngGrpArray);
         } else {
@@ -59,9 +55,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     @DataProvider(name = "StdtName")
     public static Object[][] StdtName(ITestContext context) throws Exception {
-        System.out.println("init StdtName");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside StdtName: " + test);
             return (stdtName);
         } else {
@@ -146,7 +140,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "users.creation"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "users.creation"})
     public void testUserCreation() throws Exception {
 
         a.navigateToMyContacts();
@@ -166,7 +160,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", groups = {"fullsmoke", "users.assignRole"})
+    @Test(dataProvider = "GrpCrsUsers", groups = {"regressionSmoke", "fullSmoke", "users.assignRole"})
     public void testAssignRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
 
         a.navigateToMyCourse();
@@ -183,7 +177,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "workingGroup.create"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "workingGroup.create"})
     public void testCreateWorkingGroup() throws Exception {
 
         a.navigateToWorkingGroups();
@@ -197,7 +191,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpUsers", groups = {"fullsmoke", "workingGroup.addMembers"})
+    @Test(dataProvider = "WrkngGrpUsers", groups = {"regressionSmoke", "fullSmoke", "workingGroup.addMembers"})
     public void testAddMembersToWorkingGroup(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWorkingGroup(wrkngGrpName);
@@ -211,7 +205,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-    groups = {"regressionsmoke", "fullsmoke", "wall.courseSectionPost"})
+          groups = {"regressionSmoke", "wall.courseSectionPost"})
     public void testPesAdminPostTextOnCourseSection(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -226,7 +220,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-    groups = {"regressionsmoke", "fullsmoke", "wall.coursePostCommentsOn"})
+          groups = {"regressionSmoke", "wall.coursePostCommentsOn"})
     public void testPesAdminPostTextOnCourseCommentsOn(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -242,7 +236,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-    groups = {"regressionsmoke", "fullsmoke", "wall.coursePostCommentsOff"})
+          groups = {"regressionSmoke", "wall.coursePostCommentsOff"})
     public void testPesAdminPostTextOnCourseCommentsOff(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);

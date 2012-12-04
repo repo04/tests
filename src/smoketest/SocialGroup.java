@@ -29,7 +29,9 @@ public class SocialGroup extends BaseClass {
         switch (user.substring(0, 7)) {
             case "student":
             case "autostu":
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    this.sclGrpName = "RgsnTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
                     this.sclGrpName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -39,7 +41,9 @@ public class SocialGroup extends BaseClass {
                 break;
             case "teacher":
             case "autotea":
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    this.sclGrpName = "RgsnTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
                     this.sclGrpName = "CrtclTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);

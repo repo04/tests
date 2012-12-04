@@ -34,7 +34,10 @@ public class Activity extends BaseClass {
      */
     public void crtForumActvty() {
         String forumIntro;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.forumName = "RgsnTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            forumIntro = "RgsnTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             forumIntro = "SmkTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -55,7 +58,10 @@ public class Activity extends BaseClass {
      */
     public void crtQuizActvty() {
         String quizIntro;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.quizName = "RgsnTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "RgsnTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -77,7 +83,10 @@ public class Activity extends BaseClass {
      */
     public void createAllInOneAssignmentActivity() {
         String allInOneAsgnmntIntro;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.allInOneAsgnmntName = "RgsnTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            allInOneAsgnmntIntro = "RgsnTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             allInOneAsgnmntIntro = "SmkTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -98,7 +107,10 @@ public class Activity extends BaseClass {
      */
     public void createPageResource() {
         String pageContent;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.pageName = "RgsnTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            pageContent = "RgsnTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             pageContent = "SmkTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -258,13 +270,13 @@ public class Activity extends BaseClass {
                 driver.switchTo().frame(frame.getAttribute("id"));
                 break;
             }
-            
+
             //Switch focus
             WebElement editableTxtArea = driver.switchTo().activeElement();
             editableTxtArea.clear();
             editableTxtArea.sendKeys(asgmntRspns);
             driver.switchTo().defaultContent();
-            
+
             List<WebElement> elements = driver.findElements(By.tagName("input"));
             System.out.println("Total inputs: " + elements.size());
             Robot robot = null;
@@ -328,16 +340,16 @@ public class Activity extends BaseClass {
 
         //Temporary solution till the time 'BUG' is resolved
         /*if (program.contains("prod")) {
-            System.out.println("in prod txtVrfyRspsXPATH");
-            driver.switchTo().window(HandleBefore);
-            //div/table/tbody/tr[2]/td/div
-            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyRspsXPATH"), asgmntRspns);
-        } else {
-            System.out.println("not in prod txtVrfyRspsXPATH");
-            driver.switchTo().window(HandleBefore);
-            ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
-        }*/
-        
+         System.out.println("in prod txtVrfyRspsXPATH");
+         driver.switchTo().window(HandleBefore);
+         //div/table/tbody/tr[2]/td/div
+         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyRspsXPATH"), asgmntRspns);
+         } else {
+         System.out.println("not in prod txtVrfyRspsXPATH");
+         driver.switchTo().window(HandleBefore);
+         ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
+         }*/
+
         driver.switchTo().window(HandleBefore);
         ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 
@@ -447,7 +459,7 @@ public class Activity extends BaseClass {
      */
     public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
         String stdtFstName;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             stdtFstName = stdtUsrName + "fstNm";
         } else {
             stdtFstName = stdtUsrName.substring(0, 4);

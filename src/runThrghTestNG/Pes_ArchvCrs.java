@@ -33,7 +33,7 @@ public class Pes_ArchvCrs {
      * 
      * @throws Exception 
      */
-    @Test(groups = {"fullsmoke", "course.archive"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "course.archive"})
     public void testArchiveCourse() throws Exception {
         a.archiveCourse(Crs_GrpCrsCreation.crsName);
     }

@@ -26,10 +26,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
 
     @DataProvider(name = "GglDoc")
     public static Object[][] GglDoc(ITestContext context) throws Exception {
-
-        System.out.println("init GglDoc");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("if GglDoc: " + test);
             return (gglDocArray);
         } else {
@@ -52,7 +49,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogin(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
@@ -65,7 +62,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "teacherLiveSession.create"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "teacherLiveSession.create"})
     public void testTeacherCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
@@ -79,7 +76,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "workingGroup.teacherCreateGoogleDoc"})
+          groups = {"regressionSmoke", "fullSmoke", "workingGroup.teacherCreateGoogleDoc"})
     public void testTeacherCreateGoogleDoc(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         gglDocArray[0][0] = a.createGoogleDoc(wrkngGrpName);
@@ -93,7 +90,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.teacherVerify"})
+          groups = {"regressionSmoke", "fullSmoke", "activites.teacherVerify"})
     public void testTeacherVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -109,7 +106,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.gradeAssignment"})
+          groups = {"regressionSmoke", "fullSmoke", "activites.gradeAssignment"})
     public void testTeacherGradeAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);

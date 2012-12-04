@@ -25,7 +25,7 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogin(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
@@ -38,7 +38,7 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "StdtSclGrp", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
-          groups = {"fullsmoke", "criticalsmoke", "studentSocialGroup.delete"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "studentSocialGroup.delete"})
     public void testStudentDeleteSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.deleteSocialGroup(stdtSclGrpName);

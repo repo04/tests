@@ -8,7 +8,7 @@
         <groups>
             <run>
                 <include name="prerequisite"/>
-                <include name="regressionsmoke"/>
+                <include name="regressionSmoke"/>
             </run>
         </groups>
         <classes>

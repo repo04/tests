@@ -26,13 +26,14 @@ public class WorkingGroup extends BaseClass {
      * PesAdmin creates & verify Working Group
      */
     public void buildWorkingGroup() {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
-            this.wrkgGrpName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);        
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.wrkgGrpName = "RgsnTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
+            this.wrkgGrpName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("CriticalTests")) {
-            this.wrkgGrpName = "CrtclTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);        
+            this.wrkgGrpName = "CrtclTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
-            this.wrkgGrpName = "DbgTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);        
+            this.wrkgGrpName = "DbgTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }
 
         String srtName = "ShrtNmWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -155,9 +156,9 @@ public class WorkingGroup extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctGglTypeXPATH")))).selectByVisibleText("Document");
         DateFormat dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String gglDocDesc;
-        
+
         if (test.equalsIgnoreCase("SmokeTests")) {
-            this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);        
+            this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
         } else if (test.equalsIgnoreCase("CriticalTests")) {
             this.gglDocName = "CrtclTstGglDoc " + dateFormat.format(now);
@@ -166,7 +167,7 @@ public class WorkingGroup extends BaseClass {
             this.gglDocName = "DbgTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "DbgTstGglDocDesc " + dateFormat.format(now);
         }
-        
+
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(gglDocName);
         driver.findElement(By.xpath(xpv.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
 
