@@ -153,14 +153,6 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        //GroupName = TchrWallCrs_StdtCmntOnPsts
-        if ("testStudentCommentOnTeacherCoursePost".equals(testMethod.getName())) {
-            System.out.println("Inside testStudentCommentOnTeacherCoursePost");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherPostsOn_Wall_CourseWall";
-            annotation.setDependsOnMethods(DependentMethods);
-        }
-
         //GroupName = TchrStdt_CrtDlt_SclGrpLvSsn
         if ("testStudentJoinsTeacherSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentJoinsTeacherSocialGroup");
@@ -234,6 +226,77 @@ public class TransformDebug implements IAnnotationTransformer {
             System.out.println("Inside testDeleteProfileNote");
             DependentMethods = new String[1];
             DependentMethods[0] = "testVerifyNoteSorting";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        //GroupName = Wall
+        if ("testPesAdminPostTextOnCourseCommentsOn".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminPostTextOnCourseCommentsOn");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testPesAdminPostTextOnCourseSection";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testPesAdminPostTextOnCourseCommentsOff".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminPostTextOnCourseCommentsOff");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testPesAdminPostTextOnCourseCommentsOn";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherPostsOn_Wall_CourseWall".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherPostsOn_Wall_CourseWall");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp.testPesAdminPostTextOnCourseCommentsOff";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherVerifyPESCoursePosts".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyPESCoursePosts");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testTeacherPostsOn_Wall_CourseWall";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentVerifyPESCoursePost".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyPESCoursePost");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherVerifyPESCoursePosts";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentCommentOnTeacherCoursePost".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentCommentOnTeacherCoursePost");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherPostsOn_Wall_CourseWall";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentRecommendCourseURLPost".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentRecommendCourseURLPost");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testStudentVerifyPESCoursePost";
+            annotation.setDependsOnMethods(DependentMethods);
+        } 
+        
+        if ("testTeacherVerifyStudentsPostRecommendation".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyStudentsPostRecommendation");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStudentRecommendCourseURLPost";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+         if ("testTeacherVerifyStudentsComment".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyStudentsComment");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStudentCommentOnTeacherCoursePost";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherDeletePost".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherDeletePost");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTeacherVerifyStudentsPostRecommendation";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

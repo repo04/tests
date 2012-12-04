@@ -65,7 +65,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "criticalsmoke", "teacherPosts.wallCourse"})
+          groups = {"fullsmoke", "criticalsmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
@@ -110,6 +110,23 @@ public class TchrPosts_SclGrp extends BaseClass {
         tchrUrlPostOnStdtWall = a.textPost("tchrUrlPostOnStdtWall");
         System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
         Reporter.log("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
+    }
+    
+    /**
+     * Teacher verifies PES posts on Course Wall
+     *
+     * @param grpCrsName
+     * @param pesTxtCrsSctnPost
+     * @param pesTxtCrsPostCmntsOn
+     * @param pesTxtCrsPostCmntsOff
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"regressionsmoke", "wall.teacherVerifyPESCoursePosts"})
+    public void testTeacherVerifyPESCoursePosts(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifyCoursePost(pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff);
     }
 
     /**

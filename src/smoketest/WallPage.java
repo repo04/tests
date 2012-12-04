@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,6 +20,7 @@ public class WallPage extends BaseClass {
     String textPost = null;
     String urlPost = null;
     String cmntPost = null;
+    DateFormat dateFormat;
 
     /**
      * Post Text on Wall
@@ -46,6 +46,43 @@ public class WallPage extends BaseClass {
 
         //Switches back to default focus
         driver.switchTo().defaultContent();
+
+        if (user.contains("Admin")) {
+            switch (textPst) {
+                case "txtCrsSctnPost":
+                    new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//td/div/img")));
+                    driver.findElement(By.xpath("//td/div/img")).click();
+                    driver.findElement(By.xpath("//div[11]/div/div[1]")).click();
+                    break;
+                case "txtAncmntPost":
+                    new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//td/div/img")));
+                    driver.findElement(By.xpath("//td/div/img")).click();
+                    driver.findElement(By.xpath("//div[11]/div/div[2]")).click();
+                    ip.isTextPresentByXPATH(driver, "//div[11]/div/div/div/div", "Post Announcement - Settings");
+                    dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.id("endtime-date"), dateFormat.format(now)));
+                    driver.findElement(By.xpath("//div/fieldset/div/div/div/div/div/input")).click();
+                    driver.findElement(By.xpath("//div[11]/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]")).click();
+                    break;
+                case "txtCrsPostCmntsOn":
+                    new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//td/div/img")));
+                    driver.findElement(By.xpath("//td/div/img")).click();
+                    driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    ip.isTextPresentByXPATH(driver, "//label/span", "On - Starts a course level discussion");
+                    driver.findElement(By.xpath("//fieldset/div/div/div/div/div/input")).click();
+                    driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
+                    break;
+                case "txtCrsPostCmntsOff":
+                    new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//td/div/img")));
+                    driver.findElement(By.xpath("//td/div/img")).click();
+                    driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    ip.isTextPresentByXPATH(driver, "//label/span", "On - Starts a course level discussion");
+                    driver.findElement(By.xpath("//fieldset/div/div/div[2]/div/div/input")).click();
+                    driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
+                    break;
+            }
+        }
+
         btnWallShare.click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("textWallCSS"), textPost);
 
@@ -127,6 +164,43 @@ public class WallPage extends BaseClass {
         }
     }
 
+    /**
+     * Recommend URL Course Post
+     * 
+     * @param tchrUrlCrsPost
+     */
+    public void recommendURLCoursePost(String tchrUrlCrsPost) {
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/a", "http://" + tchrUrlCrsPost);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//label[2]/a")));
+        driver.findElement(By.xpath("//label[2]/a")).click();
+        ip.isTextPresentByXPATH(driver, "//label[3]", "(You Recommend This)");
+    }
+    
+    /**
+     * Delete Post
+     * 
+     * @param tchrUrlCrsPost 
+     */
+    public void deleteCourseURLPost(String tchrUrlCrsPost) {
+        ip.isTextPresentByXPATH(driver, "//li/div/div[4]/div/a", tchrUrlCrsPost);
+        Utility.navigateToSubMenu(driver, "//li/div/div/a");                
+        ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Are you sure you want to delete this post");
+        driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table/tbody"
+                + "/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + tchrUrlCrsPost + "')]")));
+    }
+
+    /**
+     * Verify comment on Post
+     * 
+     * @param stdtTxtCmntOnTchrCrsPost 
+     */
+    public void verifyCommentOnPost(String stdtTxtCmntOnTchrCrsPost) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//a/label")));
+        driver.findElement(By.xpath("//a/label")).click();
+        ip.isTextPresentByXPATH(driver, "//li[2]/div/div[3]/div[3]", stdtTxtCmntOnTchrCrsPost);
+    }
+    
     /**
      * @return TxtPost
      */

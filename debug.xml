@@ -5,7 +5,7 @@
         <listener class-name="runThrghTestNG.TransformDebug"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="tchrUsrName" value="autoteacher1"/>
+        <!--parameter name="tchrUsrName" value="autoteacher1"/>
         <parameter name="stdtUsrName" value="autostudent1"/>
         <parameter name="grpCrsName" value="AutoGroupCourse"/>        
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
@@ -14,7 +14,12 @@
         <parameter name="quizActvtyName" value="AutoQuiz"/>
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
-        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
+        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/-->
+        
+        <parameter name="stdtUsrName" value="student2911-1646"/>
+        <parameter name="tchrUsrName" value="teacher2911-1645"/>
+        <parameter name="grpCrsName" value="SmkTstGrpCrs Nov 29, 2012 4:43 PM"/>
+        <parameter name="allInOneAsgnmntAvtvtyName" value="SmkTstAllInOneAsgnmnt Nov 28, 2012 1:39 PM"/>
         <groups>
             <define name="CrsCrtArchv_GrpCrsCrtDlt">
                 <include name="prerequisite"/>
@@ -63,12 +68,6 @@
                 <include name="workingGroup.teacherCreateGoogleDoc"/> 
                 <include name="workingGroup.studentVerifyGoogleDoc"/>                
             </define>            
-            <define name="TchrWallCrs_StdtCmntOnPsts">
-                <include name="prerequisite"/>
-                <include name="teacherPosts.wallCourse"/>
-                <include name="teacherPosts.studentsWall"/> 
-                <include name="studentComment.TeacherCoursePost"/>                        
-            </define>            
             <define name="TchrStdt_CrtDlt_SclGrpLvSsn">
                 <include name="prerequisite"/>
                 <include name="teacherSocialGroup.create"/>
@@ -94,11 +93,24 @@
             <define name="Resources">
                 <include name="prerequisite"/>
                 <include name="resources.verify"/>                                              
+            </define>
+            <define name="Wall">
+                <include name="prerequisite"/>
+                <include name="wall.courseSectionPost"/>
+                <include name="wall.coursePostCommentsOn"/>
+                <include name="wall.coursePostCommentsOff"/>
+                <include name="wall.teacherPostsOnProfileCourseWall"/>
+                <include name="wall.teacherVerifyPESCoursePosts"/> 
+                <include name="wall.studentVerifyPESCoursePosts"/>
+                <include name="wall.studentCommentOnTeacherCoursePost"/> 
+                <include name="wall.studentRecommendPost"/>   
+                <include name="wall.teacherVerifyStudentsPostRecommendation"/>
+                <include name="wall.teacherVerifyStudentsCommentOnPost"/> 
+                <include name="wall.teacherDeleteCourseURLPost"/>            
             </define>                        
                         
             <!--run>
-                <include name="prerequisite"/>
-                <include name="CrsCrtArchv_GrpCrsCrtDlt"/>                 
+                <include name="prerequisite"/>                             
             </run-->
         </groups>
         <classes>
