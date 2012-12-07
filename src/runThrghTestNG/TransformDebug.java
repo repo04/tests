@@ -33,7 +33,7 @@ public class TransformDebug implements IAnnotationTransformer {
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
 
-        //GroupName = CrsCrtArchv_GrpCrsCrtDlt
+        //GroupName = Course_GroupCourse
         if ("testGroupCourse_Deletion".equals(testMethod.getName())) {
             System.out.println("Inside testGroupCourse_Deletion");
             DependentMethods = new String[1];
@@ -51,7 +51,7 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setAlwaysRun(true);
         }
 
-        //GroupName = ActvtsCrt_AddQzQstn_Dlt        
+        //GroupName = ActvtsCrt_AddQzQstn_Dlt         
         if ("testAddQuizQuestion".equals(testMethod.getName())) {
             System.out.println("Inside testAddQuizQuestion");
             DependentMethods = new String[1];
@@ -71,7 +71,7 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDataProviderClass(Crs_GrpCrsCreation.class);
         }
 
-        //GroupName = StdtTchr_Asgmt_SbmtGrdVrfyResbmt
+        //GroupName = Assignment_Grade
         if ("testTeacherGradeAssignment".equals(testMethod.getName())
                 || "testTeacherAllowResubmitAssignment".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherGradeAssignment");
@@ -87,7 +87,7 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
         
-        //GroupName = UsrsCrtn_Role_Dltn
+        //GroupName = Users
         if ("testAssignRole".equals(testMethod.getName())) {
             System.out.println("Inside testAssignRole");
             DependentMethods = new String[1];
@@ -116,7 +116,7 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDataProviderClass(UsrCrtn_AsgnRole_WrkngGrp.class);
         }
 
-        //GroupName = WrkngGrpCrtn_AddMbrs_Dltn
+        //GroupName = WorkingGroup
         if ("testAddMembersToWorkingGroup".equals(testMethod.getName())) {
             System.out.println("Inside testAddMembersToWorkingGroup");
             DependentMethods = new String[1];
@@ -145,7 +145,7 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDataProviderClass(UsrCrtn_AsgnRole_WrkngGrp.class);
         }
 
-        //GroupName = GglDoc_MbrsCrtVrfy
+        //GroupName = GoogleDoc
         if ("testStudentVerifyWorkingGroup_GoogleDoc".equals(testMethod.getName())) {
             System.out.println("Inside testStudentVerifyWorkingGroup_GoogleDoc");
             DependentMethods = new String[1];
@@ -153,7 +153,7 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        //GroupName = TchrStdt_CrtDlt_SclGrpLvSsn
+        //GroupName = SocialGroup_LiveSession
         if ("testStudentJoinsTeacherSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentJoinsTeacherSocialGroup");
             DependentMethods = new String[1];
@@ -182,7 +182,21 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[1] = "runThrghTestNG.TchrLvSsn_GglDoc.testTeacherCreateLiveSession";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testTeacherJoinsStudentSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherJoinsStudentSocialGroup");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStudentCreateSocialGroup";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
+        if ("testTeacherLeavesStudentSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherLeavesStudentSocialGroup");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testTeacherJoinsStudentSocialGroup";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
         if ("testTeacherDeleteSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeleteSocialGroup");
             DependentMethods = new String[1];
@@ -194,17 +208,7 @@ public class TransformDebug implements IAnnotationTransformer {
             System.out.println("Inside testStudentDeleteSocialGroup");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStudentCreateSocialGroup";
-            annotation.setDependsOnMethods(DependentMethods);
-            annotation.setDataProvider("StdtSclGrpDebug");
-            annotation.setDataProviderClass(StdtLvSsn_SclGrp_GglDoc.class);
-        }
-
-        //GroupName = Stdt_JnLvsTchrGrp
-        if ("testTeacherLeavesStudentSocialGroup".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherLeavesStudentSocialGroup");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "testTeacherJoinsStudentSocialGroup";
-            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setDependsOnMethods(DependentMethods);            
         }
         
         //GroupName = Notes

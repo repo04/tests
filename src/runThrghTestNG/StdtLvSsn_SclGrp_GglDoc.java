@@ -25,13 +25,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
     @DataProvider(name = "StdtSclGrp")
     public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("DebugTests")) {
-            System.out.println("if StdtSclGrp: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("stdtSclGrpName")}};            
-        } else {
-            System.out.println("else StdtSclGrp: " + test);
-            return (stdtSclGrpArray);           
-        }
+        System.out.println("StdtSclGrp: " + test);
+        return (stdtSclGrpArray);
     }
 
     @DataProvider(name = "TchrStdtSclGrps")
@@ -46,12 +41,6 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
         return DataProviderUtil.cartesianProviderFrom(UsrCrtn_AsgnRole_WrkngGrp.Users(context),
                 UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), TchrPosts_SclGrp.TchrSclGrp(context),
                 StdtSclGrp(context));
-    }
-    
-    @DataProvider(name = "StdtSclGrpDebug")
-    public static Object[][] StdtSclGrpDebug(ITestContext context) throws Exception {
-        System.out.println("init StdtSclGrpDebug");
-        return (stdtSclGrpArray);
     }
 
     /**
@@ -75,7 +64,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "studentLiveSession.create"})
+    groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "studentLiveSession.create"})
     public void testStudentCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
@@ -102,7 +91,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class,
-          groups = {"regressionSmoke", "fullSmoke", "workingGroup.studentVerifyGoogleDoc"})
+    groups = {"regressionSmoke", "fullSmoke", "workingGroup.studentVerifyGoogleDoc"})
     public void testStudentVerifyWorkingGroup_GoogleDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
@@ -114,7 +103,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "activites.studentVerify"})
+    groups = {"regressionSmoke", "fullSmoke", "activites.studentVerify"})
     public void testStudentVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -129,30 +118,30 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsQz", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "activites.submitQuiz"})
+    groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "activites.submitQuiz"})
     public void testSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.navigateToActivityReport();
         a.submitQuiz(quizActvtyName);
     }
-    
+
     /**
      * Verify Assignment Grade
-     * 
+     *
      * @param grpCrsName
      * @param allInOneAsgnmntAvtvtyName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "activites.verifyAssignmentGrade"})
+    groups = {"regressionSmoke", "fullSmoke", "activites.verifyAssignmentGrade"})
     public void testVerifyAssignmentGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.navigateToGrades();
         a.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
     }
-    
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

@@ -17,7 +17,7 @@
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
         
         <groups>
-            <define name="CrsCrtArchv_GrpCrsCrtDlt">
+            <define name="Course_GroupCourse">
                 <include name="prerequisite"/>
                 <include name="course.creation"/>
                 <include name="groupcourse.deletion"/>
@@ -38,48 +38,45 @@
                 <include name="prerequisite"/>
                 <include name="activites.submitQuiz"/>          
             </define>
-            <define name="StdtTchr_Asgmt_SbmtGrdVrfyResbmt">
+            <define name="Assignment_Grade">
                 <include name="prerequisite"/>
                 <include name="activites.submitAssignment"/>
                 <include name="activites.gradeAssignment"/>
                 <include name="activites.verifyAssignmentGrade"/>
                 <include name="activites.allowResubmitAssignment"/>
             </define>            
-            <define name="UsrsCrtn_Role_Dltn">
+            <define name="Users">
                 <include name="prerequisite"/>
                 <include name="users.creation"/>
                 <include name="users.assignRole"/>
                 <include name="users.unAssignRole"/>
                 <include name="users.delete"/>         
             </define>
-            <define name="WrkngGrpCrtn_AddMbrs_Dltn">
+            <define name="WorkingGroup">
                 <include name="prerequisite"/>
                 <include name="workingGroup.create"/>
                 <include name="workingGroup.addMembers"/>
                 <include name="workingGroup.removeMembers"/>                
                 <include name="workingGroup.delete"/>         
             </define>              
-            <define name="GglDoc_MbrsCrtVrfy">
+            <define name="GoogleDoc">
                 <include name="prerequisite"/>
                 <include name="workingGroup.teacherCreateGoogleDoc"/> 
                 <include name="workingGroup.studentVerifyGoogleDoc"/>                
             </define>            
-            <define name="TchrStdt_CrtDlt_SclGrpLvSsn">
+            <define name="SocialGroup_LiveSession">
                 <include name="prerequisite"/>
                 <include name="teacherSocialGroup.create"/>
                 <include name="teacherSocialGroup.studentJoins"/>
                 <include name="teacherSocialGroup.studentPostURL"/>
                 <include name="teacherLiveSession.create"/>
                 <include name="studentLiveSession.create"/>
-                <include name="teacherSocialGroup.delete"/>
                 <include name="studentSocialGroup.create"/>
+                <include name="studentSocialGroup.teacherJoins"/>
+                <include name="studentSocialGroup.teacherLeaves"/>
+                <include name="teacherSocialGroup.delete"/>                
                 <include name="studentSocialGroup.delete"/>                                                         
             </define>            
-            <define name="Stdt_JnLvsTchrGrp">
-                <include name="prerequisite"/>
-                <include name="studentSocialGroup.teacherJoins"/>
-                <include name="studentSocialGroup.teacherLeaves"/>                
-            </define>
             <define name="Notes">
                 <include name="note.createOnCourseWall"/>
                 <include name="note.createOnProfileWall"/>                
