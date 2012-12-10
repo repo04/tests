@@ -40,10 +40,10 @@
             </define>
             <define name="Assignment_Grade">
                 <include name="prerequisite"/>
-                <include name="activites.submitAssignment"/>
-                <include name="activites.gradeAssignment"/>
-                <include name="activites.verifyAssignmentGrade"/>
-                <include name="activites.allowResubmitAssignment"/>
+                <include name="assignment.submit"/>
+                <include name="assignment.grade"/>
+                <include name="assignment.verifyGrade"/>
+                <include name="assignment.allowResubmit"/>
             </define>            
             <define name="Users">
                 <include name="prerequisite"/>
@@ -66,16 +66,16 @@
             </define>            
             <define name="SocialGroup_LiveSession">
                 <include name="prerequisite"/>
-                <include name="teacherSocialGroup.create"/>
-                <include name="teacherSocialGroup.studentJoins"/>
-                <include name="teacherSocialGroup.studentPostURL"/>
-                <include name="teacherLiveSession.create"/>
-                <include name="studentLiveSession.create"/>
-                <include name="studentSocialGroup.create"/>
-                <include name="studentSocialGroup.teacherJoins"/>
-                <include name="studentSocialGroup.teacherLeaves"/>
-                <include name="teacherSocialGroup.delete"/>                
-                <include name="studentSocialGroup.delete"/>                                                         
+                <include name="socialGroup.teacherCreate"/>
+                <include name="socialGroup.studentJoinTeachers"/>
+                <include name="socialGroup.studentPostURLOnTeachers"/>
+                <include name="liveSession.teacherCreate"/>
+                <include name="liveSession.studentCreate"/>
+                <include name="socialGroup.studentCreate"/>
+                <include name="socialGroup.teacherJoinsStudent"/>
+                <include name="socialGroup.teacherLeavesStudent"/>
+                <include name="socialGroup.teacherDelete"/>                
+                <include name="socialGroup.studentDelete"/>                                                         
             </define>            
             <define name="Notes">
                 <include name="note.createOnCourseWall"/>

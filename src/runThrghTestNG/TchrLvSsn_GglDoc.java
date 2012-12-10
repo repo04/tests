@@ -62,7 +62,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "teacherLiveSession.create"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.teacherCreate"})
     public void testTeacherCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
@@ -106,7 +106,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "activites.gradeAssignment"})
+          groups = {"regressionSmoke", "fullSmoke", "assignment.grade"})
     public void testTeacherGradeAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);

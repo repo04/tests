@@ -88,7 +88,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "teacherSocialGroup.create"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherCreate"})
     public void testTeacherCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
         tchrSclGrpArray[0][0] = a.createSocialGroup();
