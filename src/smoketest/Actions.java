@@ -688,6 +688,14 @@ public class Actions extends BaseClass {
         Resources rs = new Resources();
         rs.verifyResources();
     }
+    
+    /**
+     * Verify Footers
+     */
+    public void verifyFooters() {
+        Footers ft = new Footers();
+        ft.verifyFooters();
+    }
 
     /**
      * Delete Note

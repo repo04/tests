@@ -100,7 +100,11 @@
                 <include name="wall.teacherVerifyStudentsPostRecommendation"/>
                 <include name="wall.teacherVerifyStudentsCommentOnPost"/> 
                 <include name="wall.teacherDeleteCourseURLPost"/>            
-            </define>                        
+            </define>
+            <define name="Footers">
+                <include name="prerequisite"/>
+                <include name="footers.verify"/>                                              
+            </define>                      
                         
             <!--run>
                 <include name="prerequisite"/>                             

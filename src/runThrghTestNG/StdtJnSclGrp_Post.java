@@ -198,6 +198,17 @@ public class StdtJnSclGrp_Post extends BaseClass {
         a.navigateToMyHome();
         a.verifyResources();
     }
+    
+    /**
+     * Verify Footers
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "footers.verify"})
+    public void testVerifyFooters() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFooters();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the
