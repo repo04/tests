@@ -84,13 +84,13 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Delete Post
+     * Delete Post / Announcement
      *
      * @param tchrUrlCrsPost
      */
-    public void deleteCourseURLPost(String tchrUrlCrsPost) {
+    public void deletePost(String deletePost) {
         WallPage wp = new WallPage();
-        wp.deleteCourseURLPost(tchrUrlCrsPost);
+        wp.deletePost(deletePost);
     }
 
     /**
@@ -337,6 +337,21 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * Create - Syllabus Activity
+     */
+    public void createSyllabusActivity() {
+        Activity actvty = new Activity();
+        actvty.createSyllabusActivity();
+    }
+
+    /**
+     * Verify Syllabus creation
+     */
+    public void verifySyllabusActivity() {
+        ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
+    }
+
+    /**
      * Create User
      *
      * @param user
@@ -500,6 +515,9 @@ public class Actions extends BaseClass {
             i++;
             if (i == 3) {
                 new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[2]/div/div[4]/label/a/label")));
+            } else if (i > 3) {
+                ip.isTextPresentByXPATH(driver, "//li/div/div[2]/div", "Announcement from Student Support");
+                ip.isTextPresentByXPATH(driver, "//li/div/div[2]/div[3]", coursepost);
             }
         }
     }
@@ -688,7 +706,7 @@ public class Actions extends BaseClass {
         Resources rs = new Resources();
         rs.verifyResources();
     }
-    
+
     /**
      * Verify Footers
      */

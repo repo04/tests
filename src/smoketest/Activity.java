@@ -131,6 +131,27 @@ public class Activity extends BaseClass {
     }
 
     /**
+     * Create - Syllabus Activity
+     */
+    public void createSyllabusActivity() {
+        String sylbsIntro;
+        sylbsIntro = "RgsnTstSylbsIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddSyllbsActvyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddSyllbsActvyXPATH")))).selectByVisibleText("Page");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
+
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys("Syllabus");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(sylbsIntro);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), sylbsIntro);
+        ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
+        driver.findElement(By.linkText("Syllabus")).click();
+        ip.isTextPresentByCSS(driver, "li.listentry > a", "Syllabus");
+    }
+
+    /**
      * Create Activity
      *
      * @param forumName
@@ -256,19 +277,19 @@ public class Activity extends BaseClass {
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAsgnmntAvtvtyName + "')]")).click();
-        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));        
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
         new WebDriverWait(driver, 60).until(ExpectedConditions.
                 presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
-        
+
         String HandleBefore = driver.getWindowHandle();
         int i = 1;
         end:
         while (i < 6) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Font family")));
             List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-            System.out.println("iframes count:"+ iframes.size());                
+            System.out.println("iframes count:" + iframes.size());
             for (WebElement frame : iframes) {
                 System.out.println("Iframe ID: " + frame.getAttribute("id"));
                 driver.switchTo().frame(frame.getAttribute("id"));
@@ -277,7 +298,7 @@ public class Activity extends BaseClass {
 
             //Switch focus
             WebElement editableTxtArea = driver.switchTo().activeElement();
-            editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL,"a"),asgmntRspns);
+            editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), asgmntRspns);
             driver.switchTo().defaultContent();
 
             List<WebElement> elements = driver.findElements(By.tagName("input"));
@@ -341,7 +362,7 @@ public class Activity extends BaseClass {
                 y++;
             }
         }
-        driver.switchTo().window(HandleBefore);        
+        driver.switchTo().window(HandleBefore);
         new WebDriverWait(driver, 60).until(ExpectedConditions.
                 presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
         driver.switchTo().window(HandleBefore);
@@ -358,7 +379,7 @@ public class Activity extends BaseClass {
          System.out.println("not in prod txtVrfyRspsXPATH");
          driver.switchTo().window(HandleBefore);
          ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
-         }*/       
+         }*/
 
         //driver.findElement(By.xpath("//input[@name='formarking']")).click();
         //driver.findElement(By.name("formarking")).click();

@@ -92,6 +92,7 @@
                 <include name="wall.courseSectionPost"/>
                 <include name="wall.coursePostCommentsOn"/>
                 <include name="wall.coursePostCommentsOff"/>
+                <include name="wall.courseAnnouncementPost"/>
                 <include name="wall.teacherPostsOnProfileCourseWall"/>
                 <include name="wall.teacherVerifyPESCoursePosts"/> 
                 <include name="wall.studentVerifyPESCoursePosts"/>
@@ -99,15 +100,22 @@
                 <include name="wall.studentRecommendPost"/>   
                 <include name="wall.teacherVerifyStudentsPostRecommendation"/>
                 <include name="wall.teacherVerifyStudentsCommentOnPost"/> 
-                <include name="wall.teacherDeleteCourseURLPost"/>            
+                <include name="wall.teacherDeleteCourseURLPost"/>
+                <include name="wall.pesDeleteAnnouncement"/>            
             </define>
             <define name="Footers">
                 <include name="prerequisite"/>
                 <include name="footers.verify"/>                                              
+            </define>
+            <define name="Syllabus">
+                <include name="prerequisite"/>
+                <include name="activity.syllabusCreation"/>
+                <include name="activity.teacherVerifySyllabus"/>    
+                <include name="activity.studentVerifySyllabus"/>                                              
             </define>                      
                         
             <!--run>
-                <include name="prerequisite"/>                             
+                <include name="prerequisite"/>
             </run-->
         </groups>
         <classes>

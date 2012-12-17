@@ -102,10 +102,10 @@ public class StdtJnSclGrp_Post extends BaseClass {
      */
     @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"regressionSmoke", "wall.studentVerifyPESCoursePosts"})
-    public void testStudentVerifyPESCoursePost(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff) throws Exception {
+    public void testStudentVerifyPESCoursePost(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff, String pesTxtAncmntCrsPost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
-        a.verifyCoursePost(pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff);
+        a.verifyCoursePost(pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
     }
     
     /**
@@ -208,6 +208,20 @@ public class StdtJnSclGrp_Post extends BaseClass {
     public void testVerifyFooters() throws Exception {
         a.navigateToMyHome();
         a.verifyFooters();
+    }
+    
+    /**
+     * Verify Syllabus Activity
+     * 
+     * @param grpCrsName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class, 
+          groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
+    public void testStudentVerifySyllabusActivity(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifySyllabusActivity();
     }
 
     /**

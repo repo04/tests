@@ -25,7 +25,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String[][] crsArray = new String[1][1];
     static String[][] qzNameArray = new String[1][1];
     static String[][] assgnmntName = new String[1][1];
-    static String[][] actvtsArray = new String[1][4];
+    static String[][] actvtsArray = new String[1][4];    
 
     @DataProvider(name = "Course")
     public static Object[][] Course(ITestContext context) throws Exception {
@@ -62,7 +62,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
             return new Object[][]{{context.getCurrentXmlTest().getParameter("quizActvtyName")}};
         }
     }
-    
+
     @DataProvider(name = "AssgnmntName")
     public static Object[][] AssgnmntName(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
@@ -85,7 +85,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
         System.out.println("init GrpCrsQz");
         return DataProviderUtil.cartesianProviderFrom(Course(context), QuizName(context));
     }
-    
+
     @DataProvider(name = "GrpCrsAssgnmnt")
     public static Iterator<Object[]> GrpCrsAssgnmnt(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAssgnmnt");
@@ -140,16 +140,13 @@ public class Crs_GrpCrsCreation extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "course.creation"})
     public void testCourseGroupCourse_Creation() throws Exception {
-
         a.navigateToMyCourse();
         crsName = a.createCourse();
-        System.out.println("crsName: " + crsName);
-        Reporter.log("crsName: " + crsName);
+        Reporter.log("crsName: " + crsName, true);
 
         a.navigateToMyCourse();
         crsArray[0][0] = a.createGrpCourse(crsName);
-        System.out.println("grpCrsName: " + crsArray[0][0]);
-        Reporter.log("grpCrsName: " + crsArray[0][0]);
+        Reporter.log("grpCrsName: " + crsArray[0][0], true);
     }
 
     /**
@@ -159,32 +156,40 @@ public class Crs_GrpCrsCreation extends BaseClass {
      */
     @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "activites.creation"})
     public void testActivities_Creation(String grpCrsName) throws Exception {
-
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][0] = a.createForumActivity();
-        System.out.println("frmActvyName: " + actvtsArray[0][0]);
-        Reporter.log("frmActvyName: " + actvtsArray[0][0]);
+        Reporter.log("frmActvyName: " + actvtsArray[0][0], true);
 
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][1] = a.createQuizActivity();
         qzNameArray[0][0] = actvtsArray[0][1];
-        System.out.println("quizActvtyName: " + actvtsArray[0][1]);
-        Reporter.log("quizActvtyName: " + actvtsArray[0][1]);
+        Reporter.log("quizActvtyName: " + actvtsArray[0][1], true);
 
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][2] = a.createAllInOneAssignmentActivity();
         assgnmntName[0][0] = actvtsArray[0][2];
-        System.out.println("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
-        Reporter.log("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
+        Reporter.log("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2], true);
 
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][3] = a.createPageResource();
-        System.out.println("pageActvtyName: " + actvtsArray[0][3]);
-        Reporter.log("pageActvtyName: " + actvtsArray[0][3]);
+        Reporter.log("pageActvtyName: " + actvtsArray[0][3], true);
+    }
+
+    /**
+     * Create - Syllabus Activity
+     * 
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.syllabusCreation"})
+    public void testSyllabus_Creation(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.createSyllabusActivity();        
     }
 
     /**

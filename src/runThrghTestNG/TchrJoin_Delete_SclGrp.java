@@ -124,10 +124,10 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
      */
     @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class,
           groups = {"regressionSmoke", "wall.teacherDeleteCourseURLPost"})
-    public void testTeacherDeletePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+    public void testTeacherDeleteCourseURLPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
-        a.deleteCourseURLPost(tchrUrlCrsPost);
+        a.deletePost(tchrUrlCrsPost);
     }
 
     /**

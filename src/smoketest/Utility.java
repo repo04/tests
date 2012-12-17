@@ -1,5 +1,11 @@
 package smoketest;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -163,10 +169,10 @@ public class Utility {
 
     /**
      * Wait max 60sec for specified 'number' of Windows to be present/open
-     * 
+     *
      * @param driver
      * @param timeout
-     * @param numberOfWindows 
+     * @param numberOfWindows
      */
     public static void waitForNumberOfWindowsToEqual(WebDriver driver, int timeout, final int numberOfWindows) {
         new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
@@ -200,5 +206,40 @@ public class Utility {
                 return switched;
             }
         });
+    }
+
+    /**
+     * Get Current NewYork Date
+     * 
+     * @param driver
+     * @return 
+     */
+    public static String getCurrentNewYorkDate(WebDriver driver) {
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"));
+        String dt = (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH)
+                + "/" + c.get(Calendar.YEAR);
+        System.out.println("Date in US->" + dt);
+        return dt;
+    }
+
+    /**
+     * Get Next NewYork Date
+     * 
+     * @param driver
+     * @param currentDate
+     * @return 
+     */
+    public static String getNextNewYorkDate(WebDriver driver, String currentDate) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            c.setTime(sdf.parse(currentDate));
+        } catch (ParseException ex) {
+            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.add(Calendar.DATE, 1);  // number of days to add
+        String nextDate = sdf.format(c.getTime());  // dt is now the new date
+        System.out.println("New date->" + nextDate);        
+        return nextDate;
     }
 }
