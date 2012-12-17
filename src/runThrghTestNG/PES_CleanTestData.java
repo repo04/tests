@@ -132,6 +132,21 @@ public class PES_CleanTestData extends BaseClass {
         a.deleteUsers(tchrUsr, stdtUsr);
     }
     
+    /**
+     * Delete Announcement
+     * 
+     * @param grpCrsName
+     * @param pesTxtAncmntCrsPost
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsAnnouncement", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"regressionSmoke", "wall.pesDeleteAnnouncement"})
+    public void testPesDeleteAnnouncement(String grpCrsName, String pesTxtAncmntCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.deletePost(pesTxtAncmntCrsPost);
+    }
+    
      /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

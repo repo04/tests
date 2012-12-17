@@ -28,6 +28,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     static String[][] stdtName = new String[1][1];
     static String[][] tchrName = new String[1][1];
     static String[][] pesTxtCrsSctnPost = new String[1][1];
+    static String[][] pesTxtAncmntCrsPost = new String[1][1];
     static String[][] pesTxtCrsPostCmntsOn = new String[1][1];
     static String[][] pesTxtCrsPostCmntsOff = new String[1][1];
 
@@ -121,7 +122,13 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @DataProvider(name = "GrpCrsPESCoursePosts")
     public static Iterator<Object[]> GrpCrsPESCoursePosts(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPESCoursePosts");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff);
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+    }
+    
+    @DataProvider(name = "GrpCrsAnnouncement")
+    public static Iterator<Object[]> GrpCrsAnnouncement(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsAnnouncement");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtAncmntCrsPost);
     }
 
     /**
@@ -212,7 +219,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         pesTxtCrsSctnPost[0][0] = a.textPost("txtCrsSctnPost");
         Reporter.log("pesTxtCrsSctnPost: " + pesTxtCrsSctnPost[0][0], true);
     }
-
+    
     /**
      * Post Text with Comments enabled on Course Wall
      *
@@ -243,6 +250,15 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         pesTxtCrsPostCmntsOff[0][0] = a.textPost("txtCrsPostCmntsOff");
         Reporter.log("pesTxtCrsPost: " + pesTxtCrsPostCmntsOff[0][0], true);
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
+    }
+    
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
+    public void testPesAdminPostAnnouncementOnAllCourseSection(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtAncmntCrsPost[0][0] = a.textPost("txtAncmntCrsPost");
+        Reporter.log("pesTxtAncmntCrsPost: " + pesTxtAncmntCrsPost[0][0], true);
     }
 
     /**

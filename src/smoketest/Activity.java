@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -127,6 +128,27 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(pageContent);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), pageContent);
+    }
+
+    /**
+     * Create - Syllabus Activity
+     */
+    public void createSyllabusActivity() {
+        String sylbsIntro;
+        sylbsIntro = "RgsnTstSylbsIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddSyllbsActvyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddSyllbsActvyXPATH")))).selectByVisibleText("Page");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
+
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys("Syllabus");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(sylbsIntro);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), sylbsIntro);
+        ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
+        driver.findElement(By.linkText("Syllabus")).click();
+        ip.isTextPresentByCSS(driver, "li.listentry > a", "Syllabus");
     }
 
     /**
@@ -256,6 +278,8 @@ public class Activity extends BaseClass {
         String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAsgnmntAvtvtyName + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.
+                presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
 
@@ -265,6 +289,7 @@ public class Activity extends BaseClass {
         while (i < 6) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Font family")));
             List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+            System.out.println("iframes count:" + iframes.size());
             for (WebElement frame : iframes) {
                 System.out.println("Iframe ID: " + frame.getAttribute("id"));
                 driver.switchTo().frame(frame.getAttribute("id"));
@@ -273,8 +298,7 @@ public class Activity extends BaseClass {
 
             //Switch focus
             WebElement editableTxtArea = driver.switchTo().activeElement();
-            editableTxtArea.clear();
-            editableTxtArea.sendKeys(asgmntRspns);
+            editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), asgmntRspns);
             driver.switchTo().defaultContent();
 
             List<WebElement> elements = driver.findElements(By.tagName("input"));
@@ -323,6 +347,7 @@ public class Activity extends BaseClass {
         } catch (TimeoutException e) {
             wndwFnd = false;
             System.out.println("feedback window not found");
+            Utility.illegalStateException("Feedback Window did not triggered");
         }
 
         if (wndwFnd) {
@@ -337,7 +362,13 @@ public class Activity extends BaseClass {
                 y++;
             }
         }
+        driver.switchTo().window(HandleBefore);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.
+                presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
+        driver.switchTo().window(HandleBefore);
+        ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 
+        //************NOT TO BE DELETED AS OF NOW************//
         //Temporary solution till the time 'BUG' is resolved
         /*if (program.contains("prod")) {
          System.out.println("in prod txtVrfyRspsXPATH");
@@ -349,11 +380,6 @@ public class Activity extends BaseClass {
          driver.switchTo().window(HandleBefore);
          ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
          }*/
-
-        driver.switchTo().window(HandleBefore);
-        ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
-
-        //************NOT TO BE DELETED AS OF NOW************//
 
         //driver.findElement(By.xpath("//input[@name='formarking']")).click();
         //driver.findElement(By.name("formarking")).click();
