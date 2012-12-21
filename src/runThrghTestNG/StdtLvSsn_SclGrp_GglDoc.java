@@ -141,6 +141,24 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
         a.navigateToGrades();
         a.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
     }
+    
+    /**
+     * Student verify files upload in Course
+     * 
+     * @param grpCrsName
+     * @param pdf
+     * @param pptx
+     * @param doc
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = TchrLvSsn_GglDoc.class, 
+          groups = {"regressionSmoke", "files.studentVerifyInCourse"})
+    public void testStudentVerifyFilesInCourse(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToFiles();
+        a.verifyFilesInCourse(doc, pptx, pdf);
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

@@ -119,4 +119,14 @@ public class IsPresent {
     public void isTitleContains(WebDriver driver, String isTitle) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.titleContains(isTitle));
     }
+
+    /**
+     * Driver finds an element by XPATH if its visible and enabled such that can be clicked
+     * 
+     * @param driver
+     * @param elmClickable 
+     */
+    public void isElementClickableByXpath(WebDriver driver, String elmClickable, int time) {
+        new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(By.xpath(elmClickable)));        
+    }
 }

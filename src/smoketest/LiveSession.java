@@ -56,7 +56,7 @@ public class LiveSession extends BaseClass {
 
         //Verify Navigated to Live Meeting creation page
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtSsn"));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCrtSsn"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnCrtSsn"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrtSsn"))).click();
         WebElement lvSsnNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH"))));
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));

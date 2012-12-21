@@ -148,7 +148,7 @@ public class WorkingGroup extends BaseClass {
     public void createGoogleDoc(String wrkngGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlFilesXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, "Start a Collaborative Document");
         driver.findElement(By.xpath("//*[contains(text(),'Start a Collaborative Document')]")).click();

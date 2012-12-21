@@ -33,7 +33,7 @@ public class Course extends BaseClass {
             this.crsName = "DbgTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             crsShrtName = "DbgShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnAddNewCrs"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnAddNewCrs"), 60);
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnAddNewCrs"));
 
         //Navigate to Create Course Screen
@@ -80,9 +80,9 @@ public class Course extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, courseName);
 
         //Naviagte to Group Course page
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsrsLnkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrsLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrsLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlGrpsLinkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlGrpsLinkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlGrpsLinkXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtGrpCrs"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrtGrpCrs"))).click();
@@ -103,9 +103,9 @@ public class Course extends BaseClass {
      * @param grpCrsName
      */
     public void deleteGroupCourse(String grpCrsName) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsrsLnkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrsLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrsLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlGrpsLinkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlGrpsLinkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlGrpsLinkXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDltGrpCrs"));
         Select select = new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctGrpCrs"))));
@@ -125,9 +125,9 @@ public class Course extends BaseClass {
      * @param crsName
      */
     public void archiveCourse(String crsName) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"))).click();
         //new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkActive"))));
         //driver.findElement(By.xpath(xpv.getTokenValue("lnkActive"))).click();
@@ -182,9 +182,9 @@ public class Course extends BaseClass {
      * Navigate to Add/Edit Course Page
      */
     public void setUpCrsPage() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlCrsLinkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlCrsLinkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlCrsLinkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlAddEditCrsXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAddEditCrsXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAddEditCrsXPATH"))).click();
     }
 

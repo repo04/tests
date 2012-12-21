@@ -159,7 +159,7 @@ public class Activity extends BaseClass {
      */
     private void createActivity(String forumName, String forumIntro) {
         WebElement actvtyNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))));
-        WebElement actvtyIntroNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));
+        WebElement actvtyIntroNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));       
 
         //This is to verify actvtyName passes correct value 
         value:
@@ -194,7 +194,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).sendKeys("1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGradeXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnAddQzQstnXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnAddQzQstnXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnAddQzQstnXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtQzQstnTypeScrnXPATH"), "Choose a question type to add");
         driver.findElement(By.xpath(xpv.getTokenValue("radioBtnQstnTypeXPATH"))).click();
@@ -456,7 +456,7 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldGrdAsgntXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).sendKeys("62");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGrdAsgntXPATH"))).click();

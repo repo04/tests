@@ -112,10 +112,27 @@
                 <include name="activity.syllabusCreation"/>
                 <include name="activity.teacherVerifySyllabus"/>    
                 <include name="activity.studentVerifySyllabus"/>                                              
-            </define>                      
-                        
-            <!--run>
+            </define>
+            <define name="Resume">
                 <include name="prerequisite"/>
+                <include name="resume.teacherVerify"/>  
+                <include name="resume.studentVerify"/>                                              
+            </define>
+            <define name="PersonalInfo">
+                <include name="prerequisite"/>
+                <include name="personalInfo.teacherVerify"/>
+                <include name="personalInfo.studentVerify"/>     
+            </define>
+            <define name="Files">
+                <include name="prerequisite"/>
+                <include name="files.teacherUploadInCourse"/>
+                <include name="files.teacherVerifyInPortfolio"/>
+                <include name="files.studentVerifyInCourse"/>
+                <include name="files.teacherDelete"/>
+            </define>
+            
+            <!--run>
+                <include name="prerequisite"/>               
             </run-->
         </groups>
         <classes>
@@ -124,7 +141,7 @@
             <class name="runThrghTestNG.TchrPosts_SclGrp"/>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.PES_CleanTestData"/>

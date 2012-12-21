@@ -34,6 +34,7 @@ public class BaseClass {
     public static String brwsr;
     public static String test;
     public static String sandbox;
+    public static File directory = new File(".");
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest(groups = {"prerequisite"})

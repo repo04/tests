@@ -164,7 +164,7 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Navigate to MyWall page
+     * Navigate to My Wall page
      */
     public void navigateToMyWall() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
@@ -251,10 +251,35 @@ public class Actions extends BaseClass {
      * Navigate To Grade Page
      */
     public void navigateToGrades() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
     }
+
+    /**
+     * Navigate To Personal Info Page
+     */
+    public void navigateToMyPersonalInfo() {
+        Utility.navigateToSubMenu(driver, "//li[2]/ul/li[2]/a");
+        ip.isTextPresentByXPATH(driver, "//h2", "Personal Information");
+    }
+
+    /**
+     * Navigate to Files page
+     */
+    public void navigateToFiles() {
+        driver.findElement(By.linkText("Files")).click();
+        ip.isTextPresentByXPATH(driver, "//h2", "My Shared Files");
+    }
+    
+    /**
+     * Navigate to Portfolio page
+     */
+    public void navigateToPortfolio() {
+        Utility.navigateToSubMenu(driver, "//li[3]/a");
+        ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
+    }
+    
 
     /**
      * PesAdmin creates Working Group
@@ -498,7 +523,7 @@ public class Actions extends BaseClass {
      * Navigate to Activity Report page
      */
     public void navigateToActivityReport() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnLftPnlActvyRprtXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
     }
@@ -660,7 +685,7 @@ public class Actions extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
 
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlFilesXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }
@@ -716,6 +741,30 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * Verify Resume
+     */
+    public void verifyResume() {
+        switch (BaseClass.program) {
+            case "usc":
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
+                ip.isElementPresentByLINK(driver, "Resume");
+                driver.findElement(By.linkText("Resume")).click();
+                ip.isTextPresentByXPATH(driver, "//h2", "Resume");
+                break;
+            default:
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
+        }
+    }
+
+    /**
+     * Verify Personal Information
+     */
+    public void verifyPersonalInfo() {
+        Profile pf = new Profile();
+        pf.verifyPersonalInfo();
+    }
+
+    /**
      * Delete Note
      *
      * @param profileNote
@@ -723,5 +772,46 @@ public class Actions extends BaseClass {
     public void deleteNote(String profileNote) {
         Note nt = new Note();
         nt.deleteNote(profileNote);
+    }
+
+    /**
+     * Upload files of multiple format(pdf, pptx, doc)
+     *
+     * @param files
+     */
+    public void uploadFiles(String... files) {
+        File fl = new File();
+        fl.uploadFiles(files);
+    }
+
+    /**
+     * Verify files in Course
+     * 
+     * @param files
+     */
+    public void verifyFilesInCourse(String... files) {
+        File fl = new File();
+        fl.verifyFilesInCourse(files);      
+    }
+    
+    /**
+     * Verify files in Portfolio
+     * 
+     * @param files 
+     */
+    public void verifyFilesInPortfolio(String... files) {
+        File fl = new File();
+        fl.verifyFilesInPortfolio(files);        
+    }    
+
+    /**
+     * 
+     * @param doc
+     * @param pptx
+     * @param pdf 
+     */
+    public void deleteFiles(String... files) {
+        File fl = new File();
+        fl.deleteFiles(files);   
     }
 }

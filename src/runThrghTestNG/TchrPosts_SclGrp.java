@@ -141,7 +141,29 @@ public class TchrPosts_SclGrp extends BaseClass {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.verifySyllabusActivity();
-    }  
+    }
+    
+    /**
+     * Teacher verify Resume
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "resume.teacherVerify"})
+    public void testTeacherVerifyResume() throws Exception {
+        a.navigateToMyWall();
+        a.verifyResume();
+    }
+    
+    /**
+     * Teacher verify Personal Information
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "personalInfo.teacherVerify"})
+    public void testTeacherVerifyPersonalInfo() throws Exception {
+        a.navigateToMyPersonalInfo();
+        a.verifyPersonalInfo();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

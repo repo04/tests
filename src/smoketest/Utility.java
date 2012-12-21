@@ -1,5 +1,10 @@
 package smoketest;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -135,18 +140,14 @@ public class Utility {
         loopEml:
         while (true) {
             try {
-                new WebDriverWait(driver, 30).until(ExpectedConditions.
-                        elementToBeClickable(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")));
+                ip.isElementClickableByXpath(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div", 30);
                 driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
 
-                new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//tr[1]/td[5]/div/span")));
+                ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 30);
                 driver.findElement(By.xpath("//div/span/div")).click();
-                new WebDriverWait(driver, 30).until(ExpectedConditions.
-                        elementToBeClickable(By.xpath("//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div")));
+                ip.isElementClickableByXpath(driver, "//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div", 30);
                 driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div")).click();
-                new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//tr[1]/td[5]/div/span")));
+                ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 30);
             } catch (TimeoutException e) {
                 break loopEml;
             }
@@ -241,5 +242,30 @@ public class Utility {
         String nextDate = sdf.format(c.getTime());  // dt is now the new date
         System.out.println("New date->" + nextDate);        
         return nextDate;
+    }
+
+    /**
+     * 
+     * @param string 
+     */
+    public static void copyContents(String string) {
+        
+        StringSelection stringSelection = new StringSelection("Somesh");
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+
+        Robot robot = null;
+        try {
+            robot = new Robot();
+        } catch (AWTException ex) {
+            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //robot.keyPress(KeyEvent.VK_ENTER);
+        //robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
     }
 }

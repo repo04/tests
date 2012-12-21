@@ -35,7 +35,7 @@ public class Note extends BaseClass {
      * @param wallType
      */
     public void createNote(String wallType) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[4]/ul/li/a/span[2]")));
+        ip.isElementClickableByXpath(driver, "//div[4]/ul/li/a/span[2]", 60);
 
         int i = 1;
         end:
