@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="smoketest" default="run" basedir="." xmlns:ac="antlib:net.sf.antcontrib">  
-       
-    <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
-    <tstamp> 
-        <!--format property="timeStamp" pattern="dd.MMM.yy HH.mma" locale="en"/--> 
-        <format property="timeStamp" pattern="dd.MMM.yy HH.mma" timezone="GMT" 
-                offset="-4" unit="hour"/> 
-    </tstamp>
+<project name="smoketest" default="run" basedir="."> 
     
-    <property name="classes.dir" value="bin" />
+    <condition property="ant.dir" value="/usr/share/java/ant-contrib.jar">
+        <matches string="${antOS}" pattern="linux*"/>
+    </condition>
+    
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="${ant.dir}"/>
+        </classpath>
+    </taskdef>
+
+    <property name="classes.dir" value="bin" /> 
     <property name="src.dir" value="src" />
     <property name="report.dir" value="reports" />
     <!--property name="browser" value="/Applications/Firefox.app"/-->
-    <property name="browser" value="C:/Program Files/Mozilla Firefox/firefox.exe"/>    
-    
+    <property name="browser" value="C:/Program Files/Mozilla Firefox/firefox.exe"/>
+
     <path id="libs">
         <fileset dir="lib">
             <include name="*.jar"/>
         </fileset>
         <pathelement path="${basedir}\${classes.dir}"/>
     </path>
-    
+
     <target name="runsmoke">
-        <property name="runTarget" value="FullSmoke Suite"/>            
+        <property name="runTarget" value="FullSmoke Suite"/>
         <antcall target="init"/>
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
@@ -62,7 +65,7 @@
         <echo>Compiling...</echo>
         <javac debug="true" srcdir="${src.dir}" destdir="${classes.dir}" classpathref="libs" />
     </target>
-    
+
     <target name="copy-resources" description="Copies resources.">
         <copy todir="${basedir}\${classes.dir}">
             <fileset dir="${src.dir}">
@@ -75,13 +78,13 @@
     <target name="runSmokeTests" description="Running tests" >
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>        
-        <ac:for list="${antPrgrm}" param = "program">
+        <for list="${antPrgrm}" param = "program">
             <sequential>
                 <echo>Program: @{program}</echo>
-                <ac:for list="${antEnv}" param = "env">
+                <for list="${antEnv}" param = "env">
                     <sequential>
                         <echo>Env: @{env}</echo>
-                        <ac:for list="${antBrwsr}" param = "brwsr">
+                        <for list="${antBrwsr}" param = "brwsr">
                             <sequential>
                                 <echo>Driver: @{brwsr}</echo>
                                 <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
@@ -92,28 +95,24 @@
                                     <sysproperty key="test" value="SmokeTests"/>
                                 </testng>
                             </sequential>
-                        </ac:for> 
+                        </for>
                     </sequential>
-                </ac:for> 
+                </for>
             </sequential>
-        </ac:for>         
-        <!--propertyset refid="propset"/--> 
-        <!--xmlfileset dir="${basedir}" includes="2GU.xml"/>
-        <testng outputDir="${report.dir}" classpathref="libs" suitethreadpoolsize="2">  
-        <xmlfileset dir="${basedir}" includes="UNC.xml" delegatecommandsystemproperties="true"/-->            
+        </for>
     </target>
-    
+
     <!-- Runs the file and generates Reportng report -->
     <target name="runCriticalTests" description="Running tests" >
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
-        <ac:for list="${antPrgrm}" param = "program">
+        <for list="${antPrgrm}" param = "program">
             <sequential>
                 <echo>Program: @{program}</echo>
-                <ac:for list="${antEnv}" param = "env">
+                <for list="${antEnv}" param = "env">
                     <sequential>
                         <echo>Env: @{env}</echo>
-                        <ac:for list="${antBrwsr}" param = "brwsr">
+                        <for list="${antBrwsr}" param = "brwsr">
                             <sequential>
                                 <echo>Driver: @{brwsr}</echo>
                                 <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
@@ -124,11 +123,11 @@
                                     <sysproperty key="test" value="CriticalTests"/>
                                 </testng>
                             </sequential>
-                        </ac:for> 
+                        </for>
                     </sequential>
-                </ac:for> 
+                </for>
             </sequential>
-        </ac:for>        
+        </for>
         <!--propertyset refid="propset"/--> 
         <!--xmlfileset dir="${basedir}" includes="2GU.xml"/>
         <testng outputDir="${report.dir}" classpathref="libs" suitethreadpoolsize="2">  
@@ -139,13 +138,13 @@
     <target name="runDebugTests" description="Running tests" >
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
-        <ac:for list="${antPrgrm}" param = "program">
+        <for list="${antPrgrm}" param = "program">
             <sequential>
                 <echo>Program: @{program}</echo>
-                <ac:for list="${antEnv}" param = "env">
+                <for list="${antEnv}" param = "env">
                     <sequential>
                         <echo>Env: @{env}</echo>                
-                        <ac:for list="${antBrwsr}" param = "brwsr">
+                        <for list="${antBrwsr}" param = "brwsr">
                             <sequential>
                                 <echo>Driver: @{brwsr}</echo>
                                 <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" 
@@ -157,20 +156,20 @@
                                     <sysproperty key="test" value="DebugTests"/>
                                 </testng>
                             </sequential>
-                        </ac:for> 
+                        </for>
                     </sequential>
-                </ac:for> 
+                </for>
             </sequential>
-        </ac:for>                 
+        </for>
     </target>
     
     <!-- Generate XSLT reports -->
     <target name="testng-xslt-report">
-        <ac:for list="${antPrgrm}" param = "program">
+        <for list="${antPrgrm}" param = "program">
             <sequential>
-                <ac:for list="${antEnv}" param = "env">
+                <for list="${antEnv}" param = "env">
                     <sequential>                
-                        <ac:for list="${antBrwsr}" param = "brwsr">
+                        <for list="${antBrwsr}" param = "brwsr">
                             <sequential>
                                 <if>
                                     <available file="${basedir}/${report.dir}/@{program}_@{env}_@{brwsr}" type="dir"/>
@@ -190,11 +189,11 @@
                                     </else>
                                 </if>                            
                             </sequential>
-                        </ac:for> 
+                        </for>
                     </sequential>
-                </ac:for>
+                </for>
             </sequential>
-        </ac:for>        
+        </for>
     </target>
     
 </project>  

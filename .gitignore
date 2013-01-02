@@ -1,6 +1,6 @@
-/smokeTest/bin/*
-/smokeTest/build/*
-/smokeTest/dist/*
-/smokeTest/nbproject/*
-/smokeTest/reports*/
-/smokeTest/chromedriver.log
+bin/*
+build/*
+dist/*
+nbproject/*
+reports*/
+chromedriver.log
