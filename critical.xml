@@ -25,8 +25,8 @@
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.PES_CleanTestData"/>
-            <class name="runThrghTestNG.TchrEmlNtfctn_CrtclTests"/>
-            <class name="runThrghTestNG.StdtEmlNtfctn_CrtclTests"/>                                              
+            <!--class name="runThrghTestNG.TchrEmlNtfctn_CrtclTests"/>
+            <class name="runThrghTestNG.StdtEmlNtfctn_CrtclTests"/-->                                              
         </classes>
     </test>    
 </suite>
