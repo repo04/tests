@@ -185,6 +185,34 @@ public class Utility {
     }
 
     /**
+     * Verify Title of Window
+     * 
+     * @param driver
+     * @param text 
+     */
+    public static void verifyWindowTitle(WebDriver driver, String text) {
+        String HandleBefore = driver.getWindowHandle();
+        int i = 1;
+        for (String handle : driver.getWindowHandles()) {
+            System.out.println("window handle: " + handle);
+            driver.switchTo().window(handle);
+            if (i == driver.getWindowHandles().size()) {
+                try {
+                    ip.isTitleContains(driver, text);                    
+                    driver.close();
+                } catch (Exception e) {
+                    System.out.println("FeedBack Window not found");
+                    driver.close();
+                    driver.switchTo().window(HandleBefore);
+                    throw e;
+                }
+            }
+            i++;
+        }
+        driver.switchTo().window(HandleBefore);
+    }
+
+    /**
      * Wait max 60sec for Alert to be present & with specified text present
      *
      * @param driver
@@ -211,9 +239,9 @@ public class Utility {
 
     /**
      * Get Current NewYork Date
-     * 
+     *
      * @param driver
-     * @return 
+     * @return
      */
     public static String getCurrentNewYorkDate(WebDriver driver) {
         Calendar c = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"));
@@ -225,10 +253,10 @@ public class Utility {
 
     /**
      * Get Next NewYork Date
-     * 
+     *
      * @param driver
      * @param currentDate
-     * @return 
+     * @return
      */
     public static String getNextNewYorkDate(WebDriver driver, String currentDate) {
         Calendar c = Calendar.getInstance();
@@ -240,22 +268,23 @@ public class Utility {
         }
         c.add(Calendar.DATE, 1);  // number of days to add
         String nextDate = sdf.format(c.getTime());  // dt is now the new date
-        System.out.println("New date->" + nextDate);        
+        System.out.println("New date->" + nextDate);
         return nextDate;
     }
 
     /**
-     * 
-     * @param string 
+     *
+     * @param string
      */
     public static void copyContents(String string) {
-        
+
         StringSelection stringSelection = new StringSelection("Somesh");
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 
         Robot robot = null;
         try {
             robot = new Robot();
+            robot.delay(1000);
         } catch (AWTException ex) {
             Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
         }

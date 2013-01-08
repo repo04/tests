@@ -260,6 +260,17 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         pesTxtAncmntCrsPost[0][0] = a.textPost("txtAncmntCrsPost");
         Reporter.log("pesTxtAncmntCrsPost: " + pesTxtAncmntCrsPost[0][0], true);
     }
+    
+    /**
+     * Pes Admin verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.pesAdminVerify"})
+    public void testPesAdminVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

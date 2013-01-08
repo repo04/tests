@@ -130,9 +130,21 @@
                 <include name="files.studentVerifyInCourse"/>
                 <include name="files.teacherDelete"/>
             </define>
+            <define name="Feedback">
+                <include name="prerequisite"/>
+                <include name="feedback.contentAdminVerify"/>               
+                <include name="feedback.pesAdminVerify"/>
+                <include name="feedback.teacherVerify"/>
+                <include name="feedback.studentVerify"/>
+            </define>
+            <define name="Image">
+                <include name="prerequisite"/>
+                <include name="image.upload"/>
+            </define>
             
             <!--run>
-                <include name="prerequisite"/>               
+                <include name="feedback.contentAdminVerify"/>               
+                <include name="feedback.contentAdminVerify"/>               
             </run-->
         </groups>
         <classes>

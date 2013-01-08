@@ -245,6 +245,17 @@ public class StdtJnSclGrp_Post extends BaseClass {
         a.navigateToMyPersonalInfo();
         a.verifyPersonalInfo();
     }
+    
+    /**
+     * Student verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.studentVerify"})
+        public void testStudentVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

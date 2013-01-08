@@ -147,6 +147,12 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
         a.navigateToFiles();
         a.deleteFiles(doc, pptx, pdf);
     }
+    
+    @Test(groups = {"regressionSmoke", "image.upload"})
+    public void testTeacherUploadVideo() throws Exception {
+        a.navigateToMyWall();
+        a.testUploadVideo();        
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

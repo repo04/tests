@@ -814,4 +814,31 @@ public class Actions extends BaseClass {
         File fl = new File();
         fl.deleteFiles(files);   
     }
+
+    /**
+     * Verify feedback window
+     */
+    public void verifyFeedbackWindow() {
+        Feedback fb = new Feedback();
+        fb.verifyFeedbackWindow(); 
+    }
+
+    /**
+     * Upload video
+     */
+    public void testUploadVideo() {
+        ip.isElementClickableByXpath(driver, "//li[2]/a", 60);
+        driver.findElement(By.linkText("Personal Information")).click();
+        ip.isElementClickableByXpath(driver, "//p/a", 60);
+        driver.findElement(By.linkText("Change Picture")).click();
+        driver.switchTo().frame("_iframe-ksubox");
+        ip.isTextPresentByXPATH(driver, "//div[@id='upload_btn_container']/div[2]", "Choose how would you like to upload a new profile image");
+        ip.isElementClickableByXpath(driver, "//div[4]/form/input", 60);
+        Utility.navigateToSubMenu(driver, "//div[4]/form/input");
+        Utility.actionBuilderClick(driver, "//div[4]/form/input");
+        driver.findElement(By.cssSelector("object#uploader")).click();
+        ip.isElementClickableByXpath(driver, "//div[6]/form/input", 60);
+        Utility.navigateToSubMenu(driver, "//div[6]/form/input");
+        ip.isTextPresentByXPATH(driver, "//body/div[3]/div[2]/div", "Choose how would you like to upload a new profile image");
+    }
 }

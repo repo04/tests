@@ -205,6 +205,17 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
     }
+    
+    /**
+     * Content Admin verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.contentAdminVerify"})
+    public void testContentAdminVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

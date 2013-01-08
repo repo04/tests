@@ -164,6 +164,17 @@ public class TchrPosts_SclGrp extends BaseClass {
         a.navigateToMyPersonalInfo();
         a.verifyPersonalInfo();
     }
+    
+    /**
+     * Teacher verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.teacherVerify"})
+    public void testTeacherVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the
