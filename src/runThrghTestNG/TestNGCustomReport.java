@@ -42,13 +42,6 @@ public class TestNGCustomReport extends TestListenerAdapter {
             // get current date time with Date()
             Date date = new Date();
             String rprtPrgm = BaseClass.program;
-
-            /*if (BaseClass.program.substring(0, 2).contains("gu")) {
-                rprtPrgm = "gu";
-            } else {
-                rprtPrgm = BaseClass.program.substring(0, 3);
-            }*/
-
             String rprtEnv = BaseClass.env;
 
             if (!(new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots")).exists()) {

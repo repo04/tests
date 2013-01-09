@@ -33,21 +33,21 @@ public class BaseClass {
     public static String env;
     public static String brwsr;
     public static String test;
-    public static String url;
     public static File directory = new File(".");
 
     //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
     @BeforeTest(groups = {"prerequisite"})
-    @Parameters({"url", "brwsr", "os", "test"})
-    public void setUp(String url, String brwsr, String os, String test) throws Exception {
+    @Parameters({"url", "program", "env", "brwsr", "os", "test"})
+    public void setUp(String url, String program, String env, String brwsr, String os, String test) throws Exception {
 
-        this.url = url;
+        this.program = program;
+        this.env = env;
         this.brwsr = brwsr;
         this.test = test;
 
         pv = new ProgramValues("loginDetails");
         xpv = new XpathValues("xPathAccountProperty");
-        System.out.println("url: " + this.url);
+        System.out.println("url: " + url);
         System.out.println("brwsr: " + this.brwsr);
         System.out.println("os: " + os);
 
@@ -103,30 +103,7 @@ public class BaseClass {
                 Reporter.log("Browser: firefox");
         }
         
-        if (this.url.contains("-sb")) {
-            int index = this.url.indexOf("-sb");
-            this.env = this.url.substring(index + 1, index + 5);
-        } else if (this.url.contains("-stg")) {
-            this.env = "stg";
-        } else {
-            this.env = "prod";
-        }
-
-        if (this.url.contains("2sc") || this.url.contains("usc-mat")) {
-            this.program = "usc-mat";
-        } else if (this.url.contains("vac") || this.url.contains("usc-msw")) {
-            this.program = "usc-msw";
-        } else if (this.url.contains("2nc") || this.url.contains("unc-mba")) {
-            this.program = "unc-mba";
-        } else if (this.url.contains("2sg") || this.url.contains("unc-mpa")) {
-            this.program = "unc-mpa";
-        } else if (this.url.contains("2gu") || this.url.contains("gu-msn")) {
-            this.program = "gu-msn";
-        } else if (this.url.contains("2law") || this.url.contains("wu-llm")) {
-            this.program = "wu-llm";
-        }
-
-        driver.get(this.url);
+        driver.get(url);
         ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
     }
 

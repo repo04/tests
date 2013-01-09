@@ -227,33 +227,8 @@ public class Activity extends BaseClass {
         }
 
         if (attempt) {
-            /*click:
-             for (; i < 101; i++) {
-             try {
-             new WebDriverWait(driver, 15).until(ExpectedConditions.
-             presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
-             System.out.println("i value: " + i);
-             } catch (TimeoutException e) {
-             System.out.println("catch i value: " + i);
-             break click;
-             }
-             }*/
-            
-            /*try {
-                WebElement table = driver.findElement(By.xpath("//div/table/tbody"));
-                List rows = table.findElements(By.tagName("tr"));
-                System.out.println("ROWS COUNT: "+ rows.size());
-            } catch (Exception e) {
-                System.out.println("Exception: ");
-            }*/
-            
-            try {
-                int rows = driver.findElements(By.xpath("//div/table/tbody/tr")).size();
-                //List rows = table.findElements(By.tagName("tr"));
-                System.out.println("ROWS COUNT: "+ rows);
-            } catch (Exception e) {
-                System.out.println("Exception: ");
-            }
+            i = driver.findElements(By.xpath("//div/table/tbody/tr")).size();
+            System.out.println("i value: " + i);
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
@@ -562,7 +537,7 @@ public class Activity extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/a", elementName, 5);
                 break;
             } catch (TimeoutException e) {
-                System.out.println(elementName + "not present at x: " + x);
+                System.out.println(elementName + " not present at x: " + x);
                 x = x + 2;
             }
         }
