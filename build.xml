@@ -5,11 +5,61 @@
         <matches string="${antOS}" pattern="linux*"/>
     </condition>
     
+    <!--condition property="ant.program" value="gu-msn">
+        <or>
+            <contains string="${antUrl}" substring="2gu" casesensitive="false"/>
+            <contains string="${antUrl}" substring="gu-msn" casesensitive="false"/>
+        </or>
+    </condition-->
+    
     <taskdef resource="net/sf/antcontrib/antlib.xml">
         <classpath>
             <pathelement location="${ant.dir}"/>
         </classpath>
     </taskdef>
+    
+    <target name="setprogram">
+        <if>
+            <or>
+                <contains string="${antUrl}" substring="2gu"/>
+                <contains string="${antUrl}" substring="gu-msn"/>
+            </or>
+            <then>
+                <echo message="GU found"/>
+                <property name="ant.program" value="gu-msn" />
+            </then>
+            <elseif>
+                <or>
+                    <contains string="${antUrl}" substring="2sc"/>
+                    <contains string="${antUrl}" substring="usc-mat"/>
+                </or>
+                <then>
+                    <echo message="2SC" />
+                    <property name="ant.program" value="usc-mat" />
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${antUrl}" substring="vac"/>
+                    <contains string="${antUrl}" substring="usc-msw"/>
+                </or>
+                <then>
+                    <echo message="VAC" />
+                    <property name="ant.program" value="usc-msw" />
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${antUrl}" substring="2nc"/>
+                    <contains string="${antUrl}" substring="unc-mba"/>
+                </or>
+                <then>
+                    <echo message="UNC" />
+                    <property name="ant.program" value="unc-mba" />
+                </then>
+            </elseif>
+        </if>
+    </target>
 
     <property name="classes.dir" value="bin" />
     <property name="src.dir" value="src" />
@@ -146,61 +196,49 @@
     </target>
     
     <!-- Runs the file and generates Reportng report -->
-    <target name="runCriticalTests" description="Running tests" >
+    <target name="runCriticalTests" description="Running tests" depends="setprogram">
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
-        <for list="${antPrgrm}" param = "program">
+        <for list="${antUrl}" param = "url">
             <sequential>
-                <echo>Program: @{program}</echo>
-                <for list="${antEnv}" param = "env">
+                <echo>Url: @{url}</echo>
+                <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
-                        <echo>Env: @{env}</echo>
-                        <for list="${antBrwsr}" param = "brwsr">
-                            <sequential>
-                                <echo>Driver: @{brwsr}</echo>
-                                <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
-                                    <xmlfileset dir="${basedir}" includes="critical.xml"/>
-                                    <sysproperty key="program" value="@{program}"/>
-                                    <sysproperty key="env" value="@{env}"/>   
-                                    <sysproperty key="brwsr" value="@{brwsr}"/>
-                                    <sysproperty key="os" value="${antOS}"/>
-                                    <sysproperty key="test" value="CriticalTests"/>
-                                </testng>
-                            </sequential>
-                        </for> 
-                    </sequential>
+                        <echo>Driver: @{brwsr}</echo>
+                        <testng outputDir="${report.dir}\${ant.program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
+                            <xmlfileset dir="${basedir}" includes="critical.xml"/>
+                            <sysproperty key="url" value="@{url}"/>   
+                            <sysproperty key="brwsr" value="@{brwsr}"/>
+                            <sysproperty key="os" value="${antOS}"/>
+                            <sysproperty key="test" value="CriticalTests"/>
+                        </testng>
+                    </sequential>                        
                 </for> 
             </sequential>
         </for>      
     </target>
     
     <!-- Runs the file and generates Reportng report -->
-    <target name="runDebugTests" description="Running tests" >
+    <target name="runDebugTests" description="Running tests" depends="setprogram">
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
-        <for list="${antPrgrm}" param = "program">
+        <for list="${antUrl}" param = "url">
             <sequential>
-                <echo>Program: @{program}</echo>
-                <for list="${antEnv}" param = "env">
+                <echo>Url: @{url}</echo>
+                <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
-                        <echo>Env: @{env}</echo>                
-                        <for list="${antBrwsr}" param = "brwsr">
-                            <sequential>
-                                <echo>Driver: @{brwsr}</echo>
-                                <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" 
+                        <echo>Driver: @{brwsr}</echo>
+                        <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" 
                                         groups="${antGrp}" delegatecommandsystemproperties="true" listeners="org.uncommons.reportng.HTMLReporter">  
-                                    <xmlfileset dir="${basedir}" includes="debug.xml"/>
-                                    <sysproperty key="program" value="@{program}"/>
-                                    <sysproperty key="env" value="@{env}"/>   
-                                    <sysproperty key="brwsr" value="@{brwsr}"/>
-                                    <sysproperty key="os" value="${antOS}"/>
-                                    <sysproperty key="test" value="DebugTests"/>
-                                </testng>
-                            </sequential>
-                        </for> 
+                            <xmlfileset dir="${basedir}" includes="debug.xml"/>
+                            <sysproperty key="url" value="@{url}"/>   
+                            <sysproperty key="brwsr" value="@{brwsr}"/>
+                            <sysproperty key="os" value="${antOS}"/>
+                            <sysproperty key="test" value="DebugTests"/>
+                        </testng>
                     </sequential>
                 </for> 
-            </sequential>
+            </sequential>                
         </for>                 
     </target>
     

@@ -25,7 +25,7 @@ public class TestNGCustomReport extends TestListenerAdapter {
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.print("TestInvoking: " + result.getName()+ "\n");
+        System.out.print("TestInvoking: " + result.getName() + "\n");
     }
 
     //Capture screenshot on TestFailure
@@ -41,20 +41,15 @@ public class TestNGCustomReport extends TestListenerAdapter {
                     "ddMMMyy__hhmmaa");
             // get current date time with Date()
             Date date = new Date();
-            String rprtPrgm;
-            
-            if (BaseClass.program.substring(0, 2).contains("gu")) {
+            String rprtPrgm = BaseClass.program;
+
+            /*if (BaseClass.program.substring(0, 2).contains("gu")) {
                 rprtPrgm = "gu";
             } else {
                 rprtPrgm = BaseClass.program.substring(0, 3);
-            }
-            
-            String rprtEnv;
-            if (BaseClass.sandbox.contains("sb")) {
-                rprtEnv = BaseClass.sandbox;
-            }else{
-                rprtEnv = BaseClass.env;
-            }
+            }*/
+
+            String rprtEnv = BaseClass.env;
 
             if (!(new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots")).exists()) {
                 new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots").mkdir();

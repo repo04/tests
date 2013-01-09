@@ -159,7 +159,7 @@ public class Activity extends BaseClass {
      */
     private void createActivity(String forumName, String forumIntro) {
         WebElement actvtyNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))));
-        WebElement actvtyIntroNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));       
+        WebElement actvtyIntroNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));
 
         //This is to verify actvtyName passes correct value 
         value:
@@ -227,16 +227,32 @@ public class Activity extends BaseClass {
         }
 
         if (attempt) {
-            click:
-            for (; i < 101; i++) {
-                try {
-                    new WebDriverWait(driver, 15).until(ExpectedConditions.
-                            presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
-                    System.out.println("i value: " + i);
-                } catch (TimeoutException e) {
-                    System.out.println("catch i value: " + i);
-                    break click;
-                }
+            /*click:
+             for (; i < 101; i++) {
+             try {
+             new WebDriverWait(driver, 15).until(ExpectedConditions.
+             presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
+             System.out.println("i value: " + i);
+             } catch (TimeoutException e) {
+             System.out.println("catch i value: " + i);
+             break click;
+             }
+             }*/
+            
+            /*try {
+                WebElement table = driver.findElement(By.xpath("//div/table/tbody"));
+                List rows = table.findElements(By.tagName("tr"));
+                System.out.println("ROWS COUNT: "+ rows.size());
+            } catch (Exception e) {
+                System.out.println("Exception: ");
+            }*/
+            
+            try {
+                int rows = driver.findElements(By.xpath("//div/table/tbody/tr")).size();
+                //List rows = table.findElements(By.tagName("tr"));
+                System.out.println("ROWS COUNT: "+ rows);
+            } catch (Exception e) {
+                System.out.println("Exception: ");
             }
         }
 
