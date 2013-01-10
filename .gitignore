@@ -4,3 +4,5 @@ dist/*
 nbproject/*
 reports*/
 chromedriver.log
+src/loginDetails.properties
+
