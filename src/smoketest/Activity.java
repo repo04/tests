@@ -217,6 +217,7 @@ public class Activity extends BaseClass {
     public void submitQuiz(String quizActvtyName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActvtyName + "')]")).click();
         int i = 1;
+        int rows;
 
         Boolean attempt;
         try {
@@ -227,8 +228,9 @@ public class Activity extends BaseClass {
         }
 
         if (attempt) {
-            i = driver.findElements(By.xpath("//div/table/tbody/tr")).size();
-            System.out.println("i value: " + i);
+            rows = driver.findElements(By.xpath("//div[@id='region-main']/div/table/tbody/tr")).size();
+            System.out.println("rows: " + rows);
+            i = rows + 1;
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));

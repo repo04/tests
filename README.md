@@ -120,7 +120,7 @@ Automation can run when above steps are followed in order.
         	* wu-llm: https://2law.onlinelaw.wustl.edu || https://www-wu-llm-lms-stg.2u.com || https://www-wu-llm-lms-sb01-qa.2u.com
         	* usc-msw: https://www.vac.usc.edu || https://www-usc-msw-lms-stg.2u.com || https://www-usc-msw-lms-sb[01-99]-qa.2u.com
         	* unc-mpa: https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || https://www-unc-mpa-lms-sb[01-99]-qa.2u.com  
-        	* Program's delimiter: ","		
+        	* Program's delimiter: ","	
 		3> antBrwsr: 
 			* ff
 			* chrome

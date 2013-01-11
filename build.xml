@@ -11,81 +11,83 @@
         </classpath>
     </taskdef>
     
-    <propertyregex property="regenv" input="${antUrl}" regexp="lms-([^-qa]*)"
-                   select="\1" casesensitive="false" />
-    
-    <target name="set_prgrm_env">
+    <target name="set_env">        
         <if>
-            <or>
-                <contains string="${antUrl}" substring="2gu"/>
-                <contains string="${antUrl}" substring="gu-msn"/>
-            </or>
+            <contains string="${callUrl}" substring="-sb"/>
             <then>
-                <property name="program" value="gu-msn" />
+                <propertyregex property="regenv" input="${callUrl}" regexp="lms-([^-qa]*)"
+                               select="\1" casesensitive="false" />
+                <var name="env" value="${regenv}" />                              
             </then>
             <elseif>
-                <or>
-                    <contains string="${antUrl}" substring="2sc"/>
-                    <contains string="${antUrl}" substring="usc-mat"/>
-                </or>
+                <contains string="${callUrl}" substring="-stg"/>
                 <then>
-                    <property name="program" value="usc-mat" />
-                </then>
-            </elseif>
-            <elseif>
-                <or>
-                    <contains string="${antUrl}" substring="vac"/>
-                    <contains string="${antUrl}" substring="usc-msw"/>
-                </or>
-                <then>
-                    <property name="program" value="usc-msw" />
-                </then>
-            </elseif>
-            <elseif>
-                <or>
-                    <contains string="${antUrl}" substring="2nc"/>
-                    <contains string="${antUrl}" substring="unc-mba"/>
-                </or>
-                <then>
-                    <property name="program" value="unc-mba" />
-                </then>
-            </elseif>
-            <elseif>
-                <or>
-                    <contains string="${antUrl}" substring="2law"/>
-                    <contains string="${antUrl}" substring="wu-llm"/>
-                </or>
-                <then>
-                    <property name="program" value="wu-llm" />
-                </then>
-            </elseif>
-            <elseif>
-                <or>
-                    <contains string="${antUrl}" substring="2sg"/>
-                    <contains string="${antUrl}" substring="unc-mpa"/>
-                </or>
-                <then>
-                    <property name="program" value="unc-mpa" />
-                </then>
-            </elseif>
-        </if>   
-        <if>
-            <contains string="${antUrl}" substring="-sb"/>
-            <then>
-                <property name="env" value="${regenv}"/>                
-            </then>
-            <elseif>
-                <contains string="${antUrl}" substring="-stg"/>
-                <then>
-                    <property name="env" value="stg"/>                    
+                    <var name="env" value="stg" />                    
                 </then>
             </elseif>
             <else>
-                <property name="env" value="prod"/>                
+                <var name="env" value="prod" />                
             </else>
-        </if>     
+        </if>
     </target>
-
+    
+    <target name="set_prgrm">
+        <if>
+            <or>
+                <contains string="${callUrl}" substring="2gu"/>
+                <contains string="${callUrl}" substring="gu-msn"/>
+            </or>
+            <then>
+                <var name="program" value="gu-msn" />                
+            </then>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="2sc"/>
+                    <contains string="${callUrl}" substring="usc-mat"/>
+                </or>
+                <then>
+                    <var name="program" value="usc-mat" />
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="vac"/>
+                    <contains string="${callUrl}" substring="usc-msw"/>
+                </or>
+                <then>
+                    <var name="program" value="usc-msw" />
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="2nc"/>
+                    <contains string="${callUrl}" substring="unc-mba"/>
+                </or>
+                <then>
+                    <var name="program" value="unc-mba" />
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="2law"/>
+                    <contains string="${callUrl}" substring="wu-llm"/>
+                </or>
+                <then>
+                    <var name="program" value="wu-llm" />
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="2sg"/>
+                    <contains string="${callUrl}" substring="unc-mpa"/>
+                </or>
+                <then>
+                    <var name="program" value="unc-mpa" />
+                </then>
+            </elseif>
+        </if>   
+    </target>
+    
     <property name="classes.dir" value="bin" />
     <property name="src.dir" value="src" />
     <property name="report.dir" value="reports" />
@@ -135,7 +137,7 @@
         <delete dir="${classes.dir}" />
         <mkdir dir="${classes.dir}"/>
         <delete dir="${report.dir}" />
-        <mkdir dir="${report.dir}"/>
+        <mkdir dir="${report.dir}"/>        
     </target>
 
     <!-- Complies the java files -->
@@ -153,12 +155,20 @@
     </target>
     
     <!-- Runs the file and generates Reportng report -->
-    <target name="runRegressionTests" description="Running tests" depends="set_prgrm_env">
+    <target name="runRegressionTests" description="Running tests">
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>        
         <for list="${antUrl}" param = "url">
             <sequential>
                 <echo>Url: @{url}</echo>
+                <antcallback target="set_prgrm" inheritRefs="true" return="program">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback> 
+                <echo>callback: ${program}</echo>
+                <antcallback target="set_env" inheritRefs="true" return="env">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback>
+                <echo>callback: ${env}</echo>
                 <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
                         <echo>Driver: @{brwsr}</echo>
@@ -178,12 +188,20 @@
     </target>
 
     <!-- Runs the file and generates Reportng report -->
-    <target name="runSmokeTests" description="Running tests" depends="set_prgrm_env">
+    <target name="runSmokeTests" description="Running tests">
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>        
         <for list="${antUrl}" param = "url">
             <sequential>
                 <echo>Url: @{url}</echo>
+                <antcallback target="set_prgrm" inheritRefs="true" return="program">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback> 
+                <echo>callback: ${program}</echo>
+                <antcallback target="set_env" inheritRefs="true" return="env">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback>
+                <echo>callback: ${env}</echo>
                 <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
                         <echo>Driver: @{brwsr}</echo>
@@ -199,16 +217,24 @@
                     </sequential>
                 </for> 
             </sequential>
-        </for>        
+        </for>           
     </target>
     
     <!-- Runs the file and generates Reportng report -->
-    <target name="runCriticalTests" description="Running tests" depends="set_prgrm_env">
+    <target name="runCriticalTests" description="Running tests">
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
         <for list="${antUrl}" param = "url">
             <sequential>
                 <echo>Url: @{url}</echo>
+                <antcallback target="set_prgrm" return="program">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback> 
+                <echo>callback: ${program}</echo>
+                <antcallback target="set_env" return="env">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback>
+                <echo>callback: ${env}</echo>
                 <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
                         <echo>Driver: @{brwsr}</echo>
@@ -228,12 +254,20 @@
     </target>
     
     <!-- Runs the file and generates Reportng report -->
-    <target name="runDebugTests" description="Running tests" depends="set_prgrm_env">
+    <target name="runDebugTests" description="Running tests">
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
         <for list="${antUrl}" param = "url">
             <sequential>
                 <echo>Url: @{url}</echo>
+                <antcallback target="set_prgrm" return="program">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback> 
+                <echo>callback: ${program}</echo>
+                <antcallback target="set_env" return="env">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback>
+                <echo>callback: ${env}</echo>
                 <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
                         <echo>Driver: @{brwsr}</echo>
@@ -263,8 +297,8 @@
                             <available file="${basedir}/${report.dir}" type="dir"/>
                             <then>
                                 <xslt in="${basedir}/${report.dir}/testng-results.xml" 
-                                              style="${basedir}/testng-results.xsl" 
-                                              out="${basedir}/${report.dir}/testng-xslt/index.html">
+                                      style="${basedir}/testng-results.xsl" 
+                                      out="${basedir}/${report.dir}/testng-xslt/index.html">
                                     <param expression="${basedir}/${report.dir}/testng-xslt/" name="testNgXslt.outputDir"/>
                                     <param expression="true" name="testNgXslt.sortTestCaseLinks"/>
                                     <param expression="FAIL,SKIP,PASS,CONF,BY_CLASS" name="testNgXslt.testDetailsFilter" />

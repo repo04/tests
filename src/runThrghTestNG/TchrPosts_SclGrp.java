@@ -106,7 +106,7 @@ public class TchrPosts_SclGrp extends BaseClass {
     groups = {"criticalsmoke", "teacherPosts.studentsWall"})
     public void testTeacherPostURLOnStudentsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
-        a.navigateToContactsWall(stdtUsrName.substring(0, 4) + " " + stdtUsrName.substring(4));
+        a.navigateToContactsWall(stdtUsrName);
         tchrUrlPostOnStdtWall = a.textPost("tchrUrlPostOnStdtWall");
         System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
         Reporter.log("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
