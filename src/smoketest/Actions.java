@@ -190,22 +190,22 @@ public class Actions extends BaseClass {
     /**
      * Navigate to My Contacts Wall
      *
-     * @param cntct
+     * @param stdtUsrName
      */
-    public void navigateToContactsWall(String cntct) {
-        ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
-        String s = cntct.substring(0, 1).toUpperCase();
-        String usrFullNm = null;
+    public void navigateToContactsWall(String stdtUsrName) {
+        String usrFullNmLC = stdtUsrName + " " + stdtUsrName;
+        ip.isElementPresentStartsWithTextByXPATH(driver, usrFullNmLC);
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + usrFullNmLC + "')]")).click();
+        ip.isTitlePresent(driver, usrFullNmLC + ": Public profile");
+        String s = stdtUsrName.substring(0, 1).toUpperCase();
+        String usrFullNmUC = null;
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
+            usrFullNmUC = s + stdtUsrName.substring(1) + "fstNm " + s + stdtUsrName.substring(1) + "sndNm";
         } else {
-            usrFullNm = cntct.substring(0, 1).toUpperCase() + cntct.substring(1, 5)
-                    + cntct.substring(5, 6).toUpperCase() + cntct.substring(6);
+            usrFullNmUC = s + stdtUsrName.substring(1) + " " + s + stdtUsrName.substring(1);
         }
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyCntctXPATH"), usrFullNm);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNmUC + "`s - Wall");
     }
 
     /**
@@ -271,7 +271,7 @@ public class Actions extends BaseClass {
         driver.findElement(By.linkText("Files")).click();
         ip.isTextPresentByXPATH(driver, "//h2", "My Shared Files");
     }
-    
+
     /**
      * Navigate to Portfolio page
      */
@@ -279,7 +279,6 @@ public class Actions extends BaseClass {
         Utility.navigateToSubMenu(driver, "//li[3]/a");
         ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
     }
-    
 
     /**
      * PesAdmin creates Working Group
@@ -786,33 +785,33 @@ public class Actions extends BaseClass {
 
     /**
      * Verify files in Course
-     * 
+     *
      * @param files
      */
     public void verifyFilesInCourse(String... files) {
         File fl = new File();
-        fl.verifyFilesInCourse(files);      
+        fl.verifyFilesInCourse(files);
     }
-    
+
     /**
      * Verify files in Portfolio
-     * 
-     * @param files 
+     *
+     * @param files
      */
     public void verifyFilesInPortfolio(String... files) {
         File fl = new File();
-        fl.verifyFilesInPortfolio(files);        
-    }    
+        fl.verifyFilesInPortfolio(files);
+    }
 
     /**
-     * 
+     *
      * @param doc
      * @param pptx
-     * @param pdf 
+     * @param pdf
      */
     public void deleteFiles(String... files) {
         File fl = new File();
-        fl.deleteFiles(files);   
+        fl.deleteFiles(files);
     }
 
     /**
@@ -820,7 +819,7 @@ public class Actions extends BaseClass {
      */
     public void verifyFeedbackWindow() {
         Feedback fb = new Feedback();
-        fb.verifyFeedbackWindow(); 
+        fb.verifyFeedbackWindow();
     }
 
     /**

@@ -25,8 +25,22 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String[][] crsArray = new String[1][1];
     static String[][] qzNameArray = new String[1][1];
     static String[][] assgnmntName = new String[1][1];
-    static String[][] actvtsArray = new String[1][4];    
+    static String[][] actvtsArray = new String[1][4];
 
+    /**
+     * ITestContext contains all the information for a given test run. A Data
+     * Provider is a method that returns an array of array of objects. This
+     * method will provide data to any test method that declares that its Data
+     * Provider is named "Course". In this case it is being fetched from
+     * 'testCourseGroupCourse_Creation' method which always get executed before
+     * 'testActivities_Creation' (execution order is maintained in
+     * TransformSmoke class, passed as listeners from smoke.xml)
+     *
+     *
+     * @param context
+     * @return
+     * @throws Exception
+     */
     @DataProvider(name = "Course")
     public static Object[][] Course(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
@@ -150,7 +164,9 @@ public class Crs_GrpCrsCreation extends BaseClass {
     }
 
     /**
-     * Create - Activities like Forum, Quiz, All In One Assignment & Page
+     * Create - Activities like Forum, Quiz, All In One Assignment & Page. This
+     * test method declares that its data should be supplied by the Data
+     * Provider named "Course"
      *
      * @throws Exception
      */
@@ -181,7 +197,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
 
     /**
      * Create - Syllabus Activity
-     * 
+     *
      * @param grpCrsName
      * @throws Exception
      */
@@ -189,7 +205,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
     public void testSyllabus_Creation(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
-        a.createSyllabusActivity();        
+        a.createSyllabusActivity();
     }
 
     /**
@@ -205,10 +221,10 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
     }
-    
+
     /**
      * Content Admin verify Feedback Window
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "feedback.contentAdminVerify"})

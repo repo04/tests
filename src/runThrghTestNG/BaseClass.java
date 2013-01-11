@@ -35,7 +35,21 @@ public class BaseClass {
     public static String test;
     public static File directory = new File(".");
 
-    //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
+    /**
+     * The annotated method will be run before any test method belonging to the
+     * classes inside the <test> tag is run. Following parameter values are
+     * received through 'Run Target' specified in build.xml. TestNG allows to
+     * perform sophisticated groupings of test methods which is called from XML
+     * file
+     *
+     * @param url
+     * @param program
+     * @param env
+     * @param brwsr
+     * @param os
+     * @param test
+     * @throws Exception
+     */
     @BeforeTest(groups = {"prerequisite"})
     @Parameters({"url", "program", "env", "brwsr", "os", "test"})
     public void setUp(String url, String program, String env, String brwsr, String os, String test) throws Exception {
@@ -102,12 +116,17 @@ public class BaseClass {
                 driver.manage().window().maximize();
                 Reporter.log("Browser: firefox");
         }
-        
+
         driver.get(url);
         ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
     }
 
-    //The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run 
+    /**
+     * The annotated method will be run after all the test methods belonging to
+     * the classes inside the <test> tag have run.
+     *
+     * @throws Exception
+     */
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
         driver.quit();
