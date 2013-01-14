@@ -172,7 +172,7 @@
                 <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
                         <echo>Driver: @{brwsr}</echo>
-                        <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
+                        <testng outputDir="${report.dir}\${program}_${env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
                             <xmlfileset dir="${basedir}" includes="regression.xml"/>
                             <sysproperty key="url" value="@{url}"/>
                             <sysproperty key="program" value="${program}"/>
@@ -205,7 +205,7 @@
                 <for list="${antBrwsr}" param = "brwsr">
                     <sequential>
                         <echo>Driver: @{brwsr}</echo>
-                        <testng outputDir="${report.dir}\@{program}_@{env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
+                        <testng outputDir="${report.dir}\${program}_${env}_@{brwsr}" classpathref="libs" delegatecommandsystemproperties="true">  
                             <xmlfileset dir="${basedir}" includes="smoke.xml"/>
                             <sysproperty key="url" value="@{url}"/>
                             <sysproperty key="program" value="${program}"/>
@@ -315,7 +315,7 @@
                                 </xslt>
                             </then>
                             <else>
-                                <echo>XSLT report is not generated as '@{program}_@{env}_@{brwsr}' report folder is missing</echo>
+                                <echo>XSLT report is not generated as '${program}_${env}_@{brwsr}' report folder is missing</echo>
                             </else>
                         </if>                            
                     </sequential>

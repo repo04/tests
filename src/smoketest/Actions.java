@@ -199,11 +199,7 @@ public class Actions extends BaseClass {
         ip.isTitlePresent(driver, usrFullNmLC + ": Public profile");
         String s = stdtUsrName.substring(0, 1).toUpperCase();
         String usrFullNmUC = null;
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            usrFullNmUC = s + stdtUsrName.substring(1) + "fstNm " + s + stdtUsrName.substring(1) + "sndNm";
-        } else {
-            usrFullNmUC = s + stdtUsrName.substring(1) + " " + s + stdtUsrName.substring(1);
-        }
+        usrFullNmUC = s + stdtUsrName.substring(1) + " " + s + stdtUsrName.substring(1);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNmUC + "`s - Wall");
     }
