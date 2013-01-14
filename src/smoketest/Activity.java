@@ -340,7 +340,7 @@ public class Activity extends BaseClass {
         } catch (TimeoutException e) {
             wndwFnd = false;
             System.out.println("feedback window not found");
-            Utility.illegalStateException("Feedback Window did not triggered");
+            //Utility.illegalStateException("Feedback Window did not triggered");
         }
 
         if (wndwFnd) {
@@ -477,21 +477,14 @@ public class Activity extends BaseClass {
      * @param allInOneAsgnmntAvtvtyName
      */
     public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
-        String stdtFstName;
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            stdtFstName = stdtUsrName + "fstNm";
-        } else {
-            stdtFstName = stdtUsrName.substring(0, 4);
-        }
-
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Allow Resubmit")));
         driver.findElement(By.linkText("Allow Resubmit")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtFstName + " to resubmit this assignment?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtUsrName + " to resubmit this assignment?");
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtFstName + " and mail sent.");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtUsrName + " and mail sent.");
         driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");

@@ -53,8 +53,8 @@ public class User extends BaseClass {
 
         driver.findElement(By.xpath(xpv.getTokenValue("fieldUsrnmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys("Moodle1!");
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName + "fstNm");
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName + "sndNm");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName);
         if (user.equalsIgnoreCase("teacher")) {
             driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("2torteacher+" + userName.substring(7) + "@gmail.com");
         } else {
@@ -101,7 +101,7 @@ public class User extends BaseClass {
             driver.findElement(By.xpath(xpv.getTokenValue("btnFindUsr"))).click();
             ip.isElementPresentStartsWithTextByXPATH(driver, user);
             driver.findElement(By.xpath(xpv.getTokenValue("lnkDltUsrXPATH"))).click();
-            String userFullNm = user + "fstNm " + user + "sndNm";
+            String userFullNm = user + " " + user;
             ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyCmpltlyDltUsrXPATH"), "Are you absolutely sure you want to completely delete '" + userFullNm + "' ?");
             ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCntnDltUsrXPATH"));
             driver.findElement(By.xpath(xpv.getTokenValue("btnCntnDltUsrXPATH"))).click();

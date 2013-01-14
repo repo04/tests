@@ -84,9 +84,8 @@ public class EnrollUser extends BaseClass {
      * @param tchrUsrName
      */
     public void frmCourse(String stdtUsrName, String tchrUsrName) {
-
-        String stdtFllNm = stdtUsrName + "fstNm " + stdtUsrName + "sndNm";
-        String tchrFllNm = tchrUsrName + "fstNm " + tchrUsrName + "sndNm";
+        String stdtFllNm = stdtUsrName + " " + stdtUsrName;
+        String tchrFllNm = tchrUsrName + " " + tchrUsrName;
 
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))).click();
@@ -101,7 +100,7 @@ public class EnrollUser extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpv.getTokenValue("chckBxUnrolFrstUsrXpath"))));
 
         unenrollUsers(stdtFllNm);
-        unenrollUsers(tchrFllNm);        
+        unenrollUsers(tchrFllNm);
     }
 
     /**
@@ -156,8 +155,8 @@ public class EnrollUser extends BaseClass {
 
     /**
      * Unassign users from group course
-     * 
-     * @param FllNm 
+     *
+     * @param FllNm
      */
     private void unenrollUsers(String FllNm) {
 
@@ -172,7 +171,7 @@ public class EnrollUser extends BaseClass {
             }
             i++;
         }
-        
+
         loop:
         do {
             try {
@@ -181,10 +180,10 @@ public class EnrollUser extends BaseClass {
                 break loop;
             } catch (TimeoutException e) {
                 System.out.println("Text not present at x: " + x);
-                x++;                
+                x++;
             }
         } while (x < i);
-        
+
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctUnrolUsers")))).selectByValue("deleteselectedusers");
         driver.findElement(By.xpath(xpv.getTokenValue("goUnrolUsers"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblEnrollUsersXPATH"), "Delete selected user enrolments");
