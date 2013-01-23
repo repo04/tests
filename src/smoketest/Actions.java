@@ -94,13 +94,13 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Create LiveSession in
+     * Create LiveSession
      *
      * @param sclGrpName
      */
-    public void createLiveSession(String sclGrpName) {
+    public void createLiveSession() {
         LiveSession ls = new LiveSession();
-        ls.buildLiveSession(sclGrpName);
+        ls.buildLiveSession();
     }
 
     /**
@@ -816,6 +816,14 @@ public class Actions extends BaseClass {
     public void verifyFeedbackWindow() {
         Feedback fb = new Feedback();
         fb.verifyFeedbackWindow();
+    }
+
+    /**
+     * Verify Help Window on Home Page
+     */
+    public void verifyHelpWindow() {
+        Help hlp = new Help();
+        hlp.verifyHelpWindow();
     }
 
     /**

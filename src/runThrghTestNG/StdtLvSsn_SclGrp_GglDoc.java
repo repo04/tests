@@ -69,9 +69,9 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
         a.accessLiveSessionWall();
-        a.createLiveSession(tchrSclGrpName);
+        a.createLiveSession();
     }
-
+    
     /**
      * Creates own Social Group
      *

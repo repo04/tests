@@ -15,12 +15,11 @@ public class LiveSession extends BaseClass {
     Date now = new Date();
 
     /**
-     * Create & verify Live Session in
+     * Create & verify Live Session
      *
      * @param sclGrpName
      */
-    public void buildLiveSession(String sclGrpName) {
-
+    public void buildLiveSession() {
         String user = LoginPage.getUser();
         String liveSsnNm = null;
         String liveSsnDesc = null;

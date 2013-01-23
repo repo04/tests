@@ -153,6 +153,17 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
         a.navigateToMyWall();
         a.testUploadVideo();        
     }
+    
+    /**
+     * Teacher verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.teacherVerify"})
+    public void testTeacherVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

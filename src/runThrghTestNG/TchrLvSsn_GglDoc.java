@@ -82,7 +82,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
         a.accessLiveSessionWall();
-        a.createLiveSession(tchrSclGrpName);
+        a.createLiveSession();
     }
 
     /**
