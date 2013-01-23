@@ -7,8 +7,6 @@ package runThrghTestNG;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,7 +29,7 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLgn() throws Exception {
+    public void testPESAdminLogin() throws Exception {
         a.login("pesAdmin");
     }
 
@@ -44,10 +42,10 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"usrs.unAssgnRole"})
+          groups = {"users.unAssignRole"})
     public void testUnerolUsers(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         a.unenrolUsers(stdtUsrName, tchrUsrName);
     }
 
@@ -61,15 +59,15 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"wrkngGrp.rmvMbrs"})
-    public void testRemoveMbrsFrmWrkngGrp(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+          groups = {"workingGroup.removeMembers"})
+    public void testRemoveMembersFromWorkngGroup(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))));
+        a.selectGroupCourse(grpCrsName);
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("linkScndNameXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))).click();
 
         String stdtFllNm;
@@ -102,7 +100,7 @@ public class PES_CleanTestData extends BaseClass {
         stdtStatus = findUser(i, stdtFllNm);
 
         a.navigateToWorkingGroups();
-        a.accessWrknGrp(wrkngGrpName);
+        a.accessWorkingGroup(wrkngGrpName);
         a.rmvMbrsFrmWrkngGrp(tchrUsrName, stdtUsrName);
     }
 
@@ -113,11 +111,11 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "wrkngGrp.delete"})
-    public void testDeleteWrkngGrp(String wrkngGrpName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "workingGroup.delete"})
+    public void testDeleteWorkingGroup(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
-        a.accessWrknGrp(wrkngGrpName);
-        a.deleteWrkngGrp(wrkngGrpName);
+        a.accessWorkingGroup(wrkngGrpName);
+        a.deleteWorkingGroup(wrkngGrpName);
     }
 
     /**
@@ -126,10 +124,25 @@ public class PES_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "usrs.delete"})
+          groups = {"regressionSmoke", "fullSmoke", "users.delete"})
     public void testDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
         a.navigateToMyContacts();
         a.deleteUsers(tchrUsr, stdtUsr);
+    }
+    
+    /**
+     * Delete Announcement
+     * 
+     * @param grpCrsName
+     * @param pesTxtAncmntCrsPost
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsAnnouncement", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"regressionSmoke", "wall.pesDeleteAnnouncement"})
+    public void testPesDeleteAnnouncement(String grpCrsName, String pesTxtAncmntCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.deletePost(pesTxtAncmntCrsPost);
     }
     
      /**

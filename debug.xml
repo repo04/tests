@@ -5,8 +5,10 @@
         <listener class-name="runThrghTestNG.TransformDebug"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="tchrUsrName" value="autoteacher1"/>
-        <parameter name="stdtUsrName" value="autostudent1"/>
+        <!--parameter name="tchrUsrName" value="autoteacher1"/>
+        <parameter name="stdtUsrName" value="autostudent1"/-->
+        <parameter name="tchrUsrName" value="teacher1"/>
+        <parameter name="stdtUsrName" value="student1"/>       
         <parameter name="grpCrsName" value="AutoGroupCourse"/>        
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
         <parameter name="tchrSclGrpName" value="AutoTchrSclGrp"/>
@@ -15,8 +17,9 @@
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
+        
         <groups>
-            <define name="CrsCrtArchv_GrpCrsCrtDlt">
+            <define name="Course_GroupCourse">
                 <include name="prerequisite"/>
                 <include name="course.creation"/>
                 <include name="groupcourse.deletion"/>
@@ -25,70 +28,132 @@
             <define name="ActvtsCrt_AddQzQstn_Dlt">
                 <include name="prerequisite"/>
                 <include name="activites.creation"/>
-                <include name="activites.addQuizQstn"/>
+                <include name="activites.addQuizQuestion"/>
                 <include name="activites.deletion"/>              
             </define>
             <define name="ActvtsVrfctn">
                 <include name="prerequisite"/>
-                <include name="activites.tchrVrfy"/>
-                <include name="activites.stdtVrfy"/>          
+                <include name="activites.teacherVerify"/>
+                <include name="activites.studentVerify"/>          
             </define>            
             <define name="ActvtsSbmtQz">
                 <include name="prerequisite"/>
-                <include name="activites.sbmtQuiz"/>          
+                <include name="activites.submitQuiz"/>          
             </define>
-            <define name="StdtTchr_Asgmt_SbmtGrdVrfyResbmt">
+            <define name="Assignment_Grade">
                 <include name="prerequisite"/>
-                <include name="activites.sbmtAsgnmnt"/>
-                <include name="activites.gradeAsgnmnt"/>
-                <include name="activites.vrfyAsgnmntGrade"/>
-                <include name="activites.allwResbmtAsgnmnt"/>
+                <include name="assignment.submit"/>
+                <include name="assignment.grade"/>
+                <include name="assignment.verifyGrade"/>
+                <include name="assignment.allowResubmit"/>
             </define>            
-            <define name="UsrsCrtn_Role_Dltn">
+            <define name="Users">
                 <include name="prerequisite"/>
-                <include name="usrs.creation"/>
-                <include name="usrs.assgnRole"/>
-                <include name="usrs.unAssgnRole"/>
-                <include name="usrs.delete"/>         
+                <include name="users.creation"/>
+                <include name="users.assignRole"/>
+                <include name="users.unAssignRole"/>
+                <include name="users.delete"/>         
             </define>
-            <define name="WrkngGrpCrtn_AddMbrs_Dltn">
+            <define name="WorkingGroup">
                 <include name="prerequisite"/>
-                <include name="wrkngGrp.create"/>
-                <include name="wrkngGrp.addMbrs"/>
-                <include name="wrkngGrp.rmvMbrs"/>                
-                <include name="wrkngGrp.delete"/>         
+                <include name="workingGroup.create"/>
+                <include name="workingGroup.addMembers"/>
+                <include name="workingGroup.removeMembers"/>                
+                <include name="workingGroup.delete"/>         
             </define>              
-            <define name="GglDoc_MbrsCrtVrfy">
+            <define name="GoogleDoc">
                 <include name="prerequisite"/>
-                <include name="wrkngGrp.tchrCrtGglDoc"/> 
-                <include name="wrkngGrp.stdtVrfyGglDoc"/>                
+                <include name="workingGroup.teacherCreateGoogleDoc"/> 
+                <include name="workingGroup.studentVerifyGoogleDoc"/>                
             </define>            
-            <define name="TchrWallCrs_StdtCmntOnPsts">
+            <define name="SocialGroup_LiveSession">
                 <include name="prerequisite"/>
-                <include name="tchrPosts.wallCrs"/>
-                <include name="tchrPosts.stdtWall"/> 
-                <include name="stdtCmnt.TchrCrsPost"/>                        
+                <include name="socialGroup.teacherCreate"/>
+                <include name="socialGroup.studentJoinTeachers"/>
+                <include name="socialGroup.studentPostURLOnTeachers"/>
+                <include name="liveSession.teacherCreate"/>
+                <include name="liveSession.studentCreate"/>
+                <include name="socialGroup.studentCreate"/>
+                <include name="socialGroup.teacherJoinStudents"/>
+                <include name="socialGroup.teacherLeaveStudents"/>
+                <include name="socialGroup.teacherDelete"/>                
+                <include name="socialGroup.studentDelete"/>                                                         
             </define>            
-            <define name="TchrStdt_CrtDlt_SclGrpLvSsn">
+            <define name="Notes">
+                <include name="note.createOnCourseWall"/>
+                <include name="note.createOnProfileWall"/>                
+                <include name="note.verifySorting"/>
+                <include name="note.deleteProfile"/> 
+            </define>
+            <define name="Resources">
                 <include name="prerequisite"/>
-                <include name="tchrSclGrp.create"/>
-                <include name="tchrSclGrp.stdtJoins"/>
-                <include name="tchrSclGrp.stdtPostURL"/>
-                <include name="tchrLvSsn.create"/>
-                <include name="stdtLvSsn.create"/>
-                <include name="tchrSclGrp.delete"/>
-                <include name="stdtSclGrp.create"/>
-                <include name="stdtSclGrp.delete"/>                                                         
-            </define>            
-            <define name="Stdt_JnLvsTchrGrp">
+                <include name="resources.verify"/>                                              
+            </define>
+            <define name="Wall">
                 <include name="prerequisite"/>
-                <include name="stdtSclGrp.tchrJoins"/>
-                <include name="stdtSclGrp.tchrLeaves"/>                
-            </define>                        
-                        
+                <include name="wall.courseSectionPost"/>
+                <include name="wall.coursePostCommentsOn"/>
+                <include name="wall.coursePostCommentsOff"/>
+                <include name="wall.courseAnnouncementPost"/>
+                <include name="wall.teacherPostsOnProfileCourseWall"/>
+                <include name="wall.teacherVerifyPESCoursePosts"/> 
+                <include name="wall.studentVerifyPESCoursePosts"/>
+                <include name="wall.studentCommentOnTeacherCoursePost"/> 
+                <include name="wall.studentRecommendPost"/>   
+                <include name="wall.teacherVerifyStudentsPostRecommendation"/>
+                <include name="wall.teacherVerifyStudentsCommentOnPost"/> 
+                <include name="wall.teacherDeleteCourseURLPost"/>
+                <include name="wall.pesDeleteAnnouncement"/>            
+            </define>
+            <define name="Footers">
+                <include name="prerequisite"/>
+                <include name="footers.verify"/>                                              
+            </define>
+            <define name="Syllabus">
+                <include name="prerequisite"/>
+                <include name="activity.syllabusCreation"/>
+                <include name="activity.teacherVerifySyllabus"/>    
+                <include name="activity.studentVerifySyllabus"/>                                              
+            </define>
+            <define name="Resume">
+                <include name="prerequisite"/>
+                <include name="resume.teacherVerify"/>  
+                <include name="resume.studentVerify"/>                                              
+            </define>
+            <define name="PersonalInfo">
+                <include name="prerequisite"/>
+                <include name="personalInfo.teacherVerify"/>
+                <include name="personalInfo.studentVerify"/>     
+            </define>
+            <define name="Files">
+                <include name="prerequisite"/>
+                <include name="files.teacherUploadInCourse"/>
+                <include name="files.teacherVerifyInPortfolio"/>
+                <include name="files.studentVerifyInCourse"/>
+                <include name="files.teacherDelete"/>
+            </define>
+            <define name="Feedback">
+                <include name="prerequisite"/>
+                <include name="feedback.contentAdminVerify"/>               
+                <include name="feedback.pesAdminVerify"/>
+                <include name="feedback.teacherVerify"/>
+                <include name="feedback.studentVerify"/>
+            </define>
+            <define name="Image">
+                <include name="prerequisite"/>
+                <include name="image.upload"/>
+            </define>
+            <define name="Help">
+                <include name="prerequisite"/>
+                <include name="help.contentAdminVerify"/>
+                <include name="help.pesAdminVerify"/>
+                <include name="help.teacherVerify"/>
+                <include name="help.studentVerify"/>
+            </define>
+            
             <!--run>
-                <include name="prerequisite"/>
-                <include name="CrsCrtArchv_GrpCrsCrtDlt"/>                 
+                <include name="feedback.contentAdminVerify"/>               
+                <include name="feedback.contentAdminVerify"/>     
             </run-->
         </groups>
         <classes>
@@ -97,7 +162,7 @@
             <class name="runThrghTestNG.TchrPosts_SclGrp"/>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.PES_CleanTestData"/>

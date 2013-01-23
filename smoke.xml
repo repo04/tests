@@ -8,7 +8,7 @@
         <groups>
             <run>
                 <include name="prerequisite"/>
-                <include name="fullsmoke"/>
+                <include name="fullSmoke"/>
             </run>
         </groups>
         <classes>

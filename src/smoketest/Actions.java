@@ -50,20 +50,57 @@ public class Actions extends BaseClass {
      * @param txtCmntOnTchrCrsPst
      * @return
      */
-    public String textCmntPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
+    public String textCommentPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
         WallPage wp = new WallPage();
-        wp.textCmntPost(urlCrsPost, txtCmntOnTchrCrsPst);
-        return wp.getTextCmntPost();
+        wp.textCommentPost(urlCrsPost, txtCmntOnTchrCrsPst);
+        return wp.getTextCommentPost();
     }
 
     /**
-     * Create LiveSession in
+     * Recommend URL Course Post
+     *
+     * @param tchrUrlCrsPost
+     */
+    public void recommendURLCoursePost(String tchrUrlCrsPost) {
+        WallPage wp = new WallPage();
+        wp.recommendURLCoursePost(tchrUrlCrsPost);
+    }
+
+    /**
+     * Verify Students Post Recommendation
+     */
+    public void verifyPostRecommendation() {
+        ip.isTextPresentByXPATH(driver, "//label[3]", "(1 People Recommend This)");
+    }
+
+    /**
+     * Verify comment on Post
+     *
+     * @param stdtTxtCmntOnTchrCrsPost
+     */
+    public void verifyCommentOnPost(String stdtTxtCmntOnTchrCrsPost) {
+        WallPage wp = new WallPage();
+        wp.verifyCommentOnPost(stdtTxtCmntOnTchrCrsPost);
+    }
+
+    /**
+     * Delete Post / Announcement
+     *
+     * @param tchrUrlCrsPost
+     */
+    public void deletePost(String deletePost) {
+        WallPage wp = new WallPage();
+        wp.deletePost(deletePost);
+    }
+
+    /**
+     * Create LiveSession
      *
      * @param sclGrpName
      */
-    public void createLiveSsn(String sclGrpName) {
+    public void createLiveSession() {
         LiveSession ls = new LiveSession();
-        ls.buildLiveSession(sclGrpName);
+        ls.buildLiveSession();
     }
 
     /**
@@ -76,21 +113,21 @@ public class Actions extends BaseClass {
         cr.createCourse();
         return cr.getCrsName();
     }
-    
+
     /**
      * Delete Group Course
-     * 
-     * @param grpCrsName 
+     *
+     * @param grpCrsName
      */
-    public void deleteGrpCrs(String grpCrsName) {
+    public void deleteGroupCourse(String grpCrsName) {
         Course cr = new Course();
-        cr.deleteGrpCrs(grpCrsName);
+        cr.deleteGroupCourse(grpCrsName);
     }
 
     /**
      * Verify Navigated to Live Meeting creation page
      */
-    public void accessLvSsnWall() {
+    public void accessLiveSessionWall() {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnleftPnlLvMtng"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnleftPnlLvMtng"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtSsn"));
@@ -107,15 +144,15 @@ public class Actions extends BaseClass {
         cr.createGrpCourse(courseName);
         return cr.getGrpCrsName();
     }
-    
+
     /**
      * Archive Course
-     * 
-     * @param crsName 
+     *
+     * @param crsName
      */
-    public void archiveCrs(String crsName) {
+    public void archiveCourse(String crsName) {
         Course cr = new Course();
-        cr.archiveCrs(crsName);
+        cr.archiveCourse(crsName);
     }
 
     /**
@@ -123,15 +160,15 @@ public class Actions extends BaseClass {
      */
     public void logOut() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToLogOut"));
-        ip.isTitlePresent(driver, pv.getTokenValue("loginPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
     }
 
     /**
-     * Navigate to MyWall page
+     * Navigate to My Wall page
      */
     public void navigateToMyWall() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue("wallPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "wallPageTitle"));
     }
 
     /**
@@ -139,7 +176,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyCourse() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToCourseXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue("crsPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "crsPageTitle"));
     }
 
     /**
@@ -147,28 +184,24 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyHome() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("lnkToHomeXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue("homePageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "homePageTitle"));
     }
 
     /**
      * Navigate to My Contacts Wall
      *
-     * @param cntct
+     * @param stdtUsrName
      */
-    public void navigateToContactsWall(String cntct) {
-        ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
-        String s = cntct.substring(0, 1).toUpperCase();
-        String usrFullNm = null;
-        if (test.equalsIgnoreCase("SmokeTests")) {
-            usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
-        } else {
-            usrFullNm = cntct.substring(0, 1).toUpperCase() + cntct.substring(1, 5)
-                    + cntct.substring(5, 6).toUpperCase() + cntct.substring(6);
-        }
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyCntctXPATH"), usrFullNm);
+    public void navigateToContactsWall(String stdtUsrName) {
+        String usrFullNmLC = stdtUsrName + " " + stdtUsrName;
+        ip.isElementPresentStartsWithTextByXPATH(driver, usrFullNmLC);
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + usrFullNmLC + "')]")).click();
+        ip.isTitlePresent(driver, usrFullNmLC + ": Public profile");
+        String s = stdtUsrName.substring(0, 1).toUpperCase();
+        String usrFullNmUC = null;
+        usrFullNmUC = s + stdtUsrName.substring(1) + " " + s + stdtUsrName.substring(1);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNmUC + "`s - Wall");
     }
 
     /**
@@ -198,7 +231,7 @@ public class Actions extends BaseClass {
         }
 
         Utility.navigateToSubMenu(driver, linkToContactXPATH);
-        ip.isTitlePresent(driver, pv.getTokenValue("contactPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue("contactPageTitle"));
     }
 
     /**
@@ -209,14 +242,38 @@ public class Actions extends BaseClass {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
-    
+
     /**
      * Navigate To Grade Page
      */
     public void navigateToGrades() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");        
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+    }
+
+    /**
+     * Navigate To Personal Info Page
+     */
+    public void navigateToMyPersonalInfo() {
+        Utility.navigateToSubMenu(driver, "//li[2]/ul/li[2]/a");
+        ip.isTextPresentByXPATH(driver, "//h2", "Personal Information");
+    }
+
+    /**
+     * Navigate to Files page
+     */
+    public void navigateToFiles() {
+        driver.findElement(By.linkText("Files")).click();
+        ip.isTextPresentByXPATH(driver, "//h2", "My Shared Files");
+    }
+
+    /**
+     * Navigate to Portfolio page
+     */
+    public void navigateToPortfolio() {
+        Utility.navigateToSubMenu(driver, "//li[3]/a");
+        ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
     }
 
     /**
@@ -235,7 +292,7 @@ public class Actions extends BaseClass {
      *
      * @param grpCrsName
      */
-    public void selectGrpCourse(String grpCrsName) {
+    public void selectGroupCourse(String grpCrsName) {
 
         String user = LoginPage.getUser();
 
@@ -282,10 +339,10 @@ public class Actions extends BaseClass {
      *
      * @return
      */
-    public String createAllInOneAsgnmntActivity() {
+    public String createAllInOneAssignmentActivity() {
         Activity actvty = new Activity();
-        actvty.crtAllInOneAsgnmntActvty();
-        return actvty.getAllInOneAsgnmntActvyName();
+        actvty.createAllInOneAssignmentActivity();
+        return actvty.getAllInOneAssignmentActivityName();
     }
 
     /**
@@ -300,6 +357,21 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * Create - Syllabus Activity
+     */
+    public void createSyllabusActivity() {
+        Activity actvty = new Activity();
+        actvty.createSyllabusActivity();
+    }
+
+    /**
+     * Verify Syllabus creation
+     */
+    public void verifySyllabusActivity() {
+        ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
+    }
+
+    /**
      * Create User
      *
      * @param user
@@ -308,7 +380,7 @@ public class Actions extends BaseClass {
     public String createUser(String user) {
         User usr = new User();
         usr.createUser(user);
-        return usr.getUsrName();
+        return usr.getUserName();
     }
 
     /**
@@ -328,9 +400,9 @@ public class Actions extends BaseClass {
      * @param user
      * @param grpCrs
      */
-    public void enrollUsrToRole_GrpCrs(String user, String grpCrs) {
+    public void enrollUserToRole_GroupCourse(String user, String grpCrs) {
         EnrollUser enrlUsr = new EnrollUser();
-        enrlUsr.toRole_Crs(user, grpCrs);
+        enrlUsr.toRole_Course(user, grpCrs);
     }
 
     /**
@@ -365,7 +437,7 @@ public class Actions extends BaseClass {
     public String createSocialGroup() {
         SocialGroup sg = new SocialGroup();
         sg.buildSocialGroup();
-        return sg.getSclGrpName();
+        return sg.getSocialGroupName();
     }
 
     /**
@@ -414,7 +486,7 @@ public class Actions extends BaseClass {
      *
      * @param sclGrp
      */
-    public void accessSclGrpWall(String sclGrp) {
+    public void accessSocialGroupWall(String sclGrp) {
         Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), sclGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + sclGrp + "')]")).click();
         String uprCS = sclGrp.substring(0, 1).toUpperCase();
@@ -445,10 +517,29 @@ public class Actions extends BaseClass {
     /**
      * Navigate to Activity Report page
      */
-    public void navigateToActvtyRprt() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))));
+    public void navigateToActivityReport() {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnLftPnlActvyRprtXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
+    }
+
+    /**
+     * User verifies PES posts on Course Wall
+     *
+     * @param courseposts
+     */
+    public void verifyCoursePost(String... courseposts) {
+        int i = 0;
+        for (String coursepost : courseposts) {
+            ip.isElementPresentContainsTextByXPATH(driver, coursepost);
+            i++;
+            if (i == 3) {
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[2]/div/div[4]/label/a/label")));
+            } else if (i > 3) {
+                ip.isTextPresentByXPATH(driver, "//li/div/div[2]/div", "Announcement from Student Support");
+                ip.isTextPresentByXPATH(driver, "//li/div/div[2]/div[3]", coursepost);
+            }
+        }
     }
 
     /**
@@ -462,19 +553,18 @@ public class Actions extends BaseClass {
             ip.isElementPresentContainsTextByXPATH(driver, activity);
         }
     }
-    
-    
+
     /**
      * Delete all Activities
-     * 
+     *
      * @param frmActvyName
      * @param quizActvtyName
-     * @param allInOneAsgnmntAvtvtyName
-     * @param pageActvtyName 
+     * @param allInOneAsgnmntActvtyName
+     * @param pageActvtyName
      */
-    public void deleteActivites(String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) {
+    public void deleteActivites(String frmActvyName, String quizActvtyName, String allInOneAsgnmntActvtyName, String pageActvtyName) {
         Activity actvty = new Activity();
-        actvty.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+        actvty.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntActvtyName, pageActvtyName);
     }
 
     /**
@@ -496,45 +586,45 @@ public class Actions extends BaseClass {
         Activity actvty = new Activity();
         actvty.submitQuiz(quizActvtyName);
     }
-    
+
     /**
      * Submit Assignment
-     * 
-     * @param allInOneAsgnmntAvtvtyName 
+     *
+     * @param allInOneAsgnmntAvtvtyName
      */
-    public void submitAssgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void submitAssignment(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
-        actvty.submitAssgnmnt(allInOneAsgnmntAvtvtyName);
+        actvty.submitAssignment(allInOneAsgnmntAvtvtyName);
     }
-    
+
     /**
      * Grade Assignment
-     * 
-     * @param quizActvtyName 
+     *
+     * @param quizActvtyName
      */
-    public void gradeAsgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
-        actvty.gradeAsgnmnt(allInOneAsgnmntAvtvtyName);
+        actvty.gradeAssignment(allInOneAsgnmntAvtvtyName);
     }
-    
+
     /**
      * Verify Assignment Grade
-     * 
-     * @param allInOneAsgnmntAvtvtyName 
+     *
+     * @param allInOneAsgnmntAvtvtyName
      */
-    public void vrfyAsgnmntGrade(String allInOneAsgnmntAvtvtyName) {
+    public void verifyAssignmentGrade(String allInOneAsgnmntAvtvtyName) {
         Activity actvty = new Activity();
-        actvty.vrfyAsgnmntGrade(allInOneAsgnmntAvtvtyName);
+        actvty.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
     }
-    
+
     /**
      * Allow Assignment to be resubmitted
-     * 
-     * @param allInOneAsgnmntAvtvtyName 
+     *
+     * @param allInOneAsgnmntAvtvtyName
      */
-    public void allwResbmtAsgnmnt(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
+    public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
         Activity actvty = new Activity();
-        actvty.allwResbmtAsgnmnt(allInOneAsgnmntAvtvtyName, stdtUsrName);
+        actvty.allowResubmitAssignment(allInOneAsgnmntAvtvtyName, stdtUsrName);
     }
 
     /**
@@ -542,7 +632,7 @@ public class Actions extends BaseClass {
      *
      * @param wrkngGrp
      */
-    public void accessWrknGrp(String wrkngGrp) {
+    public void accessWorkingGroup(String wrkngGrp) {
         //Show all WorkingGroups
         Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
@@ -553,10 +643,10 @@ public class Actions extends BaseClass {
      *
      * @param members
      */
-    public void addMbrsToWrkngGrp(String... members) {
+    public void addMembersToWorkingGroup(String... members) {
 
         WorkingGroup wg = new WorkingGroup();
-        wg.addMbrsToWrkngGrp(members);
+        wg.addMembersToWorkingGroup(members);
     }
 
     /**
@@ -575,9 +665,9 @@ public class Actions extends BaseClass {
      *
      * @param wrkngGrp
      */
-    public void deleteWrkngGrp(String wrkngGrp) {
+    public void deleteWorkingGroup(String wrkngGrp) {
         WorkingGroup wg = new WorkingGroup();
-        wg.deleteWrkngGrp(wrkngGrp);
+        wg.deleteWorkingGroup(wrkngGrp);
     }
 
     /**
@@ -590,7 +680,7 @@ public class Actions extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
 
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlFilesXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }
@@ -605,5 +695,153 @@ public class Actions extends BaseClass {
         WorkingGroup wg = new WorkingGroup();
         wg.createGoogleDoc(wrkngGrp);
         return wg.getGoogleDocName();
+    }
+
+    /**
+     * Create Note on specific Wall
+     *
+     * @param wallType
+     * @return
+     */
+    public String createNote(String wallType) {
+        Note nt = new Note();
+        nt.createNote(wallType);
+        return nt.getNoteName();
+    }
+
+    /**
+     * Verify Note Sorting
+     *
+     * @param profileNote
+     */
+    public void verifyNoteSorting(String profileNote) {
+        Note nt = new Note();
+        nt.verifyNoteSorting(profileNote);
+    }
+
+    /**
+     * Verify Resources
+     */
+    public void verifyResources() {
+        Resources rs = new Resources();
+        rs.verifyResources();
+    }
+
+    /**
+     * Verify Footers
+     */
+    public void verifyFooters() {
+        Footers ft = new Footers();
+        ft.verifyFooters();
+    }
+
+    /**
+     * Verify Resume
+     */
+    public void verifyResume() {
+        switch (BaseClass.program) {
+            case "usc":
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
+                ip.isElementPresentByLINK(driver, "Resume");
+                driver.findElement(By.linkText("Resume")).click();
+                ip.isTextPresentByXPATH(driver, "//h2", "Resume");
+                break;
+            default:
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
+        }
+    }
+
+    /**
+     * Verify Personal Information
+     */
+    public void verifyPersonalInfo() {
+        Profile pf = new Profile();
+        pf.verifyPersonalInfo();
+    }
+
+    /**
+     * Delete Note
+     *
+     * @param profileNote
+     */
+    public void deleteNote(String profileNote) {
+        Note nt = new Note();
+        nt.deleteNote(profileNote);
+    }
+
+    /**
+     * Upload files of multiple format(pdf, pptx, doc)
+     *
+     * @param files
+     */
+    public void uploadFiles(String... files) {
+        File fl = new File();
+        fl.uploadFiles(files);
+    }
+
+    /**
+     * Verify files in Course
+     *
+     * @param files
+     */
+    public void verifyFilesInCourse(String... files) {
+        File fl = new File();
+        fl.verifyFilesInCourse(files);
+    }
+
+    /**
+     * Verify files in Portfolio
+     *
+     * @param files
+     */
+    public void verifyFilesInPortfolio(String... files) {
+        File fl = new File();
+        fl.verifyFilesInPortfolio(files);
+    }
+
+    /**
+     *
+     * @param doc
+     * @param pptx
+     * @param pdf
+     */
+    public void deleteFiles(String... files) {
+        File fl = new File();
+        fl.deleteFiles(files);
+    }
+
+    /**
+     * Verify feedback window
+     */
+    public void verifyFeedbackWindow() {
+        Feedback fb = new Feedback();
+        fb.verifyFeedbackWindow();
+    }
+
+    /**
+     * Verify Help Window on Home Page
+     */
+    public void verifyHelpWindow() {
+        Help hlp = new Help();
+        hlp.verifyHelpWindow();
+    }
+
+    /**
+     * Upload video
+     */
+    public void testUploadVideo() {
+        ip.isElementClickableByXpath(driver, "//li[2]/a", 60);
+        driver.findElement(By.linkText("Personal Information")).click();
+        ip.isElementClickableByXpath(driver, "//p/a", 60);
+        driver.findElement(By.linkText("Change Picture")).click();
+        driver.switchTo().frame("_iframe-ksubox");
+        ip.isTextPresentByXPATH(driver, "//div[@id='upload_btn_container']/div[2]", "Choose how would you like to upload a new profile image");
+        ip.isElementClickableByXpath(driver, "//div[4]/form/input", 60);
+        Utility.navigateToSubMenu(driver, "//div[4]/form/input");
+        Utility.actionBuilderClick(driver, "//div[4]/form/input");
+        driver.findElement(By.cssSelector("object#uploader")).click();
+        ip.isElementClickableByXpath(driver, "//div[6]/form/input", 60);
+        Utility.navigateToSubMenu(driver, "//div[6]/form/input");
+        ip.isTextPresentByXPATH(driver, "//body/div[3]/div[2]/div", "Choose how would you like to upload a new profile image");
     }
 }

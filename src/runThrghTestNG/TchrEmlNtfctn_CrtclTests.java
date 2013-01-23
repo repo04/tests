@@ -33,8 +33,8 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTchrEmailLgn() throws Exception {
-        Utility.usrEmlLgn(driver, xpv, "2torteacher");
+    public void testTeacherEmailLogin() throws Exception {
+        Utility.usrEmailLogin(driver, xpv, "2torteacher");
     }
 
     /**
@@ -46,7 +46,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      */
     @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
           groups = {"criticalsmoke", "tchrVrfyEmails"})
-    public void testTchrVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
+    public void testTeacherVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
         stdtFllNm = "Auto Student1";
 
@@ -65,7 +65,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
 
         for (int i = 0; i < 4; i++) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[1]/td[5]/div/span")));
+            ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 60);
             Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
 
             int j = 0;
@@ -125,7 +125,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTchrEmailLogOut() throws Exception {
-        Utility.usrEmlLogout(driver);
+    public void testTeacherEmailLogOut() throws Exception {
+        Utility.usrEmailLogout(driver);
     }
 }

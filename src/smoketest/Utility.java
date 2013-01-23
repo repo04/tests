@@ -1,5 +1,17 @@
 package smoketest;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -99,7 +111,7 @@ public class Utility {
      * @param xpv
      * @param usrNm
      */
-    public static void usrEmlLgn(WebDriver driver, XpathValues xpv, String usrNm) {
+    public static void usrEmailLogin(WebDriver driver, XpathValues xpv, String usrNm) {
         driver.get("https://mail.google.com/");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
         WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
@@ -129,18 +141,14 @@ public class Utility {
         loopEml:
         while (true) {
             try {
-                new WebDriverWait(driver, 30).until(ExpectedConditions.
-                        elementToBeClickable(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")));
+                ip.isElementClickableByXpath(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div", 30);
                 driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
 
-                new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//tr[1]/td[5]/div/span")));
+                ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 30);
                 driver.findElement(By.xpath("//div/span/div")).click();
-                new WebDriverWait(driver, 30).until(ExpectedConditions.
-                        elementToBeClickable(By.xpath("//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div")));
+                ip.isElementClickableByXpath(driver, "//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div", 30);
                 driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div/div/div/div/div[2]/div[3]/div/div")).click();
-                new WebDriverWait(driver, 30).until(ExpectedConditions.elementToBeClickable(
-                        By.xpath("//tr[1]/td[5]/div/span")));
+                ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 30);
             } catch (TimeoutException e) {
                 break loopEml;
             }
@@ -151,7 +159,7 @@ public class Utility {
      *
      * @param driver
      */
-    public static void usrEmlLogout(WebDriver driver) {
+    public static void usrEmailLogout(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
         try {
             Utility.navigateToSubMenu(driver, "//td[2]/a");
@@ -163,10 +171,10 @@ public class Utility {
 
     /**
      * Wait max 60sec for specified 'number' of Windows to be present/open
-     * 
+     *
      * @param driver
      * @param timeout
-     * @param numberOfWindows 
+     * @param numberOfWindows
      */
     public static void waitForNumberOfWindowsToEqual(WebDriver driver, int timeout, final int numberOfWindows) {
         new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
@@ -178,27 +186,128 @@ public class Utility {
     }
 
     /**
-     * Wait max 60sec for Alert to be present & with specified text present
+     * Verify Title of Window
+     *
+     * @param driver
+     * @param text
+     */
+    public static void verifyWindowTitle(WebDriver driver, String text) {
+        String HandleBefore = driver.getWindowHandle();
+        int i = 1;
+        for (String handle : driver.getWindowHandles()) {
+            System.out.println("window handle: " + handle);
+            driver.switchTo().window(handle);
+            if (i == driver.getWindowHandles().size()) {
+                try {
+                    ip.isTitleContains(driver, text);
+                    driver.close();
+                } catch (Exception e) {
+                    System.out.println("FeedBack Window not found");
+                    driver.close();
+                    driver.switchTo().window(HandleBefore);
+                    throw e;
+                }
+            }
+            i++;
+        }
+        driver.switchTo().window(HandleBefore);
+    }
+
+    /**
+     * Wait 60sec for Alert with expected TEXT is present
      *
      * @param driver
      * @param timeout
+     * @param text
      */
     public static void waitForAlertToBeAccepted(WebDriver driver, int timeout, final String text) {
-        new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                Boolean switched = false;
-                try {
-                    driver.switchTo().alert();
-                    if (driver.switchTo().alert().getText().contains(text)) {
-                        driver.switchTo().alert().accept();
-                        switched = true;
-                    }
-                } catch (Exception Ex) {
-                    // Couldn't switch!
-                }
-                return switched;
-            }
-        });
+        Alert alert = new WebDriverWait(driver, 60).until(ExpectedConditions.alertIsPresent());
+        if (alert.getText().contains(text)) {
+            alert.accept();
+        } else {
+            alert.dismiss();
+            Utility.illegalStateException("Incorrect Alert present with Text as '" + text + "'. "
+                    + "Expected text: '" + alert.getText() + "'");
+        }
+    }
+
+    /**
+     * Get Current NewYork Date
+     *
+     * @param driver
+     * @return
+     */
+    public static String getCurrentNewYorkDate(WebDriver driver) {
+        Calendar c = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"));
+        String dt = (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.DAY_OF_MONTH)
+                + "/" + c.get(Calendar.YEAR);
+        System.out.println("Date in US->" + dt);
+        return dt;
+    }
+
+    /**
+     * Get Next NewYork Date
+     *
+     * @param driver
+     * @param currentDate
+     * @return
+     */
+    public static String getNextNewYorkDate(WebDriver driver, String currentDate) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            c.setTime(sdf.parse(currentDate));
+        } catch (ParseException ex) {
+            Logger.getLogger(Utility.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        c.add(Calendar.DATE, 1);  // number of days to add
+        String nextDate = sdf.format(c.getTime());  // dt is now the new date
+        System.out.println("New date->" + nextDate);
+        return nextDate;
+    }
+
+    /**
+     *
+     * @param string
+     */
+    public static void copyContents(String string) {
+
+        StringSelection stringSelection = new StringSelection("Somesh");
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+
+        Robot robot = null;
+        try {
+            robot = new Robot();
+            robot.delay(1000);
+        } catch (AWTException ex) {
+            Logger.getLogger(Actions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //robot.keyPress(KeyEvent.VK_ENTER);
+        //robot.keyRelease(KeyEvent.VK_ENTER);
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+    }
+
+    /**
+     * Chrome Browser element Click limitation minimized by ROBOT functionality
+     *
+     * @param element
+     */
+    public static void robotclick(WebElement element) {
+        Robot robot = null;
+        try {
+            robot = new Robot();
+            robot.delay(1000);
+        } catch (AWTException ex) {
+            System.out.println("excptn:");
+            Logger.getLogger(Activity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        element.click();
+        robot.keyRelease(KeyEvent.VK_CONTROL);
     }
 }

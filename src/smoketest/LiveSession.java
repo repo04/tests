@@ -15,12 +15,11 @@ public class LiveSession extends BaseClass {
     Date now = new Date();
 
     /**
-     * Create & verify Live Session in
+     * Create & verify Live Session
      *
      * @param sclGrpName
      */
-    public void buildLiveSession(String sclGrpName) {
-
+    public void buildLiveSession() {
         String user = LoginPage.getUser();
         String liveSsnNm = null;
         String liveSsnDesc = null;
@@ -30,7 +29,10 @@ public class LiveSession extends BaseClass {
         switch (user.substring(0, 7)) {
             case "student":
             case "autostu":
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    liveSsnNm = "RgsnTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "RgsnTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     liveSsnNm = "SmkTstLvSsnInTchrSclGrpBYStdt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                     liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
@@ -39,7 +41,10 @@ public class LiveSession extends BaseClass {
                 }
                 break;
             default:
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    liveSsnNm = "RgsnTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "RgsnTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     liveSsnNm = "SmkTstLvSsn " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                     liveSsnDesc = "SmkTstLvSsnDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
@@ -50,21 +55,21 @@ public class LiveSession extends BaseClass {
 
         //Verify Navigated to Live Meeting creation page
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCrtSsn"));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCrtSsn"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnCrtSsn"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrtSsn"))).click();
         WebElement lvSsnNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH"))));
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
         dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         System.out.println(dateFormat.format(now));
-        WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));        
+        WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));
         new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), "60"));
-            
+
         //This is to verify lvSsnName & lvSsnDrtn field passes correct value 
         value:
         while (true) {
             lvSsnNm.clear();
             lvSsnNmDesc.clear();
-            lvSsnDrtn.clear();  
+            lvSsnDrtn.clear();
             lvSsnNm.sendKeys(liveSsnNm);
             lvSsnNmDesc.sendKeys(liveSsnDesc);
             lvSsnDrtn.sendKeys(xpv.getTokenValue("lvSsnDuration"));

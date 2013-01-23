@@ -5,6 +5,9 @@
 package runThrghTestNG;
 
 import java.util.Iterator;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -24,12 +27,14 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     static String[][] wrkngGrpArray = new String[1][1];
     static String[][] stdtName = new String[1][1];
     static String[][] tchrName = new String[1][1];
+    static String[][] pesTxtCrsSctnPost = new String[1][1];
+    static String[][] pesTxtAncmntCrsPost = new String[1][1];
+    static String[][] pesTxtCrsPostCmntsOn = new String[1][1];
+    static String[][] pesTxtCrsPostCmntsOff = new String[1][1];
 
     @DataProvider(name = "Users")
     public static Object[][] Users(ITestContext context) throws Exception {
-        System.out.println("init Users");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("if Users: " + test);
             return (usrsArray);
         } else {
@@ -40,9 +45,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     @DataProvider(name = "WrkngGrp")
     public static Object[][] WrkngGrp(ITestContext context) throws Exception {
-        System.out.println("init WrkngGrp");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("if WrkngGrp: " + test);
             return (wrkngGrpArray);
         } else {
@@ -50,12 +53,10 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
             return new Object[][]{{context.getCurrentXmlTest().getParameter("wrkngGrpName")}};
         }
     }
-    
+
     @DataProvider(name = "StdtName")
     public static Object[][] StdtName(ITestContext context) throws Exception {
-        System.out.println("init StdtName");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside StdtName: " + test);
             return (stdtName);
         } else {
@@ -118,6 +119,18 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Crs_GrpCrsCreation.AssgnmntName(context), StdtName(context));
     }
 
+    @DataProvider(name = "GrpCrsPESCoursePosts")
+    public static Iterator<Object[]> GrpCrsPESCoursePosts(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsPESCoursePosts");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+    }
+    
+    @DataProvider(name = "GrpCrsAnnouncement")
+    public static Iterator<Object[]> GrpCrsAnnouncement(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsAnnouncement");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtAncmntCrsPost);
+    }
+
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Student logs in, PES Admin Logs in
@@ -125,17 +138,17 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLgn() throws Exception {
+    public void testPESAdminLogin() throws Exception {
         a.login("pesAdmin");
     }
 
     /**
-     * Create Two Users
+     * Create Two UserstestUsrCrtn
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "usrs.creation"})
-    public void testUsrCrtn() throws Exception {
+    @Test(groups = {"regressionSmoke", "fullSmoke", "users.creation"})
+    public void testUserCreation() throws Exception {
 
         a.navigateToMyContacts();
         usrsArray[0][0] = a.createUser("teacher");
@@ -144,7 +157,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
         a.navigateToMyContacts();
         usrsArray[0][1] = a.createUser("student");
-        stdtName[0][0] = usrsArray[0][1];        
+        stdtName[0][0] = usrsArray[0][1];
         System.out.println("stdtUsrName: " + usrsArray[0][1]);
         Reporter.log("stdtUsrName: " + usrsArray[0][1]);
     }
@@ -154,16 +167,16 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", groups = {"fullsmoke", "usrs.assgnRole"})
-    public void testAsgnRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
+    @Test(dataProvider = "GrpCrsUsers", groups = {"regressionSmoke", "fullSmoke", "users.assignRole"})
+    public void testAssignRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.enrollUsrToRole_GrpCrs(tchrUsrName, grpCrsName);
+        a.selectGroupCourse(grpCrsName);
+        a.enrollUserToRole_GroupCourse(tchrUsrName, grpCrsName);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.enrollUsrToRole_GrpCrs(stdtUsrName, grpCrsName);
+        a.selectGroupCourse(grpCrsName);
+        a.enrollUserToRole_GroupCourse(stdtUsrName, grpCrsName);
     }
 
     /**
@@ -171,8 +184,8 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "wrkngGrp.create"})
-    public void testCrtWrkgnGrp() throws Exception {
+    @Test(groups = {"regressionSmoke", "fullSmoke", "workingGroup.create"})
+    public void testCreateWorkingGroup() throws Exception {
 
         a.navigateToWorkingGroups();
         wrkngGrpArray[0][0] = a.createWorkingGroup();
@@ -185,11 +198,89 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpUsers", groups = {"fullsmoke", "wrkngGrp.addMbrs"})
-    public void testAddMbrsToWrkngGrp(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+    @Test(dataProvider = "WrkngGrpUsers", groups = {"regressionSmoke", "fullSmoke", "workingGroup.addMembers"})
+    public void testAddMembersToWorkingGroup(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
-        a.accessWrknGrp(wrkngGrpName);
-        a.addMbrsToWrkngGrp(tchrUsrName, stdtUsrName);
+        a.accessWorkingGroup(wrkngGrpName);
+        a.addMembersToWorkingGroup(tchrUsrName, stdtUsrName);
+    }
+
+    /**
+     * Post Text on Course Section
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "wall.courseSectionPost"})
+    public void testPesAdminPostTextOnCourseSection(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtCrsSctnPost[0][0] = a.textPost("txtCrsSctnPost");
+        Reporter.log("pesTxtCrsSctnPost: " + pesTxtCrsSctnPost[0][0], true);
+    }
+    
+    /**
+     * Post Text with Comments enabled on Course Wall
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "wall.coursePostCommentsOn"})
+    public void testPesAdminPostTextOnCourseCommentsOn(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtCrsPostCmntsOn[0][0] = a.textPost("txtCrsPostCmntsOn");
+        Reporter.log("pesTxtCrsPost: " + pesTxtCrsPostCmntsOn[0][0], true);
+        ip.isElementPresentByXPATH(driver, "//li[1]/div/div[4]/label/a/label");
+    }
+
+    /**
+     * Post Text with Comments disabled on Course Wall
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "wall.coursePostCommentsOff"})
+    public void testPesAdminPostTextOnCourseCommentsOff(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtCrsPostCmntsOff[0][0] = a.textPost("txtCrsPostCmntsOff");
+        Reporter.log("pesTxtCrsPost: " + pesTxtCrsPostCmntsOff[0][0], true);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
+    }
+    
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
+    public void testPesAdminPostAnnouncementOnAllCourseSection(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pesTxtAncmntCrsPost[0][0] = a.textPost("txtAncmntCrsPost");
+        Reporter.log("pesTxtAncmntCrsPost: " + pesTxtAncmntCrsPost[0][0], true);
+    }
+    
+    /**
+     * Pes Admin verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.pesAdminVerify"})
+    public void testPesAdminVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
+    
+    /**
+     * PesAdmin verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.pesAdminVerify"})
+    public void testPesAdminVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
     }
 
     /**

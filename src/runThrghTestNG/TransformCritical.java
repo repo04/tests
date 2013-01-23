@@ -33,87 +33,87 @@ public class TransformCritical implements IAnnotationTransformer {
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
 
-        if ("testStdtJoinsTchrSclGrp".equals(testMethod.getName())) {
-            System.out.println("Inside testStdtJoinsTchrSclGrp");
+        if ("testStudentJoinsTeacherSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentJoinsTeacherSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp";
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStdtPostURLOnTchrSclGrp".equals(testMethod.getName())) {
-            System.out.println("Inside testStdtPostURLOnTchrSclGrp");
+        if ("testStudentPostURLOnTeacherSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentPostURLOnTeacherSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testStdtJoinsTchrSclGrp";
+            DependentMethods[0] = "testStudentJoinsTeacherSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStdtCmntOnTchrCrsPost".equals(testMethod.getName())) {
-            System.out.println("Inside testStdtCmntOnTchrCrsPost");
+        if ("testStudentCommentOnTeacherCoursePost".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentCommentOnTeacherCoursePost");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrPostsOn_Wall_CrsWall";
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherPostsOn_Wall_CourseWall";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTchrCrtLvSsn".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrCrtLvSsn");
+        if ("testTeacherCreateLiveSession".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherCreateLiveSession");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp";
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStdtCrtLvSsn".equals(testMethod.getName())) {
-            System.out.println("Inside testStdtCrtLvSsn");
+        if ("testStudentCreateLiveSession".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentCreateLiveSession");
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
-            DependentMethods[1] = "runThrghTestNG.TchrLvSsn_GglDoc.testTchrCrtLvSsn";
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
+            DependentMethods[1] = "runThrghTestNG.TchrLvSsn_GglDoc.testTeacherCreateLiveSession";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTchrJoinsStdtSclGrp".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrJoinsStdtSclGrp");
+        if ("testTeacherJoinsStudentSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherJoinsStudentSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp";
+            DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStudentCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTchrLeavesStdtSclGrp".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrLeavesStdtSclGrp");
+        if ("testTeacherLeavesStudentSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherLeavesStudentSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testTchrJoinsStdtSclGrp";
+            DependentMethods[0] = "testTeacherJoinsStudentSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTchrDeleteSclGrp".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrDeleteSclGrp");
+        if ("testTeacherDeleteSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherDeleteSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrCrtSclGrp";
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStdtDeleteSclGrp".equals(testMethod.getName())) {
-            System.out.println("Inside testStdtDeleteSclGrp");
+        if ("testStudentDeleteSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentDeleteSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStdtCrtSclGrp";
+            DependentMethods[0] = "runThrghTestNG.StdtLvSsn_SclGrp_GglDoc.testStudentCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTchrVerifyEmails".equals(testMethod.getName())) {
-            System.out.println("Inside testTchrVerifyEmails");
+        if ("testTeacherVerifyEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyEmails");
             DependentMethods = new String[4];
-            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
-            DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtCmntOnTchrCrsPost";
-            DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
-            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
+            DependentMethods[0] = "runThrghTestNG.StdtJnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
+            DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStudentCommentOnTeacherCoursePost";
+            DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTeacherJoinsStudentSocialGroup";
+            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStudentDeleteSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
-        if ("testStdtVerifyEmails".equals(testMethod.getName())) {
-            System.out.println("Inside testStdtVerifyEmails");
+        if ("testStudentVerifyEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyEmails");
             DependentMethods = new String[4];
-            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTchrPostURLOnStdtsWall";
-            DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStdtJoinsTchrSclGrp";
-            DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTchrJoinsStdtSclGrp";
-            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStdtDeleteSclGrp";
+            DependentMethods[0] = "runThrghTestNG.TchrPosts_SclGrp.testTeacherPostURLOnStudentsWall";
+            DependentMethods[1] = "runThrghTestNG.StdtJnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
+            DependentMethods[2] = "runThrghTestNG.TchrJoin_Delete_SclGrp.testTeacherJoinsStudentSocialGroup";
+            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStudentDeleteSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

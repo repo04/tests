@@ -4,10 +4,12 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -19,8 +21,20 @@ import smoketest.Actions;
 public class StdtJnSclGrp_Post extends BaseClass {
 
     static String stdtUrlPostOnTchrSclGrp;
-    static String stdtTxtCmntOnTchrCrsPost;
+    static String[][] stdtTxtCmntOnTchrCrsPost = new String[1][1];
+    static String[][] noteCourse = new String[1][1];
+    static String[][] noteWall = new String[1][1];
     Actions a = new Actions();
+
+    @DataProvider(name = "Note")
+    public static Object[][] Note(ITestContext context) throws Exception {
+        return (noteWall);
+    }
+    
+    @DataProvider(name = "CrsStdtCmnt")
+    public static Iterator<Object[]> StdtTxtCmntOnTchrCrsPost(ITestContext context) throws Exception {
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -29,8 +43,8 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testStdtLgn(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+    public void testStudentLogin(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
@@ -43,8 +57,8 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.stdtJoins"})
-    public void testStdtJoinsTchrSclGrp(String tchrSclGrpName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentJoinTeachers"})
+    public void testStudentJoinsTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(tchrSclGrpName);
         a.joinSocialGroup(tchrSclGrpName);
@@ -56,13 +70,12 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.stdtPostURL"})
-    public void testStdtPostURLOnTchrSclGrp(String tchrSclGrpName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentPostURLOnTeachers"})
+    public void testStudentPostURLOnTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(tchrSclGrpName);
+        a.accessSocialGroupWall(tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
-        System.out.println("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
-        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp);
+        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp, true);
     }
 
     /**
@@ -71,30 +84,189 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "stdtCmnt.TchrCrsPost"})
-    public void testStdtCmntOnTchrCrsPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
-        a.selectGrpCourse(grpCrsName);
-        stdtTxtCmntOnTchrCrsPost = a.textCmntPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
-        System.out.println("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
-        Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost);
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "wall.studentCommentOnTeacherCoursePost"})
+    public void testStudentCommentOnTeacherCoursePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+        a.selectGroupCourse(grpCrsName);
+        stdtTxtCmntOnTchrCrsPost[0][0] = a.textCommentPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
+        Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost[0][0], true);
+    }
+    
+    /**
+     * Student verifies PES posts on Course Wall
+     * 
+     * @param grpCrsName
+     * @param pesTxtCrsSctnPost
+     * @param pesTxtCrsPostCmntsOn
+     * @param pesTxtCrsPostCmntsOff
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"regressionSmoke", "wall.studentVerifyPESCoursePosts"})
+    public void testStudentVerifyPESCoursePost(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff, String pesTxtAncmntCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifyCoursePost(pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+    }
+    
+    /**
+     * Student recommend Teacher's URL Course Post
+     * 
+     * @param grpCrsName
+     * @param tchrUrlCrsPost
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = TchrPosts_SclGrp.class,
+          groups = {"regressionSmoke", "wall.studentRecommendPost"})
+    public void testStudentRecommendCourseURLPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.recommendURLCoursePost(tchrUrlCrsPost);
     }
     
     /**
      * Submit Assignment
-     * 
+     *
      * @param grpCrsName
      * @param allInOneAsgnmntAvtvtyName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.sbmtAsgnmnt"})
-    public void testSubmitAsgnmnt(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "assignment.submit"})
+    public void testSubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.navigateToActvtyRprt();
-        a.submitAssgnmnt(allInOneAsgnmntAvtvtyName);
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.submitAssignment(allInOneAsgnmntAvtvtyName);
     }
 
+    /**
+     * Create Note on Course Wall
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "note.createOnCourseWall"})
+    public void testCreateNoteOnCourseWall(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        noteCourse[0][0] = a.createNote(grpCrsName);
+    }
+
+    /**
+     * Create Note on Profile Wall
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "note.createOnProfileWall"})
+    public void testCreateNoteOnProfileWall() throws Exception {
+        a.navigateToMyWall();
+        noteWall[0][0] = a.createNote("Profile");
+    }
+    
+    /**
+     * Verify Note Sorting 
+     * 
+     * @param profileNote
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Note", groups = {"regressionSmoke", "note.verifySorting"})
+    public void testVerifyNoteSorting(String profileNote) throws Exception {
+        a.navigateToMyWall();
+        a.verifyNoteSorting(profileNote);
+    }
+
+    /**
+     * Delete Note 
+     * 
+     * @param profileNote
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Note", groups = {"regressionSmoke", "note.deleteProfile"})
+    public void testDeleteProfileNote(String profileNote) throws Exception {
+        a.navigateToMyWall();
+        a.deleteNote(profileNote);
+    }
+    
+    /**
+     * Verify Resources
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "resources.verify"})
+    public void testVerifyResources() throws Exception {
+        a.navigateToMyHome();
+        a.verifyResources();
+    }
+    
+    /**
+     * Verify Footers
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "footers.verify"})
+    public void testVerifyFooters() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFooters();
+    }
+    
+    /**
+     * Verify Syllabus Activity
+     * 
+     * @param grpCrsName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class, 
+          groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
+    public void testStudentVerifySyllabusActivity(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifySyllabusActivity();
+    }
+    
+    /**
+     * Student verify Resume
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "resume.studentVerify"})
+    public void testStudentVerifyResume() throws Exception {
+        a.navigateToMyWall();
+        a.verifyResume();
+    }
+    
+    /**
+     * Student verify Personal Information
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "personalInfo.studentVerify"})
+    public void testStudentVerifyPersonalInfo() throws Exception {
+        a.navigateToMyPersonalInfo();
+        a.verifyPersonalInfo();
+    }
+    
+    /**
+     * Student verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.studentVerify"})
+        public void testStudentVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
+    
+    /**
+     * Student verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.studentVerify"})
+    public void testStudentVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the
@@ -103,7 +275,7 @@ public class StdtJnSclGrp_Post extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testStdtLogOut() throws Exception {
+    public void testStudentLogOut() throws Exception {
         a.logOut();
     }
 }

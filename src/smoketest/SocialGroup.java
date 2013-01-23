@@ -4,11 +4,9 @@ import com.thoughtworks.selenium.SeleneseTestBase;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
@@ -29,7 +27,9 @@ public class SocialGroup extends BaseClass {
         switch (user.substring(0, 7)) {
             case "student":
             case "autostu":
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    this.sclGrpName = "RgsnTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
                     this.sclGrpName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -39,7 +39,9 @@ public class SocialGroup extends BaseClass {
                 break;
             case "teacher":
             case "autotea":
-                if (test.equalsIgnoreCase("SmokeTests")) {
+                if (test.equalsIgnoreCase("RegressionTests")) {
+                    this.sclGrpName = "RgsnTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
                     this.sclGrpName = "CrtclTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -107,9 +109,19 @@ public class SocialGroup extends BaseClass {
      */
     public void leaveSocialGroup(String stdtSclGrpName) {
         Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
-        ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
-        ip.isElementPresentContainsTextByXPATH(driver, "Leave Group");
-        driver.findElement(By.xpath("//*[contains(text(),'Leave Group')]")).click();
+        int i = 2;
+
+        while (true) {
+            try {
+                ip.isTextPresentByXPATH(driver, "//li[" + i + "]/div/div[2]/div/a", stdtSclGrpName, 5);
+                break;
+            } catch (TimeoutException e) {
+                System.out.println(stdtSclGrpName + " is not found at " + i + " position");
+                i++;
+            }
+        }
+
+        driver.findElement(By.xpath("//li[" + i + "]/div/div[3]/a")).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyRmvSclGrpXPATH"), "Are you sure you want to remove yourself from the group " + stdtSclGrpName + "?");
 
         //XPATH didn't work
@@ -133,27 +145,14 @@ public class SocialGroup extends BaseClass {
         driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnDeleteGrp"))).click();
-
-        //Get a handle to the open alert, prompt or confirmation
-        final Alert alert = driver.switchTo().alert();
-
-        //Verify alert popup
-        (new WebDriverWait(driver, 60)).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return alert.getText().contentEquals("Do you really want to delete this group?");
-            }
-        });
-
-        //And acknowledge the alert (equivalent to clicking "OK")
-        alert.accept();
+        Utility.waitForAlertToBeAccepted(driver, 60, "Do you really want to delete this group?");
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
     }
 
     /**
      * @return SclGrpName
      */
-    public String getSclGrpName() {
+    public String getSocialGroupName() {
         return this.sclGrpName;
     }
 }

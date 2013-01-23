@@ -22,14 +22,12 @@ import smoketest.Actions;
 public class TchrLvSsn_GglDoc extends BaseClass {
 
     static String[][] gglDocArray = new String[1][1];
+    static String[][] filesArray = new String[1][3];
     Actions a = new Actions();
 
     @DataProvider(name = "GglDoc")
     public static Object[][] GglDoc(ITestContext context) throws Exception {
-
-        System.out.println("init GglDoc");
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("if GglDoc: " + test);
             return (gglDocArray);
         } else {
@@ -43,6 +41,20 @@ public class TchrLvSsn_GglDoc extends BaseClass {
         System.out.println("init WrkngGrpGgleDoc");
         return DataProviderUtil.cartesianProviderFrom(UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), GglDoc(context));
     }
+    
+    @DataProvider(name = "Files")
+    public static Object[][] Files(ITestContext context) throws Exception {
+        filesArray[0][0] = "UploadPDF_2Mb.pdf";
+        filesArray[0][1] = "UploadPPT_4Mb.pptx";
+        filesArray[0][2] = "UploadWord_14Mb.doc";
+        return (filesArray);        
+    }
+    
+    @DataProvider(name = "GrpCrsFiles")
+    public static Iterator<Object[]> GrpCrsFiles(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsFiles");
+        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Files(context));
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -51,8 +63,8 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTchrLgn(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+    public void testTeacherLogin(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
@@ -65,12 +77,12 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "tchrLvSsn.create"})
-    public void testTchrCrtLvSsn(String tchrSclGrpName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.teacherCreate"})
+    public void testTeacherCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(tchrSclGrpName);
-        a.accessLvSsnWall();
-        a.createLiveSsn(tchrSclGrpName);
+        a.accessSocialGroupWall(tchrSclGrpName);
+        a.accessLiveSessionWall();
+        a.createLiveSession();
     }
 
     /**
@@ -79,8 +91,8 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"fullsmoke", "wrkngGrp.tchrCrtGglDoc"})
-    public void testTchrCrtGglDoc(String wrkngGrpName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "workingGroup.teacherCreateGoogleDoc"})
+    public void testTeacherCreateGoogleDoc(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         gglDocArray[0][0] = a.createGoogleDoc(wrkngGrpName);
         System.out.println("gglDocName: " + gglDocArray[0][0]);
@@ -93,28 +105,61 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.tchrVrfy"})
-    public void testTchrVrfyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "activites.teacherVerify"})
+    public void testTeacherVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.navigateToActvtyRprt();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
         a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
     }
-    
+
     /**
-     * Grade Assignment 
-     * 
+     * Grade Assignment
+     *
      * @param grpCrsName
      * @param allInOneAsgnmntAvtvtyName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.gradeAsgnmnt"})
-    public void testTchrGradeAsgnmnt(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "assignment.grade"})
+    public void testTeacherGradeAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         a.navigateToGrades();
-        a.gradeAsgnmnt(allInOneAsgnmntAvtvtyName);
+        a.gradeAssignment(allInOneAsgnmntAvtvtyName);
+    }
+
+    /**
+     * Teacher upload files of multiple formats(pdf, pptx, doc)
+     * 
+     * @param grpCrsName
+     * @param pdf
+     * @param pptx
+     * @param doc
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsFiles", groups = {"regressionSmoke", "files.teacherUploadInCourse"})
+    public void testTeacherUploadFilesInCourse(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToFiles();
+        a.uploadFiles(pdf, pptx, doc);
+    }
+
+    /**
+     * Teacher verify all uploaded files in Portfolio
+     * 
+     * @param grpCrsName
+     * @param pdf
+     * @param pptx
+     * @param doc
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Files", groups = {"regressionSmoke", "files.teacherVerifyInPortfolio"})
+    public void testTeacherVerifyFilesInPortfolio(String pdf, String pptx, String doc) throws Exception {
+        a.navigateToMyHome();
+        a.navigateToPortfolio();
+        a.verifyFilesInPortfolio(doc, pptx, pdf);
     }
     
     /**
@@ -124,7 +169,7 @@ public class TchrLvSsn_GglDoc extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTchrLogOut() throws Exception {
+    public void testTeacherLogOut() throws Exception {
         a.logOut();
     }
 }

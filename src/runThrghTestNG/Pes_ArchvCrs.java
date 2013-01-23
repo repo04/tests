@@ -24,7 +24,7 @@ public class Pes_ArchvCrs {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLgn() throws Exception {
+    public void testPESAdminLogin() throws Exception {
         a.login("pesAdmin");
     }
     
@@ -33,9 +33,9 @@ public class Pes_ArchvCrs {
      * 
      * @throws Exception 
      */
-    @Test(groups = {"fullsmoke", "course.archive"})
-    public void testArchvCrs() throws Exception {
-        a.archiveCrs(Crs_GrpCrsCreation.crsName);
+    @Test(groups = {"regressionSmoke", "fullSmoke", "course.archive"})
+    public void testArchiveCourse() throws Exception {
+        a.archiveCourse(Crs_GrpCrsCreation.crsName);
     }
     
      /**

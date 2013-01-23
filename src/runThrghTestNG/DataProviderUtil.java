@@ -11,7 +11,7 @@ import java.util.Set;
 public class DataProviderUtil {
 
     /**
-     * Given a variable list of @DataProvider results, generate a cartesian product of available combinations.
+     * Given a variable list of @DataProvider results, generate a Cartesian product of available combination's.
      *
      * @param dataProviderData A vararg list of @DataProvider results
      * @return The cartesian product of available combinations.
@@ -21,7 +21,7 @@ public class DataProviderUtil {
     }
 
     /**
-     * Given a list of @DataProvider results, generate a cartesian product of available combinations.
+     * Given a list of @DataProvider results, generate a Cartesian product of available combination's.
      *
      * @param dataProviderData A list of @DataProvider results
      * @return The cartesian product of available combinations.

@@ -12,40 +12,40 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class IsPresent {
 
     /**
-     * Driver checks if the given txtByCSS is present in the specified element
-     * by CSS
+     * Driver checks if the given TEXT is present in the specified element by
+     * CSS
      *
      * @param driver
-     * @param textPostCSS
-     * @param txtByCSS
+     * @param css
+     * @param text
      */
-    public void isTextPresentByCSS(WebDriver driver, String textPostCSS, String txtByCSS) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.cssSelector(textPostCSS), txtByCSS));
+    public void isTextPresentByCSS(WebDriver driver, String css, String text) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.cssSelector(css), text));
     }
 
     /**
-     * Driver checks if the given txtByXPATH is present in the specified element
-     * by XPATH
+     * Driver checks if the given TEXT is present in the specified element by
+     * PATH
      *
      * @param driver
-     * @param headingTextPath
-     * @param txtByXPATH
+     * @param path
+     * @param text
      */
-    public void isTextPresentByXPATH(WebDriver driver, String headingTextPath, String txtByXPATH) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath(headingTextPath), txtByXPATH));
+    public void isTextPresentByXPATH(WebDriver driver, String path, String text) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath(path), text));
     }
 
     /**
-     * Driver checks if the given txtByXPATH is present in the specified element
-     * by XPATH till allocated time
+     * Driver checks if the given TEXT is present in the specified element by
+     * XPATH till allocated time
      *
      * @param driver
-     * @param headingTextPath
-     * @param txtByXPATH
+     * @param path
+     * @param text
      * @param wait
      */
-    public void isTextPresentByXPATH(WebDriver driver, String headingTextPath, String txtByXPATH, int wait) {
-        new WebDriverWait(driver, wait).until(ExpectedConditions.textToBePresentInElement(By.xpath(headingTextPath), txtByXPATH));
+    public void isTextPresentByXPATH(WebDriver driver, String path, String text, int wait) {
+        new WebDriverWait(driver, wait).until(ExpectedConditions.textToBePresentInElement(By.xpath(path), text));
     }
 
     /**
@@ -53,10 +53,10 @@ public class IsPresent {
      * DOM of a page
      *
      * @param driver
-     * @param elmntByXPATH
+     * @param elementText
      */
-    public void isElementPresentContainsTextByXPATH(WebDriver driver, String elmntByXPATH) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'" + elmntByXPATH + "')]")));
+    public void isElementPresentContainsTextByXPATH(WebDriver driver, String elementText) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'" + elementText + "')]")));
     }
 
     /**
@@ -64,40 +64,40 @@ public class IsPresent {
      * DOM of a page
      *
      * @param driver
-     * @param elmntByXPATH
+     * @param elementText
      */
-    public void isElementPresentStartsWithTextByXPATH(WebDriver driver, String elmntByXPATH) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[starts-with(text(),'" + elmntByXPATH + "')]")));
+    public void isElementPresentStartsWithTextByXPATH(WebDriver driver, String elementText) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[starts-with(text(),'" + elementText + "')]")));
     }
 
     /**
      * Driver checks if an element is present by LINK on the DOM of a page
      *
      * @param driver
-     * @param elmntByLINK
+     * @param elementByLINK
      */
-    public void isElementPresentByLINK(WebDriver driver, String elmntByLINK) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elmntByLINK)));
+    public void isElementPresentByLINK(WebDriver driver, String elementByLINK) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elementByLINK)));
     }
 
     /**
      * Driver checks if an element is present by ID on the DOM of a page
      *
      * @param driver
-     * @param elmntByID
+     * @param elementByID
      */
-    public void isElementPresentByID(WebDriver driver, String elmntByID) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.id(elmntByID)));
+    public void isElementPresentByID(WebDriver driver, String elementByID) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.id(elementByID)));
     }
 
     /**
      * Driver checks if an element is present by XPATH on the DOM of a page
      *
      * @param driver
-     * @param elmtByXPATH
+     * @param elementByXPATH
      */
-    public void isElementPresentByXPATH(WebDriver driver, String elmtByXPATH) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(elmtByXPATH)));
+    public void isElementPresentByXPATH(WebDriver driver, String elementByXPATH) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(elementByXPATH)));
     }
 
     /**
@@ -109,14 +109,25 @@ public class IsPresent {
     public void isTitlePresent(WebDriver driver, String isTitle) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.titleIs(isTitle));
     }
-    
+
     /**
      * Driver checks if the current title contains isTitle
-     * 
+     *
      * @param driver
-     * @param isTitle 
+     * @param isTitle
      */
     public void isTitleContains(WebDriver driver, String isTitle) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.titleContains(isTitle));
+    }
+
+    /**
+     * Driver finds an element by XPATH if its visible and enabled such that can
+     * be clicked
+     *
+     * @param driver
+     * @param elementClickable
+     */
+    public void isElementClickableByXpath(WebDriver driver, String elementClickable, int time) {
+        new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(By.xpath(elementClickable)));
     }
 }

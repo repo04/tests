@@ -4,16 +4,12 @@
  */
 package smoketest;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -34,7 +30,10 @@ public class Activity extends BaseClass {
      */
     public void crtForumActvty() {
         String forumIntro;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.forumName = "RgsnTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            forumIntro = "RgsnTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             forumIntro = "SmkTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -55,7 +54,10 @@ public class Activity extends BaseClass {
      */
     public void crtQuizActvty() {
         String quizIntro;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.quizName = "RgsnTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "RgsnTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -75,9 +77,12 @@ public class Activity extends BaseClass {
     /**
      * Create & Verify AllInOneAsgnmnt Activity
      */
-    public void crtAllInOneAsgnmntActvty() {
+    public void createAllInOneAssignmentActivity() {
         String allInOneAsgnmntIntro;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.allInOneAsgnmntName = "RgsnTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            allInOneAsgnmntIntro = "RgsnTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             allInOneAsgnmntIntro = "SmkTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -98,7 +103,10 @@ public class Activity extends BaseClass {
      */
     public void createPageResource() {
         String pageContent;
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.pageName = "RgsnTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            pageContent = "RgsnTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             pageContent = "SmkTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
@@ -115,6 +123,27 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(pageContent);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), pageContent);
+    }
+
+    /**
+     * Create - Syllabus Activity
+     */
+    public void createSyllabusActivity() {
+        String sylbsIntro;
+        sylbsIntro = "RgsnTstSylbsIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddSyllbsActvyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddSyllbsActvyXPATH")))).selectByVisibleText("Page");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
+
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys("Syllabus");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(sylbsIntro);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), sylbsIntro);
+        ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
+        driver.findElement(By.linkText("Syllabus")).click();
+        ip.isTextPresentByCSS(driver, "li.listentry > a", "Syllabus");
     }
 
     /**
@@ -160,7 +189,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).sendKeys("1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGradeXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnAddQzQstnXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnAddQzQstnXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnAddQzQstnXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtQzQstnTypeScrnXPATH"), "Choose a question type to add");
         driver.findElement(By.xpath(xpv.getTokenValue("radioBtnQstnTypeXPATH"))).click();
@@ -183,6 +212,7 @@ public class Activity extends BaseClass {
     public void submitQuiz(String quizActvtyName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActvtyName + "')]")).click();
         int i = 1;
+        int rows;
 
         Boolean attempt;
         try {
@@ -193,17 +223,9 @@ public class Activity extends BaseClass {
         }
 
         if (attempt) {
-            click:
-            for (; i < 101; i++) {
-                try {
-                    new WebDriverWait(driver, 15).until(ExpectedConditions.
-                            presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
-                    System.out.println("i value: " + i);
-                } catch (TimeoutException e) {
-                    System.out.println("catch i value: " + i);
-                    break click;
-                }
-            }
+            rows = driver.findElements(By.xpath("//div[@id='region-main']/div/table/tbody/tr")).size();
+            System.out.println("rows: " + rows);
+            i = rows + 1;
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
@@ -238,12 +260,14 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void submitAssgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void submitAssignment(String allInOneAsgnmntAvtvtyName) {
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAsgnmntAvtvtyName + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.
+                presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
 
@@ -251,22 +275,23 @@ public class Activity extends BaseClass {
         int i = 1;
         end:
         while (i < 6) {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldAsgntRspXPATH"))).clear();
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldAsgntRspXPATH"))).sendKeys(asgmntRspns);
+            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Font family")));
+            List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+            System.out.println("iframes count:" + iframes.size());
+            for (WebElement frame : iframes) {
+                System.out.println("Iframe ID: " + frame.getAttribute("id"));
+                driver.switchTo().frame(frame.getAttribute("id"));
+                break;
+            }
+
+            //Switch focus
+            WebElement editableTxtArea = driver.switchTo().activeElement();
+            editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), asgmntRspns);
+            driver.switchTo().defaultContent();
+
             List<WebElement> elements = driver.findElements(By.tagName("input"));
             System.out.println("Total inputs: " + elements.size());
-            Robot robot = null;
-            try {
-                robot = new Robot();
-                robot.delay(1000);
-            } catch (AWTException ex) {
-                System.out.println("excptn:");
-                Logger.getLogger(Activity.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            elements.get(22).click();
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-
+            Utility.robotclick(elements.get(22));
             if (i < 5) {
                 if (brwsr.equalsIgnoreCase("chrome")) {
                     try {
@@ -299,6 +324,7 @@ public class Activity extends BaseClass {
         } catch (TimeoutException e) {
             wndwFnd = false;
             System.out.println("feedback window not found");
+            //Utility.illegalStateException("Feedback Window did not triggered");
         }
 
         if (wndwFnd) {
@@ -313,19 +339,24 @@ public class Activity extends BaseClass {
                 y++;
             }
         }
-
-        //Temporary solution till the time 'BUG' is resolved
-        if (program.contains("prod")) {
-            System.out.println("in prod txtVrfyRspsXPATH");
-            driver.switchTo().window(HandleBefore);
-            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyRspsXPATH"), asgmntRspns);
-        } else {
-            System.out.println("not in prod txtVrfyRspsXPATH");
-            driver.switchTo().window(HandleBefore);
-            ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
-        }
+        driver.switchTo().window(HandleBefore);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.
+                presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
+        driver.switchTo().window(HandleBefore);
+        ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 
         //************NOT TO BE DELETED AS OF NOW************//
+        //Temporary solution till the time 'BUG' is resolved
+        /*if (program.contains("prod")) {
+         System.out.println("in prod txtVrfyRspsXPATH");
+         driver.switchTo().window(HandleBefore);
+         //div/table/tbody/tr[2]/td/div
+         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyRspsXPATH"), asgmntRspns);
+         } else {
+         System.out.println("not in prod txtVrfyRspsXPATH");
+         driver.switchTo().window(HandleBefore);
+         ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", asgmntRspns);
+         }*/
 
         //driver.findElement(By.xpath("//input[@name='formarking']")).click();
         //driver.findElement(By.name("formarking")).click();
@@ -395,14 +426,14 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void gradeAsgnmnt(String allInOneAsgnmntAvtvtyName) {
+    public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
 
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldGrdAsgntXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).sendKeys("62");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGrdAsgntXPATH"))).click();
@@ -417,7 +448,7 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void vrfyAsgnmntGrade(String allInOneAsgnmntAvtvtyName) {
+    public void verifyAssignmentGrade(String allInOneAsgnmntAvtvtyName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "62/100 (62%)");
@@ -429,22 +460,15 @@ public class Activity extends BaseClass {
      *
      * @param allInOneAsgnmntAvtvtyName
      */
-    public void allwResbmtAsgnmnt(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
-        String stdtFstName;
-        if (test.equalsIgnoreCase("SmokeTests")) {
-            stdtFstName = stdtUsrName + "fstNm";
-        } else {
-            stdtFstName = stdtUsrName.substring(0, 4);
-        }
-
+    public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Allow Resubmit")));
         driver.findElement(By.linkText("Allow Resubmit")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtFstName + " to resubmit this assignment?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtUsrName + " to resubmit this assignment?");
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtFstName + " and mail sent.");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtUsrName + " and mail sent.");
         driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
@@ -492,7 +516,7 @@ public class Activity extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/a", elementName, 5);
                 break;
             } catch (TimeoutException e) {
-                System.out.println(elementName + "not present at x: " + x);
+                System.out.println(elementName + " not present at x: " + x);
                 x = x + 2;
             }
         }
@@ -516,7 +540,7 @@ public class Activity extends BaseClass {
     /**
      * @return AllInOneAsgnmntName
      */
-    public String getAllInOneAsgnmntActvyName() {
+    public String getAllInOneAssignmentActivityName() {
         return this.allInOneAsgnmntName;
     }
 

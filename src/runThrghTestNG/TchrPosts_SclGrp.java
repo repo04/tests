@@ -51,8 +51,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTchrLgn(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+    public void testTeacherLogin(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
@@ -65,8 +65,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "criticalsmoke", "tchrPosts.wallCrs"})
-    public void testTchrPostsOn_Wall_CrsWall(String grpCrsName) throws Exception {
+    groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "wall.teacherPostsOnProfileCourseWall"})
+    public void testTeacherPostsOn_Wall_CourseWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
         tchrTxtWallPost = a.textPost("txtWallPost");
         System.out.println("tchrTxtWallPost: " + tchrTxtWallPost);
@@ -77,7 +77,7 @@ public class TchrPosts_SclGrp extends BaseClass {
         System.out.println("tchrUrlWallPost: " + tchrUrlWallPost);
         Reporter.log("tchrUrlWallPost: " + tchrUrlWallPost);
 
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         tchrUrlCrsPostArray[0][0] = a.urlPost("urlCrsPost");
         System.out.println("tchrUrlCrsPost: " + tchrUrlCrsPostArray[0][0]);
         Reporter.log("tchrUrlCrsPost: " + tchrUrlCrsPostArray[0][0]);
@@ -88,8 +88,8 @@ public class TchrPosts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "criticalsmoke", "tchrSclGrp.create"})
-    public void testTchrCrtSclGrp() throws Exception {
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherCreate"})
+    public void testTeacherCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
         tchrSclGrpArray[0][0] = a.createSocialGroup();
         System.out.println("tchrSclGrpName: " + tchrSclGrpArray[0][0]);
@@ -103,13 +103,77 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
-          groups = {"criticalsmoke", "tchrPosts.stdtWall"})
-    public void testTchrPostURLOnStdtsWall(String tchrUsrName, String stdtUsrName) throws Exception {
+    groups = {"criticalsmoke", "teacherPosts.studentsWall"})
+    public void testTeacherPostURLOnStudentsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
-        a.navigateToContactsWall(stdtUsrName.substring(0, 4) + " " + stdtUsrName.substring(4));
+        a.navigateToContactsWall(stdtUsrName);
         tchrUrlPostOnStdtWall = a.textPost("tchrUrlPostOnStdtWall");
         System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
         Reporter.log("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
+    }
+
+    /**
+     * Teacher verifies PES posts on Course Wall
+     *
+     * @param grpCrsName
+     * @param pesTxtCrsSctnPost
+     * @param pesTxtCrsPostCmntsOn
+     * @param pesTxtCrsPostCmntsOff
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+    groups = {"regressionSmoke", "wall.teacherVerifyPESCoursePosts"})
+    public void testTeacherVerifyPESCoursePosts(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff, String pesTxtAncmntCrsPost) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifyCoursePost(pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+    }
+
+    /**
+     * Verify Syllabus Activity
+     * 
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    groups = {"regressionSmoke", "activity.teacherVerifySyllabus"})
+    public void testTeacherVerifySyllabusActivity(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.verifySyllabusActivity();
+    }
+    
+    /**
+     * Teacher verify Resume
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "resume.teacherVerify"})
+    public void testTeacherVerifyResume() throws Exception {
+        a.navigateToMyWall();
+        a.verifyResume();
+    }
+    
+    /**
+     * Teacher verify Personal Information
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "personalInfo.teacherVerify"})
+    public void testTeacherVerifyPersonalInfo() throws Exception {
+        a.navigateToMyPersonalInfo();
+        a.verifyPersonalInfo();
+    }
+    
+    /**
+     * Teacher verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.teacherVerify"})
+    public void testTeacherVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
     }
 
     /**
@@ -119,7 +183,7 @@ public class TchrPosts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTchrLogOut() throws Exception {
+    public void testTeacherLogOut() throws Exception {
         a.logOut();
     }
 }

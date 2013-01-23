@@ -20,12 +20,12 @@ public class TestNGCustomReport extends TestListenerAdapter {
 
     @Override
     public void onStart(ITestContext testContext) {
-        System.out.print("Class: " + testContext.getName());
+        System.out.print("Class: " + testContext.getName() + "\n");
     }
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.print("TestInvoking: " + result.getName());
+        System.out.print("TestInvoking: " + result.getName() + "\n");
     }
 
     //Capture screenshot on TestFailure
@@ -36,30 +36,17 @@ public class TestNGCustomReport extends TestListenerAdapter {
             String NewFileNamePath;
             String methodName = result.getName();
 
-            // Get the dir path
-            File directory = new File(".");
-
             //Get current date time with Date() to create unique file name
             SimpleDateFormat dateFormat = new SimpleDateFormat(
                     "ddMMMyy__hhmmaa");
             // get current date time with Date()
             Date date = new Date();
-            String rprtPrgm;
-            String rprtEnv;
 
-            if (BaseClass.program.substring(0, 2).contains("gu")) {
-                rprtPrgm = "gu";
-                rprtEnv = BaseClass.program.substring(2);
-            } else {
-                rprtPrgm = BaseClass.program.substring(0, 3);
-                rprtEnv = BaseClass.program.substring(3);
+            if (!(new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots")).exists()) {
+                new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots").mkdir();
             }
 
-            if (!(new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots")).exists()) {
-                new File(directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots").mkdir();
-            }
-
-            NewFileNamePath = directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.brwsr + File.separator + "screenshots"
+            NewFileNamePath = BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots"
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);

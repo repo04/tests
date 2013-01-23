@@ -27,10 +27,23 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String[][] assgnmntName = new String[1][1];
     static String[][] actvtsArray = new String[1][4];
 
+    /**
+     * ITestContext contains all the information for a given test run. A Data
+     * Provider is a method that returns an array of array of objects. This
+     * method will provide data to any test method that declares that its Data
+     * Provider is named "Course". In this case it is being fetched from
+     * 'testCourseGroupCourse_Creation' method which always get executed before
+     * 'testActivities_Creation' (execution order is maintained in
+     * TransformSmoke class, passed as listeners from smoke.xml)
+     *
+     *
+     * @param context
+     * @return
+     * @throws Exception
+     */
     @DataProvider(name = "Course")
     public static Object[][] Course(ITestContext context) throws Exception {
-        System.out.println("init Course");
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside Course: " + test);
             return (crsArray);
         } else {
@@ -41,8 +54,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
 
     @DataProvider(name = "Activites")
     public static Object[][] Activites(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside Activites: " + test);
             return (actvtsArray);
         } else {
@@ -56,8 +68,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
 
     @DataProvider(name = "QuizName")
     public static Object[][] QuizName(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside QuizName: " + test);
             return (qzNameArray);
         } else {
@@ -65,11 +76,10 @@ public class Crs_GrpCrsCreation extends BaseClass {
             return new Object[][]{{context.getCurrentXmlTest().getParameter("quizActvtyName")}};
         }
     }
-    
+
     @DataProvider(name = "AssgnmntName")
     public static Object[][] AssgnmntName(ITestContext context) throws Exception {
-
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("Inside AssgnmntName: " + test);
             return (assgnmntName);
         } else {
@@ -89,7 +99,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
         System.out.println("init GrpCrsQz");
         return DataProviderUtil.cartesianProviderFrom(Course(context), QuizName(context));
     }
-    
+
     @DataProvider(name = "GrpCrsAssgnmnt")
     public static Iterator<Object[]> GrpCrsAssgnmnt(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAssgnmnt");
@@ -133,7 +143,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testCntntAdminLgn() throws Exception {
+    public void testContentAdminLogin() throws Exception {
         a.login("contentAdmin");
     }
 
@@ -142,53 +152,60 @@ public class Crs_GrpCrsCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "course.creation"})
-    public void testCrsGrpCrs_Creation() throws Exception {
-
+    @Test(groups = {"regressionSmoke", "fullSmoke", "course.creation"})
+    public void testCourseGroupCourse_Creation() throws Exception {
         a.navigateToMyCourse();
         crsName = a.createCourse();
-        System.out.println("crsName: " + crsName);
-        Reporter.log("crsName: " + crsName);
+        Reporter.log("crsName: " + crsName, true);
 
         a.navigateToMyCourse();
         crsArray[0][0] = a.createGrpCourse(crsName);
-        System.out.println("grpCrsName: " + crsArray[0][0]);
-        Reporter.log("grpCrsName: " + crsArray[0][0]);
+        Reporter.log("grpCrsName: " + crsArray[0][0], true);
     }
 
     /**
-     * Create - Activities like Forum, Quiz, All In One Assignment & Page
+     * Create - Activities like Forum, Quiz, All In One Assignment & Page. This
+     * test method declares that its data should be supplied by the Data
+     * Provider named "Course"
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"fullsmoke", "activites.creation"})
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "activites.creation"})
     public void testActivities_Creation(String grpCrsName) throws Exception {
-
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         actvtsArray[0][0] = a.createForumActivity();
-        System.out.println("frmActvyName: " + actvtsArray[0][0]);
-        Reporter.log("frmActvyName: " + actvtsArray[0][0]);
+        Reporter.log("frmActvyName: " + actvtsArray[0][0], true);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         actvtsArray[0][1] = a.createQuizActivity();
         qzNameArray[0][0] = actvtsArray[0][1];
-        System.out.println("quizActvtyName: " + actvtsArray[0][1]);
-        Reporter.log("quizActvtyName: " + actvtsArray[0][1]);
+        Reporter.log("quizActvtyName: " + actvtsArray[0][1], true);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        actvtsArray[0][2] = a.createAllInOneAsgnmntActivity();
+        a.selectGroupCourse(grpCrsName);
+        actvtsArray[0][2] = a.createAllInOneAssignmentActivity();
         assgnmntName[0][0] = actvtsArray[0][2];
-        System.out.println("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
-        Reporter.log("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2]);
+        Reporter.log("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2], true);
 
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         actvtsArray[0][3] = a.createPageResource();
-        System.out.println("pageActvtyName: " + actvtsArray[0][3]);
-        Reporter.log("pageActvtyName: " + actvtsArray[0][3]);
+        Reporter.log("pageActvtyName: " + actvtsArray[0][3], true);
+    }
+
+    /**
+     * Create - Syllabus Activity
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.syllabusCreation"})
+    public void testSyllabus_Creation(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.createSyllabusActivity();
     }
 
     /**
@@ -198,11 +215,33 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @param quizName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz", groups = {"fullsmoke", "activites.addQuizQstn"})
+    @Test(dataProvider = "GrpCrsQz", groups = {"regressionSmoke", "fullSmoke", "activites.addQuizQuestion"})
     public void testAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
+        a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
+    }
+
+    /**
+     * Content Admin verify Feedback Window
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.contentAdminVerify"})
+    public void testContentAdminVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
+    
+    /**
+     * ContentAdmin verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.contentAdminVerify"})
+    public void testContentAdminVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
     }
 
     /**
@@ -212,7 +251,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testCntntAdminLogOut() throws Exception {
+    public void testContentAdminLogOut() throws Exception {
         a.logOut();
     }
 }

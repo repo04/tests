@@ -25,15 +25,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
 
     @DataProvider(name = "StdtSclGrp")
     public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
-        System.out.println("init StdtSclGrp");
-
-        if (test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("CriticalTests")) {
-            System.out.println("if StdtSclGrp: " + test);
-            return (stdtSclGrpArray);
-        } else {
-            System.out.println("else StdtSclGrp: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("stdtSclGrpName")}};
-        }
+        System.out.println("StdtSclGrp: " + test);
+        return (stdtSclGrpArray);
     }
 
     @DataProvider(name = "TchrStdtSclGrps")
@@ -49,12 +42,6 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
                 UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), TchrPosts_SclGrp.TchrSclGrp(context),
                 StdtSclGrp(context));
     }
-    
-    @DataProvider(name = "StdtSclGrpDebug")
-    public static Object[][] StdtSclGrpDebug(ITestContext context) throws Exception {
-        System.out.println("init StdtSclGrpDebug");
-        return (stdtSclGrpArray);
-    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -63,8 +50,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testStdtLgn(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("SmokeTests")) {
+    public void testStudentLogin(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
@@ -77,21 +64,21 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
-          groups = {"fullsmoke", "criticalsmoke", "stdtLvSsn.create"})
-    public void testStdtCrtLvSsn(String tchrSclGrpName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.studentCreate"})
+    public void testStudentCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSclGrpWall(tchrSclGrpName);
-        a.accessLvSsnWall();
-        a.createLiveSsn(tchrSclGrpName);
+        a.accessSocialGroupWall(tchrSclGrpName);
+        a.accessLiveSessionWall();
+        a.createLiveSession();
     }
-
+    
     /**
      * Creates own Social Group
      *
      * @throws Exception
      */
-    @Test(groups = {"fullsmoke", "criticalsmoke", "stdtSclGrp.create"})
-    public void testStdtCrtSclGrp() throws Exception {
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentCreate"})
+    public void testStudentCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
         stdtSclGrpArray[0][0] = a.createSocialGroup();
         System.out.println("stdtSclGrpName: " + stdtSclGrpArray[0][0]);
@@ -104,8 +91,8 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class,
-          groups = {"fullsmoke", "wrkngGrp.stdtVrfyGglDoc"})
-    public void testStdtVrfyWrkGrp_GglDoc(String wrkngGrpName, String gglDocName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "workingGroup.studentVerifyGoogleDoc"})
+    public void testStudentVerifyWorkingGroup_GoogleDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
     }
@@ -116,11 +103,11 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.stdtVrfy"})
-    public void testStdtVrfyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+          groups = {"regressionSmoke", "fullSmoke", "activites.studentVerify"})
+    public void testStudentVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.navigateToActvtyRprt();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
         a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
     }
 
@@ -131,30 +118,48 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsQz", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "criticalsmoke", "activites.sbmtQuiz"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "activites.submitQuiz"})
     public void testSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.navigateToActvtyRprt();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
         a.submitQuiz(quizActvtyName);
+    }
+
+    /**
+     * Verify Assignment Grade
+     *
+     * @param grpCrsName
+     * @param allInOneAsgnmntAvtvtyName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "assignment.verifyGrade"})
+    public void testVerifyAssignmentGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToGrades();
+        a.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
     }
     
     /**
-     * Verify Assignment Grade
+     * Student verify files upload in Course
      * 
      * @param grpCrsName
-     * @param allInOneAsgnmntAvtvtyName
-     * @throws Exception 
+     * @param pdf
+     * @param pptx
+     * @param doc
+     * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
-          groups = {"fullsmoke", "activites.vrfyAsgnmntGrade"})
-    public void testVrfyAsgnmntGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = TchrLvSsn_GglDoc.class, 
+          groups = {"regressionSmoke", "files.studentVerifyInCourse"})
+    public void testStudentVerifyFilesInCourse(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
-        a.selectGrpCourse(grpCrsName);
-        a.navigateToGrades();
-        a.vrfyAsgnmntGrade(allInOneAsgnmntAvtvtyName);
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToFiles();
+        a.verifyFilesInCourse(doc, pptx, pdf);
     }
-    
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
@@ -162,7 +167,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testStdtLogOut() throws Exception {
+    public void testStudentLogOut() throws Exception {
         a.logOut();
     }
 }
