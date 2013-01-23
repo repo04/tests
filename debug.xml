@@ -5,8 +5,10 @@
         <listener class-name="runThrghTestNG.TransformDebug"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="tchrUsrName" value="autoteacher1"/>
-        <parameter name="stdtUsrName" value="autostudent1"/>
+        <!--parameter name="tchrUsrName" value="autoteacher1"/>
+        <parameter name="stdtUsrName" value="autostudent1"/-->
+        <parameter name="tchrUsrName" value="teacher1"/>
+        <parameter name="stdtUsrName" value="student1"/>       
         <parameter name="grpCrsName" value="AutoGroupCourse"/>        
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
         <parameter name="tchrSclGrpName" value="AutoTchrSclGrp"/>
@@ -72,8 +74,8 @@
                 <include name="liveSession.teacherCreate"/>
                 <include name="liveSession.studentCreate"/>
                 <include name="socialGroup.studentCreate"/>
-                <include name="socialGroup.teacherJoinsStudent"/>
-                <include name="socialGroup.teacherLeavesStudent"/>
+                <include name="socialGroup.teacherJoinStudents"/>
+                <include name="socialGroup.teacherLeaveStudents"/>
                 <include name="socialGroup.teacherDelete"/>                
                 <include name="socialGroup.studentDelete"/>                                                         
             </define>            
@@ -112,10 +114,46 @@
                 <include name="activity.syllabusCreation"/>
                 <include name="activity.teacherVerifySyllabus"/>    
                 <include name="activity.studentVerifySyllabus"/>                                              
-            </define>                      
-                        
-            <!--run>
+            </define>
+            <define name="Resume">
                 <include name="prerequisite"/>
+                <include name="resume.teacherVerify"/>  
+                <include name="resume.studentVerify"/>                                              
+            </define>
+            <define name="PersonalInfo">
+                <include name="prerequisite"/>
+                <include name="personalInfo.teacherVerify"/>
+                <include name="personalInfo.studentVerify"/>     
+            </define>
+            <define name="Files">
+                <include name="prerequisite"/>
+                <include name="files.teacherUploadInCourse"/>
+                <include name="files.teacherVerifyInPortfolio"/>
+                <include name="files.studentVerifyInCourse"/>
+                <include name="files.teacherDelete"/>
+            </define>
+            <define name="Feedback">
+                <include name="prerequisite"/>
+                <include name="feedback.contentAdminVerify"/>               
+                <include name="feedback.pesAdminVerify"/>
+                <include name="feedback.teacherVerify"/>
+                <include name="feedback.studentVerify"/>
+            </define>
+            <define name="Image">
+                <include name="prerequisite"/>
+                <include name="image.upload"/>
+            </define>
+            <define name="Help">
+                <include name="prerequisite"/>
+                <include name="help.contentAdminVerify"/>
+                <include name="help.pesAdminVerify"/>
+                <include name="help.teacherVerify"/>
+                <include name="help.studentVerify"/>
+            </define>
+            
+            <!--run>
+                <include name="feedback.contentAdminVerify"/>               
+                <include name="feedback.contentAdminVerify"/>     
             </run-->
         </groups>
         <classes>
@@ -124,7 +162,7 @@
             <class name="runThrghTestNG.TchrPosts_SclGrp"/>
             <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
             <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
+            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>
             <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.PES_CleanTestData"/>

@@ -67,7 +67,7 @@ Requirement: Git
 
 Setup JARS
 ----------
-Requirement: The appropriate JAR's are need to be copied to machine specific ANT's classpath. <br />
+Requirement: The appropriate JAR's need to be present in specific ANT's classpath. <br />
 **Note:** Path where BUILD.XML is located is referred as **BASEDIR**
 
       i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
@@ -104,29 +104,23 @@ Automation can run when above steps are followed in order.
      ii> Navigate to *BASEDIR*
 	iii> Run Automation
 	       _______________________________________________________________________________________________
-		a> ant runsmoke/runcritical -DantPrgrm=gu,usc -DantEnv=stgng,prod -DantBrwsr=chrome,ff -DantOS=win 
+		a> ant runsmoke/runcritical -DantUrl={gu-msn},{usc-mat} -DantBrwsr=chrome,ff -DantOS=win 
 		
 		b> debugSmoke takes 1 extra paramter i.e group name/s={The list of groups mentioned in ConfluencePage to run separated by comma}
 		   ______________________________________________________________________________________________________________________	
-		   ant rundebug -DantGrp=ActvtsVrfctn,ActvtsSbmtQz -DantPrgrm=gu,usc -DantEnv=stgng,prod -DantBrwsr=chrome,ff -DantOS=win 
+		   ant rundebug -DantGrp=ActvtsVrfctn,ActvtsSbmtQz -DantUrl={gu-msn},{usc-mat} -DantBrwsr=chrome,ff -DantOS=win 
 	
 	Applicable Parameters (Case Sensitive)
 		1> Targets: runsmoke / runcritical / rundebug
 			* Can accept only one target at a time
-        2> antPrgrm: 
-        	* gu
-        	* unc
-        	* usc 
-        	* llm
-        	* vac
-        	* mpa 
-        	* Program's delimiter: ","
-		3> antEnv: 
-			* qa
-			* prod
-			* stgng
-			* sb(01 till 99)
-			* Environment's delimiter: ","
+        2> antUrl:
+        	* gu-msn: https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || https://www-gu-msn-lms-sb[01-99]-qa.2u.com
+        	* unc-mba: https://www.2nc.unc.edu || https://www-unc-mba-lms-stg.2u.com || https://www-unc-mba-lms-sb[01-99]-qa.2u.com
+        	* usc-mat: https://www.2sc.usc.edu || https://www-usc-mat-lms-stg.2u.com || https://www-usc-mat-lms-sb[01-99]-qa.2u.com 
+        	* wu-llm: https://2law.onlinelaw.wustl.edu || https://www-wu-llm-lms-stg.2u.com || https://www-wu-llm-lms-sb01-qa.2u.com
+        	* usc-msw: https://www.vac.usc.edu || https://www-usc-msw-lms-stg.2u.com || https://www-usc-msw-lms-sb[01-99]-qa.2u.com
+        	* unc-mpa: https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || https://www-unc-mpa-lms-sb[01-99]-qa.2u.com  
+        	* Program's delimiter: ","	
 		3> antBrwsr: 
 			* ff
 			* chrome
@@ -140,17 +134,11 @@ Automation can run when above steps are followed in order.
 		5> antGrp:
 			* n number of group/s mentioned in DebugSmoke confluence page can be passed delimited by ","
      iv> Flow of TEST:
-     	1> gu
-            a> stgng 
-			   a> chrome  b> ff
-			b> prod
-			   a> chrome  b> ff
-        2> usc
-            a> stgng 
-			   a> chrome  b> ff
-			b> prod
-			   a> chrome  b> ff
-	  v> Each run will have a separate "reports" folder {Basedir}\reports\{program}_{env}_{browser}	  
+     	1> {gu-msn}            
+			   a> chrome  b> ff			
+        2> {usc-mat}            
+			   a> chrome  b> ff			
+	  v> Reports are saved in '{Basedir}\reports' folder
 
 
 ## Installing Xvfb and dependencies

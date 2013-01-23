@@ -4,15 +4,10 @@
  */
 package smoketest;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -194,7 +189,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).sendKeys("1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGradeXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnAddQzQstnXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnAddQzQstnXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnAddQzQstnXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtQzQstnTypeScrnXPATH"), "Choose a question type to add");
         driver.findElement(By.xpath(xpv.getTokenValue("radioBtnQstnTypeXPATH"))).click();
@@ -217,6 +212,7 @@ public class Activity extends BaseClass {
     public void submitQuiz(String quizActvtyName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActvtyName + "')]")).click();
         int i = 1;
+        int rows;
 
         Boolean attempt;
         try {
@@ -227,17 +223,9 @@ public class Activity extends BaseClass {
         }
 
         if (attempt) {
-            click:
-            for (; i < 101; i++) {
-                try {
-                    new WebDriverWait(driver, 15).until(ExpectedConditions.
-                            presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
-                    System.out.println("i value: " + i);
-                } catch (TimeoutException e) {
-                    System.out.println("catch i value: " + i);
-                    break click;
-                }
-            }
+            rows = driver.findElements(By.xpath("//div[@id='region-main']/div/table/tbody/tr")).size();
+            System.out.println("rows: " + rows);
+            i = rows + 1;
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
@@ -303,18 +291,7 @@ public class Activity extends BaseClass {
 
             List<WebElement> elements = driver.findElements(By.tagName("input"));
             System.out.println("Total inputs: " + elements.size());
-            Robot robot = null;
-            try {
-                robot = new Robot();
-                robot.delay(1000);
-            } catch (AWTException ex) {
-                System.out.println("excptn:");
-                Logger.getLogger(Activity.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            elements.get(22).click();
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-
+            Utility.robotclick(elements.get(22));
             if (i < 5) {
                 if (brwsr.equalsIgnoreCase("chrome")) {
                     try {
@@ -347,7 +324,7 @@ public class Activity extends BaseClass {
         } catch (TimeoutException e) {
             wndwFnd = false;
             System.out.println("feedback window not found");
-            Utility.illegalStateException("Feedback Window did not triggered");
+            //Utility.illegalStateException("Feedback Window did not triggered");
         }
 
         if (wndwFnd) {
@@ -456,7 +433,7 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldGrdAsgntXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).sendKeys("62");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGrdAsgntXPATH"))).click();
@@ -484,21 +461,14 @@ public class Activity extends BaseClass {
      * @param allInOneAsgnmntAvtvtyName
      */
     public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
-        String stdtFstName;
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            stdtFstName = stdtUsrName + "fstNm";
-        } else {
-            stdtFstName = stdtUsrName.substring(0, 4);
-        }
-
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Allow Resubmit")));
         driver.findElement(By.linkText("Allow Resubmit")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtFstName + " to resubmit this assignment?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtUsrName + " to resubmit this assignment?");
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtFstName + " and mail sent.");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtUsrName + " and mail sent.");
         driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
@@ -546,7 +516,7 @@ public class Activity extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/a", elementName, 5);
                 break;
             } catch (TimeoutException e) {
-                System.out.println(elementName + "not present at x: " + x);
+                System.out.println(elementName + " not present at x: " + x);
                 x = x + 2;
             }
         }

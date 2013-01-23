@@ -69,9 +69,9 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
         a.accessLiveSessionWall();
-        a.createLiveSession(tchrSclGrpName);
+        a.createLiveSession();
     }
-
+    
     /**
      * Creates own Social Group
      *
@@ -140,6 +140,24 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.navigateToGrades();
         a.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
+    }
+    
+    /**
+     * Student verify files upload in Course
+     * 
+     * @param grpCrsName
+     * @param pdf
+     * @param pptx
+     * @param doc
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = TchrLvSsn_GglDoc.class, 
+          groups = {"regressionSmoke", "files.studentVerifyInCourse"})
+    public void testStudentVerifyFilesInCourse(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToFiles();
+        a.verifyFilesInCourse(doc, pptx, pdf);
     }
 
     /**

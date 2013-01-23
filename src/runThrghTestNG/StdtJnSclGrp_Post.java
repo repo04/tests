@@ -223,6 +223,50 @@ public class StdtJnSclGrp_Post extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.verifySyllabusActivity();
     }
+    
+    /**
+     * Student verify Resume
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "resume.studentVerify"})
+    public void testStudentVerifyResume() throws Exception {
+        a.navigateToMyWall();
+        a.verifyResume();
+    }
+    
+    /**
+     * Student verify Personal Information
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "personalInfo.studentVerify"})
+    public void testStudentVerifyPersonalInfo() throws Exception {
+        a.navigateToMyPersonalInfo();
+        a.verifyPersonalInfo();
+    }
+    
+    /**
+     * Student verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.studentVerify"})
+        public void testStudentVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
+    
+    /**
+     * Student verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.studentVerify"})
+    public void testStudentVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

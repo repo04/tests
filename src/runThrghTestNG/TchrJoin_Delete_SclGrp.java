@@ -129,6 +129,41 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.deletePost(tchrUrlCrsPost);
     }
+    
+    /**
+     * Teacher delete single file uploaded in Course
+     * 
+     * @param grpCrsName
+     * @param pdf
+     * @param pptx
+     * @param doc
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = TchrLvSsn_GglDoc.class,
+          groups = {"regressionSmoke", "files.teacherDelete"})
+    public void testTeacherDeleteFiles(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToFiles();
+        a.deleteFiles(doc, pptx, pdf);
+    }
+    
+    @Test(groups = {"regressionSmoke", "image.upload"})
+    public void testTeacherUploadVideo() throws Exception {
+        a.navigateToMyWall();
+        a.testUploadVideo();        
+    }
+    
+    /**
+     * Teacher verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.teacherVerify"})
+    public void testTeacherVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

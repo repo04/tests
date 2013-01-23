@@ -331,6 +331,28 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Crs_GrpCrsCreation.testSyllabus_Creation";
             annotation.setDependsOnMethods(DependentMethods);
-        }        
+        }
+        
+        //GroupName = Files
+        if ("testTeacherVerifyFilesInPortfolio".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyFilesInPortfolio");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testTeacherUploadFilesInCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentVerifyFilesInCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyFilesInCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrLvSsn_GglDoc.testTeacherVerifyFilesInPortfolio";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherDeleteFiles".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherDeleteFiles");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrLvSsn_GglDoc.testTeacherUploadFilesInCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

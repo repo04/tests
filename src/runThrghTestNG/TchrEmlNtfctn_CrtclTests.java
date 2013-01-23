@@ -65,7 +65,7 @@ public class TchrEmlNtfctn_CrtclTests extends BaseClass {
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
 
         for (int i = 0; i < 4; i++) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//tr[1]/td[5]/div/span")));
+            ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 60);
             Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
 
             int j = 0;

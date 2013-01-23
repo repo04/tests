@@ -65,13 +65,13 @@ public class WorkingGroup extends BaseClass {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
-                    fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
+                    fullNm = mbr + " " + mbr + "(Non-editing teacher)";
                     break sw;
                 case "autotea":
                     fullNm = "auto teacher1(Non-editing teacher)";
                     break sw;
                 case "student":
-                    fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
+                    fullNm = mbr + " " + mbr + "(Student)";
                     break sw;
                 case "autostu":
                     fullNm = "auto student1(Student)";
@@ -104,9 +104,9 @@ public class WorkingGroup extends BaseClass {
             switch (mbr.substring(0, 7)) {
                 case "teacher":
                     if (PES_CleanTestData.tchrStatus) {
-                        fullNm = mbr + "fstNm " + mbr + "sndNm(Non-editing teacher)";
+                        fullNm = mbr + " " + mbr + "(Non-editing teacher)";
                     } else {
-                        fullNm = mbr + "fstNm " + mbr + "sndNm()";
+                        fullNm = mbr + " " + mbr + "()";
                     }
                     break sw;
                 case "autotea":
@@ -118,9 +118,9 @@ public class WorkingGroup extends BaseClass {
                     break sw;
                 case "student":
                     if (PES_CleanTestData.stdtStatus) {
-                        fullNm = mbr + "fstNm " + mbr + "sndNm(Student)";
+                        fullNm = mbr + " " + mbr + "(Student)";
                     } else {
-                        fullNm = mbr + "fstNm " + mbr + "sndNm()";
+                        fullNm = mbr + " " + mbr + "()";
                     }
                     break sw;
                 case "autostu":
@@ -148,7 +148,7 @@ public class WorkingGroup extends BaseClass {
     public void createGoogleDoc(String wrkngGrp) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlFilesXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, "Start a Collaborative Document");
         driver.findElement(By.xpath("//*[contains(text(),'Start a Collaborative Document')]")).click();

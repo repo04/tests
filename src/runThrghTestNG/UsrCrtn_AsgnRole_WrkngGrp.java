@@ -260,6 +260,28 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         pesTxtAncmntCrsPost[0][0] = a.textPost("txtAncmntCrsPost");
         Reporter.log("pesTxtAncmntCrsPost: " + pesTxtAncmntCrsPost[0][0], true);
     }
+    
+    /**
+     * Pes Admin verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.pesAdminVerify"})
+    public void testPesAdminVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
+    
+    /**
+     * PesAdmin verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.pesAdminVerify"})
+    public void testPesAdminVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

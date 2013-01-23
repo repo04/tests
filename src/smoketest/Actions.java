@@ -94,13 +94,13 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Create LiveSession in
+     * Create LiveSession
      *
      * @param sclGrpName
      */
-    public void createLiveSession(String sclGrpName) {
+    public void createLiveSession() {
         LiveSession ls = new LiveSession();
-        ls.buildLiveSession(sclGrpName);
+        ls.buildLiveSession();
     }
 
     /**
@@ -160,15 +160,15 @@ public class Actions extends BaseClass {
      */
     public void logOut() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToLogOut"));
-        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "loginPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
     }
 
     /**
-     * Navigate to MyWall page
+     * Navigate to My Wall page
      */
     public void navigateToMyWall() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "wallPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "wallPageTitle"));
     }
 
     /**
@@ -176,7 +176,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyCourse() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToCourseXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "crsPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "crsPageTitle"));
     }
 
     /**
@@ -184,28 +184,24 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyHome() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("lnkToHomeXPATH"));
-        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "homePageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "homePageTitle"));
     }
 
     /**
      * Navigate to My Contacts Wall
      *
-     * @param cntct
+     * @param stdtUsrName
      */
-    public void navigateToContactsWall(String cntct) {
-        ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + cntct + "')]")).click();
-        String s = cntct.substring(0, 1).toUpperCase();
-        String usrFullNm = null;
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            usrFullNm = s + cntct.substring(1) + "fstNm " + s + cntct.substring(1) + "sndNm";
-        } else {
-            usrFullNm = cntct.substring(0, 1).toUpperCase() + cntct.substring(1, 5)
-                    + cntct.substring(5, 6).toUpperCase() + cntct.substring(6);
-        }
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyCntctXPATH"), usrFullNm);
+    public void navigateToContactsWall(String stdtUsrName) {
+        String usrFullNmLC = stdtUsrName + " " + stdtUsrName;
+        ip.isElementPresentStartsWithTextByXPATH(driver, usrFullNmLC);
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + usrFullNmLC + "')]")).click();
+        ip.isTitlePresent(driver, usrFullNmLC + ": Public profile");
+        String s = stdtUsrName.substring(0, 1).toUpperCase();
+        String usrFullNmUC = null;
+        usrFullNmUC = s + stdtUsrName.substring(1) + " " + s + stdtUsrName.substring(1);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNm + "`s - Wall");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNmUC + "`s - Wall");
     }
 
     /**
@@ -235,7 +231,7 @@ public class Actions extends BaseClass {
         }
 
         Utility.navigateToSubMenu(driver, linkToContactXPATH);
-        ip.isTitlePresent(driver, pv.getTokenValue("contactPageTitle"));
+        ip.isTitlePresent(driver, xpv.getTokenValue("contactPageTitle"));
     }
 
     /**
@@ -251,9 +247,33 @@ public class Actions extends BaseClass {
      * Navigate To Grade Page
      */
     public void navigateToGrades() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+    }
+
+    /**
+     * Navigate To Personal Info Page
+     */
+    public void navigateToMyPersonalInfo() {
+        Utility.navigateToSubMenu(driver, "//li[2]/ul/li[2]/a");
+        ip.isTextPresentByXPATH(driver, "//h2", "Personal Information");
+    }
+
+    /**
+     * Navigate to Files page
+     */
+    public void navigateToFiles() {
+        driver.findElement(By.linkText("Files")).click();
+        ip.isTextPresentByXPATH(driver, "//h2", "My Shared Files");
+    }
+
+    /**
+     * Navigate to Portfolio page
+     */
+    public void navigateToPortfolio() {
+        Utility.navigateToSubMenu(driver, "//li[3]/a");
+        ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
     }
 
     /**
@@ -498,7 +518,7 @@ public class Actions extends BaseClass {
      * Navigate to Activity Report page
      */
     public void navigateToActivityReport() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnLftPnlActvyRprtXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
     }
@@ -660,7 +680,7 @@ public class Actions extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
 
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlFilesXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
     }
@@ -716,6 +736,30 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * Verify Resume
+     */
+    public void verifyResume() {
+        switch (BaseClass.program) {
+            case "usc":
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
+                ip.isElementPresentByLINK(driver, "Resume");
+                driver.findElement(By.linkText("Resume")).click();
+                ip.isTextPresentByXPATH(driver, "//h2", "Resume");
+                break;
+            default:
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
+        }
+    }
+
+    /**
+     * Verify Personal Information
+     */
+    public void verifyPersonalInfo() {
+        Profile pf = new Profile();
+        pf.verifyPersonalInfo();
+    }
+
+    /**
      * Delete Note
      *
      * @param profileNote
@@ -723,5 +767,81 @@ public class Actions extends BaseClass {
     public void deleteNote(String profileNote) {
         Note nt = new Note();
         nt.deleteNote(profileNote);
+    }
+
+    /**
+     * Upload files of multiple format(pdf, pptx, doc)
+     *
+     * @param files
+     */
+    public void uploadFiles(String... files) {
+        File fl = new File();
+        fl.uploadFiles(files);
+    }
+
+    /**
+     * Verify files in Course
+     *
+     * @param files
+     */
+    public void verifyFilesInCourse(String... files) {
+        File fl = new File();
+        fl.verifyFilesInCourse(files);
+    }
+
+    /**
+     * Verify files in Portfolio
+     *
+     * @param files
+     */
+    public void verifyFilesInPortfolio(String... files) {
+        File fl = new File();
+        fl.verifyFilesInPortfolio(files);
+    }
+
+    /**
+     *
+     * @param doc
+     * @param pptx
+     * @param pdf
+     */
+    public void deleteFiles(String... files) {
+        File fl = new File();
+        fl.deleteFiles(files);
+    }
+
+    /**
+     * Verify feedback window
+     */
+    public void verifyFeedbackWindow() {
+        Feedback fb = new Feedback();
+        fb.verifyFeedbackWindow();
+    }
+
+    /**
+     * Verify Help Window on Home Page
+     */
+    public void verifyHelpWindow() {
+        Help hlp = new Help();
+        hlp.verifyHelpWindow();
+    }
+
+    /**
+     * Upload video
+     */
+    public void testUploadVideo() {
+        ip.isElementClickableByXpath(driver, "//li[2]/a", 60);
+        driver.findElement(By.linkText("Personal Information")).click();
+        ip.isElementClickableByXpath(driver, "//p/a", 60);
+        driver.findElement(By.linkText("Change Picture")).click();
+        driver.switchTo().frame("_iframe-ksubox");
+        ip.isTextPresentByXPATH(driver, "//div[@id='upload_btn_container']/div[2]", "Choose how would you like to upload a new profile image");
+        ip.isElementClickableByXpath(driver, "//div[4]/form/input", 60);
+        Utility.navigateToSubMenu(driver, "//div[4]/form/input");
+        Utility.actionBuilderClick(driver, "//div[4]/form/input");
+        driver.findElement(By.cssSelector("object#uploader")).click();
+        ip.isElementClickableByXpath(driver, "//div[6]/form/input", 60);
+        Utility.navigateToSubMenu(driver, "//div[6]/form/input");
+        ip.isTextPresentByXPATH(driver, "//body/div[3]/div[2]/div", "Choose how would you like to upload a new profile image");
     }
 }

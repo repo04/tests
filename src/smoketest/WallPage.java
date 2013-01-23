@@ -48,7 +48,7 @@ public class WallPage extends BaseClass {
         driver.switchTo().defaultContent();
 
         if (user.contains("Admin")) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//td/div/img")));
+            ip.isElementClickableByXpath(driver, "//td/div/img", 60);
             driver.findElement(By.xpath("//td/div/img")).click();
 
             switch (textPst) {
@@ -168,7 +168,7 @@ public class WallPage extends BaseClass {
      */
     public void recommendURLCoursePost(String tchrUrlCrsPost) {
         ip.isTextPresentByXPATH(driver, "//div[3]/div/a", "http://" + tchrUrlCrsPost);
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//label[2]/a")));
+        ip.isElementClickableByXpath(driver, "//label[2]/a", 60);
         driver.findElement(By.xpath("//label[2]/a")).click();
         ip.isTextPresentByXPATH(driver, "//label[3]", "(You Recommend This)");
     }
@@ -199,7 +199,7 @@ public class WallPage extends BaseClass {
      * @param stdtTxtCmntOnTchrCrsPost
      */
     public void verifyCommentOnPost(String stdtTxtCmntOnTchrCrsPost) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//a/label")));
+        ip.isElementClickableByXpath(driver, "//a/label", 60);
         driver.findElement(By.xpath("//a/label")).click();
         ip.isTextPresentByXPATH(driver, "//li[2]/div/div[3]/div[3]", stdtTxtCmntOnTchrCrsPost);
     }

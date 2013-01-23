@@ -106,7 +106,7 @@ public class TchrPosts_SclGrp extends BaseClass {
     groups = {"criticalsmoke", "teacherPosts.studentsWall"})
     public void testTeacherPostURLOnStudentsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
-        a.navigateToContactsWall(stdtUsrName.substring(0, 4) + " " + stdtUsrName.substring(4));
+        a.navigateToContactsWall(stdtUsrName);
         tchrUrlPostOnStdtWall = a.textPost("tchrUrlPostOnStdtWall");
         System.out.println("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
         Reporter.log("tchrUrlPostOnStdtWall: " + tchrUrlPostOnStdtWall);
@@ -141,7 +141,40 @@ public class TchrPosts_SclGrp extends BaseClass {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.verifySyllabusActivity();
-    }  
+    }
+    
+    /**
+     * Teacher verify Resume
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "resume.teacherVerify"})
+    public void testTeacherVerifyResume() throws Exception {
+        a.navigateToMyWall();
+        a.verifyResume();
+    }
+    
+    /**
+     * Teacher verify Personal Information
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "personalInfo.teacherVerify"})
+    public void testTeacherVerifyPersonalInfo() throws Exception {
+        a.navigateToMyPersonalInfo();
+        a.verifyPersonalInfo();
+    }
+    
+    /**
+     * Teacher verify Feedback Window
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "feedback.teacherVerify"})
+    public void testTeacherVerifyFeedbackWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyFeedbackWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

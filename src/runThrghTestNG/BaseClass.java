@@ -33,25 +33,38 @@ public class BaseClass {
     public static String env;
     public static String brwsr;
     public static String test;
-    public static String sandbox;
+    public static File directory = new File(".");
 
-    //The annotated method will be run before any test method belonging to the classes inside the <test> tag is run
+    /**
+     * The annotated method will be run before any test method belonging to the
+     * classes inside the <test> tag is run. Following parameter values are
+     * received through 'Run Target' specified in build.xml. TestNG allows to
+     * perform sophisticated groupings of test methods which is called from XML
+     * file
+     *
+     * @param url
+     * @param program
+     * @param env
+     * @param brwsr
+     * @param os
+     * @param test
+     * @throws Exception
+     */
     @BeforeTest(groups = {"prerequisite"})
-    @Parameters({"program", "env", "brwsr", "os", "test"})
-    public void setUp(String program, String env, String brwsr, String os, String test) throws Exception {
+    @Parameters({"url", "program", "env", "brwsr", "os", "test"})
+    public void setUp(String url, String program, String env, String brwsr, String os, String test) throws Exception {
 
-        this.sandbox = env;
         this.program = program;
+        this.env = env;
         this.brwsr = brwsr;
         this.test = test;
 
-        pv = new ProgramValues(this.program);
+        pv = new ProgramValues("loginDetails");
         xpv = new XpathValues("xPathAccountProperty");
-        System.out.println("program: " + this.program);
-        System.out.println("env: " + this.sandbox);
+        System.out.println("url: " + url);
         System.out.println("brwsr: " + this.brwsr);
         System.out.println("os: " + os);
-        File directory = new File(".");
+
         switch (brwsr) {
             case "chrome":
                 String chromDrvrPath;
@@ -82,6 +95,7 @@ public class BaseClass {
                 } else {
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--start-maximized");
+                    options.addArguments("--disable-extensions");
                     driver = new ChromeDriver(options);
                 }
                 Reporter.log("Browser: " + brwsr);
@@ -100,32 +114,19 @@ public class BaseClass {
             default:
                 driver = new FirefoxDriver();
                 driver.manage().window().maximize();
-                Reporter.log("Browser: firefox");
+                Reporter.log("Browser: firefox");                
         }
-        if (this.sandbox.contains("sb")) {
-            sb:
-            switch (this.program) {
-                case "gu":
-                    driver.get("https://www-gu-msn-lms-" + this.sandbox + "-qa.2u.com");
-                    break sb;
-                case "unc":
-                    driver.get("https://www-unc-mba-lms-" + this.sandbox + "-qa.2u.com");
-                    break sb;
-                case "usc":
-                    driver.get("https://www-usc-mat-lms-" + this.sandbox + "-qa.2u.com");
-                    break sb;
-                case "vac":
-                    driver.get("https://www-usc-msw-lms-" + this.sandbox + "-qa.2u.com");
-            }
-            this.env = this.sandbox.substring(0, 2);
-        } else {
-            this.env = env;
-            driver.get(pv.getTokenValue(this.program + this.env + "programURL"));
-        }
-        ip.isTitlePresent(driver, pv.getTokenValue(this.program + this.env + "loginPageTitle"));
+
+        driver.get(url);
+        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
     }
 
-    //The annotated method will be run after all the test methods belonging to the classes inside the <test> tag have run 
+    /**
+     * The annotated method will be run after all the test methods belonging to
+     * the classes inside the <test> tag have run.
+     *
+     * @throws Exception
+     */
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
         driver.quit();
