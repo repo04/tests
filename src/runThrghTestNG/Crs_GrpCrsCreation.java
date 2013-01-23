@@ -232,6 +232,17 @@ public class Crs_GrpCrsCreation extends BaseClass {
         a.navigateToMyHome();
         a.verifyFeedbackWindow();
     }
+    
+    /**
+     * ContentAdmin verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.contentAdminVerify"})
+    public void testContentAdminVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

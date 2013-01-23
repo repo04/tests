@@ -65,7 +65,6 @@ public class BaseClass {
         System.out.println("brwsr: " + this.brwsr);
         System.out.println("os: " + os);
 
-        File directory = new File(".");
         switch (brwsr) {
             case "chrome":
                 String chromDrvrPath;
@@ -96,6 +95,7 @@ public class BaseClass {
                 } else {
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--start-maximized");
+                    options.addArguments("--disable-extensions");
                     driver = new ChromeDriver(options);
                 }
                 Reporter.log("Browser: " + brwsr);
@@ -114,7 +114,7 @@ public class BaseClass {
             default:
                 driver = new FirefoxDriver();
                 driver.manage().window().maximize();
-                Reporter.log("Browser: firefox");
+                Reporter.log("Browser: firefox");                
         }
 
         driver.get(url);

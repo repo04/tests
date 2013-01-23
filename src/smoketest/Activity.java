@@ -4,15 +4,10 @@
  */
 package smoketest;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -296,18 +291,7 @@ public class Activity extends BaseClass {
 
             List<WebElement> elements = driver.findElements(By.tagName("input"));
             System.out.println("Total inputs: " + elements.size());
-            Robot robot = null;
-            try {
-                robot = new Robot();
-                robot.delay(1000);
-            } catch (AWTException ex) {
-                System.out.println("excptn:");
-                Logger.getLogger(Activity.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            elements.get(22).click();
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-
+            Utility.robotclick(elements.get(22));
             if (i < 5) {
                 if (brwsr.equalsIgnoreCase("chrome")) {
                     try {

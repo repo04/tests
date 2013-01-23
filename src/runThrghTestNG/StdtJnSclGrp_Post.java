@@ -256,6 +256,17 @@ public class StdtJnSclGrp_Post extends BaseClass {
         a.navigateToMyHome();
         a.verifyFeedbackWindow();
     }
+    
+    /**
+     * Student verify Help Window on Home Page
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "help.studentVerify"})
+    public void testStudentVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -186,9 +187,9 @@ public class Utility {
 
     /**
      * Verify Title of Window
-     * 
+     *
      * @param driver
-     * @param text 
+     * @param text
      */
     public static void verifyWindowTitle(WebDriver driver, String text) {
         String HandleBefore = driver.getWindowHandle();
@@ -198,7 +199,7 @@ public class Utility {
             driver.switchTo().window(handle);
             if (i == driver.getWindowHandles().size()) {
                 try {
-                    ip.isTitleContains(driver, text);                    
+                    ip.isTitleContains(driver, text);
                     driver.close();
                 } catch (Exception e) {
                     System.out.println("FeedBack Window not found");
@@ -213,28 +214,21 @@ public class Utility {
     }
 
     /**
-     * Wait max 60sec for Alert to be present & with specified text present
+     * Wait 60sec for Alert with expected TEXT is present
      *
      * @param driver
      * @param timeout
+     * @param text
      */
     public static void waitForAlertToBeAccepted(WebDriver driver, int timeout, final String text) {
-        new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver) {
-                Boolean switched = false;
-                try {
-                    driver.switchTo().alert();
-                    if (driver.switchTo().alert().getText().contains(text)) {
-                        driver.switchTo().alert().accept();
-                        switched = true;
-                    }
-                } catch (Exception Ex) {
-                    // Couldn't switch!
-                }
-                return switched;
-            }
-        });
+        Alert alert = new WebDriverWait(driver, 60).until(ExpectedConditions.alertIsPresent());
+        if (alert.getText().contains(text)) {
+            alert.accept();
+        } else {
+            alert.dismiss();
+            Utility.illegalStateException("Incorrect Alert present with Text as '" + text + "'. "
+                    + "Expected text: '" + alert.getText() + "'");
+        }
     }
 
     /**
@@ -296,5 +290,24 @@ public class Utility {
         robot.keyRelease(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
+    }
+
+    /**
+     * Chrome Browser element Click limitation minimized by ROBOT functionality
+     *
+     * @param element
+     */
+    public static void robotclick(WebElement element) {
+        Robot robot = null;
+        try {
+            robot = new Robot();
+            robot.delay(1000);
+        } catch (AWTException ex) {
+            System.out.println("excptn:");
+            Logger.getLogger(Activity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        element.click();
+        robot.keyRelease(KeyEvent.VK_CONTROL);
     }
 }
