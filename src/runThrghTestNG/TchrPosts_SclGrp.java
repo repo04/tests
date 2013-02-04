@@ -5,6 +5,7 @@
 package runThrghTestNG;
 
 import java.util.Iterator;
+import org.openqa.selenium.By;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -12,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
+import smoketest.Utility;
 
 /**
  * Teacher Login, Posts on Wall & Course Wall, Creates Social Group
@@ -131,7 +133,7 @@ public class TchrPosts_SclGrp extends BaseClass {
 
     /**
      * Verify Syllabus Activity
-     * 
+     *
      * @param grpCrsName
      * @throws Exception
      */
@@ -142,21 +144,21 @@ public class TchrPosts_SclGrp extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.verifySyllabusActivity();
     }
-    
+
     /**
      * Teacher verify Resume
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "resume.teacherVerify"})
     public void testTeacherVerifyResume() throws Exception {
         a.navigateToMyWall();
         a.verifyResume();
     }
-    
+
     /**
      * Teacher verify Personal Information
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "personalInfo.teacherVerify"})
@@ -164,16 +166,42 @@ public class TchrPosts_SclGrp extends BaseClass {
         a.navigateToMyPersonalInfo();
         a.verifyPersonalInfo();
     }
-    
+
     /**
      * Teacher verify Feedback Window
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "feedback.teacherVerify"})
     public void testTeacherVerifyFeedbackWindow() throws Exception {
         a.navigateToMyHome();
         a.verifyFeedbackWindow();
+    }
+
+    @Test(groups = {"mail.read"})
+    public void testTeacherReadMailBody() throws Exception {
+        Utility.usrEmailLogin(driver, xpv, "2torteacher");
+
+        ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
+        driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
+
+        ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 60);
+        Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
+
+        ip.isTextPresentByXPATH(driver, "//h1/span", "Passwords for PswdQz", 60);
+
+        String mailContent = driver.findElement(By.xpath("//div[2]/div[6]/div")).getText();
+        System.out.println("Mail: " + mailContent);
+
+        int x = mailContent.indexOf("autostudent1 autostudent1");
+        int y = mailContent.lastIndexOf("autostudent1 autostudent1");
+        int z = mailContent.lastIndexOf(":");
+        System.out.println("x value: " + x);
+        System.out.println("y value: " + y);
+        String pswd = mailContent.substring(z);
+        System.out.println("pswd: " + pswd);
+
+        Utility.usrEmailLogout(driver);
     }
 
     /**

@@ -150,6 +150,10 @@
                 <include name="help.teacherVerify"/>
                 <include name="help.studentVerify"/>
             </define>
+            <define name="Mail">
+                <include name="prerequisite"/>
+                <include name="mail.read"/>                
+            </define>
             
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
