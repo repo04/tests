@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="smoketest" default="run" basedir=".">
     
-    <condition property="ant.dir" value="/usr/share/java/ant-contrib.jar">
+    <condition property="ant.dir" value="/usr/share/java/ant-contrib-1.0b3.jar">
         <matches string="${antOS}" pattern="linux*"/>
     </condition>
     
