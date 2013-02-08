@@ -342,7 +342,6 @@ public class Activity extends BaseClass {
         driver.switchTo().window(HandleBefore);
         new WebDriverWait(driver, 60).until(ExpectedConditions.
                 presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
-        driver.switchTo().window(HandleBefore);
         ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 
         //************NOT TO BE DELETED AS OF NOW************//
@@ -429,14 +428,16 @@ public class Activity extends BaseClass {
     public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
 
+        //fieldGrdAsgntXPATH btnSaveGrdAsgntXPATH
         int x = locateElement(allInOneAsgnmntAvtvtyName);
+        int y = x + 1;
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
-        ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldGrdAsgntXPATH"), 60);
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).clear();
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrdAsgntXPATH"))).sendKeys("62");
-        driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGrdAsgntXPATH"))).click();
+        ip.isElementClickableByXpath(driver, "//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input", 60);
+        driver.findElement(By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input")).clear();
+        driver.findElement(By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input")).sendKeys("62");
+        driver.findElement(By.xpath("//tr[" + y + "]/td/div/div/a")).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Your grading changes have been saved.");
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");

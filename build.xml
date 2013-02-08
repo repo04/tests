@@ -85,6 +85,15 @@
                     <var name="program" value="unc-mpa" />
                 </then>
             </elseif>
+            <elseif>
+                <or>
+<!--                    <contains string="${callUrl}" substring="2sg"/>-->
+                    <contains string="${callUrl}" substring="au-mir"/>
+                </or>
+                <then>
+                    <var name="program" value="au-mir" />
+                </then>
+            </elseif>
         </if>   
     </target>
     
