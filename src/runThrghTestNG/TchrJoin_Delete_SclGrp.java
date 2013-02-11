@@ -148,7 +148,7 @@ public class TchrJoin_Delete_SclGrp extends BaseClass {
         a.deleteFiles(doc, pptx, pdf);
     }
     
-    @Test(groups = {"regressionSmoke", "image.upload"})
+    @Test(groups = {"image.upload"})
     public void testTeacherUploadVideo() throws Exception {
         a.navigateToMyWall();
         a.testUploadVideo();        
