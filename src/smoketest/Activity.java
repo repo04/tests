@@ -428,7 +428,6 @@ public class Activity extends BaseClass {
     public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
 
-        //fieldGrdAsgntXPATH btnSaveGrdAsgntXPATH
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         int y = x + 1;
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
