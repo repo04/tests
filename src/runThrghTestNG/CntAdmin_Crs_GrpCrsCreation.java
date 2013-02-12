@@ -18,7 +18,7 @@ import smoketest.Actions;
  * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
  * Logs out
  */
-public class Crs_GrpCrsCreation extends BaseClass {
+public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
 
     public static String crsName;
     Actions a = new Actions();
@@ -26,14 +26,15 @@ public class Crs_GrpCrsCreation extends BaseClass {
     static String[][] qzNameArray = new String[1][1];
     static String[][] assgnmntName = new String[1][1];
     static String[][] actvtsArray = new String[1][4];
+    static String[][] pswdQzNameArray = new String[1][1];
 
     /**
      * ITestContext contains all the information for a given test run. A Data
      * Provider is a method that returns an array of array of objects. This
      * method will provide data to any test method that declares that its Data
      * Provider is named "Course". In this case it is being fetched from
-     * 'testCourseGroupCourse_Creation' method which always get executed before
-     * 'testActivities_Creation' (execution order is maintained in
+     * 'testContenAdminCourseGroupCourseCreation' method which always get executed before
+     * 'testContenAdminActivitiesCreation' (execution order is maintained in
      * TransformSmoke class, passed as listeners from smoke.xml)
      *
      *
@@ -153,7 +154,7 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "course.creation"})
-    public void testCourseGroupCourse_Creation() throws Exception {
+    public void testContenAdminCourseGroupCourseCreation() throws Exception {
         a.navigateToMyCourse();
         crsName = a.createCourse();
         Reporter.log("crsName: " + crsName, true);
@@ -171,28 +172,28 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "activites.creation"})
-    public void testActivities_Creation(String grpCrsName) throws Exception {
+    public void testContenAdminActivitiesCreation(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][0] = a.createForumActivity();
-        Reporter.log("frmActvyName: " + actvtsArray[0][0], true);
+        Reporter.log("forumActivityName: " + actvtsArray[0][0], true);
 
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][1] = a.createQuizActivity();
         qzNameArray[0][0] = actvtsArray[0][1];
-        Reporter.log("quizActvtyName: " + actvtsArray[0][1], true);
+        Reporter.log("quizActivityName: " + actvtsArray[0][1], true);
 
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][2] = a.createAllInOneAssignmentActivity();
         assgnmntName[0][0] = actvtsArray[0][2];
-        Reporter.log("allInOneAsgnmntAvtvtyName: " + actvtsArray[0][2], true);
+        Reporter.log("allInOneAssignmentActivityName: " + actvtsArray[0][2], true);
 
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][3] = a.createPageResource();
-        Reporter.log("pageActvtyName: " + actvtsArray[0][3], true);
+        Reporter.log("pageActivityName: " + actvtsArray[0][3], true);
     }
 
     /**
@@ -201,13 +202,22 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.syllabusCreation"})
+    /*@Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.syllabusCreation"})
     public void testSyllabus_Creation(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.createSyllabusActivity();
     }
 
+    
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.quizPasswordCreation"})
+    public void testContentAdminQuizPasswordCreation(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        pswdQzNameArray[0][0] = a.createPswdQuizActivity();
+        Reporter.log("pswdQuizActvtyName: " + pswdQzNameArray[0][0], true);
+    }*/
+    
     /**
      * Add True/False question to Quiz Activity
      *
@@ -216,12 +226,12 @@ public class Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsQz", groups = {"regressionSmoke", "fullSmoke", "activites.addQuizQuestion"})
-    public void testAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
+    public void testContenAdminAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
     }
-
+    
     /**
      * Content Admin verify Feedback Window
      *

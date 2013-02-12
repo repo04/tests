@@ -24,6 +24,7 @@ public class Activity extends BaseClass {
     private String quizName;
     private String allInOneAsgnmntName;
     private String pageName;
+    private String pswdQuizName;
 
     /**
      * Create & Verify Forum Activity
@@ -70,6 +71,32 @@ public class Activity extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
         createActivity(quizName, quizIntro);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
+    }
+    
+    /**
+     * 
+     */
+    public void crtPswdQuizActivity() {
+        String quizIntro;
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.pswdQuizName = "RgsnTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "RgsnTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
+            this.pswdQuizName = "SmkTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "SmkTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.pswdQuizName = "DbgTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "DbgTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
+        createActivity(pswdQuizName, quizIntro);
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
+        driver.findElement(By.xpath("//fieldset[6]/div[2]/div/div[2]/input")).sendKeys("Password1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
     }
@@ -549,5 +576,12 @@ public class Activity extends BaseClass {
      */
     public String getPageActvyName() {
         return this.pageName;
+    }
+
+    /**
+     * @return 
+     */
+    public String getPswdQuizActivity() {
+        return this.pswdQuizName;
     }
 }

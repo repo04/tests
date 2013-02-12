@@ -333,6 +333,16 @@ public class Actions extends BaseClass {
         actvty.crtQuizActvty();
         return actvty.getQzActvyName();
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String createPswdQuizActivity() {
+        Activity actvty = new Activity();
+        actvty.crtPswdQuizActivity();
+        return actvty.getPswdQuizActivity();
+    }
 
     /**
      * Create AllInOneAsgnmntActivity

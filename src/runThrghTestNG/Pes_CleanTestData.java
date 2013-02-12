@@ -16,7 +16,7 @@ import smoketest.Actions;
  *
  * @author somesh.bansal
  */
-public class PES_CleanTestData extends BaseClass {
+public class Pes_CleanTestData extends BaseClass {
 
     Actions a = new Actions();
     public static boolean tchrStatus;
@@ -41,9 +41,9 @@ public class PES_CleanTestData extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"users.unAssignRole"})
-    public void testUnerolUsers(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testPESAdminUnerolUsers(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.unenrolUsers(stdtUsrName, tchrUsrName);
@@ -58,9 +58,9 @@ public class PES_CleanTestData extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"workingGroup.removeMembers"})
-    public void testRemoveMembersFromWorkngGroup(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testPESAdminRemoveMembersFromWorkngGroup(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
@@ -110,9 +110,9 @@ public class PES_CleanTestData extends BaseClass {
      * @param wrkngGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrp", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.delete"})
-    public void testDeleteWorkingGroup(String wrkngGrpName) throws Exception {
+    public void testPESAdminDeleteWorkingGroup(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWorkingGroup(wrkngGrpName);
         a.deleteWorkingGroup(wrkngGrpName);
@@ -123,9 +123,9 @@ public class PES_CleanTestData extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Users", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"regressionSmoke", "fullSmoke", "users.delete"})
-    public void testDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
+    public void testPESAdminDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
         a.navigateToMyContacts();
         a.deleteUsers(tchrUsr, stdtUsr);
     }
@@ -137,9 +137,9 @@ public class PES_CleanTestData extends BaseClass {
      * @param pesTxtAncmntCrsPost
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsAnnouncement", dataProviderClass = UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsAnnouncement", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
           groups = {"regressionSmoke", "wall.pesDeleteAnnouncement"})
-    public void testPesDeleteAnnouncement(String grpCrsName, String pesTxtAncmntCrsPost) throws Exception {
+    public void testPESAdminDeleteAnnouncement(String grpCrsName, String pesTxtAncmntCrsPost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.deletePost(pesTxtAncmntCrsPost);

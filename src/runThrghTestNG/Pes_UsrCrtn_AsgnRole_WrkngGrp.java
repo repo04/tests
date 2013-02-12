@@ -20,7 +20,7 @@ import smoketest.Actions;
  * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
  * Teacher/Student roles Create Working Group & add users as members Logs out
  */
-public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
+public class Pes_UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
 
     Actions a = new Actions();
     static String[][] usrsArray = new String[1][2];
@@ -74,13 +74,13 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @DataProvider(name = "GrpCrsUsers")
     public static Iterator<Object[]> GrpCrsUsers(ITestContext context) throws Exception {
         System.out.println("init GrpCrsUsers");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Users(context));
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), Users(context));
     }
 
     @DataProvider(name = "GrpCrsWrkngGrpUsers")
     public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
         System.out.println("init GrpCrsUsers");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), WrkngGrp(context), Users(context));
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), WrkngGrp(context), Users(context));
     }
 
     @DataProvider(name = "UsersDebug")
@@ -104,31 +104,31 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @DataProvider(name = "GrpCrsWrkngGrpDebugUsers")
     public static Iterator<Object[]> GrpCrsWrkngGrpDebugUsers(ITestContext context) throws Exception {
         System.out.println("init GrpCrsWrkngGrpDebugUsers");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), WrkngGrpDebug(context), Users(context));
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), WrkngGrpDebug(context), Users(context));
     }
 
     @DataProvider(name = "GrpCrsUsersDebug")
     public static Iterator<Object[]> GrpCrsUsersDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsUsersDebug");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), UsersDebug(context));
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), UsersDebug(context));
     }
 
     @DataProvider(name = "GrpCrsAsgnmntStdt")
     public static Iterator<Object[]> GrpCrsAsgnmntStdt(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAsgnmntStdt");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), Crs_GrpCrsCreation.AssgnmntName(context), StdtName(context));
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), CntAdmin_Crs_GrpCrsCreation.AssgnmntName(context), StdtName(context));
     }
 
     @DataProvider(name = "GrpCrsPESCoursePosts")
     public static Iterator<Object[]> GrpCrsPESCoursePosts(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPESCoursePosts");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
     }
     
     @DataProvider(name = "GrpCrsAnnouncement")
     public static Iterator<Object[]> GrpCrsAnnouncement(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAnnouncement");
-        return DataProviderUtil.cartesianProviderFrom(Crs_GrpCrsCreation.Course(context), pesTxtAncmntCrsPost);
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), pesTxtAncmntCrsPost);
     }
 
     /**
@@ -148,8 +148,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "users.creation"})
-    public void testUserCreation() throws Exception {
-
+    public void testPESAdminUserCreation () throws Exception {
         a.navigateToMyContacts();
         usrsArray[0][0] = a.createUser("teacher");
         System.out.println("tchrUsrName: " + usrsArray[0][0]);
@@ -168,8 +167,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsUsers", groups = {"regressionSmoke", "fullSmoke", "users.assignRole"})
-    public void testAssignRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
-
+    public void testPESAdminAssignRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.enrollUserToRole_GroupCourse(tchrUsrName, grpCrsName);
@@ -185,8 +183,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "workingGroup.create"})
-    public void testCreateWorkingGroup() throws Exception {
-
+    public void testPESAdminCreateWorkingGroup() throws Exception {
         a.navigateToWorkingGroups();
         wrkngGrpArray[0][0] = a.createWorkingGroup();
         System.out.println("wrkngGrp: " + wrkngGrpArray[0][0]);
@@ -199,7 +196,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WrkngGrpUsers", groups = {"regressionSmoke", "fullSmoke", "workingGroup.addMembers"})
-    public void testAddMembersToWorkingGroup(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testPESAdminAddMembersToWorkingGroup(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWorkingGroup(wrkngGrpName);
         a.addMembersToWorkingGroup(tchrUsrName, stdtUsrName);
@@ -211,7 +208,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "wall.courseSectionPost"})
     public void testPesAdminPostTextOnCourseSection(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
@@ -226,7 +223,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "wall.coursePostCommentsOn"})
     public void testPesAdminPostTextOnCourseCommentsOn(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
@@ -242,7 +239,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "wall.coursePostCommentsOff"})
     public void testPesAdminPostTextOnCourseCommentsOff(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
@@ -252,7 +249,7 @@ public class UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
     }
     
-    @Test(dataProvider = "Course", dataProviderClass = Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
     public void testPesAdminPostAnnouncementOnAllCourseSection(String grpCrsName) throws Exception {
         a.navigateToMyCourse();

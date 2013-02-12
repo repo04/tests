@@ -44,7 +44,7 @@ public class StdtEmlNtfctn_CrtclTests extends BaseClass {
      * @param stdtSclGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = StdtLvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
     groups = {"criticalsmoke", "stdtVrfyEmails"})
     public void testStudentVerifyEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 

@@ -40,23 +40,9 @@ public class Note extends BaseClass {
         int i = 1;
         end:
         while (i < 6) {
-            List<WebElement> elements = driver.findElements(By.tagName("a"));
-            System.out.println("Total inputs: " + elements.size());
-            for (WebElement a : elements) {
-                System.out.println("A id: " + a.getAttribute("id"));
-            }
-
-            List<WebElement> span;
-            if (wallType.contentEquals("Profile")) {
-                if (BaseClass.program.contentEquals("usc")) {
-                    span = elements.get(32).findElements(By.tagName("span"));
-                }else{
-                    span = elements.get(31).findElements(By.tagName("span"));
-                }
-            } else {
-                span = elements.get(35).findElements(By.tagName("span"));
-            }
-
+            List<WebElement> span = driver.findElement(By.id("show-notes")).findElements(By.tagName("span"));
+            System.out.println("Total span: " + span.size());
+            
             Robot robot = null;
             try {
                 robot = new Robot();
