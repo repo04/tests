@@ -55,7 +55,7 @@ public class Help extends BaseClass {
                         i++;
                     }
                 } else {
-                    ip.isTextPresentByCSS(driver, "//div[@id='ext-gen21']/span", "Help on This Page");
+                    ip.isTextPresentByXPATH(driver, "//div[@id='ext-gen21']/span", "Help on This Page");
                     break end;
                 }
             } else {
