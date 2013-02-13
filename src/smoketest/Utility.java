@@ -232,7 +232,7 @@ public class Utility {
     }
 
     /**
-     * Get Current NewYork Date
+     * Get Current NewYork Date in MM/dd/yyyy
      *
      * @param driver
      * @return
@@ -246,7 +246,7 @@ public class Utility {
     }
 
     /**
-     * Get Next NewYork Date
+     * Get Next NewYork Date in MM/dd/yyyy
      *
      * @param driver
      * @param currentDate
