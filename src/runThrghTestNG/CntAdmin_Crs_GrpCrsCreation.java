@@ -33,9 +33,9 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * Provider is a method that returns an array of array of objects. This
      * method will provide data to any test method that declares that its Data
      * Provider is named "Course". In this case it is being fetched from
-     * 'testContenAdminCourseGroupCourseCreation' method which always get executed before
-     * 'testContenAdminActivitiesCreation' (execution order is maintained in
-     * TransformSmoke class, passed as listeners from smoke.xml)
+     * 'testContenAdminCourseGroupCourseCreation' method which always get
+     * executed before 'testContenAdminActivitiesCreation' (execution order is
+     * maintained in TransformSmoke class, passed as listeners from smoke.xml)
      *
      *
      * @param context
@@ -89,6 +89,19 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         }
     }
 
+    @DataProvider(name = "PswdQzName")
+    public static Object[][] PswdQzName(ITestContext context) throws Exception {
+        /*if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
+         System.out.println("Inside PswdQzName: " + test);
+         return (pswdQzNameArray);
+         } else {
+         System.out.println("Inside PswdQzName: " + test);
+         return new Object[][]{{context.getCurrentXmlTest().getParameter("pswdQuizName")}};
+         }*/
+        System.out.println("Inside PswdQzName: " + test);
+        return (pswdQzNameArray);
+    }
+
     @DataProvider(name = "GrpCrsActivities")
     public static Iterator<Object[]> GrpCrsActivities(ITestContext context) throws Exception {
         System.out.println("init GrpCrsActivities");
@@ -135,6 +148,12 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
     public static Iterator<Object[]> GrpCrsQzDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsQzDebug");
         return DataProviderUtil.cartesianProviderFrom(Course(context), QzDebug(context));
+    }
+
+    @DataProvider(name = "GrpCrsPswdQzName")
+    public static Iterator<Object[]> GrpCrsPswdQzName(ITestContext context) throws Exception {
+        System.out.println("init GrpCrsPswdQzName");
+        return DataProviderUtil.cartesianProviderFrom(Course(context), PswdQzName(context));
     }
 
     /**
@@ -203,21 +222,25 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     /*@Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.syllabusCreation"})
-    public void testSyllabus_Creation(String grpCrsName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.createSyllabusActivity();
-    }
-
+     public void testSyllabus_Creation(String grpCrsName) throws Exception {
+     a.navigateToMyCourse();
+     a.selectGroupCourse(grpCrsName);
+     a.createSyllabusActivity();
+     }*/
     
-    @Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.quizPasswordCreation"})
+    /**
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"pswdQuiz.activityCreation"})
     public void testContentAdminQuizPasswordCreation(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         pswdQzNameArray[0][0] = a.createPswdQuizActivity();
         Reporter.log("pswdQuizActvtyName: " + pswdQzNameArray[0][0], true);
-    }*/
-    
+    }
+
     /**
      * Add True/False question to Quiz Activity
      *
@@ -231,7 +254,20 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
     }
-    
+
+    /**
+     *
+     * @param grpCrsName
+     * @param pswdQuizName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GrpCrsPswdQzName", groups = {"pswdQuiz.addQuestion"})
+    public void testContenAdminAddPasswordQuizQuestion(String grpCrsName, String pswdQuizName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.addQuizQuestion(pswdQuizName);
+    }
+
     /**
      * Content Admin verify Feedback Window
      *
@@ -242,17 +278,17 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         a.navigateToMyHome();
         a.verifyFeedbackWindow();
     }
-    
+
     /**
      * ContentAdmin verify Help Window on Home Page
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "help.contentAdminVerify"})
+    /*@Test(groups = {"regressionSmoke", "help.contentAdminVerify"})
     public void testContentAdminVerifyHelpWindow() throws Exception {
         a.navigateToMyHome();
         a.verifyHelpWindow();
-    }
+    }*/
 
     /**
      * The annotated method will be run after all the test methods in the

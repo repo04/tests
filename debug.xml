@@ -16,7 +16,7 @@
         <parameter name="quizActvtyName" value="AutoQuiz"/>
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
-        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
+        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>        
         
         <groups>
             <define name="Course_GroupCourse">
@@ -151,9 +151,13 @@
                 <include name="help.teacherVerify"/>
                 <include name="help.studentVerify"/>
             </define>
-            <define name="Mail">
+            <define name="PswdQz">
                 <include name="prerequisite"/>
-                <include name="mail.read"/>                
+                <include name="pswdQuiz.activityCreation"/>
+                <include name="pswdQuiz.addQuestion"/>
+                <include name="pswdQuiz.generatePassword"/>
+                <include name="pswdQuiz.readMail"/>
+                <include name="pswdQuiz.submitQuiz"/>                
             </define>
             
             <!--run>
@@ -172,7 +176,7 @@
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.CntAdmn_CleanTstData"/>
-            <class name="runThrghTestNG.Pes_ArchvCrs"/>
+            <class name="runThrghTestNG.Pes_ArchvCrs"/>                        
         </classes>
     </test>
 </suite>

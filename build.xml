@@ -87,11 +87,20 @@
             </elseif>
             <elseif>
                 <or>
-<!--                    <contains string="${callUrl}" substring="2sg"/>-->
+                    <contains string="${callUrl}" substring="2sg"/>
                     <contains string="${callUrl}" substring="au-mir"/>
                 </or>
                 <then>
                     <var name="program" value="au-mir" />
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="2sg"/>
+                    <contains string="${callUrl}" substring="gwu-mph"/>
+                </or>
+                <then>
+                    <var name="program" value="gwu-mph"/>
                 </then>
             </elseif>
         </if>   

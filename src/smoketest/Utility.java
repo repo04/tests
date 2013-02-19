@@ -226,8 +226,8 @@ public class Utility {
             alert.accept();
         } else {
             alert.dismiss();
-            Utility.illegalStateException("Incorrect Alert present with Text as '" + text + "'. "
-                    + "Expected text: '" + alert.getText() + "'");
+            Utility.illegalStateException("Incorrect Alert present with Text as '" + alert.getText() + "'. "
+                    + "Expected text: '" + text + "'");
         }
     }
 

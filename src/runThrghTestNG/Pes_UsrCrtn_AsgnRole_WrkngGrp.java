@@ -274,11 +274,11 @@ public class Pes_UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
      * 
      * @throws Exception 
      */
-    @Test(groups = {"regressionSmoke", "help.pesAdminVerify"})
+    /*@Test(groups = {"regressionSmoke", "help.pesAdminVerify"})
     public void testPesAdminVerifyHelpWindow() throws Exception {
         a.navigateToMyHome();
         a.verifyHelpWindow();
-    }
+    }*/
 
     /**
      * The annotated method will be run after all the test methods in the

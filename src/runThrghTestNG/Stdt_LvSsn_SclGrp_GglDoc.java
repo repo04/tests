@@ -123,7 +123,23 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.navigateToActivityReport();
-        a.submitQuiz(quizActvtyName);
+        a.submitQuiz(quizActvtyName, "");
+    }
+    
+    /**
+     * 
+     * @param grpCrsName
+     * @param pswdQzName
+     * @param password
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsPswdQzNamePassword", dataProviderClass = TchrEmlNtfctn_SmkTests.class,
+          groups = {"pswdQuiz.submitQuiz"})
+    public void testStudentSubmitPasswordQuiz(String grpCrsName, String pswdQzName, String password) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.submitQuiz(pswdQzName, password);
     }
 
     /**

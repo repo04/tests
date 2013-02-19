@@ -7,6 +7,7 @@ package runThrghTestNG;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import org.testng.IAnnotationTransformer;
+import org.testng.IInvokedMethodListener;
 import org.testng.annotations.ITestAnnotation;
 
 /**
@@ -24,8 +25,9 @@ import org.testng.annotations.ITestAnnotation;
  * parameter represents this constructor (null otherwise).
  * @param testMethod If the annotation was found on a method, this parameter
  * represents this method (null otherwise).
+ * IInvokedMethodListener
  */
-public class TransformDebug implements IAnnotationTransformer {
+public class TransformDebug implements IAnnotationTransformer  {
 
     String DependentMethods[] = null;
 
@@ -79,13 +81,13 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStudentVerifyAssignmentGrade".equals(testMethod.getName()) 
+        if ("testStudentVerifyAssignmentGrade".equals(testMethod.getName())
                 || "testTeacherAllowResubmitAssignment".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherGradeAssignment";
             annotation.setDependsOnMethods(DependentMethods);
-        }       
+        }
 
         //GroupName = Users
         if ("testPESAdminAssignRole".equals(testMethod.getName())) {
@@ -354,5 +356,52 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherUploadFilesInCourse";
             annotation.setDependsOnMethods(DependentMethods);
         }
+
+        //GroupName = PswdQuiz
+        if ("testContenAdminAddPasswordQuizQuestion".equals(testMethod.getName())) {
+            System.out.println("Inside testContenAdminAddPasswordQuizQuestion");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminQuizPasswordCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
+            System.out.println("Inside testContenAdminAddPasswordQuizQuestion");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddPasswordQuizQuestion";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherReadMailBody".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherReadMailBody");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherGenerateQuizPassword";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentSubmitPasswordQuiz");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.TchrEmlNtfctn_SmkTests.testTeacherReadMailBody";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
+
+    /*@Override
+    public void beforeInvocation(IInvokedMethod invokedMethod, ITestResult result) {
+        ITestNGMethod testNgMethod = result.getMethod();
+        System.out.println("Print1: " + testNgMethod.getMethodName());
+        ConstructorOrMethod contructorOrMethod = testNgMethod.getConstructorOrMethod();
+        Method method = contructorOrMethod.getMethod();
+        System.out.println("Print2: " + method.getName());
+        if ("testContentAdminQuizPasswordCreation".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
+            System.out.println("Not a test method");
+            throw new SkipException("");
+        }
+    }
+
+    @Override
+    public void afterInvocation(IInvokedMethod iim, ITestResult itr) {
+        //throw new UnsupportedOperationException("Not supported yet.");
+    }*/
 }

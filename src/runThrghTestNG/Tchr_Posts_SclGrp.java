@@ -5,7 +5,6 @@
 package runThrghTestNG;
 
 import java.util.Iterator;
-import org.openqa.selenium.By;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -13,7 +12,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
-import smoketest.Utility;
 
 /**
  * Teacher Login, Posts on Wall & Course Wall, Creates Social Group
@@ -138,13 +136,12 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @throws Exception
      */
     /*@Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-    groups = {"regressionSmoke", "activity.teacherVerifySyllabus"})
-    public void testTeacherVerifySyllabusActivity(String grpCrsName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.verifySyllabusActivity();
-    }*/
-
+     groups = {"regressionSmoke", "activity.teacherVerifySyllabus"})
+     public void testTeacherVerifySyllabusActivity(String grpCrsName) throws Exception {
+     a.navigateToMyCourse();
+     a.selectGroupCourse(grpCrsName);
+     a.verifySyllabusActivity();
+     }*/
     /**
      * Teacher verify Resume
      *
@@ -178,30 +175,19 @@ public class Tchr_Posts_SclGrp extends BaseClass {
         a.verifyFeedbackWindow();
     }
 
-    @Test(groups = {"mail.read"})
-    public void testTeacherReadMailBody() throws Exception {
-        Utility.usrEmailLogin(driver, xpv, "2torteacher");
-
-        ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
-        driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
-
-        ip.isElementClickableByXpath(driver, "//tr[1]/td[5]/div/span", 60);
-        Utility.actionBuilderClick(driver, "//tr[1]/td[5]/div/span");
-
-        ip.isTextPresentByXPATH(driver, "//h1/span", "Passwords for PswdQz", 60);
-
-        String mailContent = driver.findElement(By.xpath("//div[2]/div[6]/div")).getText();
-        System.out.println("Mail: " + mailContent);
-
-        int x = mailContent.indexOf("autostudent1 autostudent1");
-        int y = mailContent.lastIndexOf("autostudent1 autostudent1");
-        int z = mailContent.lastIndexOf(":");
-        System.out.println("x value: " + x);
-        System.out.println("y value: " + y);
-        String pswd = mailContent.substring(z);
-        System.out.println("pswd: " + pswd);
-
-        Utility.usrEmailLogout(driver);
+    /**
+     * 
+     * @param grpCrsName
+     * @param pswdQzName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsPswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+          groups = {"pswdQuiz.generatePassword"})
+    public void testTeacherGenerateQuizPassword(String grpCrsName, String pswdQzName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.generateQuizPassword(pswdQzName);
     }
 
     /**

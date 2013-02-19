@@ -33,6 +33,7 @@ public class BaseClass {
     public static String env;
     public static String brwsr;
     public static String test;
+    public static String url;
     public static File directory = new File(".");
 
     /**
@@ -58,6 +59,7 @@ public class BaseClass {
         this.env = env;
         this.brwsr = brwsr;
         this.test = test;
+        this.url = url;
 
         pv = new ProgramValues("loginDetails");
         xpv = new XpathValues("xPathAccountProperty");
@@ -120,7 +122,7 @@ public class BaseClass {
                 Reporter.log("Browser: firefox");                
         }
 
-        driver.get(url);
+        driver.get(this.url);
         ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
     }
 
