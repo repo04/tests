@@ -77,7 +77,7 @@ Requirement: The appropriate JAR's need to be present in specific ANT's classpat
 		
 Setup Property Files
 --------------------
-**Note:** 'loginDetails' property file needs to be placed at /tests/src folder. <br />
+**Note:** 'loginDetails' property file needs to be placed at /tests/src folder.  Please contact Benjamin for a copy. This will eventually be on S3. <br />
 
 
 Setup to execute on CHROME Browser
