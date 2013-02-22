@@ -7,7 +7,6 @@ package runThrghTestNG;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import org.testng.IAnnotationTransformer;
-import org.testng.IInvokedMethodListener;
 import org.testng.annotations.ITestAnnotation;
 
 /**
@@ -25,9 +24,9 @@ import org.testng.annotations.ITestAnnotation;
  * parameter represents this constructor (null otherwise).
  * @param testMethod If the annotation was found on a method, this parameter
  * represents this method (null otherwise).
- * IInvokedMethodListener
+ *
  */
-public class TransformDebug implements IAnnotationTransformer  {
+public class TransformDebug implements IAnnotationTransformer {
 
     String DependentMethods[] = null;
 
@@ -382,26 +381,8 @@ public class TransformDebug implements IAnnotationTransformer  {
         if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
             System.out.println("Inside testStudentSubmitPasswordQuiz");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.TchrEmlNtfctn_SmkTests.testTeacherReadMailBody";
+            DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherReadMailBody";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }
-
-    /*@Override
-    public void beforeInvocation(IInvokedMethod invokedMethod, ITestResult result) {
-        ITestNGMethod testNgMethod = result.getMethod();
-        System.out.println("Print1: " + testNgMethod.getMethodName());
-        ConstructorOrMethod contructorOrMethod = testNgMethod.getConstructorOrMethod();
-        Method method = contructorOrMethod.getMethod();
-        System.out.println("Print2: " + method.getName());
-        if ("testContentAdminQuizPasswordCreation".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
-            System.out.println("Not a test method");
-            throw new SkipException("");
-        }
-    }
-
-    @Override
-    public void afterInvocation(IInvokedMethod iim, ITestResult itr) {
-        //throw new UnsupportedOperationException("Not supported yet.");
-    }*/
 }

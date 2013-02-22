@@ -3,6 +3,7 @@
 <suite name="Staging-DebugSuite">
     <listeners>
         <listener class-name="runThrghTestNG.TransformDebug"/>
+        <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
         <parameter name="tchrUsrName" value="autoteacher1"/>
@@ -171,6 +172,7 @@
             <class name="runThrghTestNG.Tchr_Posts_SclGrp"/>
             <class name="runThrghTestNG.Stdt_JnSclGrp_Post"/>
             <class name="runThrghTestNG.Tchr_LvSsn_GglDoc"/>
+            <class name="runThrghTestNG.Tchr_FetchAssignmentPassword"/>
             <class name="runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc"/>
             <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>

@@ -25,7 +25,7 @@ public class TestNGCustomReport extends TestListenerAdapter {
 
     @Override
     public void onTestStart(ITestResult result) {
-        System.out.print("*****TestInvoking: " + result.getName() + "*****" + "\n");
+        //Do Nothing
     }
 
     //Capture screenshot on TestFailure

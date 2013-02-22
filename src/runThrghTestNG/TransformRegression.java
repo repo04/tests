@@ -347,5 +347,34 @@ public class TransformRegression implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherUploadFilesInCourse";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        //GroupName = PswdQuiz
+        if ("testContenAdminAddPasswordQuizQuestion".equals(testMethod.getName())) {
+            System.out.println("Inside testContenAdminAddPasswordQuizQuestion");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminQuizPasswordCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
+            System.out.println("Inside testContenAdminAddPasswordQuizQuestion");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddPasswordQuizQuestion";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherReadMailBody".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherReadMailBody");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherGenerateQuizPassword";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentSubmitPasswordQuiz");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherReadMailBody";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

@@ -233,7 +233,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"pswdQuiz.activityCreation"})
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.activityCreation"})
     public void testContentAdminQuizPasswordCreation(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -261,7 +261,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @param pswdQuizName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsPswdQzName", groups = {"pswdQuiz.addQuestion"})
+    @Test(dataProvider = "GrpCrsPswdQzName", groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.addQuestion"})
     public void testContenAdminAddPasswordQuizQuestion(String grpCrsName, String pswdQuizName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);

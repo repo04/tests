@@ -3,6 +3,7 @@
 <suite name="FullSmoke Suite">
     <listeners>
         <listener class-name="runThrghTestNG.TransformRegression"/>
+        <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="SmokeTests" preserve-order="true" parallel="false">
         <groups>
@@ -23,8 +24,8 @@
             <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.CntAdmn_CleanTstData"/>
             <class name="runThrghTestNG.Pes_ArchvCrs"/>
-            <!--class name="runThrghTestNG.TchrEmlNtfctn_SmkTests"/>
-            <class name="runThrghTestNG.StdtEmlNtfctn_SmkTests"/-->
+            <!--class name="runThrghTestNG.Tchr_VerifyEmailNotifications"/>
+            <class name="runThrghTestNG.Stdt_VerifyEmailNotifications"/-->
         </classes>
     </test>
 </suite>

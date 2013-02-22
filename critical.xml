@@ -3,6 +3,7 @@
 <suite name="CriticalSmoke Suite">
     <listeners>
         <listener class-name="runThrghTestNG.TransformCritical"/>
+        <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="CriticalTests" preserve-order="true" parallel="false">
         <parameter name="tchrUsrName" value="autoteacher1"/>
@@ -27,8 +28,8 @@
             <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
             <class name="runThrghTestNG.Pes_CleanTestData"/>
-            <!--class name="runThrghTestNG.TchrEmlNtfctn_CrtclTests"/>
-            <class name="runThrghTestNG.StdtEmlNtfctn_CrtclTests"/-->                                              
+            <!--class name="runThrghTestNG.Tchr_VerifyEmailNotifications"/>
+            <class name="runThrghTestNG.Stdt_VerifyEmailNotifications"/-->                                              
         </classes>
     </test>    
 </suite>
