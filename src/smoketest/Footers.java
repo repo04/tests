@@ -26,28 +26,28 @@ public class Footers extends BaseClass {
      * Verify Footers
      */
     void verifyFooters() {
-        switch (BaseClass.program) {
-            case "unc":
+        switch (program) {
+            case "unc-mba":
                 vrfy1 = "University of North Carolina at Chapel Hill";
                 prgrmTitle = "UNC Kenan-Flagler Business School MBA@UNC:";
                 break;
-            case "gu":
+            case "gu-msn":
                 vrfy1 = "Georgetown University";
                 prgrmTitle = "Nursing@Georgetown:";
                 break;
-            case "vac":
+            case "usc-msw":
                 vrfy1 = "University of Southern California";
                 prgrmTitle = "USC School of Social Work: MSW@USC:";
                 break;
-            case "usc":
+            case "usc-mat":
                 vrfy1 = "University of Southern California";
                 prgrmTitle = "USC Rossier School of Education:";
                 break;
-            case "llm":
+            case "wu-llm":
                 vrfy1 = "Washington University in St. Louis";
                 prgrmTitle = "@WashULaw | Washington University in St.Louis:";
                 break;
-            case "mpa":
+            case "unc-mpa":
                 vrfy1 = "University of North Carolina at Chapel Hill";
                 prgrmTitle = "MPA@UNC | UNC School of Government:";
         }

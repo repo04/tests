@@ -226,13 +226,13 @@ public class Utility {
             alert.accept();
         } else {
             alert.dismiss();
-            Utility.illegalStateException("Incorrect Alert present with Text as '" + text + "'. "
-                    + "Expected text: '" + alert.getText() + "'");
+            Utility.illegalStateException("Incorrect Alert present with Text as '" + alert.getText() + "'. "
+                    + "Expected text: '" + text + "'");
         }
     }
 
     /**
-     * Get Current NewYork Date
+     * Get Current NewYork Date in MM/dd/yyyy
      *
      * @param driver
      * @return
@@ -246,7 +246,7 @@ public class Utility {
     }
 
     /**
-     * Get Next NewYork Date
+     * Get Next NewYork Date in MM/dd/yyyy
      *
      * @param driver
      * @param currentDate

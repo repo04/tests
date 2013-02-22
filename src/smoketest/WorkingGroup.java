@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
-import runThrghTestNG.PES_CleanTestData;
+import runThrghTestNG.Pes_CleanTestData;
 
 public class WorkingGroup extends BaseClass {
 
@@ -103,28 +103,28 @@ public class WorkingGroup extends BaseClass {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
-                    if (PES_CleanTestData.tchrStatus) {
+                    if (Pes_CleanTestData.tchrStatus) {
                         fullNm = mbr + " " + mbr + "(Non-editing teacher)";
                     } else {
                         fullNm = mbr + " " + mbr + "()";
                     }
                     break sw;
                 case "autotea":
-                    if (PES_CleanTestData.tchrStatus) {
+                    if (Pes_CleanTestData.tchrStatus) {
                         fullNm = "auto teacher1(Non-editing teacher)";
                     } else {
                         fullNm = "auto teacher1()";
                     }
                     break sw;
                 case "student":
-                    if (PES_CleanTestData.stdtStatus) {
+                    if (Pes_CleanTestData.stdtStatus) {
                         fullNm = mbr + " " + mbr + "(Student)";
                     } else {
                         fullNm = mbr + " " + mbr + "()";
                     }
                     break sw;
                 case "autostu":
-                    if (PES_CleanTestData.stdtStatus) {
+                    if (Pes_CleanTestData.stdtStatus) {
                         fullNm = "auto student1(Student)";
                     } else {
                         fullNm = "auto student1()";

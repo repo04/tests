@@ -24,6 +24,8 @@ public class Activity extends BaseClass {
     private String quizName;
     private String allInOneAsgnmntName;
     private String pageName;
+    private String pswdQuizName;
+    private String questionTitle, question, ans;
 
     /**
      * Create & Verify Forum Activity
@@ -70,6 +72,32 @@ public class Activity extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
         createActivity(quizName, quizIntro);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
+    }
+
+    /**
+     *
+     */
+    public void crtPswdQuizActivity() {
+        String quizIntro;
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.pswdQuizName = "RgsnTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "RgsnTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
+            this.pswdQuizName = "SmkTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "SmkTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.pswdQuizName = "DbgTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            quizIntro = "DbgTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
+        createActivity(pswdQuizName, quizIntro);
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
+        driver.findElement(By.xpath("//fieldset[6]/div[2]/div/div[2]/input")).sendKeys("Password1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
     }
@@ -178,6 +206,15 @@ public class Activity extends BaseClass {
      * @param quizActvtyName
      */
     public void addQuizQuestion(String quizActvtyName) {
+        if (quizActvtyName.contains("PswdQuiz")) {
+            questionTitle = "Unit";
+            question = "1 Kg equals 1000 grams";
+            ans = "True";
+        } else {
+            questionTitle = "Capital";
+            question = "New York City is the capital of the United States";
+            ans = "False";
+        }
 
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
@@ -197,11 +234,11 @@ public class Activity extends BaseClass {
                 + "question with just the two choices 'True' and 'False'.");
         driver.findElement(By.xpath(xpv.getTokenValue("btnNxtScrnXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAddQzQstnScrnXPATH"), "Adding a True/False question");
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldQzQstnNmXPATH"))).sendKeys("Capital");
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldQzQstnTxtXPATH"))).sendKeys("New York City is the capital of the United States");
-        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrrctAnsXPATH")))).selectByVisibleText("False");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldQzQstnNmXPATH"))).sendKeys(questionTitle);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldQzQstnTxtXPATH"))).sendKeys(question);
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrrctAnsXPATH")))).selectByVisibleText(ans);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSvQzQstnXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyQzQstnXPATH"), "New York City is the capital of the United States");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyQzQstnXPATH"), question);
     }
 
     /**
@@ -209,7 +246,7 @@ public class Activity extends BaseClass {
      *
      * @param quizActvtyName
      */
-    public void submitQuiz(String quizActvtyName) {
+    public void submitQuiz(String quizActvtyName, String password) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActvtyName + "')]")).click();
         int i = 1;
         int rows;
@@ -230,9 +267,19 @@ public class Activity extends BaseClass {
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnEditQzXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtSbmtQzQstnXPATH"), "New York City is the capital of the United States");
 
-        WebElement yesRadioButton = driver.findElement(By.xpath(xpv.getTokenValue("radioBtnFlsOptnXPATH")));
+        WebElement yesRadioButton;
+
+        if (!password.isEmpty()) {
+            ip.isTextPresentByXPATH(driver, "//div[2]/p", "To attempt this quiz you need to know the quiz password");
+            driver.findElement(By.xpath("//div/input")).sendKeys(password);
+            driver.findElement(By.xpath("//div/input[5]")).click();
+            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtSbmtQzQstnXPATH"), "1 Kg equals 1000 grams");
+            yesRadioButton = driver.findElement(By.xpath(xpv.getTokenValue("radioBtnTrueOptnXPATH")));
+        } else {
+            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtSbmtQzQstnXPATH"), "New York City is the capital of the United States");
+            yesRadioButton = driver.findElement(By.xpath(xpv.getTokenValue("radioBtnFlsOptnXPATH")));
+        }
         yesRadioButton.click();
 
         driver.findElement(By.xpath(xpv.getTokenValue("btnNxtSbmtQzQstnXPATH"))).click();
@@ -428,7 +475,6 @@ public class Activity extends BaseClass {
     public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
 
-        //fieldGrdAsgntXPATH btnSaveGrdAsgntXPATH
         int x = locateElement(allInOneAsgnmntAvtvtyName);
         int y = x + 1;
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
@@ -506,6 +552,23 @@ public class Activity extends BaseClass {
     }
 
     /**
+     * 
+     * @param pswdQzName 
+     */
+    public void generateQuizPassword(String pswdQzName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + pswdQzName + "')]")).click();
+        ip.isElementPresentByID(driver, "generate_pwds_btn");
+        driver.findElement(By.id("generate_pwds_btn")).click();
+        Utility.waitForAlertToBeAccepted(driver, 60, "This will e-mail you and all other instructors in this section a list of passwords for this quiz. "
+                + "If you already generated this, a new set of passwords will be created, "
+                + "rendering the old set invalid. Students will need to use the latest set.");
+        Utility.waitForAlertToBeAccepted(driver, 60, "Passwords have been emailed.");
+        //new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath("//*[contains(text(),'//div[5]/div/div[4]/div[3]')]"), "Last generated by autoteacher1 autoteacher1 on 02-14-2013"));
+        //new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath("//*[contains(text(),'//div[3]/div[3]')]"), "Last generated by autoteacher1 autoteacher1 on 02-14-2013"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.id("generate_pwds_btn")));
+    }
+
+    /**
      *
      * @param elementName
      * @return
@@ -550,5 +613,12 @@ public class Activity extends BaseClass {
      */
     public String getPageActvyName() {
         return this.pageName;
+    }
+
+    /**
+     * @return
+     */
+    public String getPswdQuizActivity() {
+        return this.pswdQuizName;
     }
 }

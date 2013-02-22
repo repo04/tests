@@ -18,15 +18,15 @@
             </run>
         </groups>
         <classes>
-            <class name="runThrghTestNG.Crs_GrpCrsCreation"/>
-            <class name="runThrghTestNG.UsrCrtn_AsgnRole_WrkngGrp"/>
-            <class name="runThrghTestNG.TchrPosts_SclGrp"/>
-            <class name="runThrghTestNG.StdtJnSclGrp_Post"/>
-            <class name="runThrghTestNG.TchrLvSsn_GglDoc"/>
-            <class name="runThrghTestNG.StdtLvSsn_SclGrp_GglDoc"/>            
-            <class name="runThrghTestNG.TchrJoin_Delete_SclGrp"/>
+            <class name="runThrghTestNG.CntAdmin_Crs_GrpCrsCreation"/>
+            <class name="runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp"/>
+            <class name="runThrghTestNG.Tchr_Posts_SclGrp"/>
+            <class name="runThrghTestNG.Stdt_JnSclGrp_Post"/>
+            <class name="runThrghTestNG.Tchr_LvSsn_GglDoc"/>
+            <class name="runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc"/>            
+            <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
-            <class name="runThrghTestNG.PES_CleanTestData"/>
+            <class name="runThrghTestNG.Pes_CleanTestData"/>
             <!--class name="runThrghTestNG.TchrEmlNtfctn_CrtclTests"/>
             <class name="runThrghTestNG.StdtEmlNtfctn_CrtclTests"/-->                                              
         </classes>

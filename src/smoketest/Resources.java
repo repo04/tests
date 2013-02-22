@@ -25,8 +25,8 @@ public class Resources extends BaseClass {
      * Verify Resources
      */
     public void verifyResources() {
-        switch (BaseClass.program) {
-            case "unc":
+        switch (program) {
+            case "unc-mba":
                 vrfy1 = "Career Connections";
                 vrfy2 = "Connect Carolina";
                 vrfy3 = "KF Intranet";
@@ -36,7 +36,7 @@ public class Resources extends BaseClass {
                 vrfy7 = "KF Email";
                 resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7);
                 break;
-            case "gu":
+            case "gu-msn":
                 vrfy1 = "HoyaMail";
                 vrfy2 = "Library";
                 vrfy3 = "MyAccess";
@@ -44,21 +44,38 @@ public class Resources extends BaseClass {
                 vrfy5 = "Handbooks & Info";
                 resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5);
                 break;
-            case "vac":
-            case "usc":
+            case "usc-msw":
+            case "usc-mat":
                 vrfy1 = "myUSC";
                 vrfy2 = "Catalogue";
                 vrfy3 = "Email";
                 vrfy4 = "Docs";
                 resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4);
                 break;
+            case "wu-llm":
+                vrfy1 = "MyLaw";
+                vrfy2 = "E-Mail";
+                vrfy3 = "WebSTAC";
+                vrfy4 = "Career Services";
+                vrfy5 = "Library Home Page";
+                vrfy6 = "Library Database";
+                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6);
+                break;
+            case "unc-mpa":
+                vrfy1 = "MyUNC";
+                vrfy2 = "Heelmail - UNC Email";
+                vrfy3 = "UNC Onyen";
+                vrfy4 = "Faculty Profiles";
+                vrfy5 = "Leadership Team";
+                vrfy6 = "Daily Tarheel";
+                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6);
         }
         verifyWindow(resources);
     }
 
     /**
-     * 
-     * @param resources 
+     *
+     * @param resources
      */
     private void verifyWindow(List<String> resources) {
 
@@ -79,12 +96,13 @@ public class Resources extends BaseClass {
             try {
                 switch (resource) {
                     case "Career Connections":
-                    case "Leadership Team":
                     case "myUSC":
                     case "Catalogue":
+                    case "WebSTAC":
                         ip.isTitleContains(driver, resource);
                         break;
                     case "Connect Carolina":
+                    case "MyUNC":
                         ip.isTitlePresent(driver, "MyUNC : UNC Campus !Portal");
                         break;
                     case "KF Intranet":
@@ -94,7 +112,18 @@ public class Resources extends BaseClass {
                         ip.isTitleContains(driver, "Onyen");
                         break;
                     case "Faculty Profiles":
-                        ip.isTitleContains(driver, "Faculty Member Profiles");
+                        if (program.contains("unc-mba")) {
+                            ip.isTitlePresent(driver, "Faculty Member Profiles | MBA@UNC");
+                        } else {
+                            ip.isTitlePresent(driver, "Faculty and Staff");
+                        }
+                        break;
+                    case "Leadership Team":
+                        if (program.contains("unc-mba")) {
+                            ip.isTitlePresent(driver, "Kenan Flagler Business School Leadership Team | MBA@UNC");
+                        } else {
+                            ip.isTitlePresent(driver, "Chapel Hill School of Government Leadership Team | MPA@UNC");
+                        }
                         break;
                     case "KF Email":
                         ip.isTitleContains(driver, "Microsoft Exchange - Outlook Web Access");
@@ -112,7 +141,7 @@ public class Resources extends BaseClass {
                         ip.isTitlePresent(driver, "Service Management");
                         break;
                     case "Handbooks & Info":
-                        ip.isTitlePresent(driver, "Useful Forms and Quick Links - School of Nursing & Health Studies");
+                        ip.isTitlePresent(driver, "Useful Documents and Quick Links - School of Nursing & Health Studies");
                         break;
                     case "Email":
                         ip.isTitlePresent(driver, "USC Web Mail");
@@ -120,6 +149,26 @@ public class Resources extends BaseClass {
                     case "Docs":
                         ip.isTitlePresent(driver, "USCnet Login");
                         break;
+                    case "MyLaw":
+                        ip.isTitlePresent(driver, "MyLaw Login");
+                        break;
+                    case "E-Mail":
+                        ip.isTitlePresent(driver, "Welcome to GO WUSTL | go.wustl.edu | Washington University in St. Louis");
+                        break;
+                    case "Career Services":
+                        ip.isTitlePresent(driver, "WULS: Career Services Overview");
+                        break;
+                    case "Library Home Page":
+                        ip.isTitlePresent(driver, "WULS: Law Library");
+                        break;
+                    case "Library Database":
+                        ip.isTitlePresent(driver, "WULS: Law Library and Technology");
+                        break;
+                    case "Heelmail - UNC Email":
+                        ip.isTitlePresent(driver, "UNC-Chapel Hill Single Sign-On");
+                        break;
+                    case "Daily Tarheel":
+                        ip.isTitlePresent(driver, "The Daily Tar Heel :: Serving UNC students and the community since 1893");                                         
                 }
                 driver.close();
                 driver.switchTo().window(HandleBefore);

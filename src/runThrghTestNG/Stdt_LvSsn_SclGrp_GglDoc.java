@@ -18,7 +18,7 @@ import smoketest.Actions;
  * Social Group Verify Google Doc Verify All Posts on Top/Recent News Verify
  * Activities & resource items appear in activity report
  */
-public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
+public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
 
     static String[][] stdtSclGrpArray = new String[1][1];
     Actions a = new Actions();
@@ -32,14 +32,14 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
     @DataProvider(name = "TchrStdtSclGrps")
     public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
         System.out.println("init TchrStdtSclGrps");
-        return DataProviderUtil.cartesianProviderFrom(TchrPosts_SclGrp.TchrSclGrp(context), StdtSclGrp(context));
+        return DataProviderUtil.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), StdtSclGrp(context));
     }
 
     @DataProvider(name = "UsrsWrkngGrpTchrStdtSclGrps")
     public static Iterator<Object[]> UsrsWrkngGrpTchrStdtSclGrps(ITestContext context) throws Exception {
         System.out.println("init UsrsWrkngGrpTchrStdtSclGrps");
-        return DataProviderUtil.cartesianProviderFrom(UsrCrtn_AsgnRole_WrkngGrp.Users(context),
-                UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), TchrPosts_SclGrp.TchrSclGrp(context),
+        return DataProviderUtil.cartesianProviderFrom(Pes_UsrCrtn_AsgnRole_WrkngGrp.Users(context),
+                Pes_UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), Tchr_Posts_SclGrp.TchrSclGrp(context),
                 StdtSclGrp(context));
     }
 
@@ -52,7 +52,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
+            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
         }
@@ -63,7 +63,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = TchrPosts_SclGrp.class,
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.studentCreate"})
     public void testStudentCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
@@ -90,7 +90,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = TchrLvSsn_GglDoc.class,
+    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = Tchr_LvSsn_GglDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.studentVerifyGoogleDoc"})
     public void testStudentVerifyWorkingGroup_GoogleDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
@@ -102,7 +102,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "activites.studentVerify"})
     public void testStudentVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -117,13 +117,29 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz", dataProviderClass = Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsQz", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "activites.submitQuiz"})
-    public void testSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
+    public void testStudentSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.navigateToActivityReport();
-        a.submitQuiz(quizActvtyName);
+        a.submitQuiz(quizActvtyName, "");
+    }
+    
+    /**
+     * 
+     * @param grpCrsName
+     * @param pswdQzName
+     * @param password
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsPswdQzNamePassword", dataProviderClass = TchrEmlNtfctn_SmkTests.class,
+          groups = {"pswdQuiz.submitQuiz"})
+    public void testStudentSubmitPasswordQuiz(String grpCrsName, String pswdQzName, String password) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.submitQuiz(pswdQzName, password);
     }
 
     /**
@@ -133,9 +149,9 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @param allInOneAsgnmntAvtvtyName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.verifyGrade"})
-    public void testVerifyAssignmentGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+    public void testStudentVerifyAssignmentGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.navigateToGrades();
@@ -151,7 +167,7 @@ public class StdtLvSsn_SclGrp_GglDoc extends BaseClass {
      * @param doc
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = TchrLvSsn_GglDoc.class, 
+    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = Tchr_LvSsn_GglDoc.class, 
           groups = {"regressionSmoke", "files.studentVerifyInCourse"})
     public void testStudentVerifyFilesInCourse(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();

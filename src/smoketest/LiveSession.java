@@ -59,8 +59,6 @@ public class LiveSession extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrtSsn"))).click();
         WebElement lvSsnNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH"))));
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
-        dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        System.out.println(dateFormat.format(now));
         WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));
         new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), "60"));
 
@@ -74,7 +72,7 @@ public class LiveSession extends BaseClass {
             lvSsnNmDesc.sendKeys(liveSsnDesc);
             lvSsnDrtn.sendKeys(xpv.getTokenValue("lvSsnDuration"));
             try {
-                new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.id("startdate"), dateFormat.format(now)));
+                new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.id("startdate"), Utility.getCurrentNewYorkDate(driver)));
                 new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH")), liveSsnNm));
                 new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), xpv.getTokenValue("lvSsnDuration")));
                 break value;

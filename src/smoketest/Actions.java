@@ -333,6 +333,16 @@ public class Actions extends BaseClass {
         actvty.crtQuizActvty();
         return actvty.getQzActvyName();
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public String createPswdQuizActivity() {
+        Activity actvty = new Activity();
+        actvty.crtPswdQuizActivity();
+        return actvty.getPswdQuizActivity();
+    }
 
     /**
      * Create AllInOneAsgnmntActivity
@@ -582,9 +592,18 @@ public class Actions extends BaseClass {
      *
      * @param quizActvtyName
      */
-    public void submitQuiz(String quizActvtyName) {
+    public void submitQuiz(String quizActvtyName, String password) {
         Activity actvty = new Activity();
-        actvty.submitQuiz(quizActvtyName);
+        actvty.submitQuiz(quizActvtyName, password);
+    }
+    
+    /**
+     * 
+     * @param pswdQzName 
+     */
+    public void generateQuizPassword(String pswdQzName) {
+        Activity actvty = new Activity();
+        actvty.generateQuizPassword(pswdQzName);
     }
 
     /**
@@ -739,8 +758,8 @@ public class Actions extends BaseClass {
      * Verify Resume
      */
     public void verifyResume() {
-        switch (BaseClass.program) {
-            case "usc":
+        switch (program) {
+            case "usc-mat":
                 new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
                 ip.isElementPresentByLINK(driver, "Resume");
                 driver.findElement(By.linkText("Resume")).click();
