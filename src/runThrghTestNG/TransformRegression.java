@@ -330,7 +330,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testTeacherVerifyFilesInPortfolio".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherVerifyFilesInPortfolio");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testTeacherUploadFiles";
+            DependentMethods[0] = "testTeacherUploadFilesInCourse";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
