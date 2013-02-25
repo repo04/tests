@@ -56,7 +56,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
      */
     @Test(dataProvider = "PswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
-    public void testTeacherReadMailBody(String pswdQuizName) throws Exception {
+    public void testTeacherFetchQuizPassword(String pswdQuizName) throws Exception {
         int x = 1;
         Boolean mailresult = null;
         loop:

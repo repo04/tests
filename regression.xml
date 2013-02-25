@@ -18,6 +18,7 @@
             <class name="runThrghTestNG.Tchr_Posts_SclGrp"/>
             <class name="runThrghTestNG.Stdt_JnSclGrp_Post"/>
             <class name="runThrghTestNG.Tchr_LvSsn_GglDoc"/>
+            <class name="runThrghTestNG.Tchr_FetchAssignmentPassword"/>
             <class name="runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc"/>            
             <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>

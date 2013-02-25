@@ -9,6 +9,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 
 public class TestNGCustomReport extends TestListenerAdapter {
@@ -56,6 +57,9 @@ public class TestNGCustomReport extends TestListenerAdapter {
             File screenshot = ((TakesScreenshot) BaseClass.driver).
                     getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot, new File(NewFileNamePath));
+            Reporter.log(methodName + " failed; Click on image to enlarge<br/>"
+                    + "<a target=\"_blank\" href=\"" + NewFileNamePath + "\"><img src=\"file:///" + NewFileNamePath
+                    + "\" alt=\"\"" + "height='100' width='100'/><br />");
         } catch (IOException e) {
             e.printStackTrace();
         }

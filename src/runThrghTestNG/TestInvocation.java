@@ -24,7 +24,7 @@ public class TestInvocation implements IInvokedMethodListener {
         ConstructorOrMethod contructorOrMethod = testNgMethod.getConstructorOrMethod();
         Method method = contructorOrMethod.getMethod();
         System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
-        if ("testContentAdminQuizPasswordCreation".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
+        if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
             System.out.println("Skipping Test Method");
             throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
         }

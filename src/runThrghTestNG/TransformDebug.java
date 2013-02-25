@@ -76,7 +76,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testTeacherGradeAssignment".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherGradeAssignment");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testSubmitAssignment";
+            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentSubmitAssignment";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -357,22 +357,22 @@ public class TransformDebug implements IAnnotationTransformer {
         }
 
         //GroupName = PswdQuiz
-        if ("testContenAdminAddPasswordQuizQuestion".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddPasswordQuizQuestion");
+        if ("testContenAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
+            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContentAdminQuizPasswordCreation";
+            DependentMethods[0] = "testContentAdminCreateQuizPasswordActivity";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddPasswordQuizQuestion");
+            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddPasswordQuizQuestion";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuesToQuizPasswordActivity";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTeacherReadMailBody".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherReadMailBody");
+        if ("testTeacherFetchQuizPassword".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherFetchQuizPassword");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherGenerateQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
@@ -381,7 +381,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
             System.out.println("Inside testStudentSubmitPasswordQuiz");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherReadMailBody";
+            DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherFetchQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }
