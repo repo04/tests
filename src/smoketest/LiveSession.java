@@ -1,8 +1,8 @@
 package smoketest;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -23,7 +23,6 @@ public class LiveSession extends BaseClass {
         String user = LoginPage.getUser();
         String liveSsnNm = null;
         String liveSsnDesc = null;
-        DateFormat dateFormat;
 
         //Split username
         switch (user.substring(0, 7)) {
@@ -61,6 +60,24 @@ public class LiveSession extends BaseClass {
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
         WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));
         new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), "60"));
+        String regex = "^(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])/((20)\\d\\d)$";
+        int x = 1;
+        
+        do {
+            String fetchdate = driver.findElement(By.id("startdate")).getAttribute("value");
+            System.out.println("fetchdate:" + fetchdate);
+            if (fetchdate.isEmpty()) {
+                if (!Pattern.matches(regex, fetchdate)) {
+                    Utility.illegalStateException("Date (" + fetchdate + ") does not match the expected (mm/dd/yyyy) format");
+                }
+                break;
+            }
+            x++;
+        } while (x < 2401);
+
+        if (x > 2400) {
+            Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by: By.id:startdate");
+        }
 
         //This is to verify lvSsnName & lvSsnDrtn field passes correct value 
         value:
@@ -72,7 +89,6 @@ public class LiveSession extends BaseClass {
             lvSsnNmDesc.sendKeys(liveSsnDesc);
             lvSsnDrtn.sendKeys(xpv.getTokenValue("lvSsnDuration"));
             try {
-                new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.id("startdate"), Utility.getCurrentNewYorkDate(driver)));
                 new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnXPATH")), liveSsnNm));
                 new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), xpv.getTokenValue("lvSsnDuration")));
                 break value;

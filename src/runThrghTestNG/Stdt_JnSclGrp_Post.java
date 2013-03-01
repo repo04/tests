@@ -132,7 +132,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
      */
     @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.submit"})
-    public void testSubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+    public void testStudentSubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.navigateToActivityReport();

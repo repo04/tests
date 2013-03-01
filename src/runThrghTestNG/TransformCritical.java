@@ -97,8 +97,8 @@ public class TransformCritical implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTeacherVerifyEmails".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherVerifyEmails");
+        if ("testTeacherVerifyCriticalSmokeTestEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyCriticalSmokeTestEmails");
             DependentMethods = new String[4];
             DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
             DependentMethods[1] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentCommentOnTeacherCoursePost";
@@ -107,8 +107,8 @@ public class TransformCritical implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
         
-        if ("testStudentVerifyEmails".equals(testMethod.getName())) {
-            System.out.println("Inside testStudentVerifyEmails");
+        if ("testStudentVerifyCriticalSmokeTestEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyCriticalSmokeTestEmails");
             DependentMethods = new String[4];
             DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherPostURLOnStudentsWall";
             DependentMethods[1] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";

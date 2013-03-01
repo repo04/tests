@@ -120,7 +120,7 @@ public class TransformSmoke implements IAnnotationTransformer {
                 || "testTeacherAllowResubmitAssignment".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherGradeAssignment");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testSubmitAssignment";
+            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentSubmitAssignment";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -189,6 +189,35 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
+        
+        //GroupName = PswdQuiz
+        if ("testContenAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
+            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminCreateQuizPasswordActivity";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
+            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuesToQuizPasswordActivity";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherFetchQuizPassword".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherFetchQuizPassword");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherGenerateQuizPassword";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentSubmitPasswordQuiz");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherFetchQuizPassword";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
         if ("testPESAdminDeleteUsers".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminDeleteUsers");
@@ -206,8 +235,8 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setAlwaysRun(true);
         }
 
-        if ("testTeacherVerifyEmails".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherVerifyEmails");
+        if ("testTeacherVerifyFullSmokeTestEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyFullSmokeTestEmails");
             DependentMethods = new String[5];
             DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAddMembersToWorkingGroup";
             DependentMethods[1] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
@@ -217,8 +246,8 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStudentVerifyEmails".equals(testMethod.getName())) {
-            System.out.println("Inside testStudentVerifyEmails");
+        if ("testStudentVerifyFullSmokeTestEmails".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyFullSmokeTestEmails");
             DependentMethods = new String[4];
             DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAddMembersToWorkingGroup";
             DependentMethods[1] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";

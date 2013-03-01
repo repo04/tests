@@ -182,7 +182,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsPswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"pswdQuiz.generatePassword"})
+          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
     public void testTeacherGenerateQuizPassword(String grpCrsName, String pswdQzName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);

@@ -69,6 +69,15 @@ public class Resources extends BaseClass {
                 vrfy5 = "Leadership Team";
                 vrfy6 = "Daily Tarheel";
                 resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6);
+                break;
+            case "au-mir":
+                vrfy1 = "My AU";
+                vrfy2 = "Email";
+                vrfy3 = "Faculty Profiles";
+                resources = Arrays.asList(vrfy1, vrfy2, vrfy3);
+                break;
+            case "gwu-mph":
+                Utility.illegalStateException("IN PROGRESS");                
         }
         verifyWindow(resources);
     }
@@ -114,8 +123,10 @@ public class Resources extends BaseClass {
                     case "Faculty Profiles":
                         if (program.contains("unc-mba")) {
                             ip.isTitlePresent(driver, "Faculty Member Profiles | MBA@UNC");
-                        } else {
+                        } else if (program.contains("unc-mba")) {
                             ip.isTitlePresent(driver, "Faculty and Staff");
+                        } else if (program.contains("au-mir")) {
+                            ip.isTitlePresent(driver, "Faculty | SIS | American University");
                         }
                         break;
                     case "Leadership Team":
@@ -144,7 +155,11 @@ public class Resources extends BaseClass {
                         ip.isTitlePresent(driver, "Useful Documents and Quick Links - School of Nursing & Health Studies");
                         break;
                     case "Email":
-                        ip.isTitlePresent(driver, "USC Web Mail");
+                        if (program.contains("usc-msw") || program.contains("usc-mat")) {
+                            ip.isTitlePresent(driver, "USC Web Mail");
+                        } else if (program.contains("au-mir")) {
+                            ip.isTitlePresent(driver, "American University");
+                        }
                         break;
                     case "Docs":
                         ip.isTitlePresent(driver, "USCnet Login");
@@ -168,7 +183,11 @@ public class Resources extends BaseClass {
                         ip.isTitlePresent(driver, "UNC-Chapel Hill Single Sign-On");
                         break;
                     case "Daily Tarheel":
-                        ip.isTitlePresent(driver, "The Daily Tar Heel :: Serving UNC students and the community since 1893");                                         
+                        ip.isTitlePresent(driver, "The Daily Tar Heel :: Serving UNC students and the community since 1893");
+                        break;
+                    case "My AU":
+                        ip.isTitlePresent(driver, "myAU Portal Login");
+                        break;
                 }
                 driver.close();
                 driver.switchTo().window(HandleBefore);

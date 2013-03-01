@@ -8,9 +8,9 @@ import runThrghTestNG.BaseClass;
 
 /**
  *
- * @author somesh.bansal
+ * 
  */
-public class Profile extends BaseClass{
+public class Profile extends BaseClass {
 
     void verifyPersonalInfo() {
         ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[4]", "Basic Information");
@@ -31,11 +31,11 @@ public class Profile extends BaseClass{
         ip.isTextPresentByXPATH(driver, "//div[11]/div", "Availability:");
         ip.isTextPresentByXPATH(driver, "//div[12]", "Personal Information");
 
-        switch (BaseClass.program) {            
-            case "usc":
+        switch (program) {
+            case "usc-mat":
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Information");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");
-        
+
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Favorite Movies:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television shows:");
@@ -48,11 +48,11 @@ public class Profile extends BaseClass{
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "What inspired you to teach?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Interested in:");
                 break;
-            case "mpa":
+            case "unc-mpa":
                 //Problem
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Info");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");
-        
+
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Favorite Movies:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television shows:");
@@ -65,12 +65,12 @@ public class Profile extends BaseClass{
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "What are your reasons for pursuing an MPA?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "In what languages are you proficient?");
                 break;
-            case "unc":
+            case "unc-mba":
                 //Problem
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Info");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television:");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");
-                
+
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Favorite Movies:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Favorite Music:");
@@ -86,12 +86,12 @@ public class Profile extends BaseClass{
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[9]/div", "Fun Fact:");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[10]/div", "Major accomplishment:");
                 break;
-            case "gu":
+            case "gu-msn":
                 //Problem
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Info");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television:");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");
-        
+
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Favorite Movies:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Favorite Music:");
@@ -103,10 +103,10 @@ public class Profile extends BaseClass{
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "What inspired you to be a nurse?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Interested in:");
                 break;
-            case "vac":
+            case "usc-msw":
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Information");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");
-        
+
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Favorite Movies:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television shows:");
@@ -119,10 +119,11 @@ public class Profile extends BaseClass{
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "What inspired you to become a social worker?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Interested in:");
                 break;
-            case "llm":
+            case "wu-llm":
+                //Confusion of Country
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Information");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "Country:");
-        
+
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "What professional goals will an LL.M. "
                         + "in U.S. Law help you to achieve?");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Have you received any professional "
@@ -137,6 +138,40 @@ public class Profile extends BaseClass{
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "How many years have you been in the legal profession?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Any professional memberships?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Are you currently working with U.S. companies?");
-        }        
-    }    
+                break;
+            case "au-mir":
+                //Confusion of Country
+                ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Information");
+                ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "Country:");
+
+                ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Are you a member of any Professional Associations?");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Where do you currently reside?");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "What languages are you proficient in?");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Please list a major accomplishments:");
+                ip.isTextPresentByXPATH(driver, "//div[16]", "Work Information");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div/div", "Courses:");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "Where did you previously attend University?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[3]/div", "What was your major?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "What employment sector are you currently or have recently worked in?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Have you ever lived or worked Internationally? If so, where?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "What concentration are you interested in pursuing?");
+                break;
+            case "gwu-mph":
+                //Confusion of Country
+                ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Information");
+                ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "Country:");
+
+                ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Favorite Movies:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Favorite Music:");
+                ip.isTextPresentByXPATH(driver, "//div[16]", "Work Information");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div/div", "Courses:");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "Current Employer:");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[3]/div", "Title/Position:");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "Do you have Public Health experience? What state or country?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Past Education:");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Why are you pursuing an MPH?");
+        }
+    }
 }
