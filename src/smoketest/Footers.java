@@ -50,6 +50,14 @@ public class Footers extends BaseClass {
             case "unc-mpa":
                 vrfy1 = "University of North Carolina at Chapel Hill";
                 prgrmTitle = "MPA@UNC | UNC School of Government:";
+                break;
+            case "au-mir":
+                vrfy1 = "American University";
+                prgrmTitle = "AU@MIR | American University";
+                break;
+            case "gwu-mph":
+                vrfy1 = "George Washington University";
+                prgrmTitle = "GWU@MPH | George Washington University";
         }
         vrfy2 = "Terms And Conditions";
         vrfy3 = "Privacy Statement";
@@ -63,7 +71,7 @@ public class Footers extends BaseClass {
     private void verifyTitle(List<String> footers) {
         int i = 1;
         String HandleBefore = driver.getWindowHandle();
-        
+
         for (String footer : footers) {
             if (i == 1) {
                 new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span/b[contains(text(),'" + footer + "')]")));
@@ -88,7 +96,7 @@ public class Footers extends BaseClass {
                     driver.switchTo().window(HandleBefore);
                     throw e;
                 }
-            }else{
+            } else {
                 ip.isTextPresentByXPATH(driver, "//div[7]/div/span[" + i + "]/a", footer);
                 driver.findElement(By.xpath("//div[7]/div/span[" + i + "]/a")).click();
                 ip.isTitleContains(driver, prgrmTitle + " " + footer);

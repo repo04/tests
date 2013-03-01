@@ -157,7 +157,10 @@ public class WorkingGroup extends BaseClass {
         DateFormat dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String gglDocDesc;
 
-        if (test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.gglDocName = "RgsnTstGglDoc " + dateFormat.format(now);
+            gglDocDesc = "RgsnTstGglDocDesc " + dateFormat.format(now);
+        } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
         } else if (test.equalsIgnoreCase("CriticalTests")) {
