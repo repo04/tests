@@ -65,8 +65,7 @@ public class LiveSession extends BaseClass {
         
         do {
             String fetchdate = driver.findElement(By.id("startdate")).getAttribute("value");
-            System.out.println("fetchdate:" + fetchdate);
-            if (fetchdate.isEmpty()) {
+            if (!fetchdate.isEmpty()) {
                 if (!Pattern.matches(regex, fetchdate)) {
                     Utility.illegalStateException("Date (" + fetchdate + ") does not match the expected (mm/dd/yyyy) format");
                 }
