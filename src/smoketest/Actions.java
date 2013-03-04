@@ -160,7 +160,10 @@ public class Actions extends BaseClass {
      */
     public void logOut() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToLogOut"));
-        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
+        if(!driver.getCurrentUrl().contains(xpv.getTokenValue("loginPageURL")))
+        {
+            Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
+        }
     }
 
     /**
@@ -168,7 +171,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyWall() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
-        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "wallPageTitle"));
+        verifyCurrentUrl("myWallURL");
     }
 
     /**
@@ -176,7 +179,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyCourse() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToCourseXPATH"));
-        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "crsPageTitle"));
+        verifyCurrentUrl("myCourseURL");
     }
 
     /**
@@ -184,7 +187,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMyHome() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("lnkToHomeXPATH"));
-        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "homePageTitle"));
+        verifyCurrentUrl("homePageURL");
     }
 
     /**
@@ -229,9 +232,10 @@ public class Actions extends BaseClass {
         } else {
             linkToContactXPATH = xpv.getTokenValue("linkToCntctXPATH");
         }
-
+        
         Utility.navigateToSubMenu(driver, linkToContactXPATH);
-        ip.isTitlePresent(driver, xpv.getTokenValue("contactPageTitle"));
+        ip.isElementPresentByID(driver, "mycontactslink");
+        verifyCurrentUrl("myContactURL");
     }
 
     /**
@@ -862,5 +866,13 @@ public class Actions extends BaseClass {
         ip.isElementClickableByXpath(driver, "//div[6]/form/input", 60);
         Utility.navigateToSubMenu(driver, "//div[6]/form/input");
         ip.isTextPresentByXPATH(driver, "//body/div[3]/div[2]/div", "Choose how would you like to upload a new profile image");
+    }
+    
+    public void verifyCurrentUrl(String u) {
+        
+        if(!driver.getCurrentUrl().contains(xpv.getTokenValue(u)))
+        {
+            Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
+        }
     }
 }

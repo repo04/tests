@@ -34,6 +34,7 @@ public class BaseClass {
     public static String brwsr;
     public static String test;
     public static String url;
+    public static String currentURL;
     public static File directory = new File(".");
 
     /**
@@ -123,7 +124,8 @@ public class BaseClass {
         }
 
         driver.get(this.url);
-        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "loginPageTitle"));
+        ip.isElementPresentByID(driver, "loginpage");
+        
     }
 
     /**

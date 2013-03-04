@@ -39,12 +39,12 @@ public class LoginPage extends BaseClass {
         }
 
         loginBtn.click();
-
-        //PesAdmin navigates to Course page after login
-        if (user.equals("pesAdmin")) {
-            ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "crsPageTitle"));
-        } else {
-            ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "homePageTitle"));
+        
+        ip.isElementPresentByXPATH(driver, "//*[@id='nav']");       // Verifies navigation bar
+        
+        if(!driver.getCurrentUrl().contains(xpv.getTokenValue("homePageURL")))
+        {
+            Utility.illegalStateException("Current URL is not as expected.  Current URL:" + driver.getCurrentUrl());
         }
     }
 
