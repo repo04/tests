@@ -160,10 +160,7 @@ public class Actions extends BaseClass {
      */
     public void logOut() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToLogOut"));
-        if(!driver.getCurrentUrl().contains(xpv.getTokenValue("loginPageURL")))
-        {
-            Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
-        }
+        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 
     /**
@@ -188,6 +185,11 @@ public class Actions extends BaseClass {
     public void navigateToMyHome() {
         Utility.navigateToSubMenu(driver, xpv.getTokenValue("lnkToHomeXPATH"));
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));
+    }
+    
+    public void navigateToStudentSupport() {
+        driver.findElement(By.xpath("//*[@id='footerlinks']/span[6]/a")).click();
+        ip.isElementPresentByXPATH(driver, "//*[@id='region-main']/div/h2[1]");
     }
 
     /**
@@ -865,5 +867,10 @@ public class Actions extends BaseClass {
         ip.isElementClickableByXpath(driver, "//div[6]/form/input", 60);
         Utility.navigateToSubMenu(driver, "//div[6]/form/input");
         ip.isTextPresentByXPATH(driver, "//body/div[3]/div[2]/div", "Choose how would you like to upload a new profile image");
+    }
+    
+    public void testStudentSupport() {
+        StudentSupport ss = new StudentSupport();
+        ss.verifyStudentSupport();
     }
 }

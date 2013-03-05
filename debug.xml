@@ -160,6 +160,11 @@
                 <include name="pswdQuiz.readMail"/>
                 <include name="pswdQuiz.submitQuiz"/>                
             </define>
+            <define name="Student">
+                <include name="prerequisite"/>
+                <include name="support.uiVerify"/>
+            <define/>
+                    
             
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
