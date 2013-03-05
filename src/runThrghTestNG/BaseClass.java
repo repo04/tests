@@ -124,8 +124,7 @@ public class BaseClass {
         }
 
         driver.get(this.url);
-        ip.isElementPresentByID(driver, "loginpage");
-        
+        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 
     /**

@@ -552,8 +552,8 @@ public class Activity extends BaseClass {
     }
 
     /**
-     * 
-     * @param pswdQzName 
+     *
+     * @param pswdQzName
      */
     public void generateQuizPassword(String pswdQzName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + pswdQzName + "')]")).click();
@@ -575,7 +575,7 @@ public class Activity extends BaseClass {
      */
     private int locateElement(String elementName) {
         int x = 2;
-        while (true) {
+        do {
             try {
                 ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/a", elementName, 5);
                 break;
@@ -583,7 +583,7 @@ public class Activity extends BaseClass {
                 System.out.println(elementName + " not present at x: " + x);
                 x = x + 2;
             }
-        }
+        } while (x < 72);
         return x;
     }
 

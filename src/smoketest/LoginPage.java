@@ -10,7 +10,8 @@ public class LoginPage extends BaseClass {
 
     /**
      * Attemps to login based on user type and values from property file
-     * @param user 
+     *
+     * @param user
      */
     public void attemptLogin(String user) {
 
@@ -18,19 +19,19 @@ public class LoginPage extends BaseClass {
         WebElement userName = driver.findElement(By.xpath(xpv.getTokenValue("userNameXPATH")));
         WebElement passWord = driver.findElement(By.xpath(xpv.getTokenValue("pswdXPATH")));
         WebElement loginBtn = driver.findElement(By.xpath(xpv.getTokenValue("btnLoginXPATH")));
-
+        
+        userName.clear();
+        passWord.clear();
+        
         switch (user) {
-
             case "contentAdmin":
                 userName.sendKeys(pv.getTokenValue("ctntAdminUserName"));
                 passWord.sendKeys(pv.getTokenValue("ctntAdminPswd"));
                 break;
-
             case "pesAdmin":
                 userName.sendKeys(pv.getTokenValue("pesUserName"));
                 passWord.sendKeys(pv.getTokenValue("pesPswd"));
                 break;
-
             //Teacher/Student
             default:
                 userName.sendKeys(user);
@@ -39,12 +40,12 @@ public class LoginPage extends BaseClass {
         }
 
         loginBtn.click();
-        
-        ip.isElementPresentByXPATH(driver, "//*[@id='nav']");       // Verifies navigation bar
-        
-        if(!driver.getCurrentUrl().contains(xpv.getTokenValue("homePageURL")))
-        {
-            Utility.illegalStateException("Current URL is not as expected.  Current URL:" + driver.getCurrentUrl());
+
+        //PesAdmin navigates to Course page after login
+        if (user.equals("pesAdmin")) {
+            Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));            
+        } else {
+            Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));
         }
     }
 

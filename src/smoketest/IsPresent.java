@@ -130,16 +130,4 @@ public class IsPresent {
     public void isElementClickableByXpath(WebDriver driver, String elementClickable, int time) {
         new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(By.xpath(elementClickable)));
     }
-    
-    /*
-     * This method is designed to fail and throw an exception b/c the current URL is not as expected
-     */
-    public void isCurrentPage(WebDriver driver, String page) {
-
-            if( !driver.getCurrentUrl().contains("foo") )   
-            {
-                new WebDriverWait(driver, 3).until(ExpectedConditions.titleIs("foo"));
-                System.out.println("(******************((((((((((((((((((((###########");
-            }
-    }
 }

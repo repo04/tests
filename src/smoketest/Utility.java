@@ -310,4 +310,17 @@ public class Utility {
         element.click();
         robot.keyRelease(KeyEvent.VK_CONTROL);
     }
+    
+    /**
+     * Verify specific TEXT is present in current URL
+     * 
+     * @param driver
+     * @param textInUrl 
+     */
+    public static void verifyCurrentUrl(WebDriver driver, String textInUrl) {
+        if(!driver.getCurrentUrl().contains(textInUrl))
+        {
+            Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
+        }
+    }
 }
