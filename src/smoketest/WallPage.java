@@ -183,6 +183,10 @@ public class WallPage extends BaseClass {
             ip.isTextPresentByXPATH(driver, "//li/div/div[4]/div/a", deletePost);
             Utility.navigateToSubMenu(driver, "//li/div/div/a");
             ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Are you sure you want to delete this post");
+        } else if (deletePost.contains("urlstdtwrknggrppost")) {
+            ip.isTextPresentByXPATH(driver, "//li/div/div[4]/div/a", deletePost);
+            Utility.navigateToSubMenu(driver, "//li/div/div/a");
+            ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div/div/div/div/div/div[2]/span", "Are you sure you want to delete this post");
         } else {
             ip.isTextPresentByXPATH(driver, "//li/div/div[3]/div[3]", deletePost);
             Utility.navigateToSubMenu(driver, "//li/div/div/a[2]");

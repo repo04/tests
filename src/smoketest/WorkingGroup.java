@@ -68,13 +68,13 @@ public class WorkingGroup extends BaseClass {
                     fullNm = mbr + " " + mbr + "(Non-editing teacher)";
                     break sw;
                 case "autotea":
-                    fullNm = "auto teacher1(Non-editing teacher)";
+                    fullNm = "autoteacher1 autoteacher1(Non-editing teacher)";
                     break sw;
                 case "student":
                     fullNm = mbr + " " + mbr + "(Student)";
                     break sw;
                 case "autostu":
-                    fullNm = "auto student1(Student)";
+                    fullNm = "autostudent1 autostudent1(Student)";
                     break sw;
                 default:
                     SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
@@ -111,9 +111,9 @@ public class WorkingGroup extends BaseClass {
                     break sw;
                 case "autotea":
                     if (Pes_CleanTestData.tchrStatus) {
-                        fullNm = "auto teacher1(Non-editing teacher)";
+                        fullNm = "autoteacher1 autoteacher1(Non-editing teacher)";
                     } else {
-                        fullNm = "auto teacher1()";
+                        fullNm = "autoteacher1 autoteacher1()";
                     }
                     break sw;
                 case "student":
@@ -125,9 +125,9 @@ public class WorkingGroup extends BaseClass {
                     break sw;
                 case "autostu":
                     if (Pes_CleanTestData.stdtStatus) {
-                        fullNm = "auto student1(Student)";
+                        fullNm = "autostudent1 autostudent1(Student)";
                     } else {
-                        fullNm = "auto student1()";
+                        fullNm = "autostudent1 autostudent1()";
                     }
                     break sw;
                 default:

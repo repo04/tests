@@ -48,6 +48,21 @@ public class Pes_CleanTestData extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.unenrolUsers(stdtUsrName, tchrUsrName);
     }
+    
+    /**
+     * PES Admin verify Student post deletion from Working Group
+     * 
+     * @param wrkngGrpName
+     * @param stdtUrlPostOnWrkngGrp
+     * @throws Exception 
+     */
+    @Test(dataProvider = "WrkngGrpStdtURLPost", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+          groups = {"regressionSmoke", "workingGroup.pesDeleteStudentPostFromWorkingGroup"})
+    public void testPESAdminVerifyStudentPostDeletionFromWorkingGroup(String wrkngGrpName, String stdtUrlPostOnWrkngGrp) throws Exception {
+        a.navigateToWorkingGroups();
+        a.navigateToGroupWall(wrkngGrpName);
+        a.deletePost(stdtUrlPostOnWrkngGrp);
+    }
 
     /**
      * Remove members from Working Group
@@ -76,13 +91,13 @@ public class Pes_CleanTestData extends BaseClass {
         if (tchrUsrName.substring(0, 7).contains("teacher")) {
             tchrFllNm = tchrUsrName + "fstNm " + tchrUsrName + "sndNm";
         } else {
-            tchrFllNm = "auto teacher1";
+            tchrFllNm = "autoteacher1 autoteacher1";
         }
 
         if (stdtUsrName.substring(0, 7).contains("student")) {
             stdtFllNm = stdtUsrName + "fstNm " + stdtUsrName + "sndNm";
         } else {
-            stdtFllNm = "auto student1";
+            stdtFllNm = "autostudent1 autostudent1";
         }
 
         int i = 1;

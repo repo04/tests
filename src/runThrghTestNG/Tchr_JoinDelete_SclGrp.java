@@ -17,7 +17,7 @@ import smoketest.Actions;
 public class Tchr_JoinDelete_SclGrp extends BaseClass {
 
     Actions a = new Actions();
-
+    
     /**
      * Teacher Logs in
      *
@@ -56,6 +56,21 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(stdtSclGrpName);
     }
+    
+    /**
+     * Teacher verify Students post existence even Student left Teacher Social Group
+     * 
+     * @param tchrSclGrpName
+     * @param stdtUrlPostOnTchrSclGrp
+     * @throws Exception 
+     */
+    @Test(dataProvider = "TchrSclGrpStdtUrlPost", dataProviderClass = Stdt_JnSclGrp_Post.class,
+          groups = {"regressionSmoke", "socialGroup.teacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall"})
+    public void testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall(String tchrSclGrpName, String stdtUrlPostOnTchrSclGrp) throws Exception {
+        a.navigateToMySocialGroups();
+        a.navigateToGroupWall(tchrSclGrpName);
+        a.verifyPostOnSocialGroupWall(stdtUrlPostOnTchrSclGrp);
+    }
 
     /**
      * Deletes own Social Group
@@ -66,6 +81,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherDelete"})
     public void testTeacherDeleteSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
+        a.navigateToGroupWall(tchrSclGrpName);
         a.deleteSocialGroup(tchrSclGrpName);
     }
 

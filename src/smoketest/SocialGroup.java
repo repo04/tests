@@ -140,13 +140,19 @@ public class SocialGroup extends BaseClass {
      * @param stdtSclGrpName
      */
     public void deleteSocialGroup(String stdtSclGrpName) {
-        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
-        ip.isElementPresentContainsTextByXPATH(driver, stdtSclGrpName);
-        driver.findElement(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnDeleteGrp"))).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Do you really want to delete this group?");
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
+    }
+    
+    /**
+     * Verify post exits on Social Group wall
+     * 
+     * @param stdtUrlPostOnTchrSclGrp
+     */
+    public void verifyPostOnSocialGroupWall(String stdtUrlPostOnTchrSclGrp) {
+        ip.isElementPresentContainsTextByXPATH(driver, stdtUrlPostOnTchrSclGrp);
     }
 
     /**

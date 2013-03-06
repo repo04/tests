@@ -163,6 +163,21 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
     }
     
     /**
+     * Teacher verify Student post on own Social Group wall
+     * 
+     * @param tchrSclGrpName
+     * @param stdtUrlPostOnTchrSclGrp
+     * @throws Exception 
+     */
+    @Test(dataProvider = "TchrSclGrpStdtUrlPost", dataProviderClass = Stdt_JnSclGrp_Post.class,
+          groups = {"regressionSmoke", "socialGroup.teacherVerifyStudentPostOnOwnSocialGroupWall"})
+    public void testTeacherVerifyStudentPostOnOwnSocialGroupWall(String tchrSclGrpName, String stdtUrlPostOnTchrSclGrp) throws Exception {
+        a.navigateToMySocialGroups();
+        a.navigateToGroupWall(tchrSclGrpName);
+        a.verifyPostOnSocialGroupWall(stdtUrlPostOnTchrSclGrp);
+    }
+    
+    /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
      *

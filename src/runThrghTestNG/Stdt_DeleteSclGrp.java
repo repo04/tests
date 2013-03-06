@@ -41,6 +41,7 @@ public class Stdt_DeleteSclGrp extends BaseClass {
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentDelete"})
     public void testStudentDeleteSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
+        a.navigateToGroupWall(stdtSclGrpName);
         a.deleteSocialGroup(stdtSclGrpName);
     }
 

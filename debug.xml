@@ -59,8 +59,10 @@
                 <include name="prerequisite"/>
                 <include name="workingGroup.create"/>
                 <include name="workingGroup.addMembers"/>
+                <include name="workingGroup.studentPost"/>
+                <include name="workingGroup.pesDeleteStudentPostFromWorkingGroup"/>
                 <include name="workingGroup.removeMembers"/>                
-                <include name="workingGroup.delete"/>         
+                <include name="workingGroup.delete"/>        
             </define>              
             <define name="GoogleDoc">
                 <include name="prerequisite"/>
@@ -73,8 +75,11 @@
                 <include name="socialGroup.studentJoinTeachers"/>
                 <include name="socialGroup.studentPostURLOnTeachers"/>
                 <include name="liveSession.teacherCreate"/>
+                <include name="socialGroup.teacherVerifyStudentPostOnOwnSocialGroupWall"/>
                 <include name="liveSession.studentCreate"/>
+                <include name="socialGroup.studentLeaveTeacherSocialGroup"/>
                 <include name="socialGroup.studentCreate"/>
+                <include name="socialGroup.teacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall"/>
                 <include name="socialGroup.teacherJoinStudents"/>
                 <include name="socialGroup.teacherLeaveStudents"/>
                 <include name="socialGroup.teacherDelete"/>                

@@ -21,6 +21,7 @@ import smoketest.Actions;
 public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
 
     static String[][] stdtSclGrpArray = new String[1][1];
+    static String[][] stdtUrlPostOnWrkngGrp = new String[1][1];
     Actions a = new Actions();
 
     @DataProvider(name = "StdtSclGrp")
@@ -41,6 +42,12 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
         return DataProviderUtil.cartesianProviderFrom(Pes_UsrCrtn_AsgnRole_WrkngGrp.Users(context),
                 Pes_UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), Tchr_Posts_SclGrp.TchrSclGrp(context),
                 StdtSclGrp(context));
+    }
+    
+    @DataProvider(name = "WrkngGrpStdtURLPost")
+    public static Iterator<Object[]> WrkngGrpStdtURLPost(ITestContext context) throws Exception {
+        System.out.println("init WrkngGrpStdtURLPost");
+        return DataProviderUtil.cartesianProviderFrom(Pes_UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), stdtUrlPostOnWrkngGrp);
     }
 
     /**
@@ -95,6 +102,22 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
     public void testStudentVerifyWorkingGroup_GoogleDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
         a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
+    }
+    
+    /**
+     * Student post on Working Group
+     * 
+     * @param wrkngGrpName
+     * @param gglDocName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"regressionSmoke", "workingGroup.studentPost"})
+    public void testStudentPostOnWorkingGroup(String wrkngGrpName) throws Exception {
+        a.navigateToWorkingGroups();
+        a.navigateToGroupWall(wrkngGrpName);
+        stdtUrlPostOnWrkngGrp[0][0] =  a.urlPost("urlWrkngGrpPost");
+        Reporter.log("stdtUrlPostOnWrkngGrp: " + stdtUrlPostOnWrkngGrp[0][0], true);
     }
 
     /**
@@ -174,6 +197,19 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         a.navigateToFiles();
         a.verifyFilesInCourse(doc, pptx, pdf);
+    }
+    
+    /**
+     * Student Leave Teacher Social Group
+     * 
+     * @param tchrSclGrpName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
+          groups = {"regressionSmoke", "fullSmoke", "socialGroup.studentLeaveTeacherSocialGroup"})
+    public void testStudentLeaveTeacherSocialGroup(String tchrSclGrpName) throws Exception {
+        a.navigateToMySocialGroups();
+        a.leaveSocialGroup(tchrSclGrpName);
     }
 
     /**

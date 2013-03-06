@@ -85,8 +85,8 @@ public class Actions extends BaseClass {
 
     /**
      * Delete Post / Announcement
-     *
-     * @param tchrUrlCrsPost
+     * 
+     * @param deletePost 
      */
     public void deletePost(String deletePost) {
         WallPage wp = new WallPage();
@@ -440,6 +440,28 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFndCntct"))).sendKeys(cntct);
         driver.findElement(By.xpath(xpv.getTokenValue("btnFnCntct"))).click();
         ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
+    }
+    
+    /**
+     * Navigate to respective group wall
+     * 
+     * @param sclGrpName
+     */
+    public void navigateToGroupWall(String grpName) {
+        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), grpName);
+        ip.isElementPresentContainsTextByXPATH(driver, grpName);
+        driver.findElement(By.xpath("//*[contains(text(),'" + grpName + "')]")).click();
+        ip.isTitlePresent(driver, grpName + " - Wall");        
+    }
+    
+    /**
+     * Verify post exits on Social Group wall
+     * 
+     * @param stdtUrlPostOnTchrSclGrp
+     */
+    public void verifyPostOnSocialGroupWall(String stdtUrlPostOnTchrSclGrp) {
+        SocialGroup sg = new SocialGroup();
+        sg.verifyPostOnSocialGroupWall(stdtUrlPostOnTchrSclGrp);        
     }
 
     /**

@@ -20,7 +20,7 @@ import smoketest.Actions;
  */
 public class Stdt_JnSclGrp_Post extends BaseClass {
 
-    static String stdtUrlPostOnTchrSclGrp;
+    static String[][] stdtUrlPostOnTchrSclGrp = new String[1][1];
     static String[][] stdtTxtCmntOnTchrCrsPost = new String[1][1];
     static String[][] noteCourse = new String[1][1];
     static String[][] noteWall = new String[1][1];
@@ -29,6 +29,12 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     @DataProvider(name = "Note")
     public static Object[][] Note(ITestContext context) throws Exception {
         return (noteWall);
+    }
+    
+    @DataProvider(name = "TchrSclGrpStdtUrlPost")
+    public static Iterator<Object[]> TchrSclGrpStdtUrlPost(ITestContext context) throws Exception {
+        System.out.println("init TchrSclGrpStdtUrlPost");
+        return DataProviderUtil.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), stdtUrlPostOnTchrSclGrp);
     }
     
     @DataProvider(name = "CrsStdtCmnt")
@@ -74,8 +80,8 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     public void testStudentPostURLOnTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.accessSocialGroupWall(tchrSclGrpName);
-        stdtUrlPostOnTchrSclGrp = a.urlPost("urlSclGrpPost");
-        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp, true);
+        stdtUrlPostOnTchrSclGrp[0][0] = a.urlPost("urlSclGrpPost");
+        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp[0][0], true);
     }
 
     /**

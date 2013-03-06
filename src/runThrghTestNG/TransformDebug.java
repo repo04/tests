@@ -126,16 +126,31 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDataProvider("WrkngGrpDebugUsrs");
             annotation.setDataProviderClass(Pes_UsrCrtn_AsgnRole_WrkngGrp.class);
         }
-
-        if ("testPESAdminRemoveMembersFromWorkngGroup".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminRemoveMembersFromWorkngGroup");
+        
+        if ("testStudentPostOnWorkingGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentPostOnWorkingGroup");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAddMembersToWorkingGroup";
+            annotation.setDependsOnMethods(DependentMethods);            
+        }
+        
+        if ("testPESAdminVerifyStudentPostDeletionFromWorkingGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testPESAdminVerifyStudentPostDeletionFromWorkingGroup");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc.testStudentPostOnWorkingGroup";
+            annotation.setDependsOnMethods(DependentMethods);            
+        }
+        
+        if ("testPESAdminRemoveMembersFromWorkngGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testPESAdminRemoveMembersFromWorkngGroup");
+            DependentMethods = new String[2];
+            DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAddMembersToWorkingGroup";
+            DependentMethods[1] = "testPESAdminVerifyStudentPostDeletionFromWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setDataProvider("GrpCrsWrkngGrpDebugUsers");
             annotation.setDataProviderClass(Pes_UsrCrtn_AsgnRole_WrkngGrp.class);
         }
-
+        
         if ("testPESAdminDeleteWorkingGroup".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminDeleteWorkingGroup");
             DependentMethods = new String[1];
@@ -175,12 +190,43 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
-
+        
+        if ("testTeacherVerifyStudentPostOnOwnSocialGroupWall".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyStudentPostOnOwnSocialGroupWall");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentPostURLOnTeacherSocialGroup";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
         if ("testStudentCreateLiveSession".equals(testMethod.getName())) {
             System.out.println("Inside testStudentCreateLiveSession");
             DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
             DependentMethods[1] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherCreateLiveSession";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentCreateSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentCreateSocialGroup");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testStudentCreateLiveSession";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+
+        if ("testStudentLeaveTeacherSocialGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentLeaveTeacherSocialGroup");
+            DependentMethods = new String[2];
+            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
+            DependentMethods[1] = "testStudentCreateLiveSession";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall");
+            DependentMethods = new String[2];
+            DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherVerifyStudentPostOnOwnSocialGroupWall";
+            DependentMethods[1] = "runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc.testStudentLeaveTeacherSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -201,8 +247,9 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testTeacherDeleteSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeleteSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateSocialGroup";
+            DependentMethods[0] = "runThrghTestNG.Tchr_JoinDelete_SclGrp.testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall";
             annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
         }
 
         if ("testStudentDeleteSocialGroup".equals(testMethod.getName())) {
