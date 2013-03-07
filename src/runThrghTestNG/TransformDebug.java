@@ -134,8 +134,8 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);            
         }
         
-        if ("testPESAdminVerifyStudentPostDeletionFromWorkingGroup".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminVerifyStudentPostDeletionFromWorkingGroup");
+        if ("testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc.testStudentPostOnWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);            
@@ -145,7 +145,7 @@ public class TransformDebug implements IAnnotationTransformer {
             System.out.println("Inside testPESAdminRemoveMembersFromWorkngGroup");
             DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAddMembersToWorkingGroup";
-            DependentMethods[1] = "testPESAdminVerifyStudentPostDeletionFromWorkingGroup";
+            DependentMethods[1] = "testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setDataProvider("GrpCrsWrkngGrpDebugUsers");
             annotation.setDataProviderClass(Pes_UsrCrtn_AsgnRole_WrkngGrp.class);

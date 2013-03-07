@@ -26,19 +26,16 @@ public class LoginPage extends BaseClass {
         switch (user) {
             case "contentAdmin":
                 userName.sendKeys(pv.getTokenValue("ctntAdminUserName"));
-                passWord.sendKeys(pv.getTokenValue("ctntAdminPswd"));
                 break;
             case "pesAdmin":
                 userName.sendKeys(pv.getTokenValue("pesUserName"));
-                passWord.sendKeys(pv.getTokenValue("pesPswd"));
                 break;
             //Teacher/Student
             default:
                 userName.sendKeys(user);
-                passWord.sendKeys("Moodle1!");
                 break;
         }
-
+        passWord.sendKeys(pv.getTokenValue("password"));
         loginBtn.click();
 
         //PesAdmin navigates to Course page after login

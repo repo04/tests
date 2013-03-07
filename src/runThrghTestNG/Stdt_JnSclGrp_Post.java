@@ -79,7 +79,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentPostURLOnTeachers"})
     public void testStudentPostURLOnTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSocialGroupWall(tchrSclGrpName);
+        a.navigateToGroupWall(tchrSclGrpName);
         stdtUrlPostOnTchrSclGrp[0][0] = a.urlPost("urlSclGrpPost");
         Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp[0][0], true);
     }

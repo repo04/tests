@@ -217,8 +217,8 @@ public class TransformRegression implements IAnnotationTransformer {
         }
         
         //Pes_CleanTestData
-        if ("testPESAdminVerifyStudentPostDeletionFromWorkingGroup".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminVerifyStudentPostDeletionFromWorkingGroup");
+        if ("testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc.testStudentPostOnWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);            
@@ -227,7 +227,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testPESAdminDeleteWorkingGroup".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminDeleteWorkingGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testPESAdminVerifyStudentPostDeletionFromWorkingGroup";
+            DependentMethods[0] = "testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }

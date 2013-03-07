@@ -65,16 +65,12 @@ public class WorkingGroup extends BaseClass {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
-                    fullNm = mbr + " " + mbr + "(Non-editing teacher)";
-                    break sw;
                 case "autotea":
-                    fullNm = "autoteacher1 autoteacher1(Non-editing teacher)";
+                    fullNm = Utility.getFullName(mbr) + "(Non-editing teacher)";
                     break sw;
                 case "student":
-                    fullNm = mbr + " " + mbr + "(Student)";
-                    break sw;
                 case "autostu":
-                    fullNm = "autostudent1 autostudent1(Student)";
+                    fullNm = Utility.getFullName(mbr) + "(Student)";
                     break sw;
                 default:
                     SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
@@ -103,31 +99,19 @@ public class WorkingGroup extends BaseClass {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
-                    if (Pes_CleanTestData.tchrStatus) {
-                        fullNm = mbr + " " + mbr + "(Non-editing teacher)";
-                    } else {
-                        fullNm = mbr + " " + mbr + "()";
-                    }
-                    break sw;
                 case "autotea":
                     if (Pes_CleanTestData.tchrStatus) {
-                        fullNm = "autoteacher1 autoteacher1(Non-editing teacher)";
+                        fullNm = Utility.getFullName(mbr) + "(Non-editing teacher)";
                     } else {
-                        fullNm = "autoteacher1 autoteacher1()";
+                        fullNm = Utility.getFullName(mbr) + "()";
                     }
                     break sw;
                 case "student":
-                    if (Pes_CleanTestData.stdtStatus) {
-                        fullNm = mbr + " " + mbr + "(Student)";
-                    } else {
-                        fullNm = mbr + " " + mbr + "()";
-                    }
-                    break sw;
                 case "autostu":
                     if (Pes_CleanTestData.stdtStatus) {
-                        fullNm = "autostudent1 autostudent1(Student)";
+                        fullNm = Utility.getFullName(mbr) + "(Student)";
                     } else {
-                        fullNm = "autostudent1 autostudent1()";
+                        fullNm = Utility.getFullName(mbr) + "()";
                     }
                     break sw;
                 default:

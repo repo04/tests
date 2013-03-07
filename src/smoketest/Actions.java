@@ -449,7 +449,6 @@ public class Actions extends BaseClass {
      */
     public void navigateToGroupWall(String grpName) {
         Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), grpName);
-        ip.isElementPresentContainsTextByXPATH(driver, grpName);
         driver.findElement(By.xpath("//*[contains(text(),'" + grpName + "')]")).click();
         ip.isTitlePresent(driver, grpName + " - Wall");        
     }
@@ -514,18 +513,6 @@ public class Actions extends BaseClass {
 
         SocialGroup sg = new SocialGroup();
         sg.deleteSocialGroup(stdtSclGrpName);
-    }
-
-    /**
-     * Navigate to SocialGroup's Wall
-     *
-     * @param sclGrp
-     */
-    public void accessSocialGroupWall(String sclGrp) {
-        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), sclGrp);
-        driver.findElement(By.xpath("//*[contains(text(),'" + sclGrp + "')]")).click();
-        String uprCS = sclGrp.substring(0, 1).toUpperCase();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), uprCS + sclGrp.substring(1) + " - Wall");
     }
 
     /**

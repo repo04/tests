@@ -11,6 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import smoketest.Actions;
+import smoketest.Utility;
 
 /**
  *
@@ -57,13 +58,13 @@ public class Pes_CleanTestData extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "WrkngGrpStdtURLPost", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
-          groups = {"regressionSmoke", "workingGroup.pesDeleteStudentPostFromWorkingGroup"})
-    public void testPESAdminVerifyStudentPostDeletionFromWorkingGroup(String wrkngGrpName, String stdtUrlPostOnWrkngGrp) throws Exception {
+          groups = {"regressionSmoke", "workingGroup.pesAdminDeleteAndVerifyStudentPostFromWorkingGroup"})
+    public void testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup(String wrkngGrpName, String stdtUrlPostOnWrkngGrp) throws Exception {
         a.navigateToWorkingGroups();
         a.navigateToGroupWall(wrkngGrpName);
         a.deletePost(stdtUrlPostOnWrkngGrp);
     }
-
+    
     /**
      * Remove members from Working Group
      *
@@ -91,13 +92,13 @@ public class Pes_CleanTestData extends BaseClass {
         if (tchrUsrName.substring(0, 7).contains("teacher")) {
             tchrFllNm = tchrUsrName + "fstNm " + tchrUsrName + "sndNm";
         } else {
-            tchrFllNm = "autoteacher1 autoteacher1";
+            tchrFllNm = Utility.getFullName(tchrUsrName);            
         }
 
         if (stdtUsrName.substring(0, 7).contains("student")) {
             stdtFllNm = stdtUsrName + "fstNm " + stdtUsrName + "sndNm";
         } else {
-            stdtFllNm = "autostudent1 autostudent1";
+            stdtFllNm = Utility.getFullName(stdtUsrName);            
         }
 
         int i = 1;

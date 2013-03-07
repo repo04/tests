@@ -323,4 +323,13 @@ public class Utility {
             Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
         }
     }
+
+    /**
+     * 
+     * @param name
+     * @return 
+     */
+    public static String getFullName(String name) {
+        return name + " " + name;
+    }
 }

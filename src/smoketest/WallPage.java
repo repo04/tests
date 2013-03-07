@@ -174,27 +174,48 @@ public class WallPage extends BaseClass {
     }
 
     /**
-     * Delete Post / Announcement
+     * Delete post
      *
-     * @param tchrUrlCrsPost
+     * @param post
      */
-    public void deletePost(String deletePost) {
-        if (deletePost.contains("urlcrspost")) {
-            ip.isTextPresentByXPATH(driver, "//li/div/div[4]/div/a", deletePost);
+    public void deletePost(String post) {
+        WebElement postElement = null;
+        String path;
+        if (post.contains("urlcrspost")) {
+            path = "//li/div/div[4]/div/a";
+            ip.isTextPresentByXPATH(driver, path, post);
+            postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
             Utility.navigateToSubMenu(driver, "//li/div/div/a");
             ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Are you sure you want to delete this post");
-        } else if (deletePost.contains("urlstdtwrknggrppost")) {
-            ip.isTextPresentByXPATH(driver, "//li/div/div[4]/div/a", deletePost);
+        } else if (post.contains("urlstdtwrknggrppost")) {
+            path = "//li/div/div[4]/div/a";
+            ip.isTextPresentByXPATH(driver, path, post);
+            postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
             Utility.navigateToSubMenu(driver, "//li/div/div/a");
             ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div/div/div/div/div/div[2]/span", "Are you sure you want to delete this post");
         } else {
-            ip.isTextPresentByXPATH(driver, "//li/div/div[3]/div[3]", deletePost);
+            path = "//li/div/div[3]/div[3]";
+            ip.isTextPresentByXPATH(driver, path, post);
+            postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
             Utility.navigateToSubMenu(driver, "//li/div/div/a[2]");
             ip.isTextPresentByXPATH(driver, "//div[*]/div[2]/div/div/div/div/div/div[2]/span", "Are you sure you want to delete this announcement");
         }
         driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table/tbody"
                 + "/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + deletePost + "')]")));
+
+        try {
+            new WebDriverWait(driver, 15).until(ExpectedConditions.stalenessOf(postElement));
+        } catch (Exception e) {
+            //Do nothing
+        }
+        driver.navigate().refresh();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("wallPublishPanelXPATH"), 60);
+        try {
+            ip.isTextPresentByXPATH(driver, path, post, 10);
+            Utility.illegalStateException("Unable to delete post: " + post);
+        } catch (TimeoutException e) {
+            //Do Nothing
+        }
     }
 
     /**

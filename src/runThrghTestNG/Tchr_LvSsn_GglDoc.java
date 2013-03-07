@@ -80,7 +80,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.teacherCreate"})
     public void testTeacherCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
-        a.accessSocialGroupWall(tchrSclGrpName);
+        a.navigateToGroupWall(tchrSclGrpName);
         a.accessLiveSessionWall();
         a.createLiveSession();
     }

@@ -17,10 +17,10 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
-import smoketest.XpathValues;
 import smoketest.IsPresent;
 import smoketest.ProgramValues;
 import smoketest.Utility;
+import smoketest.XpathValues;
 
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class BaseClass {

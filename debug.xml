@@ -60,7 +60,7 @@
                 <include name="workingGroup.create"/>
                 <include name="workingGroup.addMembers"/>
                 <include name="workingGroup.studentPost"/>
-                <include name="workingGroup.pesDeleteStudentPostFromWorkingGroup"/>
+                <include name="workingGroup.pesAdminDeleteAndVerifyStudentPostFromWorkingGroup"/>
                 <include name="workingGroup.removeMembers"/>                
                 <include name="workingGroup.delete"/>        
             </define>              

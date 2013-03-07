@@ -52,7 +52,7 @@ public class User extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldUsrnmXPATH"));
 
         driver.findElement(By.xpath(xpv.getTokenValue("fieldUsrnmXPATH"))).sendKeys(userName);
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys("Moodle1!");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys(pv.getTokenValue("password"));
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName);
         if (user.equalsIgnoreCase("teacher")) {
