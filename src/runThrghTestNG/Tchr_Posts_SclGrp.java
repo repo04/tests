@@ -189,7 +189,24 @@ public class Tchr_Posts_SclGrp extends BaseClass {
         a.navigateToActivityReport();
         a.generateQuizPassword(pswdQzName);
     }
-
+    
+    /**
+     * Teacher Add Student as contact from Course
+     * 
+     * @param grpCrsName
+     * @param tchrUsrName
+     * @param stdtUsrName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+          groups = {"regressionSmoke", "contact.teacherAddStudentAsContactfromCourse"})
+    public void testTeacherAddStudentAsContactfromCourse(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToAllInstructorsStudentsPage("student"); 
+        a.addUserAsContact(stdtUsrName); 
+    }
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

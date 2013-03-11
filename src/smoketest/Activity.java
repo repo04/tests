@@ -219,7 +219,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentContainsTextByXPATH(driver, quizActvtyName);
-        Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + quizActvtyName + "')]");
+        Utility.clickByJavaScript(driver, "//*[contains(text(),'" + quizActvtyName + "')]");
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnEditQzXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtEditQzScrnXPATH"), "Editing quiz: " + quizActvtyName);
@@ -409,7 +409,7 @@ public class Activity extends BaseClass {
         //driver.findElement(By.cssSelector("input[name=\"formarking\"]")).click();
         /*driver.findElement(By.xpath("//div[2]/input[6]")).click();
          Utility.actionBuilderClick(driver, "//div[2]/input[6]");
-         Utility.navigateToSubMenu(driver, "//div[2]/input[6]");*/
+         Utility.clickByJavaScript(driver, "//div[2]/input[6]");*/
         //WebElement elmd = driver.findElement(By.xpath("//div[2]/input[6]"));
         //Utility.actionBuilderClick(driver, "//input[@name='formarking']");
         // org.openqa.selenium.interactions.Actions builder = new org.openqa.selenium.interactions.Actions(driver);
@@ -536,7 +536,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         for (String activity : activities) {
             ip.isElementPresentByXPATH(driver, xpv.getTokenValue("imgDltActvtyXPATH"));
-            Utility.navigateToSubMenu(driver, xpv.getTokenValue("imgDltActvtyXPATH"));
+            Utility.clickByJavaScript(driver, xpv.getTokenValue("imgDltActvtyXPATH"));
             if (activity.contains("Forum")) {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Forum '" + activity + "' ?");
             } else if (activity.contains("Quiz")) {

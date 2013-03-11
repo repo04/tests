@@ -1,6 +1,9 @@
 package smoketest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
@@ -85,8 +88,8 @@ public class Actions extends BaseClass {
 
     /**
      * Delete Post / Announcement
-     * 
-     * @param deletePost 
+     *
+     * @param deletePost
      */
     public void deletePost(String deletePost) {
         WallPage wp = new WallPage();
@@ -159,9 +162,8 @@ public class Actions extends BaseClass {
      * User logs out
      */
     public void logOut() {
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToLogOut"));
-        if(!driver.getCurrentUrl().contains(xpv.getTokenValue("loginPageURL")))
-        {
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToLogOut"));
+        if (!driver.getCurrentUrl().contains(xpv.getTokenValue("loginPageURL"))) {
             Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
         }
     }
@@ -170,7 +172,7 @@ public class Actions extends BaseClass {
      * Navigate to My Wall page
      */
     public void navigateToMyWall() {
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToWallXPATH"));
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myWallURL"));
     }
 
@@ -178,7 +180,7 @@ public class Actions extends BaseClass {
      * Navigates to MyCourse Page
      */
     public void navigateToMyCourse() {
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToCourseXPATH"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));
     }
 
@@ -186,7 +188,7 @@ public class Actions extends BaseClass {
      * Navigate to Home Page
      */
     public void navigateToMyHome() {
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("lnkToHomeXPATH"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("lnkToHomeXPATH"));
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));
     }
 
@@ -211,7 +213,7 @@ public class Actions extends BaseClass {
      * Navigate to Working Groups page
      */
     public void navigateToWorkingGroups() {
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWrkgGrpXPATH"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToWrkgGrpXPATH"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMyWrkngGrpTEXT"));
     }
 
@@ -232,8 +234,8 @@ public class Actions extends BaseClass {
         } else {
             linkToContactXPATH = xpv.getTokenValue("linkToCntctXPATH");
         }
-        
-        Utility.navigateToSubMenu(driver, linkToContactXPATH);
+
+        Utility.clickByJavaScript(driver, linkToContactXPATH);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myContactURL"));
     }
 
@@ -242,7 +244,7 @@ public class Actions extends BaseClass {
      */
     public void navigateToMySocialGroups() {
 
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
 
@@ -259,7 +261,7 @@ public class Actions extends BaseClass {
      * Navigate To Personal Info Page
      */
     public void navigateToMyPersonalInfo() {
-        Utility.navigateToSubMenu(driver, "//li[2]/ul/li[2]/a");
+        Utility.clickByJavaScript(driver, "//li[2]/ul/li[2]/a");
         ip.isTextPresentByXPATH(driver, "//h2", "Personal Information");
     }
 
@@ -275,7 +277,7 @@ public class Actions extends BaseClass {
      * Navigate to Portfolio page
      */
     public void navigateToPortfolio() {
-        Utility.navigateToSubMenu(driver, "//li[3]/a");
+        Utility.clickByJavaScript(driver, "//li[3]/a");
         ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
     }
 
@@ -309,7 +311,7 @@ public class Actions extends BaseClass {
                 break;
 
             default:
-                Utility.navigateToSubMenu(driver, "//*[contains(text(),'" + grpCrsName + "')]");
+                Utility.clickByJavaScript(driver, "//*[contains(text(),'" + grpCrsName + "')]");
 
         }
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("lblCrsLftPnlCSS"), grpCrsName.toUpperCase());
@@ -336,10 +338,10 @@ public class Actions extends BaseClass {
         actvty.crtQuizActvty();
         return actvty.getQzActvyName();
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String createPswdQuizActivity() {
         Activity actvty = new Activity();
@@ -441,26 +443,51 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("btnFnCntct"))).click();
         ip.isElementPresentStartsWithTextByXPATH(driver, cntct);
     }
-    
+
+    /**
+     * Navigate to All Instructors/Students page
+     * 
+     * @param user 
+     */
+    public void navigateToAllInstructorsStudentsPage(String user) {
+        if (user.equalsIgnoreCase("teacher")) {
+            driver.findElement(By.xpath("(//*[contains(text(),'More...')])")).click();
+            ip.isElementPresentByLINK(driver, "Email All Instructors");
+        } else {
+            driver.findElement(By.xpath("(//*[contains(text(),'More...')])[2]")).click();
+            ip.isElementPresentByLINK(driver, "Email All Students");
+        }
+    }
+
+    /**
+     * Add user as contact
+     * 
+     * @param user 
+     */
+    public void addUserAsContact(String user) {
+        Contact c = new Contact();
+        c.addUserAsContact(user);
+    }
+
     /**
      * Navigate to respective group wall
-     * 
+     *
      * @param sclGrpName
      */
     public void navigateToGroupWall(String grpName) {
         Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), grpName);
         driver.findElement(By.xpath("//*[contains(text(),'" + grpName + "')]")).click();
-        ip.isTitlePresent(driver, grpName + " - Wall");        
+        ip.isTitlePresent(driver, grpName + " - Wall");
     }
-    
+
     /**
      * Verify post exits on Social Group wall
-     * 
+     *
      * @param stdtUrlPostOnTchrSclGrp
      */
     public void verifyPostOnSocialGroupWall(String stdtUrlPostOnTchrSclGrp) {
         SocialGroup sg = new SocialGroup();
-        sg.verifyPostOnSocialGroupWall(stdtUrlPostOnTchrSclGrp);        
+        sg.verifyPostOnSocialGroupWall(stdtUrlPostOnTchrSclGrp);
     }
 
     /**
@@ -528,7 +555,7 @@ public class Actions extends BaseClass {
             ip.isElementPresentContainsTextByXPATH(driver, post);
         }
 
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkRecentNewsXPATH"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkRecentNewsXPATH"));
 
         for (String post : posts) {
             post.isEmpty();
@@ -608,10 +635,10 @@ public class Actions extends BaseClass {
         Activity actvty = new Activity();
         actvty.submitQuiz(quizActvtyName, password);
     }
-    
+
     /**
-     * 
-     * @param pswdQzName 
+     *
+     * @param pswdQzName
      */
     public void generateQuizPassword(String pswdQzName) {
         Activity actvty = new Activity();
@@ -868,11 +895,11 @@ public class Actions extends BaseClass {
         driver.switchTo().frame("_iframe-ksubox");
         ip.isTextPresentByXPATH(driver, "//div[@id='upload_btn_container']/div[2]", "Choose how would you like to upload a new profile image");
         ip.isElementClickableByXpath(driver, "//div[4]/form/input", 60);
-        Utility.navigateToSubMenu(driver, "//div[4]/form/input");
+        Utility.clickByJavaScript(driver, "//div[4]/form/input");
         Utility.actionBuilderClick(driver, "//div[4]/form/input");
         driver.findElement(By.cssSelector("object#uploader")).click();
         ip.isElementClickableByXpath(driver, "//div[6]/form/input", 60);
-        Utility.navigateToSubMenu(driver, "//div[6]/form/input");
+        Utility.clickByJavaScript(driver, "//div[6]/form/input");
         ip.isTextPresentByXPATH(driver, "//body/div[3]/div[2]/div", "Choose how would you like to upload a new profile image");
     }
 }

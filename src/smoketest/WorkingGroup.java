@@ -198,7 +198,7 @@ public class WorkingGroup extends BaseClass {
                     System.out.println("inside google window");
                     ip.isTitleContains(driver, gglDocName);
                     ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
-                    Utility.navigateToSubMenu(driver, xpv.getTokenValue("btnGglDocSgnOutXPATH"));
+                    Utility.clickByJavaScript(driver, xpv.getTokenValue("btnGglDocSgnOutXPATH"));
                     ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
                     driver.close();
                 } catch (Exception e) {

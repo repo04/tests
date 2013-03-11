@@ -86,7 +86,7 @@ public class Note extends BaseClass {
         }
         driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table"
                 + "/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
-        Utility.navigateToSubMenu(driver, xpv.getTokenValue("linkToWallXPATH"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToWallXPATH"));
         ip.isElementPresentContainsTextByXPATH(driver, "Notes");
         driver.findElement(By.linkText("Notes")).click();
         verifyNoteCreation(this.noteName, wallType);

@@ -98,7 +98,7 @@ public class File extends BaseClass {
             }
             y++;
         }
-        Utility.navigateToSubMenu(driver, "//li[2]/ul/li[3]/a");
+        Utility.clickByJavaScript(driver, "//li[2]/ul/li[3]/a");
         int z = 2;
         for (String file : files) {
             if (z == 2) {

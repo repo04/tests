@@ -33,7 +33,7 @@ public class Utility {
      * @param driver
      * @param menuXPATH
      */
-    public static void navigateToSubMenu(WebDriver driver, String menuXPATH) {
+    public static void clickByJavaScript(WebDriver driver, String menuXPATH) {
         WebElement hiddenElement = driver.findElement(By.xpath(menuXPATH));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
     }
@@ -162,7 +162,7 @@ public class Utility {
     public static void usrEmailLogout(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
         try {
-            Utility.navigateToSubMenu(driver, "//td[2]/a");
+            Utility.clickByJavaScript(driver, "//td[2]/a");
         } catch (UnhandledAlertException e) {
             driver.switchTo().alert().accept();
         }
@@ -310,24 +310,23 @@ public class Utility {
         element.click();
         robot.keyRelease(KeyEvent.VK_CONTROL);
     }
-    
+
     /**
      * Verify specific TEXT is present in current URL
-     * 
+     *
      * @param driver
-     * @param textInUrl 
+     * @param textInUrl
      */
     public static void verifyCurrentUrl(WebDriver driver, String textInUrl) {
-        if(!driver.getCurrentUrl().contains(textInUrl))
-        {
+        if (!driver.getCurrentUrl().contains(textInUrl)) {
             Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
         }
     }
 
     /**
-     * 
+     *
      * @param name
-     * @return 
+     * @return
      */
     public static String getFullName(String name) {
         return name + " " + name;

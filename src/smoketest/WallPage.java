@@ -185,19 +185,19 @@ public class WallPage extends BaseClass {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
-            Utility.navigateToSubMenu(driver, "//li/div/div/a");
+            Utility.clickByJavaScript(driver, "//li/div/div/a");
             ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Are you sure you want to delete this post");
         } else if (post.contains("urlstdtwrknggrppost")) {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
-            Utility.navigateToSubMenu(driver, "//li/div/div/a");
+            Utility.clickByJavaScript(driver, "//li/div/div/a");
             ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div/div/div/div/div/div[2]/span", "Are you sure you want to delete this post");
         } else {
             path = "//li/div/div[3]/div[3]";
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
-            Utility.navigateToSubMenu(driver, "//li/div/div/a[2]");
+            Utility.clickByJavaScript(driver, "//li/div/div/a[2]");
             ip.isTextPresentByXPATH(driver, "//div[*]/div[2]/div/div/div/div/div/div[2]/span", "Are you sure you want to delete this announcement");
         }
         driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table/tbody"
