@@ -45,7 +45,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTeacherEmailLogin() throws Exception {
+    public void testTeacherEmailFetchAssignmentPasswordLogin() throws Exception {
         Utility.usrEmailLogin(driver, xpv, "2torteacher");
     }
 
@@ -98,9 +98,9 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTeacherEmailLogOut() throws Exception {
+    public void testTeacherEmailFetchAssignmentPasswordLogOut() throws Exception {
         Utility.usrEmailLogout(driver);
         driver.get(url);
-        ip.isTitlePresent(driver, xpv.getTokenValue(program + "loginPageTitle"));
+        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 }

@@ -11,9 +11,9 @@ import smoketest.Actions;
 
 /**
  *
- * 
+ *
  */
-public class CntAdmn_CleanTstData {
+public class CntAdmn_CleanTstData extends BaseClass{
 
     Actions a = new Actions();
 
@@ -30,13 +30,13 @@ public class CntAdmn_CleanTstData {
 
     /**
      * Delete all Activities
-     *  
+     *
      * @param grpCrsName
      * @param frmActvyName
      * @param quizActvtyName
      * @param allInOneAsgnmntActvtyName
      * @param pageActvtyName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"activites.deletion"})
@@ -46,12 +46,12 @@ public class CntAdmn_CleanTstData {
         a.selectGroupCourse(grpCrsName);
         a.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntActvtyName, pageActvtyName);
     }
-    
+
     /**
      * Delete Group Course
-     * 
+     *
      * @param grpCrsName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
           groups = {"groupcourse.deletion"})
@@ -59,6 +59,46 @@ public class CntAdmn_CleanTstData {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.deleteGroupCourse(grpCrsName);
+    }
+
+    /**
+     * Takes backup of course
+     * 
+     * @param pswdQzName
+     * @param frmActvyName
+     * @param quizActvtyName
+     * @param allInOneAsgnmntAvtvtyName
+     * @param pageActvtyName
+     * @throws Exception
+     */
+    @Test(dataProvider = "PswdQzNameActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "course.backup"})
+    public void testContentAdminBackupCourse(String pswdQzName, String frmActvyName, String quizActvtyName,
+            String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.navigateToCourseCategories();
+        a.selectCourse(CntAdmin_Crs_GrpCrsCreation.crsName);
+        a.backupCourse(pswdQzName, frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+    }
+
+    /**
+     * Restore course as new archive course
+     * 
+     * @param pswdQzName
+     * @param frmActvyName
+     * @param quizActvtyName
+     * @param allInOneAsgnmntAvtvtyName
+     * @param pageActvtyName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "PswdQzNameActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "course.restore"})
+    public void testContentAdminRestoreCourseAsNewArchiveCourse(String pswdQzName, String frmActvyName, String quizActvtyName,
+            String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+        a.navigateToMyCourse();
+        a.navigateToCourseCategories();
+        a.selectCourse(CntAdmin_Crs_GrpCrsCreation.crsName);
+        a.restoreAsNewArchiveCourse(pswdQzName, frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);       
     }
 
     /**

@@ -16,12 +16,12 @@ import runThrghTestNG.BaseClass;
  *
  * @author somesh.bansal
  */
-public class Contact extends BaseClass{
+public class Contact extends BaseClass {
 
     /**
      * Add user as contact
-     * 
-     * @param user 
+     *
+     * @param user
      */
     void addUserAsContact(String user) {
         String userName, imagePath;
@@ -44,7 +44,7 @@ public class Contact extends BaseClass{
                     ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", elm);
                     elm.click();
                     try {
-                        new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElement(By.id("ext-gen67"), "Add student1 student1 as contact"));
+                        ip.isTextPresentByXPATH(driver, "//div[2]/span", "Add a personal message: (optional)", 15);
                         break loop;
                     } catch (TimeoutException e) {
                         x++;
@@ -56,9 +56,10 @@ public class Contact extends BaseClass{
             }
             i++;
         }
+        new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElement(By.id("ext-gen67"),
+                "Add " + Utility.getFullName(user) + " as contact"));
         driver.findElement(By.xpath("//div/textarea")).sendKeys("Add as contact");
         driver.findElement(By.xpath("//button")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath(imagePath))));
     }
-    
 }

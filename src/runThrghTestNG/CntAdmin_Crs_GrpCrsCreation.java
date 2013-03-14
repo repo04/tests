@@ -155,6 +155,12 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         System.out.println("init GrpCrsPswdQzName");
         return DataProviderUtil.cartesianProviderFrom(Course(context), PswdQzName(context));
     }
+    
+    @DataProvider(name = "PswdQzNameActivities")
+    public static Iterator<Object[]> PswdQzNameActivities(ITestContext context) throws Exception {
+        System.out.println("init PswdQzNameActivities");
+        return DataProviderUtil.cartesianProviderFrom(PswdQzName(context), Activites(context));
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -175,10 +181,12 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
     @Test(groups = {"regressionSmoke", "fullSmoke", "course.creation"})
     public void testContenAdminCourseGroupCourseCreation() throws Exception {
         a.navigateToMyCourse();
+        a.navigateToCourseCategories();
         crsName = a.createCourse();
         Reporter.log("crsName: " + crsName, true);
 
         a.navigateToMyCourse();
+        a.navigateToCourseCategories();
         crsArray[0][0] = a.createGrpCourse(crsName);
         Reporter.log("grpCrsName: " + crsArray[0][0], true);
     }

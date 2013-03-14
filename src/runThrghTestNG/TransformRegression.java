@@ -419,5 +419,20 @@ public class TransformRegression implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherFetchQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        //GroupName = BackUp / Restore
+        if ("testContentAdminBackupCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminBackupCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminActivitiesCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testContentAdminRestoreCourseAsNewArchiveCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminRestoreCourseAsNewArchiveCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminBackupCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

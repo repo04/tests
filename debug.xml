@@ -6,10 +6,10 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <!--parameter name="tchrUsrName" value="autoteacher1"/>
-        <parameter name="stdtUsrName" value="autostudent1"/-->
-        <parameter name="tchrUsrName" value="teacher1"/>
-        <parameter name="stdtUsrName" value="student1"/>       
+        <parameter name="tchrUsrName" value="autoteacher1"/>
+        <parameter name="stdtUsrName" value="autostudent1"/>
+        <!--parameter name="tchrUsrName" value="teacher1"/>
+        <parameter name="stdtUsrName" value="student1"/-->       
         <parameter name="grpCrsName" value="AutoGroupCourse"/>        
         <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
         <parameter name="tchrSclGrpName" value="AutoTchrSclGrp"/>
@@ -165,10 +165,17 @@
                 <include name="pswdQuiz.readMail"/>
                 <include name="pswdQuiz.submitQuiz"/>                
             </define>
-            <!--define name="Contact">
+            
+            <!--Not ready for debug module
+            <define name="Course">
+                <include name="prerequisite"/>
+                <include name="course.backup"/>
+                <include name="course.restore"/>
+            </define>
+            <define name="Contact">
                 <include name="prerequisite"/>
                 <include name="contact.teacherAddStudentAsContactfromCourse"/>                                
-            </define-->
+            </define>-->
             
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               

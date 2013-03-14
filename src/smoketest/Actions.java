@@ -1,9 +1,6 @@
 package smoketest;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
@@ -125,6 +122,37 @@ public class Actions extends BaseClass {
     public void deleteGroupCourse(String grpCrsName) {
         Course cr = new Course();
         cr.deleteGroupCourse(grpCrsName);
+    }
+
+    /**
+     * Navigate to Course categories Page
+     */
+    public void navigateToCourseCategories() {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlCrsLinkXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlCrsLinkXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAddEditCrsXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAddEditCrsXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, "//div[4]/div/h2", "Course categories");
+    }
+
+    /**
+     * Take backup of course
+     * 
+     * @param activites 
+     */
+    public void backupCourse(String... activites) {
+        Course cr = new Course();
+        cr.backupCourse(activites);
+    }
+    
+    /**
+     * Restore course as new archive course
+     * 
+     * @param activities 
+     */
+    public void restoreAsNewArchiveCourse(String... activities) {
+        Course cr = new Course();
+        cr.restoreAsNewArchiveCourse(activities);
     }
 
     /**
@@ -318,6 +346,17 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * Select & Navigate to Course page
+     * 
+     * @param crsName
+     */
+    public void selectCourse(String crsName) {
+        ip.isElementPresentContainsTextByXPATH(driver, crsName);
+        driver.findElement(By.xpath("//*[contains(text(),'" + crsName + "')]")).click();
+        ip.isTextPresentByXPATH(driver, "//h1/a", crsName);
+    }
+
+    /**
      * Create ForumActivity
      *
      * @return
@@ -446,8 +485,8 @@ public class Actions extends BaseClass {
 
     /**
      * Navigate to All Instructors/Students page
-     * 
-     * @param user 
+     *
+     * @param user
      */
     public void navigateToAllInstructorsStudentsPage(String user) {
         if (user.equalsIgnoreCase("teacher")) {
@@ -461,8 +500,8 @@ public class Actions extends BaseClass {
 
     /**
      * Add user as contact
-     * 
-     * @param user 
+     *
+     * @param user
      */
     public void addUserAsContact(String user) {
         Contact c = new Contact();
