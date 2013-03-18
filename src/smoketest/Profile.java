@@ -68,7 +68,7 @@ public class Profile extends BaseClass {
             case "unc-mba":
                 //Problem
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Info");
-                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television shows:");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");
 
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
@@ -89,7 +89,7 @@ public class Profile extends BaseClass {
             case "gu-msn":
                 //Problem
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Info");
-                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television shows:");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");
 
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");

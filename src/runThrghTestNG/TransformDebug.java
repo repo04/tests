@@ -38,7 +38,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testContentAdminGroupCourseDeletion".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminGroupCourseDeletion");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminCourseGroupCourseCreation";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setDataProvider("GrpCrsDebug");
             annotation.setDataProviderClass(CntAdmin_Crs_GrpCrsCreation.class);
@@ -53,10 +53,10 @@ public class TransformDebug implements IAnnotationTransformer {
         }
 
         //GroupName = ActvtsCrt_AddQzQstn_Dlt         
-        if ("testContenAdminAddQuizQuestion".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuizQuestion");
+        if ("testContentAdminAddQuizQuestion".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminAddQuizQuestion");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContenAdminActivitiesCreation";
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setDataProvider("GrpCrsQzDebug");
             annotation.setDataProviderClass(CntAdmin_Crs_GrpCrsCreation.class);
@@ -65,7 +65,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testContentAdminActivitiesDeletion".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminActivitiesDeletion");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuizQuestion";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminAddQuizQuestion";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
             annotation.setDataProvider("GrpCrsActivitiesDebug");
@@ -404,17 +404,17 @@ public class TransformDebug implements IAnnotationTransformer {
         }
 
         //GroupName = PswdQuiz
-        if ("testContenAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
+        if ("testContentAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[1];
             DependentMethods[0] = "testContentAdminCreateQuizPasswordActivity";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
+            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuesToQuizPasswordActivity";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminAddQuesToQuizPasswordActivity";
             annotation.setDependsOnMethods(DependentMethods);
         }
 

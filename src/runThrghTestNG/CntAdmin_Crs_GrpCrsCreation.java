@@ -33,8 +33,8 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * Provider is a method that returns an array of array of objects. This
      * method will provide data to any test method that declares that its Data
      * Provider is named "Course". In this case it is being fetched from
-     * 'testContenAdminCourseGroupCourseCreation' method which always get
-     * executed before 'testContenAdminActivitiesCreation' (execution order is
+     * 'testContentAdminCourseGroupCourseCreation' method which always get
+     * executed before 'testContentAdminActivitiesCreation' (execution order is
      * maintained in TransformSmoke class, passed as listeners from smoke.xml)
      *
      *
@@ -179,7 +179,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "course.creation"})
-    public void testContenAdminCourseGroupCourseCreation() throws Exception {
+    public void testContentAdminCourseGroupCourseCreation() throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         crsName = a.createCourse();
@@ -199,7 +199,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "activites.creation"})
-    public void testContenAdminActivitiesCreation(String grpCrsName) throws Exception {
+    public void testContentAdminActivitiesCreation(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][0] = a.createForumActivity();
@@ -257,7 +257,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsQz", groups = {"regressionSmoke", "fullSmoke", "activites.addQuizQuestion"})
-    public void testContenAdminAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
+    public void testContentAdminAddQuizQuestion(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(quizActvtyName);
@@ -270,7 +270,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsPswdQzName", groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.addQuestion"})
-    public void testContenAdminAddQuesToQuizPasswordActivity(String grpCrsName, String pswdQuizName) throws Exception {
+    public void testContentAdminAddQuesToQuizPasswordActivity(String grpCrsName, String pswdQuizName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
         a.addQuizQuestion(pswdQuizName);

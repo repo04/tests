@@ -22,8 +22,8 @@
             <class name="runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc"/>            
             <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
-            <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.CntAdmn_CleanTstData"/>
+            <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.Pes_ArchvCrs"/>
             <!--class name="runThrghTestNG.Tchr_VerifyEmailNotifications"/>
             <class name="runThrghTestNG.Stdt_VerifyEmailNotifications"/-->

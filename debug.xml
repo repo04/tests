@@ -166,13 +166,13 @@
                 <include name="pswdQuiz.submitQuiz"/>                
             </define>
             
-            <!--Not ready for debug module
-            <define name="Course">
+            <!--Not ready for debug module-->
+            <!--define name="Course">
                 <include name="prerequisite"/>
                 <include name="course.backup"/>
                 <include name="course.restore"/>
-            </define>
-            <define name="Contact">
+            </define-->
+            <!--define name="Contact">
                 <include name="prerequisite"/>
                 <include name="contact.teacherAddStudentAsContactfromCourse"/>                                
             </define>-->
@@ -192,8 +192,8 @@
             <class name="runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc"/>
             <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
-            <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.CntAdmn_CleanTstData"/>
+            <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.Pes_ArchvCrs"/>                        
         </classes>
     </test>

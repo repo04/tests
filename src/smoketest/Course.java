@@ -177,8 +177,8 @@ public class Course extends BaseClass {
 
     /**
      * Takes backup of course
-     * 
-     * @param activities 
+     *
+     * @param activities
      */
     public void backupCourse(String... activities) {
         ip.isElementClickableByXpath(driver, "//li[6]/p/a", 60);
@@ -189,7 +189,7 @@ public class Course extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//legend", "Backup settings");
         ip.isTextPresentByXPATH(driver, "//fieldset[2]/legend", "Include:");
 
-        validateActivities(activities, "//div[", "]/div/div/div/div/label", 3, "(//img[@alt='Yes'])[", "]", 3);
+        validateActivities(activities, "//div[", "]/div/div/div/div/label", 3);
 
         driver.findElement(By.xpath("//fieldset/input")).click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath("//span[5]"))));
@@ -204,18 +204,24 @@ public class Course extends BaseClass {
 
     /**
      * Restore course as new archive course
-     * 
-     * @param activities 
+     *
+     * @param activities
      */
     public void restoreAsNewArchiveCourse(String... activities) {
         driver.findElement(By.linkText("Restore")).click();
-        ip.isTextPresentByXPATH(driver, "//div[3]/table/tbody/tr/td", backupFileName);
+        int j = 1;
+        for (String activity : activities) {
+            if (j > 5) {
+                ip.isTextPresentByXPATH(driver, "//div[3]/table/tbody/tr/td", activity);
+            }
+            j++;
+        }
         driver.findElement(By.xpath("//tr[1]/td[5]/a")).click();
         ip.isTextPresentByXPATH(driver, "//div[2]/div/h2", "Backup details");
         ip.isTextPresentByXPATH(driver, "//div[2]/h2", "Backup settings");
 
-        validateActivities(activities, "//tr[", "]/td[2]", 1, "(//img[@alt='No'])[", "]", 11);
-        
+        validateActivities(activities, "//tr[", "]/td[2]", 1);
+
         driver.findElement(By.xpath("//div/input")).click();
         ip.isTextPresentByXPATH(driver, "//form/div/h2", "Restore as a new course");
         driver.findElement(By.xpath("//tr[3]/td/input")).click();
@@ -227,16 +233,12 @@ public class Course extends BaseClass {
         }
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//legend", "Course settings");
-        driver.findElement(By.id("id_setting_course_course_fullname")).clear();
-        
-        String restoredCourseName = null;
-        for (String actvity : activities) {
-            restoredCourseName = "Restored " + actvity;
-            driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys(restoredCourseName);
-            break;
-        }
+
+        String restoredCourseName = driver.findElement(By.id("id_setting_course_course_fullname")).getAttribute("value");
         String shortCourseName = driver.findElement(By.id("id_setting_course_course_shortname")).getAttribute("value");
+        driver.findElement(By.id("id_setting_course_course_fullname")).clear();
         driver.findElement(By.id("id_setting_course_course_shortname")).clear();
+        driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys("Restored " + restoredCourseName);
         driver.findElement(By.id("id_setting_course_course_shortname")).sendKeys("Restored " + shortCourseName);
 
         int a = 4;
@@ -249,12 +251,12 @@ public class Course extends BaseClass {
 
         int b = 3;
         int c;
-        if(!"gu-msn".equals(program)){
+        if (!"gu-msn".equals(program)) {
             c = 7;
-        }else{
+        } else {
             c = 8;
         }
-        
+
         do {
             if (!driver.findElement(By.xpath("//div[5]/div[" + b + "]/div/div/div[2]/span/input")).isSelected()) {
                 driver.findElement(By.xpath("//div[5]/div[" + b + "]/div/div/div[2]/span/input")).click();
@@ -264,70 +266,74 @@ public class Course extends BaseClass {
 
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//legend", "Backup settings");
-        ip.isTextPresentByXPATH(driver, "//fieldset[2]/legend", "Course settings");       
-        
+        ip.isTextPresentByXPATH(driver, "//fieldset[2]/legend", "Course settings");
+
         driver.findElement(By.xpath("//fieldset/input")).click();
-        //ip.isTextPresentByXPATH(driver, "//div[2]/div/div/span", "Students generally have fewer privileges within a course.");
-        //driver.findElement(By.xpath("//div[3]/input")).click();
-        ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div[2]/div", "The course was restored successfully, clicking the continue button below will take you to view the course you restored.");
-        
+        ip.isTextPresentByXPATH(driver, "//form/div/div", "The Student role in the backup file cannot "
+                + "be mapped to any of the roles that you are allowed to assign.");
+        driver.findElement(By.xpath("//div[3]/input")).click();
+        ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div[2]/div", "The course was restored successfully, "
+                + "clicking the continue button below will take you to view the course you restored.");
         driver.findElement(By.xpath("//div/input")).click();
         ip.isTextPresentByXPATH(driver, "//h1/a", restoredCourseName);
-        //driver.findElement(By.xpath("//li[2]/a")).click();
-        
+
         int d = 1;
         for (String actvity : activities) {
-            if (!"gu-msn".equals(program)) {
-                if (d > 1) {
+            if (d < 6) {
+                if (!"gu-msn".equals(program)) {
+                    if (d > 1) {
+                        ip.isElementPresentContainsTextByXPATH(driver, actvity);
+                    }
+                } else {
                     ip.isElementPresentContainsTextByXPATH(driver, actvity);
-                    d++;
                 }
-            } else {
-                ip.isElementPresentContainsTextByXPATH(driver, actvity);
                 d++;
             }
-        }        
-    }
+        }
 
-    /**
-     * Validate activities while taking Backup & Restore then
-     * 
-     * @param activities
-     * @param activityxpath1
-     * @param activityxpath2
-     * @param i
-     * @param imageXpath1
-     * @param imageXpath2
-     * @param z 
-     */
-    private void validateActivities(String[] activities, String activityxpath1, String activityxpath2,
-            int i, String imageXpath1, String imageXpath2, int z) {
-        int x = 1;
-        for (String activity : activities) {
-            if (!"gu-msn".equals(program)) {
-                if (x > 1) {
-                    ip.isTextPresentByXPATH(driver, activityxpath1 + i + activityxpath2, activity, 60);
-                    i++;
-                }
-            } else {
-                ip.isTextPresentByXPATH(driver, activityxpath1 + i + activityxpath2, activity, 60);
-                i++;
-            }
-            x++;
-            ip.isElementPresentByXPATH(driver, imageXpath1 + z + imageXpath2);
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/div[2]", "Instructors");
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/div[3]", "None");
+        ip.isTextPresentByXPATH(driver, "//div[4]/div/div[2]", "Students");
+        ip.isTextPresentByXPATH(driver, "//div[4]/div/div[3]", "None");
+
+        driver.findElement(By.xpath("//li[4]/p/span")).click();
+        driver.findElement(By.xpath("//li[4]/ul/li[3]/p/a")).click();
+        ip.isElementClickableByXpath(driver, "//select", 60);
+
+        Select select = new Select(driver.findElement(By.id("groups")));
+        if (!" ".equalsIgnoreCase(select.getOptions().get(0).getText())) {
+            Utility.illegalStateException(select.getOptions().get(0).getText()
+                    + ": Group section should not get restored");
         }
     }
 
     /**
-     * Navigate to Add/Edit Course Page
+     * Validate activities while taking Backup & Restore then
+     *
+     * @param activities
+     * @param activityxpath1
+     * @param activityxpath2
+     * @param i
      */
-    /*public void setUpCrsPage() {
-     ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlCrsLinkXPATH"), 60);
-     driver.findElement(By.xpath(xpv.getTokenValue("lftPnlCrsLinkXPATH"))).click();
-     ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAddEditCrsXPATH"), 60);
-     driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAddEditCrsXPATH"))).click();
-     }*/
-    
+    private void validateActivities(String[] activities, String activityxpath1, String activityxpath2,
+            int i) {
+        int x = 1;
+        for (String activity : activities) {
+            if (x < 6) {
+                if (!"gu-msn".equals(program)) {
+                    if (x > 1) {
+                        ip.isTextPresentByXPATH(driver, activityxpath1 + i + activityxpath2, activity, 60);
+                        i++;
+                    }
+                } else {
+                    ip.isTextPresentByXPATH(driver, activityxpath1 + i + activityxpath2, activity, 60);
+                    i++;
+                }
+            }
+            x++;
+        }
+    }
+
     /**
      * @return CourseName
      */
@@ -340,5 +346,12 @@ public class Course extends BaseClass {
      */
     public String getGrpCrsName() {
         return this.grpCrsName;
+    }
+
+    /**
+     * @return backupFileName
+     */
+    public String getBackupFileName() {
+        return this.backupFileName;
     }
 }

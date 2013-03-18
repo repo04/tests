@@ -33,24 +33,24 @@ public class TransformSmoke implements IAnnotationTransformer {
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
 
-        if ("testContenAdminActivitiesCreation".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminActivitiesCreation");
+        if ("testContentAdminCourseGroupCourseCreation".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminCourseGroupCourseCreation");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContenAdminCourseGroupCourseCreation";
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testContenAdminAddQuizQuestion".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuizQuestion");
+        if ("testContentAdminAddQuizQuestion".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminAddQuizQuestion");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContenAdminActivitiesCreation";
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testPESAdminAssignRole".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminAssignRole");
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminCourseGroupCourseCreation";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminCourseGroupCourseCreation";
             DependentMethods[1] = "testPESAdminUserCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -111,7 +111,7 @@ public class TransformSmoke implements IAnnotationTransformer {
                 || "testStudentVerifyActivities".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminActivitiesCreation";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminCourseGroupCourseCreation";
             DependentMethods[1] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -134,7 +134,7 @@ public class TransformSmoke implements IAnnotationTransformer {
         if ("testStudentSubmitQuiz".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuizQuestion";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminAddQuizQuestion";
             DependentMethods[1] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -191,17 +191,17 @@ public class TransformSmoke implements IAnnotationTransformer {
         }
         
         //GroupName = PswdQuiz
-        if ("testContenAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
+        if ("testContentAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[1];
             DependentMethods[0] = "testContentAdminCreateQuizPasswordActivity";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
+            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuesToQuizPasswordActivity";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminAddQuesToQuizPasswordActivity";
             annotation.setDependsOnMethods(DependentMethods);
         }
 

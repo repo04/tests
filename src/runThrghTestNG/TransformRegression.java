@@ -33,24 +33,24 @@ public class TransformRegression implements IAnnotationTransformer {
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
 
-        if ("testContenAdminActivitiesCreation".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminActivitiesCreation");
+        if ("testContentAdminActivitiesCreation".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminActivitiesCreation");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContenAdminCourseGroupCourseCreation";
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testContenAdminAddQuizQuestion".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuizQuestion");
+        if ("testContentAdminAddQuizQuestion".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminAddQuizQuestion");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContenAdminActivitiesCreation";
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
-        }
+        }   
 
         if ("testPESAdminAssignRole".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminAssignRole");
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminCourseGroupCourseCreation";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminCourseGroupCourseCreation";
             DependentMethods[1] = "testPESAdminUserCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -68,6 +68,13 @@ public class TransformRegression implements IAnnotationTransformer {
                 || "testStudentCreateSocialGroup".equals(testMethod.getName())
                 || "testTeacherAddStudentAsContactfromCourse".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherVerifyPersonalInfo".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyPersonalInfo");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
@@ -112,7 +119,7 @@ public class TransformRegression implements IAnnotationTransformer {
                 || "testStudentVerifyActivities".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminActivitiesCreation";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminActivitiesCreation";
             DependentMethods[1] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -135,7 +142,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testStudentSubmitQuiz".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuizQuestion";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminAddQuizQuestion";
             DependentMethods[1] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -370,6 +377,13 @@ public class TransformRegression implements IAnnotationTransformer {
         }
 
         //GroupName = Files
+        if ("testTeacherUploadFilesInCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherUploadFilesInCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
         if ("testTeacherVerifyFilesInPortfolio".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherVerifyFilesInPortfolio");
             DependentMethods = new String[1];
@@ -392,17 +406,18 @@ public class TransformRegression implements IAnnotationTransformer {
         }
 
         //GroupName = PswdQuiz
-        if ("testContenAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
+        if ("testContentAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[1];
             DependentMethods[0] = "testContentAdminCreateQuizPasswordActivity";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
-            System.out.println("Inside testContenAdminAddQuesToQuizPasswordActivity");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminAddQuesToQuizPasswordActivity";
+            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
+            DependentMethods = new String[2];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminAddQuesToQuizPasswordActivity";
+            DependentMethods[1] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -424,7 +439,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testContentAdminBackupCourse".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminBackupCourse");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminActivitiesCreation";
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminActivitiesCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
         

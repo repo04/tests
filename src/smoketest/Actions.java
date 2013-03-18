@@ -140,9 +140,10 @@ public class Actions extends BaseClass {
      * 
      * @param activites 
      */
-    public void backupCourse(String... activites) {
+    public String backupCourse(String... activites) {
         Course cr = new Course();
         cr.backupCourse(activites);
+        return cr.getBackupFileName();        
     }
     
     /**

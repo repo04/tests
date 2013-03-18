@@ -4,8 +4,12 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
+import org.testng.ITestContext;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -13,9 +17,17 @@ import smoketest.Actions;
  *
  *
  */
-public class CntAdmn_CleanTstData extends BaseClass{
+public class CntAdmn_CleanTstData extends BaseClass {
 
     Actions a = new Actions();
+    static String[][] backupFileNameArray = new String[1][1];
+
+    @DataProvider(name = "PswdQzNameActvitiesBackupFile")
+    public static Iterator<Object[]> PswdQzNameActvitiesBackupFile(ITestContext context) throws Exception {
+        System.out.println("init PswdQzNameActvitiesBackupFile");
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.PswdQzName(context),
+                CntAdmin_Crs_GrpCrsCreation.Activites(context), backupFileNameArray);
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -39,7 +51,7 @@ public class CntAdmn_CleanTstData extends BaseClass{
      * @throws Exception
      */
     @Test(dataProvider = "GrpCrsActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"activites.deletion"})
+    groups = {"activites.deletion"})
     public void testContentAdminActivitiesDeletion(String grpCrsName, String frmActvyName, String quizActvtyName,
             String allInOneAsgnmntActvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -54,7 +66,7 @@ public class CntAdmn_CleanTstData extends BaseClass{
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"groupcourse.deletion"})
+    groups = {"groupcourse.deletion"})
     public void testContentAdminGroupCourseDeletion(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -63,7 +75,7 @@ public class CntAdmn_CleanTstData extends BaseClass{
 
     /**
      * Takes backup of course
-     * 
+     *
      * @param pswdQzName
      * @param frmActvyName
      * @param quizActvtyName
@@ -72,33 +84,35 @@ public class CntAdmn_CleanTstData extends BaseClass{
      * @throws Exception
      */
     @Test(dataProvider = "PswdQzNameActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"regressionSmoke", "course.backup"})
+    groups = {"regressionSmoke", "course.backup"})
     public void testContentAdminBackupCourse(String pswdQzName, String frmActvyName, String quizActvtyName,
             String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(CntAdmin_Crs_GrpCrsCreation.crsName);
-        a.backupCourse(pswdQzName, frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+        backupFileNameArray[0][0] = a.backupCourse(pswdQzName, frmActvyName, quizActvtyName,
+                allInOneAsgnmntAvtvtyName, pageActvtyName);
+        Reporter.log("backupFileName: " + backupFileNameArray[0][0], true);
     }
 
     /**
      * Restore course as new archive course
-     * 
+     *
      * @param pswdQzName
      * @param frmActvyName
      * @param quizActvtyName
      * @param allInOneAsgnmntAvtvtyName
      * @param pageActvtyName
-     * @throws Exception 
+     * @throws Exception
      */
-    @Test(dataProvider = "PswdQzNameActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"regressionSmoke", "course.restore"})
+    @Test(dataProvider = "PswdQzNameActvitiesBackupFile", groups = {"regressionSmoke", "course.restore"})
     public void testContentAdminRestoreCourseAsNewArchiveCourse(String pswdQzName, String frmActvyName, String quizActvtyName,
-            String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+            String allInOneAsgnmntAvtvtyName, String pageActvtyName, String backupFile) throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(CntAdmin_Crs_GrpCrsCreation.crsName);
-        a.restoreAsNewArchiveCourse(pswdQzName, frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);       
+        a.restoreAsNewArchiveCourse(pswdQzName, frmActvyName, quizActvtyName,
+                allInOneAsgnmntAvtvtyName, pageActvtyName, backupFile);
     }
 
     /**
