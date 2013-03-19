@@ -297,6 +297,17 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         a.navigateToMyHome();
         a.verifyHelpWindow();
     }*/
+    
+    /**
+     * Verify Settings page specific to user role
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "settings.contentAdminVerify"})
+    public void testContentAdminVerifySettings() throws Exception {
+        a.navigateToSettings();
+        a.verifySettings();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

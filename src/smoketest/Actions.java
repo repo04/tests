@@ -137,19 +137,19 @@ public class Actions extends BaseClass {
 
     /**
      * Take backup of course
-     * 
-     * @param activites 
+     *
+     * @param activites
      */
     public String backupCourse(String... activites) {
         Course cr = new Course();
         cr.backupCourse(activites);
-        return cr.getBackupFileName();        
+        return cr.getBackupFileName();
     }
-    
+
     /**
      * Restore course as new archive course
-     * 
-     * @param activities 
+     *
+     * @param activities
      */
     public void restoreAsNewArchiveCourse(String... activities) {
         Course cr = new Course();
@@ -348,7 +348,7 @@ public class Actions extends BaseClass {
 
     /**
      * Select & Navigate to Course page
-     * 
+     *
      * @param crsName
      */
     public void selectCourse(String crsName) {
@@ -610,6 +610,35 @@ public class Actions extends BaseClass {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnLftPnlActvyRprtXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnLftPnlActvyRprtXPATH"))).click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngActvtyRprtCSS"), "Activity report");
+    }
+
+    /**
+     * Navigate to Settings page
+     */
+    public void navigateToSettings() {
+        Utility.clickByJavaScript(driver, "//div[2]/nav/ul/li[3]/ul/li/a");        
+        switch (LoginPage.getUser()) {
+            case "contentAdmin":
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/h2",
+                        Utility.getFullName(pv.getTokenValue("ctntAdminUserName")));
+                break;
+            case "pesAdmin":
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/h2",
+                        Utility.getFullName(pv.getTokenValue("pesUserName")));
+                break;
+            //Teacher/Student
+            default:
+                ip.isTextPresentByXPATH(driver, "//h2",
+                        Utility.getFullName(LoginPage.getUser()));
+        }
+    }
+
+    /**
+     * Verify Settings page specific to user role
+     */
+    public void verifySettings() {
+        Settings settings = new Settings();
+        settings.verifySettings();
     }
 
     /**

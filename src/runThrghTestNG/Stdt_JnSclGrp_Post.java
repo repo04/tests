@@ -273,6 +273,17 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
         a.navigateToMyHome();
         a.verifyHelpWindow();
     }*/
+    
+    /**
+     * Verify Settings page specific to user role
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "settings.studentVerify"})
+    public void testStudentVerifySettings() throws Exception {
+        a.navigateToSettings();
+        a.verifySettings();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

@@ -165,6 +165,13 @@
                 <include name="pswdQuiz.readMail"/>
                 <include name="pswdQuiz.submitQuiz"/>                
             </define>
+            <define name="Settings">
+                <include name="prerequisite"/>
+                <include name="settings.contentAdminVerify"/>
+                <include name="settings.pesAdminVerify"/>
+                <include name="settings.teacherVerify"/>
+                <include name="settings.studentVerify"/>                                
+            </define>
             
             <!--Not ready for debug module-->
             <!--define name="Course">

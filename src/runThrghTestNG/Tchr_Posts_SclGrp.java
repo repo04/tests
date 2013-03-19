@@ -208,6 +208,17 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     }
     
     /**
+     * Verify Settings page specific to user role
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "settings.teacherVerify"})
+    public void testTeacherVerifySettings() throws Exception {
+        a.navigateToSettings();
+        a.verifySettings();
+    }
+    
+    /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
      *

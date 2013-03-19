@@ -279,6 +279,17 @@ public class Pes_UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
         a.navigateToMyHome();
         a.verifyHelpWindow();
     }*/
+    
+    /**
+     * Verify Settings page specific to user role
+     * 
+     * @throws Exception 
+     */
+    @Test(groups = {"regressionSmoke", "settings.pesAdminVerify"})
+    public void testPesAdminVerifySettings() throws Exception {
+        a.navigateToSettings();
+        a.verifySettings();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the
