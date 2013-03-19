@@ -108,7 +108,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.teacherVerifyStudentsPostRecommendation"})
     public void testTeacherVerifyStudentsPostRecommendation(String grpCrsName) throws Exception {
         a.navigateToMyCourse();

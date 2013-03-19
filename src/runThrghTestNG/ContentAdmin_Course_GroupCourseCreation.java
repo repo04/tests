@@ -18,7 +18,7 @@ import smoketest.Actions;
  * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
  * Logs out
  */
-public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
+public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
     public static String crsName;
     Actions a = new Actions();

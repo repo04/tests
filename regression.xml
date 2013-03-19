@@ -13,7 +13,7 @@
             </run>
         </groups>
         <classes>
-            <class name="runThrghTestNG.CntAdmin_Crs_GrpCrsCreation"/>
+            <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp"/>
             <class name="runThrghTestNG.Tchr_Posts_SclGrp"/>
             <class name="runThrghTestNG.Stdt_JnSclGrp_Post"/>

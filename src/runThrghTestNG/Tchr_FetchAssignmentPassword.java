@@ -34,8 +34,8 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
     @DataProvider(name = "GrpCrsPswdQzNamePassword")
     public static Iterator<Object[]> GrpCrsPswdQzNamePassword(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPswdQzNamePassword");
-        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context),
-                CntAdmin_Crs_GrpCrsCreation.PswdQzName(context), quizPassword(context));
+        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context),
+                ContentAdmin_Course_GroupCourseCreation.PswdQzName(context), quizPassword(context));
     }
 
     /**
@@ -54,7 +54,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
      * @param pswdQuizName
      * @throws Exception
      */
-    @Test(dataProvider = "PswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "PswdQzName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
     public void testTeacherFetchQuizPassword(String pswdQuizName) throws Exception {
         int x = 1;

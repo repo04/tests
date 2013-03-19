@@ -39,7 +39,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     
     @DataProvider(name = "CrsStdtCmnt")
     public static Iterator<Object[]> StdtTxtCmntOnTchrCrsPost(ITestContext context) throws Exception {
-        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
+        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
     }
 
     /**
@@ -136,7 +136,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
      * @param allInOneAsgnmntAvtvtyName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.submit"})
     public void testStudentSubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -151,7 +151,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "note.createOnCourseWall"})
     public void testStudentCreateNoteOnCourseWall(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
@@ -222,7 +222,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
      * @param grpCrsName
      * @throws Exception 
      */
-    /*@Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class, 
+    /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class, 
           groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
     public void testStudentVerifySyllabusActivity(String grpCrsName) throws Exception {
         a.navigateToMyCourse();

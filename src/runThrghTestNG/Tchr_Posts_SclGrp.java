@@ -41,7 +41,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     @DataProvider(name = "GrpCrsTchrUrlCrsPst")
     public static Iterator<Object[]> GrpCrsTchrUrlCrsPst(ITestContext context) throws Exception {
         System.out.println("init GrpCrsTchrUrlCrsPst");
-        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), tchrUrlCrsPost(context));
+        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), tchrUrlCrsPost(context));
     }
 
     /**
@@ -64,7 +64,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
@@ -135,7 +135,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    /*@Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
      groups = {"regressionSmoke", "activity.teacherVerifySyllabus"})
      public void testTeacherVerifySyllabusActivity(String grpCrsName) throws Exception {
      a.navigateToMyCourse();
@@ -181,7 +181,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param pswdQzName
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsPswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsPswdQzName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
     public void testTeacherGenerateQuizPassword(String grpCrsName, String pswdQzName) throws Exception {
         a.navigateToMyCourse();

@@ -41,7 +41,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContenAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setDataProvider("GrpCrsDebug");
-            annotation.setDataProviderClass(CntAdmin_Crs_GrpCrsCreation.class);
+            annotation.setDataProviderClass(ContentAdmin_Course_GroupCourseCreation.class);
         }
 
         if ("testPESAdminArchiveCourse".equals(testMethod.getName())) {
@@ -59,7 +59,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "testContenAdminActivitiesCreation";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setDataProvider("GrpCrsQzDebug");
-            annotation.setDataProviderClass(CntAdmin_Crs_GrpCrsCreation.class);
+            annotation.setDataProviderClass(ContentAdmin_Course_GroupCourseCreation.class);
         }
 
         if ("testContentAdminActivitiesDeletion".equals(testMethod.getName())) {
@@ -69,7 +69,7 @@ public class TransformDebug implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
             annotation.setDataProvider("GrpCrsActivitiesDebug");
-            annotation.setDataProviderClass(CntAdmin_Crs_GrpCrsCreation.class);
+            annotation.setDataProviderClass(ContentAdmin_Course_GroupCourseCreation.class);
         }
 
         //GroupName = Assignment_Grade

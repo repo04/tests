@@ -125,7 +125,7 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "activites.studentVerify"})
     public void testStudentVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -140,7 +140,7 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsQz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "activites.submitQuiz"})
     public void testStudentSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -172,7 +172,7 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
      * @param allInOneAsgnmntAvtvtyName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.verifyGrade"})
     public void testStudentVerifyAssignmentGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();

@@ -53,7 +53,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
     @DataProvider(name = "GrpCrsFiles")
     public static Iterator<Object[]> GrpCrsFiles(ITestContext context) throws Exception {
         System.out.println("init GrpCrsFiles");
-        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), Files(context));
+        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Files(context));
     }
 
     /**
@@ -104,7 +104,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "activites.teacherVerify"})
     public void testTeacherVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -120,7 +120,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
      * @param allInOneAsgnmntAvtvtyName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.grade"})
     public void testTeacherGradeAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
         a.navigateToMyCourse();
