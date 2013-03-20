@@ -90,8 +90,9 @@ public class Resources extends BaseClass {
                 vrfy10 = "Financing Your Education";
                 vrfy11 = "Disability Support Services";
                 vrfy12 = "The GW Bookstore";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7);
-        }
+                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7,
+                        vrfy8, vrfy9, vrfy10, vrfy11, vrfy12);
+        }           
         verifyWindow(resources);
     }
 
@@ -232,8 +233,7 @@ public class Resources extends BaseClass {
                                 + "- The George Washington University");
                         break;
                     case "Financing Your Education":
-                        ip.isTitlePresent(driver, "Costs & Financial Planning  "
-                                + "| The George Washington University");
+                        ip.isTitlePresent(driver, "Costs & Financial Planning | The George Washington University");
                         break;
                     case "Disability Support Services":
                         ip.isTitlePresent(driver, "Disability Support Services "
