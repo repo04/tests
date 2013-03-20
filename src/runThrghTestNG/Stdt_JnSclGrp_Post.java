@@ -199,7 +199,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
      * 
      * @throws Exception 
      */
-    @Test(groups = {"regressionSmoke", "resources.verify"})
+    @Test(groups = {"regressionSmoke", "resources.studentVerify"})
     public void testStudentVerifyResources() throws Exception {
         a.navigateToMyHome();
         a.verifyResources();

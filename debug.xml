@@ -24,7 +24,7 @@
                 <include name="prerequisite"/>
                 <include name="course.creation"/>
                 <include name="groupcourse.deletion"/>
-                <include name="course.archive"/>                 
+                <include name="course.archive"/>                    
             </define>            
             <define name="ActvtsCrt_AddQzQstn_Dlt">
                 <include name="prerequisite"/>
@@ -94,7 +94,7 @@
             </define>
             <define name="Resources">
                 <include name="prerequisite"/>
-                <include name="resources.verify"/>                                              
+                <include name="resources.studentVerify"/>                                              
             </define>
             <define name="Wall">
                 <include name="prerequisite"/>

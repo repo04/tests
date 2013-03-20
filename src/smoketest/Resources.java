@@ -18,7 +18,8 @@ import runThrghTestNG.BaseClass;
 public class Resources extends BaseClass {
 
     Date now = new Date();
-    String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7;
+    String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7,
+            vrfy8, vrfy9, vrfy10, vrfy11, vrfy12, vrfy13;
     List<String> resources;
 
     /**
@@ -77,7 +78,19 @@ public class Resources extends BaseClass {
                 resources = Arrays.asList(vrfy1, vrfy2, vrfy3);
                 break;
             case "gwu-mph":
-                Utility.illegalStateException("IN PROGRESS");                
+                vrfy1 = "Email";
+                vrfy2 = "Gweb";
+                vrfy3 = "Colonial Central";
+                vrfy4 = "Himmelfarb Health Sciences Library";
+                vrfy5 = "Public Health & Health Services Portal";
+                vrfy6 = "SPHSS Jobs Database";
+                vrfy7 = "Writing Center";
+                vrfy8 = "University Counseling Center";
+                vrfy9 = "Career Center";
+                vrfy10 = "Financing Your Education";
+                vrfy11 = "Disability Support Services";
+                vrfy12 = "The GW Bookstore";
+                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7);
         }
         verifyWindow(resources);
     }
@@ -108,6 +121,7 @@ public class Resources extends BaseClass {
                     case "myUSC":
                     case "Catalogue":
                     case "WebSTAC":
+                    case "Writing Center":
                         ip.isTitleContains(driver, resource);
                         break;
                     case "Connect Carolina":
@@ -159,6 +173,9 @@ public class Resources extends BaseClass {
                             ip.isTitlePresent(driver, "USC Web Mail");
                         } else if (program.contains("au-mir")) {
                             ip.isTitlePresent(driver, "American University");
+                        } else if (program.contains("gwu-mph")) {
+                            ip.isTitlePresent(driver, "Email Log-In - MyGW - "
+                                    + "The George Washington University Web Portal");
                         }
                         break;
                     case "Docs":
@@ -187,6 +204,45 @@ public class Resources extends BaseClass {
                         break;
                     case "My AU":
                         ip.isTitlePresent(driver, "myAU Portal Login");
+                        break;
+                    case "Gweb":
+                        ip.isTitlePresent(driver, "Banner Secured Area");
+                        break;
+                    case "Colonial Central":
+                        ip.isTitlePresent(driver, "COLONIAL CENTRAL");
+                        break;
+                    case "Himmelfarb Health Sciences Library":
+                        ip.isTitlePresent(driver, "Himmelfarb Library Homepage");
+                        break;
+                    case "Public Health & Health Services Portal":
+                        ip.isTitlePresent(driver, "Public Health&Health Services Portal "
+                                + "- Education - Himmelfarb Library");
+                        break;
+                    case "SPHSS Jobs Database":
+                        ip.isTitlePresent(driver, "Job Database | Career Connection "
+                                + "| School of Public Health and Health Services "
+                                + "| George Washington University");
+                        break;
+                    case "University Counseling Center":
+                        ip.isTitlePresent(driver, "University Counseling Center "
+                                + "- The George Washington University");
+                        break;
+                    case "Career Center":
+                        ip.isTitlePresent(driver, "The GW Career Center "
+                                + "- The George Washington University");
+                        break;
+                    case "Financing Your Education":
+                        ip.isTitlePresent(driver, "Costs & Financial Planning  "
+                                + "| The George Washington University");
+                        break;
+                    case "Disability Support Services":
+                        ip.isTitlePresent(driver, "Disability Support Services "
+                                + "- The George Washington University");
+                        break;
+                    case "The GW Bookstore":
+                        ip.isTitlePresent(driver, "GW Bookstore : Shop the George Washington University "
+                                + "Bookstore For New & Used Textbooks, Rent Textbooks, "
+                                + "Digital Textbooks, Apparel, Gifts & Supplies");
                         break;
                 }
                 driver.close();

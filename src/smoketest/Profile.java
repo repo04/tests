@@ -147,7 +147,7 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Are you a member of any Professional Associations?");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Where do you currently reside?");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "What languages are you proficient in?");
-                ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Please list a major accomplishments:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Please list a major accomplishments::");
                 ip.isTextPresentByXPATH(driver, "//div[16]", "Work Information");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div/div", "Courses:");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "Where did you previously attend University?");
@@ -163,7 +163,7 @@ public class Profile extends BaseClass {
 
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Books:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Favorite Movies:");
-                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Favorite Television shows:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Favorite Music:");
                 ip.isTextPresentByXPATH(driver, "//div[16]", "Work Information");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div/div", "Courses:");
