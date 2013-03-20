@@ -19,7 +19,7 @@ import smoketest.Utility;
  *
  *
  */
-public class Tchr_FetchAssignmentPassword extends BaseClass {
+public class Teacher_FetchAssignmentPassword extends BaseClass {
 
     Actions a = new Actions();
     String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6;

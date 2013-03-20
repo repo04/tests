@@ -84,7 +84,7 @@ public class TransformDebug implements IAnnotationTransformer {
                 || "testTeacherAllowResubmitAssignment".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherGradeAssignment";
+            DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherGradeAssignment";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -165,7 +165,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testStudentVerifyWorkingGroup_GoogleDoc".equals(testMethod.getName())) {
             System.out.println("Inside testStudentVerifyWorkingGroup_GoogleDoc");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherCreateGoogleDoc";
+            DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherCreateGoogleDoc";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -173,7 +173,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testStudentJoinsTeacherSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentJoinsTeacherSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateSocialGroup";
+            DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -187,7 +187,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testTeacherCreateLiveSession".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherCreateLiveSession");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateSocialGroup";
+            DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
@@ -202,7 +202,7 @@ public class TransformDebug implements IAnnotationTransformer {
             System.out.println("Inside testStudentCreateLiveSession");
             DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentJoinsTeacherSocialGroup";
-            DependentMethods[1] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherCreateLiveSession";
+            DependentMethods[1] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherCreateLiveSession";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
@@ -225,7 +225,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall");
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherVerifyStudentPostOnOwnSocialGroupWall";
+            DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherVerifyStudentPostOnOwnSocialGroupWall";
             DependentMethods[1] = "runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentLeaveTeacherSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -247,7 +247,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testTeacherDeleteSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeleteSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_JoinDelete_SclGrp.testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall";
+            DependentMethods[0] = "runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
@@ -320,14 +320,14 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testStudentVerifyPESCoursePost".equals(testMethod.getName())) {
             System.out.println("Inside testStudentVerifyPESCoursePost");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherVerifyPESCoursePosts";
+            DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherVerifyPESCoursePosts";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testStudentCommentOnTeacherCoursePost".equals(testMethod.getName())) {
             System.out.println("Inside testStudentCommentOnTeacherCoursePost");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherPostsOn_Wall_CourseWall";
+            DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherPostsOn_Wall_CourseWall";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -355,14 +355,14 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testTeacherDeleteCourseURLPost".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeleteCourseURLPost");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_JoinDelete_SclGrp.testTeacherVerifyStudentsPostRecommendation";
+            DependentMethods[0] = "runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherVerifyStudentsPostRecommendation";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testPESAdminDeleteAnnouncement".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminDeleteAnnouncement");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_JoinDelete_SclGrp.testTeacherDeleteCourseURLPost";
+            DependentMethods[0] = "runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherDeleteCourseURLPost";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -392,14 +392,14 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testStudentVerifyFilesInCourse".equals(testMethod.getName())) {
             System.out.println("Inside testStudentVerifyFilesInCourse");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherVerifyFilesInPortfolio";
+            DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherVerifyFilesInPortfolio";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherDeleteFiles".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeleteFiles");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherUploadFilesInCourse";
+            DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherUploadFilesInCourse";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -421,14 +421,14 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testTeacherFetchQuizPassword".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherFetchQuizPassword");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherGenerateQuizPassword";
+            DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherGenerateQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
             System.out.println("Inside testStudentSubmitPasswordQuiz");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherFetchQuizPassword";
+            DependentMethods[0] = "runThrghTestNG.Teacher_FetchAssignmentPassword.testTeacherFetchQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

@@ -14,7 +14,7 @@ import smoketest.Actions;
  * Teacher Logs in Find, Join & Leave Student's Social Group, Deletes own Social
  * Group
  */
-public class Tchr_JoinDelete_SclGrp extends BaseClass {
+public class Teacher_JoinDelete_SocialGroup extends BaseClass {
 
     Actions a = new Actions();
     
@@ -77,7 +77,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherDelete"})
     public void testTeacherDeleteSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
@@ -138,7 +138,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      * @param tchrUrlCrsPost
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "wall.teacherDeleteCourseURLPost"})
     public void testTeacherDeleteCourseURLPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.navigateToMyCourse();
@@ -155,7 +155,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      * @param doc
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = Tchr_LvSsn_GglDoc.class,
+    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
           groups = {"regressionSmoke", "files.teacherDelete"})
     public void testTeacherDeleteFiles(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();

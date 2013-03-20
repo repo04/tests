@@ -33,14 +33,14 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
     @DataProvider(name = "TchrStdtSclGrps")
     public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
         System.out.println("init TchrStdtSclGrps");
-        return DataProviderUtility.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), StdtSclGrp(context));
+        return DataProviderUtility.cartesianProviderFrom(Teacher_Posts_SocialGroup.TchrSclGrp(context), StdtSclGrp(context));
     }
 
     @DataProvider(name = "UsrsWrkngGrpTchrStdtSclGrps")
     public static Iterator<Object[]> UsrsWrkngGrpTchrStdtSclGrps(ITestContext context) throws Exception {
         System.out.println("init UsrsWrkngGrpTchrStdtSclGrps");
         return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.Users(context),
-                Pes_UserCreation_AssignRole_WorkingGroup.WrkngGrp(context), Tchr_Posts_SclGrp.TchrSclGrp(context),
+                Pes_UserCreation_AssignRole_WorkingGroup.WrkngGrp(context), Teacher_Posts_SocialGroup.TchrSclGrp(context),
                 StdtSclGrp(context));
     }
     
@@ -70,7 +70,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.studentCreate"})
     public void testStudentCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
@@ -97,7 +97,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = Tchr_LvSsn_GglDoc.class,
+    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.studentVerifyGoogleDoc"})
     public void testStudentVerifyWorkingGroup_GoogleDoc(String wrkngGrpName, String gglDocName) throws Exception {
         a.navigateToWorkingGroups();
@@ -156,7 +156,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      * @param password
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsPswdQzNamePassword", dataProviderClass = Tchr_FetchAssignmentPassword.class,
+    @Test(dataProvider = "GrpCrsPswdQzNamePassword", dataProviderClass = Teacher_FetchAssignmentPassword.class,
           groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.submitQuiz"})
     public void testStudentSubmitPasswordQuiz(String grpCrsName, String pswdQzName, String password) throws Exception {
         a.navigateToMyCourse();
@@ -190,7 +190,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      * @param doc
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = Tchr_LvSsn_GglDoc.class, 
+    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class, 
           groups = {"regressionSmoke", "files.studentVerifyInCourse"})
     public void testStudentVerifyFilesInCourse(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
@@ -205,7 +205,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      * @param tchrSclGrpName
      * @throws Exception 
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "socialGroup.studentLeaveTeacherSocialGroup"})
     public void testStudentLeaveTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();

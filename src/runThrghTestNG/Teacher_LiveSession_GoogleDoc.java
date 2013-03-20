@@ -19,7 +19,7 @@ import smoketest.Actions;
  * GoogleDoc in Working Group Verify All Posts on Top & RecentNews Verify
  * Activities & resource appear items on activity report
  */
-public class Tchr_LvSsn_GglDoc extends BaseClass {
+public class Teacher_LiveSession_GoogleDoc extends BaseClass {
 
     static String[][] gglDocArray = new String[1][1];
     static String[][] filesArray = new String[1][3];
@@ -76,7 +76,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.teacherCreate"})
     public void testTeacherCreateLiveSession(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();

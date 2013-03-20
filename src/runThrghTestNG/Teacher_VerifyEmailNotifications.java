@@ -20,7 +20,7 @@ import smoketest.Utility;
  *
  *
  */
-public class Tchr_VerifyEmailNotifications extends BaseClass {
+public class Teacher_VerifyEmailNotifications extends BaseClass {
 
     Actions a = new Actions();
     String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6;

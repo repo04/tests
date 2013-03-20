@@ -34,7 +34,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @DataProvider(name = "TchrSclGrpStdtUrlPost")
     public static Iterator<Object[]> TchrSclGrpStdtUrlPost(ITestContext context) throws Exception {
         System.out.println("init TchrSclGrpStdtUrlPost");
-        return DataProviderUtility.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), stdtUrlPostOnTchrSclGrp);
+        return DataProviderUtility.cartesianProviderFrom(Teacher_Posts_SocialGroup.TchrSclGrp(context), stdtUrlPostOnTchrSclGrp);
     }
     
     @DataProvider(name = "CrsStdtCmnt")
@@ -62,7 +62,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentJoinTeachers"})
     public void testStudentJoinsTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
@@ -75,7 +75,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentPostURLOnTeachers"})
     public void testStudentPostURLOnTeacherSocialGroup(String tchrSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
@@ -89,7 +89,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "wall.studentCommentOnTeacherCoursePost"})
     public void testStudentCommentOnTeacherCoursePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.selectGroupCourse(grpCrsName);
@@ -121,7 +121,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @param tchrUrlCrsPost
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Tchr_Posts_SclGrp.class,
+    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "wall.studentRecommendPost"})
     public void testStudentRecommendCourseURLPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
         a.navigateToMyCourse();

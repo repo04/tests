@@ -17,7 +17,7 @@ import smoketest.Actions;
  * Teacher Login, Posts on Wall & Course Wall, Creates Social Group
  *
  */
-public class Tchr_Posts_SclGrp extends BaseClass {
+public class Teacher_Posts_SocialGroup extends BaseClass {
 
     String tchrTxtWallPost;
     String tchrUrlWallPost;
