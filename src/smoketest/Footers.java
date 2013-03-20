@@ -88,7 +88,9 @@ public class Footers extends BaseClass {
                     y++;
                 }
                 try {
-                    ip.isTitleContains(driver, prgrmTitle + " " + footer);
+                    //Temporarily MODIFIED
+                    //ip.isTitleContains(driver, prgrmTitle + " " + footer);
+                    ip.isTitleContains(driver, footer);
                     driver.close();
                     driver.switchTo().window(HandleBefore);
                 } catch (TimeoutException e) {
@@ -99,7 +101,9 @@ public class Footers extends BaseClass {
             } else {
                 ip.isTextPresentByXPATH(driver, "//div[7]/div/span[" + i + "]/a", footer);
                 driver.findElement(By.xpath("//div[7]/div/span[" + i + "]/a")).click();
-                ip.isTitleContains(driver, prgrmTitle + " " + footer);
+                //Temporarily MODIFIED
+                //ip.isTitleContains(driver, prgrmTitle + " " + footer);
+                ip.isTitleContains(driver, footer);
                 driver.findElement(By.linkText("Home")).click();
             }
             i++;

@@ -13,16 +13,28 @@
    
     <target name="set_env">        
         <if>
-            <contains string="${callUrl}" substring="-sb"/>
+            <contains string="${callUrl}" substring="lms-sb"/>
             <then>
                 <propertyregex property="regenv" input="${callUrl}" regexp="lms-([^-qa]*)"
                                select="\1" casesensitive="false" />
                 <var name="env" value="${regenv}" />                              
             </then>
             <elseif>
-                <contains string="${callUrl}" substring="-stg"/>
+                <contains string="${callUrl}" substring="lms-stg"/>
                 <then>
                     <var name="env" value="stg" />                    
+                </then>
+            </elseif>
+            <elseif>
+                <contains string="${callUrl}" substring="lms-standalone"/>
+                <then>
+                    <var name="env" value="standalone" />                    
+                </then>
+            </elseif>
+            <elseif>
+                <contains string="${callUrl}" substring="lms-prod"/>
+                <then>
+                    <var name="env" value="preprod" />                    
                 </then>
             </elseif>
             <else>
@@ -87,7 +99,7 @@
             </elseif>
             <elseif>
                 <or>
-                    <contains string="${callUrl}" substring="2sg"/>
+                    <contains string="${callUrl}" substring="2ir"/>
                     <contains string="${callUrl}" substring="au-mir"/>
                 </or>
                 <then>
@@ -96,7 +108,7 @@
             </elseif>
             <elseif>
                 <or>
-                    <contains string="${callUrl}" substring="2sg"/>
+                    <contains string="${callUrl}" substring=""/>
                     <contains string="${callUrl}" substring="gwu-mph"/>
                 </or>
                 <then>
