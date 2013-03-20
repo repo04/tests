@@ -18,7 +18,7 @@ import smoketest.Actions;
  * Social Group Verify Google Doc Verify All Posts on Top/Recent News Verify
  * Activities & resource items appear in activity report
  */
-public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
+public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
 
     static String[][] stdtSclGrpArray = new String[1][1];
     static String[][] stdtUrlPostOnWrkngGrp = new String[1][1];
@@ -33,21 +33,21 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
     @DataProvider(name = "TchrStdtSclGrps")
     public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
         System.out.println("init TchrStdtSclGrps");
-        return DataProviderUtil.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), StdtSclGrp(context));
+        return DataProviderUtility.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), StdtSclGrp(context));
     }
 
     @DataProvider(name = "UsrsWrkngGrpTchrStdtSclGrps")
     public static Iterator<Object[]> UsrsWrkngGrpTchrStdtSclGrps(ITestContext context) throws Exception {
         System.out.println("init UsrsWrkngGrpTchrStdtSclGrps");
-        return DataProviderUtil.cartesianProviderFrom(Pes_UsrCrtn_AsgnRole_WrkngGrp.Users(context),
-                Pes_UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), Tchr_Posts_SclGrp.TchrSclGrp(context),
+        return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.Users(context),
+                Pes_UserCreation_AssignRole_WorkingGroup.WrkngGrp(context), Tchr_Posts_SclGrp.TchrSclGrp(context),
                 StdtSclGrp(context));
     }
     
     @DataProvider(name = "WrkngGrpStdtURLPost")
     public static Iterator<Object[]> WrkngGrpStdtURLPost(ITestContext context) throws Exception {
         System.out.println("init WrkngGrpStdtURLPost");
-        return DataProviderUtil.cartesianProviderFrom(Pes_UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), stdtUrlPostOnWrkngGrp);
+        return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.WrkngGrp(context), stdtUrlPostOnWrkngGrp);
     }
 
     /**
@@ -59,7 +59,7 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][1]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
         }
@@ -111,7 +111,7 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
      * @param gglDocName
      * @throws Exception 
      */
-    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "workingGroup.studentPost"})
     public void testStudentPostOnWorkingGroup(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();

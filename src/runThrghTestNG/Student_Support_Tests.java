@@ -16,7 +16,7 @@ public class Student_Support_Tests extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogin(ITestContext context) throws Exception {
         if(test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][0]);
         }
         else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));

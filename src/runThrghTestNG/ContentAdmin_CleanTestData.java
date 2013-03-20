@@ -13,7 +13,7 @@ import smoketest.Actions;
  *
  * 
  */
-public class CntAdmn_CleanTstData {
+public class ContentAdmin_CleanTestData {
 
     Actions a = new Actions();
 

@@ -18,7 +18,7 @@ import smoketest.Actions;
  * Teacher's SocialGroup,
  *
  */
-public class Stdt_JnSclGrp_Post extends BaseClass {
+public class Student_JoinSocialGroup_Post extends BaseClass {
 
     static String[][] stdtUrlPostOnTchrSclGrp = new String[1][1];
     static String[][] stdtTxtCmntOnTchrCrsPost = new String[1][1];
@@ -34,12 +34,12 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     @DataProvider(name = "TchrSclGrpStdtUrlPost")
     public static Iterator<Object[]> TchrSclGrpStdtUrlPost(ITestContext context) throws Exception {
         System.out.println("init TchrSclGrpStdtUrlPost");
-        return DataProviderUtil.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), stdtUrlPostOnTchrSclGrp);
+        return DataProviderUtility.cartesianProviderFrom(Tchr_Posts_SclGrp.TchrSclGrp(context), stdtUrlPostOnTchrSclGrp);
     }
     
     @DataProvider(name = "CrsStdtCmnt")
     public static Iterator<Object[]> StdtTxtCmntOnTchrCrsPost(ITestContext context) throws Exception {
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][1]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
         }
@@ -106,7 +106,7 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
      * @param pesTxtCrsPostCmntsOff
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "wall.studentVerifyPESCoursePosts"})
     public void testStudentVerifyPESCoursePost(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff, String pesTxtAncmntCrsPost) throws Exception {
         a.navigateToMyCourse();

@@ -20,7 +20,7 @@ import smoketest.Utility;
  *
  *
  */
-public class Stdt_VerifyEmailNotifications extends BaseClass {
+public class Student_VerifyEmailNotifications extends BaseClass {
 
     Actions a = new Actions();
     String vrfy1, vrfy2, vrfy3, vrfy4;
@@ -44,7 +44,7 @@ public class Stdt_VerifyEmailNotifications extends BaseClass {
      * @param stdtSclGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"stdtVrfyCriticalSmokeTestEmails"})
     public void testStudentVerifyCriticalSmokeTestEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
@@ -128,7 +128,7 @@ public class Stdt_VerifyEmailNotifications extends BaseClass {
      * @param stdtSclGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"stdtVrfyFullSmokeTestEmails"})
     public void testStudentVerifyFullSmokeTestEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
             String tchrSclGrpName, String stdtSclGrpName) throws Exception {

@@ -178,17 +178,17 @@
         </groups>
         <classes>
             <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
-            <class name="runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp"/>
+            <class name="runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
             <class name="runThrghTestNG.Tchr_Posts_SclGrp"/>
-            <class name="runThrghTestNG.Stdt_JnSclGrp_Post"/>
+            <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Tchr_LvSsn_GglDoc"/>
             <class name="runThrghTestNG.Tchr_FetchAssignmentPassword"/>
-            <class name="runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc"/>
+            <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>
             <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
-            <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>
+            <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
             <class name="runThrghTestNG.Pes_CleanTestData"/>
-            <class name="runThrghTestNG.CntAdmn_CleanTstData"/>
-            <class name="runThrghTestNG.Pes_ArchvCrs"/>                        
+            <class name="runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="runThrghTestNG.Pes_ArchiveCourse"/>                        
         </classes>
     </test>
 </suite>

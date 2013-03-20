@@ -41,7 +41,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     @DataProvider(name = "GrpCrsTchrUrlCrsPst")
     public static Iterator<Object[]> GrpCrsTchrUrlCrsPst(ITestContext context) throws Exception {
         System.out.println("init GrpCrsTchrUrlCrsPst");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), tchrUrlCrsPost(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), tchrUrlCrsPost(context));
     }
 
     /**
@@ -53,7 +53,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
         }
@@ -102,7 +102,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "Users", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
     groups = {"criticalsmoke", "teacherPosts.studentsWall"})
     public void testTeacherPostURLOnStudentsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
@@ -121,7 +121,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param pesTxtCrsPostCmntsOff
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
     groups = {"regressionSmoke", "wall.teacherVerifyPESCoursePosts"})
     public void testTeacherVerifyPESCoursePosts(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff, String pesTxtAncmntCrsPost) throws Exception {
         a.navigateToMyCourse();

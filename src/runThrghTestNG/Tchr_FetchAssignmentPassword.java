@@ -34,7 +34,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
     @DataProvider(name = "GrpCrsPswdQzNamePassword")
     public static Iterator<Object[]> GrpCrsPswdQzNamePassword(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPswdQzNamePassword");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context),
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context),
                 ContentAdmin_Course_GroupCourseCreation.PswdQzName(context), quizPassword(context));
     }
 

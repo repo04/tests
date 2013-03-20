@@ -20,7 +20,7 @@ import smoketest.Actions;
  * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
  * Teacher/Student roles Create Working Group & add users as members Logs out
  */
-public class Pes_UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
+public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
 
     Actions a = new Actions();
     static String[][] usrsArray = new String[1][2];
@@ -68,19 +68,19 @@ public class Pes_UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @DataProvider(name = "WrkngGrpUsers")
     public static Iterator<Object[]> WrkngGrpUsers(ITestContext context) throws Exception {
         System.out.println("init WrkngGrpUsers");
-        return DataProviderUtil.cartesianProviderFrom(WrkngGrp(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(WrkngGrp(context), Users(context));
     }
 
     @DataProvider(name = "GrpCrsUsers")
     public static Iterator<Object[]> GrpCrsUsers(ITestContext context) throws Exception {
         System.out.println("init GrpCrsUsers");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Users(context));
     }
 
     @DataProvider(name = "GrpCrsWrkngGrpUsers")
     public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
         System.out.println("init GrpCrsUsers");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WrkngGrp(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WrkngGrp(context), Users(context));
     }
 
     @DataProvider(name = "UsersDebug")
@@ -98,37 +98,37 @@ public class Pes_UsrCrtn_AsgnRole_WrkngGrp extends BaseClass {
     @DataProvider(name = "WrkngGrpDebugUsrs")
     public static Iterator<Object[]> WrkngGrpDebugUsrs(ITestContext context) throws Exception {
         System.out.println("init WrkngGrpDebugUsrs");
-        return DataProviderUtil.cartesianProviderFrom(WrkngGrpDebug(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(WrkngGrpDebug(context), Users(context));
     }
 
     @DataProvider(name = "GrpCrsWrkngGrpDebugUsers")
     public static Iterator<Object[]> GrpCrsWrkngGrpDebugUsers(ITestContext context) throws Exception {
         System.out.println("init GrpCrsWrkngGrpDebugUsers");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WrkngGrpDebug(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WrkngGrpDebug(context), Users(context));
     }
 
     @DataProvider(name = "GrpCrsUsersDebug")
     public static Iterator<Object[]> GrpCrsUsersDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsUsersDebug");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), UsersDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), UsersDebug(context));
     }
 
     @DataProvider(name = "GrpCrsAsgnmntStdt")
     public static Iterator<Object[]> GrpCrsAsgnmntStdt(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAsgnmntStdt");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), ContentAdmin_Course_GroupCourseCreation.AssgnmntName(context), StdtName(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), ContentAdmin_Course_GroupCourseCreation.AssgnmntName(context), StdtName(context));
     }
 
     @DataProvider(name = "GrpCrsPESCoursePosts")
     public static Iterator<Object[]> GrpCrsPESCoursePosts(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPESCoursePosts");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
     }
     
     @DataProvider(name = "GrpCrsAnnouncement")
     public static Iterator<Object[]> GrpCrsAnnouncement(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAnnouncement");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTxtAncmntCrsPost);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTxtAncmntCrsPost);
     }
 
     /**

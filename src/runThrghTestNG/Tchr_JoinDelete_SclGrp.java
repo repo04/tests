@@ -26,7 +26,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
         }
@@ -37,7 +37,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherJoinStudents"})
     public void testTeacherJoinsStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
@@ -50,7 +50,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherLeaveStudents"})
     public void testTeacherLeavesStudentSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
@@ -64,7 +64,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      * @param stdtUrlPostOnTchrSclGrp
      * @throws Exception 
      */
-    @Test(dataProvider = "TchrSclGrpStdtUrlPost", dataProviderClass = Stdt_JnSclGrp_Post.class,
+    @Test(dataProvider = "TchrSclGrpStdtUrlPost", dataProviderClass = Student_JoinSocialGroup_Post.class,
           groups = {"regressionSmoke", "socialGroup.teacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall"})
     public void testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall(String tchrSclGrpName, String stdtUrlPostOnTchrSclGrp) throws Exception {
         a.navigateToMySocialGroups();
@@ -93,7 +93,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAsgnmntStdt", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsAsgnmntStdt", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.allowResubmit"})
     public void testTeacherAllowResubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
@@ -123,7 +123,7 @@ public class Tchr_JoinDelete_SclGrp extends BaseClass {
      * @param stdtTxtCmntOnTchrCrsPost
      * @throws Exception 
      */
-    @Test(dataProvider = "CrsStdtCmnt", dataProviderClass = Stdt_JnSclGrp_Post.class,
+    @Test(dataProvider = "CrsStdtCmnt", dataProviderClass = Student_JoinSocialGroup_Post.class,
           groups = {"regressionSmoke", "wall.teacherVerifyStudentsCommentOnPost"})
     public void testTeacherVerifyStudentsComment(String grpCrsName, String stdtTxtCmntOnTchrCrsPost) throws Exception {
         a.navigateToMyCourse();

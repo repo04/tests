@@ -39,7 +39,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
     @DataProvider(name = "WrkngGrpGgleDoc")
     public static Iterator<Object[]> WrkngGrpGgleDoc(ITestContext context) throws Exception {
         System.out.println("init WrkngGrpGgleDoc");
-        return DataProviderUtil.cartesianProviderFrom(Pes_UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), GglDoc(context));
+        return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.WrkngGrp(context), GglDoc(context));
     }
     
     @DataProvider(name = "Files")
@@ -53,7 +53,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
     @DataProvider(name = "GrpCrsFiles")
     public static Iterator<Object[]> GrpCrsFiles(ITestContext context) throws Exception {
         System.out.println("init GrpCrsFiles");
-        return DataProviderUtil.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Files(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Files(context));
     }
 
     /**
@@ -65,7 +65,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogin(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
         }
@@ -90,7 +90,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.teacherCreateGoogleDoc"})
     public void testTeacherCreateGoogleDoc(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
@@ -169,7 +169,7 @@ public class Tchr_LvSsn_GglDoc extends BaseClass {
      * @param stdtUrlPostOnTchrSclGrp
      * @throws Exception 
      */
-    @Test(dataProvider = "TchrSclGrpStdtUrlPost", dataProviderClass = Stdt_JnSclGrp_Post.class,
+    @Test(dataProvider = "TchrSclGrpStdtUrlPost", dataProviderClass = Student_JoinSocialGroup_Post.class,
           groups = {"regressionSmoke", "socialGroup.teacherVerifyStudentPostOnOwnSocialGroupWall"})
     public void testTeacherVerifyStudentPostOnOwnSocialGroupWall(String tchrSclGrpName, String stdtUrlPostOnTchrSclGrp) throws Exception {
         a.navigateToMySocialGroups();

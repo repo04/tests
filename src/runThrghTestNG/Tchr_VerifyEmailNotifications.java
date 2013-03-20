@@ -45,7 +45,7 @@ public class Tchr_VerifyEmailNotifications extends BaseClass {
      * @param stdtSclGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"tchrVrfyCriticalTestEmails"})
     public void testTeacherVerifyCriticalSmokeTestEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
 
@@ -130,7 +130,7 @@ public class Tchr_VerifyEmailNotifications extends BaseClass {
      * @param stdtSclGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"tchrVrfySmokeTestEmails"})
     public void testTeacherVerifyFullSmokeTestEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
             String tchrSclGrpName, String stdtSclGrpName) throws Exception {

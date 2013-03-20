@@ -105,19 +105,19 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GrpCrsActivities")
     public static Iterator<Object[]> GrpCrsActivities(ITestContext context) throws Exception {
         System.out.println("init GrpCrsActivities");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), Activites(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), Activites(context));
     }
 
     @DataProvider(name = "GrpCrsQz")
     public static Iterator<Object[]> GrpCrsQz(ITestContext context) throws Exception {
         System.out.println("init GrpCrsQz");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), QuizName(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), QuizName(context));
     }
 
     @DataProvider(name = "GrpCrsAssgnmnt")
     public static Iterator<Object[]> GrpCrsAssgnmnt(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAssgnmnt");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), AssgnmntName(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), AssgnmntName(context));
     }
 
     @DataProvider(name = "GrpCrsDebug")
@@ -135,7 +135,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GrpCrsActivitiesDebug")
     public static Iterator<Object[]> GrpCrsActivitiesDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsActivitiesDebug");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), ActivitiesDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), ActivitiesDebug(context));
     }
 
     @DataProvider(name = "QzDebug")
@@ -147,13 +147,13 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GrpCrsQzDebug")
     public static Iterator<Object[]> GrpCrsQzDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsQzDebug");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), QzDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), QzDebug(context));
     }
 
     @DataProvider(name = "GrpCrsPswdQzName")
     public static Iterator<Object[]> GrpCrsPswdQzName(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPswdQzName");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), PswdQzName(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), PswdQzName(context));
     }
 
     /**

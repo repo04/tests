@@ -64,7 +64,7 @@ public class TransformCritical implements IAnnotationTransformer {
         if ("testStudentCreateLiveSession".equals(testMethod.getName())) {
             System.out.println("Inside testStudentCreateLiveSession");
             DependentMethods = new String[2];
-            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
+            DependentMethods[0] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentJoinsTeacherSocialGroup";
             DependentMethods[1] = "runThrghTestNG.Tchr_LvSsn_GglDoc.testTeacherCreateLiveSession";
             annotation.setDependsOnMethods(DependentMethods);
         }
@@ -72,7 +72,7 @@ public class TransformCritical implements IAnnotationTransformer {
         if ("testTeacherJoinsStudentSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherJoinsStudentSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc.testStudentCreateSocialGroup";
+            DependentMethods[0] = "runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -93,17 +93,17 @@ public class TransformCritical implements IAnnotationTransformer {
         if ("testStudentDeleteSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentDeleteSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc.testStudentCreateSocialGroup";
+            DependentMethods[0] = "runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherVerifyCriticalSmokeTestEmails".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherVerifyCriticalSmokeTestEmails");
             DependentMethods = new String[4];
-            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
-            DependentMethods[1] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentCommentOnTeacherCoursePost";
+            DependentMethods[0] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentJoinsTeacherSocialGroup";
+            DependentMethods[1] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentCommentOnTeacherCoursePost";
             DependentMethods[2] = "runThrghTestNG.Tchr_JoinDelete_SclGrp.testTeacherJoinsStudentSocialGroup";
-            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStudentDeleteSocialGroup";
+            DependentMethods[3] = "runThrghTestNG.Student_DeleteSocialGroup.testStudentDeleteSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
@@ -111,9 +111,9 @@ public class TransformCritical implements IAnnotationTransformer {
             System.out.println("Inside testStudentVerifyCriticalSmokeTestEmails");
             DependentMethods = new String[4];
             DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherPostURLOnStudentsWall";
-            DependentMethods[1] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentJoinsTeacherSocialGroup";
+            DependentMethods[1] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentJoinsTeacherSocialGroup";
             DependentMethods[2] = "runThrghTestNG.Tchr_JoinDelete_SclGrp.testTeacherJoinsStudentSocialGroup";
-            DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStudentDeleteSocialGroup";
+            DependentMethods[3] = "runThrghTestNG.Student_DeleteSocialGroup.testStudentDeleteSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

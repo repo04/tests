@@ -13,7 +13,7 @@ import smoketest.Actions;
  *
  * 
  */
-public class Pes_ArchvCrs {
+public class Pes_ArchiveCourse {
     
     Actions a = new Actions();
     
