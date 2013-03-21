@@ -116,5 +116,20 @@ public class TransformCritical implements IAnnotationTransformer {
             DependentMethods[3] = "runThrghTestNG.Stdt_DeleteSclGrp.testStudentDeleteSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        //GroupName = PswdQuiz
+        if ("testTeacherFetchQuizPassword".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherFetchQuizPassword");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherGenerateQuizPassword";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentSubmitPasswordQuiz");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherFetchQuizPassword";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

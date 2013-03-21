@@ -12,6 +12,7 @@
         <parameter name="stdtUsrName" value="student1"/-->
         <parameter name="grpCrsName" value="AutoGroupCourse"/>
         <parameter name="quizActvtyName" value="AutoQuiz"/>
+        <parameter name="pswdQuizName" value="AutoPswdQuiz"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -24,6 +25,7 @@
             <class name="runThrghTestNG.Tchr_Posts_SclGrp"/>
             <class name="runThrghTestNG.Stdt_JnSclGrp_Post"/>
             <class name="runThrghTestNG.Tchr_LvSsn_GglDoc"/>
+            <class name="runThrghTestNG.Tchr_FetchAssignmentPassword"/>
             <class name="runThrghTestNG.Stdt_LvSsn_SclGrp_GglDoc"/>            
             <class name="runThrghTestNG.Tchr_JoinDelete_SclGrp"/>
             <class name="runThrghTestNG.Stdt_DeleteSclGrp"/>

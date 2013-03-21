@@ -271,7 +271,7 @@ public class Activity extends BaseClass {
         WebElement yesRadioButton;
 
         if (!password.isEmpty()) {
-            ip.isTextPresentByXPATH(driver, "//div[2]/p", "To attempt this quiz you need to know the quiz password");
+            ip.isTextPresentByXPATH(driver, "//div[5]/div/div/p", "To attempt this quiz you need to know the quiz password");
             driver.findElement(By.xpath("//div/input")).sendKeys(password);
             driver.findElement(By.xpath("//div/input[5]")).click();
             ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtSbmtQzQstnXPATH"), "1 Kg equals 1000 grams");

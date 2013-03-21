@@ -91,15 +91,13 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
 
     @DataProvider(name = "PswdQzName")
     public static Object[][] PswdQzName(ITestContext context) throws Exception {
-        /*if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-         System.out.println("Inside PswdQzName: " + test);
-         return (pswdQzNameArray);
-         } else {
-         System.out.println("Inside PswdQzName: " + test);
-         return new Object[][]{{context.getCurrentXmlTest().getParameter("pswdQuizName")}};
-         }*/
-        System.out.println("Inside PswdQzName: " + test);
-        return (pswdQzNameArray);
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
+            System.out.println("Inside PswdQzName: " + test);
+            return (pswdQzNameArray);
+        } else {
+            System.out.println("Inside PswdQzName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("pswdQuizName")}};
+        }
     }
 
     @DataProvider(name = "GrpCrsActivities")
@@ -155,7 +153,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         System.out.println("init GrpCrsPswdQzName");
         return DataProviderUtil.cartesianProviderFrom(Course(context), PswdQzName(context));
     }
-    
+
     @DataProvider(name = "PswdQzNameActivities")
     public static Iterator<Object[]> PswdQzNameActivities(ITestContext context) throws Exception {
         System.out.println("init PswdQzNameActivities");
@@ -293,15 +291,15 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     /*@Test(groups = {"regressionSmoke", "help.contentAdminVerify"})
-    public void testContentAdminVerifyHelpWindow() throws Exception {
-        a.navigateToMyHome();
-        a.verifyHelpWindow();
-    }*/
+     public void testContentAdminVerifyHelpWindow() throws Exception {
+     a.navigateToMyHome();
+     a.verifyHelpWindow();
+     }*/
     
     /**
      * Verify Settings page specific to user role
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "settings.contentAdminVerify"})
     public void testContentAdminVerifySettings() throws Exception {

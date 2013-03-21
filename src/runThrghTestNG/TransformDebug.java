@@ -404,20 +404,6 @@ public class TransformDebug implements IAnnotationTransformer {
         }
 
         //GroupName = PswdQuiz
-        if ("testContentAdminAddQuesToQuizPasswordActivity".equals(testMethod.getName())) {
-            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "testContentAdminCreateQuizPasswordActivity";
-            annotation.setDependsOnMethods(DependentMethods);
-        }
-
-        if ("testTeacherGenerateQuizPassword".equals(testMethod.getName())) {
-            System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminAddQuesToQuizPasswordActivity";
-            annotation.setDependsOnMethods(DependentMethods);
-        }
-
         if ("testTeacherFetchQuizPassword".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherFetchQuizPassword");
             DependentMethods = new String[1];

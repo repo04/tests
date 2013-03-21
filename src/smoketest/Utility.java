@@ -225,9 +225,10 @@ public class Utility {
         if (alert.getText().contains(text)) {
             alert.accept();
         } else {
+            String error = "Incorrect Alert present with Text as '" + alert.getText() + "'. "
+                    + "Expected text: '" + text + "'";
             alert.dismiss();
-            Utility.illegalStateException("Incorrect Alert present with Text as '" + alert.getText() + "'. "
-                    + "Expected text: '" + text + "'");
+            Utility.illegalStateException(error);
         }
     }
 
@@ -319,7 +320,8 @@ public class Utility {
      */
     public static void verifyCurrentUrl(WebDriver driver, String textInUrl) {
         if (!driver.getCurrentUrl().contains(textInUrl)) {
-            Utility.illegalStateException("Current URL is not as expected.  Current URL: " + driver.getCurrentUrl());
+            Utility.illegalStateException("Actual URL: '" + textInUrl + "' is not present "
+                    + "in Expected URL: " + driver.getCurrentUrl());
         }
     }
 

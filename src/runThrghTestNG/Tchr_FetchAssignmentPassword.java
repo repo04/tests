@@ -30,7 +30,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
         System.out.println("init quizPassword");
         return (quizPasswordArray);
     }
-
+                          
     @DataProvider(name = "GrpCrsPswdQzNamePassword")
     public static Iterator<Object[]> GrpCrsPswdQzNamePassword(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPswdQzNamePassword");
@@ -55,7 +55,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "PswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
+          groups = {"criticalsmoke", "regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
     public void testTeacherFetchQuizPassword(String pswdQuizName) throws Exception {
         int x = 1;
         Boolean mailresult = null;
@@ -80,7 +80,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
         }
 
         ip.isTextPresentByXPATH(driver, "//h1/span", "Passwords for " + pswdQuizName, 15);
-        String mailContent = driver.findElement(By.xpath("//div[2]/div[6]/div")).getText();
+        String mailContent = driver.findElement(By.xpath("//div/div/div/div/div[2]/div[6]/div")).getText();
 
         System.out.println("Mail: " + mailContent);
         int z = mailContent.lastIndexOf(":");

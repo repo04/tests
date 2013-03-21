@@ -16,6 +16,7 @@
         <parameter name="frmActvyName" value="AutoForum"/>
         <parameter name="quizActvtyName" value="AutoQuiz"/>
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pswdQuizName" value="AutoPswdQuiz"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>        
         
@@ -159,8 +160,6 @@
             </define>
             <define name="PswdQz">
                 <include name="prerequisite"/>
-                <include name="pswdQuiz.activityCreation"/>
-                <include name="pswdQuiz.addQuestion"/>
                 <include name="pswdQuiz.generatePassword"/>
                 <include name="pswdQuiz.readMail"/>
                 <include name="pswdQuiz.submitQuiz"/>                

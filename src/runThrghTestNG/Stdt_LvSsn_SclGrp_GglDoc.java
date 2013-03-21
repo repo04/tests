@@ -157,7 +157,7 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsPswdQzNamePassword", dataProviderClass = Tchr_FetchAssignmentPassword.class,
-          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.submitQuiz"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "pswdQuiz.submitQuiz"})
     public void testStudentSubmitPasswordQuiz(String grpCrsName, String pswdQzName, String password) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
