@@ -165,10 +165,10 @@
                 <include name="pswdQuiz.readMail"/>
                 <include name="pswdQuiz.submitQuiz"/>                
             </define>
-            <define name="Student">
+            <define name="StudentSupport">
                 <include name="prerequisite"/>
                 <include name="support.uiVerify"/>
-            <define/>
+            </define>
                     
             
             <!--run>
@@ -188,7 +188,8 @@
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
             <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.ContentAdmin_CleanTestData"/>
-            <class name="runThrghTestNG.Pes_ArchiveCourse"/>                        
+            <class name="runThrghTestNG.Pes_ArchiveCourse"/>
+            <class name="runThrghTestNG.Student_Support_Tests"/>                        
         </classes>
     </test>
 </suite>

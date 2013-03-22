@@ -28,7 +28,7 @@ public class Student_Support_Tests extends BaseClass {
         a.navigateToStudentSupport();
         a.testStudentSupport();
     }
-
+    
     @AfterClass(groups = {"prerequisite"})
     public void testStudentLogOut() throws Exception {
         a.logOut();

@@ -2,6 +2,7 @@
 package smoketest;
 
 //import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.By;
 import runThrghTestNG.BaseClass;
 import smoketest.Actions;
 
@@ -31,5 +32,10 @@ public class StudentSupport extends BaseClass {
                                         xpv.getTokenValue(programName + "SaturdayTimes"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sundayXPATH"), 
                                         xpv.getTokenValue(programName + "SundayTimes"));
+        
+        ip.isElementPresentByXPATH(driver, "//*[@id='region-main']/div/div[2]/div[1]/div[2]/div[2]/div[2]/div/div/a");
+       
+        String temp = driver.findElement(By.xpath("//*[@id='region-main']/div/div[2]/div[1]/div[2]/div[2]/div[2]/div/div/a")).getAttribute("href");
+        System.out.println(temp);
     }
 }
