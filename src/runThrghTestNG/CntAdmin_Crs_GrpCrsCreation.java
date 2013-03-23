@@ -27,6 +27,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
     static String[][] assgnmntName = new String[1][1];
     static String[][] actvtsArray = new String[1][4];
     static String[][] pswdQzNameArray = new String[1][1];
+    static String[][] glossaryActvtyArray = new String[1][1];
 
     /**
      * ITestContext contains all the information for a given test run. A Data
@@ -100,6 +101,17 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         }
     }
 
+    @DataProvider(name = "GlossaryName")
+    public static Object[][] GlossaryName(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            System.out.println("Inside GlossaryName: " + test);
+            return (glossaryActvtyArray);
+        } else {
+            System.out.println("Inside GlossaryName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("glossaryActvtyName")}};
+        }        
+    }
+
     @DataProvider(name = "GrpCrsActivities")
     public static Iterator<Object[]> GrpCrsActivities(ITestContext context) throws Exception {
         System.out.println("init GrpCrsActivities");
@@ -158,6 +170,12 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
     public static Iterator<Object[]> PswdQzNameActivities(ITestContext context) throws Exception {
         System.out.println("init PswdQzNameActivities");
         return DataProviderUtil.cartesianProviderFrom(PswdQzName(context), Activites(context));
+    }
+
+    @DataProvider(name = "CourseGlossaryName")
+    public static Iterator<Object[]> CourseGlossaryName(ITestContext context) throws Exception {
+        System.out.println("init CourseGlossaryName");
+        return DataProviderUtil.cartesianProviderFrom(Course(context), GlossaryName(context));
     }
 
     /**
@@ -219,6 +237,20 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
         a.selectGroupCourse(grpCrsName);
         actvtsArray[0][3] = a.createPageResource();
         Reporter.log("pageActivityName: " + actvtsArray[0][3], true);
+    }
+
+    /**
+     * Create Glossary activity
+     *
+     * @param grpCrsName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "activities.createGlossary"})
+    public void testContentAdminGlossaryActivityCreation(String grpCrsName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        glossaryActvtyArray[0][0] = a.createGlossaryActivity();
+        Reporter.log("glossaryActvtyName: " + glossaryActvtyArray[0][0], true);
     }
 
     /**

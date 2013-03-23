@@ -8,12 +8,14 @@ import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
@@ -332,5 +334,32 @@ public class Utility {
      */
     public static String getFullName(String name) {
         return name + " " + name;
+    }
+
+    /**
+     * Type in Content Editable iframe
+     * 
+     * @param driver
+     * @param i -> Select iframe index
+     * @param conceptEntry 
+     */
+    public static void typeInContentEditableIframe(WebDriver driver, int i, String conceptEntry) {
+        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+        System.out.println("iframes count:" + iframes.size());
+        int x = 1;
+        loop:
+        for (WebElement frame : iframes) {
+            if (x == i) {
+                System.out.println("Iframe ID: " + frame.getAttribute("id"));
+                driver.switchTo().frame(frame.getAttribute("id"));
+                break loop;
+            }
+            x++;
+        }
+
+        //Switch focus
+        WebElement editableTxtArea = driver.switchTo().activeElement();
+        editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), conceptEntry);
+        driver.switchTo().defaultContent();
     }
 }

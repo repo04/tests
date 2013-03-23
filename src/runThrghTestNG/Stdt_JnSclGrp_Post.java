@@ -24,6 +24,8 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     static String[][] stdtTxtCmntOnTchrCrsPost = new String[1][1];
     static String[][] noteCourse = new String[1][1];
     static String[][] noteWall = new String[1][1];
+    static String[][] stdtGlossaryEntryArray = new String[1][1];
+    
     Actions a = new Actions();
 
     @DataProvider(name = "Note")
@@ -40,6 +42,12 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     @DataProvider(name = "CrsStdtCmnt")
     public static Iterator<Object[]> StdtTxtCmntOnTchrCrsPost(ITestContext context) throws Exception {
         return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
+    }
+    
+    @DataProvider(name = "StdtGlossaryEntryName")
+    public static Object[][] StdtGlossaryEntryName(ITestContext context) throws Exception {
+        System.out.println("init StdtGlossaryEntryName");
+        return (stdtGlossaryEntryArray);
     }
 
     /**
@@ -283,6 +291,24 @@ public class Stdt_JnSclGrp_Post extends BaseClass {
     public void testStudentVerifySettings() throws Exception {
         a.navigateToSettings();
         a.verifySettings();
+    }
+    
+    /**
+     * Student create Glossary entry
+     * 
+     * @param grpCrsName
+     * @param glossaryName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "activites.studentCreateGlossaryEntry"})
+    public void testStudentCreateGlossaryEntry(String grpCrsName, String glossaryName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.navigateToContentPage(glossaryName);
+        stdtGlossaryEntryArray[0][0] = a.createGlossaryEntry(glossaryName);
+        Reporter.log("stdtGlossaryEntryName: " + stdtGlossaryEntryArray[0][0], true);
     }
 
     /**

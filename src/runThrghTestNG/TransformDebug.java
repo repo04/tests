@@ -417,5 +417,15 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Tchr_FetchAssignmentPassword.testTeacherFetchQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        //GroupName = Glossary
+        if ("testStudentEditGlossary".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentEditGlossary");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateGlossaryEntry";
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateGlossaryCategory";
+            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentCreateGlossaryEntry";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

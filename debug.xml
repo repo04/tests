@@ -18,6 +18,7 @@
         <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pswdQuizName" value="AutoPswdQuiz"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
+        <parameter name="glossaryActvtyName" value="AutoGlossary"/>
         <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>        
         
         <groups>
@@ -170,6 +171,14 @@
                 <include name="settings.pesAdminVerify"/>
                 <include name="settings.teacherVerify"/>
                 <include name="settings.studentVerify"/>                                
+            </define>
+            <define name="Glossary">
+                <include name="prerequisite"/>
+                <!--include name="activities.createGlossary"/-->
+                <include name="activites.teacherCreateGlossaryEntry"/>
+                <include name="activites.teacherCreateGlossaryCategory"/>
+                <include name="activites.studentCreateGlossaryEntry"/>
+                <include name="activites.studentEditGlossary"/>           
             </define>
             
             <!--Not ready for debug module-->

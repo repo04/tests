@@ -49,6 +49,14 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
         System.out.println("init WrkngGrpStdtURLPost");
         return DataProviderUtil.cartesianProviderFrom(Pes_UsrCrtn_AsgnRole_WrkngGrp.WrkngGrp(context), stdtUrlPostOnWrkngGrp);
     }
+    
+    @DataProvider(name = "AllGlossaryData")
+    public static Iterator<Object[]> AllGlossaryData(ITestContext context) throws Exception {
+        System.out.println("init AllGlossaryData");
+        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), CntAdmin_Crs_GrpCrsCreation.GlossaryName(context),
+                Stdt_JnSclGrp_Post.StdtGlossaryEntryName(context), Tchr_Posts_SclGrp.GlossaryCategoryName(context),
+                Tchr_Posts_SclGrp.TchrGlossaryEntryName(context));
+    }
 
     /**
      * The annotated method will be run before the first test method in the
@@ -211,7 +219,27 @@ public class Stdt_LvSsn_SclGrp_GglDoc extends BaseClass {
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(tchrSclGrpName);
     }
-
+    
+    /**
+     * Student edit Glossary Activity
+     * 
+     * @param grpCrsName
+     * @param glossaryName
+     * @param stdtGlossaryEntryName
+     * @param glossaryCategoryName
+     * @param tchrGlossaryEntryName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "AllGlossaryData", groups = {"regressionSmoke", "activites.studentEditGlossary"})
+    public void testStudentEditGlossary(String grpCrsName, String glossaryName, 
+            String stdtGlossaryEntryName, String glossaryCategoryName, String tchrGlossaryEntryName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.navigateToContentPage(glossaryName);
+        a.editGlossaryEntry(glossaryName, stdtGlossaryEntryName, glossaryCategoryName, tchrGlossaryEntryName);        
+    }
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

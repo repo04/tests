@@ -449,5 +449,43 @@ public class TransformRegression implements IAnnotationTransformer {
             DependentMethods[0] = "testContentAdminBackupCourse";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        //GroupName = Glossary
+        if ("testContentAdminGlossaryActivityCreation".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminGlossaryActivityCreation");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherCreateGlossaryEntry".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherCreateGlossaryEntry");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminGlossaryActivityCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherCreateGlossaryCategory".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminRestoreCourseAsNewArchiveCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminGlossaryActivityCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentCreateGlossaryEntry".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentCreateGlossaryEntry");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.CntAdmin_Crs_GrpCrsCreation.testContentAdminGlossaryActivityCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentEditGlossary".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentEditGlossary");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateGlossaryEntry";
+            DependentMethods[0] = "runThrghTestNG.Tchr_Posts_SclGrp.testTeacherCreateGlossaryCategory";
+            DependentMethods[0] = "runThrghTestNG.Stdt_JnSclGrp_Post.testStudentCreateGlossaryEntry";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

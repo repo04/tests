@@ -367,6 +367,17 @@ public class Actions extends BaseClass {
         actvty.crtForumActvty();
         return actvty.getFrmActvyName();
     }
+    
+    /**
+     * Create Glossary activity
+     * 
+     * @return Glossary Activity Name
+     */
+    public String createGlossaryActivity() {
+        Activity actvty = new Activity();
+        actvty.crtGlossaryActvty();
+        return actvty.getGlossaryActvyName();
+    }
 
     /**
      * Create QuizActivity
@@ -970,5 +981,52 @@ public class Actions extends BaseClass {
         ip.isElementClickableByXpath(driver, "//div[6]/form/input", 60);
         Utility.clickByJavaScript(driver, "//div[6]/form/input");
         ip.isTextPresentByXPATH(driver, "//body/div[3]/div[2]/div", "Choose how would you like to upload a new profile image");
+    }
+
+    /**
+     * Navigate to Content Wall Page
+     * 
+     * @param activityName 
+     */
+    public void navigateToContentPage(String activityName) {
+        ip.isElementPresentContainsTextByXPATH(driver, activityName);
+        driver.findElement(By.xpath("//*[contains(text(),'" + activityName + "')]")).click();
+        ip.isElementPresentByLINK(driver, "Browse by alphabet");
+    }
+
+    /**
+     * Student create Glossary entry
+     * 
+     * @param glossaryName
+     * @return glossaryEntryName
+     */
+    public String createGlossaryEntry(String glossaryName) {
+        Activity actvty = new Activity();
+        actvty.createGlossaryEntry(glossaryName);
+        return actvty.getGlossaryEntryName();
+    }
+
+    /**
+     * 
+     * @param glossaryName
+     * @return glossaryCategoryName
+     */
+    public String createGlossaryCategory(String glossaryName) {
+        Activity actvty = new Activity();
+        actvty.createGlossaryCategory(glossaryName);
+        return actvty.getGlossaryCategoryName();
+    }
+
+    /**
+     * Edit Glossary Activity
+     * 
+     * @param glossaryName
+     * @param stdtGlossaryEntryName
+     * @param glossatyCategoryName
+     * @param tchrGlossaryEntryName 
+     */
+    public void editGlossaryEntry(String glossaryName, String stdtGlossaryEntryName, String glossatyCategoryName, String tchrGlossaryEntryName) {
+        Activity actvty = new Activity();
+        actvty.editGlossaryEntry(glossaryName, stdtGlossaryEntryName, glossatyCategoryName, tchrGlossaryEntryName);        
     }
 }

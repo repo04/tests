@@ -26,6 +26,9 @@ public class Activity extends BaseClass {
     private String pageName;
     private String pswdQuizName;
     private String questionTitle, question, ans;
+    private String glossaryName;
+    private String glossaryEntryName;
+    private String glossaryCategoryName;
 
     /**
      * Create & Verify Forum Activity
@@ -127,6 +130,27 @@ public class Activity extends BaseClass {
     }
 
     /**
+     * Create Glossary activity
+     */
+    public void crtGlossaryActvty() {
+        String glossaryIntro;
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.glossaryName = "RgsnTstGlossary " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            glossaryIntro = "RgsnTstGlossaryIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.glossaryName = "DbgTstGlossary " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            glossaryIntro = "DbgTstGlossaryIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Glossary");
+        createActivity(glossaryName, glossaryIntro);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), glossaryIntro);
+    }
+
+    /**
      * Create & Verify Page Resource
      */
     public void createPageResource() {
@@ -172,6 +196,127 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
         driver.findElement(By.linkText("Syllabus")).click();
         ip.isTextPresentByCSS(driver, "li.listentry > a", "Syllabus");
+    }
+
+    /**
+     * Create Glossary entry
+     * 
+     * @param glossaryName
+     */
+    public void createGlossaryEntry(String glossaryName) {
+        ip.isElementClickableByXpath(driver, "//div/input[2]", 60);
+        driver.findElement(By.xpath("//div/input[2]")).click();
+        ip.isTextPresentByXPATH(driver, "//h2", glossaryName);
+        String conceptEntry;
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.glossaryEntryName = "RgsnTstGlossaryConceptEntry " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            conceptEntry = "RgsnTstGlossaryConceptEntryDef " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.glossaryEntryName = "DbgTstGlossaryConceptEntry " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            conceptEntry = "DbgTstGlossaryConceptEntryDef " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        driver.findElement(By.xpath("//input[@id='id_concept']")).sendKeys(this.glossaryEntryName);
+        ip.isElementClickableByXpath(driver, "//*[@id='id_definition_editor_toolbargroup']/span", 60);
+
+        Utility.typeInContentEditableIframe(driver, 1, conceptEntry);
+        driver.findElement(By.xpath("//fieldset/input")).click();
+        ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        driver.findElement(By.linkText("Browse by category")).click();
+        ip.isTextPresentByXPATH(driver, "//td[2]/b", "All categories");
+        ip.isTextPresentByXPATH(driver, "//div[4]/div[3]/div", "No entries found in this section");
+        new Select(driver.findElement(By.xpath("//select"))).selectByIndex(1);
+        ip.isTextPresentByXPATH(driver, "//td[2]/b", "Entries without category");
+        if (LoginPage.getUser().contains("teacher") || LoginPage.getUser().contains("tchrUsrName")) {
+            ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        } else {
+            ip.isTextPresentByXPATH(driver, "//table[3]/tbody/tr/td/div/h3/span", this.glossaryEntryName);
+        }
+        driver.findElement(By.linkText("Browse by date")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("By creation date")));
+        driver.findElement(By.cssSelector("a[title=\"By creation date ascending\"]")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("By creation date")));
+        driver.findElement(By.cssSelector("a[title=\"By creation date change to descending\"]")).click();
+        ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        driver.findElement(By.linkText("Browse by Author")).click();
+        ip.isTextPresentByXPATH(driver, "//h2", Utility.getFullName(LoginPage.getUser()));
+        ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        driver.findElement(By.linkText("Browse by alphabet")).click();
+        if (LoginPage.getUser().contains("teacher") || LoginPage.getUser().contains("tchrUsrName")) {
+            ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        } else {
+            ip.isTextPresentByXPATH(driver, "//table[2]/tbody/tr/td/div/h3/span", this.glossaryEntryName);
+        }
+    }
+
+    /**
+     * Create Glossary category
+     * 
+     * @param glossaryName 
+     */
+    public void createGlossaryCategory(String glossaryName) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Browse by category")));
+        driver.findElement(By.linkText("Browse by category")).click();
+        ip.isTextPresentByXPATH(driver, "//div[4]/div[3]/div", "No entries found in this section");
+        driver.findElement(By.xpath("//td/div/form/div/input")).click();
+        ip.isElementClickableByXpath(driver, "//div/input", 60);
+        driver.findElement(By.xpath("//div/input")).click();
+        ip.isElementClickableByXpath(driver, "//td[2]/input", 60);
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            this.glossaryCategoryName = "RgsnTstGlossaryCategoryName " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.glossaryCategoryName = "DbgTstGlossaryCategoryName " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        }
+        driver.findElement(By.xpath("//td[2]/input")).sendKeys(this.glossaryCategoryName);
+        new Select(driver.findElement(By.xpath("//select"))).selectByValue("1");
+        driver.findElement(By.xpath("//div/input[6]")).click();
+        ip.isTextPresentByXPATH(driver, "//td/span", this.glossaryCategoryName);
+        ip.isTextPresentByXPATH(driver, "//td/span[2]", "(0 Entries)");
+        driver.findElement(By.xpath("//form/div/input")).click();
+        ip.isElementClickableByXpath(driver, "//select", 60);
+        List<WebElement> allOptions = driver.findElement(By.xpath("//select")).findElements(By.tagName("option"));
+        int i = 0;
+        for (WebElement option : allOptions) {
+            if (this.glossaryCategoryName.equals(option.getText())) {
+                break;
+            }
+            i++;
+        }
+        new Select(driver.findElement(By.xpath("//select"))).selectByIndex(i);
+        ip.isTextPresentByXPATH(driver, "//td[2]/b", this.glossaryCategoryName);
+    }   
+    
+    /**
+     * Edit Glossary entry
+     * 
+     * @param glossaryName
+     * @param stdtGlossaryEntryName
+     * @param glossaryCategoryName
+     * @param tchrGlossaryEntryName 
+     */
+    public void editGlossaryEntry(String glossaryName, String stdtGlossaryEntryName, String glossaryCategoryName, String tchrGlossaryEntryName) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[title=\"Edit\"] > img.iconsmall")));
+        driver.findElement(By.cssSelector("a[title=\"Edit\"] > img.iconsmall")).click();
+        ip.isTextPresentByXPATH(driver, "//h2", glossaryName);
+        new Select(driver.findElement(By.xpath("//div[3]/div[2]/select"))).selectByVisibleText(glossaryCategoryName);
+        driver.findElement(By.xpath("//fieldset/input")).click();
+        ip.isTextPresentByXPATH(driver, "//h3/span", stdtGlossaryEntryName);
+        driver.findElement(By.linkText("Browse by category")).click();
+        ip.isTextPresentByXPATH(driver, "//b", "All categories");
+        ip.isTextPresentByXPATH(driver, "//h2", glossaryCategoryName.toUpperCase());
+        ip.isTextPresentByXPATH(driver, "//h3/span", stdtGlossaryEntryName);
+        new Select(driver.findElement(By.xpath("//select"))).selectByIndex(1);
+        ip.isTextPresentByXPATH(driver, "//td[2]/b", "Entries without category");
+        ip.isTextPresentByXPATH(driver, "//h3/span", tchrGlossaryEntryName);
+        List<WebElement> allOptions = driver.findElement(By.xpath("//select")).findElements(By.tagName("option"));
+        int i = 0;
+        for (WebElement option : allOptions) {
+            if (glossaryCategoryName.equals(option.getText())) {
+                break;
+            }
+            i++;
+        }
+        new Select(driver.findElement(By.xpath("//select"))).selectByIndex(i);
+        ip.isTextPresentByXPATH(driver, "//h3/span", stdtGlossaryEntryName);
     }
 
     /**
@@ -620,5 +765,26 @@ public class Activity extends BaseClass {
      */
     public String getPswdQuizActivity() {
         return this.pswdQuizName;
+    }
+
+    /**
+     * @return Glossary Activity Name
+     */
+    public String getGlossaryActvyName() {
+        return this.glossaryName;
+    }
+
+    /**
+     * @return
+     */
+    public String getGlossaryEntryName() {
+        return this.glossaryEntryName;
+    }
+
+    /**
+     * @return 
+     */
+    public String getGlossaryCategoryName() {
+        return this.glossaryCategoryName;
     }
 }

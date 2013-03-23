@@ -24,6 +24,9 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     String tchrUrlPostOnStdtWall;
     static String[][] tchrUrlCrsPostArray = new String[1][1];
     static String[][] tchrSclGrpArray = new String[1][1];
+    static String[][] tchrGlossaryEntryArray = new String[1][1];
+    static String[][] tchrGlossaryCategoryArray = new String[1][1];
+    
     Actions a = new Actions();
 
     @DataProvider(name = "tchrUrlCrsPost")
@@ -42,6 +45,18 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     public static Iterator<Object[]> GrpCrsTchrUrlCrsPst(ITestContext context) throws Exception {
         System.out.println("init GrpCrsTchrUrlCrsPst");
         return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), tchrUrlCrsPost(context));
+    }
+    
+    @DataProvider(name = "TchrGlossaryEntryName")
+    public static Object[][] TchrGlossaryEntryName(ITestContext context) throws Exception {
+        System.out.println("init TchrGlossaryEntryName");
+        return (tchrGlossaryEntryArray);
+    }
+    
+    @DataProvider(name = "GlossaryCategoryName")
+    public static Object[][] GlossaryCategoryName(ITestContext context) throws Exception {
+        System.out.println("init GlossaryCategoryName");
+        return (tchrGlossaryCategoryArray);
     }
 
     /**
@@ -216,6 +231,40 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     public void testTeacherVerifySettings() throws Exception {
         a.navigateToSettings();
         a.verifySettings();
+    }
+    
+    /**
+     * Teacher create Glossary entry
+     * 
+     * @param grpCrsName
+     * @param glossaryName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "activites.teacherCreateGlossaryEntry"})
+    public void testTeacherCreateGlossaryEntry(String grpCrsName, String glossaryName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.navigateToContentPage(glossaryName);
+        tchrGlossaryEntryArray[0][0] = a.createGlossaryEntry(glossaryName);
+        Reporter.log("tchrGlossaryEntryName: " + tchrGlossaryEntryArray[0][0], true);
+    }
+    
+    /**
+     * Teacher create Glossary Category
+     * 
+     * @throws Exception 
+     */
+    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+          groups = {"regressionSmoke", "activites.teacherCreateGlossaryCategory"})
+    public void testTeacherCreateGlossaryCategory(String grpCrsName, String glossaryName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(grpCrsName);
+        a.navigateToActivityReport();
+        a.navigateToContentPage(glossaryName);
+        tchrGlossaryCategoryArray[0][0] = a.createGlossaryCategory(glossaryName);
+        Reporter.log("tchrGlossaryCategoryName: " + tchrGlossaryCategoryArray[0][0], true);
     }
     
     /**
