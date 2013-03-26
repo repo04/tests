@@ -19,7 +19,7 @@
         <parameter name="pswdQuizName" value="AutoPswdQuiz"/>
         <parameter name="pageActvtyName" value="AutoPage"/>
         <parameter name="glossaryActvtyName" value="AutoGlossary"/>
-        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>        
+        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
         
         <groups>
             <define name="Course_GroupCourse">
@@ -180,13 +180,12 @@
                 <include name="activites.studentCreateGlossaryEntry"/>
                 <include name="activites.studentEditGlossary"/>           
             </define>
-            
-            <!--Not ready for debug module-->
-            <!--define name="Course">
+            <define name="CourseBackupRestore">
                 <include name="prerequisite"/>
                 <include name="course.backup"/>
                 <include name="course.restore"/>
-            </define-->
+            </define>
+            <!--Not ready for debug module-->
             <!--define name="Contact">
                 <include name="prerequisite"/>
                 <include name="contact.teacherAddStudentAsContactfromCourse"/>                                

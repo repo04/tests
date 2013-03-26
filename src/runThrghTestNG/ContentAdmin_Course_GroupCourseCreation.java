@@ -169,7 +169,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "PswdQzNameActivities")
     public static Iterator<Object[]> PswdQzNameActivities(ITestContext context) throws Exception {
         System.out.println("init PswdQzNameActivities");
-        return DataProviderUtility.cartesianProviderFrom(PswdQzName(context), Activites(context));
+        return DataProviderUtility.cartesianProviderFrom(PswdQzName(context), Activites(context), GlossaryName(context));
     }
 
     @DataProvider(name = "CourseGlossaryName")

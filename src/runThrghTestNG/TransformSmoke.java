@@ -112,7 +112,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminCourseGroupCourseCreation";
-            DependentMethods[1] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
+            DependentMethods[1] = "runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
         
@@ -135,7 +135,7 @@ public class TransformSmoke implements IAnnotationTransformer {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminAddQuizQuestion";
-            DependentMethods[1] = "runThrghTestNG.Pes_UsrCrtn_AsgnRole_WrkngGrp.testPESAdminAssignRole";
+            DependentMethods[1] = "runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 

@@ -441,5 +441,13 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentCreateGlossaryEntry";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        //BackUp&Restore Course
+        if ("testContentAdminRestoreCourseAsNewArchiveCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminRestoreCourseAsNewArchiveCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminBackupCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

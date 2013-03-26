@@ -211,7 +211,7 @@ public class Course extends BaseClass {
         driver.findElement(By.linkText("Restore")).click();
         int j = 1;
         for (String activity : activities) {
-            if (j > 5) {
+            if (j > 6) {
                 ip.isTextPresentByXPATH(driver, "//div[3]/table/tbody/tr/td", activity);
             }
             j++;
@@ -241,6 +241,7 @@ public class Course extends BaseClass {
         driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys("Restored " + restoredCourseName);
         driver.findElement(By.id("id_setting_course_course_shortname")).sendKeys("Restored " + shortCourseName);
 
+        //Verify Section checkboxes
         int a = 4;
         do {
             if (!driver.findElement(By.xpath("//div[2]/div[" + a + "]/div/div/div[2]/span/input")).isSelected()) {
@@ -249,12 +250,13 @@ public class Course extends BaseClass {
             a++;
         } while (a < 15);
 
+        //Verify Activities checkboxes
         int b = 3;
         int c;
         if (!"gu-msn".equals(program)) {
-            c = 7;
-        } else {
             c = 8;
+        } else {
+            c = 9;
         }
 
         do {
@@ -279,7 +281,7 @@ public class Course extends BaseClass {
 
         int d = 1;
         for (String actvity : activities) {
-            if (d < 6) {
+            if (d < 7) {
                 if (!"gu-msn".equals(program)) {
                     if (d > 1) {
                         ip.isElementPresentContainsTextByXPATH(driver, actvity);
@@ -319,7 +321,7 @@ public class Course extends BaseClass {
             int i) {
         int x = 1;
         for (String activity : activities) {
-            if (x < 6) {
+            if (x < 7) {
                 if (!"gu-msn".equals(program)) {
                     if (x > 1) {
                         ip.isTextPresentByXPATH(driver, activityxpath1 + i + activityxpath2, activity, 60);

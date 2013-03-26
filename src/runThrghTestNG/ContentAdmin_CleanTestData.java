@@ -26,7 +26,8 @@ public class ContentAdmin_CleanTestData {
     public static Iterator<Object[]> PswdQzNameActvitiesBackupFile(ITestContext context) throws Exception {
         System.out.println("init PswdQzNameActvitiesBackupFile");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.PswdQzName(context),
-                ContentAdmin_Course_GroupCourseCreation.Activites(context), backupFileNameArray);
+                ContentAdmin_Course_GroupCourseCreation.Activites(context), ContentAdmin_Course_GroupCourseCreation.GlossaryName(context),
+                backupFileNameArray);
     }
 
     /**
@@ -86,12 +87,12 @@ public class ContentAdmin_CleanTestData {
     @Test(dataProvider = "PswdQzNameActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "course.backup"})
     public void testContentAdminBackupCourse(String pswdQzName, String frmActvyName, String quizActvtyName,
-            String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+            String allInOneAsgnmntAvtvtyName, String pageActvtyName, String glossaryActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(ContentAdmin_Course_GroupCourseCreation.crsName);
         backupFileNameArray[0][0] = a.backupCourse(pswdQzName, frmActvyName, quizActvtyName,
-                allInOneAsgnmntAvtvtyName, pageActvtyName);
+                allInOneAsgnmntAvtvtyName, pageActvtyName, glossaryActvtyName);
         Reporter.log("backupFileName: " + backupFileNameArray[0][0], true);
     }
 
@@ -107,12 +108,12 @@ public class ContentAdmin_CleanTestData {
      */
     @Test(dataProvider = "PswdQzNameActvitiesBackupFile", groups = {"regressionSmoke", "course.restore"})
     public void testContentAdminRestoreCourseAsNewArchiveCourse(String pswdQzName, String frmActvyName, String quizActvtyName,
-            String allInOneAsgnmntAvtvtyName, String pageActvtyName, String backupFile) throws Exception {
+            String allInOneAsgnmntAvtvtyName, String pageActvtyName, String glossaryActvtyName, String backupFile) throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(ContentAdmin_Course_GroupCourseCreation.crsName);
         a.restoreAsNewArchiveCourse(pswdQzName, frmActvyName, quizActvtyName,
-                allInOneAsgnmntAvtvtyName, pageActvtyName, backupFile);
+                allInOneAsgnmntAvtvtyName, pageActvtyName, glossaryActvtyName, backupFile);
     }
 
     /**
