@@ -55,7 +55,7 @@ public class Teacher_FetchAssignmentPassword extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "PswdQzName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
+          groups = {"criticalsmoke", "regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
     public void testTeacherFetchQuizPassword(String pswdQuizName) throws Exception {
         int x = 1;
         Boolean mailresult = null;

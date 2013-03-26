@@ -20,8 +20,6 @@
             </run>
         </groups>
         <classes>
-            <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
-            <class name="runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>

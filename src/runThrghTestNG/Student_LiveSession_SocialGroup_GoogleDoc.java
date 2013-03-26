@@ -165,7 +165,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GrpCrsPswdQzNamePassword", dataProviderClass = Teacher_FetchAssignmentPassword.class,
-          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.submitQuiz"})
+          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "pswdQuiz.submitQuiz"})
     public void testStudentSubmitPasswordQuiz(String grpCrsName, String pswdQzName, String password) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
