@@ -24,6 +24,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import runThrghTestNG.BaseClass;
 
 public class Utility {
 
@@ -131,7 +132,13 @@ public class Utility {
             }
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
-        ip.isTitleContains(driver, usrNm + "@gmail.com - Gmail");
+        try {
+            ip.isTitleContains(driver, usrNm + "@gmail.com - Gmail");
+        } catch (Exception e) {
+            driver.get(BaseClass.url);
+            verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
+            throw e;
+        }
     }
 
     /**
@@ -338,10 +345,10 @@ public class Utility {
 
     /**
      * Type in Content Editable iframe
-     * 
+     *
      * @param driver
      * @param i -> Select iframe index
-     * @param conceptEntry 
+     * @param conceptEntry
      */
     public static void typeInContentEditableIframe(WebDriver driver, int i, String conceptEntry) {
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
