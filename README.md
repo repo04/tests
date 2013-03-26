@@ -119,21 +119,21 @@ Automation can run when above steps are followed in order.
 			* Can accept only one target at a time
         2> antUrl:
         	* gu-msn:  https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || 
-			           https://www-gu-msn-lms-sb[01-10]-qa.2u.com || https://gu-msn-lms-standalone-prod.2u.com					  
+			   https://www-gu-msn-lms-sb[01-10]-qa.2u.com || https://gu-msn-lms-standalone-prod.2u.com					  
         	* unc-mba: https://www.2nc.unc.edu || https://www-unc-mba-lms-stg.2u.com || 
-			           https://www-unc-mba-lms-sb[01-10]-qa.2u.com || https://unc-mba-lms-standalone-prod.2u.com
+			   https://www-unc-mba-lms-sb[01-10]-qa.2u.com || https://unc-mba-lms-standalone-prod.2u.com
         	* usc-mat: https://www.2sc.usc.edu || https://www-usc-mat-lms-stg.2u.com || 
-			           https://www-usc-mat-lms-sb[01-10]-qa.2u.com || https://usc-mat-lms-standalone-prod.2u.com
+			   https://www-usc-mat-lms-sb[01-10]-qa.2u.com || https://usc-mat-lms-standalone-prod.2u.com
         	* wu-llm:  https://2law.onlinelaw.wustl.edu || https://www-wu-llm-lms-stg.2u.com || 
-			           https://www-wu-llm-lms-sb[01-10]-qa.2u.com || https://wu-llm-lms-standalone-prod.2u.com
+			   https://www-wu-llm-lms-sb[01-10]-qa.2u.com || https://wu-llm-lms-standalone-prod.2u.com
         	* usc-msw: https://www.vac.usc.edu || https://www-usc-msw-lms-stg.2u.com || 
-			           https://www-usc-msw-lms-sb[01-10]-qa.2u.com || https://usc-msw-lms-standalone-prod.2u.com
+			   https://www-usc-msw-lms-sb[01-10]-qa.2u.com || https://usc-msw-lms-standalone-prod.2u.com
         	* unc-mpa: https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || 
-			           https://www-unc-mpa-lms-sb[01-10]-qa.2u.com || https://unc-mpa-lms-standalone-prod.2u.com
-			* au-mir:  https://www-au-mir-lms-prod.2u.com || https://www-au-mir-lms-stg.2u.com || 
-			           https://www-au-mir-lms-sb[01-10]-qa.2u.com			           
+			   https://www-unc-mpa-lms-sb[01-10]-qa.2u.com || https://unc-mpa-lms-standalone-prod.2u.com
+		* au-mir:  https://www-au-mir-lms-prod.2u.com || https://www-au-mir-lms-stg.2u.com || 
+			   https://www-au-mir-lms-sb[01-10]-qa.2u.com			           
         	* gwu-mph: https://www-gwu-mph-lms-prod.2u.com || https://www-gwu-mph-lms-stg.2u.com || 
-			           https://www-gwu-mph-lms-sb[01-10]-qa.2u.com
+			   https://www-gwu-mph-lms-sb[01-10]-qa.2u.com
         	* Program's delimiter: ","	
 		3> antBrwsr: 
 			* ff

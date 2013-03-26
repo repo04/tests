@@ -13,7 +13,7 @@ import smoketest.Actions;
  *
  * 
  */
-public class Pes_ArchvCrs {
+public class Pes_ArchiveCourse {
     
     Actions a = new Actions();
     
@@ -24,7 +24,7 @@ public class Pes_ArchvCrs {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLogin() throws Exception {
+    public void testPESAdminLogIn() throws Exception {
         a.login("pesAdmin");
     }
     
@@ -35,7 +35,7 @@ public class Pes_ArchvCrs {
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "course.archive"})
     public void testPESAdminArchiveCourse() throws Exception {
-        a.archiveCourse(CntAdmin_Crs_GrpCrsCreation.crsName);
+        a.archiveCourse(ContentAdmin_Course_GroupCourseCreation.crsName);
     }
     
      /**

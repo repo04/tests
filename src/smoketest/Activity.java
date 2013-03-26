@@ -226,7 +226,7 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//div[4]/div[3]/div", "No entries found in this section");
         new Select(driver.findElement(By.xpath("//select"))).selectByIndex(1);
         ip.isTextPresentByXPATH(driver, "//td[2]/b", "Entries without category");
-        if (LoginPage.getUser().contains("teacher") || LoginPage.getUser().contains("tchrUsrName")) {
+        if (LoginPage.getUser().contains("teacher")) {
             ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
         } else {
             ip.isTextPresentByXPATH(driver, "//table[3]/tbody/tr/td/div/h3/span", this.glossaryEntryName);
@@ -241,7 +241,7 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//h2", Utility.getFullName(LoginPage.getUser()));
         ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
         driver.findElement(By.linkText("Browse by alphabet")).click();
-        if (LoginPage.getUser().contains("teacher") || LoginPage.getUser().contains("tchrUsrName")) {
+        if (LoginPage.getUser().contains("teacher")) {
             ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
         } else {
             ip.isTextPresentByXPATH(driver, "//table[2]/tbody/tr/td/div/h3/span", this.glossaryEntryName);

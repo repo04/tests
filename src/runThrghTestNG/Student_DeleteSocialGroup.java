@@ -14,7 +14,7 @@ import smoketest.Actions;
  * Teacher Logs in Find, Join & Leave Student's Social Group, Deletes own Social
  * Group
  */
-public class Stdt_DeleteSclGrp extends BaseClass {
+public class Student_DeleteSocialGroup extends BaseClass {
 
     Actions a = new Actions();
 
@@ -24,9 +24,9 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testStudentLogin(ITestContext context) throws Exception {
+    public void testStudentLogIn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][1]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][1]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
         }
@@ -37,13 +37,24 @@ public class Stdt_DeleteSclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentDelete"})
     public void testStudentDeleteSocialGroup(String stdtSclGrpName) throws Exception {
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(stdtSclGrpName);
         a.deleteSocialGroup(stdtSclGrpName);
     }
+    
+    
+    /**
+     * 
+     */
+    @Test(groups = {"regressionSmoke", "support.uiVerify"})
+    public void testStudentSupport() {
+        a.navigateToStudentSupport();
+        a.testStudentSupport();
+    }
+    
 
     /**
      * The annotated method will be run after all the test methods in the

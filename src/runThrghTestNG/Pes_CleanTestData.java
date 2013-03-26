@@ -30,7 +30,7 @@ public class Pes_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLogin() throws Exception {
+    public void testPESAdminLogIn() throws Exception {
         a.login("pesAdmin");
     }
 
@@ -42,7 +42,7 @@ public class Pes_CleanTestData extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"users.unAssignRole"})
     public void testPESAdminUnerolUsers(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
@@ -57,7 +57,7 @@ public class Pes_CleanTestData extends BaseClass {
      * @param stdtUrlPostOnWrkngGrp
      * @throws Exception 
      */
-    @Test(dataProvider = "WrkngGrpStdtURLPost", dataProviderClass = Stdt_LvSsn_SclGrp_GglDoc.class,
+    @Test(dataProvider = "WrkngGrpStdtURLPost", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "workingGroup.pesAdminDeleteAndVerifyStudentPostFromWorkingGroup"})
     public void testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup(String wrkngGrpName, String stdtUrlPostOnWrkngGrp) throws Exception {
         a.navigateToWorkingGroups();
@@ -74,7 +74,7 @@ public class Pes_CleanTestData extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"workingGroup.removeMembers"})
     public void testPESAdminRemoveMembersFromWorkngGroup(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
@@ -126,7 +126,7 @@ public class Pes_CleanTestData extends BaseClass {
      * @param wrkngGrpName
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.delete"})
     public void testPESAdminDeleteWorkingGroup(String wrkngGrpName) throws Exception {
         a.navigateToWorkingGroups();
@@ -139,7 +139,7 @@ public class Pes_CleanTestData extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Users", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "users.delete"})
     public void testPESAdminDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
         a.navigateToMyContacts();
@@ -153,7 +153,7 @@ public class Pes_CleanTestData extends BaseClass {
      * @param pesTxtAncmntCrsPost
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsAnnouncement", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsAnnouncement", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "wall.pesDeleteAnnouncement"})
     public void testPESAdminDeleteAnnouncement(String grpCrsName, String pesTxtAncmntCrsPost) throws Exception {
         a.navigateToMyCourse();

@@ -19,7 +19,7 @@ import smoketest.Utility;
  *
  *
  */
-public class Tchr_FetchAssignmentPassword extends BaseClass {
+public class Teacher_FetchAssignmentPassword extends BaseClass {
 
     Actions a = new Actions();
     String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6;
@@ -34,8 +34,8 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
     @DataProvider(name = "GrpCrsPswdQzNamePassword")
     public static Iterator<Object[]> GrpCrsPswdQzNamePassword(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPswdQzNamePassword");
-        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context),
-                CntAdmin_Crs_GrpCrsCreation.PswdQzName(context), quizPassword(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context),
+                ContentAdmin_Course_GroupCourseCreation.PswdQzName(context), quizPassword(context));
     }
 
     /**
@@ -45,7 +45,7 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTeacherEmailFetchAssignmentPasswordLogin() throws Exception {
+    public void testTeacherEmailFetchAssignmentPasswordLogIn() throws Exception {
         Utility.usrEmailLogin(driver, xpv, "2torteacher");
     }
 
@@ -54,8 +54,8 @@ public class Tchr_FetchAssignmentPassword extends BaseClass {
      * @param pswdQuizName
      * @throws Exception
      */
-    @Test(dataProvider = "PswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"criticalsmoke", "regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
+    @Test(dataProvider = "PswdQzName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
     public void testTeacherFetchQuizPassword(String pswdQuizName) throws Exception {
         int x = 1;
         Boolean mailresult = null;

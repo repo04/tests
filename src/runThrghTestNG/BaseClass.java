@@ -66,8 +66,8 @@ public class BaseClass {
         xpv = new XpathValues("xPathAccountProperty");
         System.out.println("url: " + url);
         System.out.println("program: " + this.program);
-        System.out.println("env: " + this.env);
-        System.out.println("brwsr: " + this.brwsr);
+        System.out.println("environment: " + this.env);
+        System.out.println("browser: " + this.brwsr);
         System.out.println("os: " + os);
         System.out.println("test: " + this.test);
 

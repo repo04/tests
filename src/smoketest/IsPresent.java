@@ -56,7 +56,7 @@ public class IsPresent {
      * @param elementText
      */
     public void isElementPresentContainsTextByXPATH(WebDriver driver, String elementText) {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'" + elementText + "')]")));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'" + elementText + "')]")));
     }
 
     /**
@@ -67,7 +67,7 @@ public class IsPresent {
      * @param elementText
      */
     public void isElementPresentStartsWithTextByXPATH(WebDriver driver, String elementText) {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[starts-with(text(),'" + elementText + "')]")));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[starts-with(text(),'" + elementText + "')]")));
     }
 
     /**
@@ -77,7 +77,7 @@ public class IsPresent {
      * @param elementByLINK
      */
     public void isElementPresentByLINK(WebDriver driver, String elementByLINK) {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elementByLINK)));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elementByLINK)));
     }
 
     /**
@@ -87,7 +87,7 @@ public class IsPresent {
      * @param elementByID
      */
     public void isElementPresentByID(WebDriver driver, String elementByID) {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.id(elementByID)));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.id(elementByID)));
     }
 
     /**
@@ -97,7 +97,7 @@ public class IsPresent {
      * @param elementByXPATH
      */
     public void isElementPresentByXPATH(WebDriver driver, String elementByXPATH) {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.xpath(elementByXPATH)));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(elementByXPATH)));
     }
 
     /**
@@ -107,7 +107,7 @@ public class IsPresent {
      * @param isTitle
      */
     public void isTitlePresent(WebDriver driver, String isTitle) {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.titleIs(isTitle));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.titleIs(isTitle));
     }
 
     /**
@@ -117,7 +117,7 @@ public class IsPresent {
      * @param isTitle
      */
     public void isTitleContains(WebDriver driver, String isTitle) {
-        new WebDriverWait(driver, 30).until(ExpectedConditions.titleContains(isTitle));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.titleContains(isTitle));
     }
 
     /**

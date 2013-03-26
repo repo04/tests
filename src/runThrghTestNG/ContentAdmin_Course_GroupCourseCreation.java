@@ -18,7 +18,7 @@ import smoketest.Actions;
  * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
  * Logs out
  */
-public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
+public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
     public static String crsName;
     Actions a = new Actions();
@@ -115,19 +115,19 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
     @DataProvider(name = "GrpCrsActivities")
     public static Iterator<Object[]> GrpCrsActivities(ITestContext context) throws Exception {
         System.out.println("init GrpCrsActivities");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), Activites(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), Activites(context));
     }
 
     @DataProvider(name = "GrpCrsQz")
     public static Iterator<Object[]> GrpCrsQz(ITestContext context) throws Exception {
         System.out.println("init GrpCrsQz");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), QuizName(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), QuizName(context));
     }
 
     @DataProvider(name = "GrpCrsAssgnmnt")
     public static Iterator<Object[]> GrpCrsAssgnmnt(ITestContext context) throws Exception {
         System.out.println("init GrpCrsAssgnmnt");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), AssgnmntName(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), AssgnmntName(context));
     }
 
     @DataProvider(name = "GrpCrsDebug")
@@ -145,7 +145,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
     @DataProvider(name = "GrpCrsActivitiesDebug")
     public static Iterator<Object[]> GrpCrsActivitiesDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsActivitiesDebug");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), ActivitiesDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), ActivitiesDebug(context));
     }
 
     @DataProvider(name = "QzDebug")
@@ -157,25 +157,25 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
     @DataProvider(name = "GrpCrsQzDebug")
     public static Iterator<Object[]> GrpCrsQzDebug(ITestContext context) throws Exception {
         System.out.println("init GrpCrsQzDebug");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), QzDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), QzDebug(context));
     }
 
     @DataProvider(name = "GrpCrsPswdQzName")
     public static Iterator<Object[]> GrpCrsPswdQzName(ITestContext context) throws Exception {
         System.out.println("init GrpCrsPswdQzName");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), PswdQzName(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), PswdQzName(context));
     }
 
     @DataProvider(name = "PswdQzNameActivities")
     public static Iterator<Object[]> PswdQzNameActivities(ITestContext context) throws Exception {
         System.out.println("init PswdQzNameActivities");
-        return DataProviderUtil.cartesianProviderFrom(PswdQzName(context), Activites(context));
+        return DataProviderUtility.cartesianProviderFrom(PswdQzName(context), Activites(context));
     }
 
     @DataProvider(name = "CourseGlossaryName")
     public static Iterator<Object[]> CourseGlossaryName(ITestContext context) throws Exception {
         System.out.println("init CourseGlossaryName");
-        return DataProviderUtil.cartesianProviderFrom(Course(context), GlossaryName(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), GlossaryName(context));
     }
 
     /**
@@ -185,7 +185,7 @@ public class CntAdmin_Crs_GrpCrsCreation extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testContentAdminLogin() throws Exception {
+    public void testContentAdminLogIn() throws Exception {
         a.login("contentAdmin");
     }
 

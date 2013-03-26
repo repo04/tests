@@ -17,7 +17,7 @@ import smoketest.Actions;
  *
  *
  */
-public class CntAdmn_CleanTstData extends BaseClass {
+public class ContentAdmin_CleanTestData {
 
     Actions a = new Actions();
     static String[][] backupFileNameArray = new String[1][1];
@@ -25,8 +25,8 @@ public class CntAdmn_CleanTstData extends BaseClass {
     @DataProvider(name = "PswdQzNameActvitiesBackupFile")
     public static Iterator<Object[]> PswdQzNameActvitiesBackupFile(ITestContext context) throws Exception {
         System.out.println("init PswdQzNameActvitiesBackupFile");
-        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.PswdQzName(context),
-                CntAdmin_Crs_GrpCrsCreation.Activites(context), backupFileNameArray);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.PswdQzName(context),
+                ContentAdmin_Course_GroupCourseCreation.Activites(context), backupFileNameArray);
     }
 
     /**
@@ -36,7 +36,7 @@ public class CntAdmn_CleanTstData extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testContentAdminLogin() throws Exception {
+    public void testContentAdminLogIn() throws Exception {
         a.login("contentAdmin");
     }
 
@@ -50,8 +50,8 @@ public class CntAdmn_CleanTstData extends BaseClass {
      * @param pageActvtyName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-    groups = {"activites.deletion"})
+    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"activites.deletion"})
     public void testContentAdminActivitiesDeletion(String grpCrsName, String frmActvyName, String quizActvtyName,
             String allInOneAsgnmntActvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
@@ -65,8 +65,8 @@ public class CntAdmn_CleanTstData extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-    groups = {"groupcourse.deletion"})
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"groupcourse.deletion"})
     public void testContentAdminGroupCourseDeletion(String grpCrsName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -83,13 +83,13 @@ public class CntAdmn_CleanTstData extends BaseClass {
      * @param pageActvtyName
      * @throws Exception
      */
-    @Test(dataProvider = "PswdQzNameActivities", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-    groups = {"regressionSmoke", "course.backup"})
+    @Test(dataProvider = "PswdQzNameActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "course.backup"})
     public void testContentAdminBackupCourse(String pswdQzName, String frmActvyName, String quizActvtyName,
             String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
-        a.selectCourse(CntAdmin_Crs_GrpCrsCreation.crsName);
+        a.selectCourse(ContentAdmin_Course_GroupCourseCreation.crsName);
         backupFileNameArray[0][0] = a.backupCourse(pswdQzName, frmActvyName, quizActvtyName,
                 allInOneAsgnmntAvtvtyName, pageActvtyName);
         Reporter.log("backupFileName: " + backupFileNameArray[0][0], true);
@@ -110,7 +110,7 @@ public class CntAdmn_CleanTstData extends BaseClass {
             String allInOneAsgnmntAvtvtyName, String pageActvtyName, String backupFile) throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
-        a.selectCourse(CntAdmin_Crs_GrpCrsCreation.crsName);
+        a.selectCourse(ContentAdmin_Course_GroupCourseCreation.crsName);
         a.restoreAsNewArchiveCourse(pswdQzName, frmActvyName, quizActvtyName,
                 allInOneAsgnmntAvtvtyName, pageActvtyName, backupFile);
     }

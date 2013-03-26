@@ -14,10 +14,10 @@ import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
- * Teacher Login, Posts on Wall & Course Wall, Creates Social Group
+ * Teacher LogIn, Posts on Wall & Course Wall, Creates Social Group
  *
  */
-public class Tchr_Posts_SclGrp extends BaseClass {
+public class Teacher_Posts_SocialGroup extends BaseClass {
 
     String tchrTxtWallPost;
     String tchrUrlWallPost;
@@ -44,7 +44,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
     @DataProvider(name = "GrpCrsTchrUrlCrsPst")
     public static Iterator<Object[]> GrpCrsTchrUrlCrsPst(ITestContext context) throws Exception {
         System.out.println("init GrpCrsTchrUrlCrsPst");
-        return DataProviderUtil.cartesianProviderFrom(CntAdmin_Crs_GrpCrsCreation.Course(context), tchrUrlCrsPost(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), tchrUrlCrsPost(context));
     }
     
     @DataProvider(name = "TchrGlossaryEntryName")
@@ -66,9 +66,9 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTeacherLogin(ITestContext context) throws Exception {
+    public void testTeacherLogIn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UsrCrtn_AsgnRole_WrkngGrp.usrsArray[0][0]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][0]);
         } else {
             a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
         }
@@ -79,7 +79,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String grpCrsName) throws Exception {
         a.navigateToMyWall();
@@ -117,7 +117,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param stdtUsrName
      * @throws Exception
      */
-    @Test(dataProvider = "Users", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
     groups = {"criticalsmoke", "teacherPosts.studentsWall"})
     public void testTeacherPostURLOnStudentsWall(String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyContacts();
@@ -136,7 +136,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param pesTxtCrsPostCmntsOff
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
     groups = {"regressionSmoke", "wall.teacherVerifyPESCoursePosts"})
     public void testTeacherVerifyPESCoursePosts(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff, String pesTxtAncmntCrsPost) throws Exception {
         a.navigateToMyCourse();
@@ -150,7 +150,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param grpCrsName
      * @throws Exception
      */
-    /*@Test(dataProvider = "Course", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
      groups = {"regressionSmoke", "activity.teacherVerifySyllabus"})
      public void testTeacherVerifySyllabusActivity(String grpCrsName) throws Exception {
      a.navigateToMyCourse();
@@ -196,8 +196,8 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param pswdQzName
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsPswdQzName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
-          groups = {"criticalsmoke", "regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
+    @Test(dataProvider = "GrpCrsPswdQzName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
     public void testTeacherGenerateQuizPassword(String grpCrsName, String pswdQzName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(grpCrsName);
@@ -213,7 +213,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param stdtUsrName
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = Pes_UsrCrtn_AsgnRole_WrkngGrp.class,
+    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "contact.teacherAddStudentAsContactfromCourse"})
     public void testTeacherAddStudentAsContactfromCourse(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
         a.navigateToMyCourse();
@@ -240,7 +240,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * @param glossaryName
      * @throws Exception 
      */
-    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "activites.teacherCreateGlossaryEntry"})
     public void testTeacherCreateGlossaryEntry(String grpCrsName, String glossaryName) throws Exception {
         a.navigateToMyCourse();
@@ -256,7 +256,7 @@ public class Tchr_Posts_SclGrp extends BaseClass {
      * 
      * @throws Exception 
      */
-    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = CntAdmin_Crs_GrpCrsCreation.class,
+    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "activites.teacherCreateGlossaryCategory"})
     public void testTeacherCreateGlossaryCategory(String grpCrsName, String glossaryName) throws Exception {
         a.navigateToMyCourse();

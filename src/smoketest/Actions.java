@@ -222,6 +222,14 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * 
+     */
+    public void navigateToStudentSupport() {
+        driver.findElement(By.xpath("//*[@id='footerlinks']/span[6]/a")).click();
+        ip.isElementPresentByXPATH(driver, "//*[@id='region-main']/div/h2[1]");
+    }
+
+    /**
      * Navigate to My Contacts Wall
      *
      * @param stdtUsrName
@@ -367,10 +375,10 @@ public class Actions extends BaseClass {
         actvty.crtForumActvty();
         return actvty.getFrmActvyName();
     }
-    
+
     /**
      * Create Glossary activity
-     * 
+     *
      * @return Glossary Activity Name
      */
     public String createGlossaryActivity() {
@@ -627,7 +635,7 @@ public class Actions extends BaseClass {
      * Navigate to Settings page
      */
     public void navigateToSettings() {
-        Utility.clickByJavaScript(driver, "//div[2]/nav/ul/li[3]/ul/li/a");        
+        Utility.clickByJavaScript(driver, "//div[2]/nav/ul/li[3]/ul/li/a");
         switch (LoginPage.getUser()) {
             case "contentAdmin":
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/h2",
@@ -985,8 +993,8 @@ public class Actions extends BaseClass {
 
     /**
      * Navigate to Content Wall Page
-     * 
-     * @param activityName 
+     *
+     * @param activityName
      */
     public void navigateToContentPage(String activityName) {
         ip.isElementPresentContainsTextByXPATH(driver, activityName);
@@ -996,7 +1004,7 @@ public class Actions extends BaseClass {
 
     /**
      * Student create Glossary entry
-     * 
+     *
      * @param glossaryName
      * @return glossaryEntryName
      */
@@ -1007,7 +1015,7 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * 
+     *
      * @param glossaryName
      * @return glossaryCategoryName
      */
@@ -1019,14 +1027,23 @@ public class Actions extends BaseClass {
 
     /**
      * Edit Glossary Activity
-     * 
+     *
      * @param glossaryName
      * @param stdtGlossaryEntryName
      * @param glossatyCategoryName
-     * @param tchrGlossaryEntryName 
+     * @param tchrGlossaryEntryName
      */
     public void editGlossaryEntry(String glossaryName, String stdtGlossaryEntryName, String glossatyCategoryName, String tchrGlossaryEntryName) {
         Activity actvty = new Activity();
-        actvty.editGlossaryEntry(glossaryName, stdtGlossaryEntryName, glossatyCategoryName, tchrGlossaryEntryName);        
+        actvty.editGlossaryEntry(glossaryName, stdtGlossaryEntryName, glossatyCategoryName, tchrGlossaryEntryName);
+    }
+
+    /**
+     *
+     */
+    public void testStudentSupport() {
+        StudentSupport ss = new StudentSupport();
+        ss.verifyStudentSupport();
+
     }
 }
