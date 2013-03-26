@@ -1,10 +1,10 @@
 
 package smoketest;
 
-//import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.By;
 import runThrghTestNG.BaseClass;
 import smoketest.Actions;
+import org.testng.Assert;
 
 public class StudentSupport extends BaseClass {
     Actions a = new Actions();
@@ -12,10 +12,13 @@ public class StudentSupport extends BaseClass {
     
     public void verifyStudentSupport() {
         testContactUS();
+        testExpressUploaderFAQ();
+        testMobileAppURL();
     }
     
     public void testContactUS() {
         
+        // Verifies the Days and Time Availability of Support
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("phoneNumberXPATH"), 
                                         xpv.getTokenValue(programName + "PhoneNumber"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("mondayXPATH"), 
@@ -33,9 +36,23 @@ public class StudentSupport extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sundayXPATH"), 
                                         xpv.getTokenValue(programName + "SundayTimes"));
         
-        ip.isElementPresentByXPATH(driver, "//*[@id='region-main']/div/div[2]/div[1]/div[2]/div[2]/div[2]/div/div/a");
-       
-        String temp = driver.findElement(By.xpath("//*[@id='region-main']/div/div[2]/div[1]/div[2]/div[2]/div[2]/div/div/a")).getAttribute("href");
-        System.out.println(temp);
+        // Verifies Email Address of Student Support
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("emailSupportXPATH"));
+        String email = driver.findElement(By.xpath(xpv.getTokenValue("emailSupportXPATH"))).getAttribute("href");
+        Assert.assertEquals(email, xpv.getTokenValue((programName + "Email")));
     }
+    
+    // Verifies the Express Uploader FAQ url, specific to each program
+    public void testExpressUploaderFAQ() {
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("expressUploadFAQXPATH"));
+        String urlFAQ = driver.findElement(By.xpath(xpv.getTokenValue("expressUploadFAQXPATH"))).getAttribute("href");
+        Assert.assertEquals(urlFAQ, url + "/kaltura/expressuploader.php");
+    }
+    
+    public void testMobileAppURL() {
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("iOSAppXPATH"));
+        String iOS = driver.findElement(By.xpath(xpv.getTokenValue("iOSAppXPATH"))).getAttribute("href");
+        Assert.assertEquals(iOS, xpv.getTokenValue(programName + "AppleAppUrl"));
+    }
+    
 }
