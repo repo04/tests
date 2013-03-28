@@ -26,6 +26,8 @@ public class TestInvocation implements IInvokedMethodListener {
         ConstructorOrMethod contructorOrMethod = testNgMethod.getConstructorOrMethod();
         Method method = contructorOrMethod.getMethod();
         System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
+        
+        /*
         if (!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
             if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) {
                 if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())) {
@@ -42,6 +44,22 @@ public class TestInvocation implements IInvokedMethodListener {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }
+            }
+        }*/
+        
+        if(!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn") && !BaseClass.test.equals("CriticalTests")) {
+            if ("testTeacherGenerateQuizPassword".equals(method.getName()) ||
+                "testContentAdminCreateQuizPasswordActivity".equals(method.getName()) || 
+                "testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
+                    System.out.println("Skipping Test Method");
+                    throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
+            }  
+        }
+        // Checks For UNC-MPA and WU-LLM 
+        if(!"setUp".equals(method.getName()) && !BaseClass.test.equalsIgnoreCase("CriticalTests") && (BaseClass.program.contains("unc-mpa") || BaseClass.program.contains("wu-llm"))) {
+            if("testMobileAppURL".equals(method.getName())) {
+                System.out.println("Skipping Test Method");
+                throw new SkipException("Skipping Mobile App Test in Student Support: Not Available For UNC-MPA and WU-LLM");
             }
         }
     }
