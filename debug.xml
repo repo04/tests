@@ -194,6 +194,10 @@
                 <include name="prerequisite"/>
                 <include name="support.uiVerify"/>
             </define>
+            <define name="LessonActivity">
+                <include name="prerequisite"/>
+                <include name="lesson.createActivity"/>
+            </define>
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     

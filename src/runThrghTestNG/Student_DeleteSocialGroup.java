@@ -54,8 +54,7 @@ public class Student_DeleteSocialGroup extends BaseClass {
         a.navigateToStudentSupport();
         a.testStudentSupport();
     }
-    
-
+   
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

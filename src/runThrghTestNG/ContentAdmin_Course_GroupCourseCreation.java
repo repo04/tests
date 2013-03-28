@@ -338,6 +338,14 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.navigateToSettings();
         a.verifySettings();
     }
+    
+    /*
+     * Verifies content admin can sucessfully 
+     */
+    @Test(groups = {"regressionSmoke", "lesson.createActivity"})
+    public void testContentAdminCreateLessonActivity() throws Exception {
+        
+    }
 
     /**
      * The annotated method will be run after all the test methods in the
