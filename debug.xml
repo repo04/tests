@@ -193,6 +193,7 @@
             <define name="StudentSupport">
                 <include name="prerequisite"/>
                 <include name="support.uiVerify"/>
+                <include name="support.mobileAppURL"/>
             </define>
             <define name="LessonActivity">
                 <include name="prerequisite"/>

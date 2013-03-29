@@ -1044,6 +1044,10 @@ public class Actions extends BaseClass {
     public void testStudentSupport() {
         StudentSupport ss = new StudentSupport();
         ss.verifyStudentSupport();
-
+    }
+    
+    public void testStudentSupportMobileAppURL() {
+        StudentSupport ss = new StudentSupport();
+        ss.verifyStudentSupportMobileAppURL();
     }
 }

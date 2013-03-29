@@ -10,6 +10,9 @@ public class StudentSupport extends BaseClass {
     public void verifyStudentSupport() {
         testContactUS();
         testExpressUploaderFAQ();
+    }
+    
+    public void verifyStudentSupportMobileAppURL() {
         testMobileAppURL();
     }
     

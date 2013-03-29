@@ -54,6 +54,11 @@ public class Student_DeleteSocialGroup extends BaseClass {
         a.navigateToStudentSupport();
         a.testStudentSupport();
     }
+    
+    @Test(groups = {"regressionSmoke", "support.mobileAppURL"})
+    public void testStudentSupportMobileURL() {
+       a.testStudentSupportMobileAppURL();
+    }
    
     /**
      * The annotated method will be run after all the test methods in the
