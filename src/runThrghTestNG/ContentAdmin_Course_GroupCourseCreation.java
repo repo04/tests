@@ -28,6 +28,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     static String[][] actvtsArray = new String[1][4];
     static String[][] pswdQzNameArray = new String[1][1];
     static String[][] glossaryActvtyArray = new String[1][1];
+    static String[][] lessonActivityArray = new String[1][1];
 
     /**
      * ITestContext contains all the information for a given test run. A Data
@@ -342,8 +343,14 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     /*
      * Verifies content admin can sucessfully 
      */
-    @Test(groups = {"regressionSmoke", "lesson.createActivity"})
-    public void testContentAdminCreateLessonActivity() throws Exception {
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", "lesson.createActivity"})
+    public void testContentAdminCreateLessonActivity(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectCourse(groupCourseName);
+        a.createLessonActivity();
+        
+        
+        
         
     }
 

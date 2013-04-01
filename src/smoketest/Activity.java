@@ -29,7 +29,16 @@ public class Activity extends BaseClass {
     private String glossaryName;
     private String glossaryEntryName;
     private String glossaryCategoryName;
+    private String lessonActivityName;
 
+    
+    public void createLessonActivity() {
+        String currentDateTime = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        
+        
+        
+        
+    }
     /**
      * Create & Verify Forum Activity
      */

@@ -1,11 +1,17 @@
 package smoketest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class Actions extends BaseClass {
+    
+    Date now = new Date();
 
     /**
      * Login
@@ -436,6 +442,11 @@ public class Actions extends BaseClass {
     public void createSyllabusActivity() {
         Activity actvty = new Activity();
         actvty.createSyllabusActivity();
+    }
+    
+    public void createLessonActivity() {
+        Activity activity = new Activity();
+        
     }
 
     /**
@@ -1049,5 +1060,10 @@ public class Actions extends BaseClass {
     public void testStudentSupportMobileAppURL() {
         StudentSupport ss = new StudentSupport();
         ss.verifyStudentSupportMobileAppURL();
+    }
+    
+    public String currentDateTime() {
+        String stuff = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        return stuff;
     }
 }
