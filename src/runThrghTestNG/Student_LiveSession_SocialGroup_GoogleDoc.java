@@ -20,42 +20,42 @@ import smoketest.Actions;
  */
 public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
 
-    static String[][] stdtSclGrpArray = new String[1][1];
-    static String[][] stdtUrlPostOnWrkngGrp = new String[1][1];
+    static String[][] studentSocialGroupNameArray = new String[1][1];
+    static String[][] studentUrlPostOnWorkingGroup = new String[1][1];
     Actions a = new Actions();
 
-    @DataProvider(name = "StdtSclGrp")
-    public static Object[][] StdtSclGrp(ITestContext context) throws Exception {
-        System.out.println("StdtSclGrp: " + test);
-        return (stdtSclGrpArray);
+    @DataProvider(name = "StudentSocialGroup")
+    public static Object[][] StudentSocialGroup(ITestContext context) throws Exception {
+        System.out.println("StudentSocialGroup: " + test);
+        return (studentSocialGroupNameArray);
     }
 
-    @DataProvider(name = "TchrStdtSclGrps")
-    public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
-        System.out.println("init TchrStdtSclGrps");
-        return DataProviderUtility.cartesianProviderFrom(Teacher_Posts_SocialGroup.TchrSclGrp(context), StdtSclGrp(context));
+    @DataProvider(name = "TeacherStudentSocialGroups")
+    public static Iterator<Object[]> TeacherStudentSocialGroups(ITestContext context) throws Exception {
+        System.out.println("init TeacherStudentSocialGroups");
+        return DataProviderUtility.cartesianProviderFrom(Teacher_Posts_SocialGroup.TeacherSocialGroup(context), StudentSocialGroup(context));
     }
 
-    @DataProvider(name = "UsrsWrkngGrpTchrStdtSclGrps")
-    public static Iterator<Object[]> UsrsWrkngGrpTchrStdtSclGrps(ITestContext context) throws Exception {
-        System.out.println("init UsrsWrkngGrpTchrStdtSclGrps");
+    @DataProvider(name = "UsersWorkingGroupTeacherStudentSocialGroups")
+    public static Iterator<Object[]> UsersWorkingGroupTeacherStudentSocialGroups(ITestContext context) throws Exception {
+        System.out.println("init UsersWorkingGroupTeacherStudentSocialGroups");
         return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.Users(context),
-                Pes_UserCreation_AssignRole_WorkingGroup.WrkngGrp(context), Teacher_Posts_SocialGroup.TchrSclGrp(context),
-                StdtSclGrp(context));
+                Pes_UserCreation_AssignRole_WorkingGroup.WorkingGroup(context), Teacher_Posts_SocialGroup.TeacherSocialGroup(context),
+                StudentSocialGroup(context));
     }
     
-    @DataProvider(name = "WrkngGrpStdtURLPost")
-    public static Iterator<Object[]> WrkngGrpStdtURLPost(ITestContext context) throws Exception {
-        System.out.println("init WrkngGrpStdtURLPost");
-        return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.WrkngGrp(context), stdtUrlPostOnWrkngGrp);
+    @DataProvider(name = "WorkingGroupStudentURLPost")
+    public static Iterator<Object[]> WorkingGroupStudentURLPost(ITestContext context) throws Exception {
+        System.out.println("init WorkingGroupStudentURLPost");
+        return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.WorkingGroup(context), studentUrlPostOnWorkingGroup);
     }
     
     @DataProvider(name = "AllGlossaryData")
     public static Iterator<Object[]> AllGlossaryData(ITestContext context) throws Exception {
         System.out.println("init AllGlossaryData");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), ContentAdmin_Course_GroupCourseCreation.GlossaryName(context),
-                Student_JoinSocialGroup_Post.StdtGlossaryEntryName(context), Teacher_Posts_SocialGroup.GlossaryCategoryName(context),
-                Teacher_Posts_SocialGroup.TchrGlossaryEntryName(context));
+                Student_JoinSocialGroup_Post.StudentGlossaryEntryName(context), Teacher_Posts_SocialGroup.GlossaryCategoryName(context),
+                Teacher_Posts_SocialGroup.TeacherGlossaryEntryName(context));
     }
 
     /**
@@ -67,9 +67,9 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogIn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][1]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
+            a.login(context.getCurrentXmlTest().getParameter("studentUserName"));
         }
     }
 
@@ -78,11 +78,11 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "liveSession.studentCreate"})
-    public void testStudentCreateLiveSession(String tchrSclGrpName) throws Exception {
+    @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "liveSession.studentCreate"})
+    public void testStudentCreateLiveSession(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.navigateToGroupWall(tchrSclGrpName);
+        a.navigateToGroupWall(teacherSocialGroupName);
         a.accessLiveSessionWall();
         a.createLiveSession();
     }
@@ -92,40 +92,40 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentCreate"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentCreate"})
     public void testStudentCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
-        stdtSclGrpArray[0][0] = a.createSocialGroup();
-        System.out.println("stdtSclGrpName: " + stdtSclGrpArray[0][0]);
-        Reporter.log("stdtSclGrpName: " + stdtSclGrpArray[0][0]);
+        studentSocialGroupNameArray[0][0] = a.createSocialGroup();
+        System.out.println("studentSocialGroupName: " + studentSocialGroupNameArray[0][0]);
+        Reporter.log("studentSocialGroupName: " + studentSocialGroupNameArray[0][0]);
     }
 
     /**
-     * Verify WrkngGrp & Google Doc
+     * Verify WorkingGroup & Google Doc
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpGgleDoc", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
+    @Test(dataProvider = "WorkingGroupGoogleDocument", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.studentVerifyGoogleDoc"})
-    public void testStudentVerifyWorkingGroup_GoogleDoc(String wrkngGrpName, String gglDocName) throws Exception {
+    public void testStudentVerifyWorkingGroup_GoogleDoc(String workingGroupName, String googleDocumentName) throws Exception {
         a.navigateToWorkingGroups();
-        a.vrfyWrkngGrp_GglDoc(wrkngGrpName, gglDocName);
+        a.verifyWorkingGroup_GoogleDoc(workingGroupName, googleDocumentName);
     }
     
     /**
      * Student post on Working Group
      * 
-     * @param wrkngGrpName
-     * @param gglDocName
+     * @param workingGroupName
+     * @param googleDocumentName
      * @throws Exception 
      */
-    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    @Test(dataProvider = "WorkingGroup", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "workingGroup.studentPost"})
-    public void testStudentPostOnWorkingGroup(String wrkngGrpName) throws Exception {
+    public void testStudentPostOnWorkingGroup(String workingGroupName) throws Exception {
         a.navigateToWorkingGroups();
-        a.navigateToGroupWall(wrkngGrpName);
-        stdtUrlPostOnWrkngGrp[0][0] =  a.urlPost("urlWrkngGrpPost");
-        Reporter.log("stdtUrlPostOnWrkngGrp: " + stdtUrlPostOnWrkngGrp[0][0], true);
+        a.navigateToGroupWall(workingGroupName);
+        studentUrlPostOnWorkingGroup[0][0] =  a.urlPost("urlWrkngGrpPost");
+        Reporter.log("studentUrlPostOnWorkingGroup: " + studentUrlPostOnWorkingGroup[0][0], true);
     }
 
     /**
@@ -133,76 +133,76 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "activites.studentVerify"})
-    public void testStudentVerifyActivities(String grpCrsName, String frmActvyName, String quizActvtyName, String allInOneAsgnmntAvtvtyName, String pageActvtyName) throws Exception {
+    @Test(dataProvider = "GroupCourseActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "activities.studentVerify"})
+    public void testStudentVerifyActivities(String groupCourseName, String forumActivityName, String quizActivityName, String allInOneAssignmentActivityName, String pageActivityName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.verifyActivities(frmActvyName, quizActvtyName, allInOneAsgnmntAvtvtyName, pageActvtyName);
+        a.verifyActivities(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
     }
 
     /**
      * User attempt to 'True/False' question in Quiz Assignment
      *
-     * @param grpCrsName
+     * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsQz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "activites.submitQuiz"})
-    public void testStudentSubmitQuiz(String grpCrsName, String quizActvtyName) throws Exception {
+    @Test(dataProvider = "GroupCourseQuiz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "activities.submitQuiz"})
+    public void testStudentSubmitQuiz(String groupCourseName, String quizActivityName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.submitQuiz(quizActvtyName, "");
+        a.submitQuiz(quizActivityName, "");
     }
     
     /**
      * 
-     * @param grpCrsName
-     * @param pswdQzName
+     * @param groupCourseName
+     * @param passwordQuizName
      * @param password
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsPswdQzNamePassword", dataProviderClass = Teacher_FetchAssignmentPassword.class,
-          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.submitQuiz"})
-    public void testStudentSubmitPasswordQuiz(String grpCrsName, String pswdQzName, String password) throws Exception {
+    @Test(dataProvider = "GroupCoursePasswordQuizNamePassword", dataProviderClass = Teacher_FetchActivityPassword.class,
+          groups = {"criticalSmoke", "regressionSmoke", "fullSmoke", "pswdQuiz.submitQuiz"})
+    public void testStudentSubmitPasswordQuiz(String groupCourseName, String passwordQuizName, String password) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.submitQuiz(pswdQzName, password);
+        a.submitQuiz(passwordQuizName, password);
     }
 
     /**
      * Verify Assignment Grade
      *
-     * @param grpCrsName
-     * @param allInOneAsgnmntAvtvtyName
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.verifyGrade"})
-    public void testStudentVerifyAssignmentGrade(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+    public void testStudentVerifyAssignmentGrade(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToGrades();
-        a.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
+        a.verifyAssignmentGrade(allInOneAssignmentActivityName);
     }
     
     /**
      * Student verify files upload in Course
      * 
-     * @param grpCrsName
+     * @param groupCourseName
      * @param pdf
      * @param pptx
      * @param doc
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class, 
+    @Test(dataProvider = "GroupCourseFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class, 
           groups = {"regressionSmoke", "files.studentVerifyInCourse"})
-    public void testStudentVerifyFilesInCourse(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
+    public void testStudentVerifyFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToFiles();
         a.verifyFilesInCourse(doc, pptx, pdf);
     }
@@ -210,34 +210,34 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
     /**
      * Student Leave Teacher Social Group
      * 
-     * @param tchrSclGrpName
+     * @param teacherSocialGroupName
      * @throws Exception 
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
+    @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "socialGroup.studentLeaveTeacherSocialGroup"})
-    public void testStudentLeaveTeacherSocialGroup(String tchrSclGrpName) throws Exception {
+    public void testStudentLeaveTeacherSocialGroup(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.leaveSocialGroup(tchrSclGrpName);
+        a.leaveSocialGroup(teacherSocialGroupName);
     }
     
     /**
      * Student edit Glossary Activity
      * 
-     * @param grpCrsName
+     * @param groupCourseName
      * @param glossaryName
-     * @param stdtGlossaryEntryName
+     * @param studentGlossaryEntryName
      * @param glossaryCategoryName
-     * @param tchrGlossaryEntryName
+     * @param teacherGlossaryEntryName
      * @throws Exception 
      */
-    @Test(dataProvider = "AllGlossaryData", groups = {"regressionSmoke", "activites.studentEditGlossary"})
-    public void testStudentEditGlossary(String grpCrsName, String glossaryName, 
-            String stdtGlossaryEntryName, String glossaryCategoryName, String tchrGlossaryEntryName) throws Exception {
+    @Test(dataProvider = "AllGlossaryData", groups = {"regressionSmoke", "activities.studentEditGlossary"})
+    public void testStudentEditGlossary(String groupCourseName, String glossaryName, 
+            String studentGlossaryEntryName, String glossaryCategoryName, String teacherGlossaryEntryName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
         a.navigateToContentPage(glossaryName);
-        a.editGlossaryEntry(glossaryName, stdtGlossaryEntryName, glossaryCategoryName, tchrGlossaryEntryName);        
+        a.editGlossaryEntry(glossaryName, studentGlossaryEntryName, glossaryCategoryName, teacherGlossaryEntryName);        
     }
     
     /**

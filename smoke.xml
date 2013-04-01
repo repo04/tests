@@ -18,7 +18,7 @@
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
-            <class name="runThrghTestNG.Teacher_FetchAssignmentPassword"/>
+            <class name="runThrghTestNG.Teacher_FetchActivityPassword"/>
             <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>

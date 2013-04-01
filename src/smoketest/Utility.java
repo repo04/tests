@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -72,9 +73,9 @@ public class Utility {
      * Remove user to check for another filter
      *
      * @param driver
-     * @param btnRmvUsrFilter
+     * @param buttonRemoveUserFilter
      */
-    public static void btnRmUsrFilter(WebDriver driver, String btnRmvUsrFilter) {
+    public static void buttonRemoveUserFilter(WebDriver driver, String btnRmvUsrFilter) {
 
         try {
             driver.findElement(By.name("filter[realname][0]")).click();
@@ -113,7 +114,7 @@ public class Utility {
      * @param xpv
      * @param usrNm
      */
-    public static void usrEmailLogin(WebDriver driver, XpathValues xpv, String usrNm) {
+    public static void userEmailLogIn(WebDriver driver, XpathValues xpv, String usrNm) {
         driver.get("https://mail.google.com/");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
         WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
@@ -139,7 +140,7 @@ public class Utility {
      *
      * @param driver
      */
-    public static void cnfrmNoEmlPrsnt(WebDriver driver) {
+    public static void confirmNoEmailPresent(WebDriver driver) {
         loopEml:
         while (true) {
             try {
@@ -161,7 +162,7 @@ public class Utility {
      *
      * @param driver
      */
-    public static void usrEmailLogout(WebDriver driver) {
+    public static void userEmailLogOut(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
         try {
             Utility.clickByJavaScript(driver, "//td[2]/a");
@@ -338,10 +339,10 @@ public class Utility {
 
     /**
      * Type in Content Editable iframe
-     * 
+     *
      * @param driver
      * @param i -> Select iframe index
-     * @param conceptEntry 
+     * @param conceptEntry
      */
     public static void typeInContentEditableIframe(WebDriver driver, int i, String conceptEntry) {
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
@@ -361,5 +362,31 @@ public class Utility {
         WebElement editableTxtArea = driver.switchTo().activeElement();
         editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), conceptEntry);
         driver.switchTo().defaultContent();
+    }
+
+    /**
+     * Verify Date Present In Element Value field
+     * 
+     * @param driver
+     * @param id
+     */
+    public static void verifyDatePresentInElementValue(WebDriver driver, By id) {
+        String regex = "^(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((20)\\d\\d)$";
+        int x = 1;
+
+        do {
+            String fetchdate = driver.findElement(id).getAttribute("value");
+            if (!fetchdate.isEmpty()) {
+                if (!Pattern.matches(regex, fetchdate)) {
+                    Utility.illegalStateException("Date (" + fetchdate + ") does not match the expected (mm/dd/yyyy) format");
+                }
+                break;
+            }
+            x++;
+        } while (x < 2401);
+
+        if (x > 2400) {
+            Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by ID: " + id);
+        }
     }
 }

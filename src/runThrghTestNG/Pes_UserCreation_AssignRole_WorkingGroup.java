@@ -23,112 +23,112 @@ import smoketest.Actions;
 public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
 
     Actions a = new Actions();
-    static String[][] usrsArray = new String[1][2];
-    static String[][] wrkngGrpArray = new String[1][1];
-    static String[][] stdtName = new String[1][1];
-    static String[][] tchrName = new String[1][1];
-    static String[][] pesTxtCrsSctnPost = new String[1][1];
-    static String[][] pesTxtAncmntCrsPost = new String[1][1];
-    static String[][] pesTxtCrsPostCmntsOn = new String[1][1];
-    static String[][] pesTxtCrsPostCmntsOff = new String[1][1];
+    static String[][] userNamesArray = new String[1][2];
+    static String[][] workingGroupNameArray = new String[1][1];
+    static String[][] studentNameArray = new String[1][1];
+    static String[][] teacherNameArray = new String[1][1];
+    static String[][] pesTextCourseSectionPost = new String[1][1];
+    static String[][] pesTextAnnouncementCoursePost = new String[1][1];
+    static String[][] pesTextCoursePostCommentsOn = new String[1][1];
+    static String[][] pesTextCoursePostCommentsOff = new String[1][1];
 
     @DataProvider(name = "Users")
     public static Object[][] Users(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             System.out.println("if Users: " + test);
-            return (usrsArray);
+            return (userNamesArray);
         } else {
             System.out.println("else Users: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("tchrUsrName"), context.getCurrentXmlTest().getParameter("stdtUsrName")}};
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("teacherUserName"), context.getCurrentXmlTest().getParameter("studentUserName")}};
         }
     }
 
-    @DataProvider(name = "WrkngGrp")
-    public static Object[][] WrkngGrp(ITestContext context) throws Exception {
+    @DataProvider(name = "WorkingGroup")
+    public static Object[][] WorkingGroup(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("if WrkngGrp: " + test);
-            return (wrkngGrpArray);
+            System.out.println("if WorkingGroup: " + test);
+            return (workingGroupNameArray);
         } else {
-            System.out.println("else WrkngGrp: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("wrkngGrpName")}};
+            System.out.println("else WorkingGroup: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("workingGroupName")}};
         }
     }
 
-    @DataProvider(name = "StdtName")
-    public static Object[][] StdtName(ITestContext context) throws Exception {
+    @DataProvider(name = "StudentName")
+    public static Object[][] StudentName(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("Inside StdtName: " + test);
-            return (stdtName);
+            System.out.println("Inside StudentName: " + test);
+            return (studentNameArray);
         } else {
-            System.out.println("Inside StdtName: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("stdtUsrName")}};
+            System.out.println("Inside StudentName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("studentUserName")}};
         }
     }
 
-    @DataProvider(name = "WrkngGrpUsers")
-    public static Iterator<Object[]> WrkngGrpUsers(ITestContext context) throws Exception {
-        System.out.println("init WrkngGrpUsers");
-        return DataProviderUtility.cartesianProviderFrom(WrkngGrp(context), Users(context));
+    @DataProvider(name = "WorkingGroupUsers")
+    public static Iterator<Object[]> WorkingGroupUsers(ITestContext context) throws Exception {
+        System.out.println("init WorkingGroupUsers");
+        return DataProviderUtility.cartesianProviderFrom(WorkingGroup(context), Users(context));
     }
 
-    @DataProvider(name = "GrpCrsUsers")
-    public static Iterator<Object[]> GrpCrsUsers(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsUsers");
+    @DataProvider(name = "GroupCourseUsers")
+    public static Iterator<Object[]> GroupCourseUsers(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseUsers");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Users(context));
     }
 
-    @DataProvider(name = "GrpCrsWrkngGrpUsers")
-    public static Iterator<Object[]> GrpCrsWrkngGrpUsers(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsUsers");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WrkngGrp(context), Users(context));
+    @DataProvider(name = "GroupCourseWorkingGroupUsers")
+    public static Iterator<Object[]> GroupCourseWorkingGroupUsers(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseWorkingGroupUsers");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WorkingGroup(context), Users(context));
     }
 
     @DataProvider(name = "UsersDebug")
     public static Object[][] UsersDebug(ITestContext context) throws Exception {
         System.out.println("init UsersDebug");
-        return (usrsArray);
+        return (userNamesArray);
     }
 
-    @DataProvider(name = "WrkngGrpDebug")
-    public static Object[][] WrkngGrpDebug(ITestContext context) throws Exception {
-        System.out.println("init WrkngGrpDebug");
-        return (wrkngGrpArray);
+    @DataProvider(name = "WorkingGroupDebug")
+    public static Object[][] WorkingGroupDebug(ITestContext context) throws Exception {
+        System.out.println("init WorkingGroupDebug");
+        return (workingGroupNameArray);
     }
 
-    @DataProvider(name = "WrkngGrpDebugUsrs")
-    public static Iterator<Object[]> WrkngGrpDebugUsrs(ITestContext context) throws Exception {
-        System.out.println("init WrkngGrpDebugUsrs");
-        return DataProviderUtility.cartesianProviderFrom(WrkngGrpDebug(context), Users(context));
+    @DataProvider(name = "WorkingGroupDebugUsers")
+    public static Iterator<Object[]> WorkingGroupDebugUsers(ITestContext context) throws Exception {
+        System.out.println("init WorkingGroupDebugUsers");
+        return DataProviderUtility.cartesianProviderFrom(WorkingGroupDebug(context), Users(context));
     }
 
-    @DataProvider(name = "GrpCrsWrkngGrpDebugUsers")
-    public static Iterator<Object[]> GrpCrsWrkngGrpDebugUsers(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsWrkngGrpDebugUsers");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WrkngGrpDebug(context), Users(context));
+    @DataProvider(name = "GroupCourseWorkingGroupDebugUsers")
+    public static Iterator<Object[]> GroupCourseWorkingGroupDebugUsers(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseWorkingGroupDebugUsers");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WorkingGroupDebug(context), Users(context));
     }
 
-    @DataProvider(name = "GrpCrsUsersDebug")
-    public static Iterator<Object[]> GrpCrsUsersDebug(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsUsersDebug");
+    @DataProvider(name = "GroupCourseUsersDebug")
+    public static Iterator<Object[]> GroupCourseUsersDebug(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseUsersDebug");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), UsersDebug(context));
     }
 
-    @DataProvider(name = "GrpCrsAsgnmntStdt")
-    public static Iterator<Object[]> GrpCrsAsgnmntStdt(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsAsgnmntStdt");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), ContentAdmin_Course_GroupCourseCreation.AssgnmntName(context), StdtName(context));
+    @DataProvider(name = "GroupCourseAssignmentStudent")
+    public static Iterator<Object[]> GroupCourseAssignmentStudent(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseAssignmentStudent");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), ContentAdmin_Course_GroupCourseCreation.AssignmentName(context), StudentName(context));
     }
 
-    @DataProvider(name = "GrpCrsPESCoursePosts")
-    public static Iterator<Object[]> GrpCrsPESCoursePosts(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsPESCoursePosts");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+    @DataProvider(name = "GroupCoursePesCoursePosts")
+    public static Iterator<Object[]> GroupCoursePesCoursePosts(ITestContext context) throws Exception {
+        System.out.println("init GroupCoursePesCoursePosts");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTextCourseSectionPost, pesTextCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
     }
     
-    @DataProvider(name = "GrpCrsAnnouncement")
-    public static Iterator<Object[]> GrpCrsAnnouncement(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsAnnouncement");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTxtAncmntCrsPost);
+    @DataProvider(name = "GroupCourseAnnouncement")
+    public static Iterator<Object[]> GroupCourseAnnouncement(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseAnnouncement");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTextAnnouncementCoursePost);
     }
 
     /**
@@ -150,15 +150,15 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     @Test(groups = {"regressionSmoke", "fullSmoke", "users.creation"})
     public void testPESAdminUserCreation() throws Exception {
         a.navigateToMyContacts();
-        usrsArray[0][0] = a.createUser("teacher");
-        System.out.println("tchrUsrName: " + usrsArray[0][0]);
-        Reporter.log("tchrUsrName: " + usrsArray[0][0]);
+        userNamesArray[0][0] = a.createUser("teacher");
+        System.out.println("teacherUserName: " + userNamesArray[0][0]);
+        Reporter.log("teacherUserName: " + userNamesArray[0][0]);
 
         a.navigateToMyContacts();
-        usrsArray[0][1] = a.createUser("student");
-        stdtName[0][0] = usrsArray[0][1];
-        System.out.println("stdtUsrName: " + usrsArray[0][1]);
-        Reporter.log("stdtUsrName: " + usrsArray[0][1]);
+        userNamesArray[0][1] = a.createUser("student");
+        studentNameArray[0][0] = userNamesArray[0][1];
+        System.out.println("studentUserName: " + userNamesArray[0][1]);
+        Reporter.log("studentUserName: " + userNamesArray[0][1]);
     }
 
     /**
@@ -166,15 +166,15 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", groups = {"regressionSmoke", "fullSmoke", "users.assignRole"})
-    public void testPESAdminAssignRole(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
+    @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", "users.assignRole"})
+    public void testPESAdminAssignRole(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.enrollUserToRole_GroupCourse(tchrUsrName, grpCrsName);
+        a.selectGroupCourse(groupCourseName);
+        a.enrollUserToRole_GroupCourse(teacherUserName, groupCourseName);
 
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.enrollUserToRole_GroupCourse(stdtUsrName, grpCrsName);
+        a.selectGroupCourse(groupCourseName);
+        a.enrollUserToRole_GroupCourse(studentUserName, groupCourseName);
     }
 
     /**
@@ -185,9 +185,9 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     @Test(groups = {"regressionSmoke", "fullSmoke", "workingGroup.create"})
     public void testPESAdminCreateWorkingGroup() throws Exception {
         a.navigateToWorkingGroups();
-        wrkngGrpArray[0][0] = a.createWorkingGroup();
-        System.out.println("wrkngGrp: " + wrkngGrpArray[0][0]);
-        Reporter.log("wrkngGrp: " + wrkngGrpArray[0][0]);
+        workingGroupNameArray[0][0] = a.createWorkingGroup();
+        System.out.println("wrkngGrp: " + workingGroupNameArray[0][0]);
+        Reporter.log("wrkngGrp: " + workingGroupNameArray[0][0]);
     }
 
     /**
@@ -195,67 +195,67 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrpUsers", groups = {"regressionSmoke", "fullSmoke", "workingGroup.addMembers"})
-    public void testPESAdminAddMembersToWorkingGroup(String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+    @Test(dataProvider = "WorkingGroupUsers", groups = {"regressionSmoke", "fullSmoke", "workingGroup.addMembers"})
+    public void testPESAdminAddMembersToWorkingGroup(String workingGroupName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToWorkingGroups();
-        a.accessWorkingGroup(wrkngGrpName);
-        a.addMembersToWorkingGroup(tchrUsrName, stdtUsrName);
+        a.accessWorkingGroup(workingGroupName);
+        a.addMembersToWorkingGroup(teacherUserName, studentUserName);
     }
 
     /**
      * Post Text on Course Section
      *
-     * @param grpCrsName
+     * @param groupCourseName
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.courseSectionPost"})
-    public void testPesAdminPostTextOnCourseSection(String grpCrsName) throws Exception {
+    public void testPesAdminPostTextOnCourseSection(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        pesTxtCrsSctnPost[0][0] = a.textPost("txtCrsSctnPost");
-        Reporter.log("pesTxtCrsSctnPost: " + pesTxtCrsSctnPost[0][0], true);
+        a.selectGroupCourse(groupCourseName);
+        pesTextCourseSectionPost[0][0] = a.textPost("txtCrsSctnPost");
+        Reporter.log("pesTextCourseSectionPost: " + pesTextCourseSectionPost[0][0], true);
     }
     
     /**
      * Post Text with Comments enabled on Course Wall
      *
-     * @param grpCrsName
+     * @param groupCourseName
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.coursePostCommentsOn"})
-    public void testPesAdminPostTextOnCourseCommentsOn(String grpCrsName) throws Exception {
+    public void testPesAdminPostTextOnCourseCommentsOn(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        pesTxtCrsPostCmntsOn[0][0] = a.textPost("txtCrsPostCmntsOn");
-        Reporter.log("pesTxtCrsPost: " + pesTxtCrsPostCmntsOn[0][0], true);
+        a.selectGroupCourse(groupCourseName);
+        pesTextCoursePostCommentsOn[0][0] = a.textPost("txtCrsPostCmntsOn");
+        Reporter.log("pesTxtCrsPost: " + pesTextCoursePostCommentsOn[0][0], true);
         ip.isElementPresentByXPATH(driver, "//li[1]/div/div[4]/label/a/label");
     }
 
     /**
      * Post Text with Comments disabled on Course Wall
      *
-     * @param grpCrsName
+     * @param groupCourseName
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.coursePostCommentsOff"})
-    public void testPesAdminPostTextOnCourseCommentsOff(String grpCrsName) throws Exception {
+    public void testPesAdminPostTextOnCourseCommentsOff(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        pesTxtCrsPostCmntsOff[0][0] = a.textPost("txtCrsPostCmntsOff");
-        Reporter.log("pesTxtCrsPost: " + pesTxtCrsPostCmntsOff[0][0], true);
+        a.selectGroupCourse(groupCourseName);
+        pesTextCoursePostCommentsOff[0][0] = a.textPost("txtCrsPostCmntsOff");
+        Reporter.log("pesTxtCrsPost: " + pesTextCoursePostCommentsOff[0][0], true);
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
     }
     
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
-    public void testPesAdminPostAnnouncementOnAllCourseSection(String grpCrsName) throws Exception {
+    public void testPesAdminPostAnnouncementOnAllCourseSection(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        pesTxtAncmntCrsPost[0][0] = a.textPost("txtAncmntCrsPost");
-        Reporter.log("pesTxtAncmntCrsPost: " + pesTxtAncmntCrsPost[0][0], true);
+        a.selectGroupCourse(groupCourseName);
+        pesTextAnnouncementCoursePost[0][0] = a.textPost("txtAncmntCrsPost");
+        Reporter.log("pesTextAnnouncementCoursePost: " + pesTextAnnouncementCoursePost[0][0], true);
     }
     
     /**

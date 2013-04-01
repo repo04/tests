@@ -6,21 +6,23 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="tchrUsrName" value="autoteacher1"/>
-        <parameter name="stdtUsrName" value="autostudent1"/>
-        <!--parameter name="tchrUsrName" value="teacher1"/>
-        <parameter name="stdtUsrName" value="student1"/-->       
-        <parameter name="grpCrsName" value="AutoGroupCourse"/>        
-        <parameter name="wrkngGrpName" value="AutoWrkngGrp"/>
-        <parameter name="tchrSclGrpName" value="AutoTchrSclGrp"/>
-        <parameter name="frmActvyName" value="AutoForum"/>
-        <parameter name="quizActvtyName" value="AutoQuiz"/>
-        <parameter name="allInOneAsgnmntAvtvtyName" value="AutoAllInOneAsgnmnt"/>
-        <parameter name="pswdQuizName" value="AutoPswdQuiz"/>
-        <parameter name="pageActvtyName" value="AutoPage"/>
-        <parameter name="glossaryActvtyName" value="AutoGlossary"/>
-        <parameter name="stdtSclGrpName" value="AutoStdtSclGrp"/>
-        
+        <parameter name="teacherUserName" value="autoteacher1"/>
+        <parameter name="studentUserName" value="autostudent1"/>
+        <!--parameter name="teacherUserName" value="teacher1"/>
+        <parameter name="studentUserName" value="student1"/-->       
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>        
+        <parameter name="workingGroupName" value="AutoWrkngGrp"/>
+        <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
+        <parameter name="teacherUserName" value="autoteacher1"/>
+        <parameter name="studentUserName" value="autostudent1"/>  
+         
         <groups>
             <define name="Course_GroupCourse">
                 <include name="prerequisite"/>
@@ -28,20 +30,20 @@
                 <include name="groupcourse.deletion"/>
                 <include name="course.archive"/>                    
             </define>            
-            <define name="ActvtsCrt_AddQzQstn_Dlt">
+            <define name="ActivitiesCreation_AddQuizQuestion_Deletion">
                 <include name="prerequisite"/>
-                <include name="activites.creation"/>
-                <include name="activites.addQuizQuestion"/>
-                <include name="activites.deletion"/>              
+                <include name="activities.creation"/>
+                <include name="activities.addQuizQuestion"/>
+                <include name="activities.deletion"/>              
             </define>
-            <define name="ActvtsVrfctn">
+            <define name="ActivitiesVerification">
                 <include name="prerequisite"/>
-                <include name="activites.teacherVerify"/>
-                <include name="activites.studentVerify"/>          
+                <include name="activities.teacherVerify"/>
+                <include name="activities.studentVerify"/>          
             </define>            
-            <define name="ActvtsSbmtQz">
+            <define name="ActivitiesSubmitQuiz">
                 <include name="prerequisite"/>
-                <include name="activites.submitQuiz"/>          
+                <include name="activities.submitQuiz"/>          
             </define>
             <define name="Assignment_Grade">
                 <include name="prerequisite"/>
@@ -129,10 +131,10 @@
                 <include name="resume.teacherVerify"/>  
                 <include name="resume.studentVerify"/>                                              
             </define>
-            <define name="PersonalInfo">
+            <define name="PersonalInformation">
                 <include name="prerequisite"/>
-                <include name="personalInfo.teacherVerify"/>
-                <include name="personalInfo.studentVerify"/>     
+                <include name="personalInformation.teacherVerify"/>
+                <include name="personalInformation.studentVerify"/>     
             </define>
             <define name="Files">
                 <include name="prerequisite"/>
@@ -159,7 +161,7 @@
                 <include name="help.teacherVerify"/>
                 <include name="help.studentVerify"/>
             </define>
-            <define name="PswdQz">
+            <define name="PasswordQuiz">
                 <include name="prerequisite"/>
                 <include name="pswdQuiz.generatePassword"/>
                 <include name="pswdQuiz.readMail"/>
@@ -174,22 +176,21 @@
             </define>
             <define name="Glossary">
                 <include name="prerequisite"/>
-                <!--include name="activities.createGlossary"/-->
-                <include name="activites.teacherCreateGlossaryEntry"/>
-                <include name="activites.teacherCreateGlossaryCategory"/>
-                <include name="activites.studentCreateGlossaryEntry"/>
-                <include name="activites.studentEditGlossary"/>           
+                <include name="activities.createGlossary"/>
+                <include name="activities.teacherCreateGlossaryEntry"/>
+                <include name="activities.teacherCreateGlossaryCategory"/>
+                <include name="activities.studentCreateGlossaryEntry"/>
+                <include name="activities.studentEditGlossary"/>           
             </define>
             <define name="CourseBackupRestore">
                 <include name="prerequisite"/>
                 <include name="course.backup"/>
                 <include name="course.restore"/>
             </define>
-            <!--Not ready for debug module-->
-            <!--define name="Contact">
+            <define name="Contact">
                 <include name="prerequisite"/>
                 <include name="contact.teacherAddStudentAsContactfromCourse"/>                                
-            </define>-->
+            </define>
             <define name="StudentSupport">
                 <include name="prerequisite"/>
                 <include name="support.uiVerify"/>
@@ -205,7 +206,7 @@
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
-            <class name="runThrghTestNG.Teacher_FetchAssignmentPassword"/>
+            <class name="runThrghTestNG.Teacher_FetchActivityPassword"/>
             <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>
             <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>

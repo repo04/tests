@@ -40,7 +40,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
-            annotation.setDataProvider("GrpCrsDebug");
+            annotation.setDataProvider("GroupCourseDebug");
             annotation.setDataProviderClass(ContentAdmin_Course_GroupCourseCreation.class);
         }
 
@@ -58,7 +58,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods = new String[1];
             DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
             annotation.setDependsOnMethods(DependentMethods);
-            annotation.setDataProvider("GrpCrsQzDebug");
+            annotation.setDataProvider("GroupCourseQuizDebug");
             annotation.setDataProviderClass(ContentAdmin_Course_GroupCourseCreation.class);
         }
 
@@ -68,7 +68,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminAddQuizQuestion";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
-            annotation.setDataProvider("GrpCrsActivitiesDebug");
+            annotation.setDataProvider("GroupCourseActivitiesDebug");
             annotation.setDataProviderClass(ContentAdmin_Course_GroupCourseCreation.class);
         }
 
@@ -94,7 +94,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminUserCreation";
             annotation.setDependsOnMethods(DependentMethods);
-            annotation.setDataProvider("GrpCrsUsersDebug");
+            annotation.setDataProvider("GroupCourseUsersDebug");
             annotation.setDataProviderClass(Pes_UserCreation_AssignRole_WorkingGroup.class);
         }
 
@@ -103,7 +103,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
-            annotation.setDataProvider("GrpCrsUsersDebug");
+            annotation.setDataProvider("GroupCourseUsersDebug");
             annotation.setDataProviderClass(Pes_UserCreation_AssignRole_WorkingGroup.class);
         }
 
@@ -123,7 +123,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods = new String[1];
             DependentMethods[0] = "testPESAdminCreateWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
-            annotation.setDataProvider("WrkngGrpDebugUsrs");
+            annotation.setDataProvider("WorkingGroupDebugUsers");
             annotation.setDataProviderClass(Pes_UserCreation_AssignRole_WorkingGroup.class);
         }
         
@@ -147,7 +147,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAddMembersToWorkingGroup";
             DependentMethods[1] = "testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
-            annotation.setDataProvider("GrpCrsWrkngGrpDebugUsers");
+            annotation.setDataProvider("GroupCourseWorkingGroupDebugUsers");
             annotation.setDataProviderClass(Pes_UserCreation_AssignRole_WorkingGroup.class);
         }
         
@@ -157,7 +157,7 @@ public class TransformDebug implements IAnnotationTransformer {
             DependentMethods[0] = "runThrghTestNG.Pes_CleanTestData.testPESAdminRemoveMembersFromWorkngGroup";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
-            annotation.setDataProvider("WrkngGrpDebug");
+            annotation.setDataProvider("WorkingGroupDebug");
             annotation.setDataProviderClass(Pes_UserCreation_AssignRole_WorkingGroup.class);
         }
 
@@ -428,7 +428,7 @@ public class TransformDebug implements IAnnotationTransformer {
         if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
             System.out.println("Inside testStudentSubmitPasswordQuiz");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Teacher_FetchAssignmentPassword.testTeacherFetchQuizPassword";
+            DependentMethods[0] = "runThrghTestNG.Teacher_FetchActivityPassword.testTeacherFetchQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
         

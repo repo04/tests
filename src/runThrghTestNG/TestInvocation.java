@@ -37,11 +37,11 @@ public class TestInvocation implements IInvokedMethodListener {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }
+            }
 
-                if ("testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
-                    System.out.println("Skipping Test Method");
-                    throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
-                }
+            if ("testTeacherEmailFetchActivityPasswordLogIn".equals(method.getName())) {
+                System.out.println("Skipping Test Method");
+                throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
             }
         }
     }

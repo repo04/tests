@@ -20,34 +20,34 @@ import smoketest.Actions;
  */
 public class Student_JoinSocialGroup_Post extends BaseClass {
 
-    static String[][] stdtUrlPostOnTchrSclGrp = new String[1][1];
-    static String[][] stdtTxtCmntOnTchrCrsPost = new String[1][1];
-    static String[][] noteCourse = new String[1][1];
-    static String[][] noteWall = new String[1][1];
-    static String[][] stdtGlossaryEntryArray = new String[1][1];
+    static String[][] studentUrlPostOnTeacherSocialGroup = new String[1][1];
+    static String[][] studentTextCommentOnTeacherCoursePost = new String[1][1];
+    static String[][] noteCourseNameArray = new String[1][1];
+    static String[][] noteWallNameArray = new String[1][1];
+    static String[][] studentGlossaryEntryArray = new String[1][1];
     
     Actions a = new Actions();
 
     @DataProvider(name = "Note")
     public static Object[][] Note(ITestContext context) throws Exception {
-        return (noteWall);
+        return (noteWallNameArray);
     }
     
-    @DataProvider(name = "TchrSclGrpStdtUrlPost")
-    public static Iterator<Object[]> TchrSclGrpStdtUrlPost(ITestContext context) throws Exception {
-        System.out.println("init TchrSclGrpStdtUrlPost");
-        return DataProviderUtility.cartesianProviderFrom(Teacher_Posts_SocialGroup.TchrSclGrp(context), stdtUrlPostOnTchrSclGrp);
+    @DataProvider(name = "TeacherSocialGroupStudentUrlPost")
+    public static Iterator<Object[]> TeacherSocialGroupStudentUrlPost(ITestContext context) throws Exception {
+        System.out.println("init TeacherSocialGroupStudentUrlPost");
+        return DataProviderUtility.cartesianProviderFrom(Teacher_Posts_SocialGroup.TeacherSocialGroup(context), studentUrlPostOnTeacherSocialGroup);
     }
     
-    @DataProvider(name = "CrsStdtCmnt")
-    public static Iterator<Object[]> StdtTxtCmntOnTchrCrsPost(ITestContext context) throws Exception {
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), stdtTxtCmntOnTchrCrsPost);
+    @DataProvider(name = "CourseStudentComment")
+    public static Iterator<Object[]> StudentTextCommentOnTeacherCoursePost(ITestContext context) throws Exception {
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), studentTextCommentOnTeacherCoursePost);
     }
     
-    @DataProvider(name = "StdtGlossaryEntryName")
-    public static Object[][] StdtGlossaryEntryName(ITestContext context) throws Exception {
-        System.out.println("init StdtGlossaryEntryName");
-        return (stdtGlossaryEntryArray);
+    @DataProvider(name = "StudentGlossaryEntryName")
+    public static Object[][] StudentGlossaryEntryName(ITestContext context) throws Exception {
+        System.out.println("init StudentGlossaryEntryName");
+        return (studentGlossaryEntryArray);
     }
 
     /**
@@ -59,9 +59,9 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogIn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][1]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
+            a.login(context.getCurrentXmlTest().getParameter("studentUserName"));
         }
     }
 
@@ -70,12 +70,12 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentJoinTeachers"})
-    public void testStudentJoinsTeacherSocialGroup(String tchrSclGrpName) throws Exception {
+    @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentJoinTeachers"})
+    public void testStudentJoinsTeacherSocialGroup(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.findSocialGroup(tchrSclGrpName);
-        a.joinSocialGroup(tchrSclGrpName);
+        a.findSocialGroup(teacherSocialGroupName);
+        a.joinSocialGroup(teacherSocialGroupName);
     }
 
     /**
@@ -83,13 +83,13 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentPostURLOnTeachers"})
-    public void testStudentPostURLOnTeacherSocialGroup(String tchrSclGrpName) throws Exception {
+    @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentPostURLOnTeachers"})
+    public void testStudentPostURLOnTeacherSocialGroup(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.navigateToGroupWall(tchrSclGrpName);
-        stdtUrlPostOnTchrSclGrp[0][0] = a.urlPost("urlSclGrpPost");
-        Reporter.log("stdtUrlPostOnTchrSclGrp: " + stdtUrlPostOnTchrSclGrp[0][0], true);
+        a.navigateToGroupWall(teacherSocialGroupName);
+        studentUrlPostOnTeacherSocialGroup[0][0] = a.urlPost("urlSclGrpPost");
+        Reporter.log("studentUrlPostOnTeacherSocialGroup: " + studentUrlPostOnTeacherSocialGroup[0][0], true);
     }
 
     /**
@@ -97,74 +97,74 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "wall.studentCommentOnTeacherCoursePost"})
-    public void testStudentCommentOnTeacherCoursePost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
-        a.selectGroupCourse(grpCrsName);
-        stdtTxtCmntOnTchrCrsPost[0][0] = a.textCommentPost(tchrUrlCrsPost, "txtCmntOnTchrCrsPst");
-        Reporter.log("stdtTxtCmntOnTchrCrsPost: " + stdtTxtCmntOnTchrCrsPost[0][0], true);
+    @Test(dataProvider = "GroupCourseTeacherUrlCoursePost", dataProviderClass = Teacher_Posts_SocialGroup.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.studentCommentOnTeacherCoursePost"})
+    public void testStudentCommentOnTeacherCoursePost(String groupCourseName, String teacherUrlCoursePost) throws Exception {
+        a.selectGroupCourse(groupCourseName);
+        studentTextCommentOnTeacherCoursePost[0][0] = a.textCommentPost(teacherUrlCoursePost, "txtCmntOnTchrCrsPst");
+        Reporter.log("studentTextCommentOnTeacherCoursePost: " + studentTextCommentOnTeacherCoursePost[0][0], true);
     }
     
     /**
      * Student verifies PES posts on Course Wall
      * 
-     * @param grpCrsName
-     * @param pesTxtCrsSctnPost
-     * @param pesTxtCrsPostCmntsOn
-     * @param pesTxtCrsPostCmntsOff
+     * @param groupCourseName
+     * @param pesTextCourseSectionPost
+     * @param pesTxtCoursePostCommentsOn
+     * @param pesTextCoursePostCommentsOff
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsPESCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    @Test(dataProvider = "GroupCoursePesCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "wall.studentVerifyPESCoursePosts"})
-    public void testStudentVerifyPESCoursePost(String grpCrsName, String pesTxtCrsSctnPost, String pesTxtCrsPostCmntsOn, String pesTxtCrsPostCmntsOff, String pesTxtAncmntCrsPost) throws Exception {
+    public void testStudentVerifyPESCoursePost(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.verifyCoursePost(pesTxtCrsSctnPost, pesTxtCrsPostCmntsOn, pesTxtCrsPostCmntsOff, pesTxtAncmntCrsPost);
+        a.selectGroupCourse(groupCourseName);
+        a.verifyCoursePost(pesTextCourseSectionPost, pesTxtCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
     }
     
     /**
      * Student recommend Teacher's URL Course Post
      * 
-     * @param grpCrsName
-     * @param tchrUrlCrsPost
+     * @param groupCourseName
+     * @param teacherUrlCoursePost
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Teacher_Posts_SocialGroup.class,
+    @Test(dataProvider = "GroupCourseTeacherUrlCoursePost", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "wall.studentRecommendPost"})
-    public void testStudentRecommendCourseURLPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+    public void testStudentRecommendCourseURLPost(String groupCourseName, String teacherUrlCoursePost) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.recommendURLCoursePost(tchrUrlCrsPost);
+        a.selectGroupCourse(groupCourseName);
+        a.recommendURLCoursePost(teacherUrlCoursePost);
     }
     
     /**
      * Submit Assignment
      *
-     * @param grpCrsName
-     * @param allInOneAsgnmntAvtvtyName
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAssgnmnt", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.submit"})
-    public void testStudentSubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName) throws Exception {
+    public void testStudentSubmitAssignment(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.submitAssignment(allInOneAsgnmntAvtvtyName);
+        a.submitAssignment(allInOneAssignmentActivityName);
     }
 
     /**
      * Create Note on Course Wall
      *
-     * @param grpCrsName
+     * @param groupCourseName
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "note.createOnCourseWall"})
-    public void testStudentCreateNoteOnCourseWall(String grpCrsName) throws Exception {
+    public void testStudentCreateNoteOnCourseWall(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        noteCourse[0][0] = a.createNote(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
+        noteCourseNameArray[0][0] = a.createNote(groupCourseName);
     }
 
     /**
@@ -175,7 +175,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @Test(groups = {"regressionSmoke", "note.createOnProfileWall"})
     public void testStudentCreateNoteOnProfileWall() throws Exception {
         a.navigateToMyWall();
-        noteWall[0][0] = a.createNote("Profile");
+        noteWallNameArray[0][0] = a.createNote("Profile");
     }
     
     /**
@@ -227,14 +227,14 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     /**
      * Verify Syllabus Activity
      * 
-     * @param grpCrsName
+     * @param groupCourseName
      * @throws Exception 
      */
     /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class, 
           groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
-    public void testStudentVerifySyllabusActivity(String grpCrsName) throws Exception {
+    public void testStudentVerifySyllabusActivity(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.verifySyllabusActivity();
     }*/
     
@@ -254,10 +254,10 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * 
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "personalInfo.studentVerify"})
-    public void testStudentVerifyPersonalInfo() throws Exception {
-        a.navigateToMyPersonalInfo();
-        a.verifyPersonalInfo();
+    @Test(groups = {"regressionSmoke", "personalInformation.studentVerify"})
+    public void testStudentVerifyPersonalInformation() throws Exception {
+        a.navigateToMyPersonalInformation();
+        a.verifyPersonalInformation();
     }
     
     /**
@@ -296,19 +296,19 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     /**
      * Student create Glossary entry
      * 
-     * @param grpCrsName
+     * @param groupCourseName
      * @param glossaryName
      * @throws Exception 
      */
     @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "activites.studentCreateGlossaryEntry"})
-    public void testStudentCreateGlossaryEntry(String grpCrsName, String glossaryName) throws Exception {
+          groups = {"regressionSmoke", "activities.studentCreateGlossaryEntry"})
+    public void testStudentCreateGlossaryEntry(String groupCourseName, String glossaryName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
         a.navigateToContentPage(glossaryName);
-        stdtGlossaryEntryArray[0][0] = a.createGlossaryEntry(glossaryName);
-        Reporter.log("stdtGlossaryEntryName: " + stdtGlossaryEntryArray[0][0], true);
+        studentGlossaryEntryArray[0][0] = a.createGlossaryEntry(glossaryName);
+        Reporter.log("studentGlossaryEntryName: " + studentGlossaryEntryArray[0][0], true);
     }
 
     /**
