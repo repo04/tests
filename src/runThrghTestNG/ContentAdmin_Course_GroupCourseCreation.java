@@ -348,10 +348,6 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.navigateToMyCourse();
         a.selectCourse(groupCourseName);
         a.createLessonActivity();
-        
-        
-        
-        
     }
 
     /**

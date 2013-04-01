@@ -368,7 +368,7 @@ public class Actions extends BaseClass {
     public void selectCourse(String crsName) {
         ip.isElementPresentContainsTextByXPATH(driver, crsName);
         driver.findElement(By.xpath("//*[contains(text(),'" + crsName + "')]")).click();
-        ip.isTextPresentByXPATH(driver, "//h1/a", crsName);
+        //ip.isTextPresentByXPATH(driver, "//h1/a", crsName);
     }
 
     /**
@@ -446,7 +446,7 @@ public class Actions extends BaseClass {
     
     public void createLessonActivity() {
         Activity activity = new Activity();
-        
+        activity.createLessonActivity();
     }
 
     /**
@@ -1063,7 +1063,7 @@ public class Actions extends BaseClass {
     }
     
     public String currentDateTime() {
-        String stuff = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        return stuff;
+        String temp = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        return temp;
     }
 }

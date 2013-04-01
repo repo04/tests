@@ -4,6 +4,7 @@
  */
 package smoketest;
 
+import java.lang.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,17 +31,21 @@ public class Activity extends BaseClass {
     private String glossaryEntryName;
     private String glossaryCategoryName;
     private String lessonActivityName;
+    StackTraceElement[] stackTraceElements; 
 
     
     public void createLessonActivity() {
         String currentDateTime = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        
-        
-        
-        
+        System.out.println("######&(*&#(@&*$&*(@#&$*(&@*#$&(*&$*(&*(#&*&$#*@&$*(@#&$*(@#&*(@#&(*^%&^%&^@&*^%&*");
+    }
+    
+    
+    public String getExecutingMethod() {
+        String temp = Thread.currentThread().getStackTrace()[2].getMethodName();
+        return temp;
     }
     /**
-     * Create & Verify Forum Activity
+ * Create & Verify Forum Activity
      */
     public void crtForumActvty() {
         String forumIntro;
