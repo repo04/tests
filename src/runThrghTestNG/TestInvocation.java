@@ -25,27 +25,8 @@ public class TestInvocation implements IInvokedMethodListener {
         ITestNGMethod testNgMethod = result.getMethod();
         ConstructorOrMethod contructorOrMethod = testNgMethod.getConstructorOrMethod();
         Method method = contructorOrMethod.getMethod();
-        System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
-        
-        /*
-        if (!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
-            if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) {
-                if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())) {
-                    System.out.println("Skipping Test Method");
-                    throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
-                }
-            } else {
-                if ("testTeacherGenerateQuizPassword".equals(method.getName())) {
-                    System.out.println("Skipping Test Method");
-                    throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
-                }
-
-                if ("testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
-                    System.out.println("Skipping Test Method");
-                    throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
-                }
-            }
-        }*/
+        System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n"); 
+ 
         if (!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
             if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) 
             {
@@ -62,6 +43,7 @@ public class TestInvocation implements IInvokedMethodListener {
                 }
             }
         }
+        
         // Checks For UNC-MPA and WU-LLM 
         if(!"setUp".equals(method.getName()) && !BaseClass.test.equalsIgnoreCase("CriticalTests") && (BaseClass.program.contains("unc-mpa") || BaseClass.program.contains("wu-llm"))) {
             if("testStudentSupportMobileURL".equals(method.getName())) {

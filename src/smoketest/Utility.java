@@ -5,6 +5,8 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,6 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Utility {
 
     public static IsPresent ip = new IsPresent();
+    Date now = new Date();
 
     /**
      * Uses js to click on hidden element on the page by XPATH

@@ -1,11 +1,17 @@
 package smoketest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class Actions extends BaseClass {
+    
+    Date now = new Date();
 
     /**
      * Login
@@ -362,7 +368,7 @@ public class Actions extends BaseClass {
     public void selectCourse(String crsName) {
         ip.isElementPresentContainsTextByXPATH(driver, crsName);
         driver.findElement(By.xpath("//*[contains(text(),'" + crsName + "')]")).click();
-        ip.isTextPresentByXPATH(driver, "//h1/a", crsName);
+        //ip.isTextPresentByXPATH(driver, "//h1/a", crsName);
     }
 
     /**
@@ -373,7 +379,7 @@ public class Actions extends BaseClass {
     public String createForumActivity() {
         Activity actvty = new Activity();
         actvty.crtForumActvty();
-        return actvty.getFrmActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -384,7 +390,7 @@ public class Actions extends BaseClass {
     public String createGlossaryActivity() {
         Activity actvty = new Activity();
         actvty.crtGlossaryActvty();
-        return actvty.getGlossaryActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -395,7 +401,7 @@ public class Actions extends BaseClass {
     public String createQuizActivity() {
         Activity actvty = new Activity();
         actvty.crtQuizActvty();
-        return actvty.getQzActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -405,7 +411,7 @@ public class Actions extends BaseClass {
     public String createPswdQuizActivity() {
         Activity actvty = new Activity();
         actvty.crtPswdQuizActivity();
-        return actvty.getPswdQuizActivity();
+        return actvty.getActivityName();
     }
 
     /**
@@ -416,7 +422,7 @@ public class Actions extends BaseClass {
     public String createAllInOneAssignmentActivity() {
         Activity actvty = new Activity();
         actvty.createAllInOneAssignmentActivity();
-        return actvty.getAllInOneAssignmentActivityName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -427,7 +433,7 @@ public class Actions extends BaseClass {
     public String createPageResource() {
         Activity actvty = new Activity();
         actvty.createPageResource();
-        return actvty.getPageActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -436,6 +442,11 @@ public class Actions extends BaseClass {
     public void createSyllabusActivity() {
         Activity actvty = new Activity();
         actvty.createSyllabusActivity();
+    }
+    
+    public void createLessonActivity() {
+        Activity activity = new Activity();
+        activity.createLessonActivity();
     }
 
     /**
@@ -1011,7 +1022,7 @@ public class Actions extends BaseClass {
     public String createGlossaryEntry(String glossaryName) {
         Activity actvty = new Activity();
         actvty.createGlossaryEntry(glossaryName);
-        return actvty.getGlossaryEntryName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -1022,7 +1033,7 @@ public class Actions extends BaseClass {
     public String createGlossaryCategory(String glossaryName) {
         Activity actvty = new Activity();
         actvty.createGlossaryCategory(glossaryName);
-        return actvty.getGlossaryCategoryName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -1049,5 +1060,10 @@ public class Actions extends BaseClass {
     public void testStudentSupportMobileAppURL() {
         StudentSupport ss = new StudentSupport();
         ss.verifyStudentSupportMobileAppURL();
+    }
+    
+    public String currentDateTime() {
+        String time = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        return time;
     }
 }

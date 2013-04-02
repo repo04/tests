@@ -25,8 +25,7 @@ import smoketest.XpathValues;
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class BaseClass {
 
-    public static XpathValues xpv;
-    public static ProgramValues pv;
+    public static XpathValues xpv, pv;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
     public static String program;
@@ -62,7 +61,7 @@ public class BaseClass {
         this.test = test;
         this.url = url;
 
-        pv = new ProgramValues("loginDetails");
+        pv = new  XpathValues("loginDetails");
         xpv = new XpathValues("xPathAccountProperty");
         System.out.println("url: " + url);
         System.out.println("program: " + this.program);
