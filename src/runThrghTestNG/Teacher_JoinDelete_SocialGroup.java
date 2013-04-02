@@ -26,9 +26,9 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogIn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][0]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("tchrUsrName"));
+            a.login(context.getCurrentXmlTest().getParameter("teacherUserName"));
         }
     }
 
@@ -37,12 +37,12 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherJoinStudents"})
-    public void testTeacherJoinsStudentSocialGroup(String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "StudentSocialGroup", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherJoinStudents"})
+    public void testTeacherJoinsStudentSocialGroup(String studentSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.findSocialGroup(stdtSclGrpName);
-        a.joinSocialGroup(stdtSclGrpName);
+        a.findSocialGroup(studentSocialGroupName);
+        a.joinSocialGroup(studentSocialGroupName);
     }
 
     /**
@@ -50,26 +50,26 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherLeaveStudents"})
-    public void testTeacherLeavesStudentSocialGroup(String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "StudentSocialGroup", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherLeaveStudents"})
+    public void testTeacherLeavesStudentSocialGroup(String studentSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.leaveSocialGroup(stdtSclGrpName);
+        a.leaveSocialGroup(studentSocialGroupName);
     }
     
     /**
      * Teacher verify Students post existence even Student left Teacher Social Group
      * 
-     * @param tchrSclGrpName
-     * @param stdtUrlPostOnTchrSclGrp
+     * @param teacherSocialGroupName
+     * @param studentUrlPostOnTeacherSocialGroup
      * @throws Exception 
      */
-    @Test(dataProvider = "TchrSclGrpStdtUrlPost", dataProviderClass = Student_JoinSocialGroup_Post.class,
+    @Test(dataProvider = "TeacherSocialGroupStudentUrlPost", dataProviderClass = Student_JoinSocialGroup_Post.class,
           groups = {"regressionSmoke", "socialGroup.teacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall"})
-    public void testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall(String tchrSclGrpName, String stdtUrlPostOnTchrSclGrp) throws Exception {
+    public void testTeacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall(String teacherSocialGroupName, String studentUrlPostOnTeacherSocialGroup) throws Exception {
         a.navigateToMySocialGroups();
-        a.navigateToGroupWall(tchrSclGrpName);
-        a.verifyPostOnSocialGroupWall(stdtUrlPostOnTchrSclGrp);
+        a.navigateToGroupWall(teacherSocialGroupName);
+        a.verifyPostOnSocialGroupWall(studentUrlPostOnTeacherSocialGroup);
     }
 
     /**
@@ -77,89 +77,89 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "TchrSclGrp", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.teacherDelete"})
-    public void testTeacherDeleteSocialGroup(String tchrSclGrpName) throws Exception {
+    @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherDelete"})
+    public void testTeacherDeleteSocialGroup(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.navigateToGroupWall(tchrSclGrpName);
-        a.deleteSocialGroup(tchrSclGrpName);
+        a.navigateToGroupWall(teacherSocialGroupName);
+        a.deleteSocialGroup(teacherSocialGroupName);
     }
 
     /**
      * Allow Assignment to be resubmitted
      *
-     * @param grpCrsName
-     * @param allInOneAsgnmntAvtvtyName
-     * @param stdtUsrName
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityName
+     * @param studentUserName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsAsgnmntStdt", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    @Test(dataProvider = "GroupCourseAssignmentStudent", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "assignment.allowResubmit"})
-    public void testTeacherAllowResubmitAssignment(String grpCrsName, String allInOneAsgnmntAvtvtyName, String stdtUsrName) throws Exception {
+    public void testTeacherAllowResubmitAssignment(String groupCourseName, String allInOneAssignmentActivityName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToGrades();
-        a.allowResubmitAssignment(allInOneAsgnmntAvtvtyName, stdtUsrName);
+        a.allowResubmitAssignment(allInOneAssignmentActivityName, studentUserName);
     }
 
     /**
      * Verify Students Post Recommendation
      * 
-     * @param grpCrsName
+     * @param groupCourseName
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.teacherVerifyStudentsPostRecommendation"})
-    public void testTeacherVerifyStudentsPostRecommendation(String grpCrsName) throws Exception {
+    public void testTeacherVerifyStudentsPostRecommendation(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.verifyPostRecommendation();
     }
     
     /**
      * Verify Students comment on Post
      * 
-     * @param grpCrsName
-     * @param stdtTxtCmntOnTchrCrsPost
+     * @param groupCourseName
+     * @param studentTextCommentOnTeacherCoursePost
      * @throws Exception 
      */
-    @Test(dataProvider = "CrsStdtCmnt", dataProviderClass = Student_JoinSocialGroup_Post.class,
+    @Test(dataProvider = "CourseStudentComment", dataProviderClass = Student_JoinSocialGroup_Post.class,
           groups = {"regressionSmoke", "wall.teacherVerifyStudentsCommentOnPost"})
-    public void testTeacherVerifyStudentsComment(String grpCrsName, String stdtTxtCmntOnTchrCrsPost) throws Exception {
+    public void testTeacherVerifyStudentsComment(String groupCourseName, String studentTextCommentOnTeacherCoursePost) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.verifyCommentOnPost(stdtTxtCmntOnTchrCrsPost);
+        a.selectGroupCourse(groupCourseName);
+        a.verifyCommentOnPost(studentTextCommentOnTeacherCoursePost);
     }
 
     /**
      * Delete Post
      * 
-     * @param grpCrsName
-     * @param tchrUrlCrsPost
+     * @param groupCourseName
+     * @param teacherUrlCoursePost
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsTchrUrlCrsPst", dataProviderClass = Teacher_Posts_SocialGroup.class,
+    @Test(dataProvider = "GroupCourseTeacherUrlCoursePost", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "wall.teacherDeleteCourseURLPost"})
-    public void testTeacherDeleteCourseURLPost(String grpCrsName, String tchrUrlCrsPost) throws Exception {
+    public void testTeacherDeleteCourseURLPost(String groupCourseName, String teacherUrlCoursePost) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.deletePost(tchrUrlCrsPost);
+        a.selectGroupCourse(groupCourseName);
+        a.deletePost(teacherUrlCoursePost);
     }
     
     /**
      * Teacher delete single file uploaded in Course
      * 
-     * @param grpCrsName
+     * @param groupCourseName
      * @param pdf
      * @param pptx
      * @param doc
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
+    @Test(dataProvider = "GroupCourseFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
           groups = {"regressionSmoke", "files.teacherDelete"})
-    public void testTeacherDeleteFiles(String grpCrsName, String pdf, String pptx, String doc) throws Exception {
+    public void testTeacherDeleteFiles(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         a.navigateToFiles();
         a.deleteFiles(doc, pptx, pdf);
     }

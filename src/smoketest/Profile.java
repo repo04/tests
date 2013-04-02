@@ -12,7 +12,7 @@ import runThrghTestNG.BaseClass;
  */
 public class Profile extends BaseClass {
 
-    void verifyPersonalInfo() {
+    void verifyPersonalInformation() {
         ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[4]", "Basic Information");
         ip.isTextPresentByXPATH(driver, "//div[6]/div/div", "Name:");
         ip.isTextPresentByXPATH(driver, "//div[6]/div[3]/div", "Birthday:");

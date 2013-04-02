@@ -16,8 +16,8 @@ import runThrghTestNG.BaseClass;
  */
 public class Settings extends BaseClass {
 
-    String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7,
-            vrfy8, vrfy9, vrfy10, vrfy11, vrfy12, vrfy13, vrfy14, vrfy15;
+    String verify1, verify2, verify3, verify4, verify5, verify6, verify7,
+            verify8, verify9, verify10, verify11, verify12, verify13, verify14, verify15;
     List<String> elementsText;
     List<WebElement> checkboxes;
 
@@ -55,28 +55,28 @@ public class Settings extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//th[2]", "Online");
         ip.isTextPresentByXPATH(driver, "//th[3]", "Email");
 
-        vrfy1 = "Someone requests you as a contact";
-        vrfy2 = "Someone confirms your contact request";
-        vrfy3 = "Someone posts or comments on your profile wall";
-        vrfy4 = "Someone comments on your post(s)";
-        vrfy5 = "Someone joins a group you are in";
-        vrfy6 = "Someone invites you to join a group";
-        vrfy7 = "A live session will be held in the next 2 days";
-        vrfy8 = "A professor or Student Support posts an announcement";
-        vrfy9 = "Someone posts in a course I am teaching";
-        vrfy10 = "A student submits an assignment";
-        vrfy11 = "A recording for a live session I attended/should attend is available online";
-        vrfy12 = "An assignment is due in the next 5 days";
-        vrfy13 = "One of my assignments is graded";
-        vrfy14 = "Remind me when assignment is past due";
-        vrfy15 = "A professor posts in a course I am in";
+        verify1 = "Someone requests you as a contact";
+        verify2 = "Someone confirms your contact request";
+        verify3 = "Someone posts or comments on your profile wall";
+        verify4 = "Someone comments on your post(s)";
+        verify5 = "Someone joins a group you are in";
+        verify6 = "Someone invites you to join a group";
+        verify7 = "A live session will be held in the next 2 days";
+        verify8 = "A professor or Student Support posts an announcement";
+        verify9 = "Someone posts in a course I am teaching";
+        verify10 = "A student submits an assignment";
+        verify11 = "A recording for a live session I attended/should attend is available online";
+        verify12 = "An assignment is due in the next 5 days";
+        verify13 = "One of my assignments is graded";
+        verify14 = "Remind me when assignment is past due";
+        verify15 = "A professor posts in a course I am in";
 
         if (LoginPage.getUser().contains("student")) {
-            elementsText = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6,
-                    vrfy12, vrfy7, vrfy13, vrfy8, vrfy14, vrfy15, vrfy11);
+            elementsText = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6,
+                    verify12, verify7, verify13, verify8, verify14, verify15, verify11);
         } else {
-            elementsText = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6,
-                    vrfy7, vrfy8, vrfy9, vrfy10, vrfy11);
+            elementsText = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6,
+                    verify7, verify8, verify9, verify10, verify11);
         }
 
         int i = 2;

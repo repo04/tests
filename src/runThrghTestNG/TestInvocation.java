@@ -30,13 +30,13 @@ public class TestInvocation implements IInvokedMethodListener {
         if (!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
             if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) {
                 if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())
-                        || "testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
+                        || "testTeacherEmailFetchActivityPasswordLogIn".equals(method.getName())) {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }
             } else {
                 if ("testTeacherGenerateQuizPassword".equals(method.getName())
-                        || "testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
+                        || "testTeacherEmailFetchActivityPasswordLogIn".equals(method.getName())) {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }

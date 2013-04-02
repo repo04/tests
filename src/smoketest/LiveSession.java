@@ -16,8 +16,6 @@ public class LiveSession extends BaseClass {
 
     /**
      * Create & verify Live Session
-     *
-     * @param sclGrpName
      */
     public void buildLiveSession() {
         String user = LoginPage.getUser();
@@ -60,24 +58,8 @@ public class LiveSession extends BaseClass {
         WebElement lvSsnNmDesc = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDescXPATH"))));
         WebElement lvSsnDrtn = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH"))));
         new WebDriverWait(driver, 30).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldLvSsnDrtnXPATH")), "60"));
-        String regex = "^(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((20)\\d\\d)$";
-        int x = 1;
+        Utility.verifyDatePresentInElementValue(driver, By.id("startdate"));
         
-        do {
-            String fetchdate = driver.findElement(By.id("startdate")).getAttribute("value");
-            if (!fetchdate.isEmpty()) {
-                if (!Pattern.matches(regex, fetchdate)) {
-                    Utility.illegalStateException("Date (" + fetchdate + ") does not match the expected (mm/dd/yyyy) format");
-                }
-                break;
-            }
-            x++;
-        } while (x < 2401);
-
-        if (x > 2400) {
-            Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by: By.id:startdate");
-        }
-
         //This is to verify lvSsnName & lvSsnDrtn field passes correct value 
         value:
         while (true) {

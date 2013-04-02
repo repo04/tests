@@ -20,8 +20,8 @@ import smoketest.Utility;
 public class Pes_CleanTestData extends BaseClass {
 
     Actions a = new Actions();
-    public static boolean tchrStatus;
-    public static boolean stdtStatus;
+    public static boolean teacherStatus;
+    public static boolean studentStatus;
 
     /**
      * The annotated method will be run before the first test method in the
@@ -37,48 +37,48 @@ public class Pes_CleanTestData extends BaseClass {
     /**
      * Un-enroll users from Working Group
      *
-     * @param grpCrsName
-     * @param tchrUsrName
-     * @param stdtUsrName
+     * @param groupCourseName
+     * @param teacherUserName
+     * @param studentUserName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    @Test(dataProvider = "GroupCourseUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"users.unAssignRole"})
-    public void testPESAdminUnerolUsers(String grpCrsName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testPESAdminUnerolUsers(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.unenrolUsers(stdtUsrName, tchrUsrName);
+        a.selectGroupCourse(groupCourseName);
+        a.unenrolUsers(studentUserName, teacherUserName);
     }
     
     /**
      * PES Admin verify Student post deletion from Working Group
      * 
-     * @param wrkngGrpName
-     * @param stdtUrlPostOnWrkngGrp
+     * @param workingGroupName
+     * @param studentUrlPostOnWorkingGroup
      * @throws Exception 
      */
-    @Test(dataProvider = "WrkngGrpStdtURLPost", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+    @Test(dataProvider = "WorkingGroupStudentURLPost", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "workingGroup.pesAdminDeleteAndVerifyStudentPostFromWorkingGroup"})
-    public void testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup(String wrkngGrpName, String stdtUrlPostOnWrkngGrp) throws Exception {
+    public void testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup(String workingGroupName, String studentUrlPostOnWorkingGroup) throws Exception {
         a.navigateToWorkingGroups();
-        a.navigateToGroupWall(wrkngGrpName);
-        a.deletePost(stdtUrlPostOnWrkngGrp);
+        a.navigateToGroupWall(workingGroupName);
+        a.deletePost(studentUrlPostOnWorkingGroup);
     }
     
     /**
      * Remove members from Working Group
      *
-     * @param grpCrsName
-     * @param wrkngGrpName
-     * @param tchrUsrName
-     * @param stdtUsrName
+     * @param groupCourseName
+     * @param workingGroupName
+     * @param teacherUserName
+     * @param studentUserName
      * @throws Exception
      */
-    @Test(dataProvider = "GrpCrsWrkngGrpUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    @Test(dataProvider = "GroupCourseWorkingGroupUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"workingGroup.removeMembers"})
-    public void testPESAdminRemoveMembersFromWorkngGroup(String grpCrsName, String wrkngGrpName, String tchrUsrName, String stdtUsrName) throws Exception {
+    public void testPESAdminRemoveMembersFromWorkngGroup(String groupCourseName, String workingGroupName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
+        a.selectGroupCourse(groupCourseName);
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"), 60);
@@ -86,19 +86,19 @@ public class Pes_CleanTestData extends BaseClass {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("linkScndNameXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))).click();
 
-        String stdtFllNm;
-        String tchrFllNm;
+        String studentFullName;
+        String teacherFullName;
 
-        if (tchrUsrName.substring(0, 7).contains("teacher")) {
-            tchrFllNm = tchrUsrName + "fstNm " + tchrUsrName + "sndNm";
+        if (teacherUserName.substring(0, 7).contains("teacher")) {
+            teacherFullName = teacherUserName + "fstNm " + teacherUserName + "sndNm";
         } else {
-            tchrFllNm = Utility.getFullName(tchrUsrName);            
+            teacherFullName = Utility.getFullName(teacherUserName);            
         }
 
-        if (stdtUsrName.substring(0, 7).contains("student")) {
-            stdtFllNm = stdtUsrName + "fstNm " + stdtUsrName + "sndNm";
+        if (studentUserName.substring(0, 7).contains("student")) {
+            studentFullName = studentUserName + "fstNm " + studentUserName + "sndNm";
         } else {
-            stdtFllNm = Utility.getFullName(stdtUsrName);            
+            studentFullName = Utility.getFullName(studentUserName);            
         }
 
         int i = 1;
@@ -112,26 +112,26 @@ public class Pes_CleanTestData extends BaseClass {
             i++;
         }
 
-        tchrStatus = findUser(i, tchrFllNm);
-        stdtStatus = findUser(i, stdtFllNm);
+        teacherStatus = findUser(i, teacherFullName);
+        studentStatus = findUser(i, studentFullName);
 
         a.navigateToWorkingGroups();
-        a.accessWorkingGroup(wrkngGrpName);
-        a.rmvMbrsFrmWrkngGrp(tchrUsrName, stdtUsrName);
+        a.accessWorkingGroup(workingGroupName);
+        a.removeMembersFromWorkingGroup(teacherUserName, studentUserName);
     }
 
     /**
      * Delete Working Group
      *
-     * @param wrkngGrpName
+     * @param workingGroupName
      * @throws Exception
      */
-    @Test(dataProvider = "WrkngGrp", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    @Test(dataProvider = "WorkingGroup", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.delete"})
-    public void testPESAdminDeleteWorkingGroup(String wrkngGrpName) throws Exception {
+    public void testPESAdminDeleteWorkingGroup(String workingGroupName) throws Exception {
         a.navigateToWorkingGroups();
-        a.accessWorkingGroup(wrkngGrpName);
-        a.deleteWorkingGroup(wrkngGrpName);
+        a.accessWorkingGroup(workingGroupName);
+        a.deleteWorkingGroup(workingGroupName);
     }
 
     /**
@@ -141,24 +141,24 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "users.delete"})
-    public void testPESAdminDeleteUsers(String tchrUsr, String stdtUsr) throws Exception {
+    public void testPESAdminDeleteUsers(String teacherUser, String studentUser) throws Exception {
         a.navigateToMyContacts();
-        a.deleteUsers(tchrUsr, stdtUsr);
+        a.deleteUsers(teacherUser, studentUser);
     }
     
     /**
      * Delete Announcement
      * 
-     * @param grpCrsName
-     * @param pesTxtAncmntCrsPost
+     * @param groupCourseName
+     * @param pesTextAnnouncementCoursePost
      * @throws Exception 
      */
-    @Test(dataProvider = "GrpCrsAnnouncement", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    @Test(dataProvider = "GroupCourseAnnouncement", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "wall.pesDeleteAnnouncement"})
-    public void testPESAdminDeleteAnnouncement(String grpCrsName, String pesTxtAncmntCrsPost) throws Exception {
+    public void testPESAdminDeleteAnnouncement(String groupCourseName, String pesTextAnnouncementCoursePost) throws Exception {
         a.navigateToMyCourse();
-        a.selectGroupCourse(grpCrsName);
-        a.deletePost(pesTxtAncmntCrsPost);
+        a.selectGroupCourse(groupCourseName);
+        a.deletePost(pesTextAnnouncementCoursePost);
     }
     
      /**

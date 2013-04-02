@@ -52,7 +52,7 @@ public class User extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldUsrnmXPATH"));
 
         driver.findElement(By.xpath(xpv.getTokenValue("fieldUsrnmXPATH"))).sendKeys(userName);
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys(pv.getTokenValue("password"));
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys(ldv.getTokenValue("password"));
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName);
         if (user.equalsIgnoreCase("teacher")) {
@@ -67,8 +67,8 @@ public class User extends BaseClass {
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctFindUsrXPATH"));
 
-        Utility.btnRmUsrFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
-
+        Utility.buttonRemoveUserFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
+        
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFindUsrXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("btnFindUsr"))).click();
@@ -95,7 +95,7 @@ public class User extends BaseClass {
         for (String user : users) {
             ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldFindUsrXPATH"), 60);
 
-            Utility.btnRmUsrFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
+            Utility.buttonRemoveUserFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
             new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
             driver.findElement(By.xpath(xpv.getTokenValue("fieldFindUsrXPATH"))).sendKeys(user);
             driver.findElement(By.xpath(xpv.getTokenValue("btnFindUsr"))).click();

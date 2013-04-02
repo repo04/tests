@@ -1,16 +1,14 @@
 package smoketest;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class Actions extends BaseClass {
-    
+
     Date now = new Date();
 
     /**
@@ -27,49 +25,49 @@ public class Actions extends BaseClass {
     /**
      * Post Text on Wall
      *
-     * @param textPst
+     * @param textPost
      * @return
      */
-    public String textPost(String textPst) {
+    public String textPost(String textPost) {
 
         WallPage wp = new WallPage();
-        wp.textPost(textPst);
-        return wp.getTxtPost();
+        wp.textPost(textPost);
+        return wp.getTextPost();
     }
 
     /**
      * Post URL on Wall
      *
-     * @param urlPst
+     * @param urlPost
      * @return
      */
-    public String urlPost(String urlPst) {
+    public String urlPost(String urlPost) {
         WallPage wp = new WallPage();
-        wp.urlPost(urlPst);
+        wp.urlPost(urlPost);
         return wp.getURLPost();
     }
 
     /**
      * Add comment on Teacher's course post
      *
-     * @param urlCrsPost
-     * @param txtCmntOnTchrCrsPst
+     * @param urlCoursePost
+     * @param textCommentOnTeacherCoursePost
      * @return
      */
-    public String textCommentPost(String urlCrsPost, String txtCmntOnTchrCrsPst) {
+    public String textCommentPost(String urlCoursePost, String textCommentOnTeacherCoursePost) {
         WallPage wp = new WallPage();
-        wp.textCommentPost(urlCrsPost, txtCmntOnTchrCrsPst);
+        wp.textCommentPost(urlCoursePost, textCommentOnTeacherCoursePost);
         return wp.getTextCommentPost();
     }
 
     /**
      * Recommend URL Course Post
      *
-     * @param tchrUrlCrsPost
+     * @param teacherUrlCoursePost
      */
-    public void recommendURLCoursePost(String tchrUrlCrsPost) {
+    public void recommendURLCoursePost(String teacherUrlCoursePost) {
         WallPage wp = new WallPage();
-        wp.recommendURLCoursePost(tchrUrlCrsPost);
+        wp.recommendURLCoursePost(teacherUrlCoursePost);
     }
 
     /**
@@ -82,11 +80,11 @@ public class Actions extends BaseClass {
     /**
      * Verify comment on Post
      *
-     * @param stdtTxtCmntOnTchrCrsPost
+     * @param studentTextCommentOnTeacherCoursePost
      */
-    public void verifyCommentOnPost(String stdtTxtCmntOnTchrCrsPost) {
+    public void verifyCommentOnPost(String studentTextCommentOnTeacherCoursePost) {
         WallPage wp = new WallPage();
-        wp.verifyCommentOnPost(stdtTxtCmntOnTchrCrsPost);
+        wp.verifyCommentOnPost(studentTextCommentOnTeacherCoursePost);
     }
 
     /**
@@ -117,17 +115,17 @@ public class Actions extends BaseClass {
     public String createCourse() {
         Course cr = new Course();
         cr.createCourse();
-        return cr.getCrsName();
+        return cr.getCourseName();
     }
 
     /**
      * Delete Group Course
      *
-     * @param grpCrsName
+     * @param groupCourseName
      */
-    public void deleteGroupCourse(String grpCrsName) {
+    public void deleteGroupCourse(String groupCourseName) {
         Course cr = new Course();
-        cr.deleteGroupCourse(grpCrsName);
+        cr.deleteGroupCourse(groupCourseName);
     }
 
     /**
@@ -144,11 +142,11 @@ public class Actions extends BaseClass {
     /**
      * Take backup of course
      *
-     * @param activites
+     * @param activities
      */
-    public String backupCourse(String... activites) {
+    public String backupCourse(String... activities) {
         Course cr = new Course();
-        cr.backupCourse(activites);
+        cr.backupCourse(activities);
         return cr.getBackupFileName();
     }
 
@@ -179,18 +177,18 @@ public class Actions extends BaseClass {
      */
     public String createGrpCourse(String courseName) {
         Course cr = new Course();
-        cr.createGrpCourse(courseName);
-        return cr.getGrpCrsName();
+        cr.createGroupCourse(courseName);
+        return cr.getGroupCourseName();
     }
 
     /**
      * Archive Course
      *
-     * @param crsName
+     * @param courseName
      */
-    public void archiveCourse(String crsName) {
+    public void archiveCourse(String courseName) {
         Course cr = new Course();
-        cr.archiveCourse(crsName);
+        cr.archiveCourse(courseName);
     }
 
     /**
@@ -228,7 +226,7 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * 
+     *
      */
     public void navigateToStudentSupport() {
         driver.findElement(By.xpath("//*[@id='footerlinks']/span[6]/a")).click();
@@ -238,16 +236,16 @@ public class Actions extends BaseClass {
     /**
      * Navigate to My Contacts Wall
      *
-     * @param stdtUsrName
+     * @param studentUserName
      */
-    public void navigateToContactsWall(String stdtUsrName) {
-        String usrFullNmLC = stdtUsrName + " " + stdtUsrName;
+    public void navigateToContactsWall(String studentUserName) {
+        String usrFullNmLC = studentUserName + " " + studentUserName;
         ip.isElementPresentStartsWithTextByXPATH(driver, usrFullNmLC);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + usrFullNmLC + "')]")).click();
         ip.isTitlePresent(driver, usrFullNmLC + ": Public profile");
-        String s = stdtUsrName.substring(0, 1).toUpperCase();
+        String s = studentUserName.substring(0, 1).toUpperCase();
         String usrFullNmUC = null;
-        usrFullNmUC = s + stdtUsrName.substring(1) + " " + s + stdtUsrName.substring(1);
+        usrFullNmUC = s + studentUserName.substring(1) + " " + s + studentUserName.substring(1);
         driver.findElement(By.xpath("//*[contains(text(),'Wall')]")).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyHdngTxtXPATH"), usrFullNmUC + "`s - Wall");
     }
@@ -303,7 +301,7 @@ public class Actions extends BaseClass {
     /**
      * Navigate To Personal Info Page
      */
-    public void navigateToMyPersonalInfo() {
+    public void navigateToMyPersonalInformation() {
         Utility.clickByJavaScript(driver, "//li[2]/ul/li[2]/a");
         ip.isTextPresentByXPATH(driver, "//h2", "Personal Information");
     }
@@ -332,15 +330,15 @@ public class Actions extends BaseClass {
     public String createWorkingGroup() {
         WorkingGroup wg = new WorkingGroup();
         wg.buildWorkingGroup();
-        return wg.getWrkngGrp();
+        return wg.getWorkingGroupName();
     }
 
     /**
      * Select GroupCourse
      *
-     * @param grpCrsName
+     * @param groupCourseName
      */
-    public void selectGroupCourse(String grpCrsName) {
+    public void selectGroupCourse(String groupCourseName) {
 
         String user = LoginPage.getUser();
 
@@ -349,26 +347,26 @@ public class Actions extends BaseClass {
 
             case "pesAdmin":
             case "contentAdmin":
-                ip.isElementPresentContainsTextByXPATH(driver, grpCrsName);
-                driver.findElement(By.xpath("//*[contains(text(),'" + grpCrsName + "')]")).click();
+                ip.isElementPresentContainsTextByXPATH(driver, groupCourseName);
+                driver.findElement(By.xpath("//*[contains(text(),'" + groupCourseName + "')]")).click();
                 break;
 
             default:
-                Utility.clickByJavaScript(driver, "//*[contains(text(),'" + grpCrsName + "')]");
+                Utility.clickByJavaScript(driver, "//*[contains(text(),'" + groupCourseName + "')]");
 
         }
-        ip.isTextPresentByCSS(driver, xpv.getTokenValue("lblCrsLftPnlCSS"), grpCrsName.toUpperCase());
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("lblCrsLftPnlCSS"), groupCourseName.toUpperCase());
     }
 
     /**
      * Select & Navigate to Course page
      *
-     * @param crsName
+     * @param courseName
      */
-    public void selectCourse(String crsName) {
-        ip.isElementPresentContainsTextByXPATH(driver, crsName);
-        driver.findElement(By.xpath("//*[contains(text(),'" + crsName + "')]")).click();
-        //ip.isTextPresentByXPATH(driver, "//h1/a", crsName);
+    public void selectCourse(String courseName) {
+        ip.isElementPresentContainsTextByXPATH(driver, courseName);
+        driver.findElement(By.xpath("//*[contains(text(),'" + courseName + "')]")).click();
+        ip.isTextPresentByXPATH(driver, "//h1/a", courseName);
     }
 
     /**
@@ -378,8 +376,8 @@ public class Actions extends BaseClass {
      */
     public String createForumActivity() {
         Activity actvty = new Activity();
-        actvty.crtForumActvty();
-        return actvty.getFrmActvyName();
+        actvty.createForumActivity();
+        return actvty.getForumActivityName();
     }
 
     /**
@@ -389,7 +387,7 @@ public class Actions extends BaseClass {
      */
     public String createGlossaryActivity() {
         Activity actvty = new Activity();
-        actvty.crtGlossaryActvty();
+        actvty.createGlossaryActivity();
         return actvty.getGlossaryActvyName();
     }
 
@@ -400,18 +398,18 @@ public class Actions extends BaseClass {
      */
     public String createQuizActivity() {
         Activity actvty = new Activity();
-        actvty.crtQuizActvty();
-        return actvty.getQzActvyName();
+        actvty.createQuizActivity();
+        return actvty.getQuizActivityName();
     }
 
     /**
      *
      * @return
      */
-    public String createPswdQuizActivity() {
+    public String createPasswordQuizActivity() {
         Activity actvty = new Activity();
-        actvty.crtPswdQuizActivity();
-        return actvty.getPswdQuizActivity();
+        actvty.createPasswordQuizActivity();
+        return actvty.getPasswordQuizActivity();
     }
 
     /**
@@ -433,7 +431,7 @@ public class Actions extends BaseClass {
     public String createPageResource() {
         Activity actvty = new Activity();
         actvty.createPageResource();
-        return actvty.getPageActvyName();
+        return actvty.getPageActivityName();
     }
 
     /**
@@ -443,7 +441,7 @@ public class Actions extends BaseClass {
         Activity actvty = new Activity();
         actvty.createSyllabusActivity();
     }
-    
+
     public void createLessonActivity() {
         Activity activity = new Activity();
         activity.createLessonActivity();
@@ -471,33 +469,33 @@ public class Actions extends BaseClass {
     /**
      * Delete Users
      *
-     * @param tchrUsr
-     * @param stdtUsr
+     * @param teacherUser
+     * @param studentUser
      */
-    public void deleteUsers(String tchrUsr, String stdtUsr) {
+    public void deleteUsers(String teacherUser, String studentUser) {
         User usr = new User();
-        usr.deleteUsers(tchrUsr, stdtUsr);
+        usr.deleteUsers(teacherUser, studentUser);
     }
 
     /**
      * Enroll User as 'Teacher/Student' to 'GroupCourse'
      *
      * @param user
-     * @param grpCrs
+     * @param groupCourse
      */
-    public void enrollUserToRole_GroupCourse(String user, String grpCrs) {
+    public void enrollUserToRole_GroupCourse(String user, String groupCourse) {
         EnrollUser enrlUsr = new EnrollUser();
-        enrlUsr.toRole_Course(user, grpCrs);
+        enrlUsr.toRole_Course(user, groupCourse);
     }
 
     /**
      *
-     * @param tchrUsrName
-     * @param grpCrsName
+     * @param teacherUserName
+     * @param groupCourseName
      */
-    public void unenrolUsers(String stdtUsrName, String tchrUsrName) {
+    public void unenrolUsers(String studentUserName, String teacherUserName) {
         EnrollUser enrlUsr = new EnrollUser();
-        enrlUsr.frmCourse(stdtUsrName, tchrUsrName);
+        enrlUsr.fromCourse(studentUserName, teacherUserName);
     }
 
     /**
@@ -553,11 +551,11 @@ public class Actions extends BaseClass {
     /**
      * Verify post exits on Social Group wall
      *
-     * @param stdtUrlPostOnTchrSclGrp
+     * @param studentUrlPostOnTeacherSocialGroup
      */
-    public void verifyPostOnSocialGroupWall(String stdtUrlPostOnTchrSclGrp) {
+    public void verifyPostOnSocialGroupWall(String studentUrlPostOnTeacherSocialGroup) {
         SocialGroup sg = new SocialGroup();
-        sg.verifyPostOnSocialGroupWall(stdtUrlPostOnTchrSclGrp);
+        sg.verifyPostOnSocialGroupWall(studentUrlPostOnTeacherSocialGroup);
     }
 
     /**
@@ -594,22 +592,22 @@ public class Actions extends BaseClass {
     /**
      * Leave Social Group
      *
-     * @param stdtSclGrpName
+     * @param studentSocialGroupName
      */
-    public void leaveSocialGroup(String stdtSclGrpName) {
+    public void leaveSocialGroup(String studentSocialGroupName) {
         SocialGroup sg = new SocialGroup();
-        sg.leaveSocialGroup(stdtSclGrpName);
+        sg.leaveSocialGroup(studentSocialGroupName);
     }
 
     /**
      * Delete Social Group
      *
-     * @param stdtSclGrpName
+     * @param studentSocialGroupName
      */
-    public void deleteSocialGroup(String stdtSclGrpName) {
+    public void deleteSocialGroup(String studentSocialGroupName) {
 
         SocialGroup sg = new SocialGroup();
-        sg.deleteSocialGroup(stdtSclGrpName);
+        sg.deleteSocialGroup(studentSocialGroupName);
     }
 
     /**
@@ -618,7 +616,7 @@ public class Actions extends BaseClass {
      *
      * @param posts
      */
-    public void vrfyURLPstsAsTop_RcntNews(String... posts) {
+    public void verifyURLPostsAsTop_RecentNews(String... posts) {
 
         for (String post : posts) {
             post.isEmpty();
@@ -650,11 +648,11 @@ public class Actions extends BaseClass {
         switch (LoginPage.getUser()) {
             case "contentAdmin":
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/h2",
-                        Utility.getFullName(pv.getTokenValue("ctntAdminUserName")));
+                        Utility.getFullName(ldv.getTokenValue("ctntAdminUserName")));
                 break;
             case "pesAdmin":
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/h2",
-                        Utility.getFullName(pv.getTokenValue("pesUserName")));
+                        Utility.getFullName(ldv.getTokenValue("pesUserName")));
                 break;
             //Teacher/Student
             default:
@@ -705,83 +703,83 @@ public class Actions extends BaseClass {
     /**
      * Delete all Activities
      *
-     * @param frmActvyName
-     * @param quizActvtyName
-     * @param allInOneAsgnmntActvtyName
-     * @param pageActvtyName
+     * @param forumActivityName
+     * @param quizActivityName
+     * @param allInOneAssignmentActivityName
+     * @param pageActivityName
      */
-    public void deleteActivites(String frmActvyName, String quizActvtyName, String allInOneAsgnmntActvtyName, String pageActvtyName) {
+    public void deleteActivites(String forumActivityName, String quizActivityName, String allInOneAssignmentActivityName, String pageActivityName) {
         Activity actvty = new Activity();
-        actvty.deleteActivites(frmActvyName, quizActvtyName, allInOneAsgnmntActvtyName, pageActvtyName);
+        actvty.deleteActivites(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
     }
 
     /**
      * Add True/False question to Quiz Activity
      *
-     * @param quizActvtyName
+     * @param quizActivityName
      */
-    public void addQuizQuestion(String quizActvtyName) {
+    public void addQuizQuestion(String quizActivityName) {
         Activity actvty = new Activity();
-        actvty.addQuizQuestion(quizActvtyName);
+        actvty.addQuizQuestion(quizActivityName);
     }
 
     /**
      * User attempt to 'True/False' question in Quiz Assignment
      *
-     * @param quizActvtyName
+     * @param quizActivityName
      */
-    public void submitQuiz(String quizActvtyName, String password) {
+    public void submitQuiz(String quizActivityName, String password) {
         Activity actvty = new Activity();
-        actvty.submitQuiz(quizActvtyName, password);
+        actvty.submitQuiz(quizActivityName, password);
     }
 
     /**
      *
-     * @param pswdQzName
+     * @param passwordQuizName
      */
-    public void generateQuizPassword(String pswdQzName) {
+    public void generateQuizPassword(String passwordQuizName) {
         Activity actvty = new Activity();
-        actvty.generateQuizPassword(pswdQzName);
+        actvty.generateQuizPassword(passwordQuizName);
     }
 
     /**
      * Submit Assignment
      *
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAssignmentActivityName
      */
-    public void submitAssignment(String allInOneAsgnmntAvtvtyName) {
+    public void submitAssignment(String allInOneAssignmentActivityName) {
         Activity actvty = new Activity();
-        actvty.submitAssignment(allInOneAsgnmntAvtvtyName);
+        actvty.submitAssignment(allInOneAssignmentActivityName);
     }
 
     /**
      * Grade Assignment
      *
-     * @param quizActvtyName
+     * @param quizActivityName
      */
-    public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
+    public void gradeAssignment(String allInOneAssignmentActivityName) {
         Activity actvty = new Activity();
-        actvty.gradeAssignment(allInOneAsgnmntAvtvtyName);
+        actvty.gradeAssignment(allInOneAssignmentActivityName);
     }
 
     /**
      * Verify Assignment Grade
      *
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAssignmentActivityName
      */
-    public void verifyAssignmentGrade(String allInOneAsgnmntAvtvtyName) {
+    public void verifyAssignmentGrade(String allInOneAssignmentActivityName) {
         Activity actvty = new Activity();
-        actvty.verifyAssignmentGrade(allInOneAsgnmntAvtvtyName);
+        actvty.verifyAssignmentGrade(allInOneAssignmentActivityName);
     }
 
     /**
      * Allow Assignment to be resubmitted
      *
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAssignmentActivityName
      */
-    public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
+    public void allowResubmitAssignment(String allInOneAssignmentActivityName, String studentUserName) {
         Activity actvty = new Activity();
-        actvty.allowResubmitAssignment(allInOneAsgnmntAvtvtyName, stdtUsrName);
+        actvty.allowResubmitAssignment(allInOneAssignmentActivityName, studentUserName);
     }
 
     /**
@@ -811,10 +809,10 @@ public class Actions extends BaseClass {
      *
      * @param members
      */
-    public void rmvMbrsFrmWrkngGrp(String... members) {
+    public void removeMembersFromWorkingGroup(String... members) {
 
         WorkingGroup wg = new WorkingGroup();
-        wg.rmvMbrsFrmWrkngGrp(members);
+        wg.removeMembersFromWorkingGroup(members);
     }
 
     /**
@@ -831,15 +829,15 @@ public class Actions extends BaseClass {
      * Verify WorkingGroup & Google Doc is visible to user or not
      *
      * @param wrkngGrp
-     * @param gglDocName
+     * @param googleDocumentName
      */
-    public void vrfyWrkngGrp_GglDoc(String wrkngGrp, String gglDocName) {
+    public void verifyWorkingGroup_GoogleDoc(String wrkngGrp, String googleDocumentName) {
         ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
         driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
 
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlFilesXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
-        ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
+        ip.isElementPresentContainsTextByXPATH(driver, googleDocumentName);
     }
 
     /**
@@ -911,9 +909,9 @@ public class Actions extends BaseClass {
     /**
      * Verify Personal Information
      */
-    public void verifyPersonalInfo() {
+    public void verifyPersonalInformation() {
         Profile pf = new Profile();
-        pf.verifyPersonalInfo();
+        pf.verifyPersonalInformation();
     }
 
     /**
@@ -1040,13 +1038,13 @@ public class Actions extends BaseClass {
      * Edit Glossary Activity
      *
      * @param glossaryName
-     * @param stdtGlossaryEntryName
+     * @param studentGlossaryEntryName
      * @param glossatyCategoryName
-     * @param tchrGlossaryEntryName
+     * @param teacherGlossaryEntryName
      */
-    public void editGlossaryEntry(String glossaryName, String stdtGlossaryEntryName, String glossatyCategoryName, String tchrGlossaryEntryName) {
+    public void editGlossaryEntry(String glossaryName, String studentGlossaryEntryName, String glossatyCategoryName, String teacherGlossaryEntryName) {
         Activity actvty = new Activity();
-        actvty.editGlossaryEntry(glossaryName, stdtGlossaryEntryName, glossatyCategoryName, tchrGlossaryEntryName);
+        actvty.editGlossaryEntry(glossaryName, studentGlossaryEntryName, glossatyCategoryName, teacherGlossaryEntryName);
     }
 
     /**
@@ -1056,12 +1054,12 @@ public class Actions extends BaseClass {
         StudentSupport ss = new StudentSupport();
         ss.verifyStudentSupport();
     }
-    
+
     public void testStudentSupportMobileAppURL() {
         StudentSupport ss = new StudentSupport();
         ss.verifyStudentSupportMobileAppURL();
     }
-    
+
     public String currentDateTime() {
         String temp = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         return temp;

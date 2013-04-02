@@ -6,26 +6,24 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="CriticalTests" preserve-order="true" parallel="false">
-        <parameter name="tchrUsrName" value="autoteacher1"/>
-        <parameter name="stdtUsrName" value="autostudent1"/>
-        <!--parameter name="tchrUsrName" value="teacher1"/>
-        <parameter name="stdtUsrName" value="student1"/-->
-        <parameter name="grpCrsName" value="AutoGroupCourse"/>
-        <parameter name="quizActvtyName" value="AutoQuiz"/>
-        <parameter name="pswdQuizName" value="AutoPswdQuiz"/>
+        <parameter name="teacherUserName" value="autoteacher1"/>
+        <parameter name="studentUserName" value="autostudent1"/>
+        <!--parameter name="teacherUserName" value="teacher1"/>
+        <parameter name="studentUserName" value="student1"/-->
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
-                <include name="criticalsmoke"/>
+                <include name="criticalSmoke"/>
             </run>
         </groups>
         <classes>
-            <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
-            <class name="runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
-            <class name="runThrghTestNG.Teacher_FetchAssignmentPassword"/>
+            <class name="runThrghTestNG.Teacher_FetchActivityPassword"/>
             <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
