@@ -379,7 +379,7 @@ public class Actions extends BaseClass {
     public String createForumActivity() {
         Activity actvty = new Activity();
         actvty.crtForumActvty();
-        return actvty.getFrmActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -401,7 +401,7 @@ public class Actions extends BaseClass {
     public String createQuizActivity() {
         Activity actvty = new Activity();
         actvty.crtQuizActvty();
-        return actvty.getQzActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -411,7 +411,7 @@ public class Actions extends BaseClass {
     public String createPswdQuizActivity() {
         Activity actvty = new Activity();
         actvty.crtPswdQuizActivity();
-        return actvty.getPswdQuizActivity();
+        return actvty.getActivityName();
     }
 
     /**
@@ -422,7 +422,7 @@ public class Actions extends BaseClass {
     public String createAllInOneAssignmentActivity() {
         Activity actvty = new Activity();
         actvty.createAllInOneAssignmentActivity();
-        return actvty.getAllInOneAssignmentActivityName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -433,7 +433,7 @@ public class Actions extends BaseClass {
     public String createPageResource() {
         Activity actvty = new Activity();
         actvty.createPageResource();
-        return actvty.getPageActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -1063,7 +1063,7 @@ public class Actions extends BaseClass {
     }
     
     public String currentDateTime() {
-        String temp = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        return temp;
+        String time = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        return time;
     }
 }

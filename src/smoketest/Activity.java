@@ -21,182 +21,144 @@ import runThrghTestNG.BaseClass;
 public class Activity extends BaseClass {
 
     Date now = new Date();
-    private String forumName;
-    private String quizName;
-    private String allInOneAsgnmntName;
-    private String pageName;
-    private String pswdQuizName;
     private String questionTitle, question, ans;
     private String glossaryName;
     private String glossaryEntryName;
     private String glossaryCategoryName;
-    private String lessonActivityName;
+    private String name;
+    private String intro;
+    private String dateAndTime;
+    
     StackTraceElement[] stackTraceElements; 
-
+    Actions a = new Actions();
     
     public void createLessonActivity() {
         String currentDateTime = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         System.out.println("######&(*&#(@&*$&*(@#&$*(&@*#$&(*&$*(&*(#&*&$#*@&$*(@#&$*(@#&*(@#&(*^%&^%&^@&*^%&*");
     }
     
-    
+    /*
+     * This can be used to grab the current method.  We can use this if we really need to include the activity type
+     * into the string when creating the activities below.  Using this would be expensive.
+     */
     public String getExecutingMethod() {
-        String temp = Thread.currentThread().getStackTrace()[2].getMethodName();
+        String temp = Thread.currentThread().getStackTrace()[1].getMethodName();
         return temp;
     }
+    
     /**
  * Create & Verify Forum Activity
      */
     public void crtForumActvty() {
-        String forumIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.forumName = "RgsnTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            forumIntro = "RgsnTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            forumIntro = "SmkTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.forumName = "DbgTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            forumIntro = "DbgTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = BaseClass.test + " " + dateAndTime;
+        this.intro = BaseClass.test + " " + dateAndTime;
+        
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Forum");
-        createActivity(forumName, forumIntro);
+        createActivity(this.name, this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), forumIntro);
-    }
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
+    } 
 
     /**
      * Create & Verify Quiz Activity
      */
     public void crtQuizActvty() {
-        String quizIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.quizName = "RgsnTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "RgsnTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.quizName = "DbgTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "DbgTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = BaseClass.test + " " + dateAndTime;
+        this.intro = BaseClass.test + " " + dateAndTime;
+        
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
-        createActivity(quizName, quizIntro);
+        createActivity(this.name, this.intro);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      *
      */
     public void crtPswdQuizActivity() {
-        String quizIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.pswdQuizName = "RgsnTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "RgsnTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.pswdQuizName = "SmkTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "SmkTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.pswdQuizName = "DbgTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "DbgTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = BaseClass.test + " " + dateAndTime;
+        this.intro = BaseClass.test + " " + dateAndTime;
+        
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
-        createActivity(pswdQuizName, quizIntro);
+        createActivity(this.name, this.intro);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
         driver.findElement(By.xpath("//fieldset[6]/div[2]/div/div[2]/input")).sendKeys("Password1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      * Create & Verify AllInOneAsgnmnt Activity
      */
     public void createAllInOneAssignmentActivity() {
-        String allInOneAsgnmntIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.allInOneAsgnmntName = "RgsnTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            allInOneAsgnmntIntro = "RgsnTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            allInOneAsgnmntIntro = "SmkTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.allInOneAsgnmntName = "DbgTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            allInOneAsgnmntIntro = "DbgTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = BaseClass.test + " " + dateAndTime;
+        this.intro = BaseClass.test + " " + dateAndTime;
+        
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
-        createActivity(allInOneAsgnmntName, allInOneAsgnmntIntro);
+        createActivity(this.name, this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), allInOneAsgnmntIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      * Create Glossary activity
      */
     public void crtGlossaryActvty() {
-        String glossaryIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.glossaryName = "RgsnTstGlossary " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            glossaryIntro = "RgsnTstGlossaryIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.glossaryName = "DbgTstGlossary " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            glossaryIntro = "DbgTstGlossaryIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = BaseClass.test + " " + dateAndTime;
+        this.intro = BaseClass.test + " " + dateAndTime;
+        
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Glossary");
-        createActivity(glossaryName, glossaryIntro);
+        createActivity(this.name, this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), glossaryIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      * Create & Verify Page Resource
      */
     public void createPageResource() {
-        String pageContent;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.pageName = "RgsnTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            pageContent = "RgsnTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            pageContent = "SmkTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.pageName = "DbgTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            pageContent = "DbgTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = BaseClass.test + " " + dateAndTime;
+        
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddRescXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddRescXPATH")))).selectByVisibleText("Page");
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
-
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys(pageName);
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(pageContent);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys(this.name);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(this.name);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), pageContent);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), this.name);
     }
 
     /**
      * Create - Syllabus Activity
      */
     public void createSyllabusActivity() {
-        String sylbsIntro;
-        sylbsIntro = "RgsnTstSylbsIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.dateAndTime = a.currentDateTime();
+        this.intro = BaseClass.test + " " + dateAndTime;
+        
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddSyllbsActvyXPATH"));
@@ -204,9 +166,9 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
 
         driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys("Syllabus");
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(sylbsIntro);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), sylbsIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), this.intro);
         ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
         driver.findElement(By.linkText("Syllabus")).click();
         ip.isTextPresentByCSS(driver, "li.listentry > a", "Syllabus");
@@ -746,39 +708,8 @@ public class Activity extends BaseClass {
         return x;
     }
 
-    /**
-     * @return ForumName
-     */
-    public String getFrmActvyName() {
-        return this.forumName;
-    }
-
-    /**
-     * @return QuizName
-     */
-    public String getQzActvyName() {
-        return this.quizName;
-    }
-
-    /**
-     * @return AllInOneAsgnmntName
-     */
-    public String getAllInOneAssignmentActivityName() {
-        return this.allInOneAsgnmntName;
-    }
-
-    /**
-     * @return PageName
-     */
-    public String getPageActvyName() {
-        return this.pageName;
-    }
-
-    /**
-     * @return
-     */
-    public String getPswdQuizActivity() {
-        return this.pswdQuizName;
+    public String getActivityName() {
+        return this.name;
     }
 
     /**
