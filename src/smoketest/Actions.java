@@ -390,7 +390,7 @@ public class Actions extends BaseClass {
     public String createGlossaryActivity() {
         Activity actvty = new Activity();
         actvty.crtGlossaryActvty();
-        return actvty.getGlossaryActvyName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -1022,7 +1022,7 @@ public class Actions extends BaseClass {
     public String createGlossaryEntry(String glossaryName) {
         Activity actvty = new Activity();
         actvty.createGlossaryEntry(glossaryName);
-        return actvty.getGlossaryEntryName();
+        return actvty.getActivityName();
     }
 
     /**
@@ -1033,7 +1033,7 @@ public class Actions extends BaseClass {
     public String createGlossaryCategory(String glossaryName) {
         Activity actvty = new Activity();
         actvty.createGlossaryCategory(glossaryName);
-        return actvty.getGlossaryCategoryName();
+        return actvty.getActivityName();
     }
 
     /**
