@@ -25,28 +25,27 @@ public class TestInvocation implements IInvokedMethodListener {
         ITestNGMethod testNgMethod = result.getMethod();
         ConstructorOrMethod contructorOrMethod = testNgMethod.getConstructorOrMethod();
         Method method = contructorOrMethod.getMethod();
-        System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n"); 
-        
+        System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
+
         if (!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
-            if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) 
-            {
-                if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())) {
+            if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) {
+                if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())
+                        || "testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }
-            } 
-            else {
-                if ("testTeacherGenerateQuizPassword".equals(method.getName()) || 
-                    "testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) { 
-                        System.out.println("Skipping Test Method");
-                        throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
+            } else {
+                if ("testTeacherGenerateQuizPassword".equals(method.getName())
+                        || "testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
+                    System.out.println("Skipping Test Method");
+                    throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }
             }
         }
-        
+
         // Checks For UNC-MPA and WU-LLM 
-        if(!"setUp".equals(method.getName()) && !BaseClass.test.equalsIgnoreCase("CriticalTests") && (BaseClass.program.contains("unc-mpa") || BaseClass.program.contains("wu-llm"))) {
-            if("testStudentSupportMobileURL".equals(method.getName())) {
+        if (!"setUp".equals(method.getName()) && !BaseClass.test.equalsIgnoreCase("CriticalTests") && (BaseClass.program.contains("unc-mpa") || BaseClass.program.contains("wu-llm"))) {
+            if ("testStudentSupportMobileURL".equals(method.getName())) {
                 System.out.println("Skipping Test Method");
                 throw new SkipException("Skipping Mobile App Test in Student Support: Not Available For UNC-MPA and WU-LLM");
             }
