@@ -56,8 +56,10 @@ public class Contact extends BaseClass {
             }
             i++;
         }
-        new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElement(By.id("ext-gen67"),
-                "Add " + Utility.getFullName(user) + " as contact"));
+        //new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElement(By.id("ext-gen67"),
+          //      "Add " + Utility.getFullName(user) + " as contact"));
+        
+        ip.isTextPresentByXPATH(driver, "//div[10]/div/div/div/div/span", "Add " + Utility.getFullName(user) + " as contact", 60);
         driver.findElement(By.xpath("//div/textarea")).sendKeys("Add as contact");
         driver.findElement(By.xpath("//button")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath(imagePath))));

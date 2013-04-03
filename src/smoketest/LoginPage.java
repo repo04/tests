@@ -6,7 +6,7 @@ import runThrghTestNG.BaseClass;
 
 public class LoginPage extends BaseClass {
 
-    private static String usr;
+    private static String username;
 
     /**
      * Attemps to login based on user type and values from property file
@@ -15,7 +15,7 @@ public class LoginPage extends BaseClass {
      */
     public void attemptLogin(String user) {
 
-        LoginPage.usr = user;
+        LoginPage.username = user;
         WebElement userName = driver.findElement(By.xpath(xpv.getTokenValue("userNameXPATH")));
         WebElement passWord = driver.findElement(By.xpath(xpv.getTokenValue("pswdXPATH")));
         WebElement loginBtn = driver.findElement(By.xpath(xpv.getTokenValue("btnLoginXPATH")));
@@ -25,17 +25,17 @@ public class LoginPage extends BaseClass {
         
         switch (user) {
             case "contentAdmin":
-                userName.sendKeys(pv.getTokenValue("ctntAdminUserName"));
+                userName.sendKeys(ldv.getTokenValue("ctntAdminUserName"));
                 break;
             case "pesAdmin":
-                userName.sendKeys(pv.getTokenValue("pesUserName"));
+                userName.sendKeys(ldv.getTokenValue("pesUserName"));
                 break;
             //Teacher/Student
             default:
                 userName.sendKeys(user);
                 break;
         }
-        passWord.sendKeys(pv.getTokenValue("password"));
+        passWord.sendKeys(ldv.getTokenValue("password"));
         loginBtn.click();
 
         //PesAdmin navigates to Course page after login
@@ -50,6 +50,6 @@ public class LoginPage extends BaseClass {
      * @return userName
      */
     public static String getUser() {
-        return usr;
+        return username;
     }
 }

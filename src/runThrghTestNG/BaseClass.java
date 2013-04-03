@@ -18,19 +18,18 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import smoketest.IsPresent;
-import smoketest.ProgramValues;
 import smoketest.Utility;
 import smoketest.XpathValues;
 
 @Listeners({runThrghTestNG.TestNGCustomReport.class})
 public class BaseClass {
 
-    public static XpathValues xpv, pv;
+    public static XpathValues xpv, ldv;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
     public static String program;
-    public static String env;
-    public static String brwsr;
+    public static String environment;
+    public static String browser;
     public static String test;
     public static String url;
     public static String currentURL;
@@ -45,32 +44,32 @@ public class BaseClass {
      *
      * @param url
      * @param program
-     * @param env
-     * @param brwsr
+     * @param environment
+     * @param browser
      * @param os
      * @param test
      * @throws Exception
      */
     @BeforeTest(groups = {"prerequisite"})
-    @Parameters({"url", "program", "env", "brwsr", "os", "test"})
-    public void setUp(String url, String program, String env, String brwsr, String os, String test) throws Exception {
+    @Parameters({"url", "program", "environment", "browser", "os", "test"})
+    public void setUp(String url, String program, String environment, String browser, String os, String test) throws Exception {
 
         this.program = program;
-        this.env = env;
-        this.brwsr = brwsr;
+        this.environment = environment;
+        this.browser = browser;
         this.test = test;
         this.url = url;
 
-        pv = new  XpathValues("loginDetails");
         xpv = new XpathValues("xPathAccountProperty");
+        ldv = new XpathValues("loginDetails");
         System.out.println("url: " + url);
         System.out.println("program: " + this.program);
-        System.out.println("environment: " + this.env);
-        System.out.println("browser: " + this.brwsr);
+        System.out.println("environment: " + this.environment);
+        System.out.println("browser: " + this.browser);
         System.out.println("os: " + os);
         System.out.println("test: " + this.test);
 
-        switch (brwsr) {
+        switch (browser) {
             case "chrome":
                 String chromDrvrPath;
                 chromDrvrPath = directory.getCanonicalPath() + File.separator + "lib" + File.separator;
@@ -94,16 +93,16 @@ public class BaseClass {
                 //ChromeOptions feature does not work on 'MAC' OS
                 if (os.equalsIgnoreCase("mac")) {
                     driver = new ChromeDriver();
-                    ((JavascriptExecutor) driver).executeScript("window.open('','chromeBrwsr','width=1280,height=800,top=0,left=0')");
+                    ((JavascriptExecutor) driver).executeScript("window.open('','chromeBrowser','width=1280,height=800,top=0,left=0')");
                     driver.close();
-                    driver.switchTo().window("chromeBrwsr");
+                    driver.switchTo().window("chromeBrowser");
                 } else {
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--start-maximized");
                     options.addArguments("--disable-extensions");
                     driver = new ChromeDriver(options);
                 }
-                Reporter.log("Browser: " + brwsr);
+                Reporter.log("Browser: " + browser);
                 Reporter.log("OS: " + os);
                 break;
             case "ie":
