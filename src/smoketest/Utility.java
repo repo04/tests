@@ -299,7 +299,7 @@ public class Utility {
     }
 
     /**
-     * Chrome Browser element Click limitation minimized by ROBOT functionality
+     * OnClick attribute of Input Element is handled for Chrome Browser by ROBOT functionality
      *
      * @param element
      */
@@ -343,16 +343,16 @@ public class Utility {
      * Type in Content Editable iframe
      *
      * @param driver
-     * @param i -> Select iframe index
-     * @param conceptEntry
+     * @param iframeIndex
+     * @param textInIframe
      */
-    public static void typeInContentEditableIframe(WebDriver driver, int i, String conceptEntry) {
+    public static void typeInContentEditableIframe(WebDriver driver, int iframeIndex, String textInIframe) {
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
         int x = 1;
         loop:
         for (WebElement frame : iframes) {
-            if (x == i) {
+            if (x == iframeIndex) {
                 System.out.println("Iframe ID: " + frame.getAttribute("id"));
                 driver.switchTo().frame(frame.getAttribute("id"));
                 break loop;
@@ -362,7 +362,7 @@ public class Utility {
 
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
-        editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), conceptEntry);
+        editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), textInIframe);
         driver.switchTo().defaultContent();
     }
 

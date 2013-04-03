@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -288,26 +287,35 @@ public class Activity extends BaseClass {
     /**
      * Create Activity
      *
-     * @param forumName
-     * @param forumIntro
+     * @param activityName
+     * @param activityIntroName
      */
-    private void createActivity(String forumName, String forumIntro) {
-        WebElement actvtyNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))));
-        WebElement actvtyIntroNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));
+    private void createActivity(String activityName, String activityIntroName) {
+        WebElement elementActivityName = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))));
+        WebElement elementActivityIntroName = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));
 
-        //This is to verify actvtyName passes correct value 
+        //This will check multiple times has activityName send correct value 
+        int i = 1;
+        Boolean result;
         value:
-        while (true) {
-            actvtyNm.clear();
-            actvtyIntroNm.clear();
-            actvtyNm.sendKeys(forumName);
-            actvtyIntroNm.sendKeys(forumIntro);
+        do {
+            elementActivityName.clear();
+            elementActivityIntroName.clear();
+            elementActivityName.sendKeys(activityName);
+            elementActivityIntroName.sendKeys(activityIntroName);
             try {
-                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH")), forumName));
-                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH")), forumIntro));
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH")), activityName));
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH")), activityIntroName));
+                result = false;
                 break value;
             } catch (TimeoutException e) {
+                i++;
+                result = true;
             }
+        } while (i < 5);
+
+        if (result) {
+            Utility.illegalStateException("Unable to send expected Name: " + activityName + " or Intro: " + activityIntroName);
         }
     }
 
@@ -430,22 +438,15 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
 
         String HandleBefore = driver.getWindowHandle();
+
+        //'Send for Marking' button with onclick attribute is not clicked by Selenium CLICK command for Chrome Browser
+        //Robot code provides the work around to perform the operation. 
+        //Hence Exception is thrown incase button is not clicked after multiple (5) tries
         int i = 1;
         end:
         while (i < 6) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Font family")));
-            List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-            System.out.println("iframes count:" + iframes.size());
-            for (WebElement frame : iframes) {
-                System.out.println("Iframe ID: " + frame.getAttribute("id"));
-                driver.switchTo().frame(frame.getAttribute("id"));
-                break;
-            }
-
-            //Switch focus
-            WebElement editableTxtArea = driver.switchTo().activeElement();
-            editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), asgmntRspns);
-            driver.switchTo().defaultContent();
+            Utility.typeInContentEditableIframe(driver, 1, asgmntRspns);
 
             List<WebElement> elements = driver.findElements(By.tagName("input"));
             System.out.println("Total inputs: " + elements.size());
@@ -652,10 +653,12 @@ public class Activity extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Forum '" + activity + "' ?");
             } else if (activity.contains("Quiz")) {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Quiz '" + activity + "' ?");
-            } else if (activity.contains("Asgnmnt")) {
+            } else if (activity.contains("All in One")) {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Assignment '" + activity + "' ?");
-            } else {
+            } else if (activity.contains("Page")) {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Page '" + activity + "' ?");
+            } else {
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Glossary '" + activity + "' ?");
             }
             ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCnfrmDltActvtyXPATH"));
             driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmDltActvtyXPATH"))).click();
@@ -697,10 +700,10 @@ public class Activity extends BaseClass {
         } while (x < 72);
         return x;
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getActivityName() {
         return this.name;

@@ -16,9 +16,9 @@
         <parameter name="forumActivityName" value="AutoForum"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
         <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
-        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
         <parameter name="pageActivityName" value="AutoPage"/>
         <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
         <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
         <parameter name="teacherUserName" value="autoteacher1"/>
         <parameter name="studentUserName" value="autostudent1"/>  
@@ -185,7 +185,7 @@
             <define name="CourseBackupRestore">
                 <include name="prerequisite"/>
                 <include name="course.backup"/>
-                <include name="course.restore"/>
+                <include name="course.restore"/>      
             </define>
             <define name="Contact">
                 <include name="prerequisite"/>

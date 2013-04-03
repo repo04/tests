@@ -121,7 +121,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     public void testTeacherPostURLOnStudentsWall(String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyContacts();
         a.navigateToContactsWall(studentUserName);
-        teacherUrlPostOnStudentWall = a.textPost("teacherUrlPostOnStdtWall");
+        teacherUrlPostOnStudentWall = a.textPost("tchrUrlPostOnStdtWall");
         System.out.println("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall);
         Reporter.log("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall);
     }

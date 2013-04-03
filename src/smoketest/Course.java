@@ -234,13 +234,20 @@ public class Course extends BaseClass {
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//legend", "Course settings");
 
-        String restoredCourseName = driver.findElement(By.id("id_setting_course_course_fullname")).getAttribute("value");
+        String fetchedCourseName = driver.findElement(By.id("id_setting_course_course_fullname")).getAttribute("value");
         String shortCourseName = driver.findElement(By.id("id_setting_course_course_shortname")).getAttribute("value");
+        int whiteSpaceCourseName = fetchedCourseName.indexOf(" ");
+        int whiteSpaceShortCourseName = shortCourseName.indexOf(" ");
+        String restoredCourseName = fetchedCourseName.substring(0, whiteSpaceCourseName)
+                + " Restore " + fetchedCourseName.substring(whiteSpaceCourseName + 1);
+        String restoredShortCourseName = shortCourseName.substring(0, whiteSpaceShortCourseName)
+                + " Restore " + shortCourseName.substring(whiteSpaceShortCourseName + 1);
         driver.findElement(By.id("id_setting_course_course_fullname")).clear();
         driver.findElement(By.id("id_setting_course_course_shortname")).clear();
-        driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys("Restored " + restoredCourseName);
-        driver.findElement(By.id("id_setting_course_course_shortname")).sendKeys("Restored " + shortCourseName);
-
+        driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys(restoredCourseName);
+        driver.findElement(By.id("id_setting_course_course_shortname")).sendKeys(restoredShortCourseName);
+        System.out.print(restoredCourseName + "\n" + restoredShortCourseName + "\n");
+        
         //Verify Section checkboxes
         int a = 4;
         do {

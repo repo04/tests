@@ -342,7 +342,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     /*
      * Verifies content admin can sucessfully 
      */
-    @Test(dataProvider = "Course", groups = {"regressionSmoke", "lesson.createActivity"})
+    @Test(dataProvider = "Course", groups = {"lesson.createActivity"})
     public void testContentAdminCreateLessonActivity(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectCourse(groupCourseName);

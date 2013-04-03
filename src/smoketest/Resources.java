@@ -92,7 +92,7 @@ public class Resources extends BaseClass {
                 verify12 = "The GW Bookstore";
                 resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6, verify7,
                         verify8, verify9, verify10, verify11, verify12);
-        }           
+        }
         verifyWindow(resources);
     }
 
@@ -101,10 +101,15 @@ public class Resources extends BaseClass {
      * @param resources
      */
     private void verifyWindow(List<String> resources) {
-
         int i = 1;
         String HandleBefore = driver.getWindowHandle();
         for (String resource : resources) {
+
+            //To be implemented based on discussion
+            /*List<WebElement> lists = driver.findElement(By.className("topnav_dropdown")).findElements(By.tagName("li"));
+             for (WebElement list : lists) {
+             }*/
+
             ip.isTextPresentByXPATH(driver, "//div[3]/div[2]/div/ul/li[" + i + "]/a", resource);
             driver.findElement(By.xpath("//div[3]/div[2]/div/ul/li[" + i + "]/a")).click();
             Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
@@ -225,8 +230,11 @@ public class Resources extends BaseClass {
                                 + "| George Washington University");
                         break;
                     case "University Counseling Center":
+                        //TBD
+                        //ip.isTitlePresent(driver, "University Counseling Center - The George Washington University");
                         ip.isTitlePresent(driver, "University Counseling Center "
-                                + "- The George Washington University");
+                                + "| Division of Student Affairs "
+                                + "| The George Washington University");
                         break;
                     case "Career Center":
                         ip.isTitlePresent(driver, "The GW Career Center "
