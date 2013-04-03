@@ -44,7 +44,8 @@ public class TestInvocation implements IInvokedMethodListener {
 
         // Checks For UNC-MPA and WU-LLM 
         if (!"setUp".equals(method.getName()) && !BaseClass.test.equalsIgnoreCase("CriticalTests") 
-                && (BaseClass.program.contains("unc-mpa") || BaseClass.program.contains("wu-llm"))) {
+                && (BaseClass.program.contains("unc-mpa") || BaseClass.program.contains("wu-llm") ||
+                    BaseClass.program.contains("gwu-mph") || BaseClass.program.contains("au-mir"))) {
             if ("testStudentSupportMobileURL".equals(method.getName())) {
                 System.out.println("Skipping Test Method");
                 throw new SkipException("Skipping Mobile App Test in Student Support: Not Available For UNC-MPA and WU-LLM");
