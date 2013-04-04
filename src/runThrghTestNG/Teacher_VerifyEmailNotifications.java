@@ -23,8 +23,8 @@ import smoketest.Utility;
 public class Teacher_VerifyEmailNotifications extends BaseClass {
 
     Actions a = new Actions();
-    String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6;
-    String stdtFllNm;
+    String verify1, verify2, verify3, verify4, verify5, verify6;
+    String studentFullName;
     
     /**
      * The annotated method will be run before the first test method in the
@@ -34,33 +34,33 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherEmailLogIn() throws Exception {
-        Utility.usrEmailLogin(driver, xpv, "2torteacher");
+        Utility.userEmailLogIn(driver, xpv, "2torteacher");
     }
 
     /**
      * Teacher verifies Critical Smoke Test Email Notifications & delete
      * subsequently *
      *
-     * @param tchrSclGrpName
-     * @param stdtSclGrpName
+     * @param teacherSocialGroupName
+     * @param studentSocialGroupName
      * @throws Exception
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"tchrVrfyCriticalTestEmails"})
-    public void testTeacherVerifyCriticalSmokeTestEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "TeacherStudentSocialGroups", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+          groups = {"teacherVerifyCriticalTestEmails"})
+    public void testTeacherVerifyCriticalSmokeTestEmails(String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
-        stdtFllNm = "Auto Student1";
+        studentFullName = "Auto Student1";
 
-        vrfy1 = "You are now a member of " + stdtSclGrpName;
-        vrfy2 = stdtFllNm + " commented on your post.";
-        vrfy3 = stdtFllNm + " has joined the group " + tchrSclGrpName + ".";
-        vrfy4 = "You are now a member of " + tchrSclGrpName;
+        verify1 = "You are now a member of " + studentSocialGroupName;
+        verify2 = studentFullName + " commented on your post.";
+        verify3 = studentFullName + " has joined the group " + teacherSocialGroupName + ".";
+        verify4 = "You are now a member of " + teacherSocialGroupName;
 
         ArrayList<String> wordList = new ArrayList<>();
-        wordList.add(vrfy1);
-        wordList.add(vrfy2);
-        wordList.add(vrfy3);
-        wordList.add(vrfy4);
+        wordList.add(verify1);
+        wordList.add(verify2);
+        wordList.add(verify3);
+        wordList.add(verify4);
 
         ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
@@ -77,23 +77,23 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
                 if (j < wordList.size()) {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
-                        String env;
+                        String environment;
                         if (BaseClass.program.substring(0, 2).contains("gu")) {
-                            env = "2GU";
+                            environment = "2GU";
                         } else if (program.substring(0, 3).contains("vac")) {
-                            env = "VAC";
+                            environment = "VAC";
                         } else if (program.substring(0, 3).contains("mpa")) {
-                            env = "2SG";
+                            environment = "2SG";
                         } else if (program.substring(0, 3).contains("llm")) {
-                            env = "@WashuLaw";
+                            environment = "@WashuLaw";
                         } else {
-                            env = "2" + program.substring(1, 3).toUpperCase();
+                            environment = "2" + program.substring(1, 3).toUpperCase();
                         }
 
-                        if (a.contentEquals(vrfy2)) {
-                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[4]", "Thanks\n" + env, 15);
+                        if (a.contentEquals(verify2)) {
+                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[4]", "Thanks\n" + environment, 15);
                         } else {
-                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + env, 15);
+                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + environment, 15);
                         }
                         System.out.println("EmailNotification verified: '" + a + "'");
                         Reporter.log("EmailNotification verified: '" + a + "'");
@@ -123,33 +123,33 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
      * Teacher verifies Full Smoke Test Email Notifications & delete
      * subsequently
      *
-     * @param tchrUsrName
-     * @param stdtUsrName
-     * @param wrkngGrpName
-     * @param tchrSclGrpName
-     * @param stdtSclGrpName
+     * @param teacherUserName
+     * @param studentUserName
+     * @param workingGroupName
+     * @param teacherSocialGroupName
+     * @param studentSocialGroupName
      * @throws Exception
      */
-    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"tchrVrfySmokeTestEmails"})
-    public void testTeacherVerifyFullSmokeTestEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
-            String tchrSclGrpName, String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "UsersWorkingGroupTeacherStudentSocialGroups", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+          groups = {"teacherVrfySmokeTestEmails"})
+    public void testTeacherVerifyFullSmokeTestEmails(String teacherUserName, String studentUserName, String workingGroupName,
+            String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
-        stdtFllNm = stdtUsrName.substring(0, 1).toUpperCase() + stdtUsrName.substring(1);
-        vrfy1 = "You are now a member of " + stdtSclGrpName;
-        vrfy2 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + tchrSclGrpName + ".";
-        vrfy3 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm commented on your post.";
-        vrfy4 = "You are now a member of " + tchrSclGrpName;
-        vrfy5 = stdtFllNm + "fstNm " + stdtFllNm + "sndNm has joined the group " + wrkngGrpName + ".";
-        vrfy6 = "You are now a member of " + wrkngGrpName;
+        studentFullName = studentUserName.substring(0, 1).toUpperCase() + studentUserName.substring(1);
+        verify1 = "You are now a member of " + studentSocialGroupName;
+        verify2 = studentFullName + "fstNm " + studentFullName + "sndNm has joined the group " + teacherSocialGroupName + ".";
+        verify3 = studentFullName + "fstNm " + studentFullName + "sndNm commented on your post.";
+        verify4 = "You are now a member of " + teacherSocialGroupName;
+        verify5 = studentFullName + "fstNm " + studentFullName + "sndNm has joined the group " + workingGroupName + ".";
+        verify6 = "You are now a member of " + workingGroupName;
 
         ArrayList<String> wordList = new ArrayList<>();
-        wordList.add(vrfy1);
-        wordList.add(vrfy2);
-        wordList.add(vrfy3);
-        wordList.add(vrfy4);
-        wordList.add(vrfy5);
-        wordList.add(vrfy6);
+        wordList.add(verify1);
+        wordList.add(verify2);
+        wordList.add(verify3);
+        wordList.add(verify4);
+        wordList.add(verify5);
+        wordList.add(verify6);
 
         ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
@@ -166,37 +166,37 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
                 if (j < wordList.size()) {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
-                        String env = null;
+                        String environment = null;
                         /**
-                         * if (program.contains("gu-msn")) { env = "2GU"; } else
-                         * if (program.substring(0, 3).contains("vac")) { env =
-                         * "VAC"; } else { env = "2" + program.substring(1,
+                         * if (program.contains("gu-msn")) { environment = "2GU"; } else
+                         * if (program.substring(0, 3).contains("vac")) { environment =
+                         * "VAC"; } else { environment = "2" + program.substring(1,
                          * 3).toUpperCase(); }
                          */
                         switch (program) {
                             case "unc-mba":
-                                env = "2NC";
+                                environment = "2NC";
                                 break;
                             case "gu-msn":
-                                env = "2GU";
+                                environment = "2GU";
                                 break;
                             case "usc-msw":
-                                env = "VAC";
+                                environment = "VAC";
                                 break;
                             case "usc-mat":
-                                env = "2SC";
+                                environment = "2SC";
                                 break;
                             case "wu-llm":
-                                env = "LLM";
+                                environment = "LLM";
                                 break;
                             case "unc-mpa":
-                                env = "MPA";
+                                environment = "MPA";
                         }
 
-                        if (a.contentEquals(vrfy3)) {
-                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[4]", "Thanks\n" + env, 15);
+                        if (a.contentEquals(verify3)) {
+                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[4]", "Thanks\n" + environment, 15);
                         } else {
-                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + env, 15);
+                            ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + environment, 15);
                         }
                         System.out.println("EmailNotification verified: '" + a + "'");
                         Reporter.log("EmailNotification verified: '" + a + "'");
@@ -230,6 +230,6 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testTeacherEmailLogOut() throws Exception {
-        Utility.usrEmailLogout(driver);        
+        Utility.userEmailLogOut(driver);        
     }
 }

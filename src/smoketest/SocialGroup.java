@@ -14,7 +14,7 @@ import runThrghTestNG.BaseClass;
 public class SocialGroup extends BaseClass {
 
     Date now = new Date();
-    private String sclGrpName;
+    private String socialGroupName;
 
     /**
      * Create & verify SocialGroup
@@ -28,25 +28,25 @@ public class SocialGroup extends BaseClass {
             case "student":
             case "autostu":
                 if (test.equalsIgnoreCase("RegressionTests")) {
-                    this.sclGrpName = "RgsnTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "RgsnTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("SmokeTests")) {
-                    this.sclGrpName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
-                    this.sclGrpName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
-                    this.sclGrpName = "DbgTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "DbgTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
                 break;
             case "teacher":
             case "autotea":
                 if (test.equalsIgnoreCase("RegressionTests")) {
-                    this.sclGrpName = "RgsnTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "RgsnTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("SmokeTests")) {
-                    this.sclGrpName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
-                    this.sclGrpName = "CrtclTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "CrtclTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
-                    this.sclGrpName = "DbgTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "DbgTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
                 break;
             default:
@@ -56,14 +56,14 @@ public class SocialGroup extends BaseClass {
         String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         driver.findElement(By.xpath(xpv.getTokenValue("linkStrtSclGrpXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpNameXPATH"));
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpNameXPATH"))).sendKeys(sclGrpName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpNameXPATH"))).sendKeys(this.socialGroupName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
         driver.findElement(By.xpath(xpv.getTokenValue("fieldTopicXPATH"))).sendKeys("Topic");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtSclGrp"))).click();
 
         //Verify SocialGroup creation
-        ip.isElementPresentByLINK(driver, sclGrpName);
+        ip.isElementPresentByLINK(driver, this.socialGroupName);
     }
 
     /**
@@ -105,60 +105,60 @@ public class SocialGroup extends BaseClass {
     /**
      * Leave Social Group
      *
-     * @param stdtSclGrpName
+     * @param studentSocialGroupName
      */
-    public void leaveSocialGroup(String stdtSclGrpName) {
-        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), stdtSclGrpName);
+    public void leaveSocialGroup(String studentSocialGroupName) {
+        Utility.optionalClickByLINK(driver, xpv.getTokenValue("btnShwMreRslts"), studentSocialGroupName);
         int i = 2;
 
         while (true) {
             try {
-                ip.isTextPresentByXPATH(driver, "//li[" + i + "]/div/div[2]/div/a", stdtSclGrpName, 5);
+                ip.isTextPresentByXPATH(driver, "//li[" + i + "]/div/div[2]/div/a", studentSocialGroupName, 5);
                 break;
             } catch (TimeoutException e) {
-                System.out.println(stdtSclGrpName + " is not found at " + i + " position");
+                System.out.println(studentSocialGroupName + " is not found at " + i + " position");
                 i++;
             }
         }
 
         driver.findElement(By.xpath("//li[" + i + "]/div/div[3]/a")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyRmvSclGrpXPATH"), "Are you sure you want to remove yourself from the group " + stdtSclGrpName + "?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyRmvSclGrpXPATH"), "Are you sure you want to remove yourself from the group " + studentSocialGroupName + "?");
 
         //XPATH didn't work
         List<WebElement> buttons = driver.findElements(By.tagName("button"));
 
         String btnID = buttons.get(1).getAttribute("id");
         driver.findElement(By.xpath("//button[@id='" + btnID + "']")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyRmvSclGrpXPATH"), "You have successfully left the group " + stdtSclGrpName);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyRmvSclGrpXPATH"), "You have successfully left the group " + studentSocialGroupName);
         driver.findElement(By.xpath(xpv.getTokenValue("btnOkLvSclGrp"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + studentSocialGroupName + "')]")));
     }
 
     /**
      * Delete SocialGroup
      *
-     * @param stdtSclGrpName
+     * @param studentSocialGroupName
      */
-    public void deleteSocialGroup(String stdtSclGrpName) {
+    public void deleteSocialGroup(String studentSocialGroupName) {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnDeleteGrp"))).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Do you really want to delete this group?");
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + stdtSclGrpName + "')]")));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + studentSocialGroupName + "')]")));
     }
     
     /**
      * Verify post exits on Social Group wall
      * 
-     * @param stdtUrlPostOnTchrSclGrp
+     * @param studentUrlPostOnTeacherSocialGroup
      */
-    public void verifyPostOnSocialGroupWall(String stdtUrlPostOnTchrSclGrp) {
-        ip.isElementPresentContainsTextByXPATH(driver, stdtUrlPostOnTchrSclGrp);
+    public void verifyPostOnSocialGroupWall(String studentUrlPostOnTeacherSocialGroup) {
+        ip.isElementPresentContainsTextByXPATH(driver, studentUrlPostOnTeacherSocialGroup);
     }
 
     /**
      * @return SclGrpName
      */
     public String getSocialGroupName() {
-        return this.sclGrpName;
+        return this.socialGroupName;
     }
 }

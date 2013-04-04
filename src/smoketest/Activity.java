@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,169 +19,135 @@ import runThrghTestNG.BaseClass;
 public class Activity extends BaseClass {
 
     Date now = new Date();
-    private String forumName;
-    private String quizName;
-    private String allInOneAsgnmntName;
-    private String pageName;
-    private String pswdQuizName;
     private String questionTitle, question, ans;
-    private String glossaryName;
-    private String glossaryEntryName;
-    private String glossaryCategoryName;
+    private String name;
+    private String intro;
+    private String dateAndTime;
+    StackTraceElement[] stackTraceElements;
+    Actions a = new Actions();
+
+    public void createLessonActivity() {
+        String currentDateTime = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        System.out.println("######&(*&#(@&*$&*(@#&$*(&@*#$&(*&$*(&*(#&*&$#*@&$*(@#&$*(@#&*(@#&(*^%&^%&^@&*^%&*");
+    }
+
+    /*
+     * This can be used to grab the current method.  We can use this if we really need to include the activity type
+     * into the string when creating the activities below.  Using this would be expensive.
+     */
+    public String getExecutingMethod() {
+        String temp = Thread.currentThread().getStackTrace()[1].getMethodName();
+        return temp;
+    }
 
     /**
      * Create & Verify Forum Activity
      */
-    public void crtForumActvty() {
-        String forumIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.forumName = "RgsnTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            forumIntro = "RgsnTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.forumName = "SmkTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            forumIntro = "SmkTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.forumName = "DbgTstForum " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            forumIntro = "DbgTstForumIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+    public void createForumActivity() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Forum " + this.dateAndTime;
+        this.intro = test + " intro " + this.dateAndTime;
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Forum");
-        createActivity(forumName, forumIntro);
+        createActivity(this.name, this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), forumIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      * Create & Verify Quiz Activity
      */
-    public void crtQuizActvty() {
-        String quizIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.quizName = "RgsnTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "RgsnTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.quizName = "SmkTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "SmkTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.quizName = "DbgTstQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "DbgTstQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+    public void createQuizActivity() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Quiz " + this.dateAndTime;
+        this.intro = test + " intro " + this.dateAndTime;
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
-        createActivity(quizName, quizIntro);
+        createActivity(this.name, this.intro);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      *
      */
-    public void crtPswdQuizActivity() {
-        String quizIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.pswdQuizName = "RgsnTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "RgsnTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.pswdQuizName = "SmkTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "SmkTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.pswdQuizName = "DbgTstPswdQuiz " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            quizIntro = "DbgTstPswdQuizIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+    public void createPasswordQuizActivity() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Password " + this.dateAndTime;
+        this.intro = test + " intro " + this.dateAndTime;
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Quiz");
-        createActivity(pswdQuizName, quizIntro);
+        createActivity(this.name, this.intro);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
         driver.findElement(By.xpath("//fieldset[6]/div[2]/div/div[2]/input")).sendKeys("Password1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), quizIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      * Create & Verify AllInOneAsgnmnt Activity
      */
     public void createAllInOneAssignmentActivity() {
-        String allInOneAsgnmntIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.allInOneAsgnmntName = "RgsnTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            allInOneAsgnmntIntro = "RgsnTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.allInOneAsgnmntName = "SmkTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            allInOneAsgnmntIntro = "SmkTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.allInOneAsgnmntName = "DbgTstAllInOneAsgnmnt " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            allInOneAsgnmntIntro = "DbgTstAllInOneAsgnmntIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " All in One " + this.dateAndTime;
+        this.intro = test + " intro " + this.dateAndTime;
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
-        createActivity(allInOneAsgnmntName, allInOneAsgnmntIntro);
+        createActivity(this.name, this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), allInOneAsgnmntIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      * Create Glossary activity
      */
-    public void crtGlossaryActvty() {
-        String glossaryIntro;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.glossaryName = "RgsnTstGlossary " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            glossaryIntro = "RgsnTstGlossaryIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.glossaryName = "DbgTstGlossary " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            glossaryIntro = "DbgTstGlossaryIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+    public void createGlossaryActivity() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Glossary " + this.dateAndTime;
+        this.intro = test + " intro " + this.dateAndTime;
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Glossary");
-        createActivity(glossaryName, glossaryIntro);
+        createActivity(this.name, this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), glossaryIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
 
     /**
      * Create & Verify Page Resource
      */
     public void createPageResource() {
-        String pageContent;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.pageName = "RgsnTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            pageContent = "RgsnTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.pageName = "SmkTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            pageContent = "SmkTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.pageName = "DbgTstPage " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            pageContent = "DbgTstPageContent " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Page " + this.dateAndTime;
+
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddRescXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddRescXPATH")))).selectByVisibleText("Page");
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
-
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys(pageName);
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(pageContent);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys(this.name);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(this.name);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), pageContent);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), this.name);
     }
 
     /**
      * Create - Syllabus Activity
      */
     public void createSyllabusActivity() {
-        String sylbsIntro;
-        sylbsIntro = "RgsnTstSylbsIntro " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        this.dateAndTime = a.currentDateTime();
+        this.intro = test + " Syllabus intro " + this.dateAndTime;
+
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddSyllbsActvyXPATH"));
@@ -190,9 +155,9 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldActvyNameXPATH"));
 
         driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))).sendKeys("Syllabus");
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(sylbsIntro);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldRescContentXPATH"))).sendKeys(this.intro);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), sylbsIntro);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngRescTextXPATH"), this.intro);
         ip.isTextPresentByXPATH(driver, "//li[3]/a", "Syllabus");
         driver.findElement(By.linkText("Syllabus")).click();
         ip.isTextPresentByCSS(driver, "li.listentry > a", "Syllabus");
@@ -200,60 +165,64 @@ public class Activity extends BaseClass {
 
     /**
      * Create Glossary entry
-     * 
+     *
      * @param glossaryName
      */
     public void createGlossaryEntry(String glossaryName) {
+        this.dateAndTime = a.currentDateTime();
+        String conceptEntry;
+
         ip.isElementClickableByXpath(driver, "//div/input[2]", 60);
         driver.findElement(By.xpath("//div/input[2]")).click();
         ip.isTextPresentByXPATH(driver, "//h2", glossaryName);
-        String conceptEntry;
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.glossaryEntryName = "RgsnTstGlossaryConceptEntry " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            conceptEntry = "RgsnTstGlossaryConceptEntryDef " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.glossaryEntryName = "DbgTstGlossaryConceptEntry " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            conceptEntry = "DbgTstGlossaryConceptEntryDef " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
-        driver.findElement(By.xpath("//input[@id='id_concept']")).sendKeys(this.glossaryEntryName);
-        ip.isElementClickableByXpath(driver, "//*[@id='id_definition_editor_toolbargroup']/span", 60);
 
+        this.name = test + "Glossary Entry " + this.dateAndTime;
+        conceptEntry = test + " Glossary Concept " + this.dateAndTime;
+
+        driver.findElement(By.xpath("//input[@id='id_concept']")).sendKeys(this.name);
+        ip.isElementClickableByXpath(driver, "//*[@id='id_definition_editor_toolbargroup']/span", 60);
         Utility.typeInContentEditableIframe(driver, 1, conceptEntry);
         driver.findElement(By.xpath("//fieldset/input")).click();
-        ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        ip.isTextPresentByXPATH(driver, "//h3/span", this.name);
         driver.findElement(By.linkText("Browse by category")).click();
         ip.isTextPresentByXPATH(driver, "//td[2]/b", "All categories");
         ip.isTextPresentByXPATH(driver, "//div[4]/div[3]/div", "No entries found in this section");
         new Select(driver.findElement(By.xpath("//select"))).selectByIndex(1);
         ip.isTextPresentByXPATH(driver, "//td[2]/b", "Entries without category");
+
         if (LoginPage.getUser().contains("teacher")) {
-            ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+            ip.isTextPresentByXPATH(driver, "//h3/span", this.name);
         } else {
-            ip.isTextPresentByXPATH(driver, "//table[3]/tbody/tr/td/div/h3/span", this.glossaryEntryName);
+            ip.isTextPresentByXPATH(driver, "//table[3]/tbody/tr/td/div/h3/span", this.name);
         }
+
         driver.findElement(By.linkText("Browse by date")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("By creation date")));
         driver.findElement(By.cssSelector("a[title=\"By creation date ascending\"]")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("By creation date")));
         driver.findElement(By.cssSelector("a[title=\"By creation date change to descending\"]")).click();
-        ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        ip.isTextPresentByXPATH(driver, "//h3/span", this.name);
         driver.findElement(By.linkText("Browse by Author")).click();
         ip.isTextPresentByXPATH(driver, "//h2", Utility.getFullName(LoginPage.getUser()));
-        ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+        ip.isTextPresentByXPATH(driver, "//h3/span", this.name);
         driver.findElement(By.linkText("Browse by alphabet")).click();
+
         if (LoginPage.getUser().contains("teacher")) {
-            ip.isTextPresentByXPATH(driver, "//h3/span", this.glossaryEntryName);
+            ip.isTextPresentByXPATH(driver, "//h3/span", this.name);
         } else {
-            ip.isTextPresentByXPATH(driver, "//table[2]/tbody/tr/td/div/h3/span", this.glossaryEntryName);
+            ip.isTextPresentByXPATH(driver, "//table[2]/tbody/tr/td/div/h3/span", this.name);
         }
     }
 
     /**
      * Create Glossary category
-     * 
-     * @param glossaryName 
+     *
+     * @param glossaryName
      */
     public void createGlossaryCategory(String glossaryName) {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Glossary Category " + this.dateAndTime;
+
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Browse by category")));
         driver.findElement(By.linkText("Browse by category")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div[3]/div", "No entries found in this section");
@@ -261,52 +230,48 @@ public class Activity extends BaseClass {
         ip.isElementClickableByXpath(driver, "//div/input", 60);
         driver.findElement(By.xpath("//div/input")).click();
         ip.isElementClickableByXpath(driver, "//td[2]/input", 60);
-        if (test.equalsIgnoreCase("RegressionTests")) {
-            this.glossaryCategoryName = "RgsnTstGlossaryCategoryName " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else {
-            this.glossaryCategoryName = "DbgTstGlossaryCategoryName " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        }
-        driver.findElement(By.xpath("//td[2]/input")).sendKeys(this.glossaryCategoryName);
+        driver.findElement(By.xpath("//td[2]/input")).sendKeys(this.name);
         new Select(driver.findElement(By.xpath("//select"))).selectByValue("1");
         driver.findElement(By.xpath("//div/input[6]")).click();
-        ip.isTextPresentByXPATH(driver, "//td/span", this.glossaryCategoryName);
+        ip.isTextPresentByXPATH(driver, "//td/span", this.name);
         ip.isTextPresentByXPATH(driver, "//td/span[2]", "(0 Entries)");
         driver.findElement(By.xpath("//form/div/input")).click();
         ip.isElementClickableByXpath(driver, "//select", 60);
+
         List<WebElement> allOptions = driver.findElement(By.xpath("//select")).findElements(By.tagName("option"));
         int i = 0;
         for (WebElement option : allOptions) {
-            if (this.glossaryCategoryName.equals(option.getText())) {
+            if (this.name.equals(option.getText())) {
                 break;
             }
             i++;
         }
         new Select(driver.findElement(By.xpath("//select"))).selectByIndex(i);
-        ip.isTextPresentByXPATH(driver, "//td[2]/b", this.glossaryCategoryName);
-    }   
-    
+        ip.isTextPresentByXPATH(driver, "//td[2]/b", this.name);
+    }
+
     /**
      * Edit Glossary entry
-     * 
+     *
      * @param glossaryName
-     * @param stdtGlossaryEntryName
+     * @param studentGlossaryEntryName
      * @param glossaryCategoryName
-     * @param tchrGlossaryEntryName 
+     * @param teacherGlossaryEntryName
      */
-    public void editGlossaryEntry(String glossaryName, String stdtGlossaryEntryName, String glossaryCategoryName, String tchrGlossaryEntryName) {
+    public void editGlossaryEntry(String glossaryName, String studentGlossaryEntryName, String glossaryCategoryName, String teacherGlossaryEntryName) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[title=\"Edit\"] > img.iconsmall")));
         driver.findElement(By.cssSelector("a[title=\"Edit\"] > img.iconsmall")).click();
         ip.isTextPresentByXPATH(driver, "//h2", glossaryName);
         new Select(driver.findElement(By.xpath("//div[3]/div[2]/select"))).selectByVisibleText(glossaryCategoryName);
         driver.findElement(By.xpath("//fieldset/input")).click();
-        ip.isTextPresentByXPATH(driver, "//h3/span", stdtGlossaryEntryName);
+        ip.isTextPresentByXPATH(driver, "//h3/span", studentGlossaryEntryName);
         driver.findElement(By.linkText("Browse by category")).click();
         ip.isTextPresentByXPATH(driver, "//b", "All categories");
         ip.isTextPresentByXPATH(driver, "//h2", glossaryCategoryName.toUpperCase());
-        ip.isTextPresentByXPATH(driver, "//h3/span", stdtGlossaryEntryName);
+        ip.isTextPresentByXPATH(driver, "//h3/span", studentGlossaryEntryName);
         new Select(driver.findElement(By.xpath("//select"))).selectByIndex(1);
         ip.isTextPresentByXPATH(driver, "//td[2]/b", "Entries without category");
-        ip.isTextPresentByXPATH(driver, "//h3/span", tchrGlossaryEntryName);
+        ip.isTextPresentByXPATH(driver, "//h3/span", teacherGlossaryEntryName);
         List<WebElement> allOptions = driver.findElement(By.xpath("//select")).findElements(By.tagName("option"));
         int i = 0;
         for (WebElement option : allOptions) {
@@ -316,42 +281,51 @@ public class Activity extends BaseClass {
             i++;
         }
         new Select(driver.findElement(By.xpath("//select"))).selectByIndex(i);
-        ip.isTextPresentByXPATH(driver, "//h3/span", stdtGlossaryEntryName);
+        ip.isTextPresentByXPATH(driver, "//h3/span", studentGlossaryEntryName);
     }
 
     /**
      * Create Activity
      *
-     * @param forumName
-     * @param forumIntro
+     * @param activityName
+     * @param activityIntroName
      */
-    private void createActivity(String forumName, String forumIntro) {
-        WebElement actvtyNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))));
-        WebElement actvtyIntroNm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));
+    private void createActivity(String activityName, String activityIntroName) {
+        WebElement elementActivityName = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH"))));
+        WebElement elementActivityIntroName = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))));
 
-        //This is to verify actvtyName passes correct value 
+        //This will check multiple times has activityName send correct value 
+        int i = 1;
+        Boolean result;
         value:
-        while (true) {
-            actvtyNm.clear();
-            actvtyIntroNm.clear();
-            actvtyNm.sendKeys(forumName);
-            actvtyIntroNm.sendKeys(forumIntro);
+        do {
+            elementActivityName.clear();
+            elementActivityIntroName.clear();
+            elementActivityName.sendKeys(activityName);
+            elementActivityIntroName.sendKeys(activityIntroName);
             try {
-                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH")), forumName));
-                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH")), forumIntro));
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyNameXPATH")), activityName));
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH")), activityIntroName));
+                result = false;
                 break value;
             } catch (TimeoutException e) {
+                i++;
+                result = true;
             }
+        } while (i < 5);
+
+        if (result) {
+            Utility.illegalStateException("Unable to send expected Name: " + activityName + " or Intro: " + activityIntroName);
         }
     }
 
     /**
      * Add True/False question to Quiz Activity
      *
-     * @param quizActvtyName
+     * @param quizActivityName
      */
-    public void addQuizQuestion(String quizActvtyName) {
-        if (quizActvtyName.contains("PswdQuiz")) {
+    public void addQuizQuestion(String quizActivityName) {
+        if (quizActivityName.contains("Password")) {
             questionTitle = "Unit";
             question = "1 Kg equals 1000 grams";
             ans = "True";
@@ -363,11 +337,11 @@ public class Activity extends BaseClass {
 
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
-        ip.isElementPresentContainsTextByXPATH(driver, quizActvtyName);
-        Utility.clickByJavaScript(driver, "//*[contains(text(),'" + quizActvtyName + "')]");
+        ip.isElementPresentContainsTextByXPATH(driver, quizActivityName);
+        Utility.clickByJavaScript(driver, "//*[contains(text(),'" + quizActivityName + "')]");
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnEditQzXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtEditQzScrnXPATH"), "Editing quiz: " + quizActvtyName);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtEditQzScrnXPATH"), "Editing quiz: " + quizActivityName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("fieldQzGradeXPATH"))).sendKeys("1");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveGradeXPATH"))).click();
@@ -389,16 +363,16 @@ public class Activity extends BaseClass {
     /**
      * User attempt to 'True/False' question in Quiz Assignment
      *
-     * @param quizActvtyName
+     * @param quizActivityName
      */
-    public void submitQuiz(String quizActvtyName, String password) {
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActvtyName + "')]")).click();
+    public void submitQuiz(String quizActivityName, String password) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActivityName + "')]")).click();
         int i = 1;
         int rows;
 
         Boolean attempt;
         try {
-            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyPrvAtmptXPATH"), "Summary of your previous attempts");
+            ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyPrvAtmptXPATH"), "Summary of your previous attempts", 15);
             attempt = true;
         } catch (TimeoutException e) {
             attempt = false;
@@ -442,7 +416,7 @@ public class Activity extends BaseClass {
                 presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
-        int x = locateElement(quizActvtyName);
+        int x = locateElement(quizActivityName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "(100%)");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "(100%)");
     }
@@ -450,13 +424,13 @@ public class Activity extends BaseClass {
     /**
      * Submit Assignment
      *
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAssignmentActivityName
      */
-    public void submitAssignment(String allInOneAsgnmntAvtvtyName) {
+    public void submitAssignment(String allInOneAssignmentActivityName) {
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAsgnmntAvtvtyName + "')]")).click();
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
         new WebDriverWait(driver, 60).until(ExpectedConditions.
                 presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
@@ -464,28 +438,21 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
 
         String HandleBefore = driver.getWindowHandle();
+
+        //'Send for Marking' button with onclick attribute is not clicked by Selenium CLICK command for Chrome Browser
+        //Robot code provides the work around to perform the operation. 
+        //Hence Exception is thrown incase button is not clicked after multiple (5) tries
         int i = 1;
         end:
         while (i < 6) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Font family")));
-            List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-            System.out.println("iframes count:" + iframes.size());
-            for (WebElement frame : iframes) {
-                System.out.println("Iframe ID: " + frame.getAttribute("id"));
-                driver.switchTo().frame(frame.getAttribute("id"));
-                break;
-            }
-
-            //Switch focus
-            WebElement editableTxtArea = driver.switchTo().activeElement();
-            editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), asgmntRspns);
-            driver.switchTo().defaultContent();
+            Utility.typeInContentEditableIframe(driver, 1, asgmntRspns);
 
             List<WebElement> elements = driver.findElements(By.tagName("input"));
             System.out.println("Total inputs: " + elements.size());
             Utility.robotclick(elements.get(22));
             if (i < 5) {
-                if (brwsr.equalsIgnoreCase("chrome")) {
+                if (browser.equalsIgnoreCase("chrome")) {
                     try {
                         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"), "Are you sure you want to send this assignment "
                                 + "for marking? After submission, you will not be able to make any changes in any documents or text.", 30);
@@ -493,7 +460,7 @@ public class Activity extends BaseClass {
                     } catch (TimeoutException e) {
                         System.out.println("count: " + i);
                         driver.navigate().refresh();
-                        ip.isTitleContains(driver, "Assignment: " + allInOneAsgnmntAvtvtyName);
+                        ip.isTitleContains(driver, "Assignment: " + allInOneAssignmentActivityName);
                         i++;
                     }
                 } else {
@@ -615,12 +582,12 @@ public class Activity extends BaseClass {
     /**
      * Grade Assignment
      *
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAssignmentActivityName
      */
-    public void gradeAssignment(String allInOneAsgnmntAvtvtyName) {
-        ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
+    public void gradeAssignment(String allInOneAssignmentActivityName) {
+        ip.isElementPresentContainsTextByXPATH(driver, allInOneAssignmentActivityName);
 
-        int x = locateElement(allInOneAsgnmntAvtvtyName);
+        int x = locateElement(allInOneAssignmentActivityName);
         int y = x + 1;
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "1 of 1");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
@@ -638,11 +605,11 @@ public class Activity extends BaseClass {
     /**
      * Verify Assignment Grade
      *
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAssignmentActivityName
      */
-    public void verifyAssignmentGrade(String allInOneAsgnmntAvtvtyName) {
-        ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
-        int x = locateElement(allInOneAsgnmntAvtvtyName);
+    public void verifyAssignmentGrade(String allInOneAssignmentActivityName) {
+        ip.isElementPresentContainsTextByXPATH(driver, allInOneAssignmentActivityName);
+        int x = locateElement(allInOneAssignmentActivityName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "62/100 (62%)");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "62/100 (62%)");
     }
@@ -650,17 +617,17 @@ public class Activity extends BaseClass {
     /**
      * Allow Assignment to be resubmitted
      *
-     * @param allInOneAsgnmntAvtvtyName
+     * @param allInOneAssignmentActivityName
      */
-    public void allowResubmitAssignment(String allInOneAsgnmntAvtvtyName, String stdtUsrName) {
-        ip.isElementPresentContainsTextByXPATH(driver, allInOneAsgnmntAvtvtyName);
-        int x = locateElement(allInOneAsgnmntAvtvtyName);
+    public void allowResubmitAssignment(String allInOneAssignmentActivityName, String studentUserName) {
+        ip.isElementPresentContainsTextByXPATH(driver, allInOneAssignmentActivityName);
+        int x = locateElement(allInOneAssignmentActivityName);
         driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Allow Resubmit")));
         driver.findElement(By.linkText("Allow Resubmit")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + stdtUsrName + " to resubmit this assignment?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + studentUserName + " to resubmit this assignment?");
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + stdtUsrName + " and mail sent.");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + studentUserName + " and mail sent.");
         driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
@@ -671,10 +638,10 @@ public class Activity extends BaseClass {
     /**
      * Delete all Activities
      *
-     * @param frmActvyName
-     * @param quizActvtyName
-     * @param allInOneAsgnmntAvtvtyName
-     * @param pageActvtyName
+     * @param forumActivityName
+     * @param quizActivityName
+     * @param allInOneAssignmentActivityName
+     * @param pageActivityName
      */
     public void deleteActivites(String... activities) {
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
@@ -686,10 +653,12 @@ public class Activity extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Forum '" + activity + "' ?");
             } else if (activity.contains("Quiz")) {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Quiz '" + activity + "' ?");
-            } else if (activity.contains("Asgnmnt")) {
+            } else if (activity.contains("All in One")) {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Assignment '" + activity + "' ?");
-            } else {
+            } else if (activity.contains("Page")) {
                 ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Page '" + activity + "' ?");
+            } else {
+                ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/p", "Are you absolutely sure you want to completely delete Glossary '" + activity + "' ?");
             }
             ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCnfrmDltActvtyXPATH"));
             driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmDltActvtyXPATH"))).click();
@@ -698,10 +667,10 @@ public class Activity extends BaseClass {
 
     /**
      *
-     * @param pswdQzName
+     * @param passwordQuizName
      */
-    public void generateQuizPassword(String pswdQzName) {
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + pswdQzName + "')]")).click();
+    public void generateQuizPassword(String passwordQuizName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + passwordQuizName + "')]")).click();
         ip.isElementPresentByID(driver, "generate_pwds_btn");
         driver.findElement(By.id("generate_pwds_btn")).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "This will e-mail you and all other instructors in this section a list of passwords for this quiz. "
@@ -733,58 +702,10 @@ public class Activity extends BaseClass {
     }
 
     /**
-     * @return ForumName
-     */
-    public String getFrmActvyName() {
-        return this.forumName;
-    }
-
-    /**
-     * @return QuizName
-     */
-    public String getQzActvyName() {
-        return this.quizName;
-    }
-
-    /**
-     * @return AllInOneAsgnmntName
-     */
-    public String getAllInOneAssignmentActivityName() {
-        return this.allInOneAsgnmntName;
-    }
-
-    /**
-     * @return PageName
-     */
-    public String getPageActvyName() {
-        return this.pageName;
-    }
-
-    /**
+     *
      * @return
      */
-    public String getPswdQuizActivity() {
-        return this.pswdQuizName;
-    }
-
-    /**
-     * @return Glossary Activity Name
-     */
-    public String getGlossaryActvyName() {
-        return this.glossaryName;
-    }
-
-    /**
-     * @return
-     */
-    public String getGlossaryEntryName() {
-        return this.glossaryEntryName;
-    }
-
-    /**
-     * @return 
-     */
-    public String getGlossaryCategoryName() {
-        return this.glossaryCategoryName;
+    public String getActivityName() {
+        return this.name;
     }
 }

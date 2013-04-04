@@ -17,7 +17,7 @@ import runThrghTestNG.BaseClass;
  */
 public class Help extends BaseClass {
 
-    String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5;
+    String verify1, verify2, verify3, verify4, verify5;
     List<String> footers;
 
     /**
@@ -25,16 +25,16 @@ public class Help extends BaseClass {
      */
     public void verifyHelpWindow() {
         System.out.println("in method");
-        vrfy1 = "- Top News: any posts or activity "
+        verify1 = "- Top News: any posts or activity "
                 + "from contacts or courses that have been promoted.";
-        vrfy2 = "- Recent News: recent posts or activity from all "
+        verify2 = "- Recent News: recent posts or activity from all "
                 + "contacts or courses you are associated with.";
-        vrfy3 = "- Resources at the bottom right will allow you "
+        verify3 = "- Resources at the bottom right will allow you "
                 + "to go to any page provided without leaving the platform.";
-        vrfy4 = "- Click on the month to open up the calendar function.";
-        vrfy5 = "- Upcoming events will list all live sessions and "
+        verify4 = "- Click on the month to open up the calendar function.";
+        verify5 = "- Upcoming events will list all live sessions and "
                 + "assignments for the week from any course you are in.";
-        footers = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5);
+        footers = Arrays.asList(verify1, verify2, verify3, verify4, verify5);
         ip.isElementClickableByXpath(driver, "//a[@id='show-help']/span[2]", 60);
 
         int i = 1;
@@ -44,7 +44,7 @@ public class Help extends BaseClass {
             System.out.println("Total inputs: " + elements.size());
             Utility.robotclick(elements.get(1));
             if (i < 5) {
-                if (brwsr.equalsIgnoreCase("chrome")) {
+                if (browser.equalsIgnoreCase("chrome")) {
                     try {
                         ip.isTextPresentByXPATH(driver, "//div[@id='ext-gen21']/span", "Help on This Page", 15);
                         break end;

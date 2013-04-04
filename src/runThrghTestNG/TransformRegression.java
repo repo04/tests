@@ -43,9 +43,9 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testContentAdminAddQuizQuestion".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminAddQuizQuestion");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
+            DependentMethods[0] = "testContentAdminActivitiesCreation";
             annotation.setDependsOnMethods(DependentMethods);
-        }   
+        }
 
         if ("testPESAdminAssignRole".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminAssignRole");
@@ -73,8 +73,8 @@ public class TransformRegression implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
         
-        if ("testTeacherVerifyPersonalInfo".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherVerifyPersonalInfo");
+        if ("testTeacherVerifyPersonalInformation".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyPersonalInformation");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
@@ -431,7 +431,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
             System.out.println("Inside testStudentSubmitPasswordQuiz");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Teacher_FetchAssignmentPassword.testTeacherFetchQuizPassword";
+            DependentMethods[0] = "runThrghTestNG.Teacher_FetchActivityPassword.testTeacherFetchQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
         

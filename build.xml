@@ -17,28 +17,28 @@
             <then>
                 <propertyregex property="regenv" input="${callUrl}" regexp="lms-([^-qa]*)"
                                select="\1" casesensitive="false" />
-                <var name="env" value="${regenv}" />                              
+                <var name="environment" value="${regenv}" />                              
             </then>
             <elseif>
                 <contains string="${callUrl}" substring="lms-stg"/>
                 <then>
-                    <var name="env" value="stg" />                    
+                    <var name="environment" value="stg" />                    
                 </then>
             </elseif>
             <elseif>
                 <contains string="${callUrl}" substring="lms-standalone"/>
                 <then>
-                    <var name="env" value="standalone" />                    
+                    <var name="environment" value="standalone" />                    
                 </then>
             </elseif>
             <elseif>
                 <contains string="${callUrl}" substring="lms-prod"/>
                 <then>
-                    <var name="env" value="preprod" />                    
+                    <var name="environment" value="preprod" />                    
                 </then>
             </elseif>
             <else>
-                <var name="env" value="prod" />                
+                <var name="environment" value="prod" />                
             </else>
         </if>
     </target>
@@ -108,7 +108,7 @@
             </elseif>
             <elseif>
                 <or>
-                    <contains string="${callUrl}" substring=""/>
+                    <contains string="${callUrl}" substring="2gw"/>
                     <contains string="${callUrl}" substring="gwu-mph"/>
                 </or>
                 <then>
@@ -195,24 +195,24 @@
                     <param name="callUrl" value="@{url}"/>
                 </antcallback> 
                 <echo>callback: ${program}</echo>
-                <antcallback target="set_env" inheritRefs="true" return="env">
+                <antcallback target="set_env" inheritRefs="true" return="environment">
                     <param name="callUrl" value="@{url}"/>
                 </antcallback>
-                <echo>callback: ${env}</echo>
-                <for list="${antBrwsr}" param = "brwsr">
+                <echo>callback: ${environment}</echo>
+                <for list="${antBrwsr}" param = "browser">
                     <sequential>
-                        <echo>Driver: @{brwsr}</echo>
+                        <echo>Driver: @{browser}</echo>
                         <testng outputDir="${report.dir}" classpathref="libs" delegatecommandsystemproperties="true">  
                             <xmlfileset dir="${basedir}" includes="regression.xml"/>
                             <sysproperty key="url" value="@{url}"/>
                             <sysproperty key="program" value="${program}"/>
-                            <sysproperty key="env" value="${env}"/>   
-                            <sysproperty key="brwsr" value="@{brwsr}"/>
+                            <sysproperty key="environment" value="${environment}"/>   
+                            <sysproperty key="browser" value="@{browser}"/>
                             <sysproperty key="os" value="${antOS}"/>
                             <sysproperty key="test" value="RegressionTests"/>
                         </testng>
                     </sequential>
-                </for> 
+                </for>
             </sequential>
         </for>           
     </target>
@@ -228,19 +228,19 @@
                     <param name="callUrl" value="@{url}"/>
                 </antcallback> 
                 <echo>callback: ${program}</echo>
-                <antcallback target="set_env" return="env">
+                <antcallback target="set_env" return="environment">
                     <param name="callUrl" value="@{url}"/>
                 </antcallback>
-                <echo>callback: ${env}</echo>
-                <for list="${antBrwsr}" param = "brwsr">
+                <echo>callback: ${environment}</echo>
+                <for list="${antBrwsr}" param = "browser">
                     <sequential>
-                        <echo>Driver: @{brwsr}</echo>
+                        <echo>Driver: @{browser}</echo>
                         <testng outputDir="${report.dir}" classpathref="libs" delegatecommandsystemproperties="true">  
                             <xmlfileset dir="${basedir}" includes="smoke.xml"/>
                             <sysproperty key="url" value="@{url}"/>
                             <sysproperty key="program" value="${program}"/>
-                            <sysproperty key="env" value="${env}"/>   
-                            <sysproperty key="brwsr" value="@{brwsr}"/>
+                            <sysproperty key="environment" value="${environment}"/>   
+                            <sysproperty key="browser" value="@{browser}"/>
                             <sysproperty key="os" value="${antOS}"/>
                             <sysproperty key="test" value="SmokeTests"/>
                         </testng>
@@ -261,19 +261,19 @@
                     <param name="callUrl" value="@{url}"/>
                 </antcallback> 
                 <echo>callback: ${program}</echo>
-                <antcallback target="set_env" return="env">
+                <antcallback target="set_env" return="environment">
                     <param name="callUrl" value="@{url}"/>
                 </antcallback>
-                <echo>callback: ${env}</echo>
-                <for list="${antBrwsr}" param = "brwsr">
+                <echo>callback: ${environment}</echo>
+                <for list="${antBrwsr}" param = "browser">
                     <sequential>
-                        <echo>Driver: @{brwsr}</echo>
+                        <echo>Driver: @{browser}</echo>
                         <testng outputDir="${report.dir}" classpathref="libs" delegatecommandsystemproperties="true">  
                             <xmlfileset dir="${basedir}" includes="critical.xml"/>
                             <sysproperty key="url" value="@{url}"/>
                             <sysproperty key="program" value="${program}"/>
-                            <sysproperty key="env" value="${env}"/>   
-                            <sysproperty key="brwsr" value="@{brwsr}"/>
+                            <sysproperty key="environment" value="${environment}"/>   
+                            <sysproperty key="browser" value="@{browser}"/>
                             <sysproperty key="os" value="${antOS}"/>
                             <sysproperty key="test" value="CriticalTests"/>
                         </testng>
@@ -294,20 +294,20 @@
                     <param name="callUrl" value="@{url}"/>
                 </antcallback> 
                 <echo>callback: ${program}</echo>
-                <antcallback target="set_env" return="env">
+                <antcallback target="set_env" return="environment">
                     <param name="callUrl" value="@{url}"/>
                 </antcallback>
-                <echo>callback: ${env}</echo>
-                <for list="${antBrwsr}" param = "brwsr">
+                <echo>callback: ${environment}</echo>
+                <for list="${antBrwsr}" param = "browser">
                     <sequential>
-                        <echo>Driver: @{brwsr}</echo>
+                        <echo>Driver: @{browser}</echo>
                         <testng outputDir="${report.dir}" classpathref="libs" 
                                 groups="${antGrp}" delegatecommandsystemproperties="true" listeners="org.uncommons.reportng.HTMLReporter">  
                             <xmlfileset dir="${basedir}" includes="debug.xml"/>
                             <sysproperty key="url" value="@{url}"/>
                             <sysproperty key="program" value="${program}"/>
-                            <sysproperty key="env" value="${env}"/>   
-                            <sysproperty key="brwsr" value="@{brwsr}"/>
+                            <sysproperty key="environment" value="${environment}"/>   
+                            <sysproperty key="browser" value="@{browser}"/>
                             <sysproperty key="os" value="${antOS}"/>
                             <sysproperty key="test" value="DebugTests"/>
                         </testng>
@@ -321,7 +321,7 @@
     <target name="testng-xslt-report">
         <for list="${antUrl}" param = "url">
             <sequential>
-                <for list="${antBrwsr}" param = "brwsr">
+                <for list="${antBrwsr}" param = "browser">
                     <sequential>
                         <if>
                             <available file="${basedir}/${report.dir}" type="dir"/>

@@ -19,34 +19,34 @@ import runThrghTestNG.Pes_CleanTestData;
 public class WorkingGroup extends BaseClass {
 
     Date now = new Date();
-    private String wrkgGrpName;
-    private String gglDocName;
+    private String workingGroupName;
+    private String googleDocumentName;
 
     /**
      * PesAdmin creates & verify Working Group
      */
     public void buildWorkingGroup() {
         if (test.equalsIgnoreCase("RegressionTests")) {
-            this.wrkgGrpName = "RgsnTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.workingGroupName = "RgsnTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.wrkgGrpName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.workingGroupName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("CriticalTests")) {
-            this.wrkgGrpName = "CrtclTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.workingGroupName = "CrtclTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
-            this.wrkgGrpName = "DbgTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.workingGroupName = "DbgTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }
 
         String srtName = "ShrtNmWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         driver.findElement(By.xpath(xpv.getTokenValue("link2torAdminXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("linkAddWrkGrp"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("headerCreateWrkGrp"), xpv.getTokenValue("txtCreateWrkGrp"));
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldWrkgGrpName"))).sendKeys(this.wrkgGrpName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldWrkgGrpName"))).sendKeys(this.workingGroupName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldWrkgGrpShrtName"))).sendKeys(srtName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldWrkgGrpAbout"))).sendKeys("this is a test");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtWrkgGrp"))).click();
 
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("headerLstWrkGrp"), xpv.getTokenValue("txtLstWrkGrp"));
-        ip.isElementPresentByLINK(driver, wrkgGrpName);
+        ip.isElementPresentByLINK(driver, workingGroupName);
     }
 
     /**
@@ -56,27 +56,27 @@ public class WorkingGroup extends BaseClass {
      */
     public void addMembersToWorkingGroup(String[] members) {
 
-        mbrsToWrkngGrp();
+        membersToWorkingGroup();
 
         Select select = new Select(driver.findElement(By.xpath(xpv.getTokenValue("addMbrsXPATH"))));
-        String fullNm = null;
+        String fullName = null;
 
         for (String mbr : members) {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
                 case "autotea":
-                    fullNm = Utility.getFullName(mbr) + "(Non-editing teacher)";
+                    fullName = Utility.getFullName(mbr) + "(Non-editing teacher)";
                     break sw;
                 case "student":
                 case "autostu":
-                    fullNm = Utility.getFullName(mbr) + "(Student)";
+                    fullName = Utility.getFullName(mbr) + "(Student)";
                     break sw;
                 default:
-                    SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
+                    SeleneseTestBase.fail("Invalid Member 'teacher'/'student' :" + mbr.substring(0, 7));
             }
 
-            select.selectByVisibleText(fullNm);
+            select.selectByVisibleText(fullName);
         }
         driver.findElement(By.xpath(xpv.getTokenValue("lnkAddMbrXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveMbrsXPATH"))).click();
@@ -88,36 +88,36 @@ public class WorkingGroup extends BaseClass {
      *
      * @param members
      */
-    public void rmvMbrsFrmWrkngGrp(String[] members) {
+    public void removeMembersFromWorkingGroup(String[] members) {
 
-        mbrsToWrkngGrp();
+        membersToWorkingGroup();
 
         Select select = new Select(driver.findElement(By.xpath(xpv.getTokenValue("rmvMbrsXPATH"))));
-        String fullNm = null;
+        String fullName = null;
 
         for (String mbr : members) {
             sw:
             switch (mbr.substring(0, 7)) {
                 case "teacher":
                 case "autotea":
-                    if (Pes_CleanTestData.tchrStatus) {
-                        fullNm = Utility.getFullName(mbr) + "(Non-editing teacher)";
+                    if (Pes_CleanTestData.teacherStatus) {
+                        fullName = Utility.getFullName(mbr) + "(Non-editing teacher)";
                     } else {
-                        fullNm = Utility.getFullName(mbr) + "()";
+                        fullName = Utility.getFullName(mbr) + "()";
                     }
                     break sw;
                 case "student":
                 case "autostu":
-                    if (Pes_CleanTestData.stdtStatus) {
-                        fullNm = Utility.getFullName(mbr) + "(Student)";
+                    if (Pes_CleanTestData.studentStatus) {
+                        fullName = Utility.getFullName(mbr) + "(Student)";
                     } else {
-                        fullNm = Utility.getFullName(mbr) + "()";
+                        fullName = Utility.getFullName(mbr) + "()";
                     }
                     break sw;
                 default:
-                    SeleneseTestBase.fail("Invalid Member 'tchr'/'stdt' :" + mbr.substring(0, 7));
+                    SeleneseTestBase.fail("Invalid Member 'teacher'/'student' :" + mbr.substring(0, 7));
             }
-            select.selectByVisibleText(fullNm);
+            select.selectByVisibleText(fullName);
         }
         driver.findElement(By.xpath(xpv.getTokenValue("lnkRmvMbrXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("btnSaveMbrsXPATH"))).click();
@@ -142,20 +142,20 @@ public class WorkingGroup extends BaseClass {
         String gglDocDesc;
 
         if (test.equalsIgnoreCase("RegressionTests")) {
-            this.gglDocName = "RgsnTstGglDoc " + dateFormat.format(now);
+            this.googleDocumentName = "RgsnTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "RgsnTstGglDocDesc " + dateFormat.format(now);
         } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.gglDocName = "SmkTstGglDoc " + dateFormat.format(now);
+            this.googleDocumentName = "SmkTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
         } else if (test.equalsIgnoreCase("CriticalTests")) {
-            this.gglDocName = "CrtclTstGglDoc " + dateFormat.format(now);
+            this.googleDocumentName = "CrtclTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "CrtclTstGglDocDesc " + dateFormat.format(now);
         } else {
-            this.gglDocName = "DbgTstGglDoc " + dateFormat.format(now);
+            this.googleDocumentName = "DbgTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "DbgTstGglDocDesc " + dateFormat.format(now);
         }
 
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(gglDocName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(googleDocumentName);
         driver.findElement(By.xpath(xpv.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
 
         //Incase checkbox for Collaborators is not selected
@@ -196,13 +196,13 @@ public class WorkingGroup extends BaseClass {
             if (i == driver.getWindowHandles().size()) {
                 try {
                     System.out.println("inside google window");
-                    ip.isTitleContains(driver, gglDocName);
-                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyGglDocXPATH"), gglDocName);
+                    ip.isTitleContains(driver, googleDocumentName);
+                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyGglDocXPATH"), googleDocumentName);
                     Utility.clickByJavaScript(driver, xpv.getTokenValue("btnGglDocSgnOutXPATH"));
                     ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
                     driver.close();
                 } catch (Exception e) {
-                    System.out.println("GglDoc exptn");
+                    System.out.println("GoogleDocument exptn");
                     driver.close();
                     driver.switchTo().window(HandleBefore);
                     throw e;
@@ -211,7 +211,7 @@ public class WorkingGroup extends BaseClass {
             i++;
         }
         driver.switchTo().window(HandleBefore);
-        ip.isElementPresentContainsTextByXPATH(driver, gglDocName);
+        ip.isElementPresentContainsTextByXPATH(driver, googleDocumentName);
     }
 
     /**
@@ -243,7 +243,7 @@ public class WorkingGroup extends BaseClass {
     /**
      * Navigate to Working Group Add/Remove Screen
      */
-    private void mbrsToWrkngGrp() {
+    private void membersToWorkingGroup() {
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditWrkngGrpXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnEditWrkngGrpXPATH"))).click();
@@ -258,16 +258,16 @@ public class WorkingGroup extends BaseClass {
     }
 
     /**
-     * @return WrkngGrpName
+     * @return WorkingGroupName
      */
-    public String getWrkngGrp() {
-        return this.wrkgGrpName;
+    public String getWorkingGroupName() {
+        return this.workingGroupName;
     }
 
     /**
      * @return GoogleDocName
      */
     public String getGoogleDocName() {
-        return this.gglDocName;
+        return this.googleDocumentName;
     }
 }

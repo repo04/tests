@@ -69,6 +69,15 @@ public class TransformCritical implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
+        if ("testStudentCreateSocialGroup".equals(testMethod.getName())
+                || "testStudentSubmitQuiz".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testStudentCreateLiveSession";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+
         if ("testTeacherJoinsStudentSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherJoinsStudentSocialGroup");
             DependentMethods = new String[1];
@@ -106,7 +115,7 @@ public class TransformCritical implements IAnnotationTransformer {
             DependentMethods[3] = "runThrghTestNG.Student_DeleteSocialGroup.testStudentDeleteSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
-        
+
         if ("testStudentVerifyCriticalSmokeTestEmails".equals(testMethod.getName())) {
             System.out.println("Inside testStudentVerifyCriticalSmokeTestEmails");
             DependentMethods = new String[4];
@@ -114,21 +123,6 @@ public class TransformCritical implements IAnnotationTransformer {
             DependentMethods[1] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentJoinsTeacherSocialGroup";
             DependentMethods[2] = "runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherJoinsStudentSocialGroup";
             DependentMethods[3] = "runThrghTestNG.Student_DeleteSocialGroup.testStudentDeleteSocialGroup";
-            annotation.setDependsOnMethods(DependentMethods);
-        }
-        
-        //GroupName = PswdQuiz
-        if ("testTeacherFetchQuizPassword".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherFetchQuizPassword");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherGenerateQuizPassword";
-            annotation.setDependsOnMethods(DependentMethods);
-        }
-
-        if ("testStudentSubmitPasswordQuiz".equals(testMethod.getName())) {
-            System.out.println("Inside testStudentSubmitPasswordQuiz");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Teacher_FetchAssignmentPassword.testTeacherFetchQuizPassword";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

@@ -10,6 +10,9 @@ public class StudentSupport extends BaseClass {
     public void verifyStudentSupport() {
         testContactUS();
         testExpressUploaderFAQ();
+    }
+    
+    public void verifyStudentSupportMobileAppURL() {
         testMobileAppURL();
     }
     
@@ -47,8 +50,15 @@ public class StudentSupport extends BaseClass {
     }
     
     public void testMobileAppURL() {
+        
+        // Verify Mobile Path for iTunes Store
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("iOSAppXPATH"));
         String iOS = driver.findElement(By.xpath(xpv.getTokenValue("iOSAppXPATH"))).getAttribute("href");
         Assert.assertEquals(iOS, xpv.getTokenValue(program + "AppleAppUrl"));
+        
+        // Verify Mobile Path for Android Store
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("androidAppXPATH"));
+        String android = driver.findElement(By.xpath(xpv.getTokenValue("androidAppXPATH"))).getAttribute("href");
+        Assert.assertEquals(android, xpv.getTokenValue(program + "AndroidAppUrl"));
     }    
 }

@@ -13,8 +13,8 @@ import runThrghTestNG.BaseClass;
 public class Course extends BaseClass {
 
     Date now = new Date();
-    private String crsName;
-    private String grpCrsName;
+    private String courseName;
+    private String groupCourseName;
     private String backupFileName;
 
     /**
@@ -23,13 +23,13 @@ public class Course extends BaseClass {
     public void createCourse() {
         String crsShrtName;
         if (test.equalsIgnoreCase("RegressionTests")) {
-            this.crsName = "RgsnTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.courseName = "RgsnTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             crsShrtName = "RgsnShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.crsName = "SmkTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.courseName = "SmkTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             crsShrtName = "SmkShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
-            this.crsName = "DbgTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.courseName = "DbgTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             crsShrtName = "DbgShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnAddNewCrs"), 60);
@@ -41,7 +41,7 @@ public class Course extends BaseClass {
 
         //Input Values
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsCtgryXPATH")))).selectByVisibleText("Active");
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldCrsFullNmXPATH"))).sendKeys(crsName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldCrsFullNmXPATH"))).sendKeys(courseName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldCrsShrtNmXPATH"))).sendKeys(crsShrtName);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsStrtDtDyXPATH")))).selectByValue("1");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsStrtDtMnthXPATH")))).selectByValue("8");
@@ -52,7 +52,7 @@ public class Course extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
 
         //Verify Course is created or not
-        ip.isElementPresentContainsTextByXPATH(driver, crsName);
+        ip.isElementPresentContainsTextByXPATH(driver, courseName);
 
     }
 
@@ -61,14 +61,14 @@ public class Course extends BaseClass {
      *
      * @param courseName
      */
-    public void createGrpCourse(String courseName) {
+    public void createGroupCourse(String courseName) {
 
         if (test.equalsIgnoreCase("RegressionTests")) {
-            this.grpCrsName = "RgsnTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.groupCourseName = "RgsnTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("SmokeTests")) {
-            this.grpCrsName = "SmkTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.groupCourseName = "SmkTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
-            this.grpCrsName = "DbgTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.groupCourseName = "DbgTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }
         ip.isElementPresentStartsWithTextByXPATH(driver, courseName);
 
@@ -86,7 +86,7 @@ public class Course extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpCrsNameXPATH"));
 
         //Input Values
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpCrsNameXPATH"))).sendKeys(grpCrsName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpCrsNameXPATH"))).sendKeys(groupCourseName);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
 
         //Verify GroupCourse is created or not
@@ -97,31 +97,31 @@ public class Course extends BaseClass {
     /**
      * Delete Group Course
      *
-     * @param grpCrsName
+     * @param groupCourseName
      */
-    public void deleteGroupCourse(String grpCrsName) {
+    public void deleteGroupCourse(String groupCourseName) {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrsLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrsLnkXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlGrpsLinkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlGrpsLinkXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDltGrpCrs"));
         Select select = new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctGrpCrs"))));
-        select.selectByVisibleText(grpCrsName + " (0)");
+        select.selectByVisibleText(groupCourseName + " (0)");
         driver.findElement(By.xpath(xpv.getTokenValue("btnDltGrpCrs"))).click();
-        ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div/p", "Are you sure you want to delete group '" + grpCrsName + "'?");
+        ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div/p", "Are you sure you want to delete group '" + groupCourseName + "'?");
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCnfrmDltCrsXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmDltCrsXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctGrpCrs"));
         Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + grpCrsName + "')]")));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + groupCourseName + "')]")));
     }
 
     /**
      * Archive Course
      *
-     * @param crsName
+     * @param courseName
      */
-    public void archiveCourse(String crsName) {
+    public void archiveCourse(String courseName) {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlArchvCrsLnkXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlArchvAddEditCrsLnkXPATH"), 60);
@@ -136,7 +136,7 @@ public class Course extends BaseClass {
         loop:
         do {
             try {
-                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/a", crsName, 5);
+                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/a", courseName, 5);
                 driver.findElement(By.xpath("//tr[" + x + "]/td[3]/input")).click();
                 break loop;
             } catch (TimeoutException e) {
@@ -146,7 +146,7 @@ public class Course extends BaseClass {
         } while (x < 22);
         Select slctMvCrs = new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctMvCrs"))));
         slctMvCrs.selectByVisibleText("Archive");
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + crsName + "')]")));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + courseName + "')]")));
         Select slctCrsCtgry = new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsCtgry"))));
         slctCrsCtgry.selectByVisibleText("Archive");
 
@@ -154,7 +154,7 @@ public class Course extends BaseClass {
         int i = 2;
 
         try {
-            ip.isElementPresentContainsTextByXPATH(driver, crsName);
+            ip.isElementPresentContainsTextByXPATH(driver, courseName);
             status = false;
         } catch (TimeoutException e) {
             status = true;
@@ -172,7 +172,7 @@ public class Course extends BaseClass {
             }
             i++;
         }
-        ip.isElementPresentContainsTextByXPATH(driver, crsName);
+        ip.isElementPresentContainsTextByXPATH(driver, courseName);
     }
 
     /**
@@ -224,7 +224,24 @@ public class Course extends BaseClass {
 
         driver.findElement(By.xpath("//div/input")).click();
         ip.isTextPresentByXPATH(driver, "//form/div/h2", "Restore as a new course");
-        driver.findElement(By.xpath("//tr[3]/td/input")).click();
+
+        //Locating radio button xpath for Archive Category
+        int e = 1;
+        Boolean result = false;
+        do {
+            String archiveXpath = driver.findElement(By.xpath("//tr[" + e + "]/td[2]")).getText();
+            if (archiveXpath.equalsIgnoreCase("Archive")) {
+                driver.findElement(By.xpath("//div/table/tbody/tr[" + e + "]/td/input")).click();
+                result = true;
+                break;
+            }
+            e++;
+        } while (e < 6);
+
+        if (!result) {
+            Utility.illegalStateException("Archive course categroy is not located");
+        }
+
         driver.findElement(By.xpath("//div[3]/div/input")).click();
         ip.isTextPresentByXPATH(driver, "//legend", "Restore settings");
 
@@ -234,12 +251,19 @@ public class Course extends BaseClass {
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//legend", "Course settings");
 
-        String restoredCourseName = driver.findElement(By.id("id_setting_course_course_fullname")).getAttribute("value");
+        String fetchedCourseName = driver.findElement(By.id("id_setting_course_course_fullname")).getAttribute("value");
         String shortCourseName = driver.findElement(By.id("id_setting_course_course_shortname")).getAttribute("value");
+        int whiteSpaceCourseName = fetchedCourseName.indexOf(" ");
+        int whiteSpaceShortCourseName = shortCourseName.indexOf(" ");
+        String restoredCourseName = fetchedCourseName.substring(0, whiteSpaceCourseName)
+                + " Restore " + fetchedCourseName.substring(whiteSpaceCourseName + 1);
+        String restoredShortCourseName = shortCourseName.substring(0, whiteSpaceShortCourseName)
+                + " Restore " + shortCourseName.substring(whiteSpaceShortCourseName + 1);
         driver.findElement(By.id("id_setting_course_course_fullname")).clear();
         driver.findElement(By.id("id_setting_course_course_shortname")).clear();
-        driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys("Restored " + restoredCourseName);
-        driver.findElement(By.id("id_setting_course_course_shortname")).sendKeys("Restored " + shortCourseName);
+        driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys(restoredCourseName);
+        driver.findElement(By.id("id_setting_course_course_shortname")).sendKeys(restoredShortCourseName);
+        System.out.print(restoredCourseName + "\n" + restoredShortCourseName + "\n");
 
         //Verify Section checkboxes
         int a = 4;
@@ -339,15 +363,15 @@ public class Course extends BaseClass {
     /**
      * @return CourseName
      */
-    public String getCrsName() {
-        return this.crsName;
+    public String getCourseName() {
+        return this.courseName;
     }
 
     /**
      * @return GroupCourseName
      */
-    public String getGrpCrsName() {
-        return this.grpCrsName;
+    public String getGroupCourseName() {
+        return this.groupCourseName;
     }
 
     /**

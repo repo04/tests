@@ -20,9 +20,9 @@ public class EnrollUser extends BaseClass {
      * Enroll/Assign user to group course
      *
      * @param user
-     * @param grpCrs
+     * @param groupCourse
      */
-    public void toRole_Course(String user, String grpCrs) {
+    public void toRole_Course(String user, String groupCourse) {
 
         String userRole = null;
 
@@ -58,12 +58,12 @@ public class EnrollUser extends BaseClass {
                 break;
 
             default:
-                SeleneseTestBase.fail("'tchr'/'stdt' not found in userName: " + user);
+                SeleneseTestBase.fail("'teacher'/'student' not found in userName: " + user);
         }
 
         Select select = new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctGrpXPATH"))));
         select.deselectByVisibleText("None");
-        select.selectByVisibleText(grpCrs);
+        select.selectByVisibleText(groupCourse);
 
         driver.findElement(By.xpath(xpv.getTokenValue("chckBxUsrXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("btnEnrlSlctdUsrXPATH"))).click();
@@ -74,18 +74,18 @@ public class EnrollUser extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblEnrollUsersXPATH"), "Enrolled users");
 
         //Verify user's role & course
-        verifyUsrRole_Course(user, userRole, grpCrs);
+        verifyUsrRole_Course(user, userRole, groupCourse);
     }
 
     /**
      * Unassign users from group course
      *
-     * @param stdtUsrName
-     * @param tchrUsrName
+     * @param studentUserName
+     * @param teacherUserName
      */
-    public void frmCourse(String stdtUsrName, String tchrUsrName) {
-        String stdtFllNm = stdtUsrName + " " + stdtUsrName;
-        String tchrFllNm = tchrUsrName + " " + tchrUsrName;
+    public void fromCourse(String studentUserName, String teacherUserName) {
+        String studentFullName = studentUserName + " " + studentUserName;
+        String teacherFullName = teacherUserName + " " + teacherUserName;
 
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))).click();
@@ -99,8 +99,8 @@ public class EnrollUser extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpv.getTokenValue("chckBxUnrolFrstUsrXpath"))));
 
-        unenrollUsers(stdtFllNm);
-        unenrollUsers(tchrFllNm);
+        unenrollUsers(studentFullName);
+        unenrollUsers(teacherFullName);
     }
 
     /**
@@ -108,9 +108,9 @@ public class EnrollUser extends BaseClass {
      *
      * @param user
      * @param userRole
-     * @param grpCrs
+     * @param groupCourse
      */
-    private void verifyUsrRole_Course(String user, String userRole, String grpCrs) {
+    private void verifyUsrRole_Course(String user, String userRole, String groupCourse) {
 
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlSiteAdminLnkVrfyUsrRoleCrsXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lftPnlSiteAdminLnkVrfyUsrRoleCrsXPATH"))).click();
@@ -123,7 +123,7 @@ public class EnrollUser extends BaseClass {
 
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldFindUsrXPATH"), 60);
 
-        Utility.btnRmUsrFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
+        Utility.buttonRemoveUserFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
 
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFindUsrXPATH"))).sendKeys(user);
@@ -150,15 +150,15 @@ public class EnrollUser extends BaseClass {
                 SeleneseTestBase.fail("'Non-editing teacher(4)'/'Student(5)' not found in userRole: " + userRole);
         }
 
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrGrpCrsXPATH"), grpCrs);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrGrpCrsXPATH"), groupCourse);
     }
 
     /**
      * Unassign users from group course
      *
-     * @param FllNm
+     * @param FullName
      */
-    private void unenrollUsers(String FllNm) {
+    private void unenrollUsers(String FullName) {
 
         int i = 1;
         int x = 1;
@@ -175,7 +175,7 @@ public class EnrollUser extends BaseClass {
         loop:
         do {
             try {
-                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]/div[2]", FllNm, 5);
+                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]/div[2]", FullName, 5);
                 driver.findElement(By.xpath("//div[4]/div/form/table/tbody/tr[" + x + "]/td/input")).click();
                 break loop;
             } catch (TimeoutException e) {
@@ -187,12 +187,12 @@ public class EnrollUser extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctUnrolUsers")))).selectByValue("deleteselectedusers");
         driver.findElement(By.xpath(xpv.getTokenValue("goUnrolUsers"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblEnrollUsersXPATH"), "Delete selected user enrolments");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtStdtUnrolXPATH"), FllNm);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtStdtUnrolXPATH"), FullName);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnEnrlUsrs"), 60);
         try {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(By.xpath("//tr[" + i + "]/td[2]/div[2]"), FllNm));
-            Utility.illegalStateException("Cannot unenrol user from course: " + FllNm);
+            new WebDriverWait(driver, 10).until(ExpectedConditions.textToBePresentInElement(By.xpath("//tr[" + i + "]/td[2]/div[2]"), FullName));
+            Utility.illegalStateException("Cannot unenrol user from course: " + FullName);
         } catch (TimeoutException e) {
         }
     }

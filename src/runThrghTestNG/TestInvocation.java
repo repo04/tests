@@ -28,20 +28,27 @@ public class TestInvocation implements IInvokedMethodListener {
         System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
         if (!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
             if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) {
-                if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())) {
+                if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())
+                        || "testTeacherEmailFetchActivityPasswordLogIn".equals(method.getName())) {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }
             } else {
-                if ("testTeacherGenerateQuizPassword".equals(method.getName())) {
+                if ("testTeacherGenerateQuizPassword".equals(method.getName())
+                        || "testTeacherEmailFetchActivityPasswordLogIn".equals(method.getName())) {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
                 }
             }
+        }
 
-            if ("testTeacherEmailFetchAssignmentPasswordLogIn".equals(method.getName())) {
+        // Checks For UNC-MPA and WU-LLM 
+        if (!"setUp".equals(method.getName()) && !BaseClass.test.equalsIgnoreCase("CriticalTests") 
+                && (BaseClass.program.contains("unc-mpa") || BaseClass.program.contains("wu-llm") ||
+                    BaseClass.program.contains("gwu-mph") || BaseClass.program.contains("au-mir"))) {
+            if ("testStudentSupportMobileURL".equals(method.getName())) {
                 System.out.println("Skipping Test Method");
-                throw new SkipException("Skipping Quiz Password TC: as it is only valid for GU MSN Program");
+                throw new SkipException("Skipping Mobile App Test in Student Support: Not Available For UNC-MPA and WU-LLM");
             }
         }
     }

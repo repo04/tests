@@ -18,8 +18,8 @@ import runThrghTestNG.BaseClass;
 public class Resources extends BaseClass {
 
     Date now = new Date();
-    String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7,
-            vrfy8, vrfy9, vrfy10, vrfy11, vrfy12, vrfy13;
+    String verify1, verify2, verify3, verify4, verify5, verify6, verify7,
+            verify8, verify9, verify10, verify11, verify12, verify13;
     List<String> resources;
 
     /**
@@ -28,71 +28,71 @@ public class Resources extends BaseClass {
     public void verifyResources() {
         switch (program) {
             case "unc-mba":
-                vrfy1 = "Career Connections";
-                vrfy2 = "Connect Carolina";
-                vrfy3 = "KF Intranet";
-                vrfy4 = "UNC Onyen";
-                vrfy5 = "Faculty Profiles";
-                vrfy6 = "Leadership Team";
-                vrfy7 = "KF Email";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7);
+                verify1 = "Career Connections";
+                verify2 = "Connect Carolina";
+                verify3 = "KF Intranet";
+                verify4 = "UNC Onyen";
+                verify5 = "Faculty Profiles";
+                verify6 = "Leadership Team";
+                verify7 = "KF Email";
+                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6, verify7);
                 break;
             case "gu-msn":
-                vrfy1 = "HoyaMail";
-                vrfy2 = "Library";
-                vrfy3 = "MyAccess";
-                vrfy4 = "NetID Mgmt";
-                vrfy5 = "Handbooks & Info";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5);
+                verify1 = "HoyaMail";
+                verify2 = "Library";
+                verify3 = "MyAccess";
+                verify4 = "NetID Mgmt";
+                verify5 = "Handbooks & Info";
+                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5);
                 break;
             case "usc-msw":
             case "usc-mat":
-                vrfy1 = "myUSC";
-                vrfy2 = "Catalogue";
-                vrfy3 = "Email";
-                vrfy4 = "Docs";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4);
+                verify1 = "myUSC";
+                verify2 = "Catalogue";
+                verify3 = "Email";
+                verify4 = "Docs";
+                resources = Arrays.asList(verify1, verify2, verify3, verify4);
                 break;
             case "wu-llm":
-                vrfy1 = "MyLaw";
-                vrfy2 = "E-Mail";
-                vrfy3 = "WebSTAC";
-                vrfy4 = "Career Services";
-                vrfy5 = "Library Home Page";
-                vrfy6 = "Library Database";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6);
+                verify1 = "MyLaw";
+                verify2 = "E-Mail";
+                verify3 = "WebSTAC";
+                verify4 = "Career Services";
+                verify5 = "Library Home Page";
+                verify6 = "Library Database";
+                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6);
                 break;
             case "unc-mpa":
-                vrfy1 = "MyUNC";
-                vrfy2 = "Heelmail - UNC Email";
-                vrfy3 = "UNC Onyen";
-                vrfy4 = "Faculty Profiles";
-                vrfy5 = "Leadership Team";
-                vrfy6 = "Daily Tarheel";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6);
+                verify1 = "MyUNC";
+                verify2 = "Heelmail - UNC Email";
+                verify3 = "UNC Onyen";
+                verify4 = "Faculty Profiles";
+                verify5 = "Leadership Team";
+                verify6 = "Daily Tarheel";
+                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6);
                 break;
             case "au-mir":
-                vrfy1 = "My AU";
-                vrfy2 = "Email";
-                vrfy3 = "Faculty Profiles";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3);
+                verify1 = "My AU";
+                verify2 = "Email";
+                verify3 = "Faculty Profiles";
+                resources = Arrays.asList(verify1, verify2, verify3);
                 break;
             case "gwu-mph":
-                vrfy1 = "Email";
-                vrfy2 = "Gweb";
-                vrfy3 = "Colonial Central";
-                vrfy4 = "Himmelfarb Health Sciences Library";
-                vrfy5 = "Public Health & Health Services Portal";
-                vrfy6 = "SPHSS Jobs Database";
-                vrfy7 = "Writing Center";
-                vrfy8 = "University Counseling Center";
-                vrfy9 = "Career Center";
-                vrfy10 = "Financing Your Education";
-                vrfy11 = "Disability Support Services";
-                vrfy12 = "The GW Bookstore";
-                resources = Arrays.asList(vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6, vrfy7,
-                        vrfy8, vrfy9, vrfy10, vrfy11, vrfy12);
-        }           
+                verify1 = "Email";
+                verify2 = "Gweb";
+                verify3 = "Colonial Central";
+                verify4 = "Himmelfarb Health Sciences Library";
+                verify5 = "Public Health & Health Services Portal";
+                verify6 = "SPHSS Jobs Database";
+                verify7 = "Writing Center";
+                verify8 = "University Counseling Center";
+                verify9 = "Career Center";
+                verify10 = "Financing Your Education";
+                verify11 = "Disability Support Services";
+                verify12 = "The GW Bookstore";
+                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6, verify7,
+                        verify8, verify9, verify10, verify11, verify12);
+        }
         verifyWindow(resources);
     }
 
@@ -101,10 +101,15 @@ public class Resources extends BaseClass {
      * @param resources
      */
     private void verifyWindow(List<String> resources) {
-
         int i = 1;
         String HandleBefore = driver.getWindowHandle();
         for (String resource : resources) {
+
+            //To be implemented based on discussion
+            /*List<WebElement> lists = driver.findElement(By.className("topnav_dropdown")).findElements(By.tagName("li"));
+             for (WebElement list : lists) {
+             }*/
+
             ip.isTextPresentByXPATH(driver, "//div[3]/div[2]/div/ul/li[" + i + "]/a", resource);
             driver.findElement(By.xpath("//div[3]/div[2]/div/ul/li[" + i + "]/a")).click();
             Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
@@ -225,8 +230,11 @@ public class Resources extends BaseClass {
                                 + "| George Washington University");
                         break;
                     case "University Counseling Center":
+                        //TBD
+                        //ip.isTitlePresent(driver, "University Counseling Center - The George Washington University");
                         ip.isTitlePresent(driver, "University Counseling Center "
-                                + "- The George Washington University");
+                                + "| Division of Student Affairs "
+                                + "| The George Washington University");
                         break;
                     case "Career Center":
                         ip.isTitlePresent(driver, "The GW Career Center "

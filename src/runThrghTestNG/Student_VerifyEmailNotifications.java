@@ -23,8 +23,8 @@ import smoketest.Utility;
 public class Student_VerifyEmailNotifications extends BaseClass {
 
     Actions a = new Actions();
-    String vrfy1, vrfy2, vrfy3, vrfy4;
-    String tchrFllNm;
+    String verify1, verify2, verify3, verify4;
+    String teacherFullName;
 
     /**
      * The annotated method will be run before the first test method in the
@@ -34,32 +34,32 @@ public class Student_VerifyEmailNotifications extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentEmailLogIn() throws Exception {
-        Utility.usrEmailLogin(driver, xpv, "2torstudent");
+        Utility.userEmailLogIn(driver, xpv, "2torstudent");
     }
     
     /**
      * Student verifies Critical Smoke Test Email Notifications & delete subsequently
      *
-     * @param tchrSclGrpName
-     * @param stdtSclGrpName
+     * @param teacherSocialGroupName
+     * @param studentSocialGroupName
      * @throws Exception
      */
-    @Test(dataProvider = "TchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"stdtVrfyCriticalSmokeTestEmails"})
-    public void testStudentVerifyCriticalSmokeTestEmails(String tchrSclGrpName, String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "TeacherStudentSocialGroups", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+          groups = {"studentVerifyCriticalSmokeTestEmails"})
+    public void testStudentVerifyCriticalSmokeTestEmails(String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
-        tchrFllNm = "Auto Teacher1";
+        teacherFullName = "Auto Teacher1";
 
-        vrfy1 = tchrFllNm + " has joined the group " + stdtSclGrpName + ".";
-        vrfy2 = "You are now a member of " + stdtSclGrpName;
-        vrfy3 = "You are now a member of " + tchrSclGrpName;
-        vrfy4 = "Posted on your Wall.";
+        verify1 = teacherFullName + " has joined the group " + studentSocialGroupName + ".";
+        verify2 = "You are now a member of " + studentSocialGroupName;
+        verify3 = "You are now a member of " + teacherSocialGroupName;
+        verify4 = "Posted on your Wall.";
 
         ArrayList<String> wordList = new ArrayList<>();
-        wordList.add(vrfy1);
-        wordList.add(vrfy2);
-        wordList.add(vrfy3);
-        wordList.add(vrfy4);
+        wordList.add(verify1);
+        wordList.add(verify2);
+        wordList.add(verify3);
+        wordList.add(verify4);
 
         ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
@@ -89,7 +89,7 @@ public class Student_VerifyEmailNotifications extends BaseClass {
                             prod = "2" + program.substring(1, 3).toUpperCase();
                         }
 
-                        if (a.contentEquals(vrfy4)) {
+                        if (a.contentEquals(verify4)) {
                             ip.isTextPresentByXPATH(driver, "//div[6]/div/div[4]", "Thanks\n" + prod, 15);
                         } else {
                             ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + prod, 15);
@@ -121,29 +121,29 @@ public class Student_VerifyEmailNotifications extends BaseClass {
     /**
      * Student verifies Full Smoke Test Email Notifications & delete subsequently
      * 
-     * @param tchrUsrName
-     * @param stdtUsrName
-     * @param wrkngGrpName
-     * @param tchrSclGrpName
-     * @param stdtSclGrpName
+     * @param teacherUserName
+     * @param studentUserName
+     * @param workingGroupName
+     * @param teacherSocialGroupName
+     * @param studentSocialGroupName
      * @throws Exception
      */
-    @Test(dataProvider = "UsrsWrkngGrpTchrStdtSclGrps", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"stdtVrfyFullSmokeTestEmails"})
-    public void testStudentVerifyFullSmokeTestEmails(String tchrUsrName, String stdtUsrName, String wrkngGrpName,
-            String tchrSclGrpName, String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "UsersWorkingGroupTeacherStudentSocialGroups", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+          groups = {"studentVrfyFullSmokeTestEmails"})
+    public void testStudentVerifyFullSmokeTestEmails(String teacherUserName, String studentUserName, String workingGroupName,
+            String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
-        tchrFllNm = tchrUsrName.substring(0, 1).toUpperCase() + tchrUsrName.substring(1);
-        vrfy1 = tchrFllNm + "fstNm " + tchrFllNm + "sndNm has joined the group " + stdtSclGrpName + ".";
-        vrfy2 = "You are now a member of " + stdtSclGrpName;
-        vrfy3 = "You are now a member of " + tchrSclGrpName;
-        vrfy4 = "You are now a member of " + wrkngGrpName;
+        teacherFullName = teacherUserName.substring(0, 1).toUpperCase() + teacherUserName.substring(1);
+        verify1 = teacherFullName + "fstNm " + teacherFullName + "sndNm has joined the group " + studentSocialGroupName + ".";
+        verify2 = "You are now a member of " + studentSocialGroupName;
+        verify3 = "You are now a member of " + teacherSocialGroupName;
+        verify4 = "You are now a member of " + workingGroupName;
 
         ArrayList<String> wordList = new ArrayList<>();
-        wordList.add(vrfy1);
-        wordList.add(vrfy2);
-        wordList.add(vrfy3);
-        wordList.add(vrfy4);
+        wordList.add(verify1);
+        wordList.add(verify2);
+        wordList.add(verify3);
+        wordList.add(verify4);
 
         ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
         driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
@@ -202,6 +202,6 @@ public class Student_VerifyEmailNotifications extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testStudentEmailLogOut() throws Exception {
-        Utility.usrEmailLogout(driver);
+        Utility.userEmailLogOut(driver);
     }
 }

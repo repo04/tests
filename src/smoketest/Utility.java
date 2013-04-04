@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,7 +30,7 @@ import runThrghTestNG.BaseClass;
 
 public class Utility {
 
-    public static IsPresent ip = new IsPresent();
+    public static IsPresent ip = new IsPresent();    
 
     /**
      * Uses js to click on hidden element on the page by XPATH
@@ -73,9 +75,9 @@ public class Utility {
      * Remove user to check for another filter
      *
      * @param driver
-     * @param btnRmvUsrFilter
+     * @param buttonRemoveUserFilter
      */
-    public static void btnRmUsrFilter(WebDriver driver, String btnRmvUsrFilter) {
+    public static void buttonRemoveUserFilter(WebDriver driver, String buttonRemoveUserFilter) {
 
         try {
             driver.findElement(By.name("filter[realname][0]")).click();
@@ -84,16 +86,16 @@ public class Utility {
             System.out.println("button not found:");
         }
 
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(btnRmvUsrFilter)));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(buttonRemoveUserFilter)));
     }
 
     /**
      * Throw IllegalStateException with user message
      *
-     * @param msg
+     * @param message
      */
-    public static void illegalStateException(String msg) {
-        throw new IllegalStateException(msg);
+    public static void illegalStateException(String message) {
+        throw new IllegalStateException(message);
     }
 
     /**
@@ -112,9 +114,9 @@ public class Utility {
      *
      * @param driver
      * @param xpv
-     * @param usrNm
+     * @param userName
      */
-    public static void usrEmailLogin(WebDriver driver, XpathValues xpv, String usrNm) {
+    public static void userEmailLogIn(WebDriver driver, XpathValues xpv, String userName) {
         driver.get("https://mail.google.com/");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
         WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
@@ -123,17 +125,17 @@ public class Utility {
         while (true) {
             gglUsrNm.clear();
             gglPswd.clear();
-            gglUsrNm.sendKeys(usrNm);
+            gglUsrNm.sendKeys(userName);
             gglPswd.sendKeys("Newuser321");
             try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), usrNm));
+                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), userName));
                 break value;
             } catch (TimeoutException e) {
             }
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
         try {
-            ip.isTitleContains(driver, usrNm + "@gmail.com - Gmail");
+            ip.isTitleContains(driver, userName + "@gmail.com - Gmail");
         } catch (Exception e) {
             driver.get(BaseClass.url);
             verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
@@ -146,7 +148,7 @@ public class Utility {
      *
      * @param driver
      */
-    public static void cnfrmNoEmlPrsnt(WebDriver driver) {
+    public static void confirmNoEmailPresent(WebDriver driver) {
         loopEml:
         while (true) {
             try {
@@ -168,7 +170,7 @@ public class Utility {
      *
      * @param driver
      */
-    public static void usrEmailLogout(WebDriver driver) {
+    public static void userEmailLogOut(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
         try {
             Utility.clickByJavaScript(driver, "//td[2]/a");
@@ -303,7 +305,7 @@ public class Utility {
     }
 
     /**
-     * Chrome Browser element Click limitation minimized by ROBOT functionality
+     * OnClick attribute of Input Element is handled for Chrome Browser by ROBOT functionality
      *
      * @param element
      */
@@ -347,16 +349,16 @@ public class Utility {
      * Type in Content Editable iframe
      *
      * @param driver
-     * @param i -> Select iframe index
-     * @param conceptEntry
+     * @param iframeIndex
+     * @param textInIframe
      */
-    public static void typeInContentEditableIframe(WebDriver driver, int i, String conceptEntry) {
+    public static void typeInContentEditableIframe(WebDriver driver, int iframeIndex, String textInIframe) {
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
         int x = 1;
         loop:
         for (WebElement frame : iframes) {
-            if (x == i) {
+            if (x == iframeIndex) {
                 System.out.println("Iframe ID: " + frame.getAttribute("id"));
                 driver.switchTo().frame(frame.getAttribute("id"));
                 break loop;
@@ -366,7 +368,33 @@ public class Utility {
 
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
-        editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), conceptEntry);
+        editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), textInIframe);
         driver.switchTo().defaultContent();
+    }
+
+    /**
+     * Verify Date Present In Element Value field
+     * 
+     * @param driver
+     * @param id
+     */
+    public static void verifyDatePresentInElementValue(WebDriver driver, By id) {
+        String regex = "^(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((20)\\d\\d)$";
+        int x = 1;
+
+        do {
+            String fetchdate = driver.findElement(id).getAttribute("value");
+            if (!fetchdate.isEmpty()) {
+                if (!Pattern.matches(regex, fetchdate)) {
+                    Utility.illegalStateException("Date (" + fetchdate + ") does not match the expected (mm/dd/yyyy) format");
+                }
+                break;
+            }
+            x++;
+        } while (x < 2401);
+
+        if (x > 2400) {
+            Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by ID: " + id);
+        }
     }
 }

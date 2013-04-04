@@ -19,11 +19,11 @@ import smoketest.Utility;
  *
  *
  */
-public class Teacher_FetchAssignmentPassword extends BaseClass {
+public class Teacher_FetchActivityPassword extends BaseClass {
 
     Actions a = new Actions();
-    String vrfy1, vrfy2, vrfy3, vrfy4, vrfy5, vrfy6;
-    String stdtFllNm;
+    String verify1, verify2, verify3, verify4, verify5, verify6;
+    String studentFullName;
     static String[][] quizPasswordArray = new String[1][1];
 
     public static Object[][] quizPassword(ITestContext context) throws Exception {
@@ -31,11 +31,11 @@ public class Teacher_FetchAssignmentPassword extends BaseClass {
         return (quizPasswordArray);
     }
                           
-    @DataProvider(name = "GrpCrsPswdQzNamePassword")
-    public static Iterator<Object[]> GrpCrsPswdQzNamePassword(ITestContext context) throws Exception {
-        System.out.println("init GrpCrsPswdQzNamePassword");
+    @DataProvider(name = "GroupCoursePasswordQuizNamePassword")
+    public static Iterator<Object[]> GroupCoursePasswordQuizNamePassword(ITestContext context) throws Exception {
+        System.out.println("init GroupCoursePasswordQuizNamePassword");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context),
-                ContentAdmin_Course_GroupCourseCreation.PswdQzName(context), quizPassword(context));
+                ContentAdmin_Course_GroupCourseCreation.PasswordQuizName(context), quizPassword(context));
     }
 
     /**
@@ -45,18 +45,18 @@ public class Teacher_FetchAssignmentPassword extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTeacherEmailFetchAssignmentPasswordLogIn() throws Exception {
-        Utility.usrEmailLogin(driver, xpv, "2torteacher");
+    public void testTeacherEmailFetchActivityPasswordLogIn() throws Exception {
+        Utility.userEmailLogIn(driver, xpv, "2torteacher");
     }
 
     /**
      *
-     * @param pswdQuizName
+     * @param passwordQuizName
      * @throws Exception
      */
-    @Test(dataProvider = "PswdQzName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"criticalsmoke", "regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
-    public void testTeacherFetchQuizPassword(String pswdQuizName) throws Exception {
+    @Test(dataProvider = "PasswordQuizName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
+    public void testTeacherFetchQuizPassword(String passwordQuizName) throws Exception {
         int x = 1;
         Boolean mailresult = null;
         loop:
@@ -64,7 +64,7 @@ public class Teacher_FetchAssignmentPassword extends BaseClass {
             ip.isElementPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div");
             driver.findElement(By.xpath("//div[2]/div/div/div[2]/div/div/div/div/div/div/div/div")).click();
             try {
-                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[6]/div/div/div/span/b", "Passwords for " + pswdQuizName, 10);
+                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[6]/div/div/div/span/b", "Passwords for " + passwordQuizName, 10);
                 Utility.actionBuilderClick(driver, "//tr[" + x + "]/td[6]/div/div/div/span/b");
                 mailresult = false;
                 break loop;
@@ -79,7 +79,7 @@ public class Teacher_FetchAssignmentPassword extends BaseClass {
             Utility.illegalStateException("Quiz Password Email Notification not received");
         }
 
-        ip.isTextPresentByXPATH(driver, "//h1/span", "Passwords for " + pswdQuizName, 15);
+        ip.isTextPresentByXPATH(driver, "//h1/span", "Passwords for " + passwordQuizName, 15);
         String mailContent = driver.findElement(By.xpath("//div/div/div/div/div[2]/div[6]/div")).getText();
 
         System.out.println("Mail: " + mailContent);
@@ -98,8 +98,8 @@ public class Teacher_FetchAssignmentPassword extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTeacherEmailFetchAssignmentPasswordLogOut() throws Exception {
-        Utility.usrEmailLogout(driver);
+    public void testTeacherEmailFetchActivityPasswordLogOut() throws Exception {
+        Utility.userEmailLogOut(driver);
         driver.get(url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }

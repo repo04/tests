@@ -26,9 +26,9 @@ public class Student_DeleteSocialGroup extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogIn(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            a.login(Pes_UserCreation_AssignRole_WorkingGroup.usrsArray[0][1]);
+            a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("stdtUsrName"));
+            a.login(context.getCurrentXmlTest().getParameter("studentUserName"));
         }
     }
 
@@ -37,12 +37,12 @@ public class Student_DeleteSocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "StdtSclGrp", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalsmoke", "socialGroup.studentDelete"})
-    public void testStudentDeleteSocialGroup(String stdtSclGrpName) throws Exception {
+    @Test(dataProvider = "StudentSocialGroup", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentDelete"})
+    public void testStudentDeleteSocialGroup(String studentSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
-        a.navigateToGroupWall(stdtSclGrpName);
-        a.deleteSocialGroup(stdtSclGrpName);
+        a.navigateToGroupWall(studentSocialGroupName);
+        a.deleteSocialGroup(studentSocialGroupName);
     }
     
     
@@ -55,7 +55,11 @@ public class Student_DeleteSocialGroup extends BaseClass {
         a.testStudentSupport();
     }
     
-
+    @Test(groups = {"regressionSmoke", "support.mobileAppURL"})
+    public void testStudentSupportMobileURL() {
+       a.testStudentSupportMobileAppURL();
+    }
+   
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
