@@ -43,9 +43,9 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testContentAdminAddQuizQuestion".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminAddQuizQuestion");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
+            DependentMethods[0] = "testContentAdminActivitiesCreation";
             annotation.setDependsOnMethods(DependentMethods);
-        }   
+        }
 
         if ("testPESAdminAssignRole".equals(testMethod.getName())) {
             System.out.println("Inside testPESAdminAssignRole");

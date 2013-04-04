@@ -196,7 +196,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCoursePasswordQuizName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-    groups = {"criticalSmoke", "regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
+    groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
     public void testTeacherGenerateQuizPassword(String groupCourseName, String passwordQuizName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);

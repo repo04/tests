@@ -224,7 +224,24 @@ public class Course extends BaseClass {
 
         driver.findElement(By.xpath("//div/input")).click();
         ip.isTextPresentByXPATH(driver, "//form/div/h2", "Restore as a new course");
-        driver.findElement(By.xpath("//tr[3]/td/input")).click();
+
+        //Locating radio button xpath for Archive Category
+        int e = 1;
+        Boolean result = false;
+        do {
+            String archiveXpath = driver.findElement(By.xpath("//tr[" + e + "]/td[2]")).getText();
+            if (archiveXpath.equalsIgnoreCase("Archive")) {
+                driver.findElement(By.xpath("//div/table/tbody/tr[" + e + "]/td/input")).click();
+                result = true;
+                break;
+            }
+            e++;
+        } while (e < 6);
+
+        if (!result) {
+            Utility.illegalStateException("Archive course categroy is not located");
+        }
+
         driver.findElement(By.xpath("//div[3]/div/input")).click();
         ip.isTextPresentByXPATH(driver, "//legend", "Restore settings");
 
@@ -247,7 +264,7 @@ public class Course extends BaseClass {
         driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys(restoredCourseName);
         driver.findElement(By.id("id_setting_course_course_shortname")).sendKeys(restoredShortCourseName);
         System.out.print(restoredCourseName + "\n" + restoredShortCourseName + "\n");
-        
+
         //Verify Section checkboxes
         int a = 4;
         do {
