@@ -11,7 +11,7 @@
         <!--parameter name="teacherUserName" value="teacher1"/>
         <parameter name="studentUserName" value="student1"/-->       
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
-        <parameter name="workingGroupName" value="AutoWrkngGrp"/>
+        <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
         <parameter name="forumActivityName" value="AutoForum"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
@@ -19,9 +19,7 @@
         <parameter name="pageActivityName" value="AutoPage"/>
         <parameter name="glossaryActivityName" value="AutoGlossary"/>
         <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
-        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
-        <parameter name="teacherUserName" value="autoteacher1"/>
-        <parameter name="studentUserName" value="autostudent1"/>  
+        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>         
          
         <groups>
             <define name="Course_GroupCourse">

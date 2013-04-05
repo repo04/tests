@@ -28,6 +28,11 @@ public class TestNGCustomReport extends TestListenerAdapter {
     public void onTestStart(ITestResult result) {
         //Do Nothing
     }
+    
+    @Override
+    public void onConfigurationFailure(ITestResult tr) {
+        //ScreenShot(tr);
+    }
 
     //Capture screenshot on TestFailure
     public void ScreenShot(ITestResult result) {

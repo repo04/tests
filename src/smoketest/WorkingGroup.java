@@ -20,8 +20,8 @@ public class WorkingGroup extends BaseClass {
 
     Date now = new Date();
     private String workingGroupName;
-    private String googleDocumentName;
-
+    private String googleDocumentName;    
+    
     /**
      * PesAdmin creates & verify Working Group
      */
@@ -127,11 +127,11 @@ public class WorkingGroup extends BaseClass {
     /**
      * Creates GoogleDoc
      *
-     * @param wrkngGrp
+     * @param workingGroup
      */
-    public void createGoogleDoc(String wrkngGrp) {
-        ip.isElementPresentContainsTextByXPATH(driver, wrkngGrp);
-        driver.findElement(By.xpath("//*[contains(text(),'" + wrkngGrp + "')]")).click();
+    public void createGoogleDoc(String workingGroup) {
+        ip.isElementPresentContainsTextByXPATH(driver, workingGroup);
+        driver.findElement(By.xpath("//*[contains(text(),'" + workingGroup + "')]")).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlFilesXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlFilesXPATH"))).click();
         ip.isElementPresentContainsTextByXPATH(driver, "Start a Collaborative Document");
@@ -154,7 +154,7 @@ public class WorkingGroup extends BaseClass {
             this.googleDocumentName = "DbgTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "DbgTstGglDocDesc " + dateFormat.format(now);
         }
-
+        
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocNameXPATH"))).sendKeys(googleDocumentName);
         driver.findElement(By.xpath(xpv.getTokenValue("txtAreaGglDescXPATH"))).sendKeys(gglDocDesc);
 
@@ -163,54 +163,83 @@ public class WorkingGroup extends BaseClass {
         if (!bool) {
             driver.findElement(By.xpath(xpv.getTokenValue("chckbxCllbrtrsXPATH"))).click();
         }
-
+        String currentURL = driver.getCurrentUrl();
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtGglDoc"))).click();
-        ip.isTitlePresent(driver, "Google Accounts");
-        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
-        WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
-        WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
+        String HandleBefore = null;
+        
+        //Navigating to GMAIL -- Catched exception as to continue with Test Run incase of any failure
+        //Code will be refactored next week
+        try {
+            ip.isTitlePresent(driver, "Google Accounts");
+            ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
+            WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
+            WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
 
-        //This is to verify gglUsrID field passes correct value 
-        value:
-        while (true) {
-            gglUsrNm.clear();
-            gglPswd.clear();
-            gglUsrNm.sendKeys("tutordemo2");
-            gglPswd.sendKeys("Newuser@123");
-            try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), "tutordemo2"));
-                break value;
-            } catch (TimeoutException e) {
-            }
-        }
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
-        ip.isTitlePresent(driver, "My Account");
-        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocGrntAccessXPATH"));
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
-
-        String HandleBefore = driver.getWindowHandle();
-        int i = 1;
-        for (String handle : driver.getWindowHandles()) {
-            System.out.println("window handle: " + handle);
-            driver.switchTo().window(handle);
-            if (i == driver.getWindowHandles().size()) {
+            //This is to verify gglUsrID field passes correct value 
+            int x = 1;
+            Boolean result;
+            value:
+            do {
+                gglUsrNm.clear();
+                gglPswd.clear();
+                gglUsrNm.sendKeys("tutordemo2");
+                gglPswd.sendKeys("Newuser@123");
                 try {
+                    new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), "tutordemo2"));
+                    result = false;
+                    break value;
+                } catch (TimeoutException e) {
+                    x++;
+                    result = true;
+                }
+            } while (x < 5);
+
+            if (result) {
+                Utility.illegalStateException("Unable to send expected userName: tutordemo2");
+            }
+
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
+            ip.isTextPresentByXPATH(driver, "//li[2]/a/span/span", "tutordemo2@gmail.com");
+        } catch (Exception e) {
+            System.out.println("1st exptn");
+            driver.get(currentURL);
+            throw e;
+        }
+        try {
+            ip.isTitlePresent(driver, "My Account");
+            ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocGrntAccessXPATH"));
+        } catch (Exception e) {
+            System.out.println("2nd exptn");
+            Utility.clickByJavaScript(driver, "//td/a");
+            ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
+            driver.get(currentURL);
+            throw e;
+        }
+        try {
+            HandleBefore = driver.getWindowHandle();
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocGrntAccessXPATH"))).click();
+            Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
+            int i = 1;
+            for (String handle : driver.getWindowHandles()) {
+                System.out.println("window handle: " + handle);
+                driver.switchTo().window(handle);
+                if (i == driver.getWindowHandles().size()) {
                     System.out.println("inside google window");
                     ip.isTitleContains(driver, googleDocumentName);
                     ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyGglDocXPATH"), googleDocumentName);
                     Utility.clickByJavaScript(driver, xpv.getTokenValue("btnGglDocSgnOutXPATH"));
                     ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGglDocUsrIdXPATH"));
                     driver.close();
-                } catch (Exception e) {
-                    System.out.println("GoogleDocument exptn");
-                    driver.close();
                     driver.switchTo().window(HandleBefore);
-                    throw e;
                 }
+                i++;
             }
-            i++;
+        } catch (Exception e) {
+            System.out.println("3rd exptn");
+            driver.close();
+            driver.switchTo().window(HandleBefore);
+            throw e;
         }
-        driver.switchTo().window(HandleBefore);
         ip.isElementPresentContainsTextByXPATH(driver, googleDocumentName);
     }
 

@@ -5,7 +5,6 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -30,7 +29,7 @@ import runThrghTestNG.BaseClass;
 
 public class Utility {
 
-    public static IsPresent ip = new IsPresent();    
+    public static IsPresent ip = new IsPresent();
 
     /**
      * Uses js to click on hidden element on the page by XPATH
@@ -374,7 +373,7 @@ public class Utility {
 
     /**
      * Verify Date Present In Element Value field
-     * 
+     *
      * @param driver
      * @param id
      */
