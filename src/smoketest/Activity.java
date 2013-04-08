@@ -432,8 +432,14 @@ public class Activity extends BaseClass {
         String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.
-                presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
+        
+        //Until Jira Ticket 'LMSII-2827' is resolved
+        if (!program.equalsIgnoreCase("unc-mpa") || !program.equalsIgnoreCase("wu-llm")) {
+            new WebDriverWait(driver, 60).until(ExpectedConditions.
+                    presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
+        } else {
+            ip.isElementPresentByXPATH(driver, "//input[@type='image']");
+        }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
 
@@ -499,8 +505,13 @@ public class Activity extends BaseClass {
             }
         }
         driver.switchTo().window(HandleBefore);
-        new WebDriverWait(driver, 60).until(ExpectedConditions.
-                presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
+        //Until Jira Ticket 'LMSII-2827' is resolved
+        if (!program.equalsIgnoreCase("unc-mpa") || !program.equalsIgnoreCase("wu-llm")) {
+            new WebDriverWait(driver, 60).until(ExpectedConditions.
+                    presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
+        } else {
+            ip.isElementPresentByXPATH(driver, "//input[@type='image']");
+        }
         ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 
         //************NOT TO BE DELETED AS OF NOW************//
