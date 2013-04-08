@@ -391,8 +391,8 @@ public class TransformRegression implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStudentVerifyFilesUploaded".equals(testMethod.getName())) {
-            System.out.println("Inside testStudentVerifyFilesUploaded");
+        if ("testStudentVerifyFilesInCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyFilesInCourse");
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherVerifyFilesInPortfolio";
             annotation.setDependsOnMethods(DependentMethods);

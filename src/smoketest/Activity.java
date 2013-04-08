@@ -432,13 +432,16 @@ public class Activity extends BaseClass {
         String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
-        
+
         //Until Jira Ticket 'LMSII-2827' is resolved
-        if (!program.equalsIgnoreCase("unc-mpa") || !program.equalsIgnoreCase("wu-llm")) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.
-                    presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
-        } else {
-            ip.isElementPresentByXPATH(driver, "//input[@type='image']");
+        switch (program) {
+            case "unc-mpa":
+            case "wu-llm":
+                ip.isElementPresentByXPATH(driver, "//input[@type='image']");
+                break;
+            default:
+                new WebDriverWait(driver, 60).until(ExpectedConditions.
+                        presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
         }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
@@ -505,12 +508,16 @@ public class Activity extends BaseClass {
             }
         }
         driver.switchTo().window(HandleBefore);
+
         //Until Jira Ticket 'LMSII-2827' is resolved
-        if (!program.equalsIgnoreCase("unc-mpa") || !program.equalsIgnoreCase("wu-llm")) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.
-                    presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
-        } else {
-            ip.isElementPresentByXPATH(driver, "//input[@type='image']");
+        switch (program) {
+            case "unc-mpa":
+            case "wu-llm":
+                ip.isElementPresentByXPATH(driver, "//input[@type='image']");
+                break;
+            default:
+                new WebDriverWait(driver, 60).until(ExpectedConditions.
+                        presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
         }
         ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 

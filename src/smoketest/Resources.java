@@ -4,11 +4,10 @@
  */
 package smoketest;
 
-import java.util.Arrays;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import runThrghTestNG.BaseClass;
 
 /**
@@ -16,11 +15,14 @@ import runThrghTestNG.BaseClass;
  *
  */
 public class Resources extends BaseClass {
-
-    Date now = new Date();
-    String verify1, verify2, verify3, verify4, verify5, verify6, verify7,
-            verify8, verify9, verify10, verify11, verify12, verify13;
-    List<String> resources;
+    
+    String resource1, resource2, resource3, resource4, resource5, resource6, resource7,
+            resource8, resource9, resource10, resource11, resource12;
+    String href1, href2, href3, href4, href5, href6, href7, href8, href9, href10,
+            href11, href12, href13;
+    ArrayList<String> resources = new ArrayList<>();
+    ArrayList<String> hrefs = new ArrayList<>();
+    int count;
 
     /**
      * Verify Resources
@@ -28,239 +30,192 @@ public class Resources extends BaseClass {
     public void verifyResources() {
         switch (program) {
             case "unc-mba":
-                verify1 = "Career Connections";
-                verify2 = "Connect Carolina";
-                verify3 = "KF Intranet";
-                verify4 = "UNC Onyen";
-                verify5 = "Faculty Profiles";
-                verify6 = "Leadership Team";
-                verify7 = "KF Email";
-                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6, verify7);
+                //Jira Ticket not located
+                count = 7;
+                resource1 = "Career Connections";
+                resource2 = "Connect Carolina";
+                resource3 = "KF Intranet";
+                resource4 = "UNC Onyen";
+                resource5 = "Faculty Profiles";
+                resource6 = "Leadership Team";
+                resource7 = "KF Email";
+                addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6, resource7);
+                
+                href1 = "https://www.2nc.unc.edu/local/symplicity.php";
+                href2 = "http://www.unc.edu/myunc/";
+                href3 = "https://onlinemba.kenan-flagler.unc.edu/Pages/default.aspx"; //LMSII-1549
+                href4 = "https://onyen.unc.edu/cgi-bin/unc_id/services";
+                href5 = "http://onlinemba.unc.edu/about/faculty-profiles/";
+                href6 = "http://onlinemba.unc.edu/about/leadership-team/";
+                href7 = "https://webmail.business.unc.edu/owa";
+                addToHrefList(href1, href2, href3, href4, href5, href6, href7);
                 break;
             case "gu-msn":
-                verify1 = "HoyaMail";
-                verify2 = "Library";
-                verify3 = "MyAccess";
-                verify4 = "NetID Mgmt";
-                verify5 = "Handbooks & Info";
-                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5);
+                //Jira Ticket LMSII-622
+                count = 5;
+                resource1 = "HoyaMail";
+                resource2 = "Library";
+                resource3 = "MyAccess";
+                resource4 = "NetID Mgmt";
+                resource5 = "Handbooks & Info";
+                addToResourceList(resource1, resource2, resource3, resource4, resource5);
+                
+                href1 = "http://apps.georgetown.edu/"; // Updated LMSII-2110
+                href2 = "http://dml.georgetown.edu/";
+                href3 = "https://myaccess.georgetown.edu/pls/bninbp/twbkwbis.P_WWWLogin";
+                href4 = "https://netid-mgmt.georgetown.edu/";
+                href5 = "http://nhs.georgetown.edu/students/graduate/forms/#OnlineGraduateStudents"; // Updated LMSII-1929
+                addToHrefList(href1, href2, href3, href4, href5);
                 break;
             case "usc-msw":
             case "usc-mat":
-                verify1 = "myUSC";
-                verify2 = "Catalogue";
-                verify3 = "Email";
-                verify4 = "Docs";
-                resources = Arrays.asList(verify1, verify2, verify3, verify4);
-                break;
-            case "wu-llm":
-                verify1 = "MyLaw";
-                verify2 = "E-Mail";
-                verify3 = "WebSTAC";
-                verify4 = "Career Services";
-                verify5 = "Library Home Page";
-                verify6 = "Library Database";
-                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6);
+                //To be verified
+                count = 4;
+                resource1 = "myUSC";
+                resource2 = "Catalogue";
+                resource3 = "Email";
+                resource4 = "Docs";
+                addToResourceList(resource1, resource2, resource3, resource4);
+                
+                href1 = "http://my.usc.edu/";
+                href2 = "http://www.usc.edu/dept/publications/cat2011/";
+                href3 = "https://email.usc.edu/";
+                href4 = "http://docs.google.com/a/usc.edu/";
+                addToHrefList(href1, href2, href3, href4);
                 break;
             case "unc-mpa":
-                verify1 = "MyUNC";
-                verify2 = "Heelmail - UNC Email";
-                verify3 = "UNC Onyen";
-                verify4 = "Faculty Profiles";
-                verify5 = "Leadership Team";
-                verify6 = "Daily Tarheel";
-                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6);
+                count = 6;
+                resource1 = "MyUNC";
+                resource2 = "Heelmail - UNC Email";
+                resource3 = "UNC Onyen";
+                resource4 = "UNC Library";
+                resource5 = "Faculty Profiles";
+                resource6 = "Leadership Team";
+                resource7 = "Daily Tarheel";
+                addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6);
+                
+                href1 = "http://www.unc.edu/myunc/";
+                href2 = "http://heelmail.unc.edu/";
+                href3 = "https://onyen.unc.edu/cgi-bin/unc_id/services";
+                href4 = "http://www.lib.unc.edu/";
+                href5 = "http://onlinempa.unc.edu/academics/faculty-and-staff/";
+                href6 = "http://onlinempa.unc.edu/about/leadership-team/";
+                href7 = "http://www.dailytarheel.com/";
+                addToHrefList(href1, href2, href3, href4, href5, href6);
+                break;
+            case "wu-llm":
+                count = 6;
+                resource1 = "MyLaw";
+                resource2 = "E-Mail";
+                resource3 = "WebSTAC";
+                resource4 = "Career Services";
+                resource5 = "Library Home Page";
+                resource6 = "Library Database";
+                addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6);
+                
+                href1 = "https://mylaw.wustl.edu/";
+                href2 = "http://go.wustl.edu/";
+                href3 = "https://acadinfo.wustl.edu/";
+                href4 = "http://law.wustl.edu/career_services/";
+                href5 = "http://law.wustl.edu/library";
+                href6 = "http://law.wustl.edu/library/pages.aspx?id=7813";
+                addToHrefList(href1, href2, href3, href4, href5, href6);
                 break;
             case "au-mir":
-                verify1 = "My AU";
-                verify2 = "Email";
-                verify3 = "Faculty Profiles";
-                resources = Arrays.asList(verify1, verify2, verify3);
+                count = 3;
+                resource1 = "My AU";
+                resource2 = "Email";
+                resource3 = "Faculty Profiles";
+                addToResourceList(resource1, resource2, resource3);
+
+                href1 = "http://myau.american.edu/";
+                href2 = "http://mail.student.american.edu/";
+                href3 = "http://www.american.edu/sis/faculty";
+                addToHrefList(href1, href2, href3);
                 break;
             case "gwu-mph":
-                verify1 = "Email";
-                verify2 = "Gweb";
-                verify3 = "Colonial Central";
-                verify4 = "Himmelfarb Health Sciences Library";
-                verify5 = "Public Health & Health Services Portal";
-                verify6 = "SPHSS Jobs Database";
-                verify7 = "Writing Center";
-                verify8 = "University Counseling Center";
-                verify9 = "Career Center";
-                verify10 = "Financing Your Education";
-                verify11 = "Disability Support Services";
-                verify12 = "The GW Bookstore";
-                resources = Arrays.asList(verify1, verify2, verify3, verify4, verify5, verify6, verify7,
-                        verify8, verify9, verify10, verify11, verify12);
+                count = 12;
+                resource1 = "Email";
+                resource2 = "Gweb";
+                resource3 = "Colonial Central";
+                resource4 = "Himmelfarb Health Sciences Library";
+                resource5 = "Public Health & Health Services Portal";
+                resource6 = "SPHSS Jobs Database";
+                resource7 = "Writing Center";
+                resource8 = "University Counseling Center";
+                resource9 = "Career Center";
+                resource10 = "Financing Your Education";
+                resource11 = "Disability Support Services";
+                resource12 = "The GW Bookstore";
+                addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6, resource7,
+                        resource8, resource9, resource10, resource11, resource12);
+
+                href1 = "https://my.gwu.edu/mod/email/?";
+                href2 = "https://banweb.gwu.edu/PRODCartridge/twbkwbis.P_WWWLogin";
+                href3 = "http://colonialcentral.gwu.edu/";
+                href4 = "http://www.gwumc.edu/library/";
+                href5 = "http://www.gwumc.edu/library/portals/pubhlthhs/educate.cfm";
+                href6 = "http://sphhs.gwu.edu/studentres/careers/jobs/index.cfm";
+                href7 = "http://www.gwu.edu/~gwriter/";
+                href8 = "http://gwired.gwu.edu/counsel";
+                href9 = "http://gwired.gwu.edu/career/";
+                href10 = "http://www.gwu.edu/costs-financial-planning";
+                href11 = "http://gwired.gwu.edu/dss/students/";
+                href12 = "http://www.bkstr.com/webapp/wcs/stores/servlet/StoreCatalogDisplay?"
+                        + "langId=-1&storeId=10370&demoKey=d&catalogId=10001";
+                addToHrefList(href1, href2, href3, href4, href5, href6, href7,
+                        href8, href9, href10, href11, href12);
         }
-        verifyWindow(resources);
+        resourceWindow(count, resources, hrefs);
+    }
+
+    private void addToResourceList(String... resourceNames) {
+        for (String resourceName : resourceNames) {
+            resources.add(resourceName);
+        }
+    }
+
+    private void addToHrefList(String... hrefLinks) {
+        for (String hrefLink : hrefLinks) {
+            hrefs.add(hrefLink);
+        }
     }
 
     /**
-     *
+     * 
+     * @param i
      * @param resources
+     * @param hrefs 
      */
-    private void verifyWindow(List<String> resources) {
-        int i = 1;
-        String HandleBefore = driver.getWindowHandle();
-        for (String resource : resources) {
-
-            //To be implemented based on discussion
-            /*List<WebElement> lists = driver.findElement(By.className("topnav_dropdown")).findElements(By.tagName("li"));
-             for (WebElement list : lists) {
-             }*/
-
-            ip.isTextPresentByXPATH(driver, "//div[3]/div[2]/div/ul/li[" + i + "]/a", resource);
-            driver.findElement(By.xpath("//div[3]/div[2]/div/ul/li[" + i + "]/a")).click();
-            Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
-            int y = 1;
-            for (String handle : driver.getWindowHandles()) {
-                System.out.println("window handle: " + handle);
-                if (y == driver.getWindowHandles().size()) {
-                    driver.switchTo().window(handle);
+    private void resourceWindow(int i, ArrayList<String> resources, ArrayList<String> hrefs) {
+        List<WebElement> lists = driver.findElement(By.className("topnav_dropdown")).findElements(By.tagName("li"));
+        
+        //Navigating through all Link lists, verifying hrefs respective to Resource Text
+        int x = 0;
+        if (i == lists.size()) {
+            lst:
+            for (WebElement list : lists) {
+                res:
+                for (String resource : resources) {
+                    if (resource.equals(list.findElement(By.tagName("a")).getText())) {
+                        hrf:
+                        for (String href : hrefs) {
+                            if (href.equals(list.findElement(By.tagName("a")).getAttribute("href"))) {
+                                break res;
+                            } else {
+                                Utility.illegalStateException("Mismatch in href --> Actual: '"
+                                        + list.findElement(By.tagName("a")).getAttribute("href") + "', Expected: '" + href
+                                        + "' for Resource: '" + resource + "'");
+                            }
+                        }
+                    } else {
+                        Utility.illegalStateException("Mismatch in resource --> Actual: '"
+                                + list.findElement(By.tagName("a")).getText() + "', Expected: '" + resource + "'");
+                    }
                 }
-                y++;
+                resources.remove(x);
+                hrefs.remove(x);
             }
-            try {
-                switch (resource) {
-                    case "Career Connections":
-                    case "myUSC":
-                    case "Catalogue":
-                    case "WebSTAC":
-                    case "Writing Center":
-                        ip.isTitleContains(driver, resource);
-                        break;
-                    case "Connect Carolina":
-                    case "MyUNC":
-                        ip.isTitlePresent(driver, "MyUNC : UNC Campus !Portal");
-                        break;
-                    case "KF Intranet":
-                        ip.isTitlePresent(driver, "Microsoft ISA Server 2006");
-                        break;
-                    case "UNC Onyen":
-                        ip.isTitleContains(driver, "Onyen");
-                        break;
-                    case "Faculty Profiles":
-                        if (program.contains("unc-mba")) {
-                            ip.isTitlePresent(driver, "Faculty Member Profiles | MBA@UNC");
-                        } else if (program.contains("unc-mba")) {
-                            ip.isTitlePresent(driver, "Faculty and Staff");
-                        } else if (program.contains("au-mir")) {
-                            ip.isTitlePresent(driver, "Faculty | SIS | American University");
-                        }
-                        break;
-                    case "Leadership Team":
-                        if (program.contains("unc-mba")) {
-                            ip.isTitlePresent(driver, "Kenan Flagler Business School Leadership Team | MBA@UNC");
-                        } else {
-                            ip.isTitlePresent(driver, "Chapel Hill School of Government Leadership Team | MPA@UNC");
-                        }
-                        break;
-                    case "KF Email":
-                        ip.isTitleContains(driver, "Microsoft Exchange - Outlook Web Access");
-                        break;
-                    case "HoyaMail":
-                        ip.isTitlePresent(driver, "Georgetown Google Apps: Sign In - Georgetown University");
-                        break;
-                    case "Library":
-                        ip.isTitlePresent(driver, "Welcome to Dahlgren Memorial Library -- Georgetown University");
-                        break;
-                    case "MyAccess":
-                        ip.isTitlePresent(driver, "User Login");
-                        break;
-                    case "NetID Mgmt":
-                        ip.isTitlePresent(driver, "Service Management");
-                        break;
-                    case "Handbooks & Info":
-                        ip.isTitlePresent(driver, "Useful Documents and Quick Links - School of Nursing & Health Studies");
-                        break;
-                    case "Email":
-                        if (program.contains("usc-msw") || program.contains("usc-mat")) {
-                            ip.isTitlePresent(driver, "USC Web Mail");
-                        } else if (program.contains("au-mir")) {
-                            ip.isTitlePresent(driver, "American University");
-                        } else if (program.contains("gwu-mph")) {
-                            ip.isTitlePresent(driver, "Email Log-In - MyGW - "
-                                    + "The George Washington University Web Portal");
-                        }
-                        break;
-                    case "Docs":
-                        ip.isTitlePresent(driver, "USCnet Login");
-                        break;
-                    case "MyLaw":
-                        ip.isTitlePresent(driver, "MyLaw Login");
-                        break;
-                    case "E-Mail":
-                        ip.isTitlePresent(driver, "Welcome to GO WUSTL | go.wustl.edu | Washington University in St. Louis");
-                        break;
-                    case "Career Services":
-                        ip.isTitlePresent(driver, "WULS: Career Services Overview");
-                        break;
-                    case "Library Home Page":
-                        ip.isTitlePresent(driver, "WULS: Law Library");
-                        break;
-                    case "Library Database":
-                        ip.isTitlePresent(driver, "WULS: Law Library and Technology");
-                        break;
-                    case "Heelmail - UNC Email":
-                        ip.isTitlePresent(driver, "UNC-Chapel Hill Single Sign-On");
-                        break;
-                    case "Daily Tarheel":
-                        ip.isTitlePresent(driver, "The Daily Tar Heel :: Serving UNC students and the community since 1893");
-                        break;
-                    case "My AU":
-                        ip.isTitlePresent(driver, "myAU Portal Login");
-                        break;
-                    case "Gweb":
-                        ip.isTitlePresent(driver, "Banner Secured Area");
-                        break;
-                    case "Colonial Central":
-                        ip.isTitlePresent(driver, "COLONIAL CENTRAL");
-                        break;
-                    case "Himmelfarb Health Sciences Library":
-                        ip.isTitlePresent(driver, "Himmelfarb Library Homepage");
-                        break;
-                    case "Public Health & Health Services Portal":
-                        ip.isTitlePresent(driver, "Public Health&Health Services Portal "
-                                + "- Education - Himmelfarb Library");
-                        break;
-                    case "SPHSS Jobs Database":
-                        ip.isTitlePresent(driver, "Job Database | Career Connection "
-                                + "| School of Public Health and Health Services "
-                                + "| George Washington University");
-                        break;
-                    case "University Counseling Center":
-                        //TBD
-                        //ip.isTitlePresent(driver, "University Counseling Center - The George Washington University");
-                        ip.isTitlePresent(driver, "University Counseling Center "
-                                + "| Division of Student Affairs "
-                                + "| The George Washington University");
-                        break;
-                    case "Career Center":
-                        ip.isTitlePresent(driver, "The GW Career Center "
-                                + "- The George Washington University");
-                        break;
-                    case "Financing Your Education":
-                        ip.isTitlePresent(driver, "Costs & Financial Planning | The George Washington University");
-                        break;
-                    case "Disability Support Services":
-                        ip.isTitlePresent(driver, "Disability Support Services "
-                                + "- The George Washington University");
-                        break;
-                    case "The GW Bookstore":
-                        ip.isTitlePresent(driver, "GW Bookstore : Shop the George Washington University "
-                                + "Bookstore For New & Used Textbooks, Rent Textbooks, "
-                                + "Digital Textbooks, Apparel, Gifts & Supplies");
-                        break;
-                }
-                driver.close();
-                driver.switchTo().window(HandleBefore);
-            } catch (TimeoutException e) {
-                driver.close();
-                driver.switchTo().window(HandleBefore);
-                throw e;
-            }
-            i++;
         }
     }
 }

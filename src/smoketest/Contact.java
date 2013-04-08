@@ -44,7 +44,7 @@ public class Contact extends BaseClass {
                     ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", elm);
                     elm.click();
                     try {
-                        ip.isTextPresentByXPATH(driver, "//div[2]/span", "Add a personal message: (optional)", 15);
+                        ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Add a personal message: (optional)", 15);
                         break loop;
                     } catch (TimeoutException e) {
                         x++;
