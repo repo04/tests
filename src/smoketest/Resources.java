@@ -20,8 +20,8 @@ public class Resources extends BaseClass {
             resource8, resource9, resource10, resource11, resource12;
     String href1, href2, href3, href4, href5, href6, href7, href8, href9, href10,
             href11, href12, href13;
-    ArrayList<String> resources = new ArrayList<>();
-    ArrayList<String> hrefs = new ArrayList<>();
+    List<String> resources = new ArrayList<>();
+    List<String> hrefs = new ArrayList<>();
     int count;
 
     /**
@@ -187,7 +187,7 @@ public class Resources extends BaseClass {
      * @param resources
      * @param hrefs 
      */
-    private void resourceWindow(int i, ArrayList<String> resources, ArrayList<String> hrefs) {
+    private void resourceWindow(int i, List<String> resources, List<String> hrefs) {
         List<WebElement> lists = driver.findElement(By.className("topnav_dropdown")).findElements(By.tagName("li"));
         
         //Navigating through all Link lists, verifying hrefs respective to Resource Text

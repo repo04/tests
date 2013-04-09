@@ -517,7 +517,7 @@ public class Activity extends BaseClass {
                 break;
             default:
                 new WebDriverWait(driver, 60).until(ExpectedConditions.
-                        presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
+                        presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
         }
         ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
 

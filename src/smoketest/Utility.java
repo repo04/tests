@@ -125,7 +125,7 @@ public class Utility {
             gglUsrNm.clear();
             gglPswd.clear();
             gglUsrNm.sendKeys(userName);
-            gglPswd.sendKeys("Newuser321");
+            gglPswd.sendKeys("h4$hTagpr0@!");
             try {
                 new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), userName));
                 break value;
@@ -134,7 +134,7 @@ public class Utility {
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
         try {
-            ip.isTitleContains(driver, userName + "@gmail.com - Gmail");
+            ip.isTitleContains(driver, userName + " - 2U Mail");
         } catch (Exception e) {
             driver.get(BaseClass.url);
             verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));

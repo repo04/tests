@@ -56,9 +56,9 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName);
         if (user.equalsIgnoreCase("teacher")) {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("2torteacher+" + userName.substring(7) + "@gmail.com");
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "teacher@2u.com");
         } else {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("2torstudent+" + userName.substring(7) + "@gmail.com");
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "student@2u.com");
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCntryXPATH")))).selectByValue("US");

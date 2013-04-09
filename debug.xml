@@ -18,7 +18,7 @@
         <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActivityName" value="AutoPage"/>
         <parameter name="glossaryActivityName" value="AutoGlossary"/>
-        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
         <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>         
          
         <groups>

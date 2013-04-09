@@ -130,9 +130,9 @@ Automation can run when above steps are followed in order.
 			   https://www-usc-msw-lms-sb[01-10]-qa.2u.com || https://usc-msw-lms-standalone-prod.2u.com
         	* unc-mpa: https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || 
 			   https://www-unc-mpa-lms-sb[01-10]-qa.2u.com || https://unc-mpa-lms-standalone-prod.2u.com
-		* au-mir:  https://www-au-mir-lms-prod.2u.com || https://www-au-mir-lms-stg.2u.com || 
+			* au-mir:  https://2ir.ironline.american.edu || https://www-au-mir-lms-stg.2u.com || 
 			   https://www-au-mir-lms-sb[01-10]-qa.2u.com			           
-        	* gwu-mph: https://www-gwu-mph-lms-prod.2u.com || https://www-gwu-mph-lms-stg.2u.com || 
+        	* gwu-mph: https://2gw.publichealthonline.gwu.edu || https://www-gwu-mph-lms-stg.2u.com || 
 			   https://www-gwu-mph-lms-sb[01-10]-qa.2u.com
         	* Program's delimiter: ","	
 		3> antBrwsr: 
