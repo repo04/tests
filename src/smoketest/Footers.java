@@ -105,6 +105,7 @@ public class Footers extends BaseClass {
                 //ip.isTitleContains(driver, programTitle + " " + footer);
                 ip.isTitleContains(driver, footer);
                 driver.findElement(By.linkText("Home")).click();
+                ip.isElementClickableByXpath(driver, xpv.getTokenValue("wallPublishPanelXPATH"), 60);
             }
             i++;
         }

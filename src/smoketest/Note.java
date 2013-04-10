@@ -116,6 +116,7 @@ public class Note extends BaseClass {
     public void verifyNoteSorting(String profileNote) {
         ip.isElementPresentContainsTextByXPATH(driver, "Notes");
         driver.findElement(By.linkText("Notes")).click();
+        ip.isElementClickableByXpath(driver, "//select", 60);
         Select select = new Select(driver.findElement(By.xpath("//select")));
         select.selectByValue("asc");
         ip.isTextPresentByXPATH(driver, "//li[2]/ul/li/div/div[2]/span", profileNote);
