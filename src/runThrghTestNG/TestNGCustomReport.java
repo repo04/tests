@@ -28,12 +28,12 @@ public class TestNGCustomReport extends TestListenerAdapter {
     public void onTestStart(ITestResult result) {
         //Do Nothing
     }
-    
+
     @Override
     public void onConfigurationFailure(ITestResult tr) {
         //ScreenShot(tr);
     }
-
+    
     //Capture screenshot on TestFailure
     public void ScreenShot(ITestResult result) {
 
@@ -47,14 +47,12 @@ public class TestNGCustomReport extends TestListenerAdapter {
                     "ddMMMyy__hhmmaa");
             // get current date time with Date()
             Date date = new Date();
-            String rprtPrgm = BaseClass.program;
-            String rprtEnv = BaseClass.environment;
 
-            if (!(new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.browser + File.separator + "screenshots")).exists()) {
-                new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.browser + File.separator + "screenshots").mkdir();
+            if (!(new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots")).exists()) {
+                new File(BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots").mkdir();
             }
 
-            NewFileNamePath = BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + rprtPrgm + "_" + rprtEnv + "_" + BaseClass.browser + File.separator + "screenshots"
+            NewFileNamePath = BaseClass.directory.getCanonicalPath() + File.separator + "reports" + File.separator + "screenshots"
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);
