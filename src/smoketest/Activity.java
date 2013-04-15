@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import runThrghTestNG.BaseClass;
 
 public class Activity extends BaseClass {
@@ -380,8 +381,8 @@ public class Activity extends BaseClass {
 
         if (attempt) {
             rows = driver.findElements(By.xpath("//div[@id='region-main']/div/table/tbody/tr")).size();
-            System.out.println("rows: " + rows);
             i = rows + 1;
+            Reporter.log("This is students '" + i + "' Quiz Attempt", true);            
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));

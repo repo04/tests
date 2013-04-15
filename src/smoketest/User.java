@@ -56,9 +56,9 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName);
         if (user.equalsIgnoreCase("teacher")) {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "teacher@2u.com");
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "teacher" + dateFormat.format(now) + "@2u.com");
         } else {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "student@2u.com");
+            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "student" + dateFormat.format(now) + "@2u.com");
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCntryXPATH")))).selectByValue("US");
@@ -68,7 +68,7 @@ public class User extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctFindUsrXPATH"));
 
         Utility.buttonRemoveUserFilter(driver, xpv.getTokenValue("btnRmvUsrFilter"));
-        
+
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctFindUsrXPATH")))).selectByValue("0");
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFindUsrXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("btnFindUsr"))).click();

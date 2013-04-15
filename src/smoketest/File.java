@@ -7,8 +7,10 @@ package smoketest;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -32,22 +34,22 @@ public class File extends BaseClass {
         } catch (IOException ex) {
             Logger.getLogger(File.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         for (String file : files) {
             ip.isTextPresentByXPATH(driver, "//thead/tr/td/div", "File Name");
             ip.isElementClickableByXpath(driver, "//div/input", 60);
             Utility.actionBuilderClick(driver, "//div/input");
             ip.isTextPresentByXPATH(driver, "//label", "File Name:");
-            
+
             WebElement elm = driver.findElement(By.xpath("//div/input[2]"));
             ((JavascriptExecutor) driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", elm);
             elm.sendKeys(filepath + file);
-            
+
             driver.findElement(By.xpath("//td[2]/table/tbody/tr/td/table/tbody/tr/td"
                     + "/table/tbody/tr[2]/td[2]/em/button")).click();
             ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Uploading File...");
             ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div/a", file, 300);
-            System.out.print("file uploaded: " + file + "\n");            
+            System.out.print("file uploaded: " + file + "\n");
         }
     }
 
@@ -88,6 +90,15 @@ public class File extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Are you sure you want to delete this file?");
         driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/"
                 + "tr/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
+        //Handled -> LMSII-3168 Exception
+        try {
+            Alert alert = new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent());
+            String error = "Unexpected Alert present with Text as: " + alert.getText();
+            alert.dismiss();
+            Utility.illegalStateException(error);
+        } catch (TimeoutException e) {
+            //Do Nothing
+        }
         int y = 1;
         int x;
         for (String file : files) {
