@@ -290,6 +290,17 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateToSettings();
         a.verifySettings();
     }
+    
+    /**
+     * Pes Admin verify Calendar on Home Page
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "calendar.pesAdminVerify"})
+    public void testPesAdminVerifyCalendar() throws Exception {
+        a.navigateToMyHome();
+        a.verifyCalendar();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

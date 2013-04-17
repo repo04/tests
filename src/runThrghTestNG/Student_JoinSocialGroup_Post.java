@@ -310,6 +310,17 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         studentGlossaryEntryArray[0][0] = a.createGlossaryEntry(glossaryName);
         Reporter.log("studentGlossaryEntryName: " + studentGlossaryEntryArray[0][0], true);
     }
+    
+    /**
+     * Student verify Calendar on Home Page
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "calendar.studentVerify"})
+    public void testStudentVerifyCalendar() throws Exception {
+        a.navigateToMyHome();
+        a.verifyCalendar();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

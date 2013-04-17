@@ -198,6 +198,13 @@
                 <include name="prerequisite"/>
                 <include name="lesson.createActivity"/>
             </define>
+            <define name="Calendar">
+                <include name="prerequisite"/>
+                <include name="calendar.contentAdminVerify"/>
+                <include name="calendar.pesAdminVerify"/>
+                <include name="calendar.teacherVerify"/>
+                <include name="calendar.studentVerify"/>
+            </define>
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     

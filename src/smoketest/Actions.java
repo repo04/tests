@@ -438,7 +438,7 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * 
+     *
      */
     public void createLessonActivity() {
         Activity activity = new Activity();
@@ -1059,6 +1059,22 @@ public class Actions extends BaseClass {
     }
 
     public String currentDateTime() {
-        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);        
+        return DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+    }
+
+    /**
+     * User verify Calendar on Home Page
+     */
+    public void verifyCalendar() {
+        //Calendar XPath verifies across user role
+        switch (LoginPage.getUser()) {
+            case "pesAdmin":
+            case "contentAdmin":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtCalendarAdminXPATH"), "Calendar");
+                break;
+            default:
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtCalendarXPATH"), "Calendar");
+        }
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("lnkCalendarMonthXPATH"));
     }
 }

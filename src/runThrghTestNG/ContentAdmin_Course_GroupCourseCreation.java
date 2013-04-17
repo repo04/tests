@@ -339,14 +339,28 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.verifySettings();
     }
     
-    /*
-     * Verifies content admin can sucessfully 
+    /**
+     * Content Admin create Lesson Activity
+     * 
+     * @param groupCourseName
+     * @throws Exception 
      */
     @Test(dataProvider = "Course", groups = {"lesson.createActivity"})
     public void testContentAdminCreateLessonActivity(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectCourse(groupCourseName);
         a.createLessonActivity();
+    }
+    
+    /**
+     * Content Admin verify Calendar on Home Page
+     * 
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "calendar.contentAdminVerify"})
+    public void testContentAdminVerifyCalendar() throws Exception {
+        a.navigateToMyHome();
+        a.verifyCalendar();
     }
 
     /**
