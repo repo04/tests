@@ -402,7 +402,9 @@ public class Activity extends BaseClass {
         }
         yesRadioButton.click();
 
-        driver.findElement(By.xpath(xpv.getTokenValue("btnNxtSbmtQzQstnXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name=\"next\"]")));
+        driver.findElement(By.cssSelector("input[name=\"next\"]")).click();
+        
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAnsSvdXPATH"), "Answer saved");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfySmryAttmptXPATH"), "Summary of attempt");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtQzAnsXPATH"))).click();
