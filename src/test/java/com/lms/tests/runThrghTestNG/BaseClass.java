@@ -12,6 +12,7 @@ import org.testng.annotations.Parameters;
 import com.lms.tests.smoketest.IsPresent;
 import com.lms.tests.smoketest.Utility;
 import com.lms.tests.smoketest.XpathValues;
+<<<<<<< Updated upstream
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
@@ -27,6 +28,11 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
+=======
+import java.net.URL;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.remote.RemoteWebDriver;
+>>>>>>> Stashed changes
 
 //@Listeners({com.lms.tests.runThrghTestNG.TestNGCustomReport.class})
 @Listeners({SauceOnDemandTestListener.class})
@@ -75,7 +81,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         System.out.println("browser: " + this.browser);
         System.out.println("os: " + os);
         System.out.println("test: " + this.test);
-
+/*
         switch (browser) {
             case "chrome":
                 String chromDrvrPath;
@@ -132,8 +138,19 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
                         capabilities);
                 /*driver = new FirefoxDriver();
                  driver.manage().window().maximize();
-                 Reporter.log("Browser: firefox");   */
+                 Reporter.log("Browser: firefox");   
         }
+                driver = new FirefoxDriver();
+                driver.manage().window().maximize();
+                Reporter.log("Browser: firefox");                
+        }*/
+        
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("version", "5");
+        capabilities.setCapability("platform", Platform.XP);
+        this.driver = new RemoteWebDriver(
+                new URL("http://benjaminkang:df15a898-9c63-4769-b0c4-e8d92dbfe30a@ondemand.saucelabs.com:80/wd/hub"),
+                capabilities);
 
         driver.get(this.url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));

@@ -6,3 +6,4 @@ reports*/
 chromedriver.log
 src/loginDetails.properties
 velocity.log
+target/*
