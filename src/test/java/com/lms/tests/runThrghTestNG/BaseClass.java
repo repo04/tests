@@ -28,7 +28,6 @@ public class BaseClass {
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
     public static String program;
-    public static String environment;
     public static String browser;
     public static String test;
     public static String url;
@@ -44,18 +43,16 @@ public class BaseClass {
      *
      * @param url
      * @param program
-     * @param environment
      * @param browser
      * @param os
      * @param test
      * @throws Exception
      */
     @BeforeTest(groups = {"prerequisite"})
-    @Parameters({"url", "program", "environment", "browser", "os", "test"})
-    public void setUp(String url, String program, String environment, String browser, String os, String test) throws Exception {
+    @Parameters({"url", "program", "browser", "os", "test"})
+    public void setUp(String url, String program, String browser, String os, String test) throws Exception {
 
         this.program = program;
-        this.environment = environment;
         this.browser = browser;
         this.test = test;
         this.url = url;
@@ -64,7 +61,6 @@ public class BaseClass {
         ldv = new XpathValues("loginDetails");
         System.out.println("url: " + url);
         System.out.println("program: " + this.program);
-        System.out.println("environment: " + this.environment);
         System.out.println("browser: " + this.browser);
         System.out.println("os: " + os);
         System.out.println("test: " + this.test);

@@ -56,44 +56,9 @@
                             <target>
                                 <echo>****Displaying value of pom.xml element****</echo>
                                 <taskdef resource="net/sf/antcontrib/antcontrib.properties"
-                                         classpathref="maven.plugin.classpath"/>                                
-                                <if>
-                                    <or>
-                                        <contains string="${mvnUrl}" substring="2gu"/>
-                                        <contains string="${mvnUrl}" substring="gu-msn"/>
-                                    </or>
-                                    <then>
-                                        <property name="program" value="gu-msn"/>
-                                    </then>                                    
-                                    <else>
-                                        <or>
-                                            <contains string="${mvnUrl}" substring="2gw"/>
-                                            <contains string="${mvnUrl}" substring="gwu-mph"/>
-                                        </or>
-                                        <then>
-                                            <property name="program" value="gwu-mph"/>
-                                        </then>
-                                    </else>                              
-                                </if>                                
-                                <echo>***Print:${program}***</echo>
-                                <if>
-                                    <contains string="${mvnUrl}" substring="lms-sb"/>
-                                    <then>
-                                        <propertyregex property="regenv" input="${mvnUrl}" regexp="lms-([^-qa]*)"
-                                                       select="\1" casesensitive="false" />
-                                        <property name="environment" value="${regenv}" />                              
-                                    </then>
-                                    <elseif>
-                                        <contains string="${mvnUrl}" substring="lms-prod"/>
-                                        <then>
-                                            <var name="environment" value="preprod" />                    
-                                        </then>
-                                    </elseif>
-                                    <else>
-                                        <property name="environment" value="prod" />                
-                                    </else>
-                                </if>
-                                <echo>***Print:${environment}***</echo>                                
+                                         classpathref="maven.plugin.classpath"/>
+                                <property name="program" value="${mvnDomain}"/>
+                                <property name="environment" value="preprod"/>
                             </target>
                             <exportAntProperties>true</exportAntProperties>
                         </configuration>
