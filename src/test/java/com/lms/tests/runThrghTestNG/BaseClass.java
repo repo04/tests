@@ -5,24 +5,35 @@
 package com.lms.tests.runThrghTestNG;
 
 import java.io.File;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 import com.lms.tests.smoketest.IsPresent;
 import com.lms.tests.smoketest.Utility;
 import com.lms.tests.smoketest.XpathValues;
+import com.saucelabs.common.SauceOnDemandAuthentication;
+import com.saucelabs.common.SauceOnDemandSessionIdProvider;
+import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
+import com.saucelabs.testng.SauceOnDemandTestListener;
+import java.net.URL;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.SessionId;
+import org.testng.Reporter;
+import org.testng.annotations.AfterTest;
 
-@Listeners({com.lms.tests.runThrghTestNG.TestNGCustomReport.class})
-public class BaseClass {
+//@Listeners({com.lms.tests.runThrghTestNG.TestNGCustomReport.class})
+@Listeners({SauceOnDemandTestListener.class})
+public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
+    
+    //Ben - Add your username & key here
+    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("", "");
 
     public static XpathValues xpv, ldv;
     public static WebDriver driver;
@@ -51,7 +62,7 @@ public class BaseClass {
     @BeforeTest(groups = {"prerequisite"})
     @Parameters({"url", "program", "browser", "os", "test"})
     public void setUp(String url, String program, String browser, String os, String test) throws Exception {
-
+        
         this.program = program;
         this.browser = browser;
         this.test = test;
@@ -112,9 +123,16 @@ public class BaseClass {
                 Reporter.log("Browser: IE");
                 break;
             default:
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                Reporter.log("Browser: firefox");                
+                DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+                capabilities.setCapability("version", "17");
+                capabilities.setCapability("platform", Platform.XP);
+                capabilities.setCapability("name", this.test);
+                this.driver = new RemoteWebDriver(
+                        new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+                        capabilities);
+                /*driver = new FirefoxDriver();
+                 driver.manage().window().maximize();
+                 Reporter.log("Browser: firefox");   */
         }
 
         driver.get(this.url);
@@ -130,5 +148,16 @@ public class BaseClass {
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
         driver.quit();
+    }
+    
+    @Override
+    public String getSessionId() {
+        SessionId sessionId = ((RemoteWebDriver) driver).getSessionId();
+        return (sessionId == null) ? null : sessionId.toString();
+    }
+
+    @Override
+    public SauceOnDemandAuthentication getAuthentication() {
+        return authentication;
     }
 }
