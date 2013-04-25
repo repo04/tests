@@ -34,7 +34,7 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherEmailLogIn() throws Exception {
-        Utility.userEmailLogIn(driver, xpv, "2torteacher");
+        Utility.userEmailLogIn(driver, xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
     }
 
     /**

@@ -19,13 +19,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.testng.Reporter;
 
 public class Utility {
 
@@ -115,26 +115,35 @@ public class Utility {
      * @param xpv
      * @param userName
      */
-    public static void userEmailLogIn(WebDriver driver, XpathValues xpv, String userName) {
+    public static void userEmailLogIn(WebDriver driver, XpathValues xpv, String emailUsername, String emailPassword) {
         driver.get("https://mail.google.com/");
         ip.isTitlePresent(driver, "Gmail: Email from Google");
         WebElement gglUsrNm = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")));
         WebElement gglPswd = driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocPswdXPATH")));
+        Boolean result;
+        int x = 1;
         value:
-        while (true) {
+        do {
             gglUsrNm.clear();
             gglPswd.clear();
-            gglUsrNm.sendKeys(userName);
-            gglPswd.sendKeys("h4$hTagpr0@!");
+            gglUsrNm.sendKeys(emailUsername);
+            gglPswd.sendKeys(emailPassword);
             try {
-                new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), userName));
+                new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), emailUsername));
+                result = false;
                 break value;
             } catch (TimeoutException e) {
+                x++;
+                result = true;
             }
+        } while (x < 5);
+
+        if (result) {
+            Utility.illegalStateException("Unable to send expected userName: " + emailUsername);
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
         try {
-            ip.isTitleContains(driver, userName + " - 2U Mail");
+            ip.isTitleContains(driver, emailUsername + " - 2U Mail");
         } catch (Exception e) {
             driver.get(BaseClass.url);
             verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
@@ -171,10 +180,15 @@ public class Utility {
      */
     public static void userEmailLogOut(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
+        Utility.clickByJavaScript(driver, "//td[2]/a");
+
         try {
-            Utility.clickByJavaScript(driver, "//td[2]/a");
-        } catch (UnhandledAlertException e) {
-            driver.switchTo().alert().accept();
+            Alert alert = new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent());
+            String error = "###Unexpected Alert located with Text as: " + alert.getText() + "###";
+            alert.accept();
+            Reporter.log(error, true);
+        } catch (TimeoutException e) {
+            //Do Nothing
         }
         ip.isTitlePresent(driver, "Gmail: Email from Google");
     }
@@ -304,7 +318,8 @@ public class Utility {
     }
 
     /**
-     * OnClick attribute of Input Element is handled for Chrome Browser by ROBOT functionality
+     * OnClick attribute of Input Element is handled for Chrome Browser by ROBOT
+     * functionality
      *
      * @param element
      */

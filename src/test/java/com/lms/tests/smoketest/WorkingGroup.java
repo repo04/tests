@@ -177,16 +177,16 @@ public class WorkingGroup extends BaseClass {
 
             //This is to verify gglUsrID field passes correct value 
             int x = 1;
-            String emailUserName = "seleniumtest@2u.com";
+            String emailUserName = ldv.getTokenValue("emailUserName");
             Boolean result;
             value:
             do {
                 gglUsrNm.clear();
                 gglPswd.clear();
                 gglUsrNm.sendKeys(emailUserName);
-                gglPswd.sendKeys("h4$hTagpr0@!");
+                gglPswd.sendKeys(ldv.getTokenValue("emailPassword"));
                 try {
-                    new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), emailUserName));
+                    new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("fieldGglDocUsrIdXPATH")), emailUserName));
                     result = false;
                     break value;
                 } catch (TimeoutException e) {
@@ -196,7 +196,7 @@ public class WorkingGroup extends BaseClass {
             } while (x < 5);
 
             if (result) {
-                Utility.illegalStateException("Unable to send expected userName: tutordemo2");
+                Utility.illegalStateException("Unable to send expected userName: " + emailUserName);
             }
 
             driver.findElement(By.xpath(xpv.getTokenValue("fieldGglDocSignInXPATH"))).click();
