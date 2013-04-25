@@ -4,6 +4,6 @@ dist/*
 nbproject/*
 reports*/
 chromedriver.log
-src/test/resources/loginDetails.properties
 velocity.log
 target/*
+src/test/resources/loginDetails.properties
