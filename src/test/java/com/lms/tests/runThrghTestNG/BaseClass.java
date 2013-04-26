@@ -74,25 +74,6 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
 
         switch (browser) {
             case "chrome":
-                String chromDrvrPath;
-                chromDrvrPath = directory.getCanonicalPath() + File.separator + "lib" + File.separator;
-
-                os:
-                switch (os) {
-                    case "linux32":
-                    case "linux64":
-                    case "mac":
-                        System.out.println("initialize OS: " + os);
-                        System.setProperty("webdriver.chrome.driver", chromDrvrPath + "chromedriver_" + os + File.separator + "chromedriver");
-                        break os;
-                    case "win":
-                        System.out.println("initialize  OS: " + os);
-                        System.setProperty("webdriver.chrome.driver", chromDrvrPath + "chromedriver_" + os + File.separator + "chromedriver.exe");
-                        break os;
-                    default:
-                        Utility.illegalStateException("Invalid OS paramter, expected values 'linux32||linux64||mac||win'");
-                }
-
                 //ChromeOptions feature does not work on 'MAC' OS
                 if (os.equalsIgnoreCase("mac")) {
                     /*driver = new ChromeDriver();
