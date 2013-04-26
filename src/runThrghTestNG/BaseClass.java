@@ -21,7 +21,7 @@ import smoketest.IsPresent;
 import smoketest.Utility;
 import smoketest.XpathValues;
 
-@Listeners({runThrghTestNG.TestNGCustomReport.class})
+@Listeners({TestNGCustomReport.class})
 public class BaseClass {
 
     public static XpathValues xpv, ldv;

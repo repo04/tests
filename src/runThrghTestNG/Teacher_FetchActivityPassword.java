@@ -46,7 +46,7 @@ public class Teacher_FetchActivityPassword extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherEmailFetchActivityPasswordLogIn() throws Exception {
-        Utility.userEmailLogIn(driver, xpv, "seleniumtest@2u.com");
+        Utility.userEmailLogIn(driver, xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
     }
 
     /**
