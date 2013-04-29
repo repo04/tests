@@ -156,7 +156,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "GroupCourseFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
-          groups = {"regressionSmoke", "files.teacherDelete"})
+          groups = {"regressionSmoke", "criticalSmoke", "files.teacherDelete"})
     public void testTeacherDeleteFiles(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);

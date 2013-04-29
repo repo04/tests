@@ -199,7 +199,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class, 
-          groups = {"regressionSmoke", "files.studentVerifyInCourse"})
+          groups = {"regressionSmoke", "criticalSmoke", "files.studentVerifyInCourse"})
     public void testStudentVerifyFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);

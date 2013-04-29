@@ -85,43 +85,29 @@ public class File extends BaseClass {
      */
     public void deleteFiles(String[] files) {
         ip.isTextPresentByXPATH(driver, "//thead/tr/td/div", "File Name");
-        ip.isElementClickableByXpath(driver, "//td[3]/div/div", 60);
-        driver.findElement(By.xpath("//td[3]/div/div")).click();
-        ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Are you sure you want to delete this file?");
-        driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/"
-                + "tr/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
-        //Handled -> LMSII-3168 Exception
-        try {
-            Alert alert = new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent());
-            String error = "Unexpected Alert present with Text as: " + alert.getText();
-            alert.dismiss();
-            Utility.illegalStateException(error);
-        } catch (TimeoutException e) {
-            //Do Nothing
-        }
-        int y = 1;
-        int x;
         for (String file : files) {
-            if (y == 1) {
-                new WebDriverWait(driver, 30).until(ExpectedConditions.
-                        invisibilityOfElementWithText(By.xpath("//div/table/tbody/tr/td/div/a"), file));
-            } else {
-                x = y - 1;
-                ip.isTextPresentByXPATH(driver, "//div[" + x + "]/table/tbody/tr/td/div/a", file);
+            ip.isElementClickableByXpath(driver, "//td[3]/div/div", 60);
+            driver.findElement(By.xpath("//td[3]/div/div")).click();
+            ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Are you sure you want to delete this file?");
+            driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/"
+                    + "tr/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
+            //Handled -> LMSII-3168 Exception
+            try {
+                Alert alert = new WebDriverWait(driver, 15).until(ExpectedConditions.alertIsPresent());
+                String error = "Unexpected Alert present with Text as: " + alert.getText();
+                alert.dismiss();
+                Utility.illegalStateException(error);
+            } catch (TimeoutException e) {
+                //Do Nothing
             }
-            y++;
+            new WebDriverWait(driver, 30).until(ExpectedConditions.
+                    invisibilityOfElementWithText(By.xpath("//div/table/tbody/tr/td/div/a"), file));
         }
+        
         Utility.clickByJavaScript(driver, "//li[2]/ul/li[3]/a");
-        int z = 2;
         for (String file : files) {
-            if (z == 2) {
-                new WebDriverWait(driver, 30).until(ExpectedConditions.
-                        invisibilityOfElementWithText(By.xpath("//div[5]/div/div/table/tbody/tr[2]/td/a"), file));
-            } else {
-                x = z - 1;
-                ip.isTextPresentByXPATH(driver, "//div[5]/div/div/table/tbody/tr[" + x + "]/td/a", file);
-            }
-            z++;
+            new WebDriverWait(driver, 30).until(ExpectedConditions.
+                    invisibilityOfElementWithText(By.xpath("//div[5]/div/div/table/tbody/tr[2]/td/a"), file));
         }
     }
 }
