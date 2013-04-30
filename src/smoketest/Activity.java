@@ -62,8 +62,13 @@ public class Activity extends BaseClass {
      */
     public void createQuizActivity() {
         this.dateAndTime = a.currentDateTime();
-        this.name = test + " Quiz " + this.dateAndTime;
-        this.intro = test + " intro " + this.dateAndTime;
+        if (!test.equalsIgnoreCase("CriticalDataTests")) {
+            this.name = test + " Quiz " + this.dateAndTime;
+            this.intro = test + " intro " + this.dateAndTime;            
+        } else {
+            this.name = "AutoQuiz";
+            this.intro = "AutoQuizIntro";
+        }
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
@@ -382,7 +387,7 @@ public class Activity extends BaseClass {
         if (attempt) {
             rows = driver.findElements(By.xpath("//div[@id='region-main']/div/table/tbody/tr")).size();
             i = rows + 1;
-            Reporter.log("This is students '" + i + "' Quiz Attempt", true);            
+            Reporter.log("This is students '" + i + "' Quiz Attempt", true);
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
@@ -404,7 +409,7 @@ public class Activity extends BaseClass {
 
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name=\"next\"]")));
         driver.findElement(By.cssSelector("input[name=\"next\"]")).click();
-        
+
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAnsSvdXPATH"), "Answer saved");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfySmryAttmptXPATH"), "Summary of attempt");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtQzAnsXPATH"))).click();

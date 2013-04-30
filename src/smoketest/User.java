@@ -29,15 +29,24 @@ public class User extends BaseClass {
         dateFormat = new SimpleDateFormat("ddMM-HHmm");
         now = new Date();
 
-        switch (user) {
-
-            case "student":
-            case "autostu":
-                this.userName = "student" + dateFormat.format(now);
-                break;
-
-            default:
-                this.userName = "teacher" + dateFormat.format(now);
+        if (!test.equalsIgnoreCase("CriticalDataTests")) {
+            switch (user) {
+                case "student":
+                case "autostu":
+                    this.userName = "student" + dateFormat.format(now);
+                    break;
+                default:
+                    this.userName = "teacher" + dateFormat.format(now);
+            }
+        } else {
+            switch (user) {
+                case "student":
+                case "autostu":
+                    this.userName = "autostudent1";
+                    break;
+                default:
+                    this.userName = "autoteacher1";
+            }
         }
 
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlSiteAdminXPATH"), 60);
@@ -55,10 +64,18 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys(ldv.getTokenValue("password"));
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName);
-        if (user.equalsIgnoreCase("teacher")) {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "teacher" + dateFormat.format(now) + "@2u.com");
+        if (!test.equalsIgnoreCase("CriticalDataTests")) {
+            if (user.equalsIgnoreCase("teacher")) {
+                driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "teacher" + dateFormat.format(now) + "@2u.com");
+            } else {
+                driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "student" + dateFormat.format(now) + "@2u.com");
+            }
         } else {
-            driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "student" + dateFormat.format(now) + "@2u.com");
+            if (user.equalsIgnoreCase("teacher")) {
+                driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "autoteacher1" + "@2u.com");
+            } else {
+                driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "autostudent1" + "@2u.com");
+            }
         }
         driver.findElement(By.xpath(xpv.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCntryXPATH")))).selectByValue("US");

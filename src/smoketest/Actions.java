@@ -534,6 +534,16 @@ public class Actions extends BaseClass {
         Contact c = new Contact();
         c.addUserAsContact(user);
     }
+    
+    /**
+     * User confirm contact request
+     * 
+     * @param user 
+     */
+    public void confirmContactRequest(String user) {
+        Contact c = new Contact();
+        c.confirmContactRequest(user);
+    }
 
     /**
      * Navigate to respective group wall

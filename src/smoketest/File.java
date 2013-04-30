@@ -108,6 +108,7 @@ public class File extends BaseClass {
         for (String file : files) {
             new WebDriverWait(driver, 30).until(ExpectedConditions.
                     invisibilityOfElementWithText(By.xpath("//div[5]/div/div/table/tbody/tr[2]/td/a"), file));
+            System.out.print("file deleted: " + file + "\n");
         }
     }
 }

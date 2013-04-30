@@ -26,7 +26,7 @@
                 <include name="prerequisite"/>
                 <include name="course.creation"/>
                 <include name="groupcourse.deletion"/>
-                <include name="course.archive"/>                    
+                <include name="course.archive"/>                                    
             </define>            
             <define name="ActivitiesCreation_AddQuizQuestion_Deletion">
                 <include name="prerequisite"/>
@@ -187,7 +187,8 @@
             </define>
             <define name="Contact">
                 <include name="prerequisite"/>
-                <include name="contact.teacherAddStudentAsContactfromCourse"/>                                
+                <include name="contact.teacherAddStudentAsContactfromCourse"/>
+                <include name="contact.studentConfirmRequest"/>                                
             </define>
             <define name="StudentSupport">
                 <include name="prerequisite"/>

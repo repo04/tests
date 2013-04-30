@@ -28,6 +28,9 @@ public class Course extends BaseClass {
         } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.courseName = "SmkTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             crsShrtName = "SmkShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("CriticalDataTests")) {
+            this.courseName = "AutoCourse-DoNotTouch";
+            crsShrtName = "AutoCourse-DNT";
         } else {
             this.courseName = "DbgTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
             crsShrtName = "DbgShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -67,6 +70,8 @@ public class Course extends BaseClass {
             this.groupCourseName = "RgsnTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.groupCourseName = "SmkTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else if (test.equalsIgnoreCase("CriticalDataTests")) {
+            this.groupCourseName = "AutoGroupCourse";
         } else {
             this.groupCourseName = "DbgTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }

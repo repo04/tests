@@ -161,6 +161,14 @@
         <antcall target="testng-xslt-report"/>       
     </target>
     
+    <target name="runcriticaltestdata">
+        <antcall target="init"/>
+        <antcall target="compile"/>
+        <antcall target="copy-resources"/>
+        <antcall target="runCriticalDataTests"/>
+        <antcall target="testng-xslt-report"/>       
+    </target>
+    
     <!-- Delete old data and create new directories -->
     <target name="init" >
         <echo>Initlizing...</echo>
@@ -310,6 +318,38 @@
                             <sysproperty key="browser" value="@{browser}"/>
                             <sysproperty key="os" value="${antOS}"/>
                             <sysproperty key="test" value="DebugTests"/>
+                        </testng>
+                    </sequential>
+                </for> 
+            </sequential>                
+        </for>                 
+    </target>
+    
+    <target name="runCriticalDataTests" description="Running tests">
+        <echo>Running Tests...</echo>
+        <taskdef resource="testngtasks" classpathref="libs"/>
+        <for list="${antUrl}" param = "url">
+            <sequential>
+                <echo>Url: @{url}</echo>
+                <antcallback target="set_prgrm" return="program">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback> 
+                <echo>callback: ${program}</echo>
+                <antcallback target="set_env" return="environment">
+                    <param name="callUrl" value="@{url}"/>
+                </antcallback>
+                <echo>callback: ${environment}</echo>
+                <for list="${antBrwsr}" param = "browser">
+                    <sequential>
+                        <echo>Driver: @{browser}</echo>
+                        <testng outputDir="${report.dir}" classpathref="libs" delegatecommandsystemproperties="true">      
+                            <xmlfileset dir="${basedir}" includes="criticalData.xml"/>
+                            <sysproperty key="url" value="@{url}"/>
+                            <sysproperty key="program" value="${program}"/>
+                            <sysproperty key="environment" value="${environment}"/>   
+                            <sysproperty key="browser" value="@{browser}"/>
+                            <sysproperty key="os" value="${antOS}"/>
+                            <sysproperty key="test" value="CriticalDataTests"/>
                         </testng>
                     </sequential>
                 </for> 
