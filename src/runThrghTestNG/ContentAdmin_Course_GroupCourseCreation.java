@@ -359,6 +359,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "calendar.contentAdminVerify"})
     public void testContentAdminVerifyCalendar() throws Exception {
+        a.navigateToMyWall();
         a.navigateToMyHome();
         a.verifyCalendar();
     }
