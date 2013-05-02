@@ -7,3 +7,4 @@ chromedriver.log
 velocity.log
 target/*
 src/test/resources/loginDetails.properties
+build.xml
