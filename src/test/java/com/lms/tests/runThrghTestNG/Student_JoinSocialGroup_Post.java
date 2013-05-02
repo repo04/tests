@@ -321,6 +321,31 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.navigateToMyHome();
         a.verifyCalendar();
     }
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Student verify Support Message - Currently commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.studentSupportMessageVerification"})
+    public void testStudentVerifySupportMessage() throws Exception {
+        a.navigateToStudentSupportPage();
+        a.studentVerificationSupportMessage();
+    } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Student verify Login Message - Currently commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.studentLoginMessageVerification"})
+    public void testStudentVerifyLoginMessage() throws Exception {
+        a.studentVerificationLoginMessage();
+    } */
 
     /**
      * The annotated method will be run after all the test methods in the

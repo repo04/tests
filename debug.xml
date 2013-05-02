@@ -205,12 +205,30 @@
                 <include name="calendar.teacherVerify"/>
                 <include name="calendar.studentVerify"/>
             </define>
+            <define name="SystemCompatiblity">
+                <include name="prerequisite"/>
+                <include name="systemCompatiblity.contentVerify"/>
+                <include name="systemCompatiblity.faqSectionUIVerify"/>
+                <include name="systemCompatiblity.expressUploader"/>
+                <include name="systemCompatiblity.mobileApplicationUIVerify"/>
+                <include name="systemCompatiblity.backToTopAndMoreInfoLinkVerify"/>
+            </define>
+            <define name="2torAdministrativeBlock">
+                <include name="prerequisite"/>
+                <include name="2torAdministrativeBlock.contentVerify"/>
+              <!--include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
+                <include name="2torAdministrativeBlock.studentLoginMessageVerification"/>
+                <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
+                <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
+                <include name="2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"/-->
+            </define> 
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     
             </run-->
         </groups>
         <classes>
+            <class name="com.lms.tests.runThrghTestNG.System_Compatibility"/>
             <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>

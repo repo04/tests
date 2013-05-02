@@ -301,6 +301,196 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateToMyHome();
         a.verifyCalendar();
     }
+    
+    /**
+     * PesAdmin verify 2tor Administrative Settings
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockVerifySiteAdministrationSettings() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.adminBlockVerifySiteAdministrationSettings();
+    }
+    
+    /**
+     * PesAdmin verify the video tutorial
+     *
+     * @throws Exception
+    */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockVerifyVideoTutorials() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToVideoTutorials();
+        a.adminBlockVerifyVideoTutorials();
+    }
+    
+    /**
+     * PesAdmin verify the student support settings
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockVerifyStudentSupportSettings() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.adminBlockVerifyStudentSupportSettings();
+    }
+    
+    /**
+     * PesAdmin verify the support message page UI
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockVerifySupportMessagePageUI() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToStudentSupportMessage();
+        a.adminBlockSupportMessageUI();
+    }
+    
+    /**
+     * PesAdmin verify the login message page UI
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockVerifyLoginMessagePageUI() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToLoginMessage();
+        a.adminBlockLoginMessageUI();
+    }
+
+    /**
+     * PesAdmin verify the UI of User Sticky Notes Page
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockVerifyUserStickyNotesUI() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToUserStickyNotes();
+        a.adminBlockVerifyUserStickyNotesUI();
+    }
+    
+    /**
+     * PesAdmin verify the "Email Not In Domain" UI
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifyEmailNotInDomainUI() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToEmailNotInDomain();
+        a.adminBlockVerifyEmailNotInDomainUI();
+    }
+
+    /**
+     * PesAdmin verify University Domain Email IDs are not present in "Email Not In Domain" list
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifyUniversityDomainNotPresentInEmailNotInDomainList() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToEmailNotInDomain();
+        a.adminBlockVerifyUniversityDomainNotPresentInEmailNotInDomainList();
+    }
+    
+    //The below method affects all system users - so currently we are skipping this
+     /**
+      * PesAdmin Set Faculty Login Message
+      *
+      * @throws Exception
+      */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockSetFacultyLoginMessage() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToLoginMessage();
+        a.adminBlockSetFacultyLoginMessage();
+    } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * PesAdmin create and verify the User Sticky Notes by text - Currently commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockStickyNotesPostText() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToUserStickyNotes();
+        a.adminBlockStickyNotesPostText();
+    } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * PesAdmin create and verify the User Sticky Notes by URL - Currently commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockStickyNotesPostURL() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToUserStickyNotes();
+        a.adminBlockStickyNotesPostURL();
+    } */
+    
+    /**
+     * PesAdmin verify the Report settings
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockVerifyReportSettings() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.adminBlockVerifyReportSettings();
+    }
+    
+    /**
+     * Verify pes admin can not access the Service and Configuration reports
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifyAccessDeniedToServiceAndConfigurationReports() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.adminBlockPesAdminVerifyAccessDeniedToServiceAndConfigurationReports();
+    }
+    
+    /**
+     * Pes admin verify the Course Roster UI
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockReportCourseRosterUIVerify() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToReportCourseRoster();
+        a.adminBlockReportCourseRosterUIVerify();
+    }
+   
+    /**
+     * Verify 2tor Administrative Block -DeletedLiveSession Section
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifyDeletedLiveSessionUIUnderAdminSettings() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToDeletedLiveSession();
+        a.adminBlockPesAdminVerifyDeletedLiveSessionUIUnderAdminSettings();
+    }
+    
+    /**
+     * Verify 2tor Administrative Block -StudentEngagementReportUIVerify
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminAdministrativeBlockStudentEngagementReportUIVerify( ) throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToStudentEngagementReport();
+        a.adminBlockStudentEngagementReportUIVerify();
+    }   
 
     /**
      * The annotated method will be run after all the test methods in the

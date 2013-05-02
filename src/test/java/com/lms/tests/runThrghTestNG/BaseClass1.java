@@ -24,7 +24,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.testng.Reporter;
 
-
 //@Listeners({TestNGCustomReport.class})
 @Listeners({SauceOnDemandTestListener.class})
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
