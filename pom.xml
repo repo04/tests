@@ -78,7 +78,7 @@
                     <groups>${mvnGrp}</groups>
                     <systemPropertyVariables>
                         <url>${mvnUrl}</url>
-                        <program>${mvnDomain}</program>
+                        <program>${mvnProgram}</program>
                         <browser>${mvnBrwsr}</browser>
                         <os>${mvnOS}</os>
                         <test>${mvnSuite}Tests</test>                                               
