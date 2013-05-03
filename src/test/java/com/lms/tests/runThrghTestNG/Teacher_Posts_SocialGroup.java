@@ -66,10 +66,11 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogIn(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
+                || test.equalsIgnoreCase("CriticalDataTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("teacherUserName"));
+            a.login(ldv.getTokenValue("teacherUserName"));
         }
     }
 
@@ -213,7 +214,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-    groups = {"regressionSmoke", "contact.teacherAddStudentAsContactfromCourse"})
+    groups = {"regressionSmoke", "criticalDataSmoke", "contact.teacherAddStudentAsContactfromCourse"})
     public void testTeacherAddStudentAsContactfromCourse(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="FullSmoke Suite">
+    <listeners>
+        <listener class-name="com.lms.tests.runThrghTestNG.TransformCriticalData"/>
+        <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
+    </listeners>
+    <test name="CriticalDataTests" preserve-order="true" parallel="false">
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+            <!--class name="com.lms.tests.runThrghTestNG.Teacher_VerifyEmailNotifications"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_VerifyEmailNotifications"/-->
+        </classes>
+    </test>
+</suite>

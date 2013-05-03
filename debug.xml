@@ -6,10 +6,6 @@
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="teacherUserName" value="autoteacher1"/>
-        <parameter name="studentUserName" value="autostudent1"/>
-        <!--parameter name="teacherUserName" value="teacher1"/>
-        <parameter name="studentUserName" value="student1"/-->       
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
@@ -187,7 +183,8 @@
             </define>
             <define name="Contact">
                 <include name="prerequisite"/>
-                <include name="contact.teacherAddStudentAsContactfromCourse"/>                                
+                <include name="contact.teacherAddStudentAsContactfromCourse"/>
+                <include name="contact.studentConfirmRequest"/>                                
             </define>
             <define name="StudentSupport">
                 <include name="prerequisite"/>

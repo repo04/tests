@@ -62,8 +62,13 @@ public class Activity extends BaseClass {
      */
     public void createQuizActivity() {
         this.dateAndTime = a.currentDateTime();
-        this.name = test + " Quiz " + this.dateAndTime;
-        this.intro = test + " intro " + this.dateAndTime;
+        if (!test.equalsIgnoreCase("CriticalDataTests")) {
+            this.name = test + " Quiz " + this.dateAndTime;
+            this.intro = test + " intro " + this.dateAndTime;            
+        } else {
+            this.name = "AutoQuiz";
+            this.intro = "AutoQuizIntro";
+        }
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));

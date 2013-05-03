@@ -135,18 +135,18 @@ public class Resources extends BaseClass {
                 break;
             case "gwu-mph":
                 count = 12;
-                resource1 = "Email";
-                resource2 = "Gweb";
-                resource3 = "Colonial Central";
-                resource4 = "Himmelfarb Health Sciences Library";
-                resource5 = "Public Health & Health Services Portal";
-                resource6 = "SPHSS Jobs Database";
-                resource7 = "Writing Center";
-                resource8 = "University Counseling Center";
-                resource9 = "Career Center";
-                resource10 = "Financing Your Education";
-                resource11 = "Disability Support Services";
-                resource12 = "The GW Bookstore";
+                resource1 = "Email >";
+                resource2 = "Gweb >";
+                resource3 = "Colonial Central >";
+                resource4 = "Himmelfarb Health Sciences Library >";
+                resource5 = "Public Health & Health Services Portal >";
+                resource6 = "SPHSS Jobs Database >";
+                resource7 = "Writing Center >";
+                resource8 = "University Counseling Center >";
+                resource9 = "Career Center >";
+                resource10 = "Financing Your Education >";
+                resource11 = "Disability Support Services >";
+                resource12 = "The GW Bookstore >";
                 addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6, resource7,
                         resource8, resource9, resource10, resource11, resource12);
 

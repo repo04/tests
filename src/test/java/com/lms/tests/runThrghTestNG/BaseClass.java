@@ -29,7 +29,7 @@ import org.testng.Reporter;
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     //Ben - Add your username & key here
-    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
+    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("", "");
     public static XpathValues xpv, ldv;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
@@ -128,9 +128,6 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
              Reporter.log("Browser: firefox");*/
         }
 
-        /*this.driver = new RemoteWebDriver(
-         new URL("http://benjaminkang:df15a898-9c63-4769-b0c4-e8d92dbfe30a@ondemand.saucelabs.com:80/wd/hub"),
-         capabilities);*/
         capabilities.setCapability("name", this.test);
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);

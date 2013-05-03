@@ -56,12 +56,38 @@ public class Contact extends BaseClass {
             }
             i++;
         }
-        //new WebDriverWait(driver, 15).until(ExpectedConditions.textToBePresentInElement(By.id("ext-gen67"),
-          //      "Add " + Utility.getFullName(user) + " as contact"));
-        
         ip.isTextPresentByXPATH(driver, "//div[10]/div/div/div/div/span", "Add " + Utility.getFullName(user) + " as contact", 60);
         driver.findElement(By.xpath("//div/textarea")).sendKeys("Add as contact");
         driver.findElement(By.xpath("//button")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath(imagePath))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath("//div[" + i + "]/div[3]/a/img"))));
+        new WebDriverWait(driver, 15).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath("//div[" + i + "]/div[3]/img"))));
+    }
+    
+    /**
+     * User confirm contact request
+     * 
+     * @param user
+     */
+    void confirmContactRequest(String user) {
+        int i = 1;
+        ip.isElementClickableByXpath(driver, "//li[" + i + "]/div/div[2]/div/a", 60);
+        Boolean contact = true;
+        do {
+            String name = driver.findElement(By.xpath("//li[" + i + "]/div/div[2]/div/a")).getText();
+            if (name.equalsIgnoreCase(Utility.getFullName(user))) {
+                contact = false;
+                break;
+            }
+            i++;
+        } while (i < 6);
+
+        if (contact) {
+            Utility.illegalStateException("Contact not found: " + user);
+        }
+        driver.findElement(By.xpath("//li[" + i + "]/div/div/a/span")).click();
+        ip.isElementClickableByXpath(driver, "//td[2]/table/tbody/tr[2]/td[2]/em/button", 60);
+        driver.findElement(By.xpath("//td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
+        ip.isTextPresentByXPATH(driver, "//li[1]/div/div[2]/div/a", Utility.getFullName(user));
+        ip.isTextPresentByXPATH(driver, "//li[1]/div/div/a/span", "Send Email");
     }
 }

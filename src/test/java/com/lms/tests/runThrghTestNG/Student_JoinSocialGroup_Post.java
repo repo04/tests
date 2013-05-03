@@ -58,10 +58,11 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogIn(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
+                || test.equalsIgnoreCase("CriticalDataTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("studentUserName"));
+            a.login(ldv.getTokenValue("studentUserName"));
         }
     }
 
@@ -320,6 +321,20 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     public void testStudentVerifyCalendar() throws Exception {
         a.navigateToMyHome();
         a.verifyCalendar();
+    }
+    
+    /**
+     * Student confirm contact request
+     * 
+     * @param teacherUserName
+     * @param studentUserName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+          groups = {"regressionSmoke", "criticalDataSmoke", "contact.studentConfirmRequest"})
+    public void testStudentConfirmContactRequest(String teacherUserName, String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.confirmContactRequest(teacherUserName);
     }
 
     /**

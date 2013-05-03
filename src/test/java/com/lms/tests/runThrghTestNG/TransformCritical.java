@@ -60,6 +60,27 @@ public class TransformCritical implements IAnnotationTransformer {
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testTeacherVerifyFilesInPortfolio".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyFilesInPortfolio");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testTeacherUploadFilesInCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentVerifyFilesInCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyFilesInCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherVerifyFilesInPortfolio";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherDeleteFiles".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherDeleteFiles");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherUploadFilesInCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
         if ("testStudentCreateLiveSession".equals(testMethod.getName())) {
             System.out.println("Inside testStudentCreateLiveSession");

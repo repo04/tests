@@ -45,7 +45,8 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @DataProvider(name = "Course")
     public static Object[][] Course(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
+                || test.equalsIgnoreCase("CriticalDataTests")) {
             System.out.println("Inside Course: " + test);
             return (groupCourseNameArray);
         } else {
@@ -70,7 +71,8 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
     @DataProvider(name = "QuizName")
     public static Object[][] QuizName(ITestContext context) throws Exception {
-        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
+                || test.equalsIgnoreCase("CriticalDataTests")) {
             System.out.println("Inside QuizName: " + test);
             return (quizNameArray);
         } else {
@@ -194,7 +196,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "fullSmoke", "course.creation"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "course.creation"})
     public void testContentAdminCourseGroupCourseCreation() throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
@@ -237,6 +239,20 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         activitiesArray[0][3] = a.createPageResource();
         Reporter.log("pageActivityName: " + activitiesArray[0][3], true);
+    }
+    
+    /**
+     * Create Quiz activity
+     * 
+     * @param groupCourseName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "Course", groups = {"criticalDataSmoke"})
+    public void testContentAdminQuizCreation(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        quizNameArray[0][0] = a.createQuizActivity();
+        Reporter.log("quizActivityName: " + quizNameArray[0][0], true);
     }
 
     /**
@@ -286,7 +302,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param quizName
      * @throws Exception
      */
-    @Test(dataProvider = "GroupCourseQuiz", groups = {"regressionSmoke", "fullSmoke", "activities.addQuizQuestion"})
+    @Test(dataProvider = "GroupCourseQuiz", groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "activities.addQuizQuestion"})
     public void testContentAdminAddQuizQuestion(String groupCourseName, String quizActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -359,6 +375,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "calendar.contentAdminVerify"})
     public void testContentAdminVerifyCalendar() throws Exception {
+        a.navigateToMyWall();
         a.navigateToMyHome();
         a.verifyCalendar();
     }

@@ -535,6 +535,16 @@ public class Actions extends BaseClass {
         Contact c = new Contact();
         c.addUserAsContact(user);
     }
+    
+    /**
+     * User confirm contact request
+     * 
+     * @param user 
+     */
+    public void confirmContactRequest(String user) {
+        Contact c = new Contact();
+        c.confirmContactRequest(user);
+    }
 
     /**
      * Navigate to respective group wall
@@ -681,7 +691,7 @@ public class Actions extends BaseClass {
             if (i == 3) {
                 new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[2]/div/div[4]/label/a/label")));
             } else if (i > 3) {
-                ip.isTextPresentByXPATH(driver, "//li/div/div[2]/div", "Announcement from Student Support");
+                ip.isTextPresentByXPATH(driver, "//li/div/div[2]/div", "Announcement from Support");
                 ip.isTextPresentByXPATH(driver, "//li/div/div[2]/div[3]", coursepost);
             }
         }

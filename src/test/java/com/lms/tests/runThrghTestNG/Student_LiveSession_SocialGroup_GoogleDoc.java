@@ -69,7 +69,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("studentUserName"));
+            a.login(ldv.getTokenValue("studentUserName"));
         }
     }
 
@@ -199,7 +199,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class, 
-          groups = {"regressionSmoke", "files.studentVerifyInCourse"})
+          groups = {"regressionSmoke", "criticalSmoke", "files.studentVerifyInCourse"})
     public void testStudentVerifyFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
