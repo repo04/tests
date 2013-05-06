@@ -240,6 +240,18 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
         a.editGlossaryEntry(glossaryName, studentGlossaryEntryName, glossaryCategoryName, teacherGlossaryEntryName);        
     }
     
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Student verify Login Message does not appear after again logging in - Currently commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"})
+    public void testStudentReverificationLoginMessage() throws Exception {
+        a.studentReverificationLoginMessage();
+    } */
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

@@ -161,7 +161,33 @@ public class Pes_CleanTestData extends BaseClass {
         a.deletePost(pesTextAnnouncementCoursePost);
     }
     
-     /**
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Pes admin disables the student support message created previously - Currently commented as it affects all system users
+     *
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"})
+    public void testPesAdmindisableStudentSupportMessage() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToStudentSupportMessage();
+        a.disableStudentSupportMessageByPesAdmin();
+    } */
+
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Pes admin disables the student support Login message created previously - Currently commented as it affects all system users
+     *
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"})
+    public void testPesAdmindisableStudentSupportLoginMessage() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToLoginMessage();
+        a.disableStudentSupportLoginMessageByPesAdmin();
+    } */
+    
+    /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
      *

@@ -202,6 +202,23 @@
                 <include name="calendar.teacherVerify"/>
                 <include name="calendar.studentVerify"/>
             </define>
+            <define name="SystemCompatibility">
+                <include name="prerequisite"/>
+                <include name="systemCompatibility.contentVerify"/>                                  
+                <include name="systemCompatibility.faqSectionUIVerify"/>
+                <include name="systemCompatibility.expressUploader"/>
+                <include name="systemCompatibility.mobileApplicationsUIVerify"/>
+                <include name="systemCompatibility.backToTopAndMoreInfoLinksVerify"/>
+            </define>
+            <define name="2torAdministrativeBlock">
+                <include name="prerequisite"/>
+                <include name="2torAdministrativeBlock.contentVerify"/>
+                <!--include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
+                <include name="2torAdministrativeBlock.studentLoginMessageVerification"/>
+                <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
+                <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
+                <include name="2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"/-->
+            </define> 
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     
@@ -210,6 +227,7 @@
         <classes>
             <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.System_Compatibility"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>

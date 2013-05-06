@@ -266,6 +266,18 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         teacherGlossaryCategoryNameArray[0][0] = a.createGlossaryCategory(glossaryName);
         Reporter.log("teacherGlossaryCategoryName: " + teacherGlossaryCategoryNameArray[0][0], true);
     }
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Teacher verify Login message - Currently commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.facultyVerificationLoginMessage"})
+    public void testTeacherVerifyLoginMessage() throws Exception {
+        a.facultyVerificationLoginMessage();
+    } */
 
     /**
      * The annotated method will be run after all the test methods in the
