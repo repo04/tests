@@ -149,6 +149,7 @@ public class SystemCompatibility extends BaseClass{
     public void backToTopAndMoreInfoLinks() {
 
         //TC: C57155 Verifies the "Back to top" and more info links are working
+        ip.isElementClickableByXpath(driver, "//td[3]/a", 60);
         List<WebElement> backtotoplinks = driver.findElements(By.linkText("back to top"));
         System.out.println("Total back to top links: " + backtotoplinks.size());
 
