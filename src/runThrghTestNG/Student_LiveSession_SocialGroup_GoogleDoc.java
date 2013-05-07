@@ -69,7 +69,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("studentUserName"));
+            a.login(ldv.getTokenValue("studentUserName"));
         }
     }
 

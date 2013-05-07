@@ -226,7 +226,7 @@ public class Utility {
                     ip.isTitleContains(driver, text);
                     driver.close();
                 } catch (Exception e) {
-                    System.out.println("FeedBack Window not found");
+                    System.out.println(text + " not found");
                     driver.close();
                     driver.switchTo().window(HandleBefore);
                     throw e;

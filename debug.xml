@@ -6,10 +6,6 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="teacherUserName" value="autoteacher1"/>
-        <parameter name="studentUserName" value="autostudent1"/>
-        <!--parameter name="teacherUserName" value="teacher1"/>
-        <parameter name="studentUserName" value="student1"/-->       
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
@@ -206,6 +202,14 @@
                 <include name="calendar.teacherVerify"/>
                 <include name="calendar.studentVerify"/>
             </define>
+            <define name="SystemCompatibility">
+                <include name="prerequisite"/>
+                <include name="systemCompatibility.contentVerify"/>                                  
+                <include name="systemCompatibility.faqSectionUIVerify"/>
+                <include name="systemCompatibility.expressUploader"/>
+                <include name="systemCompatibility.mobileApplicationsUIVerify"/>
+                <include name="systemCompatibility.backToTopAndMoreInfoLinksVerify"/>
+            </define>
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     
@@ -214,6 +218,7 @@
         <classes>
             <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="runThrghTestNG.System_Compatibility"/>
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>

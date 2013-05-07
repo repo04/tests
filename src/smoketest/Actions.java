@@ -1087,4 +1087,80 @@ public class Actions extends BaseClass {
         }
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("lnkCalendarMonthXPATH"));
     }
+    
+    /**
+     * Navigate To System Compatibility page
+     */
+    public void navigateToSystemCompatibility() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
+    }
+    
+    /**
+     * Verify System Compatibility Page BreadCrumb and Introduction Part
+     */
+    public void systemCompatibilityUIVerify() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.breadCrumbandIntroduction();
+    }
+    
+    /**
+     * Verifies content of Step 1: Component Compatibility Check
+     */
+    public void systemCompatibilityComponentCompatibilityUIVerify() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.componentCompatibilityUIVerify();
+    }
+    
+    /**
+     * Verifies content of Step 2: Meeting Connection Diagnostic
+     */
+    public void systemCompatibilityMeetingConnectionDiagnosticUIVerify() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.meetingConnectionDiagnosticUIVerify();
+    }
+    
+    /**
+     * Verifies content of Mobile Application section
+     */
+    public void systemCompatibilityMobileApplicationsUIVerify() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.mobileApplicationsUIVerify();
+    }
+    
+    /**
+     * Verifies the faq section (Questions Answers)
+     * also verify the related browser page opens with download option
+     * while clicking on browser compatible icons
+     */
+    public void systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons();
+    }
+    
+    /**
+     * Verify the number of "back to top" and "more info" links available and
+     * are enabled or not on System Compatibility Page
+     */
+    public void systemCompatibilityVerifyBackToTopAndMoreInfoLinks() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.backToTopAndMoreInfoLinks();
+    }
+    
+    /**
+     * Verify content and functionality of ExpressUploader
+     */
+    public void systemCompatibilityExpressUploader() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.expressUploader();
+    }
+    
+    /**
+     * Verify System Compatibility Page - mobile Support Section UI
+     */
+    public void systemCompatibilityMobileSupportSectionUIVerify() {
+        SystemCompatibility syscomptble=new SystemCompatibility();
+        syscomptble.mobileSupportSectionUIVerify();
+    }
 }

@@ -28,7 +28,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("teacherUserName"));
+            a.login(ldv.getTokenValue("teacherUserName"));
         }
     }
 

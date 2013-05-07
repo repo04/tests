@@ -70,7 +70,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
                 || test.equalsIgnoreCase("CriticalDataTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
         } else {
-            a.login(context.getCurrentXmlTest().getParameter("teacherUserName"));
+            a.login(ldv.getTokenValue("teacherUserName"));
         }
     }
 
