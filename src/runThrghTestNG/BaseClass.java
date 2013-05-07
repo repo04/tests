@@ -32,6 +32,7 @@ public class BaseClass {
     public static String browser;
     public static String test;
     public static String url;
+    public static String os;
     public static String currentURL;
     public static File directory = new File(".");
 
@@ -59,6 +60,7 @@ public class BaseClass {
         this.browser = browser;
         this.test = test;
         this.url = url;
+        this.os = os;
 
         xpv = new XpathValues("xPathAccountProperty");
         ldv = new XpathValues("loginDetails");
