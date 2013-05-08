@@ -1095,6 +1095,14 @@ public class Actions extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
+        String HandleBefore = driver.getWindowHandle();
+        for (String handle : driver.getWindowHandles()) {
+            driver.switchTo().window(handle);
+            if(driver.getTitle().contains("about:blank")){
+                driver.close();
+            }            
+        }
+        driver.switchTo().window(HandleBefore);
     }
     
     /**

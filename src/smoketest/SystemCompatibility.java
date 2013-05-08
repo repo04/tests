@@ -58,8 +58,16 @@ public class SystemCompatibility extends BaseClass{
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sslXPATH"), " Secure Sockets Layer");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("aarXPATH"), " Adobe Acrobat Reader *");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("screenResolutionXPATH"), " Screen Resolution");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("popupWindowsAllowedXPATH"), " Pop-up Windows Allowed");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("flashXPATH"), " Flash");
+        os:
+        switch (os) {
+            case "win":
+            case "mac":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("popupWindowsAllowedXPATH"), " Pop-up Windows Allowed");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("flashXPATH"), " Flash");
+                break os;
+            default:
+                //Do nothing
+        }
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("pdfReaderTextXPATH"), "If you have another PDF reader software installed you do not need to download Adobe Acrobat Reader");
     }
 
@@ -84,7 +92,7 @@ public class SystemCompatibility extends BaseClass{
 
         //TC: C57758 Verifies the content of 'Is my OS compatible?' section
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("isMyOsCompatibleHeadingXPATH"), "Is my OS compatible?");
-        
+
         //TC: C57171 Verifies the content of "Is my connection speed fast enough?" section
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("isMyConectionSpdHeadingXPATH"), "Is my connection speed fast enough?");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("broadbandConProgramTextXPATH"), broadbandContext);
@@ -97,12 +105,12 @@ public class SystemCompatibility extends BaseClass{
                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatiblePassXPATH"), browserCompatibleText);
                 break os;
             case "mac":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("ismyOsCompatibleDescXPATH"), "We detect that you are using MacOSX");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("ismyOsCompatibleDescXPATH"), "We detect that you are using MacOSX.");
                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("osCompatibiltyProgramTextXPATH"), osCompatiblilityText);
                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatiblePassXPATH"), browserCompatibleText);
                 break os;
             default:
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("ismyOsCompatibleDescXPATH"), "We detect that you are using Unix");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("ismyOsCompatibleDescXPATH"), "We detect that you are using UNIX.");
                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("osCompatibleFailXPATH"),
                         "Your operating system is not compatible with " + xpv.getTokenValue(programName + "SupportName") + ". Below are the minimum recommended operating systems for using the website.");//
                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatibleFailXPATH"), "Your browser is not compatible with " + xpv.getTokenValue(programName + "SupportName")
