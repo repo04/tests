@@ -7,7 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class Actions extends BaseClass {
 
     Date now = new Date();
@@ -535,11 +534,11 @@ public class Actions extends BaseClass {
         Contact c = new Contact();
         c.addUserAsContact(user);
     }
-    
+
     /**
      * User confirm contact request
-     * 
-     * @param user 
+     *
+     * @param user
      */
     public void confirmContactRequest(String user) {
         Contact c = new Contact();
@@ -1088,7 +1087,7 @@ public class Actions extends BaseClass {
         }
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("lnkCalendarMonthXPATH"));
     }
-    
+
     /**
      * Navigate To System Compatibility page
      */
@@ -1096,84 +1095,92 @@ public class Actions extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
+        String HandleBefore = driver.getWindowHandle();
+        for (String handle : driver.getWindowHandles()) {
+            driver.switchTo().window(handle);
+            if (driver.getTitle().contains("about:blank")) {
+                driver.close();
+            }
+        }
+        driver.switchTo().window(HandleBefore);
     }
-    
+
     /**
      * Verify System Compatibility Page BreadCrumb and Introduction Part
      */
     public void systemCompatibilityUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.breadCrumbandIntroduction();
     }
-    
+
     /**
      * Verifies content of Step 1: Component Compatibility Check
      */
     public void systemCompatibilityComponentCompatibilityUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.componentCompatibilityUIVerify();
     }
-    
+
     /**
      * Verifies content of Step 2: Meeting Connection Diagnostic
      */
     public void systemCompatibilityMeetingConnectionDiagnosticUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.meetingConnectionDiagnosticUIVerify();
     }
-    
+
     /**
      * Verifies content of Mobile Application section
      */
     public void systemCompatibilityMobileApplicationsUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.mobileApplicationsUIVerify();
     }
-    
+
     /**
-     * Verifies the faq section (Questions Answers)
-     * also verify the related browser page opens with download option
-     * while clicking on browser compatible icons
+     * Verifies the faq section (Questions Answers) also verify the related
+     * browser page opens with download option while clicking on browser
+     * compatible icons
      */
     public void systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons();
     }
-    
+
     /**
      * Verify the number of "back to top" and "more info" links available and
      * are enabled or not on System Compatibility Page
      */
     public void systemCompatibilityVerifyBackToTopAndMoreInfoLinks() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.backToTopAndMoreInfoLinks();
     }
-    
+
     /**
      * Verify content and functionality of ExpressUploader
      */
     public void systemCompatibilityExpressUploader() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.expressUploader();
     }
-    
+
     /**
      * Verify System Compatibility Page - mobile Support Section UI
      */
     public void systemCompatibilityMobileSupportSectionUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.mobileSupportSectionUIVerify();
     }
-    
+
     /**
      * Navigate To 2tor Site Administrator
      */
     public void navigateTo2torSiteAdministrator() {
-         Utility.clickByJavaScript(driver, "//nav/ul/li/a");
-         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("link2torAdminXPATH"), "2tor Site administration");
-         driver.findElement(By.xpath(xpv.getTokenValue("link2torAdminXPATH"))).click();
-     }
-    
+        Utility.clickByJavaScript(driver, "//nav/ul/li/a");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("link2torAdminXPATH"), "2tor Site administration");
+        driver.findElement(By.xpath(xpv.getTokenValue("link2torAdminXPATH"))).click();
+    }
+
     /**
      * Navigate To Video Tutorials page
      */
@@ -1182,7 +1189,7 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("videoTutorialXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("uploadVideo1XPATH"), "Upload");
     }
-    
+
     /**
      * Navigate To Student Support Message page
      */
@@ -1191,7 +1198,7 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("supportMessageXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportLoginMessagePageHeaderXPATH"), "Student Support");
     }
-    
+
     /**
      * Navigate To Student Support page
      */
@@ -1200,25 +1207,25 @@ public class Actions extends BaseClass {
         driver.findElement(By.linkText("Student Support")).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
     }
-    
+
     /**
      * Navigate To Login Message page
      */
     public void navigateToLoginMessage() {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("loginMessageXPATH"), 30);
         driver.findElement(By.xpath(xpv.getTokenValue("loginMessageXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportLoginMessagePageHeaderXPATH"), "Login Message",20);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportLoginMessagePageHeaderXPATH"), "Login Message", 20);
     }
-    
+
     /**
      * Navigate To Sticky Notes page
      */
     public void navigateToUserStickyNotes() {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("userStickyNotesXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("userStickyNotesXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("userStickyNotesPageHeaderXPATH"), "User Sticky Notes",30);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("userStickyNotesPageHeaderXPATH"), "User Sticky Notes", 30);
     }
-    
+
     /**
      * Navigate To Report Course Roster Page
      */
@@ -1227,7 +1234,7 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("courseRosterXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("courseRosterPageHeaderXPATH"), "Course Rosters");
     }
-    
+
     /**
      * Navigate To Deleted Live Session Page
      */
@@ -1236,7 +1243,7 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("deletedLiveSessionXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("deletedLivesessionPageHeaderXPATH"), "Deleted Live Session Recording");
     }
-              
+
     /**
      * Navigate To Student Engagement Report
      */
@@ -1245,7 +1252,7 @@ public class Actions extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("studentEngagementReportXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentEngagementReportPageHeaderXPATH"), "Student Engagement Report");
     }
-        
+
     /**
      * Navigate To Email Not In Domain Page
      */
@@ -1259,23 +1266,24 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Email Not In Domain UI
      */
     public void adminBlockVerifyEmailNotInDomainUI() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.pesAdminVerifyEmailNotInDomainUI();
     }
 
     /**
-     * Verify 2tor Administrative Block - University Domain Email IDs are not present in "Email Not In Domain" list
+     * Verify 2tor Administrative Block - University Domain Email IDs are not
+     * present in "Email Not In Domain" list
      */
     public void adminBlockVerifyUniversityDomainNotPresentInEmailNotInDomainList() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.pesAdminVerifyUniversityDomainNotPresentInEmailNotInDomainList();
     }
-    
+
     /**
      * Verify Site Administration Settings
      */
     public void adminBlockVerifySiteAdministrationSettings() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.siteAdministrationSettings();
     }
 
@@ -1283,7 +1291,7 @@ public class Actions extends BaseClass {
      * Verifies the UI and functionality of Video Tutorials
      */
     public void adminBlockVerifyVideoTutorials() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.studentSupportSettingsVideoTutorials();
     }
 
@@ -1291,15 +1299,15 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Student Support Settings
      */
     public void adminBlockVerifyStudentSupportSettings() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.studentSupportSettings();
     }
-    
+
     /**
      * Verify 2tor Administrative Block -Support Message
      */
     public void adminBlockSupportMessageUI() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.studentSupportSettingsSupportMessage();
     }
 
@@ -1307,53 +1315,53 @@ public class Actions extends BaseClass {
      * Verifies the UI of login message page
      */
     public void adminBlockLoginMessageUI() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.studentSupportSettingsLoginMessage();
     }
-    
+
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block - Set faculty Login Message
      */
     /*
-    public void adminBlockSetFacultyLoginMessage() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock. teacherSupportSettingsLoginMessage();
-    } */
+     public void adminBlockSetFacultyLoginMessage() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock. teacherSupportSettingsLoginMessage();
+     } */
     
-   /**
-    * Verify 2tor Administrative Block -User StickyNotes UI
-    */
-   public void adminBlockVerifyUserStickyNotesUI() {
-        AdministratonBlock ablock=new AdministratonBlock();
+    /**
+     * Verify 2tor Administrative Block -User StickyNotes UI
+     */
+    public void adminBlockVerifyUserStickyNotesUI() {
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.studentSupportSettingsStickyNotes();
     }
-   
+
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block -Sticky Notes Post Text
      */
-   /*
-    public void adminBlockStickyNotesPostText() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.studentSupportSettingsStickyNotesPostText();
-    } */
-
+    /*
+     public void adminBlockStickyNotesPostText() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.studentSupportSettingsStickyNotesPostText();
+     } */
+    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block -Sticky Notes Post URL
      */
     /*
-    public void adminBlockStickyNotesPostURL() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.studentSupportSettingsStickyNotesPostURL();
-    } */
-
+     public void adminBlockStickyNotesPostURL() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.studentSupportSettingsStickyNotesPostURL();
+     } */
+    
     /**
      * Verify 2tor Administrative Block -Report Settings
      */
     public void adminBlockVerifyReportSettings() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.reportSettings();
     }
 
@@ -1361,90 +1369,90 @@ public class Actions extends BaseClass {
      * Verify pes admin can not access Services Report
      */
     public void adminBlockPesAdminVerifyAccessDeniedToServiceAndConfigurationReports() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.pesAdminGetAccessDeniedToStudentServicesAndConfigurationReports();
     }
-  
+
     /**
      * Verify 2tor Administrative Block -Course Roster UI Verify
      */
     public void adminBlockReportCourseRosterUIVerify() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.reportCourseRosterUIVerify();
     }
-  
+
     /**
      * Verify 2tor Administrative Block -Deleted Live Session Section
      */
     public void adminBlockPesAdminVerifyDeletedLiveSessionUIUnderAdminSettings() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.pesAdminVerifyDeletedLiveSessionUIUnderAdminSettings();
     }
-   
+
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify the Student Support Message previously created by pes admin
      */
     /*
-    public void studentVerificationSupportMessage() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.studentVerificationSupportMessage();
-    } */
+     public void studentVerificationSupportMessage() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.studentVerificationSupportMessage();
+     } */
     
     /**
      * Verify the student Login Message previously created by pes admin
      */
     /*
-    public void studentVerificationLoginMessage() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.studentVerificationLoginMessage();
-    } */
-
+     public void studentVerificationLoginMessage() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.studentVerificationLoginMessage();
+     } */
+    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify the faculty Login Message previously created by pes admin
      */
     /*
-    public void facultyVerificationLoginMessage() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.facultyVerificationLoginMessage();
-    } */
-
+     public void facultyVerificationLoginMessage() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.facultyVerificationLoginMessage();
+     } */
+    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Reverify the Login message
      */
     /*
-    public void studentReverificationLoginMessage() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.loginMessageAlertNotPresent();
-    } */
-
+     public void studentReverificationLoginMessage() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.loginMessageAlertNotPresent();
+     } */
+    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Pes admin disables the support message
      */
     /*
-    public void disableStudentSupportMessageByPesAdmin() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.disableStudentSupportMessageByPesAdmin();
-    } */
+     public void disableStudentSupportMessageByPesAdmin() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.disableStudentSupportMessageByPesAdmin();
+     } */
     
     //The below method affects all system users - so currently we are skipping this
     /**
      * Pes admin disables the Login message
      */
     /*
-    public void disableStudentSupportLoginMessageByPesAdmin() {
-        AdministratonBlock ablock=new AdministratonBlock();
-        ablock.disableLoginMessageByPesAdmin();
-    } */
+     public void disableStudentSupportLoginMessageByPesAdmin() {
+     AdministratonBlock ablock=new AdministratonBlock();
+     ablock.disableLoginMessageByPesAdmin();
+     } */
     
     /**
      * Verify 2tor Administrative Block -Student Engagement Report UI Verify
      */
     public void adminBlockStudentEngagementReportUIVerify() {
-        AdministratonBlock ablock=new AdministratonBlock();
+        AdministratonBlock ablock = new AdministratonBlock();
         ablock.studentEngagementReportUIVerify();
     }
 }

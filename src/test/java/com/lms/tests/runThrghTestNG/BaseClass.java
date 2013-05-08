@@ -28,7 +28,7 @@ import org.testng.Reporter;
 @Listeners({SauceOnDemandTestListener.class})
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
-    //Ben - Add your username & key here
+    //Add your username & key here
     private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("", "");
     public static XpathValues xpv, ldv;
     public static WebDriver driver;
@@ -37,6 +37,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     public static String browser;
     public static String test;
     public static String url;
+    public static String os;
     public static String currentURL;
     public static File directory = new File(".");
     DesiredCapabilities capabilities;
@@ -63,6 +64,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         this.browser = browser;
         this.test = test;
         this.url = url;
+        this.os = os;
 
         xpv = new XpathValues("xPathAccountProperty");
         ldv = new XpathValues("loginDetails");
@@ -74,60 +76,31 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
 
         switch (browser) {
             case "chrome":
-                //ChromeOptions feature does not work on 'MAC' OS
-                if (os.equalsIgnoreCase("mac")) {
-                    /*driver = new ChromeDriver();
-                     ((JavascriptExecutor) driver).executeScript("window.open('','chromeBrowser','width=1280,height=800,top=0,left=0')");
-                     driver.close();
-                     driver.switchTo().window("chromeBrowser");
-                     */
-                    capabilities = DesiredCapabilities.chrome();
-                    capabilities.setCapability("platform", Platform.MAC);
-
-                } else {
-                    /*ChromeOptions options = new ChromeOptions();
-                     options.addArguments("--start-maximized");
-                     options.addArguments("--disable-extensions");
-                     driver = new ChromeDriver(options);
-                     capabilities.setCapability(ChromeOptions.CAPABILITY, options);*/
-                    capabilities = DesiredCapabilities.chrome();
-                    capabilities.setCapability("platform", Platform.LINUX);
-                }
+                capabilities = DesiredCapabilities.chrome();
                 Reporter.log("Browser: " + browser);
                 Reporter.log("OS: " + os);
                 break;
             case "ie":
-                /*capabilities = DesiredCapabilities.internetExplorer();
-                 capabilities.setCapability("nativeEvents", false);
-                 caps.setCapability("nativeEvents", true);
-                 caps.setCapability("ignoreZoomSetting", true);
-                 caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                 driver = new InternetExplorerDriver(capabilities);
-                 ip.isTitlePresent(driver, "WebDriver");*/
                 capabilities = DesiredCapabilities.internetExplorer();
-                capabilities.setCapability("platform", Platform.WIN8);
                 Reporter.log("Browser: IE");
                 break;
             default:
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("version", "20");
-                os:
-                switch (os) {
-                    case "linux32":
-                    case "linux64":
-                        capabilities.setCapability("platform", Platform.LINUX);
-                        break os;
-                    case "mac":
-                        capabilities.setCapability("platform", Platform.MAC);
-                        break os;
-                    default:
-                        capabilities.setCapability("platform", Platform.WIN8);
-                }
-            /*driver = new FirefoxDriver();
-             driver.manage().window().maximize();
-             Reporter.log("Browser: firefox");*/
         }
-
+        
+        os:
+        switch (os) {
+            case "linux32":
+            case "linux64":
+                capabilities.setCapability("platform", Platform.LINUX);
+                break os;
+            case "mac":
+                capabilities.setCapability("platform", Platform.MAC);
+                break os;
+            default:
+                capabilities.setCapability("platform", "WINDOWS 7");
+        }
         capabilities.setCapability("name", this.test);
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);

@@ -23,7 +23,6 @@ public class SystemCompatibility extends BaseClass {
     String cookieCompatibleText = "We detect that your cookie settings are compatible with " + xpv.getTokenValue(programName + "SupportName") + ".";
     String browserCompatibleText = "Your browser is compatible with " + xpv.getTokenValue(programName + "SupportName") + ".";
     String expressUploaderDesc = "ExpressUploader offers increased upload speeds for your video files by first converting and then uploading them, giving you more time to focus on what's important. You can continue to navigate " + xpv.getTokenValue(programName + "SupportName") + " while your file is uploading and, if you happen to lose your connection while uploading, the file(s) will simply resume uploading once you've reconnected. Get ExpressUploader today and see the difference for yourself.";
-    String settingsCompatible = "All settings are compatible with " + xpv.getTokenValue(programName + "SupportName");
 
     /**
      * Verifies System Compatibility Page BreadCrumb and Introduction Part
@@ -55,8 +54,16 @@ public class SystemCompatibility extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sslXPATH"), " Secure Sockets Layer");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("aarXPATH"), " Adobe Acrobat Reader *");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("screenResolutionXPATH"), " Screen Resolution");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("popupWindowsAllowedXPATH"), " Pop-up Windows Allowed");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("flashXPATH"), " Flash");
+        os:
+        switch (os) {
+            case "win":
+            case "mac":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("popupWindowsAllowedXPATH"), " Pop-up Windows Allowed");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("flashXPATH"), " Flash");
+                break os;
+            default:
+                //Do nothing
+        }
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("pdfReaderTextXPATH"), "If you have another PDF reader software installed you do not need to download Adobe Acrobat Reader");
     }
 
@@ -81,16 +88,34 @@ public class SystemCompatibility extends BaseClass {
 
         //TC: C57758 Verifies the content of 'Is my OS compatible?' section
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("isMyOsCompatibleHeadingXPATH"), "Is my OS compatible?");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("osCompatibiltyProgramTextXPATH"), osCompatiblilityText);
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("supportedOSXPATH"), "Supported Operating Systems: Windows XP, Windows Vista, Windows 7, Windows 8, Mac OS 10.5 and above.");
 
         //TC: C57171 Verifies the content of "Is my connection speed fast enough?" section
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("isMyConectionSpdHeadingXPATH"), "Is my connection speed fast enough?");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("broadbandConProgramTextXPATH"), broadbandContext);
 
+        os:
+        switch (os) {
+            case "win":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("ismyOsCompatibleDescXPATH"), "We detect that you are using Windows");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("osCompatibiltyProgramTextXPATH"), osCompatiblilityText);
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatiblePassXPATH"), browserCompatibleText);
+                break os;
+            case "mac":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("ismyOsCompatibleDescXPATH"), "We detect that you are using MacOSX.");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("osCompatibiltyProgramTextXPATH"), osCompatiblilityText);
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatiblePassXPATH"), browserCompatibleText);
+                break os;
+            default:
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("ismyOsCompatibleDescXPATH"), "We detect that you are using UNIX.");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("osCompatibleFailXPATH"),
+                        "Your operating system is not compatible with " + xpv.getTokenValue(programName + "SupportName") + ". Below are the minimum recommended operating systems for using the website.");//
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatibleFailXPATH"), "Your browser is not compatible with " + xpv.getTokenValue(programName + "SupportName")
+                        + ". Below are the browsers with which the website is compatible.");
+        }
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("supportedOSXPATH"), "Supported Operating Systems: Windows XP, Windows Vista, Windows 7, Windows 8, Mac OS 10.5 and above.");
+
         //TC: C58172/C134438 Verifies the content of "Is my Browser compatible?" section and TC: C58232 Verifies that image links under 'Is my Browser compatible' section work correctly
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatibleHeadiingXPATH"), "Is my Browser compatible?");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("browserCompatibilityTextXPATH"), browserCompatibleText);
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("supportedBrowsersXPATH"), "Supported Browsers: Internet Explorer 8.0 and above (Exception: 9.0 is not supported on Windows XP), Firefox 14.0 and above, Safari 4.0 and above, Chrome 20.0 and above.");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("latestVersionXPATH"), "The latest versions of these browsers can be downloaded at these links:");
 
@@ -103,11 +128,7 @@ public class SystemCompatibility extends BaseClass {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("ffImgXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("ffImgXPATH"))).click();
         Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
-        if (browserName.equalsIgnoreCase("ff")) {
-            Utility.verifyWindowTitle(driver, "Mozilla Firefox Web Browser — Get More From Your Firefox — Mobile, Add-ons & Other Stuff — mozilla.org");
-        } else {
-            Utility.verifyWindowTitle(driver, "Mozilla Firefox Web Browser — Free Download — mozilla.org");
-        }
+        Utility.verifyWindowTitle(driver, "Mozilla Firefox Web Browser");
 
         //Click on Safari Image on system compatiblity page and verify the window title of the page opened in new window
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("safariImgXPATH"), 60);
@@ -121,23 +142,37 @@ public class SystemCompatibility extends BaseClass {
         Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
         Utility.verifyWindowTitle(driver, "Chrome Browser");
 
-        //TC:C58242 Verify the content of the "Is my Web browser SSL capable?" section
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sslCapableHeadingXPATH"), "Is my Web browser SSL capable?");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sslCapableDescXPATH"), "We detect that your browser supports SSL.");
-
-        //TC:C58246 Verify the content of "Is the screen resolution on my monitor correct?" section
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("screenResolutionHeadingXPATH"), "Is the screen resolution on my monitor correct?");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst1XPATH"), "Go to the start menu: control panel: display.");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst2XPATH"), "Click on the settings tab.");
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst3XPATH"), "Under screen resolution move the screen resolution tab either right or left until 800x600 or 1024x768 is displayed.");
-
         //TC:C58233 Verify the content of "Is the screen resolution on my monitor correct?" section
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("cookieSettingHeadingXPATH"), "Are my cookie settings correct?");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("cookieSettingCompatibleTextXPATH"), cookieCompatibleText);
 
+        //TC:C58242 Verify the content of the "Is my Web browser SSL capable?" section
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sslCapableHeadingXPATH"), "Is my Web browser SSL capable?");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sslCapableDescXPATH"), "We detect that your browser supports SSL.");
+
         //Verify the content of popup window,AAR,student support and flash Section
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("popupWindowsHeadingXPATH"), "Does my browser allow pop-up windows?");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("adobeAcrobatHeadingXPATH"), "Is Adobe Acrobat Reader installed?");
+
+        //TC:C58246 Verify the content of "Is the screen resolution on my monitor correct?" section
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("screenResolutionHeadingXPATH"), "Is the screen resolution on my monitor correct?");
+        os:
+        switch (os) {
+            case "win":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst1XPATH"), "Go to the start menu: control panel: display.");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst2XPATH"), "Click on the settings tab.");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst3XPATH"), "Under screen resolution move the screen resolution tab either right or left until 800x600 or 1024x768 is displayed.");
+                break os;
+            case "mac":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst1XPATH"), "Click on Apple Button.");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst2XPATH"), "Select control panels: Monitors.");
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("scrnResolutionInst3XPATH"), "Click on monitor icon and select resolution 800x600 or 1024x768 .");
+                break os;
+            default:
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("scrnResolutionInst1XPATH")));
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("scrnResolutionInst2XPATH")));
+                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("scrnResolutionInst3XPATH")));
+        }
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("popupWindowsHeadingXPATH"), "Does my browser allow pop-up windows?");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("flashInstalledHeadingXPATH"), "Is Flash installed?");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sudentSupportNoXPATH"), xpv.getTokenValue(programName + "StudentSupportNo"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("universityNameXPATH"), xpv.getTokenValue(programName + "UniversityName"));
@@ -150,7 +185,7 @@ public class SystemCompatibility extends BaseClass {
     public void backToTopAndMoreInfoLinks() {
 
         //TC: C57155 Verifies the "Back to top" and more info links are working
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtSystemCompatibleXPATH"), settingsCompatible);
+        ip.isElementClickableByXpath(driver, "//td[3]/a", 60);
         List<WebElement> backtotoplinks = driver.findElements(By.linkText("back to top"));
         System.out.println("Total back to top links: " + backtotoplinks.size());
 
