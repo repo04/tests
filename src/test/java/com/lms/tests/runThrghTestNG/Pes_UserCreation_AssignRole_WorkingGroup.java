@@ -125,7 +125,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         System.out.println("init GroupCoursePesCoursePosts");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTextCourseSectionPost, pesTextCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
     }
-    
+
     @DataProvider(name = "GroupCourseAnnouncement")
     public static Iterator<Object[]> GroupCourseAnnouncement(ITestContext context) throws Exception {
         System.out.println("init GroupCourseAnnouncement");
@@ -148,7 +148,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.creation"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalTestDataSmoke", "users.creation"})
     public void testPESAdminUserCreation() throws Exception {
         a.navigateToMyContacts();
         userNamesArray[0][0] = a.createUser("teacher");
@@ -167,7 +167,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.assignRole"})
+    @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", "criticalTestDataSmoke", "users.assignRole"})
     public void testPESAdminAssignRole(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -210,14 +210,14 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "wall.courseSectionPost"})
+    groups = {"regressionSmoke", "wall.courseSectionPost"})
     public void testPesAdminPostTextOnCourseSection(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         pesTextCourseSectionPost[0][0] = a.textPost("txtCrsSctnPost");
         Reporter.log("pesTextCourseSectionPost: " + pesTextCourseSectionPost[0][0], true);
     }
-    
+
     /**
      * Post Text with Comments enabled on Course Wall
      *
@@ -225,7 +225,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "wall.coursePostCommentsOn"})
+    groups = {"regressionSmoke", "wall.coursePostCommentsOn"})
     public void testPesAdminPostTextOnCourseCommentsOn(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -241,7 +241,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "wall.coursePostCommentsOff"})
+    groups = {"regressionSmoke", "wall.coursePostCommentsOff"})
     public void testPesAdminPostTextOnCourseCommentsOff(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -249,19 +249,19 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         Reporter.log("pesTxtCrsPost: " + pesTextCoursePostCommentsOff[0][0], true);
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
     }
-    
+
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
+    groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
     public void testPesAdminPostAnnouncementOnAllCourseSection(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         pesTextAnnouncementCoursePost[0][0] = a.textPost("txtAncmntCrsPost");
         Reporter.log("pesTextAnnouncementCoursePost: " + pesTextAnnouncementCoursePost[0][0], true);
     }
-    
+
     /**
      * Pes Admin verify Feedback Window
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "feedback.pesAdminVerify"})
@@ -269,32 +269,32 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateToMyHome();
         a.verifyFeedbackWindow();
     }
-    
+
     /**
      * PesAdmin verify Help Window on Home Page
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     /*@Test(groups = {"regressionSmoke", "help.pesAdminVerify"})
-    public void testPesAdminVerifyHelpWindow() throws Exception {
-        a.navigateToMyHome();
-        a.verifyHelpWindow();
-    }*/
+     public void testPesAdminVerifyHelpWindow() throws Exception {
+     a.navigateToMyHome();
+     a.verifyHelpWindow();
+     }*/
     
     /**
      * Verify Settings page specific to user role
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "settings.pesAdminVerify"})
     public void testPesAdminVerifySettings() throws Exception {
         a.navigateToSettings();
         a.verifySettings();
     }
-    
+
     /**
      * Pes Admin verify Calendar on Home Page
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "calendar.pesAdminVerify"})
@@ -302,196 +302,197 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateToMyHome();
         a.verifyCalendar();
     }
-    
+
     /**
      * PesAdmin verify 2tor Administrative Settings
      *
      * @throws Exception
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockVerifySiteAdministrationSettings() throws Exception {
+    public void testPesAdminVerifySiteAdministrationSection() throws Exception {
         a.navigateTo2torSiteAdministrator();
-        a.adminBlockVerifySiteAdministrationSettings();
+        a.verifySiteAdministrationSection();
     }
-    
-    /**
-     * PesAdmin verify the video tutorial
-     *
-     * @throws Exception
-    */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockVerifyVideoTutorials() throws Exception {
-        a.navigateTo2torSiteAdministrator();
-        a.navigateToVideoTutorials();
-        a.adminBlockVerifyVideoTutorials();
-    }
-    
+
     /**
      * PesAdmin verify the student support settings
      *
      * @throws Exception
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockVerifyStudentSupportSettings() throws Exception {
+    public void testPesAdminVerifySiteAdminStudentSupportSection() throws Exception {
         a.navigateTo2torSiteAdministrator();
-        a.adminBlockVerifyStudentSupportSettings();
-    }
-    
-    /**
-     * PesAdmin verify the support message page UI
-     *
-     * @throws Exception
-     */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockVerifySupportMessagePageUI() throws Exception {
-        a.navigateTo2torSiteAdministrator();
-        a.navigateToStudentSupportMessage();
-        a.adminBlockSupportMessageUI();
-    }
-    
-    /**
-     * PesAdmin verify the login message page UI
-     *
-     * @throws Exception
-     */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockVerifyLoginMessagePageUI() throws Exception {
-        a.navigateTo2torSiteAdministrator();
-        a.navigateToLoginMessage();
-        a.adminBlockLoginMessageUI();
+        a.verifySiteAdminStudentSupportSection();
     }
 
     /**
-     * PesAdmin verify the UI of User Sticky Notes Page
+     * PesAdmin verify the video tutorial
      *
      * @throws Exception
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockVerifyUserStickyNotesUI() throws Exception {
+    public void testPesAdminVerifySiteAdminVideoTutorialsPage() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToVideoTutorials();
+        a.verifySiteAdminStudentSupportVideoTutorialsPage();
+    }
+
+    /**
+     * PesAdmin verify the Student support message page
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifySiteAdminStudentSupportMessagePage() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToStudentSupportMessage();
+        a.verifySiteAdminStudentSupportMessagePage();
+    }
+
+    /**
+     * PesAdmin verify the login message page
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifyStudentSupportLoginMessagePage() throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToLoginMessage();
+        a.verifySiteAdminStudentSupportLoginMessagePage();
+    }
+
+    /**
+     * PesAdmin verify User Sticky Notes Page
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifyStudentSupportUserStickyNotesPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToUserStickyNotes();
-        a.adminBlockVerifyUserStickyNotesUI();
     }
-    
+
     /**
      * PesAdmin verify the "Email Not In Domain" UI
      *
      * @throws Exception
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminVerifyEmailNotInDomainUI() throws Exception {
+    public void testPesAdminVerifySiteAdminReportEmailNotInDomainPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToEmailNotInDomain();
-        a.adminBlockVerifyEmailNotInDomainUI();
+        a.verifySiteAdminReportEmailNotInDomainPage();
     }
 
+    //Commented -- As looping executes very slow on Sauce Lab
     /**
-     * PesAdmin verify University Domain Email IDs are not present in "Email Not In Domain" list
+     * PesAdmin verify University Domain Email IDs are not present in "Email Not
+     * In Domain" list
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    /*@Test(groups = {"2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"})
     public void testPesAdminVerifyUniversityDomainNotPresentInEmailNotInDomainList() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToEmailNotInDomain();
-        a.adminBlockVerifyUniversityDomainNotPresentInEmailNotInDomainList();
-    }
-    
-    //The below method affects all system users - so currently we are skipping this
-     /**
-      * PesAdmin Set Faculty Login Message
-      *
-      * @throws Exception
-      */
-    /*
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockSetFacultyLoginMessage() throws Exception {
-        a.navigateTo2torSiteAdministrator();
-        a.navigateToLoginMessage();
-        a.adminBlockSetFacultyLoginMessage();
-    } */
-    
-    //The below method affects all system users - so currently we are skipping this
-    /**
-     * PesAdmin create and verify the User Sticky Notes by text - Currently commented as it affects all system users
-     *
-     * @throws Exception
-     */
-    /*
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockStickyNotesPostText() throws Exception {
-        a.navigateTo2torSiteAdministrator();
-        a.navigateToUserStickyNotes();
-        a.adminBlockStickyNotesPostText();
-    } */
-    
-    //The below method affects all system users - so currently we are skipping this
-    /**
-     * PesAdmin create and verify the User Sticky Notes by URL - Currently commented as it affects all system users
-     *
-     * @throws Exception
-     */
-    /*
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockStickyNotesPostURL() throws Exception {
-        a.navigateTo2torSiteAdministrator();
-        a.navigateToUserStickyNotes();
-        a.adminBlockStickyNotesPostURL();
-    } */
-    
+        a.verifyUniversityDomainNotPresentInEmailNotInDomainList();
+    }*/
+
     /**
      * PesAdmin verify the Report settings
      *
      * @throws Exception
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockVerifyReportSettings() throws Exception {
+    public void testPesAdminVerifySiteAdminReportSection() throws Exception {
         a.navigateTo2torSiteAdministrator();
-        a.adminBlockVerifyReportSettings();
+        a.verifySiteAdministrationReportSection();
     }
-    
+
     /**
      * Verify pes admin can not access the Service and Configuration reports
      *
      * @throws Exception
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminVerifyAccessDeniedToServiceAndConfigurationReports() throws Exception {
+    public void testPesAdminGetAccessDeniedForStudentServicesAndConfigurationReports() throws Exception {
         a.navigateTo2torSiteAdministrator();
-        a.adminBlockPesAdminVerifyAccessDeniedToServiceAndConfigurationReports();
+        a.verifyGetAccessDeniedForStudentServicesAndConfigurationReports();
     }
-    
+
     /**
      * Pes admin verify the Course Roster UI
      *
      * @throws Exception
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockReportCourseRosterUIVerify() throws Exception {
+    public void testPesAdminVerifySiteAdminReportCourseRostersPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
-        a.navigateToReportCourseRoster();
-        a.adminBlockReportCourseRosterUIVerify();
+        a.navigateToCourseRosters();
+        a.verifySiteAdminReportCourseRostersPage();
     }
-   
+
     /**
      * Verify 2tor Administrative Block -DeletedLiveSession Section
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminVerifyDeletedLiveSessionUIUnderAdminSettings() throws Exception {
+    public void testPesAdminVerifySiteAdminReportDeletedLiveSessionPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToDeletedLiveSession();
-        a.adminBlockPesAdminVerifyDeletedLiveSessionUIUnderAdminSettings();
+        a.verifySiteAdminReportDeletedLiveSessionPage();
     }
-    
+
     /**
      * Verify 2tor Administrative Block -StudentEngagementReportUIVerify
      */
     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminAdministrativeBlockStudentEngagementReportUIVerify( ) throws Exception {
+    public void testPesAdminVerifySiteAdminReportStudentEngagementReportPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToStudentEngagementReport();
-        a.adminBlockStudentEngagementReportUIVerify();
-    }   
+        a.verifySiteAdminReportStudentEngagementReportPage();
+    }
+
+    //Following functional test methods affect all system users - so currently we are skipping this
+    /**
+     * PesAdmin Set Faculty Login Message
+     *
+     * @throws Exception
+     */
+    /*
+     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+     public void testPesAdminAdministrativeBlockSetFacultyLoginMessage() throws Exception {
+     a.navigateTo2torSiteAdministrator();
+     a.navigateToLoginMessage();
+     a.adminBlockSetFacultyLoginMessage();
+     } */
+    
+    /**
+     * PesAdmin create and verify the User Sticky Notes by text - Currently
+     * commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+     public void testPesAdminAdministrativeBlockStickyNotesPostText() throws Exception {
+     a.navigateTo2torSiteAdministrator();
+     a.navigateToUserStickyNotes();
+     a.adminBlockStickyNotesPostText();
+     } */
+    
+    /**
+     * PesAdmin create and verify the User Sticky Notes by URL - Currently
+     * commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+     @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+     public void testPesAdminAdministrativeBlockStickyNotesPostURL() throws Exception {
+     a.navigateTo2torSiteAdministrator();
+     a.navigateToUserStickyNotes();
+     a.adminBlockStickyNotesPostURL();
+     } */    
 
     /**
      * The annotated method will be run after all the test methods in the

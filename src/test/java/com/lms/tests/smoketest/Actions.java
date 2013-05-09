@@ -1200,15 +1200,6 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Navigate To Student Support page
-     */
-    public void navigateToStudentSupportPage() {
-        ip.isElementPresentByLINK(driver, "Student Support");
-        driver.findElement(By.linkText("Student Support")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
-    }
-
-    /**
      * Navigate To Login Message page
      */
     public void navigateToLoginMessage() {
@@ -1229,7 +1220,7 @@ public class Actions extends BaseClass {
     /**
      * Navigate To Report Course Roster Page
      */
-    public void navigateToReportCourseRoster() {
+    public void navigateToCourseRosters() {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("courseRosterXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("courseRosterXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("courseRosterPageHeaderXPATH"), "Course Rosters");
@@ -1245,15 +1236,6 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Navigate To Student Engagement Report
-     */
-    public void navigateToStudentEngagementReport() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("studentEngagementReportXPATH"))));
-        driver.findElement(By.xpath(xpv.getTokenValue("studentEngagementReportXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentEngagementReportPageHeaderXPATH"), "Student Engagement Report");
-    }
-
-    /**
      * Navigate To Email Not In Domain Page
      */
     public void navigateToEmailNotInDomain() {
@@ -1263,87 +1245,129 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Verify 2tor Administrative Block -Email Not In Domain UI
+     * Navigate To Student Engagement Report
      */
-    public void adminBlockVerifyEmailNotInDomainUI() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.pesAdminVerifyEmailNotInDomainUI();
+    public void navigateToStudentEngagementReport() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("studentEngagementReportXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("studentEngagementReportXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentEngagementReportPageHeaderXPATH"), "Student Engagement Report");
     }
 
+    /**
+     * Verify 2tor Administrative Block -Email Not In Domain UI
+     */
+    public void verifySiteAdminReportEmailNotInDomainPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportEmailNotInDomainPage();
+    }
+
+    //Commented -- As looping executes very slow on Sauce Lab
     /**
      * Verify 2tor Administrative Block - University Domain Email IDs are not
      * present in "Email Not In Domain" list
      */
-    public void adminBlockVerifyUniversityDomainNotPresentInEmailNotInDomainList() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.pesAdminVerifyUniversityDomainNotPresentInEmailNotInDomainList();
-    }
+    /*public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifyUniversityDomainNotPresentInEmailNotInDomainList();
+    }*/
 
     /**
-     * Verify Site Administration Settings
+     * Verify Site Administration Section
      */
-    public void adminBlockVerifySiteAdministrationSettings() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.siteAdministrationSettings();
-    }
-
-    /**
-     * Verifies the UI and functionality of Video Tutorials
-     */
-    public void adminBlockVerifyVideoTutorials() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.studentSupportSettingsVideoTutorials();
+    public void verifySiteAdministrationSection() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdministrationSection();
     }
 
     /**
      * Verify 2tor Administrative Block -Student Support Settings
      */
-    public void adminBlockVerifyStudentSupportSettings() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.studentSupportSettings();
+    public void verifySiteAdminStudentSupportSection() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportSection();
     }
 
     /**
-     * Verify 2tor Administrative Block -Support Message
+     * Verifies the UI and functionality of Video Tutorials
      */
-    public void adminBlockSupportMessageUI() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.studentSupportSettingsSupportMessage();
+    public void verifySiteAdminStudentSupportVideoTutorialsPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportVideoTutorialsPage();
+    }
+
+    /**
+     * Verify 2tor Administrative Block - Support Message
+     */
+    public void verifySiteAdminStudentSupportMessagePage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportMessagePage();
     }
 
     /**
      * Verifies the UI of login message page
      */
-    public void adminBlockLoginMessageUI() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.studentSupportSettingsLoginMessage();
+    public void verifySiteAdminStudentSupportLoginMessagePage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportLoginMessagePage();
     }
 
-    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Verify 2tor Administrative Block -Report Settings
+     */
+    public void verifySiteAdministrationReportSection() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdministrationReportSection();
+    }
+
+    /**
+     * Verify pes admin can not access Services Report
+     */
+    public void verifyGetAccessDeniedForStudentServicesAndConfigurationReports() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifyGetAccessDeniedForStudentServicesAndConfigurationReports();
+    }
+
+    /**
+     * Verify 2tor Administrative Block -Course Roster UI Verify
+     */
+    public void verifySiteAdminReportCourseRostersPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportCourseRostersPage();
+    }
+
+    /**
+     * Verify 2tor Administrative Block -Deleted Live Session Section
+     */
+    public void verifySiteAdminReportDeletedLiveSessionPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportDeletedLiveSessionPage();
+    }
+    
+    /**
+     * Verify 2tor Administrative Block -Student Engagement Report UI Verify
+     */
+    public void verifySiteAdminReportStudentEngagementReportPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportStudentEngagementReportPage();
+    }
+
+    //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block - Set faculty Login Message
      */
     /*
      public void adminBlockSetFacultyLoginMessage() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock. teacherSupportSettingsLoginMessage();
      } */
     
-    /**
-     * Verify 2tor Administrative Block -User StickyNotes UI
-     */
-    public void adminBlockVerifyUserStickyNotesUI() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.studentSupportSettingsStickyNotes();
-    }
-
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block -Sticky Notes Post Text
      */
     /*
      public void adminBlockStickyNotesPostText() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentSupportSettingsStickyNotesPostText();
      } */
     
@@ -1353,49 +1377,16 @@ public class Actions extends BaseClass {
      */
     /*
      public void adminBlockStickyNotesPostURL() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentSupportSettingsStickyNotesPostURL();
      } */
     
-    /**
-     * Verify 2tor Administrative Block -Report Settings
-     */
-    public void adminBlockVerifyReportSettings() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.reportSettings();
-    }
-
-    /**
-     * Verify pes admin can not access Services Report
-     */
-    public void adminBlockPesAdminVerifyAccessDeniedToServiceAndConfigurationReports() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.pesAdminGetAccessDeniedToStudentServicesAndConfigurationReports();
-    }
-
-    /**
-     * Verify 2tor Administrative Block -Course Roster UI Verify
-     */
-    public void adminBlockReportCourseRosterUIVerify() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.reportCourseRosterUIVerify();
-    }
-
-    /**
-     * Verify 2tor Administrative Block -Deleted Live Session Section
-     */
-    public void adminBlockPesAdminVerifyDeletedLiveSessionUIUnderAdminSettings() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.pesAdminVerifyDeletedLiveSessionUIUnderAdminSettings();
-    }
-
-    //The below method affects all system users - so currently we are skipping this
     /**
      * Verify the Student Support Message previously created by pes admin
      */
     /*
      public void studentVerificationSupportMessage() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentVerificationSupportMessage();
      } */
     
@@ -1404,7 +1395,7 @@ public class Actions extends BaseClass {
      */
     /*
      public void studentVerificationLoginMessage() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentVerificationLoginMessage();
      } */
     
@@ -1414,7 +1405,7 @@ public class Actions extends BaseClass {
      */
     /*
      public void facultyVerificationLoginMessage() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.facultyVerificationLoginMessage();
      } */
     
@@ -1424,7 +1415,7 @@ public class Actions extends BaseClass {
      */
     /*
      public void studentReverificationLoginMessage() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.loginMessageAlertNotPresent();
      } */
     
@@ -1434,7 +1425,7 @@ public class Actions extends BaseClass {
      */
     /*
      public void disableStudentSupportMessageByPesAdmin() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.disableStudentSupportMessageByPesAdmin();
      } */
     
@@ -1444,15 +1435,16 @@ public class Actions extends BaseClass {
      */
     /*
      public void disableStudentSupportLoginMessageByPesAdmin() {
-     AdministratonBlock ablock=new AdministratonBlock();
+     AdministrationBlock ablock=new AdministrationBlock();
      ablock.disableLoginMessageByPesAdmin();
      } */
     
     /**
-     * Verify 2tor Administrative Block -Student Engagement Report UI Verify
+     * Navigate To Student Support page
      */
-    public void adminBlockStudentEngagementReportUIVerify() {
-        AdministratonBlock ablock = new AdministratonBlock();
-        ablock.studentEngagementReportUIVerify();
-    }
+    /*public void navigateToStudentSupportPage() {
+        ip.isElementPresentByLINK(driver, "Student Support");
+        driver.findElement(By.linkText("Student Support")).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
+    }*/
 }

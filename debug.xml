@@ -213,7 +213,8 @@
             <define name="2torAdministrativeBlock">
                 <include name="prerequisite"/>
                 <include name="2torAdministrativeBlock.contentVerify"/>
-                <!--include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
+                <!--include name="2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"/>
+                <include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
                 <include name="2torAdministrativeBlock.studentLoginMessageVerification"/>
                 <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
                 <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
