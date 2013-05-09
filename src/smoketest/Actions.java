@@ -1171,4 +1171,277 @@ public class Actions extends BaseClass {
         SystemCompatibility syscomptble=new SystemCompatibility();
         syscomptble.mobileSupportSectionUIVerify();
     }
+    
+    /**
+     * Navigate To 2tor Site Administrator
+     */
+    public void navigateTo2torSiteAdministrator() {
+        Utility.clickByJavaScript(driver, "//nav/ul/li/a");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("link2torAdminXPATH"), "2tor Site administration");
+        driver.findElement(By.xpath(xpv.getTokenValue("link2torAdminXPATH"))).click();
+    }
+
+    /**
+     * Navigate To Video Tutorials page
+     */
+    public void navigateToVideoTutorials() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("videoTutorialXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("videoTutorialXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("uploadVideo1XPATH"), "Upload");
+    }
+
+    /**
+     * Navigate To Student Support Message page
+     */
+    public void navigateToStudentSupportMessage() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("supportMessageXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("supportMessageXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportLoginMessagePageHeaderXPATH"), "Student Support");
+    }
+
+    /**
+     * Navigate To Login Message page
+     */
+    public void navigateToLoginMessage() {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("loginMessageXPATH"), 30);
+        driver.findElement(By.xpath(xpv.getTokenValue("loginMessageXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportLoginMessagePageHeaderXPATH"), "Login Message", 20);
+    }
+
+    /**
+     * Navigate To Sticky Notes page
+     */
+    public void navigateToUserStickyNotes() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("userStickyNotesXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("userStickyNotesXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("userStickyNotesPageHeaderXPATH"), "User Sticky Notes", 30);
+    }
+
+    /**
+     * Navigate To Report Course Roster Page
+     */
+    public void navigateToCourseRosters() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("courseRosterXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("courseRosterXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("courseRosterPageHeaderXPATH"), "Course Rosters");
+    }
+
+    /**
+     * Navigate To Deleted Live Session Page
+     */
+    public void navigateToDeletedLiveSession() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("deletedLiveSessionXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("deletedLiveSessionXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("deletedLivesessionPageHeaderXPATH"), "Deleted Live Session Recording");
+    }
+
+    /**
+     * Navigate To Email Not In Domain Page
+     */
+    public void navigateToEmailNotInDomain() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("emailNotInDomainXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("emailNotInDomainXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("emailNotInDomainPageHeadrXPATH"), "Total students without university domain email address");
+    }
+
+    /**
+     * Navigate To Student Engagement Report
+     */
+    public void navigateToStudentEngagementReport() {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("studentEngagementReportXPATH"))));
+        driver.findElement(By.xpath(xpv.getTokenValue("studentEngagementReportXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentEngagementReportPageHeaderXPATH"), "Student Engagement Report");
+    }
+
+    /**
+     * Verify 2tor Administrative Block -Email Not In Domain UI
+     */
+    public void verifySiteAdminReportEmailNotInDomainPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportEmailNotInDomainPage();
+    }
+    
+    /**
+     * Verify 2tor Administrative Block - University Domain Email IDs are not
+     * present in "Email Not In Domain" list
+     */
+    public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifyUniversityDomainNotPresentInEmailNotInDomainList();
+    }
+
+    /**
+     * Verify Site Administration Section
+     */
+    public void verifySiteAdministrationSection() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdministrationSection();
+    }
+
+    /**
+     * Verify 2tor Administrative Block -Student Support Settings
+     */
+    public void verifySiteAdminStudentSupportSection() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportSection();
+    }
+
+    /**
+     * Verifies the UI and functionality of Video Tutorials
+     */
+    public void verifySiteAdminStudentSupportVideoTutorialsPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportVideoTutorialsPage();
+    }
+
+    /**
+     * Verify 2tor Administrative Block - Support Message
+     */
+    public void verifySiteAdminStudentSupportMessagePage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportMessagePage();
+    }
+
+    /**
+     * Verifies the UI of login message page
+     */
+    public void verifySiteAdminStudentSupportLoginMessagePage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminStudentSupportLoginMessagePage();
+    }
+    
+    /**
+     * Verify 2tor Administrative Block -Report Settings
+     */
+    public void verifySiteAdministrationReportSection() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdministrationReportSection();
+    }
+
+    /**
+     * Verify pes admin can not access Services Report
+     */
+    public void verifyGetAccessDeniedForStudentServicesAndConfigurationReports() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifyGetAccessDeniedForStudentServicesAndConfigurationReports();
+    }
+
+    /**
+     * Verify 2tor Administrative Block -Course Roster UI Verify
+     */
+    public void verifySiteAdminReportCourseRostersPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportCourseRostersPage();
+    }
+
+    /**
+     * Verify 2tor Administrative Block -Deleted Live Session Section
+     */
+    public void verifySiteAdminReportDeletedLiveSessionPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportDeletedLiveSessionPage();
+    }
+    
+    /**
+     * Verify 2tor Administrative Block -Student Engagement Report UI Verify
+     */
+    public void verifySiteAdminReportStudentEngagementReportPage() {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySiteAdminReportStudentEngagementReportPage();
+    }
+
+    //Following functional test methods affect all system users - so currently we are skipping this
+    /**
+     * Verify 2tor Administrative Block - Set faculty Login Message
+     */
+    /*
+     public void adminBlockSetFacultyLoginMessage() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock. teacherSupportSettingsLoginMessage();
+     } */
+    
+    /**
+     * Verify 2tor Administrative Block -Sticky Notes Post Text
+     */
+    /*
+     public void adminBlockStickyNotesPostText() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.studentSupportSettingsStickyNotesPostText();
+     } */
+    
+    /**
+     * Verify 2tor Administrative Block -Sticky Notes Post URL
+     */
+    /*
+     public void adminBlockStickyNotesPostURL() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.studentSupportSettingsStickyNotesPostURL();
+     } */
+    
+    /**
+     * Verify the Student Support Message previously created by pes admin
+     */
+    /*
+     public void studentVerificationSupportMessage() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.studentVerificationSupportMessage();
+     } */
+    
+    /**
+     * Verify the student Login Message previously created by pes admin
+     */
+    /*
+     public void studentVerificationLoginMessage() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.studentVerificationLoginMessage();
+     } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Verify the faculty Login Message previously created by pes admin
+     */
+    /*
+     public void facultyVerificationLoginMessage() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.facultyVerificationLoginMessage();
+     } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Reverify the Login message
+     */
+    /*
+     public void studentReverificationLoginMessage() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.loginMessageAlertNotPresent();
+     } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Pes admin disables the support message
+     */
+    /*
+     public void disableStudentSupportMessageByPesAdmin() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.disableStudentSupportMessageByPesAdmin();
+     } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Pes admin disables the Login message
+     */
+    /*
+     public void disableStudentSupportLoginMessageByPesAdmin() {
+     AdministrationBlock ablock=new AdministrationBlock();
+     ablock.disableLoginMessageByPesAdmin();
+     } */
+    
+    /**
+     * Navigate To Student Support page
+     */
+    /*public void navigateToStudentSupportPage() {
+        ip.isElementPresentByLINK(driver, "Student Support");
+        driver.findElement(By.linkText("Student Support")).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
+    }*/
 }

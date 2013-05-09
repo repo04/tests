@@ -210,6 +210,16 @@
                 <include name="systemCompatibility.mobileApplicationsUIVerify"/>
                 <include name="systemCompatibility.backToTopAndMoreInfoLinksVerify"/>
             </define>
+            <define name="2torAdministrativeBlock">
+                <include name="prerequisite"/>
+                <include name="2torAdministrativeBlock.contentVerify"/>
+                <include name="2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"/>
+                <!--include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
+                <include name="2torAdministrativeBlock.studentLoginMessageVerification"/>
+                <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
+                <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
+                <include name="2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"/-->
+            </define>
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     
