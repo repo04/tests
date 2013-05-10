@@ -28,7 +28,7 @@ import org.testng.Reporter;
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     //Add your username & key here
-    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("", "");
+    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
     public static XpathValues xpv, ldv;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
