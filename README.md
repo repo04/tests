@@ -77,7 +77,7 @@ Requirement: The appropriate JAR's need to be present in specific ANT's classpat
 		
 Setup Property Files
 --------------------
-**Note:** 'loginDetails' property file needs to be placed at /tests/src folder.  Please contact Benjamin for a copy. This will eventually be on S3. <br />
+**Note:** 'loginDetails' property file needs to be placed at src/test/resources folder.  Please contact Benjamin for a copy. This will eventually be on S3. <br />
 
 
 Setup to execute on CHROME Browser
@@ -106,17 +106,17 @@ Automation can run when above steps are followed in order.
 
       i> Open Terminal
      ii> Navigate to *BASEDIR*
-    iii> Run Automation
-	   ______________________________________________________________________________________________________
-	a> mvn clean test -DmvnSuite=critical -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win 
+        iii> Run Automation
+               ______________________________________________________________________________________________________
+                a> mvn clean test -DmvnSuite=critical -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win 
 		
-	b> debugSmoke takes 1 extra parameter i.e group name/s={The list of groups mentioned in Confluence Page to run separated by comma}
-	   ________________________________________________________________________________________________________________________________	
-	   mvn clean test -DmvnSuite=debug -DmvnGrp=SystemCompatibility -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win
+                b> debugSmoke takes 1 extra parameter i.e group name/s={The list of groups mentioned in Confluence Page to run separated by comma}
+                   ________________________________________________________________________________________________________________________________	
+                   mvn clean test -DmvnSuite=debug -DmvnGrp=SystemCompatibility -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win
 	
-    Applicable Parameters (Case Sensitive)
-	1> mvnSuite: critical/ smoke / regression / debug / criticalData
-		* Can accept only one target at a time
+        Applicable Parameters (Case Sensitive)
+                1> mvnSuite: critical/ smoke / regression / debug / criticalData
+                        * Can accept only one target at a time
         2> mvnUrl:
         	* gu-msn:  https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || 
 			   https://www-gu-msn-lms-sb[01-10]-qa.2u.com || https://gu-msn-lms-standalone-prod.2u.com					  
@@ -130,19 +130,19 @@ Automation can run when above steps are followed in order.
 			   https://www-usc-msw-lms-sb[01-10]-qa.2u.com || https://usc-msw-lms-standalone-prod.2u.com
         	* unc-mpa: https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || 
 			   https://www-unc-mpa-lms-sb[01-10]-qa.2u.com || https://unc-mpa-lms-standalone-prod.2u.com
-		* au-mir:  https://2ir.ironline.american.edu || https://www-au-mir-lms-stg.2u.com || 
+                        * au-mir:  https://2ir.ironline.american.edu || https://www-au-mir-lms-stg.2u.com || 
 			   https://www-au-mir-lms-sb[01-10]-qa.2u.com || https://au-mir-lms-standalone-prod.2u.com
         	* gwu-mph: https://2gw.publichealthonline.gwu.edu || https://www-gwu-mph-lms-stg.2u.com || 
 			   https://www-gwu-mph-lms-sb[01-10]-qa.2u.com || https://gwu-mph-lms-standalone-prod.2u.com
         	* Only one PROGRAM url to be passed
-	3> mvnBrwsr: 
-		* ff || chrome
-                * Only one browser to be passed
-	4> mvnOS: 
-                * win || mac || linux32 || linux64
-		* Only one OS name to be passed
-	5> mvnGrp:
-		* n number of group/s mentioned in DebugSmoke confluence page can be passed delimited by ","
+                3> mvnBrwsr: 
+                        * ff || chrome
+                        * Only one browser to be passed
+                4> mvnOS: 
+                        * win || mac || linux32 || linux64
+                        * Only one OS name to be passed
+                5> mvnGrp:
+                        * n number of group/s mentioned in DebugSmoke confluence page can be passed delimited by ","
      iv> Reports are saved in '{Basedir}\target\surefire-reports\' folder
      	
 
