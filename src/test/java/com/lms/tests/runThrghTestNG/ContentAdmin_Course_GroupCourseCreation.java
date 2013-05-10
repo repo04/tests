@@ -55,13 +55,13 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         }
     }
 
-    @DataProvider(name = "Activites")
-    public static Object[][] Activites(ITestContext context) throws Exception {
+    @DataProvider(name = "Activities")
+    public static Object[][] Activities(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("Inside Activites: " + test);
+            System.out.println("Inside Activities: " + test);
             return (activitiesArray);
         } else {
-            System.out.println("Inside Activites: " + test);
+            System.out.println("Inside Activities: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("forumActivityName"),
                             context.getCurrentXmlTest().getParameter("quizActivityName"),
                             context.getCurrentXmlTest().getParameter("allInOneAssignmentActivityName"),
@@ -117,7 +117,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GroupCourseActivities")
     public static Iterator<Object[]> GroupCourseActivities(ITestContext context) throws Exception {
         System.out.println("init GroupCourseActivities");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), Activites(context));
+        return DataProviderUtility.cartesianProviderFrom(Course(context), Activities(context));
     }
 
     @DataProvider(name = "GroupCourseQuiz")
@@ -171,7 +171,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "PasswordQuizNameActivities")
     public static Iterator<Object[]> PasswordQuizNameActivities(ITestContext context) throws Exception {
         System.out.println("init PasswordQuizNameActivities");
-        return DataProviderUtility.cartesianProviderFrom(PasswordQuizName(context), Activites(context), GlossaryName(context));
+        return DataProviderUtility.cartesianProviderFrom(PasswordQuizName(context), Activities(context), GlossaryName(context));
     }
 
     @DataProvider(name = "CourseGlossaryName")

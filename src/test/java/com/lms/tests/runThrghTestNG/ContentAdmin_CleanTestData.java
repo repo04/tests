@@ -26,7 +26,7 @@ public class ContentAdmin_CleanTestData {
     public static Iterator<Object[]> PasswordQuizNameActvitiesBackupFile(ITestContext context) throws Exception {
         System.out.println("init PasswordQuizNameActvitiesBackupFile");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.PasswordQuizName(context),
-                ContentAdmin_Course_GroupCourseCreation.Activites(context), ContentAdmin_Course_GroupCourseCreation.GlossaryName(context),
+                ContentAdmin_Course_GroupCourseCreation.Activities(context), ContentAdmin_Course_GroupCourseCreation.GlossaryName(context),
                 backupFileNameArray);
     }
 
@@ -57,7 +57,7 @@ public class ContentAdmin_CleanTestData {
             String allInOneAssignmentActivityName, String pageActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
-        a.deleteActivites(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
+        a.deleteActivities(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
     }
 
     /**

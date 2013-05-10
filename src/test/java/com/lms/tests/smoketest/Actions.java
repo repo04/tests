@@ -716,9 +716,9 @@ public class Actions extends BaseClass {
      * @param allInOneAssignmentActivityName
      * @param pageActivityName
      */
-    public void deleteActivites(String forumActivityName, String quizActivityName, String allInOneAssignmentActivityName, String pageActivityName) {
+    public void deleteActivities(String forumActivityName, String quizActivityName, String allInOneAssignmentActivityName, String pageActivityName) {
         Activity actvty = new Activity();
-        actvty.deleteActivites(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
+        actvty.deleteActivities(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
     }
 
     /**

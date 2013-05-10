@@ -32,6 +32,13 @@ public class TransformCriticalData implements IAnnotationTransformer {
     @Override
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
+        
+        if ("testContentAdminQuizCreation".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminQuizCreation");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
         if ("testContentAdminAddQuizQuestion".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());

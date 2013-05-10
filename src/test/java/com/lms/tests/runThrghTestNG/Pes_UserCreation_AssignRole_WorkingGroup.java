@@ -148,7 +148,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalTestDataSmoke", "users.creation"})
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.creation"})
     public void testPESAdminUserCreation() throws Exception {
         a.navigateToMyContacts();
         userNamesArray[0][0] = a.createUser("teacher");
@@ -167,7 +167,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", "criticalTestDataSmoke", "users.assignRole"})
+    @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.assignRole"})
     public void testPESAdminAssignRole(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
