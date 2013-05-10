@@ -40,7 +40,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
             return (userNamesArray);
         } else {
             System.out.println("else Users: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("teacherUserName"), context.getCurrentXmlTest().getParameter("studentUserName")}};
+            return new Object[][]{{ldv.getTokenValue("teacherUserName"), ldv.getTokenValue("studentUserName")}};
         }
     }
 
