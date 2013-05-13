@@ -308,7 +308,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdministrationSection() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.verifySiteAdministrationSection();
@@ -319,7 +319,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminStudentSupportSection() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.verifySiteAdminStudentSupportSection();
@@ -330,7 +330,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminVideoTutorialsPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToVideoTutorials();
@@ -342,7 +342,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminStudentSupportMessagePage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToStudentSupportMessage();
@@ -354,7 +354,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifyStudentSupportLoginMessagePage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToLoginMessage();
@@ -366,7 +366,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifyStudentSupportUserStickyNotesPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToUserStickyNotes();
@@ -377,7 +377,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminReportEmailNotInDomainPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToEmailNotInDomain();
@@ -403,7 +403,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminReportSection() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.verifySiteAdministrationReportSection();
@@ -414,7 +414,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminGetAccessDeniedForStudentServicesAndConfigurationReports() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.verifyGetAccessDeniedForStudentServicesAndConfigurationReports();
@@ -425,7 +425,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminReportCourseRostersPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToCourseRosters();
@@ -435,7 +435,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     /**
      * Verify 2tor Administrative Block -DeletedLiveSession Section
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminReportDeletedLiveSessionPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToDeletedLiveSession();
@@ -445,7 +445,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     /**
      * Verify 2tor Administrative Block -StudentEngagementReportUIVerify
      */
-    @Test(groups = {"2torAdministrativeBlock.contentVerify"})
+    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySiteAdminReportStudentEngagementReportPage() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToStudentEngagementReport();

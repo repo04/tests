@@ -18,35 +18,38 @@ Verify JDK is configured correctly
  * javac -version	
 	
 	
-Install ANT 1.8.4 or higher
+Install Maven 3.0.5 or higher
 ---------------------------
-Requirement: ANT 1.8.4
+Requirement: Maven 3.0.5
 
-	  i> Installing Ant on Windows
-		* Enter the URL: http://ant.apache.org/bindownload.cgi.
-		* On the Apache Ant Project page, find the heading 'Current Release of Ant.'
-		* Select apache-ant-1.8.4-bin.zip [PGP] [SHA1] [SHA512] [MD5]
-		* Click Save to unzip and save it to your C:\ directory 
-		* Set Environment Variable; follow 
-		  http://www.daimi.au.dk/~hbc/technical/ant/setup.html
-     ii> Installing Ant on Mac OS X
-		* Ant is already installed on Mac OS X, and so it is not necessary to install it yourself.		 	
+	  i> Installing Maven on Windows
+		* Enter the URL: http://maven.apache.org/download.cgi
+		* Download latest Binary zip (apache-maven-3.0.5-bin.zip)
+		* Unzip and save it to your C:\ directory
+                * Create a JAVA_HOME System Variable
+                * Create an M2_HOME System Variable
+                * Add %JAVA_HOME%\bin;%M2_HOME%\bin; to your System Path
+                    * Follow: Installation Instructions / Windows 2000/XP
+                      http://maven.apache.org/download.cgi
+     ii> Installing Maven on Linux / Mac OS X
+		* Maven is already installed on Linux / Mac OS X, and so it is not necessary to install it yourself.		 	
 		* If you absolutely want to install it, though, the best way would be to install it through MacPorts (using sudo port install apache-ant)
-		* However, to install it manually, you would need to follow 2nd Answers
-		  http://stackoverflow.com/questions/3222804/how-can-i-install-apache-ant-on-mac-os-x
-    iii> Verify ANT installed correctly 
+		* However, to install it manually, follow:
+                    * Follow: Installation Instructions / Unix-based Operating Systems
+                      http://maven.apache.org/download.cgi || http://www.mkyong.com/maven/how-to-install-maven-in-ubuntu/
+    iii> Verify Maven installed correctly 
 	     a> open terminal
-		 b> ant -version
+		 b> mvn -version
 		    ____________________________________________________
-		    Apache Ant(TM) version 1.8.4 compiled on May 22 2012
+		    Apache Maven 3.0.5
 			
 
-Ubuntu (Linux) install instructions for Java, Ant, and other dependencies
--------------------------------------------------------------------------
+Ubuntu (Linux) install instructions for Java and other dependencies
+-------------------------------------------------------------------
 
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
-    sudo apt-get install oracle-java7-installer libgeronimo-activation-1.1-spec-java ant1.7 ant1.7-optional ant-contrib
+    sudo apt-get install oracle-java7-installer libgeronimo-activation-1.1-spec-java
 
 Install Git
 -----------
@@ -65,19 +68,9 @@ Requirement: Git
      iv> Verify, project is downloaded     
 	
 
-Setup JARS
-----------
-Requirement: The appropriate JAR's need to be present in specific ANT's classpath. <br />
-**Note:** Path where BUILD.XML is located is referred as **BASEDIR**
-
-      i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
-		 a> Windows: C:/Program Files/apache-ant-1.8.4-bin/apache-ant-1.8.4/lib
-		 b> MAC: /usr/share/ant/lib
-		 c> Linux32/64: /usr/share/java/
-		
 Setup Property Files
 --------------------
-**Note:** 'loginDetails' property file needs to be placed at src/test/resources folder.  Please contact Benjamin for a copy. This will eventually be on S3. <br />
+**Note:** 'loginDetails' property file needs to be placed at src/test/resources folder.  Please contact Benjamin/Somesh for a copy. This will eventually be on S3. <br />
 
 
 Setup to execute on CHROME Browser
@@ -87,25 +80,12 @@ Requirement: Chrome browser installed. <br />
          
 	sudo apt-get install chromium-browser firefox
 
-In order to execute Automation project using Chrome Browser, you need to make file on unix server available to read, write, etc.
-
-      i> Using GIT, navigate to project <Basedir/lib/chromedriver_*>. '*' refers to machine/os (linux32 / linux64 / mac / win)
-     ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
-       * [Tutorial](http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux)
-	   
-
-Setup to execute on INTERNET EXPLORER
--------------------------------------
-**WARNING:** This method of starting the IE driver is deprecated and will be removed in selenium 2.26. <br />
-Please download the OS specific IEDriverServer.exe from http://code.google.com/p/selenium/downloads/list and ensure that it is in your PATH.
-	   
-
 Run Automation
 --------------
 Automation can run when above steps are followed in order.
 
       i> Open Terminal
-     ii> Navigate to *BASEDIR*
+     ii> Navigate to *BASEDIR* (Path where pom.xml is located)
     iii> Run Automation
                ______________________________________________________________________________________________________
             a> mvn clean test -DmvnSuite=critical -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win 
@@ -116,7 +96,7 @@ Automation can run when above steps are followed in order.
 	
         Applicable Parameters (Case Sensitive)
         1> mvnSuite: critical/ smoke / regression / debug / criticalData
-                        * Can accept only one target at a time
+                * Only one Suite to be passed
         2> mvnUrl:
         	* gu-msn:  https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || 
 			   https://www-gu-msn-lms-sb[01-10]-qa.2u.com || https://gu-msn-lms-standalone-prod.2u.com					  

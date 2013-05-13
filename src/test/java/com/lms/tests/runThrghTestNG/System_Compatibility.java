@@ -25,7 +25,7 @@ public class System_Compatibility {
      *
      * @throws Exception
      */
-    @Test(groups = {"systemCompatibility.contentVerify"})
+    @Test(groups = {"regressionSmoke", "systemCompatibility.contentVerify"})
     public void testSystemCompatibilityUIVerify() throws Exception {
         a.systemCompatibilityUIVerify();
     }
@@ -35,7 +35,7 @@ public class System_Compatibility {
      *
      * @throws Exception
      */
-    @Test(groups = {"systemCompatibility.contentVerify"})
+    @Test(groups = {"regressionSmoke", "systemCompatibility.contentVerify"})
     public void testComponentCompatibilityUIVerify() throws Exception {
         a.systemCompatibilityComponentCompatibilityUIVerify();
     }
@@ -45,7 +45,7 @@ public class System_Compatibility {
      *
      * @throws Exception
      */
-    @Test(groups = {"systemCompatibility.contentVerify"})
+    @Test(groups = {"regressionSmoke", "systemCompatibility.contentVerify"})
     public void testSystemCompatibilityMeetingConnectionDiagnosticUIVerify() throws Exception {
         a.systemCompatibilityMeetingConnectionDiagnosticUIVerify();
     }
@@ -55,7 +55,7 @@ public class System_Compatibility {
      *
      * @throws Exception
      */
-    @Test(groups = {"systemCompatibility.faqSectionUIVerify"})
+    @Test(groups = {"regressionSmoke", "systemCompatibility.faqSectionUIVerify"})
     public void testSystemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons() throws Exception {
         a.systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons();
     }
@@ -65,7 +65,7 @@ public class System_Compatibility {
      *
      * @throws Exception
      */
-    @Test(groups = {"systemCompatibility.expressUploader"})
+    @Test(groups = {"regressionSmoke", "systemCompatibility.expressUploader"})
     public void testSystemCompatibilityExpressUploader() throws Exception {
         a.systemCompatibilityExpressUploader();
     }
@@ -85,7 +85,7 @@ public class System_Compatibility {
      *
      * @throws Exception
      */
-    @Test(groups = {"systemCompatibility.mobileApplicationsUIVerify"})
+    @Test(groups = {"regressionSmoke", "systemCompatibility.mobileApplicationsUIVerify"})
     public void testSystemCompatibilityMobileApplicationsUIVerify() throws Exception {
         a.systemCompatibilityMobileApplicationsUIVerify();
     }
@@ -96,7 +96,7 @@ public class System_Compatibility {
      *
      * throws Exception
      */
-    @Test(groups = {"systemCompatibility.backToTopAndMoreInfoLinksVerify"})
+    @Test(groups = {"regressionSmoke", "systemCompatibility.backToTopAndMoreInfoLinksVerify"})
     public void testSystemCompatibilityVerifyBackToTopAndMoreInfoLinks()throws Exception {
         a.systemCompatibilityVerifyBackToTopAndMoreInfoLinks();
     }
