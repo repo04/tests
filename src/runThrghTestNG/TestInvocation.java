@@ -27,7 +27,7 @@ public class TestInvocation implements IInvokedMethodListener {
         Method method = contructorOrMethod.getMethod();
         System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
         if (!"setUp".equals(method.getName()) && !BaseClass.program.contains("gu-msn")) {
-            if (BaseClass.test.equals("RegressionTests") || BaseClass.test.equals("SmokeTests")) {
+            if (BaseClass.test.equalsIgnoreCase("RegressionTests") || BaseClass.test.equalsIgnoreCase("SmokeTests")) {
                 if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())
                         || "testTeacherEmailFetchActivityPasswordLogIn".equals(method.getName())) {
                     System.out.println("Skipping Test Method");

@@ -215,7 +215,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-          groups = {"regressionSmoke", "criticalTestDataSmoke", "contact.teacherAddStudentAsContactfromCourse"})
+          groups = {"regressionSmoke", "criticalDataSmoke", "contact.teacherAddStudentAsContactfromCourse"})
     public void testTeacherAddStudentAsContactfromCourse(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);

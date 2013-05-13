@@ -331,7 +331,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception 
      */
     @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-          groups = {"regressionSmoke", "criticalTestDataSmoke", "contact.studentConfirmRequest"})
+          groups = {"regressionSmoke", "criticalDataSmoke", "contact.studentConfirmRequest"})
     public void testStudentConfirmContactRequest(String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyContacts();
         a.confirmContactRequest(teacherUserName);

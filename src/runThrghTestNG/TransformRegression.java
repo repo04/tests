@@ -410,6 +410,7 @@ public class TransformRegression implements IAnnotationTransformer {
             DependentMethods = new String[1];
             DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherUploadFilesInCourse";
             annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
         }
 
         //GroupName = PswdQuiz

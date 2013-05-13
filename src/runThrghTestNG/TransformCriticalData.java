@@ -25,13 +25,20 @@ import org.testng.annotations.ITestAnnotation;
  * @param testMethod If the annotation was found on a method, this parameter
  * represents this method (null otherwise).
  */
-public class TransformCriticalTestData implements IAnnotationTransformer {
+public class TransformCriticalData implements IAnnotationTransformer {
 
     String DependentMethods[] = null;
 
     @Override
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
+        
+        if ("testContentAdminQuizCreation".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminQuizCreation");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
         if ("testContentAdminAddQuizQuestion".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());

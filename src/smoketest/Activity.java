@@ -669,7 +669,7 @@ public class Activity extends BaseClass {
      * @param allInOneAssignmentActivityName
      * @param pageActivityName
      */
-    public void deleteActivites(String... activities) {
+    public void deleteActivities(String... activities) {
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         for (String activity : activities) {

@@ -6,10 +6,6 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="CriticalTests" preserve-order="true" parallel="false">
-        <parameter name="teacherUserName" value="autoteacher1"/>
-        <parameter name="studentUserName" value="autostudent1"/>
-        <!--parameter name="teacherUserName" value="teacher1"/>
-        <parameter name="studentUserName" value="student1"/-->
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
         <parameter name="passwordQuizName" value="AutoPswdQuiz"/>

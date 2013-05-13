@@ -161,11 +161,11 @@
         <antcall target="testng-xslt-report"/>       
     </target>
     
-    <target name="runcriticaltestdata">
+    <target name="runcriticaldata">
         <antcall target="init"/>
         <antcall target="compile"/>
         <antcall target="copy-resources"/>
-        <antcall target="runCriticalDataTests"/>
+        <antcall target="runCriticalData"/>
         <antcall target="testng-xslt-report"/>       
     </target>
     
@@ -325,7 +325,7 @@
         </for>                 
     </target>
     
-    <target name="runCriticalDataTests" description="Running tests">
+    <target name="runCriticalData" description="Running tests">
         <echo>Running Tests...</echo>
         <taskdef resource="testngtasks" classpathref="libs"/>
         <for list="${antUrl}" param = "url">

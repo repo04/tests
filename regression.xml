@@ -13,6 +13,7 @@
             </run>
         </groups>
         <classes>
+            <class name="runThrghTestNG.System_Compatibility"/>
             <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
