@@ -6,9 +6,11 @@ package com.lms.tests.runThrghTestNG;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
+import com.lms.tests.smoketest.Utility;
+import org.testng.annotations.AfterClass;
 
 
-public class System_Compatibility {
+public class System_Compatibility extends BaseClass{
 
     Actions a = new Actions();
 
@@ -99,5 +101,17 @@ public class System_Compatibility {
     @Test(groups = {"regressionSmoke", "systemCompatibility.backToTopAndMoreInfoLinksVerify"})
     public void testSystemCompatibilityVerifyBackToTopAndMoreInfoLinks()throws Exception {
         a.systemCompatibilityVerifyBackToTopAndMoreInfoLinks();
+    }
+    
+    /**
+     * The annotated method will be run after all the test methods in the
+     * current class have been run, User logsOut
+     *
+     * @throws Exception
+     */
+    @AfterClass(groups = {"prerequisite"}, alwaysRun=true)
+    public void testNavigateToHomePage() throws Exception {
+        driver.get(url);
+        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 } 

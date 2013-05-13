@@ -13,9 +13,9 @@
             </run>
         </groups>
         <classes>
+            <class name="com.lms.tests.runThrghTestNG.System_Compatibility"/>
             <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
-            <class name="com.lms.tests.runThrghTestNG.System_Compatibility"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
