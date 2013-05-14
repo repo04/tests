@@ -172,8 +172,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);
-            BaseClass.driver = new Augmenter().augment(BaseClass.driver);
-            File screenshot = ((TakesScreenshot) BaseClass.driver).
+            File screenshot = ((TakesScreenshot) new Augmenter().augment(BaseClass.driver)).
                     getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot, new File(NewFileNamePath));
             Reporter.log(methodName + " failed; Click on image to enlarge<br/>"

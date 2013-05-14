@@ -5,7 +5,6 @@
 package com.lms.tests.runThrghTestNG;
 
 import java.io.File;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
@@ -18,6 +17,7 @@ import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import java.net.URL;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.testng.annotations.AfterTest;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
@@ -29,7 +29,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     //Add your username & key here
     private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
     public static XpathValues xpv, ldv;
-    public static WebDriver driver;
+    public static RemoteWebDriver driver;
     public IsPresent ip = new IsPresent();
     public static String program;
     public static String browser;
@@ -102,6 +102,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         capabilities.setCapability("name", this.test);
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);
+        driver.setFileDetector(new LocalFileDetector());
         driver.get(this.url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }

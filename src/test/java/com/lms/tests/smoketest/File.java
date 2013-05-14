@@ -47,7 +47,6 @@ public class File extends BaseClass {
 
             driver.findElement(By.xpath("//td[2]/table/tbody/tr/td/table/tbody/tr/td"
                     + "/table/tbody/tr[2]/td[2]/em/button")).click();
-            ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Uploading File...");
             ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div/a", file, 300);
             System.out.print("file uploaded: " + file + "\n");
         }
