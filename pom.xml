@@ -79,8 +79,6 @@
                     <systemPropertyVariables>
                         <url>${mvnUrl}</url>
                         <program>${mvnProgram}</program>
-                        <browser>${mvnBrwsr}</browser>
-                        <os>${mvnOS}</os>
                         <test>${mvnSuite}Tests</test>                                               
                     </systemPropertyVariables>                    
                     <suiteXmlFiles>

@@ -29,7 +29,8 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     //Add your username & key here
     private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
     public static XpathValues xpv, ldv;
-    public static RemoteWebDriver driver;
+    //public static RemoteWebDriver driver;
+    public RemoteWebDriver driver;
     public IsPresent ip = new IsPresent();
     public static String program;
     public static String browser;

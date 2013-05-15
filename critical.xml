@@ -1,11 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="CriticalSmoke Suite">
+<suite name="CriticalSmoke Suite" verbose="5" parallel="tests" thread-count="10">
     <listeners>
         <listener class-name="com.lms.tests.runThrghTestNG.TransformCritical"/>
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
-    <test name="CriticalTests" preserve-order="true" parallel="false">
+    <test name="CriticalTests_WinFF" preserve-order="true">
+        <parameter name="browser" value="ff"/>
+        <parameter name="os" value="win"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_WinChrome" preserve-order="true">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="win"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
         <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
