@@ -904,7 +904,6 @@ public class Actions extends BaseClass {
     public void verifyResume() {
         switch (program) {
             case "usc-mat":
-                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
                 ip.isElementPresentByLINK(driver, "Resume");
                 driver.findElement(By.linkText("Resume")).click();
                 ip.isTextPresentByXPATH(driver, "//h2", "Resume");

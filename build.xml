@@ -115,6 +115,14 @@
                     <var name="program" value="gwu-mph"/>
                 </then>
             </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="corp-son"/>
+                </or>
+                <then>
+                    <var name="program" value="corp-son"/>
+                </then>
+            </elseif>
         </if>   
     </target>
     

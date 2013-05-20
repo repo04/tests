@@ -58,6 +58,10 @@ public class Footers extends BaseClass {
             case "gwu-mph":
                 verify1 = "George Washington University";
                 programTitle = "GWU@MPH | George Washington University";
+                break;
+            case "corp-son":
+                verify1 = "Semester Online";
+                programTitle = "";
         }
         verify2 = "Terms And Conditions";
         verify3 = "Privacy Statement";
