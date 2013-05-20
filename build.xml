@@ -123,6 +123,14 @@
                     <var name="program" value="corp-son"/>
                 </then>
             </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="demo"/>
+                </or>
+                <then>
+                    <var name="program" value="wu-llm"/>
+                </then>
+            </elseif>
         </if>   
     </target>
     
