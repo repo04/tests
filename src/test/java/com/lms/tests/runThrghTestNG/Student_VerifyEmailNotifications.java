@@ -22,7 +22,7 @@ import com.lms.tests.smoketest.Utility;
  */
 public class Student_VerifyEmailNotifications extends BaseClass {
 
-    Actions a = new Actions();
+    Actions a = new Actions(driver);
     String verify1, verify2, verify3, verify4;
     String teacherFullName;
 

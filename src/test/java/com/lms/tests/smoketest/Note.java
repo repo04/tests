@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
@@ -29,6 +30,11 @@ public class Note extends BaseClass {
     Date now = new Date();
     private String noteName;
 
+    private RemoteWebDriver driver;
+    
+    public Note(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
     /**
      * Create Note on specific Wall
      *

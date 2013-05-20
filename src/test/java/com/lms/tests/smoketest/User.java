@@ -12,8 +12,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class User extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public User(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     DateFormat dateFormat;
     Date now;

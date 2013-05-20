@@ -3,6 +3,7 @@ package com.lms.tests.smoketest;
 
 import org.openqa.selenium.By;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 
 public class StudentSupport extends BaseClass {
@@ -14,6 +15,12 @@ public class StudentSupport extends BaseClass {
     
     public void verifyStudentSupportMobileAppURL() {
         testMobileAppURL();
+    }
+    
+    private RemoteWebDriver driver;
+    
+    public StudentSupport(RemoteWebDriver driver){
+        this.driver = driver;        
     }
     
     public void testContactUS() {

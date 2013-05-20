@@ -5,12 +5,19 @@
 package com.lms.tests.smoketest;
 
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
  * 
  */
 public class Profile extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public Profile(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     void verifyPersonalInformation() {
         ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[4]", "Basic Information");

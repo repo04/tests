@@ -19,11 +19,11 @@
         </groups>
         <classes>
             <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
-            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <!--class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
             <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
-            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/-->
         </classes>
     </test>
     <test name="CriticalTests_WinChrome" preserve-order="true">
@@ -40,11 +40,11 @@
         </groups>
         <classes>
             <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
-            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <!--class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
             <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
-            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/-->
         </classes>
     </test>    
 </suite>

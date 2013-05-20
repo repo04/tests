@@ -9,12 +9,19 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
  *
  */
 public class Resources extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public Resources(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
     
     String resource1, resource2, resource3, resource4, resource5, resource6, resource7,
             resource8, resource9, resource10, resource11, resource12;

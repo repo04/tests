@@ -16,7 +16,7 @@ import com.lms.tests.smoketest.Actions;
  */
 public class Student_DeleteSocialGroup extends BaseClass {
 
-    Actions a = new Actions();
+    Actions a;
 
     /**
      * Teacher Logs in
@@ -25,6 +25,7 @@ public class Student_DeleteSocialGroup extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogIn(ITestContext context) throws Exception {
+        a = new Actions(driver);
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
@@ -40,6 +41,7 @@ public class Student_DeleteSocialGroup extends BaseClass {
     @Test(dataProvider = "StudentSocialGroup", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentDelete"})
     public void testStudentDeleteSocialGroup(String studentSocialGroupName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(studentSocialGroupName);
         a.deleteSocialGroup(studentSocialGroupName);
@@ -68,6 +70,7 @@ public class Student_DeleteSocialGroup extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testStudentLogOut() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 }

@@ -22,7 +22,7 @@ import com.lms.tests.smoketest.Actions;
  */
 public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
 
-    Actions a = new Actions();
+    Actions a;
     static String[][] userNamesArray = new String[1][2];
     static String[][] workingGroupNameArray = new String[1][1];
     static String[][] studentNameArray = new String[1][1];
@@ -140,6 +140,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testPESAdminLogIn() throws Exception {
+        a = new Actions(driver);
         a.login("pesAdmin");
     }
 
@@ -502,6 +503,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testPESAdminLogOut() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 }

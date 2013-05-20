@@ -17,9 +17,9 @@ import com.lms.tests.smoketest.Actions;
  *
  *
  */
-public class ContentAdmin_CleanTestData {
+public class ContentAdmin_CleanTestData extends BaseClass {
 
-    Actions a = new Actions();
+    Actions a;
     static String[][] backupFileNameArray = new String[1][1];
 
     @DataProvider(name = "PasswordQuizNameActvitiesBackupFile")
@@ -38,6 +38,7 @@ public class ContentAdmin_CleanTestData {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testContentAdminLogIn() throws Exception {
+        a = new Actions(driver);
         a.login("contentAdmin");
     }
 
@@ -55,6 +56,7 @@ public class ContentAdmin_CleanTestData {
           groups = {"activities.deletion"})
     public void testContentAdminActivitiesDeletion(String groupCourseName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.deleteActivities(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
@@ -69,6 +71,7 @@ public class ContentAdmin_CleanTestData {
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"groupcourse.deletion"})
     public void testContentAdminGroupCourseDeletion(String groupCourseName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.deleteGroupCourse(groupCourseName);
@@ -88,6 +91,7 @@ public class ContentAdmin_CleanTestData {
           groups = {"regressionSmoke", "course.backup"})
     public void testContentAdminBackupCourse(String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(ContentAdmin_Course_GroupCourseCreation.courseName);
@@ -109,6 +113,7 @@ public class ContentAdmin_CleanTestData {
     @Test(dataProvider = "PasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke", "course.restore"})
     public void testContentAdminRestoreCourseAsNewArchiveCourse(String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName, String backupFile) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(ContentAdmin_Course_GroupCourseCreation.courseName);
@@ -124,6 +129,7 @@ public class ContentAdmin_CleanTestData {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testContentAdminLogOut() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 }

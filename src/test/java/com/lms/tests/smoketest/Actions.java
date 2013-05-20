@@ -4,10 +4,29 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Actions extends BaseClass {
+    
+//    private EventFiringWebDriver driver;
+//    
+//    public Actions(EventFiringWebDriver driver){
+//        this.driver = driver;
+//        System.out.println("//Action//: " + this.driver);
+//    }
+    
+    private RemoteWebDriver driver;
+    
+    public Actions(RemoteWebDriver driver){
+        this.driver = driver;
+        System.out.println("//Action//: " + this.driver);
+    }
+    
+    public Actions(){
+        //do nothing
+    }
 
     Date now = new Date();
 
@@ -17,7 +36,7 @@ public class Actions extends BaseClass {
      * @param user
      */
     public void login(String user) {
-        LoginPage lp = new LoginPage();
+        LoginPage lp = new LoginPage(driver);
         lp.attemptLogin(user);
     }
 
@@ -28,7 +47,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String textPost(String textPost) {
-        WallPage wp = new WallPage();
+        WallPage wp = new WallPage(driver);
         wp.textPost(textPost);
         return wp.getTextPost();
     }
@@ -40,7 +59,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String urlPost(String urlPost) {
-        WallPage wp = new WallPage();
+        WallPage wp = new WallPage(driver);
         wp.urlPost(urlPost);
         return wp.getURLPost();
     }
@@ -53,7 +72,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String textCommentPost(String urlCoursePost, String textCommentOnTeacherCoursePost) {
-        WallPage wp = new WallPage();
+        WallPage wp = new WallPage(driver);
         wp.textCommentPost(urlCoursePost, textCommentOnTeacherCoursePost);
         return wp.getTextCommentPost();
     }
@@ -64,7 +83,7 @@ public class Actions extends BaseClass {
      * @param teacherUrlCoursePost
      */
     public void recommendURLCoursePost(String teacherUrlCoursePost) {
-        WallPage wp = new WallPage();
+        WallPage wp = new WallPage(driver);
         wp.recommendURLCoursePost(teacherUrlCoursePost);
     }
 
@@ -81,7 +100,7 @@ public class Actions extends BaseClass {
      * @param studentTextCommentOnTeacherCoursePost
      */
     public void verifyCommentOnPost(String studentTextCommentOnTeacherCoursePost) {
-        WallPage wp = new WallPage();
+        WallPage wp = new WallPage(driver);
         wp.verifyCommentOnPost(studentTextCommentOnTeacherCoursePost);
     }
 
@@ -91,7 +110,7 @@ public class Actions extends BaseClass {
      * @param deletePost
      */
     public void deletePost(String deletePost) {
-        WallPage wp = new WallPage();
+        WallPage wp = new WallPage(driver);
         wp.deletePost(deletePost);
     }
 
@@ -101,7 +120,7 @@ public class Actions extends BaseClass {
      * @param sclGrpName
      */
     public void createLiveSession() {
-        LiveSession ls = new LiveSession();
+        LiveSession ls = new LiveSession(driver);
         ls.buildLiveSession();
     }
 
@@ -111,7 +130,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createCourse() {
-        Course cr = new Course();
+        Course cr = new Course(driver);
         cr.createCourse();
         return cr.getCourseName();
     }
@@ -122,7 +141,7 @@ public class Actions extends BaseClass {
      * @param groupCourseName
      */
     public void deleteGroupCourse(String groupCourseName) {
-        Course cr = new Course();
+        Course cr = new Course(driver);
         cr.deleteGroupCourse(groupCourseName);
     }
 
@@ -143,7 +162,7 @@ public class Actions extends BaseClass {
      * @param activities
      */
     public String backupCourse(String... activities) {
-        Course cr = new Course();
+        Course cr = new Course(driver);
         cr.backupCourse(activities);
         return cr.getBackupFileName();
     }
@@ -154,7 +173,7 @@ public class Actions extends BaseClass {
      * @param activities
      */
     public void restoreAsNewArchiveCourse(String... activities) {
-        Course cr = new Course();
+        Course cr = new Course(driver);
         cr.restoreAsNewArchiveCourse(activities);
     }
 
@@ -174,7 +193,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createGrpCourse(String courseName) {
-        Course cr = new Course();
+        Course cr = new Course(driver);
         cr.createGroupCourse(courseName);
         return cr.getGroupCourseName();
     }
@@ -185,7 +204,7 @@ public class Actions extends BaseClass {
      * @param courseName
      */
     public void archiveCourse(String courseName) {
-        Course cr = new Course();
+        Course cr = new Course(driver);
         cr.archiveCourse(courseName);
     }
 
@@ -324,7 +343,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createWorkingGroup() {
-        WorkingGroup wg = new WorkingGroup();
+        WorkingGroup wg = new WorkingGroup(driver);
         wg.buildWorkingGroup();
         return wg.getWorkingGroupName();
     }
@@ -370,7 +389,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createForumActivity() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createForumActivity();
         return activity.getActivityName();
     }
@@ -381,7 +400,7 @@ public class Actions extends BaseClass {
      * @return Glossary Activity Name
      */
     public String createGlossaryActivity() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createGlossaryActivity();
         return activity.getActivityName();
     }
@@ -392,7 +411,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createQuizActivity() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createQuizActivity();
         return activity.getActivityName();
     }
@@ -402,7 +421,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createPasswordQuizActivity() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createPasswordQuizActivity();
         return activity.getActivityName();
     }
@@ -413,7 +432,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createAllInOneAssignmentActivity() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createAllInOneAssignmentActivity();
         return activity.getActivityName();
     }
@@ -424,7 +443,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createPageResource() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createPageResource();
         return activity.getActivityName();
     }
@@ -433,7 +452,7 @@ public class Actions extends BaseClass {
      * Create - Syllabus Activity
      */
     public void createSyllabusActivity() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createSyllabusActivity();
     }
 
@@ -441,7 +460,7 @@ public class Actions extends BaseClass {
      *
      */
     public void createLessonActivity() {
-        Activity activity = new Activity();
+        Activity activity = new Activity(driver);
         activity.createLessonActivity();
     }
 
@@ -459,7 +478,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createUser(String user) {
-        User usr = new User();
+        User usr = new User(driver);
         usr.createUser(user);
         return usr.getUserName();
     }
@@ -471,7 +490,7 @@ public class Actions extends BaseClass {
      * @param studentUser
      */
     public void deleteUsers(String teacherUser, String studentUser) {
-        User usr = new User();
+        User usr = new User(driver);
         usr.deleteUsers(teacherUser, studentUser);
     }
 
@@ -482,7 +501,7 @@ public class Actions extends BaseClass {
      * @param groupCourse
      */
     public void enrollUserToRole_GroupCourse(String user, String groupCourse) {
-        EnrollUser enrlUsr = new EnrollUser();
+        EnrollUser enrlUsr = new EnrollUser(driver);
         enrlUsr.toRole_Course(user, groupCourse);
     }
 
@@ -492,7 +511,7 @@ public class Actions extends BaseClass {
      * @param groupCourseName
      */
     public void unenrolUsers(String studentUserName, String teacherUserName) {
-        EnrollUser enrlUsr = new EnrollUser();
+        EnrollUser enrlUsr = new EnrollUser(driver);
         enrlUsr.fromCourse(studentUserName, teacherUserName);
     }
 
@@ -531,7 +550,7 @@ public class Actions extends BaseClass {
      * @param user
      */
     public void addUserAsContact(String user) {
-        Contact c = new Contact();
+        Contact c = new Contact(driver);
         c.addUserAsContact(user);
     }
 
@@ -541,7 +560,7 @@ public class Actions extends BaseClass {
      * @param user
      */
     public void confirmContactRequest(String user) {
-        Contact c = new Contact();
+        Contact c = new Contact(driver);
         c.confirmContactRequest(user);
     }
 
@@ -562,7 +581,7 @@ public class Actions extends BaseClass {
      * @param studentUrlPostOnTeacherSocialGroup
      */
     public void verifyPostOnSocialGroupWall(String studentUrlPostOnTeacherSocialGroup) {
-        SocialGroup sg = new SocialGroup();
+        SocialGroup sg = new SocialGroup(driver);
         sg.verifyPostOnSocialGroupWall(studentUrlPostOnTeacherSocialGroup);
     }
 
@@ -572,7 +591,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createSocialGroup() {
-        SocialGroup sg = new SocialGroup();
+        SocialGroup sg = new SocialGroup(driver);
         sg.buildSocialGroup();
         return sg.getSocialGroupName();
     }
@@ -583,7 +602,7 @@ public class Actions extends BaseClass {
      * @param sclGrp
      */
     public void findSocialGroup(String sclGrp) {
-        SocialGroup sg = new SocialGroup();
+        SocialGroup sg = new SocialGroup(driver);
         sg.findSocialGroup(sclGrp);
     }
 
@@ -593,7 +612,7 @@ public class Actions extends BaseClass {
      * @param sclGrp
      */
     public void joinSocialGroup(String sclGrp) {
-        SocialGroup sg = new SocialGroup();
+        SocialGroup sg = new SocialGroup(driver);
         sg.joinSocialGroup(sclGrp);
     }
 
@@ -603,7 +622,7 @@ public class Actions extends BaseClass {
      * @param studentSocialGroupName
      */
     public void leaveSocialGroup(String studentSocialGroupName) {
-        SocialGroup sg = new SocialGroup();
+        SocialGroup sg = new SocialGroup(driver);
         sg.leaveSocialGroup(studentSocialGroupName);
     }
 
@@ -614,7 +633,7 @@ public class Actions extends BaseClass {
      */
     public void deleteSocialGroup(String studentSocialGroupName) {
 
-        SocialGroup sg = new SocialGroup();
+        SocialGroup sg = new SocialGroup(driver);
         sg.deleteSocialGroup(studentSocialGroupName);
     }
 
@@ -673,7 +692,7 @@ public class Actions extends BaseClass {
      * Verify Settings page specific to user role
      */
     public void verifySettings() {
-        Settings settings = new Settings();
+        Settings settings = new Settings(driver);
         settings.verifySettings();
     }
 
@@ -717,7 +736,7 @@ public class Actions extends BaseClass {
      * @param pageActivityName
      */
     public void deleteActivities(String forumActivityName, String quizActivityName, String allInOneAssignmentActivityName, String pageActivityName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.deleteActivities(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
     }
 
@@ -727,7 +746,7 @@ public class Actions extends BaseClass {
      * @param quizActivityName
      */
     public void addQuizQuestion(String quizActivityName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.addQuizQuestion(quizActivityName);
     }
 
@@ -737,7 +756,7 @@ public class Actions extends BaseClass {
      * @param quizActivityName
      */
     public void submitQuiz(String quizActivityName, String password) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.submitQuiz(quizActivityName, password);
     }
 
@@ -746,7 +765,7 @@ public class Actions extends BaseClass {
      * @param passwordQuizName
      */
     public void generateQuizPassword(String passwordQuizName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.generateQuizPassword(passwordQuizName);
     }
 
@@ -756,7 +775,7 @@ public class Actions extends BaseClass {
      * @param allInOneAssignmentActivityName
      */
     public void submitAssignment(String allInOneAssignmentActivityName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.submitAssignment(allInOneAssignmentActivityName);
     }
 
@@ -766,7 +785,7 @@ public class Actions extends BaseClass {
      * @param quizActivityName
      */
     public void gradeAssignment(String allInOneAssignmentActivityName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.gradeAssignment(allInOneAssignmentActivityName);
     }
 
@@ -776,7 +795,7 @@ public class Actions extends BaseClass {
      * @param allInOneAssignmentActivityName
      */
     public void verifyAssignmentGrade(String allInOneAssignmentActivityName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.verifyAssignmentGrade(allInOneAssignmentActivityName);
     }
 
@@ -786,7 +805,7 @@ public class Actions extends BaseClass {
      * @param allInOneAssignmentActivityName
      */
     public void allowResubmitAssignment(String allInOneAssignmentActivityName, String studentUserName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.allowResubmitAssignment(allInOneAssignmentActivityName, studentUserName);
     }
 
@@ -808,7 +827,7 @@ public class Actions extends BaseClass {
      */
     public void addMembersToWorkingGroup(String... members) {
 
-        WorkingGroup wg = new WorkingGroup();
+        WorkingGroup wg = new WorkingGroup(driver);
         wg.addMembersToWorkingGroup(members);
     }
 
@@ -819,7 +838,7 @@ public class Actions extends BaseClass {
      */
     public void removeMembersFromWorkingGroup(String... members) {
 
-        WorkingGroup wg = new WorkingGroup();
+        WorkingGroup wg = new WorkingGroup(driver);
         wg.removeMembersFromWorkingGroup(members);
     }
 
@@ -829,7 +848,7 @@ public class Actions extends BaseClass {
      * @param wrkngGrp
      */
     public void deleteWorkingGroup(String wrkngGrp) {
-        WorkingGroup wg = new WorkingGroup();
+        WorkingGroup wg = new WorkingGroup(driver);
         wg.deleteWorkingGroup(wrkngGrp);
     }
 
@@ -855,7 +874,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createGoogleDoc(String wrkngGrp) {
-        WorkingGroup wg = new WorkingGroup();
+        WorkingGroup wg = new WorkingGroup(driver);
         wg.createGoogleDoc(wrkngGrp);
         return wg.getGoogleDocName();
     }
@@ -867,7 +886,7 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createNote(String wallType) {
-        Note nt = new Note();
+        Note nt = new Note(driver);
         nt.createNote(wallType);
         return nt.getNoteName();
     }
@@ -878,7 +897,7 @@ public class Actions extends BaseClass {
      * @param profileNote
      */
     public void verifyNoteSorting(String profileNote) {
-        Note nt = new Note();
+        Note nt = new Note(driver);
         nt.verifyNoteSorting(profileNote);
     }
 
@@ -886,7 +905,7 @@ public class Actions extends BaseClass {
      * Verify Resources
      */
     public void verifyResources() {
-        Resources rs = new Resources();
+        Resources rs = new Resources(driver);
         rs.verifyResources();
     }
 
@@ -894,7 +913,7 @@ public class Actions extends BaseClass {
      * Verify Footers
      */
     public void verifyFooters() {
-        Footers ft = new Footers();
+        Footers ft = new Footers(driver);
         ft.verifyFooters();
     }
 
@@ -918,7 +937,7 @@ public class Actions extends BaseClass {
      * Verify Personal Information
      */
     public void verifyPersonalInformation() {
-        Profile pf = new Profile();
+        Profile pf = new Profile(driver);
         pf.verifyPersonalInformation();
     }
 
@@ -928,7 +947,7 @@ public class Actions extends BaseClass {
      * @param profileNote
      */
     public void deleteNote(String profileNote) {
-        Note nt = new Note();
+        Note nt = new Note(driver);
         nt.deleteNote(profileNote);
     }
 
@@ -938,7 +957,7 @@ public class Actions extends BaseClass {
      * @param files
      */
     public void uploadFiles(String... files) {
-        File fl = new File();
+        File fl = new File(driver);
         fl.uploadFiles(files);
     }
 
@@ -948,7 +967,7 @@ public class Actions extends BaseClass {
      * @param files
      */
     public void verifyFilesInCourse(String... files) {
-        File fl = new File();
+        File fl = new File(driver);
         fl.verifyFilesInCourse(files);
     }
 
@@ -958,7 +977,7 @@ public class Actions extends BaseClass {
      * @param files
      */
     public void verifyFilesInPortfolio(String... files) {
-        File fl = new File();
+        File fl = new File(driver);
         fl.verifyFilesInPortfolio(files);
     }
 
@@ -969,7 +988,7 @@ public class Actions extends BaseClass {
      * @param pdf
      */
     public void deleteFiles(String... files) {
-        File fl = new File();
+        File fl = new File(driver);
         fl.deleteFiles(files);
     }
 
@@ -977,7 +996,7 @@ public class Actions extends BaseClass {
      * Verify feedback window
      */
     public void verifyFeedbackWindow() {
-        Feedback fb = new Feedback();
+        Feedback fb = new Feedback(driver);
         fb.verifyFeedbackWindow();
     }
 
@@ -985,7 +1004,7 @@ public class Actions extends BaseClass {
      * Verify Help Window on Home Page
      */
     public void verifyHelpWindow() {
-        Help hlp = new Help();
+        Help hlp = new Help(driver);
         hlp.verifyHelpWindow();
     }
 
@@ -1026,7 +1045,7 @@ public class Actions extends BaseClass {
      * @return glossaryEntryName
      */
     public String createGlossaryEntry(String glossaryName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.createGlossaryEntry(glossaryName);
         return actvty.getActivityName();
     }
@@ -1037,7 +1056,7 @@ public class Actions extends BaseClass {
      * @return glossaryCategoryName
      */
     public String createGlossaryCategory(String glossaryName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.createGlossaryCategory(glossaryName);
         return actvty.getActivityName();
     }
@@ -1051,7 +1070,7 @@ public class Actions extends BaseClass {
      * @param teacherGlossaryEntryName
      */
     public void editGlossaryEntry(String glossaryName, String studentGlossaryEntryName, String glossatyCategoryName, String teacherGlossaryEntryName) {
-        Activity actvty = new Activity();
+        Activity actvty = new Activity(driver);
         actvty.editGlossaryEntry(glossaryName, studentGlossaryEntryName, glossatyCategoryName, teacherGlossaryEntryName);
     }
 
@@ -1059,12 +1078,12 @@ public class Actions extends BaseClass {
      *
      */
     public void testStudentSupport() {
-        StudentSupport ss = new StudentSupport();
+        StudentSupport ss = new StudentSupport(driver);
         ss.verifyStudentSupport();
     }
 
     public void testStudentSupportMobileAppURL() {
-        StudentSupport ss = new StudentSupport();
+        StudentSupport ss = new StudentSupport(driver);
         ss.verifyStudentSupportMobileAppURL();
     }
 
@@ -1109,7 +1128,7 @@ public class Actions extends BaseClass {
      * Verify System Compatibility Page BreadCrumb and Introduction Part
      */
     public void systemCompatibilityUIVerify() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.breadCrumbandIntroduction();
     }
 
@@ -1117,7 +1136,7 @@ public class Actions extends BaseClass {
      * Verifies content of Step 1: Component Compatibility Check
      */
     public void systemCompatibilityComponentCompatibilityUIVerify() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.componentCompatibilityUIVerify();
     }
 
@@ -1125,7 +1144,7 @@ public class Actions extends BaseClass {
      * Verifies content of Step 2: Meeting Connection Diagnostic
      */
     public void systemCompatibilityMeetingConnectionDiagnosticUIVerify() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.meetingConnectionDiagnosticUIVerify();
     }
 
@@ -1133,7 +1152,7 @@ public class Actions extends BaseClass {
      * Verifies content of Mobile Application section
      */
     public void systemCompatibilityMobileApplicationsUIVerify() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.mobileApplicationsUIVerify();
     }
 
@@ -1143,7 +1162,7 @@ public class Actions extends BaseClass {
      * compatible icons
      */
     public void systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons();
     }
 
@@ -1152,7 +1171,7 @@ public class Actions extends BaseClass {
      * are enabled or not on System Compatibility Page
      */
     public void systemCompatibilityVerifyBackToTopAndMoreInfoLinks() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.backToTopAndMoreInfoLinks();
     }
 
@@ -1160,7 +1179,7 @@ public class Actions extends BaseClass {
      * Verify content and functionality of ExpressUploader
      */
     public void systemCompatibilityExpressUploader() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.expressUploader();
     }
 
@@ -1168,7 +1187,7 @@ public class Actions extends BaseClass {
      * Verify System Compatibility Page - mobile Support Section UI
      */
     public void systemCompatibilityMobileSupportSectionUIVerify() {
-        SystemCompatibility syscomptble = new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility(driver);
         syscomptble.mobileSupportSectionUIVerify();
     }
 
@@ -1257,7 +1276,7 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Email Not In Domain UI
      */
     public void verifySiteAdminReportEmailNotInDomainPage() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminReportEmailNotInDomainPage();
     }
 
@@ -1275,7 +1294,7 @@ public class Actions extends BaseClass {
      * Verify Site Administration Section
      */
     public void verifySiteAdministrationSection() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdministrationSection();
     }
 
@@ -1283,7 +1302,7 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Student Support Settings
      */
     public void verifySiteAdminStudentSupportSection() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminStudentSupportSection();
     }
 
@@ -1291,7 +1310,7 @@ public class Actions extends BaseClass {
      * Verifies the UI and functionality of Video Tutorials
      */
     public void verifySiteAdminStudentSupportVideoTutorialsPage() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminStudentSupportVideoTutorialsPage();
     }
 
@@ -1299,7 +1318,7 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block - Support Message
      */
     public void verifySiteAdminStudentSupportMessagePage() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminStudentSupportMessagePage();
     }
 
@@ -1307,7 +1326,7 @@ public class Actions extends BaseClass {
      * Verifies the UI of login message page
      */
     public void verifySiteAdminStudentSupportLoginMessagePage() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminStudentSupportLoginMessagePage();
     }
 
@@ -1315,7 +1334,7 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Report Settings
      */
     public void verifySiteAdministrationReportSection() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdministrationReportSection();
     }
 
@@ -1323,7 +1342,7 @@ public class Actions extends BaseClass {
      * Verify pes admin can not access Services Report
      */
     public void verifyGetAccessDeniedForStudentServicesAndConfigurationReports() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifyGetAccessDeniedForStudentServicesAndConfigurationReports();
     }
 
@@ -1331,7 +1350,7 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Course Roster UI Verify
      */
     public void verifySiteAdminReportCourseRostersPage() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminReportCourseRostersPage();
     }
 
@@ -1339,7 +1358,7 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Deleted Live Session Section
      */
     public void verifySiteAdminReportDeletedLiveSessionPage() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminReportDeletedLiveSessionPage();
     }
     
@@ -1347,7 +1366,7 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block -Student Engagement Report UI Verify
      */
     public void verifySiteAdminReportStudentEngagementReportPage() {
-        AdministrationBlock ablock = new AdministrationBlock();
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminReportStudentEngagementReportPage();
     }
 

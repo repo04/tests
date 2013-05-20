@@ -17,19 +17,21 @@ import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import java.net.URL;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.testng.annotations.AfterTest;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Reporter;
 
 @Listeners({SauceOnDemandTestListener.class})
-public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
+public class BaseClass_EWD implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
-    //Add your username & key here
     //public static ThreadLocal<RemoteWebDriver> threadLocalDriver = new ThreadLocal<>();
+    //Add your username & key here
     private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
     public static XpathValues xpv, ldv;
-    public RemoteWebDriver driver;
+    public RemoteWebDriver rwd;
     public IsPresent ip = new IsPresent();
     public static String program;
     public String browser;
@@ -38,7 +40,8 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     public String os;
     public String currentURL;
     public static File directory = new File(".");
-    DesiredCapabilities capabilities;    
+    DesiredCapabilities capabilities;
+    EventFiringWebDriver driver;
 
     /**
      * The annotated method will be run before any test method belonging to the
@@ -100,11 +103,12 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
                 capabilities.setCapability("platform", "WINDOWS 7");
         }
         capabilities.setCapability("name", this.test);
-        ///threadLocalDriver.set(new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
-        //     capabilities));
-        //driver = threadLocalDriver.get();
-        driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+        rwd = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);        
+        rwd.setFileDetector(new LocalFileDetector());
+        driver = new EventFiringWebDriver(rwd);
+        MyEventListener eventListener = new MyEventListener(rwd);
+        driver.register(eventListener);
         driver.get(this.url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
@@ -122,7 +126,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
 
     @Override
     public String getSessionId() {
-        SessionId sessionId = ((RemoteWebDriver) driver).getSessionId();
+        SessionId sessionId = ((RemoteWebDriver) rwd).getSessionId();
         return (sessionId == null) ? null : sessionId.toString();
     }
 

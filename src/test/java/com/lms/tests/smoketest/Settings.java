@@ -9,12 +9,19 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
  *
  */
 public class Settings extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public Settings(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     String verify1, verify2, verify3, verify4, verify5, verify6, verify7,
             verify8, verify9, verify10, verify11, verify12, verify13, verify14, verify15;

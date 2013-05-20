@@ -11,12 +11,19 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
  *
  */
 public class Footers extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public Footers(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     String verify1, verify2, verify3, verify4, verify5, verify6;
     List<String> footers;

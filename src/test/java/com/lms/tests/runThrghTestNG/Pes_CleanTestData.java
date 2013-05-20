@@ -19,7 +19,7 @@ import com.lms.tests.smoketest.Utility;
  */
 public class Pes_CleanTestData extends BaseClass {
 
-    Actions a = new Actions();
+    Actions a;
     public static boolean teacherStatus;
     public static boolean studentStatus;
 
@@ -31,6 +31,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testPESAdminLogIn() throws Exception {
+        a = new Actions(driver);
         a.login("pesAdmin");
     }
 
@@ -195,6 +196,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testPESAdminLogOut() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 

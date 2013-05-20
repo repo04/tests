@@ -22,7 +22,6 @@ import com.lms.tests.smoketest.Utility;
  */
 public class Teacher_VerifyEmailNotifications extends BaseClass {
 
-    Actions a = new Actions();
     String verify1, verify2, verify3, verify4, verify5, verify6;
     String studentFullName;
     

@@ -9,8 +9,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class AdministrationBlock extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public AdministrationBlock(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     String programName = BaseClass.program;
     String studentSupportMessage = "This is support message created through Automation by pesadmin";

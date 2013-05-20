@@ -16,7 +16,7 @@ import com.lms.tests.smoketest.Actions;
  */
 public class Teacher_JoinDelete_SocialGroup extends BaseClass {
 
-    Actions a = new Actions();
+    Actions a;
     
     /**
      * Teacher Logs in
@@ -25,6 +25,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogIn(ITestContext context) throws Exception {
+        a = new Actions(driver);
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
         } else {
@@ -40,6 +41,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
     @Test(dataProvider = "StudentSocialGroup", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherJoinStudents"})
     public void testTeacherJoinsStudentSocialGroup(String studentSocialGroupName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         a.findSocialGroup(studentSocialGroupName);
         a.joinSocialGroup(studentSocialGroupName);
@@ -53,6 +55,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
     @Test(dataProvider = "StudentSocialGroup", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherLeaveStudents"})
     public void testTeacherLeavesStudentSocialGroup(String studentSocialGroupName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         a.leaveSocialGroup(studentSocialGroupName);
     }
@@ -80,6 +83,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherDelete"})
     public void testTeacherDeleteSocialGroup(String teacherSocialGroupName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
         a.deleteSocialGroup(teacherSocialGroupName);
@@ -158,6 +162,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
     @Test(dataProvider = "GroupCourseFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class,
           groups = {"regressionSmoke", "criticalSmoke", "files.teacherDelete"})
     public void testTeacherDeleteFiles(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToFiles();
@@ -200,6 +205,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testTeacherLogOut() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 }

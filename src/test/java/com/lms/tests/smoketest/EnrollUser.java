@@ -13,8 +13,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class EnrollUser extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public EnrollUser(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     /**
      * Enroll/Assign user to group course

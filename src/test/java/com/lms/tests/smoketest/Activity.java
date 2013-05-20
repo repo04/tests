@@ -16,9 +16,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Activity extends BaseClass {
-
+    
+    private RemoteWebDriver driver;
+    
     Date now = new Date();
     private String questionTitle, question, ans;
     private String name;
@@ -26,6 +29,10 @@ public class Activity extends BaseClass {
     private String dateAndTime;
     StackTraceElement[] stackTraceElements;
     Actions a = new Actions();
+    
+    public Activity(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     public void createLessonActivity() {
         String currentDateTime = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);

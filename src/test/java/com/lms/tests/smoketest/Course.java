@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Course extends BaseClass {
 
@@ -16,6 +17,12 @@ public class Course extends BaseClass {
     private String courseName;
     private String groupCourseName;
     private String backupFileName;
+    
+    private RemoteWebDriver driver;
+    
+    public Course(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     /**
      * Create & verify Course

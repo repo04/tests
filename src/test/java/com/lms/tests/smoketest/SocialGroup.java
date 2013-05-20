@@ -10,12 +10,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class SocialGroup extends BaseClass {
+    
+    /*private EventFiringWebDriver driver;
+    
+    public SocialGroup(EventFiringWebDriver driver){
+        this.driver = driver;        
+    }*/
+    
+    private RemoteWebDriver driver;
+    
+    public SocialGroup(RemoteWebDriver driver){
+        this.driver = driver;
+        System.out.println("//Action//: " + this.driver);
+    }
 
     Date now = new Date();
     private String socialGroupName;
-
+    
     /**
      * Create & verify SocialGroup
      */

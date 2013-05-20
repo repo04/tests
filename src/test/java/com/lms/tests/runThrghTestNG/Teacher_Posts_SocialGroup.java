@@ -4,14 +4,14 @@
  */
 package com.lms.tests.runThrghTestNG;
 
-import java.util.Iterator;
 import org.testng.ITestContext;
+import org.testng.annotations.Test;
+import com.lms.tests.smoketest.Actions;
+import java.util.Iterator;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /**
  * Teacher LogIn, Posts on Wall & Course Wall, Creates Social Group
@@ -26,7 +26,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     static String[][] teacherSocialGroupNameArray = new String[1][1];
     static String[][] teacherGlossaryEntryNameArray = new String[1][1];
     static String[][] teacherGlossaryCategoryNameArray = new String[1][1];
-    Actions a = new Actions();
+    Actions a;
 
     @DataProvider(name = "teacherUrlCoursePost")
     public static Object[][] teacherUrlCoursePost(ITestContext context) throws Exception {
@@ -65,7 +65,9 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTeacherLogIn(ITestContext context) throws Exception {
+    public void testTeacherLogInA(ITestContext context) throws Exception {
+        System.out.println("//Teacher_Posts_SocialGroup-login//: " + driver);
+        a = new Actions(driver);
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
                 || test.equalsIgnoreCase("CriticalDataTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
@@ -79,9 +81,10 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-    groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.teacherPostsOnProfileCourseWall"})
+    //@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    //groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String groupCourseName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyWall();
         teacherTextWallPost = a.textPost("txtWallPost");
         System.out.println("teacherTextWallPost: " + teacherTextWallPost);
@@ -105,6 +108,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherCreate"})
     public void testTeacherCreateSocialGroup() throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         teacherSocialGroupNameArray[0][0] = a.createSocialGroup();
         System.out.println("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
@@ -117,9 +121,10 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @param studentUserName
      * @throws Exception
      */
-    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-    groups = {"criticalSmoke", "teacherPosts.studentsWall"})
+    //@Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    //groups = {"criticalSmoke", "teacherPosts.studentsWall"})
     public void testTeacherPostURLOnStudentsWall(String teacherUserName, String studentUserName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyContacts();
         a.navigateToContactsWall(studentUserName);
         teacherUrlPostOnStudentWall = a.textPost("tchrUrlPostOnStdtWall");
@@ -197,7 +202,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCoursePasswordQuizName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
+    groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.generatePassword"})
     public void testTeacherGenerateQuizPassword(String groupCourseName, String passwordQuizName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -221,7 +226,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a.navigateToAllInstructorsStudentsPage("student");
         a.addUserAsContact(studentUserName);
     }
-    
+
     /**
      * Verify Settings page specific to user role
      *
@@ -266,19 +271,19 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         teacherGlossaryCategoryNameArray[0][0] = a.createGlossaryCategory(glossaryName);
         Reporter.log("teacherGlossaryCategoryName: " + teacherGlossaryCategoryNameArray[0][0], true);
     }
-    
+
     //The below method affects all system users - so currently we are skipping this
     /**
-     * Teacher verify Login message - Currently commented as it affects all system users
+     * Teacher verify Login message - Currently commented as it affects all
+     * system users
      *
      * @throws Exception
      */
     /*
-    @Test(groups = {"2torAdministrativeBlock.facultyVerificationLoginMessage"})
-    public void testTeacherVerifyLoginMessage() throws Exception {
-        a.facultyVerificationLoginMessage();
-    } */
-
+     @Test(groups = {"2torAdministrativeBlock.facultyVerificationLoginMessage"})
+     public void testTeacherVerifyLoginMessage() throws Exception {
+     a.facultyVerificationLoginMessage();
+     } */
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
@@ -286,7 +291,8 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTeacherLogOut() throws Exception {
+    public void testTeacherLogOutA() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 }

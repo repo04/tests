@@ -23,7 +23,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
 
     static String[][] googleDocumentNameArray = new String[1][1];
     static String[][] filesArray = new String[1][3];
-    Actions a = new Actions();
+    Actions a;
 
     @DataProvider(name = "GoogleDocument")
     public static Object[][] GoogleDocument(ITestContext context) throws Exception {
@@ -63,7 +63,8 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTeacherLogIn(ITestContext context) throws Exception {
+    public void testTeacherLogInB(ITestContext context) throws Exception {
+        a = new Actions(driver);
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
         } else {
@@ -79,6 +80,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "liveSession.teacherCreate"})
     public void testTeacherCreateLiveSession(String teacherSocialGroupName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
         a.accessLiveSessionWall();
@@ -140,6 +142,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseFiles", groups = {"regressionSmoke", "criticalSmoke", "files.teacherUploadInCourse"})
     public void testTeacherUploadFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToFiles();
@@ -157,6 +160,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      */
     @Test(dataProvider = "Files", groups = {"regressionSmoke", "criticalSmoke", "files.teacherVerifyInPortfolio"})
     public void testTeacherVerifyFilesInPortfolio(String pdf, String pptx, String doc) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyHome();
         a.navigateToPortfolio();
         a.verifyFilesInPortfolio(doc, pptx, pdf);
@@ -184,7 +188,8 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTeacherLogOut() throws Exception {
+    public void testTeacherLogOutB() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 }

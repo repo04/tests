@@ -15,12 +15,19 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
 import com.lms.tests.runThrghTestNG.Pes_CleanTestData;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WorkingGroup extends BaseClass {
 
     Date now = new Date();
     private String workingGroupName;
-    private String googleDocumentName;    
+    private String googleDocumentName;   
+    
+    private RemoteWebDriver driver;
+    
+    public WorkingGroup(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
     
     /**
      * PesAdmin creates & verify Working Group

@@ -34,7 +34,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     private static final String SELENIUM_BROWSER = "SELENIUM_BROWSER";
     private static final String SELENIUM_PLATFORM = "SELENIUM_PLATFORM";
     private static final String SELENIUM_VERSION = "SELENIUM_VERSION";
-
+    
     /**
      * The underlying {@link com.saucelabs.common.SauceOnDemandSessionIdProvider} instance which contains the Selenium session id.  This is typically
      * the unit test being executed.
@@ -102,7 +102,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     @Override
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
-        ScreenShot(tr);
+        //ScreenShot(tr);
         markJobAsFailed();
     }
 
@@ -172,13 +172,15 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
                     + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);
-            /*File screenshot = ((TakesScreenshot) new Augmenter().augment(BaseClass.driver)).
+            /*System.out.println("//screenshot//: " + BaseClass.threadLocalDriver.get());
+            File screenshot = ((TakesScreenshot) new Augmenter().augment(BaseClass.threadLocalDriver.get())).
                     getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot, new File(NewFileNamePath));
             Reporter.log(methodName + " failed; Click on image to enlarge<br/>"
                     + "<a target=\"_blank\" href=\"" + NewFileNamePath + "\"><img src=\"file:///" + NewFileNamePath
                     + "\" alt=\"\"" + "height='100' width='100'/></a><br />");
-            Reporter.setCurrentTestResult(null);*/
+            Reporter.setCurrentTestResult(null);
+            System.out.println("//screenshot saved//");*/
         } catch (IOException e) {
             e.printStackTrace();
         }

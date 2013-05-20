@@ -10,9 +10,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class SystemCompatibility extends BaseClass {
 
+    private RemoteWebDriver driver;
+    
+    public SystemCompatibility(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
+    
     String programName = program;
     String browserName = browser;
     String systemCompPageHeader = "Make sure your computer is ready for " + xpv.getTokenValue(programName + "SupportName");

@@ -12,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 import com.lms.tests.smoketest.Utility;
 
 /**
@@ -21,7 +20,6 @@ import com.lms.tests.smoketest.Utility;
  */
 public class Teacher_FetchActivityPassword extends BaseClass {
 
-    Actions a = new Actions();
     String verify1, verify2, verify3, verify4, verify5, verify6;
     String studentFullName;
     static String[][] quizPasswordArray = new String[1][1];

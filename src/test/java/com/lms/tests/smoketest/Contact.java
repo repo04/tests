@@ -11,12 +11,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
  * @author somesh.bansal
  */
 public class Contact extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public Contact(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     /**
      * Add user as contact

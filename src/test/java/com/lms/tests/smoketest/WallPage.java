@@ -10,8 +10,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WallPage extends BaseClass {
+    
+    /*private EventFiringWebDriver driver;
+    
+    public WallPage(EventFiringWebDriver driver){
+        this.driver = driver;        
+    }*/
+    
+    private RemoteWebDriver driver;
+    
+    public WallPage(RemoteWebDriver driver){
+        this.driver = driver;
+        System.out.println("//Action//: " + this.driver);
+    }
 
     Date now = new Date();
     WebElement textArea;

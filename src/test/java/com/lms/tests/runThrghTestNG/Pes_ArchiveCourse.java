@@ -13,9 +13,9 @@ import com.lms.tests.smoketest.Actions;
  *
  * 
  */
-public class Pes_ArchiveCourse {
+public class Pes_ArchiveCourse extends BaseClass {
     
-    Actions a = new Actions();
+    Actions a;
     
     /**
      * The annotated method will be run before the first test method in the
@@ -25,6 +25,7 @@ public class Pes_ArchiveCourse {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testPESAdminLogIn() throws Exception {
+        a = new Actions(driver);
         a.login("pesAdmin");
     }
     
@@ -46,6 +47,7 @@ public class Pes_ArchiveCourse {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testPESAdminLogOut() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
     

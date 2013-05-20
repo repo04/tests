@@ -15,12 +15,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
  * @author somesh.bansal
  */
 public class File extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public File(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
 
     /**
      * Upload files of multiple format(pdf, pptx, doc)

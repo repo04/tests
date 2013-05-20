@@ -6,12 +6,19 @@ package com.lms.tests.smoketest;
 
 import org.openqa.selenium.By;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
  *
  */
 public class Feedback extends BaseClass {
+    
+    private RemoteWebDriver driver;
+    
+    public Feedback(RemoteWebDriver driver){
+        this.driver = driver;        
+    }
     
     /**
      * Verify feedback window

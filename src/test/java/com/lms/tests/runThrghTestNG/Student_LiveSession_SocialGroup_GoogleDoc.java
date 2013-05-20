@@ -22,7 +22,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
 
     static String[][] studentSocialGroupNameArray = new String[1][1];
     static String[][] studentUrlPostOnWorkingGroup = new String[1][1];
-    Actions a = new Actions();
+    Actions a;
 
     @DataProvider(name = "StudentSocialGroup")
     public static Object[][] StudentSocialGroup(ITestContext context) throws Exception {
@@ -66,6 +66,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentLogIn(ITestContext context) throws Exception {
+        a = new Actions(driver);
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
         } else {
@@ -81,6 +82,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "liveSession.studentCreate"})
     public void testStudentCreateLiveSession(String teacherSocialGroupName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
         a.accessLiveSessionWall();
@@ -94,6 +96,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentCreate"})
     public void testStudentCreateSocialGroup() throws Exception {
+        a = new Actions(driver);
         a.navigateToMySocialGroups();
         studentSocialGroupNameArray[0][0] = a.createSocialGroup();
         System.out.println("studentSocialGroupName: " + studentSocialGroupNameArray[0][0]);
@@ -151,6 +154,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
     @Test(dataProvider = "GroupCourseQuiz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "activities.submitQuiz"})
     public void testStudentSubmitQuiz(String groupCourseName, String quizActivityName) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
@@ -201,6 +205,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
     @Test(dataProvider = "GroupCourseFiles", dataProviderClass = Teacher_LiveSession_GoogleDoc.class, 
           groups = {"regressionSmoke", "criticalSmoke", "files.studentVerifyInCourse"})
     public void testStudentVerifyFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
+        a = new Actions(driver);
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToFiles();
@@ -260,6 +265,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testStudentLogOut() throws Exception {
+        a = new Actions(driver);
         a.logOut();
     }
 }

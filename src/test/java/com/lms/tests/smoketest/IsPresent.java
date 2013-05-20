@@ -77,7 +77,7 @@ public class IsPresent {
      * @param elementByLINK
      */
     public void isElementPresentByLINK(WebDriver driver, String elementByLINK) {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elementByLINK)));
+        new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.linkText(elementByLINK)));
     }
 
     /**
