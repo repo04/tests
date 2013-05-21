@@ -78,6 +78,7 @@ public class Note extends BaseClass {
         }
         this.noteName = wallType + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         driver.findElement(By.id("txtnoteText")).sendKeys(this.noteName);
+        driver.findElement(By.linkText("See all notes"));
         driver.findElement(By.id("btnNoteSave")).click();
         if (wallType.contentEquals("Profile")) {
             ip.isTextPresentByXPATH(driver, "//div[15]/div[2]/div/div/div/div/div/div[2]/span", "Note Saved.");

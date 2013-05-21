@@ -82,6 +82,7 @@
             <elseif>
                 <or>
                     <contains string="${callUrl}" substring="2law"/>
+                    <contains string="${callUrl}" substring="demo"/>
                     <contains string="${callUrl}" substring="wu-llm"/>
                 </or>
                 <then>
@@ -121,14 +122,6 @@
                 </or>
                 <then>
                     <var name="program" value="corp-son"/>
-                </then>
-            </elseif>
-            <elseif>
-                <or>
-                    <contains string="${callUrl}" substring="demo"/>
-                </or>
-                <then>
-                    <var name="program" value="wu-llm"/>
                 </then>
             </elseif>
         </if>   
