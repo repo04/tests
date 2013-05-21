@@ -632,8 +632,7 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "1 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/a")).click();
-        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div", allInOneAssignmentActivityName);
-        driver.findElement(By.linkText("View 1 submitted assignments"));
+        ip.isElementPresentByLINK(driver, "View 1 submitted assignments");
     }
 
     /**
