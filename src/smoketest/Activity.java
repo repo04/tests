@@ -109,6 +109,11 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
         createActivity(this.name, this.intro);
+        String lateSubmission = new Select(driver.findElement(By.xpath("//select[@id='id_preventlate']"))).getFirstSelectedOption().getText();
+        if(!lateSubmission.equalsIgnoreCase("No")){
+            Utility.illegalStateException("All in one assignment's prevent late submission value differs, "
+                    + "expected: 'No' but actual: '" + lateSubmission + "'");
+        }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
@@ -125,11 +130,6 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Glossary");
         createActivity(this.name, this.intro);
-        String lateSubmission = new Select(driver.findElement(By.xpath("//select[@id='id_preventlate']"))).getFirstSelectedOption().getText();
-        if(!lateSubmission.equalsIgnoreCase("No")){
-            Utility.illegalStateException("All in one assignment's prevent late submission value differs, "
-                    + "expected: 'No' but actual: '" + lateSubmission + "'");
-        }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
