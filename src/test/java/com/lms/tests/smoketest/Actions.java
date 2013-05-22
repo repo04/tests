@@ -1266,10 +1266,10 @@ public class Actions extends BaseClass {
      * Verify 2tor Administrative Block - University Domain Email IDs are not
      * present in "Email Not In Domain" list
      */
-    /*public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
+    public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifyUniversityDomainNotPresentInEmailNotInDomainList();
-    }*/
+    }
 
     /**
      * Verify Site Administration Section
@@ -1335,6 +1335,14 @@ public class Actions extends BaseClass {
         ablock.verifySiteAdminReportCourseRostersPage();
     }
 
+    /**
+     * Verify pes admin is able to see the related sections to the courses in the section drop down
+     */
+    public void verifySectionDropdownCourseRostersPage(String course, String groupCourse) {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySectionDropdownCourseRostersPage(course, groupCourse);
+    }
+    
     /**
      * Verify 2tor Administrative Block -Deleted Live Session Section
      */

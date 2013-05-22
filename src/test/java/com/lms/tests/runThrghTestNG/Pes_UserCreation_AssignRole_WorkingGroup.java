@@ -391,13 +391,13 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    /*@Test(groups = {"2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"})
+    @Test(groups = {"2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"})
     public void testPesAdminVerifyUniversityDomainNotPresentInEmailNotInDomainList() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToEmailNotInDomain();
         a.verifyUniversityDomainNotPresentInEmailNotInDomainList();
-    }*/
-
+    }
+    
     /**
      * PesAdmin verify the Report settings
      *
@@ -432,6 +432,24 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.verifySiteAdminReportCourseRostersPage();
     }
 
+    /**
+     * Pes admin verify the related sections to the courses in the section drop down in Course Roster Page
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifySectionDropdownCourseRostersPage(ITestContext context, String groupCourseName) throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToCourseRosters();
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
+            ) {
+            a.verifySectionDropdownCourseRostersPage(ContentAdmin_Course_GroupCourseCreation.courseName, groupCourseName);
+        } else {
+            a.verifySectionDropdownCourseRostersPage(context.getCurrentXmlTest().getParameter("courseName"), groupCourseName);
+        }
+    }
+    
     /**
      * Verify 2tor Administrative Block -DeletedLiveSession Section
      */

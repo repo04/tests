@@ -9,6 +9,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import java.util.List;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AdministrationBlock extends BaseClass {
 
@@ -58,7 +61,7 @@ public class AdministrationBlock extends BaseClass {
         ip.isElementPresentByID(driver, "drag-handle");
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("uploadWindowTitleTxtXPATH"), "Upload Video");
     }
-
+                                                                 
     /**
      * Verifies the UI and functionality of Support Message
      */
@@ -132,9 +135,38 @@ public class AdministrationBlock extends BaseClass {
         //Verifies if the Category dropdown first value is selected or not
         WebElement element =  new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
         System.out.println("text: " + element.getText());
-        element.isSelected();        
+        element.isSelected();
+        
+        //Verifies if the Category dropdown values- Active and Archive are selectable or not
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).selectByVisibleText("Active");
+        WebElement active =  new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
+        System.out.println("Value selected: " + active.getText());
+        active.isSelected();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("categoryDropdownXPATH"), 30);
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).selectByVisibleText("Archive");
+        WebElement archive =  new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
+        System.out.println("Value selected: " + archive.getText());
+        archive.isSelected();
     }
 
+    /**
+     * Verifies if pes admin is able to see the related sections to the courses in the section drop down
+     */
+    public void verifySectionDropdownCourseRostersPage(String course, String groupCourse) {
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sectionColumnXPATH"), "Section", 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH"))).click();
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).selectByVisibleText(course);
+        WebElement courseNameSelected = new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).getFirstSelectedOption();
+        System.out.println("course selected: " + courseNameSelected.getText());
+        courseNameSelected.isSelected();
+        driver.findElement(By.xpath(xpv.getTokenValue("searchByNameTxtBoxXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("sectionDropdownXPATH"), 60);
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("sectionDropdownXPATH")))).selectByVisibleText(groupCourse);
+        WebElement groupCourseNameSelected = new Select(driver.findElement(By.xpath(xpv.getTokenValue("sectionDropdownXPATH")))).getFirstSelectedOption();
+        System.out.println("group course selected: " + groupCourseNameSelected.getText());
+        groupCourseNameSelected.isSelected();
+    }
+    
     /**
      * Verifies the UI and elements of deleted Live Session
      */
@@ -208,15 +240,15 @@ public class AdministrationBlock extends BaseClass {
      * Verifies the University Domain Email IDs are not present in "Email Not In
      * Domain" list
      */
-    /*public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
+    public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
         int rows = driver.findElements(By.xpath("//*[@id='region-main']/div/table/tbody/tr")).size();
         System.out.println("rows: " + rows);
         for (int i = 1; i <= rows; i++) {
-            System.out.println("i: " + i);
+            //System.out.println("i: " + i);
             new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
                     textToBePresentInElement(By.xpath("//*[@id='region-main']/div/table/tbody/tr[" + i + "]/td[2]"), emailDomain)));
         }
-    }*/
+    }
 
     //Following functional test methods affect all system users - so currently we are skipping this
     /**

@@ -14,20 +14,24 @@ import com.lms.tests.smoketest.Utility;
 import com.lms.tests.smoketest.XpathValues;
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
+import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterTest;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 
 @Listeners({SauceOnDemandTestListener.class})
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     //Add your username & key here
-    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
+    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("jchakraborty", "57bb5a35-dfc0-450e-99e3-9c5474d7ae46");
     public static XpathValues xpv, ldv;
     public static WebDriver driver;
     public IsPresent ip = new IsPresent();
@@ -39,6 +43,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     public static String currentURL;
     public static File directory = new File(".");
     DesiredCapabilities capabilities;
+    private Object testbed;
 
     /**
      * The annotated method will be run before any test method belonging to the
@@ -113,9 +118,9 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
      * @throws Exception
      */
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})
-    public void tearDown() throws Exception {
-        driver.quit();
-    }
+   public void tearDown() throws Exception {
+            driver.quit();
+}
 
     @Override
     public String getSessionId() {

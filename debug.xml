@@ -6,6 +6,7 @@
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
+        <parameter name="courseName" value="AutoCourse-DNT"/>        
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
@@ -213,8 +214,8 @@
             <define name="2torAdministrativeBlock">
                 <include name="prerequisite"/>
                 <include name="2torAdministrativeBlock.contentVerify"/>
-                <!--include name="2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"/>
-                <include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
+                <include name="2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"/>
+                <!--include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
                 <include name="2torAdministrativeBlock.studentLoginMessageVerification"/>
                 <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
                 <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
