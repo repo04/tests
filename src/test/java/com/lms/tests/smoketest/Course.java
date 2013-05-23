@@ -14,6 +14,7 @@ public class Course extends BaseClass {
 
     Date now = new Date();
     private String courseName;
+    private String courseShortName;
     private String groupCourseName;
     private String backupFileName;
 
@@ -21,19 +22,18 @@ public class Course extends BaseClass {
      * Create & verify Course
      */
     public void createCourse() {
-        String crsShrtName;
         if (test.equalsIgnoreCase("RegressionTests")) {
             this.courseName = "RgsnTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            crsShrtName = "RgsnShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.courseShortName = "RgsnShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.courseName = "SmkTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            crsShrtName = "SmkShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.courseShortName = "SmkShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("CriticalDataTests")) {
             this.courseName = "AutoCourse-DoNotTouch";
-            crsShrtName = "AutoCourse-DNT";
-         } else {
+            this.courseShortName = "AutoCourse-DNT";
+        } else {
             this.courseName = "DbgTstCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-            crsShrtName = "DbgShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+            this.courseShortName = "DbgShrtCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnAddNewCrs"), 60);
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnAddNewCrs"));
@@ -45,7 +45,7 @@ public class Course extends BaseClass {
         //Input Values
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsCtgryXPATH")))).selectByVisibleText("Active");
         driver.findElement(By.xpath(xpv.getTokenValue("fieldCrsFullNmXPATH"))).sendKeys(courseName);
-        driver.findElement(By.xpath(xpv.getTokenValue("fieldCrsShrtNmXPATH"))).sendKeys(crsShrtName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldCrsShrtNmXPATH"))).sendKeys(courseShortName);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsStrtDtDyXPATH")))).selectByValue("1");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsStrtDtMnthXPATH")))).selectByValue("8");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsStrtDtYrXPATH")))).selectByValue("2012");
@@ -72,7 +72,7 @@ public class Course extends BaseClass {
             this.groupCourseName = "SmkTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("CriticalDataTests")) {
             this.groupCourseName = "AutoGroupCourse";
-         } else {
+        } else {
             this.groupCourseName = "DbgTstGrpCrs " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         }
         ip.isElementPresentStartsWithTextByXPATH(driver, courseName);
@@ -370,6 +370,13 @@ public class Course extends BaseClass {
      */
     public String getCourseName() {
         return this.courseName;
+    }
+    
+    /**
+     * @return CourseName
+     */
+    public String getShortCourseName() {
+        return this.courseShortName;
     }
 
     /**

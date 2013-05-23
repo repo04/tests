@@ -64,7 +64,7 @@ public class Activity extends BaseClass {
         this.dateAndTime = a.currentDateTime();
         if (!test.equalsIgnoreCase("CriticalDataTests")) {
             this.name = test + " Quiz " + this.dateAndTime;
-            this.intro = test + " intro " + this.dateAndTime;            
+            this.intro = test + " intro " + this.dateAndTime;
         } else {
             this.name = "AutoQuiz";
             this.intro = "AutoQuizIntro";
@@ -109,6 +109,11 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
         createActivity(this.name, this.intro);
+        String lateSubmission = new Select(driver.findElement(By.xpath("//select[@id='id_preventlate']"))).getFirstSelectedOption().getText();
+        if (!lateSubmission.equalsIgnoreCase("No")) {
+            Utility.illegalStateException("All in one assignment's prevent late submission value differs, "
+                    + "expected: 'No' but actual: '" + lateSubmission + "'");
+        }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
     }
@@ -387,7 +392,7 @@ public class Activity extends BaseClass {
         if (attempt) {
             rows = driver.findElements(By.xpath("//div[@id='region-main']/div/table/tbody/tr")).size();
             i = rows + 1;
-            Reporter.log("This is students '" + i + "' Quiz Attempt", true);            
+            Reporter.log("This is students '" + i + "' Quiz Attempt", true);
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
@@ -409,7 +414,7 @@ public class Activity extends BaseClass {
 
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[name=\"next\"]")));
         driver.findElement(By.cssSelector("input[name=\"next\"]")).click();
-        
+
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAnsSvdXPATH"), "Answer saved");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfySmryAttmptXPATH"), "Summary of attempt");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtQzAnsXPATH"))).click();
@@ -626,6 +631,8 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "1 of 1");
+        driver.findElement(By.xpath("//tr[" + x + "]/td/a")).click();
+        ip.isElementPresentByLINK(driver, "View 1 submitted assignments");
     }
 
     /**
