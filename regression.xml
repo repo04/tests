@@ -13,6 +13,7 @@
             </run>
         </groups>
         <classes>
+            <class name="com.lms.tests.runThrghTestNG.System_Compatibility"/>
             <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>

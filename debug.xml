@@ -6,7 +6,7 @@
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="courseName" value="AutoCourse-DNT"/>        
+        <parameter name="courseShortName" value="AutoCourse-DNT"/>        
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>

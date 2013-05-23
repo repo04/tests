@@ -18,35 +18,38 @@ Verify JDK is configured correctly
  * javac -version	
 	
 	
-Install ANT 1.8.4 or higher
+Install Maven 3.0.5 or higher
 ---------------------------
-Requirement: ANT 1.8.4
+Requirement: Maven 3.0.5
 
-	  i> Installing Ant on Windows
-		* Enter the URL: http://ant.apache.org/bindownload.cgi.
-		* On the Apache Ant Project page, find the heading 'Current Release of Ant.'
-		* Select apache-ant-1.8.4-bin.zip [PGP] [SHA1] [SHA512] [MD5]
-		* Click Save to unzip and save it to your C:\ directory 
-		* Set Environment Variable; follow 
-		  http://www.daimi.au.dk/~hbc/technical/ant/setup.html
-     ii> Installing Ant on Mac OS X
-		* Ant is already installed on Mac OS X, and so it is not necessary to install it yourself.		 	
+	  i> Installing Maven on Windows
+		* Enter the URL: http://maven.apache.org/download.cgi
+		* Download latest Binary zip (apache-maven-3.0.5-bin.zip)
+		* Unzip and save it to your C:\ directory
+                * Create a JAVA_HOME System Variable
+                * Create an M2_HOME System Variable
+                * Add %JAVA_HOME%\bin;%M2_HOME%\bin; to your System Path
+                    * Follow: Installation Instructions / Windows 2000/XP
+                      http://maven.apache.org/download.cgi
+     ii> Installing Maven on Linux / Mac OS X
+		* Maven is already installed on Linux / Mac OS X, and so it is not necessary to install it yourself.		 	
 		* If you absolutely want to install it, though, the best way would be to install it through MacPorts (using sudo port install apache-ant)
-		* However, to install it manually, you would need to follow 2nd Answers
-		  http://stackoverflow.com/questions/3222804/how-can-i-install-apache-ant-on-mac-os-x
-    iii> Verify ANT installed correctly 
+		* However, to install it manually, follow:
+                    * Follow: Installation Instructions / Unix-based Operating Systems
+                      http://maven.apache.org/download.cgi || http://www.mkyong.com/maven/how-to-install-maven-in-ubuntu/
+    iii> Verify Maven installed correctly 
 	     a> open terminal
-		 b> ant -version
+		 b> mvn -version
 		    ____________________________________________________
-		    Apache Ant(TM) version 1.8.4 compiled on May 22 2012
+		    Apache Maven 3.0.5
 			
 
-Ubuntu (Linux) install instructions for Java, Ant, and other dependencies
--------------------------------------------------------------------------
+Ubuntu (Linux) install instructions for Java and other dependencies
+-------------------------------------------------------------------
 
     sudo add-apt-repository ppa:webupd8team/java
     sudo apt-get update
-    sudo apt-get install oracle-java7-installer libgeronimo-activation-1.1-spec-java ant1.7 ant1.7-optional ant-contrib
+    sudo apt-get install oracle-java7-installer libgeronimo-activation-1.1-spec-java
 
 Install Git
 -----------
@@ -65,19 +68,9 @@ Requirement: Git
      iv> Verify, project is downloaded     
 	
 
-Setup JARS
-----------
-Requirement: The appropriate JAR's need to be present in specific ANT's classpath. <br />
-**Note:** Path where BUILD.XML is located is referred as **BASEDIR**
-
-      i> Copy all files from <Basedir/lib/antLib> to your machine specific ANT's lib folder, eg:
-		 a> Windows: C:/Program Files/apache-ant-1.8.4-bin/apache-ant-1.8.4/lib
-		 b> MAC: /usr/share/ant/lib
-		 c> Linux32/64: /usr/share/java/
-		
 Setup Property Files
 --------------------
-**Note:** 'loginDetails' property file needs to be placed at /tests/src folder.  Please contact Benjamin for a copy. This will eventually be on S3. <br />
+**Note:** 'loginDetails' property file needs to be placed at src/test/resources folder.  Please contact Benjamin/Somesh for a copy. This will eventually be on S3. <br />
 
 
 Setup to execute on CHROME Browser
@@ -87,37 +80,24 @@ Requirement: Chrome browser installed. <br />
          
 	sudo apt-get install chromium-browser firefox
 
-In order to execute Automation project using Chrome Browser, you need to make file on unix server available to read, write, etc.
-
-      i> Using GIT, navigate to project <Basedir/lib/chromedriver_*>. '*' refers to machine/os (linux32 / linux64 / mac / win)
-     ii> Execute chmod +x filename or chmod 777 filename so as to make the file executable
-       * [Tutorial](http://selftechy.com/2011/08/17/running-selenium-tests-with-chromedriver-on-linux)
-	   
-
-Setup to execute on INTERNET EXPLORER
--------------------------------------
-**WARNING:** This method of starting the IE driver is deprecated and will be removed in selenium 2.26. <br />
-Please download the OS specific IEDriverServer.exe from http://code.google.com/p/selenium/downloads/list and ensure that it is in your PATH.
-	   
-
 Run Automation
 --------------
 Automation can run when above steps are followed in order.
 
       i> Open Terminal
-     ii> Navigate to *BASEDIR*
-	iii> Run Automation
-	       _______________________________________________________________________________________________
-		a> ant runsmoke/runcritical -DantUrl={gu-msn},{usc-mat} -DantBrwsr=chrome,ff -DantOS=win 
+     ii> Navigate to *BASEDIR* (Path where pom.xml is located)
+    iii> Run Automation
+               ______________________________________________________________________________________________________
+            a> mvn clean test -DmvnSuite=critical -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win 
 		
-		b> debugSmoke takes 1 extra paramter i.e group name/s={The list of groups mentioned in ConfluencePage to run separated by comma}
-		   ______________________________________________________________________________________________________________________	
-		   ant rundebug -DantGrp=ActvtsVrfctn,ActvtsSbmtQz -DantUrl={gu-msn},{usc-mat} -DantBrwsr=chrome,ff -DantOS=win 
+            b> debugSmoke takes 1 extra parameter i.e group name/s={The list of groups mentioned in Confluence Page to run separated by comma}
+               ________________________________________________________________________________________________________________________________	
+               mvn clean test -DmvnSuite=debug -DmvnGrp=SystemCompatibility -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win
 	
-	Applicable Parameters (Case Sensitive)
-		1> Targets: runsmoke / runcritical / rundebug
-			* Can accept only one target at a time
-        2> antUrl:
+        Applicable Parameters (Case Sensitive)
+        1> mvnSuite: critical/ smoke / regression / debug / criticalData
+                * Only one Suite to be passed
+        2> mvnUrl:
         	* gu-msn:  https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || 
 			   https://www-gu-msn-lms-sb[01-10]-qa.2u.com || https://gu-msn-lms-standalone-prod.2u.com					  
         	* unc-mba: https://www.2nc.unc.edu || https://www-unc-mba-lms-stg.2u.com || 
@@ -130,30 +110,24 @@ Automation can run when above steps are followed in order.
 			   https://www-usc-msw-lms-sb[01-10]-qa.2u.com || https://usc-msw-lms-standalone-prod.2u.com
         	* unc-mpa: https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || 
 			   https://www-unc-mpa-lms-sb[01-10]-qa.2u.com || https://unc-mpa-lms-standalone-prod.2u.com
-			* au-mir:  https://2ir.ironline.american.edu || https://www-au-mir-lms-stg.2u.com || 
+                * au-mir:  https://2ir.ironline.american.edu || https://www-au-mir-lms-stg.2u.com || 
 			   https://www-au-mir-lms-sb[01-10]-qa.2u.com || https://au-mir-lms-standalone-prod.2u.com
         	* gwu-mph: https://2gw.publichealthonline.gwu.edu || https://www-gwu-mph-lms-stg.2u.com || 
 			   https://www-gwu-mph-lms-sb[01-10]-qa.2u.com || https://gwu-mph-lms-standalone-prod.2u.com
-        	* Program's delimiter: ","	
-		3> antBrwsr: 
-			* ff
-			* chrome
-			* Browser's delimiter: ","
-		4> antOS: 
-			* win 
-			* mac 
-			* linux32
-			* linux64
-			* Only one OS name can be passed
-		5> antGrp:
-			* n number of group/s mentioned in DebugSmoke confluence page can be passed delimited by ","
-     iv> Flow of TEST:
-     	1> {gu-msn}            
-			   a> chrome  b> ff			
-        2> {usc-mat}            
-			   a> chrome  b> ff			
-	  v> Reports are saved in '{Basedir}\reports' folder
-
+        	* Only one PROGRAM URL to be passed
+        3> mvnProgram: 
+                * gu-msn || unc-mba || usc-mat || wu-llm || usc-msw || unc-mpa || au-mir || gwu-mph
+                * Only one program domain name to be passed
+        4> mvnBrwsr: 
+                * ff || chrome
+                * Only one browser to be passed
+        5> mvnOS: 
+                * win || mac || linux32 || linux64
+                * Only one OS name to be passed
+        6> mvnGrp:
+                * n number of group/s mentioned in DebugSmoke confluence page can be passed delimited by ","
+     iv> Reports are saved in '{Basedir}\target\surefire-reports\' folder
+     	
 
 ## Installing Xvfb and dependencies
 

@@ -117,6 +117,14 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * @return CourseName
+     */
+    public String getShortCourseName() {
+        Course cr = new Course();
+        return cr.getShortCourseName();
+    }
+    
+    /**
      * Delete Group Course
      *
      * @param groupCourseName
@@ -904,7 +912,6 @@ public class Actions extends BaseClass {
     public void verifyResume() {
         switch (program) {
             case "usc-mat":
-                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
                 ip.isElementPresentByLINK(driver, "Resume");
                 driver.findElement(By.linkText("Resume")).click();
                 ip.isTextPresentByXPATH(driver, "//h2", "Resume");
@@ -1260,6 +1267,14 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminReportEmailNotInDomainPage();
     }
+    
+    /**
+     * Verify pes admin is able to see the related sections to the courses in the section drop down
+     */
+    public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySectionDropdownCourseRostersPage(courseShortName, groupCourse);
+    }
 
     //Commented -- As looping executes very slow on Sauce Lab
     /**
@@ -1333,14 +1348,6 @@ public class Actions extends BaseClass {
     public void verifySiteAdminReportCourseRostersPage() {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminReportCourseRostersPage();
-    }
-
-    /**
-     * Verify pes admin is able to see the related sections to the courses in the section drop down
-     */
-    public void verifySectionDropdownCourseRostersPage(String course, String groupCourse) {
-        AdministrationBlock ablock = new AdministrationBlock();
-        ablock.verifySectionDropdownCourseRostersPage(course, groupCourse);
     }
     
     /**

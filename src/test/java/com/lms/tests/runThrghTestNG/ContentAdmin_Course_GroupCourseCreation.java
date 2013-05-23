@@ -21,6 +21,7 @@ import com.lms.tests.smoketest.Actions;
 public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
     public static String courseName;
+    public static String courseShortName;
     Actions a = new Actions();
     static String[][] groupCourseNameArray = new String[1][1];
     static String[][] quizNameArray = new String[1][1];
@@ -201,6 +202,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         courseName = a.createCourse();
+        courseShortName = a.getShortCourseName();
         Reporter.log("courseName: " + courseName, true);
 
         a.navigateToMyCourse();
