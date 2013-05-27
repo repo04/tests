@@ -79,7 +79,7 @@ public class SocialGroup extends BaseClass {
         String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         driver.findElement(By.xpath(xpv.getTokenValue("linkStrtSclGrpXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpNameXPATH"));
-        ip.isTextPresentByXPATH(driver, "//font", "Topics are keywords or labels that make a group easy to find. "
+        ip.isTextPresentByXPATH(driver, "//b/div/font", "Topics are keywords or labels that make a group easy to find. "
                 + "Enter up to 7 short and simple topics to describe your group. "
                 + "For example, a group called \"New York City\" might have topics like Statue of Liberty, "
                 + "Hot Dogs, Yankees, or Empire State Building. "
