@@ -19,6 +19,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -180,17 +181,29 @@ public class Utility {
      */
     public static void userEmailLogOut(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
-        Utility.clickByJavaScript(driver, "//td[2]/a");
-
         try {
+            Utility.clickByJavaScript(driver, "//td[2]/a");
             Alert alert = new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent());
-            String error = "###**Unexpected Alert located with Text as: " + alert.getText() + "**###";
-            alert.accept();
-            Reporter.log(error, true);
+            handleAlertException(alert);
+        } catch (UnhandledAlertException e) {
+            Alert alert = driver.switchTo().alert();
+            handleAlertException(alert);
+            System.out.println("Inside UnhandledAlertException");
         } catch (TimeoutException e) {
             //Do Nothing
-        }
+            System.out.println("No unknown modal dialog present");
+        }        
         ip.isTitlePresent(driver, "Gmail: Email from Google");
+    }
+
+    /**
+     * 
+     * @param alert 
+     */
+    private static void handleAlertException(Alert alert) {
+        String error = "###**Unexpected Alert located with Text as: " + alert.getText() + "**###";
+        alert.accept();
+        Reporter.log(error, true);
     }
 
     /**
@@ -318,7 +331,8 @@ public class Utility {
     }
 
     /**
-     * OnClick attribute of Input Element is handled for Chrome Browser by ROBOT functionality
+     * OnClick attribute of Input Element is handled for Chrome Browser by ROBOT
+     * functionality
      *
      * @param element
      */

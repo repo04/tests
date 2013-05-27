@@ -117,6 +117,14 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * @return CourseName
+     */
+    public String getShortCourseName() {
+        Course cr = new Course();
+        return cr.getShortCourseName();
+    }
+
+    /**
      * Delete Group Course
      *
      * @param groupCourseName
@@ -224,11 +232,15 @@ public class Actions extends BaseClass {
     }
 
     /**
-     *
+     * Navigate to Support Page
      */
-    public void navigateToStudentSupport() {
+    public void navigateToSupport(String role) {
         driver.findElement(By.xpath("//*[@id='footerlinks']/span[6]/a")).click();
-        ip.isElementPresentByXPATH(driver, "//*[@id='region-main']/div/h2[1]");
+        if (role.equalsIgnoreCase("Teacher")) {
+            ip.isTextPresentByXPATH(driver, "//h2", "Faculty Support");
+        } else {
+            ip.isTextPresentByXPATH(driver, "//h2", "Student Support");
+        }
     }
 
     /**
@@ -534,11 +546,11 @@ public class Actions extends BaseClass {
         Contact c = new Contact();
         c.addUserAsContact(user);
     }
-    
+
     /**
      * User confirm contact request
-     * 
-     * @param user 
+     *
+     * @param user
      */
     public void confirmContactRequest(String user) {
         Contact c = new Contact();
@@ -1055,16 +1067,19 @@ public class Actions extends BaseClass {
     }
 
     /**
-     *
+     * Verifies Support page
      */
-    public void testStudentSupport() {
-        StudentSupport ss = new StudentSupport();
-        ss.verifyStudentSupport();
+    public void testSupportPage(String role) {
+        Support ss = new Support();
+        ss.verifySupport(role);
     }
 
-    public void testStudentSupportMobileAppURL() {
-        StudentSupport ss = new StudentSupport();
-        ss.verifyStudentSupportMobileAppURL();
+    /**
+     * Verifies Mobile section on Support page
+     */
+    public void testSupportMobileAppURL(String role) {
+        Support ss = new Support();
+        ss.verifySupportMobileAppURL(role);
     }
 
     public String currentDateTime() {
@@ -1086,7 +1101,7 @@ public class Actions extends BaseClass {
         }
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("lnkCalendarMonthXPATH"));
     }
-    
+
     /**
      * Navigate To System Compatibility page
      */
@@ -1097,80 +1112,80 @@ public class Actions extends BaseClass {
         String HandleBefore = driver.getWindowHandle();
         for (String handle : driver.getWindowHandles()) {
             driver.switchTo().window(handle);
-            if(driver.getTitle().contains("about:blank")){
+            if (driver.getTitle().contains("about:blank")) {
                 driver.close();
-            }            
+            }
         }
         driver.switchTo().window(HandleBefore);
     }
-    
+
     /**
      * Verify System Compatibility Page BreadCrumb and Introduction Part
      */
     public void systemCompatibilityUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.breadCrumbandIntroduction();
     }
-    
+
     /**
      * Verifies content of Step 1: Component Compatibility Check
      */
     public void systemCompatibilityComponentCompatibilityUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.componentCompatibilityUIVerify();
     }
-    
+
     /**
      * Verifies content of Step 2: Meeting Connection Diagnostic
      */
     public void systemCompatibilityMeetingConnectionDiagnosticUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.meetingConnectionDiagnosticUIVerify();
     }
-    
+
     /**
      * Verifies content of Mobile Application section
      */
     public void systemCompatibilityMobileApplicationsUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.mobileApplicationsUIVerify();
     }
-    
+
     /**
-     * Verifies the faq section (Questions Answers)
-     * also verify the related browser page opens with download option
-     * while clicking on browser compatible icons
+     * Verifies the faq section (Questions Answers) also verify the related
+     * browser page opens with download option while clicking on browser
+     * compatible icons
      */
     public void systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons();
     }
-    
+
     /**
      * Verify the number of "back to top" and "more info" links available and
      * are enabled or not on System Compatibility Page
      */
     public void systemCompatibilityVerifyBackToTopAndMoreInfoLinks() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.backToTopAndMoreInfoLinks();
     }
-    
+
     /**
      * Verify content and functionality of ExpressUploader
      */
     public void systemCompatibilityExpressUploader() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.expressUploader();
     }
-    
+
     /**
      * Verify System Compatibility Page - mobile Support Section UI
      */
     public void systemCompatibilityMobileSupportSectionUIVerify() {
-        SystemCompatibility syscomptble=new SystemCompatibility();
+        SystemCompatibility syscomptble = new SystemCompatibility();
         syscomptble.mobileSupportSectionUIVerify();
     }
-    
+
     /**
      * Navigate To 2tor Site Administrator
      */
@@ -1259,7 +1274,7 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminReportEmailNotInDomainPage();
     }
-    
+
     /**
      * Verify 2tor Administrative Block - University Domain Email IDs are not
      * present in "Email Not In Domain" list
@@ -1308,7 +1323,7 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminStudentSupportLoginMessagePage();
     }
-    
+
     /**
      * Verify 2tor Administrative Block -Report Settings
      */
@@ -1340,7 +1355,7 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminReportDeletedLiveSessionPage();
     }
-    
+
     /**
      * Verify 2tor Administrative Block -Student Engagement Report UI Verify
      */
@@ -1349,6 +1364,14 @@ public class Actions extends BaseClass {
         ablock.verifySiteAdminReportStudentEngagementReportPage();
     }
 
+    /**
+     * Verify pes admin is able to see the related sections to the courses in
+     * the section drop down
+     */
+    public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySectionDropdownCourseRostersPage(courseShortName, groupCourse);
+    }
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block - Set faculty Login Message
@@ -1439,8 +1462,8 @@ public class Actions extends BaseClass {
      * Navigate To Student Support page
      */
     /*public void navigateToStudentSupportPage() {
-        ip.isElementPresentByLINK(driver, "Student Support");
-        driver.findElement(By.linkText("Student Support")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
-    }*/
+     ip.isElementPresentByLINK(driver, "Student Support");
+     driver.findElement(By.linkText("Student Support")).click();
+     ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
+     }*/
 }

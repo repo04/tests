@@ -38,28 +38,33 @@ public class Student_DeleteSocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "StudentSocialGroup", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentDelete"})
+    groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentDelete"})
     public void testStudentDeleteSocialGroup(String studentSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(studentSocialGroupName);
         a.deleteSocialGroup(studentSocialGroupName);
     }
-    
-    
+
     /**
-     * 
+     * Verifies Support page
      */
-    @Test(groups = {"regressionSmoke", "support.uiVerify"})
-    public void testStudentSupport() {
-        a.navigateToStudentSupport();
-        a.testStudentSupport();
+    @Test(groups = {"regressionSmoke", "support.studentUIVerify"})
+    public void testStudentSupportPage() {
+        a.navigateToMyHome();
+        a.navigateToSupport("Student");
+        a.testSupportPage("Student");
     }
-    
-    @Test(groups = {"regressionSmoke", "support.mobileAppURL"})
+
+    /**
+     * Verifies Mobile section on Support page
+     */
+    @Test(groups = {"regressionSmoke", "support.studentMobileAppURL"})
     public void testStudentSupportMobileURL() {
-       a.testStudentSupportMobileAppURL();
+        a.navigateToMyHome();
+        a.navigateToSupport("Student");
+        a.testSupportMobileAppURL("Student");
     }
-   
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

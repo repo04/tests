@@ -450,6 +450,20 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateToStudentEngagementReport();
         a.verifySiteAdminReportStudentEngagementReportPage();
     }
+    
+    /**
+     * Verify Sections of the Course in the section drop down 
+     * in Course Roster Page
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifySectionDropdownCourseRostersPage(String groupCourseName) throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToCourseRosters();
+        a.verifySectionDropdownCourseRostersPage(ContentAdmin_Course_GroupCourseCreation.courseShortName, groupCourseName);
+    }
 
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
@@ -471,6 +485,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
+    
     /*
      @Test(groups = {"2torAdministrativeBlock.contentVerify"})
      public void testPesAdminAdministrativeBlockStickyNotesPostText() throws Exception {
@@ -485,14 +500,15 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
+    
     /*
      @Test(groups = {"2torAdministrativeBlock.contentVerify"})
      public void testPesAdminAdministrativeBlockStickyNotesPostURL() throws Exception {
      a.navigateTo2torSiteAdministrator();
      a.navigateToUserStickyNotes();
      a.adminBlockStickyNotesPostURL();
-     } */    
-
+     } */
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

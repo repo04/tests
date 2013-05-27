@@ -4,6 +4,7 @@
  */
 package smoketest;
 
+import java.util.List;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -132,8 +133,16 @@ public class AdministrationBlock extends BaseClass {
 
         //Verifies if the Category dropdown first value is selected or not
         WebElement element = new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
-        System.out.println("text: " + element.getText());
         element.isSelected();
+
+        //Verifies if the Category dropdown values- Active and Archive are selectable or not
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).selectByVisibleText("Active");
+        WebElement active = new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
+        active.isSelected();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("categoryDropdownXPATH"), 30);
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).selectByVisibleText("Archive");
+        WebElement archive = new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
+        archive.isSelected();
     }
 
     /**
@@ -214,6 +223,37 @@ public class AdministrationBlock extends BaseClass {
         for (int i = 1; i <= rows; i++) {
             new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
                     textToBePresentInElement(By.xpath("//*[@id='region-main']/div/table/tbody/tr[" + i + "]/td[2]"), emailDomain)));
+        }
+    }
+
+    /**
+     * Verifies if pes admin is able to see the related sections to the courses
+     * in the section drop down
+     */
+    public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sectionColumnXPATH"), "Section", 60);
+        ip.isElementClickableByXpath(driver, "//td[3]/div/div/a/img", 60);
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).selectByVisibleText(courseShortName);
+        WebElement courseNameSelected = new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).getFirstSelectedOption();
+        courseNameSelected.isSelected();
+        ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", courseShortName);
+        ip.isElementClickableByXpath(driver, "//td[3]/div/div/a/img", 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("searchByNameTxtBoxXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("sectionDropdownXPATH"), 60);
+        Select sectionDropdown = new Select(driver.findElement(By.xpath(xpv.getTokenValue("sectionDropdownXPATH"))));
+        List<WebElement> options = sectionDropdown.getOptions();
+        if (options.size() != 2) {
+            Utility.illegalStateException("All sections dropdown size varies; Expected:2, Actual:" + options.size());
+        }
+        int size = 1;
+        for (WebElement option : options) {
+            if (size > 1) {
+                if (!option.getText().equalsIgnoreCase(groupCourse)) {
+                    Utility.illegalStateException("Group Section varies; Expected: '" + groupCourse
+                            + "', Actual: '" + option.getText() + "'");
+                }
+            }
+            size++;
         }
     }
     
