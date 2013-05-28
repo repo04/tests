@@ -234,9 +234,13 @@ public class Actions extends BaseClass {
     /**
      *
      */
-    public void navigateToStudentSupport() {
+    public void navigateToSupport(String role) {
         driver.findElement(By.xpath("//*[@id='footerlinks']/span[6]/a")).click();
-        ip.isElementPresentByXPATH(driver, "//*[@id='region-main']/div/h2[1]");
+        if (role.equalsIgnoreCase("Teacher")) {
+            ip.isTextPresentByXPATH(driver, "//h2", "Faculty Support");
+        } else {
+            ip.isTextPresentByXPATH(driver, "//h2", "Student Support");
+        }
     }
 
     /**
@@ -1064,15 +1068,19 @@ public class Actions extends BaseClass {
 
     /**
      *
+     * Verifies Support page
      */
-    public void testStudentSupport() {
-        StudentSupport ss = new StudentSupport();
-        ss.verifyStudentSupport();
-    }
+    public void testSupportPage(String role) {
+        Support ss = new Support();
+        ss.verifySupport(role);
+     }
 
-    public void testStudentSupportMobileAppURL() {
-        StudentSupport ss = new StudentSupport();
-        ss.verifyStudentSupportMobileAppURL();
+    /**
+     * Verifies Mobile section on Support page
+     */
+    public void testSupportMobileAppURL(String role) {
+        Support ss = new Support();
+        ss.verifySupportMobileAppURL(role);
     }
 
     public String currentDateTime() {

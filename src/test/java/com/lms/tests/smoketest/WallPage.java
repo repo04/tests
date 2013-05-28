@@ -45,11 +45,11 @@ public class WallPage extends BaseClass {
 
         //Switches back to default focus
         driver.switchTo().defaultContent();
-
+        
         if (user.contains("Admin")) {
             ip.isElementClickableByXpath(driver, "//td/div/img", 60);
             driver.findElement(By.xpath("//td/div/img")).click();
-
+            
             switch (textPost) {
                 case "txtCrsSctnPost":
                     driver.findElement(By.xpath("//div[11]/div/div[1]")).click();
@@ -96,10 +96,10 @@ public class WallPage extends BaseClass {
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String user = LoginPage.getUser();
         this.urlPost = xpv.getTokenValue(urlPost) + "by" + user.substring(0, 7) + dateFormat.format(now) + ".com";
-
+        
         linkButton.click();
         WebElement linkTextBox = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div/input[3]")));
-
+        
         int i = 1;
         value:
         while (i < 6) {
@@ -155,6 +155,7 @@ public class WallPage extends BaseClass {
         } catch (TimeoutException e) {
             Utility.illegalStateException("Selenium is unable to click on TextArea, this is an Automation Limitation");
         }
+        verifyWYSIWYGEditor();
     }
 
     /**
@@ -182,7 +183,7 @@ public class WallPage extends BaseClass {
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
             Utility.clickByJavaScript(driver, "//li/div/div/a");
-            ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Are you sure you want to delete this post");
+            ip.isTextPresentByXPATH(driver, "//div/div/div/div/div/div[2]/span", "Are you sure you want to delete this post");
         } else if (post.contains("urlstdtwrknggrppost")) {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
@@ -198,7 +199,7 @@ public class WallPage extends BaseClass {
         }
         driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table/tbody"
                 + "/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
-
+        
         try {
             new WebDriverWait(driver, 15).until(ExpectedConditions.stalenessOf(postElement));
         } catch (Exception e) {
@@ -223,6 +224,18 @@ public class WallPage extends BaseClass {
         ip.isElementClickableByXpath(driver, "//a/label", 60);
         driver.findElement(By.xpath("//a/label")).click();
         ip.isTextPresentByXPATH(driver, "//li[2]/div/div[3]/div[3]", studentTextCommentOnTeacherCoursePost);
+    }
+
+    /**
+     * Verify WYSIWYG Editor
+     */
+    private void verifyWYSIWYGEditor() {
+        ip.isElementPresentByXPATH(driver, "//select");
+        for (int x = 3; x < 19; x++) {
+            if (x != 6 && x != 9 && x != 12 && x != 16) {
+                ip.isElementPresentByXPATH(driver, "//td[" + x + "]/table/tbody/tr[2]/td[2]/em/button");                
+            }
+        }
     }
 
     /**

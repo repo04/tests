@@ -191,6 +191,26 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
         a.navigateToMyHome();
         a.verifyCalendar();
     }
+    
+    /**
+     * Verifies Support page
+     */
+    @Test(groups = {"regressionSmoke", "support.teacherUIVerify"})
+    public void testTeacherSupportPage() {
+        a.navigateToMyHome();
+        a.navigateToSupport("Teacher");
+        a.testSupportPage("Teacher");
+    }
+
+    /**
+     * Verifies Mobile section on Support page
+     */
+    @Test(groups = {"regressionSmoke", "support.teacherMobileAppURL"})
+    public void testTeacherSupportMobileURL() {
+        a.navigateToMyHome();
+        a.navigateToSupport("Teacher");
+        a.testSupportMobileAppURL("Teacher");
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

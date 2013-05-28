@@ -187,10 +187,12 @@
                 <include name="contact.teacherAddStudentAsContactfromCourse"/>
                 <include name="contact.studentConfirmRequest"/>                                
             </define>
-            <define name="StudentSupport">
+            <define name="Support">
                 <include name="prerequisite"/>
-                <include name="support.uiVerify"/>
-                <include name="support.mobileAppURL"/>
+                <include name="support.teacherUIVerify"/>
+                <include name="support.teacherMobileAppURL"/>
+                <include name="support.studentUIVerify"/>
+                <include name="support.studentMobileAppURL"/>
             </define>
             <define name="LessonActivity">
                 <include name="prerequisite"/>
