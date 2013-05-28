@@ -24,6 +24,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     public static String courseShortName;
     Actions a = new Actions();
     static String[][] groupCourseNameArray = new String[1][1];
+    static String[][] courseShortNameArray = new String[1][1];
     static String[][] quizNameArray = new String[1][1];
     static String[][] assignmentNameArray = new String[1][1];
     static String[][] activitiesArray = new String[1][4];
@@ -53,6 +54,18 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         } else {
             System.out.println("Inside Course: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("groupCourseName")}};
+        }
+    }
+
+    @DataProvider(name = "CourseShortName")
+    public static Object[][] CourseShortName(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
+                || test.equalsIgnoreCase("CriticalDataTests")) {
+            System.out.println("Inside Course: " + test);
+            return (courseShortNameArray);
+        } else {
+            System.out.println("Inside Course: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("courseShortName")}};
         }
     }
 
@@ -181,6 +194,12 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         return DataProviderUtility.cartesianProviderFrom(Course(context), GlossaryName(context));
     }
 
+    @DataProvider(name = "GroupCourseShortName")
+    public static Iterator<Object[]> GroupCourseShort(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseShort");
+        return DataProviderUtility.cartesianProviderFrom(CourseShortName(context), Course(context));
+    }
+
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Content Admin logs in
@@ -204,11 +223,12 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         courseName = a.createCourse();
         courseShortName = a.getShortCourseName();
         Reporter.log("courseName: " + courseName, true);
-
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         groupCourseNameArray[0][0] = a.createGrpCourse(courseName);
         Reporter.log("groupCourseName: " + groupCourseNameArray[0][0], true);
+        courseShortNameArray[0][0] = a.getShortCourseName();
+        Reporter.log("courseShortName: " + courseShortNameArray[0][0], true);
     }
 
     /**

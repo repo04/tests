@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.google.common.collect.Lists;
 import java.util.Iterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +16,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
@@ -27,6 +30,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     static String[][] workingGroupNameArray = new String[1][1];
     static String[][] studentNameArray = new String[1][1];
     static String[][] teacherNameArray = new String[1][1];
+    static String[][] courseShortNameArray = new String[1][1];
     static String[][] pesTextCourseSectionPost = new String[1][1];
     static String[][] pesTextAnnouncementCoursePost = new String[1][1];
     static String[][] pesTextCoursePostCommentsOn = new String[1][1];
@@ -131,7 +135,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         System.out.println("init GroupCourseAnnouncement");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTextAnnouncementCoursePost);
     }
-
+    
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Student logs in, PES Admin Logs in
@@ -458,19 +462,13 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseShortName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
-    public void testPesAdminVerifySectionDropdownCourseRostersPage(ITestContext context, String groupCourseName) throws Exception {
+    public void testPesAdminVerifySectionDropdownCourseRostersPage(String courseShortName, String groupCourseName) throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToCourseRosters();
-        if (ContentAdmin_Course_GroupCourseCreation.courseShortName != null ) {
-        //if (ContentAdmin_Course_GroupCourseCreation.courseShortName.contains("RgsnTstCrs") || ContentAdmin_Course_GroupCourseCreation.courseShortName.contains("SmkTstCrs")
-        //    || ContentAdmin_Course_GroupCourseCreation.courseShortName.contains("DbgTstCrs") ) {
-            a.verifySectionDropdownCourseRostersPage(ContentAdmin_Course_GroupCourseCreation.courseShortName, groupCourseName);
-        } else {
-            a.verifySectionDropdownCourseRostersPage(context.getCurrentXmlTest().getParameter("courseShortName"), groupCourseName);
+        a.verifySectionDropdownCourseRostersPage(courseShortName, groupCourseName);
         }    
-    }
 
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
