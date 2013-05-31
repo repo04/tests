@@ -18,6 +18,8 @@ public class User extends BaseClass {
     DateFormat dateFormat;
     Date now;
     private String userName;
+    private String title;
+    private String gender;
 
     /**
      * PesAdmin creates user
@@ -34,18 +36,31 @@ public class User extends BaseClass {
                 case "student":
                 case "autostu":
                     this.userName = "student" + dateFormat.format(now);
+                    this.title = "Pupil";
+                    this.gender = "1";
+                    break;
+                case "coordinator":
+                    this.userName = "coordinator" + dateFormat.format(now);
+                    this.title = "Organizer";
+                    this.gender = "0";
                     break;
                 default:
                     this.userName = "teacher" + dateFormat.format(now);
+                    this.title = "Lecturer";
+                    this.gender = "2";
             }
         } else {
             switch (user) {
                 case "student":
                 case "autostu":
                     this.userName = "autostudent1";
+                    this.title = "Pupil";
+                    this.gender = "1";
                     break;
                 default:
                     this.userName = "autoteacher1";
+                    this.title = "Lecturer";
+                    this.gender = "2";
             }
         }
 
@@ -64,6 +79,7 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys(ldv.getTokenValue("password"));
         driver.findElement(By.xpath(xpv.getTokenValue("fieldFirstNmXPATH"))).sendKeys(userName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldScndNmXPATH"))).sendKeys(userName);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldTitleXPATH"))).sendKeys(title);
         if (!test.equalsIgnoreCase("CriticalDataTests")) {
             if (user.equalsIgnoreCase("teacher")) {
                 driver.findElement(By.xpath(xpv.getTokenValue("fieldEmailXPATH"))).sendKeys("seleniumtest+" + "teacher" + dateFormat.format(now) + "@2u.com");
@@ -80,6 +96,7 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("fieldCityXPATH"))).sendKeys("New York");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCntryXPATH")))).selectByValue("US");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctTimeZnXPATH")))).selectByValue("America/New_York");
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldGenderXPATH"))).sendKeys(gender);
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctFindUsrXPATH"));

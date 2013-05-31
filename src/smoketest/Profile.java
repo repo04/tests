@@ -8,15 +8,27 @@ import runThrghTestNG.BaseClass;
 
 /**
  *
- * 
+ *
  */
 public class Profile extends BaseClass {
 
-    void verifyPersonalInformation() {
+    void verifyPersonalInformation(String role) {
         ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[4]", "Basic Information");
         ip.isTextPresentByXPATH(driver, "//div[6]/div/div", "Name:");
         ip.isTextPresentByXPATH(driver, "//div[6]/div[3]/div", "Birthday:");
         ip.isTextPresentByXPATH(driver, "//div[6]/div[4]/div", "Gender:");
+        switch (role) {
+            case "teacher":
+                ip.isTextPresentByXPATH(driver, "//span[3]", "Lecturer");
+                ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Female");
+                break;
+            case "coordinator":
+                ip.isTextPresentByXPATH(driver, "//span[3]", "Organizer");                
+                break;
+            default:
+                ip.isTextPresentByXPATH(driver, "//span[3]", "Pupil");
+                ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Male");
+        }
 
         ip.isTextPresentByXPATH(driver, "//div[10]/div/div", "Email:");
         ip.isTextPresentByXPATH(driver, "//div[10]/div[2]/div", "Website:");

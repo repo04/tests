@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class WallPage extends BaseClass {
-    
+
     Date now = new Date();
     WebElement textArea;
     WebElement buttonWallShare;
@@ -40,16 +40,22 @@ public class WallPage extends BaseClass {
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         String user = LoginPage.getUser();
-        this.textPost = xpv.getTokenValue(textPost) + "by" + user.substring(0, 7) + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        if (!textPost.contains("HTML")) {
+            this.textPost = xpv.getTokenValue(textPost) + "by" + user.substring(0, 7) + " "
+                    + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.textPost = xpv.getTokenValue(textPost + "1") + "by" + user.substring(0, 7) + " "
+                    + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now) + xpv.getTokenValue(textPost + "2");
+        }
         editableTxtArea.sendKeys(this.textPost);
 
         //Switches back to default focus
         driver.switchTo().defaultContent();
-        
+
         if (user.contains("Admin")) {
             ip.isElementClickableByXpath(driver, "//td/div/img", 60);
             driver.findElement(By.xpath("//td/div/img")).click();
-            
+
             switch (textPost) {
                 case "txtCrsSctnPost":
                     driver.findElement(By.xpath("//div[11]/div/div[1]")).click();
@@ -77,6 +83,8 @@ public class WallPage extends BaseClass {
                     driver.findElement(By.xpath("//fieldset/div/div/div[2]/div/div/input")).click();
                     driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
             }
+        } else {
+            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.id("sharetype")));
         }
         buttonWallShare.click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("textWallCSS"), this.textPost);
@@ -96,10 +104,10 @@ public class WallPage extends BaseClass {
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String user = LoginPage.getUser();
         this.urlPost = xpv.getTokenValue(urlPost) + "by" + user.substring(0, 7) + dateFormat.format(now) + ".com";
-        
+
         linkButton.click();
         WebElement linkTextBox = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div/input[3]")));
-        
+
         int i = 1;
         value:
         while (i < 6) {
@@ -121,6 +129,21 @@ public class WallPage extends BaseClass {
         }
         buttonWallShare.click();
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + this.urlPost);
+        if (urlPost.contains("urlCrsPost")) {
+            String mainWindow = driver.getWindowHandle();
+            driver.findElement(By.linkText("http://" + this.urlPost)).click();
+            Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
+            int z = 1;
+            for (String handle : driver.getWindowHandles()) {
+                System.out.println("window handle: " + handle);
+                driver.switchTo().window(handle);
+                if (z > 1) {
+                    driver.close();
+                }
+                z++;
+            }
+            driver.switchTo().window(mainWindow);
+        }
     }
 
     /**
@@ -130,7 +153,7 @@ public class WallPage extends BaseClass {
      * @param txtCmntOnTchrCrsPst
      */
     public void textCommentPost(String urlCoursePost, String txtCmntOnTchrCrsPst) {
-        textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlCoursePost);
         driver.findElement(By.xpath("//a/label")).click();
         WebElement cmntTxtArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//li/div/div/div/textarea")));
@@ -142,7 +165,7 @@ public class WallPage extends BaseClass {
     }
 
     /**
-     * Click on TextArea & enable share button
+     * Click on TextArea, Enable share button & verify WYSIWYGEditor TestArea
      */
     public void setUpWallPost() {
         textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
@@ -165,6 +188,7 @@ public class WallPage extends BaseClass {
      */
     public void recommendURLCoursePost(String teacherUrlCoursePost) {
         ip.isTextPresentByXPATH(driver, "//div[3]/div/a", "http://" + teacherUrlCoursePost);
+        driver.findElement(By.cssSelector("span.icon.like"));
         ip.isElementClickableByXpath(driver, "//label[2]/a", 60);
         driver.findElement(By.xpath("//label[2]/a")).click();
         ip.isTextPresentByXPATH(driver, "//label[3]", "(You Recommend This)");
@@ -199,7 +223,7 @@ public class WallPage extends BaseClass {
         }
         driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table/tbody"
                 + "/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
-        
+
         try {
             new WebDriverWait(driver, 15).until(ExpectedConditions.stalenessOf(postElement));
         } catch (Exception e) {
@@ -233,7 +257,7 @@ public class WallPage extends BaseClass {
         ip.isElementPresentByXPATH(driver, "//select");
         for (int x = 3; x < 19; x++) {
             if (x != 6 && x != 9 && x != 12 && x != 16) {
-                ip.isElementPresentByXPATH(driver, "//td[" + x + "]/table/tbody/tr[2]/td[2]/em/button");                
+                ip.isElementPresentByXPATH(driver, "//td[" + x + "]/table/tbody/tr[2]/td[2]/em/button");
             }
         }
     }

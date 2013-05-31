@@ -84,18 +84,15 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     public void testTeacherPostsOn_Wall_CourseWall(String groupCourseName) throws Exception {
         a.navigateToMyWall();
         teacherTextWallPost = a.textPost("txtWallPost");
-        System.out.println("teacherTextWallPost: " + teacherTextWallPost);
-        Reporter.log("teacherTextWallPost: " + teacherTextWallPost);
+        Reporter.log("teacherTextWallPost: " + teacherTextWallPost, true);
 
         a.navigateToMyWall();
         teacherUrlWallPost = a.urlPost("urlWallPost");
-        System.out.println("teacherUrlWallPost: " + teacherUrlWallPost);
-        Reporter.log("teacherUrlWallPost: " + teacherUrlWallPost);
+        Reporter.log("teacherUrlWallPost: " + teacherUrlWallPost, true);
 
         a.selectGroupCourse(groupCourseName);
         teacherUrlCoursePostArray[0][0] = a.urlPost("urlCrsPost");
-        System.out.println("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0]);
-        Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0]);
+        Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0], true);
     }
 
     /**
@@ -107,8 +104,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     public void testTeacherCreateSocialGroup() throws Exception {
         a.navigateToMySocialGroups();
         teacherSocialGroupNameArray[0][0] = a.createSocialGroup();
-        System.out.println("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
-        Reporter.log("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
+        Reporter.log("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0], true);
     }
 
     /**
@@ -123,8 +119,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a.navigateToMyContacts();
         a.navigateToContactsWall(studentUserName);
         teacherUrlPostOnStudentWall = a.textPost("tchrUrlPostOnStdtWall");
-        System.out.println("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall);
-        Reporter.log("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall);
+        Reporter.log("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall, true);
     }
 
     /**
@@ -177,7 +172,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     @Test(groups = {"regressionSmoke", "personalInformation.teacherVerify"})
     public void testTeacherVerifyPersonalInformation() throws Exception {
         a.navigateToMyPersonalInformation();
-        a.verifyPersonalInformation();
+        a.verifyPersonalInformation("teacher");
     }
 
     /**

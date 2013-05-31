@@ -25,6 +25,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     static String[][] noteCourseNameArray = new String[1][1];
     static String[][] noteWallNameArray = new String[1][1];
     static String[][] studentGlossaryEntryArray = new String[1][1];
+    String studentPostHTMLOnOwnWall;
     
     Actions a = new Actions();
 
@@ -258,7 +259,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @Test(groups = {"regressionSmoke", "personalInformation.studentVerify"})
     public void testStudentVerifyPersonalInformation() throws Exception {
         a.navigateToMyPersonalInformation();
-        a.verifyPersonalInformation();
+        a.verifyPersonalInformation("student");
     }
 
     /**
@@ -337,6 +338,16 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.confirmContactRequest(teacherUserName);
     }
     
+    /**
+     * Student post HTML on own Wall
+     */
+    @Test(groups = {"regressionSmoke", "wall.studentHTMLWallPost"})
+    public void testStudentPostHTMLOnOwnWall() {
+        a.navigateToMyWall();
+        studentPostHTMLOnOwnWall = a.textPost("txtHTMLWallPost");
+        Reporter.log("studentPostHTMLOnOwnWall: " + studentPostHTMLOnOwnWall, true);
+    }
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

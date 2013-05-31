@@ -928,9 +928,9 @@ public class Actions extends BaseClass {
     /**
      * Verify Personal Information
      */
-    public void verifyPersonalInformation() {
+    public void verifyPersonalInformation(String role) {
         Profile pf = new Profile();
-        pf.verifyPersonalInformation();
+        pf.verifyPersonalInformation(role);
     }
 
     /**
