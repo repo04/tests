@@ -216,6 +216,11 @@
                 <include name="systemCompatibility.mobileApplicationsUIVerify"/>
                 <include name="systemCompatibility.backToTopAndMoreInfoLinksVerify"/>
             </define>
+            <define name="Quiz">
+                <include name="prerequisite"/>
+                <include name="quiz.pesVerifyReportSection"/>                                  
+                <include name="quiz.teacherVerifyReportSection"/>                
+            </define>
             <define name="2torAdministrativeBlock">
                 <include name="prerequisite"/>
                 <include name="2torAdministrativeBlock.contentVerify"/>

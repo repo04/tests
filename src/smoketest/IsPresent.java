@@ -130,4 +130,14 @@ public class IsPresent {
     public void isElementClickableByXpath(WebDriver driver, String elementClickable, int time) {
         new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(By.xpath(elementClickable)));
     }
+
+    /**
+     * An expectation for checking that an element with text is either invisible or not present on the DOM
+     * 
+     * @param driver
+     * @param elementXpath 
+     */
+    public void invisibilityOfElementByXpathWithText(WebDriver driver, String elementXpath, String text) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath(elementXpath), text));
+    }
 }

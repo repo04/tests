@@ -6,6 +6,7 @@ package smoketest;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import org.openqa.selenium.By;
@@ -14,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.Reporter;
 import runThrghTestNG.BaseClass;
 
@@ -26,6 +28,12 @@ public class Activity extends BaseClass {
     private String dateAndTime;
     StackTraceElement[] stackTraceElements;
     Actions a = new Actions();
+    List<String> reportLabels = Arrays.asList("Info", "Overview & Regrade", "Manual Grading",
+            "Item Analysis", "Preview");
+    List<String> contentQuizAdministrationLinks = Arrays.asList("Edit settings", "Group overrides",
+            "User overrides", "Edit quiz", "Preview", "Logs");
+    List<String> pesQuizAdministrationLinks = Arrays.asList("Group overrides", "User overrides",
+            "Preview", "Locally assigned roles", "Permissions", "Check permissions", "Logs");
 
     public void createLessonActivity() {
         String currentDateTime = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -64,7 +72,7 @@ public class Activity extends BaseClass {
         this.dateAndTime = a.currentDateTime();
         if (!test.equalsIgnoreCase("CriticalDataTests")) {
             this.name = test + " Quiz " + this.dateAndTime;
-            this.intro = test + " intro " + this.dateAndTime;            
+            this.intro = test + " intro " + this.dateAndTime;
         } else {
             this.name = "AutoQuiz";
             this.intro = "AutoQuizIntro";
@@ -77,6 +85,14 @@ public class Activity extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctQuizAttmpts")))).selectByVisibleText("Unlimited");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/div[2]", "Quiz Reports");
+        int x = 1;
+        for (String reportLabel : reportLabels) {
+            ip.isTextPresentByXPATH(driver, "//div[3]/ul/li[" + x + "]/a/span", reportLabel);
+            x++;
+        }
+        ip.invisibilityOfElementByXpathWithText(driver, "//div[3]/ul/li[6]/a/span", "Edit + Release");
+        verifyQuizAdministrationLinksPage(contentQuizAdministrationLinks, name);
     }
 
     /**
@@ -110,7 +126,7 @@ public class Activity extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
         createActivity(this.name, this.intro);
         String lateSubmission = new Select(driver.findElement(By.xpath("//select[@id='id_preventlate']"))).getFirstSelectedOption().getText();
-        if(!lateSubmission.equalsIgnoreCase("No")){
+        if (!lateSubmission.equalsIgnoreCase("No")) {
             Utility.illegalStateException("All in one assignment's prevent late submission value differs, "
                     + "expected: 'No' but actual: '" + lateSubmission + "'");
         }
@@ -394,6 +410,13 @@ public class Activity extends BaseClass {
             i = rows + 1;
             Reporter.log("This is students '" + i + "' Quiz Attempt", true);
         }
+
+        int y = 1;
+        for (String reportLabel : reportLabels) {
+            ip.invisibilityOfElementByXpathWithText(driver, "//div[3]/ul/li[" + y + "]/a/span", reportLabel);
+            y++;
+        }
+        ip.invisibilityOfElementByXpathWithText(driver, "//div[3]/ul/li[6]/a/span", "Edit + Release");
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnEditQzXPATH"))).click();
@@ -716,6 +739,87 @@ public class Activity extends BaseClass {
     }
 
     /**
+     * Verify UI of Quiz page
+     * 
+     * @param quizActivityName
+     */
+    public void verifyQuizUIPage(String quizActivityName) {
+        int x = 1;
+        for (String reportLabel : reportLabels) {
+            ip.isTextPresentByXPATH(driver, "//div[3]/ul/li[" + x + "]/a/span", reportLabel);
+            driver.findElement(By.xpath("//div[3]/ul/li[" + x + "]/a/span")).click();
+            switch (reportLabel) {
+                case "Info":
+                    if (LoginPage.getUser().contains("pes")) {
+                        ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div[2]/p", "Grading method: Highest grade");
+                    } else {
+                        ip.isTextPresentByXPATH(driver, "//div[2]/p", "Grading method: Highest grade");
+                    }
+                    break;
+                case "Overview & Regrade":
+                    ip.isTextPresentByXPATH(driver, "//div[4]/p", "Showing graded and ungraded attempts for each user. "
+                            + "The one attempt for each user that is graded is highlighted. "
+                            + "The grading method for this quiz is Highest grade.");
+                    break;
+                case "Manual Grading":
+                    if (LoginPage.getUser().contains("pes")) {
+                        ip.isTextPresentByXPATH(driver, "//div[4]/div/h2", "Questions that need grading");
+                    } else {
+                        ip.isTextPresentByXPATH(driver, "//h2", "Questions that need grading");
+                    }
+                    break;
+                case "Item Analysis":
+                    if (LoginPage.getUser().contains("pes")) {
+                        ip.isTextPresentByXPATH(driver, "//div[4]/div/h2", "Quiz information");
+                    } else {
+                        ip.isTextPresentByXPATH(driver, "//h2", "Quiz information");
+                    }
+                    break;
+                case "Preview":
+                    if (LoginPage.getUser().contains("pes")) {
+                        ip.isTextPresentByXPATH(driver, "//div[4]/div/h2", quizActivityName);
+                    } else {
+                        ip.isTextPresentByXPATH(driver, "//h2", quizActivityName);
+                    }
+            }
+            x++;
+        }
+        if (LoginPage.getUser().contains("pes")) {
+            ip.isTextPresentByXPATH(driver, "//div[3]/ul/li[6]/a/span", "Edit + Release");
+            driver.findElement(By.xpath("//div[3]/ul/li[6]/a/span")).click();
+            ip.isTextPresentByXPATH(driver, "//div[4]/div/h2", "Edit + Release: " + quizActivityName);
+            ip.isElementPresentByXPATH(driver, "//span/a");
+            ip.isElementPresentByXPATH(driver, "//span/span/a");
+            ip.isElementPresentByXPATH(driver, "//td[5]/input");
+            String mainWindow = driver.getWindowHandle();
+            driver.findElement(By.xpath("//span/a/img")).click();
+            Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
+            int i = 1;
+            for (String handle : driver.getWindowHandles()) {
+                System.out.println("window handle: " + handle);
+                driver.switchTo().window(handle);
+                if (i == driver.getWindowHandles().size()) {
+                    try {
+                        ip.isTitleContains(driver, "Preview question: Capital");
+                        ip.isTextPresentByXPATH(driver, "//div[2]/div/div", "New York City is the capital of the United States");
+                        driver.close();
+                    } catch (Exception e) {
+                        System.out.println("Preview question: Captal" + " not found");
+                        driver.close();
+                        driver.switchTo().window(mainWindow);
+                        throw e;
+                    }
+                }
+                i++;
+            }
+            driver.switchTo().window(mainWindow);
+            verifyQuizAdministrationLinksPage(pesQuizAdministrationLinks, quizActivityName);
+        } else {
+            ip.invisibilityOfElementByXpathWithText(driver, "//div[3]/ul/li[6]/a/span", "Edit + Release");
+        }
+    }
+
+    /**
      *
      * @param elementName
      * @return
@@ -732,6 +836,44 @@ public class Activity extends BaseClass {
             }
         } while (x < 72);
         return x;
+    }
+
+    private void verifyQuizAdministrationLinksPage(List<String> quizAdministrationLinks, String quizName) {
+        for (String quizAdministrationLink : quizAdministrationLinks) {
+            ip.isElementPresentByLINK(driver, quizAdministrationLink);
+            driver.findElement(By.linkText(quizAdministrationLink)).click();
+
+            switch (quizAdministrationLink) {
+                case "Edit settings":
+                    ip.isElementClickableByXpath(driver, "//input[@id='id_name']", 60);
+                    break;
+                case "Group overrides":
+                    ip.isElementPresentByXPATH(driver, "//input[@value='Add group override']");
+                    break;
+                case "User overrides":
+                    ip.isElementPresentByXPATH(driver, "//input[@value='Add user override']");
+                    break;
+                case "Edit quiz":
+                    ip.isElementPresentByXPATH(driver, "//div[4]/div/div/ul/li/a/span");
+                    break;
+                case "Preview":
+                    //LMSII-3372
+                    break;
+                case "Logs":
+                    Assert.assertEquals(quizName,
+                            new Select(driver.findElement(By.xpath("//select[@id='menumodid']"))).getFirstSelectedOption().getText());
+                    ip.isElementPresentByXPATH(driver, "//input[@value='Get these logs']");
+                    break;
+                case "Locally assigned roles":
+                    ip.isTextPresentByXPATH(driver, "//div[4]/div/h2", "Assign roles in Quiz: " + quizName);
+                    break;
+                case "Permissions":
+                    ip.isTextPresentByXPATH(driver, "//div[4]/div/h2", "Permissions in Quiz: " + quizName);
+                    break;
+                case "Check permissions":
+                    ip.isTextPresentByXPATH(driver, "//div[3]/div/h2", "Check permissions in Quiz: " + quizName);
+            }
+        }
     }
 
     /**

@@ -503,7 +503,24 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateToCourseRosters();
         a.verifySectionDropdownCourseRostersPage(ContentAdmin_Course_GroupCourseCreation.courseShortName, groupCourseName);
     }
-
+    
+    /**
+     * Verify UI of Quiz Reports Section
+     * 
+     * @param groupCourseName
+     * @param quizActivityName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GroupCourseQuiz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "quiz.pesVerifyUI"})
+    public void testPesAdminVerifyQuizUIPage(String groupCourseName, String quizActivityName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.navigateToQuiz(quizActivityName);
+        a.verifyQuizUIPage(quizActivityName);
+    }
+    
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * PesAdmin Set Faculty Login Message

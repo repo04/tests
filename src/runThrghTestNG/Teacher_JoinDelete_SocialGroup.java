@@ -211,6 +211,23 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
         a.navigateToSupport("Teacher");
         a.testSupportMobileAppURL("Teacher");
     }
+    
+    /**
+     * Verify UI of Quiz page
+     * 
+     * @param groupCourseName
+     * @param quizActivityName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GroupCourseQuiz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "quiz.teacherVerifyUI"})
+    public void testTeacherVerifyverifyQuizUIPage(String groupCourseName, String quizActivityName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.navigateToQuiz(quizActivityName);
+        a.verifyQuizUIPage(quizActivityName);
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

@@ -108,7 +108,7 @@ Automation can run when above steps are followed in order.
      ii> Navigate to *BASEDIR*
 	iii> Run Automation
 	       _______________________________________________________________________________________________
-		a> ant runsmoke/runcritical -DantUrl={gu-msn},{usc-mat} -DantBrwsr=chrome,ff -DantOS=win 
+		a> ant runsmoke/runcritical/runcriticaldata -DantUrl={gu-msn},{usc-mat} -DantBrwsr=chrome,ff -DantOS=win 
 		
 		b> debugSmoke takes 1 extra paramter i.e group name/s={The list of groups mentioned in ConfluencePage to run separated by comma}
 		   ______________________________________________________________________________________________________________________	

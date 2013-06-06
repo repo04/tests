@@ -1372,6 +1372,27 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySectionDropdownCourseRostersPage(courseShortName, groupCourse);
     }
+
+    /**
+     * Navigate to quiz page
+     * 
+     * @param quizActivityName
+     */
+    public void navigateToQuiz(String quizActivityName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActivityName + "')]")).click();
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/div[2]", "Quiz Reports");
+    }
+
+    /**
+     * Verify UI of Quiz Page
+     * 
+     * @param quizActivityName
+     */
+    public void verifyQuizUIPage(String quizActivityName) {
+        Activity a = new Activity();
+        a.verifyQuizUIPage(quizActivityName);        
+    }
+    
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block - Set faculty Login Message
