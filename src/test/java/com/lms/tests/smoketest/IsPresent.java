@@ -49,6 +49,20 @@ public class IsPresent {
     }
 
     /**
+     * Driver checks if the given TEXT is present in the specified element by
+     * ID till allocated time
+     *
+     * @param driver
+     * @param id
+     * @param text
+     * @param wait
+     */
+    public void isTextPresentByID(WebDriver driver, String id, String text, int wait) {
+        new WebDriverWait(driver, wait).until(ExpectedConditions.textToBePresentInElement(By.id(id), text));
+    }
+
+    
+    /**
      * Driver checks if an element containing Text is present by XPATH on the
      * DOM of a page
      *

@@ -362,6 +362,71 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.studentVerificationLoginMessage();
     } */
 
+     /**
+     * Verify Reveal Password button is visible to student for All In One Assignment Created with 
+     * Reveal Password Functionality
+     *
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityNameWithRevealPassword
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseallInOneAssignmentActivityNameWithRevealPassword", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"revealpasswordbutton.visible"})
+    public void testVerifyRevealPasswordButtonVisibleForStudent(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.verifyRevealPasswordButtonVisibleForStudent(allInOneAssignmentActivityNameWithRevealPassword);
+    }
+
+     /**
+     * Verify Student has read only access to Offline Activity created 
+     *
+     * @param groupCourseName
+     * @param offlineActivityName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseOfflineActivityName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"readonlyaccesstoofflineactivity.student"})
+    public void testverifyReadOnlyAccessToOfflineActivityForStudent(String groupCourseName, String offlineActivityName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.verifyReadOnlyAccessToOfflineActivityForStudent(offlineActivityName);
+    }
+
+     /**
+     * Student verify the elements on the right sidebar of course work page  
+     *
+     * @param groupCourseName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"rightSideBarCourseworkPage.student"})
+    public void testVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToCourseWorkPage();
+        a.verifyRightSidebarOfCourseWorkPage();
+    }
+     
+     /**
+     * Verify Reveal Password button is visible to student for All In One Assignment Created with 
+     * Reveal Password Functionality
+     *
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityNameWithRevealPassword
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseallInOneAssignmentActivityNameWithRevealPassword", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"markcomplete.allinone"})
+    public void testVerifyMarkCompleteCheckBoxForAllInOneAssignment(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.verifyMarkCompleteCheckBoxForAllInOneAssignment(allInOneAssignmentActivityNameWithRevealPassword);
+    }
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

@@ -30,6 +30,10 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     static String[][] activitiesArray = new String[1][4];
     static String[][] passwordQuizNameArray = new String[1][1];
     static String[][] glossaryActivityNameArray = new String[1][1];
+    static String[][] offlineActivityNameArray = new String[1][1];
+    static String[][] revealPasswordAssignmentNameArray = new String[1][1];
+    static String[][] liveSessionActivityNameArray = new String[1][1];
+    static String[][] offlineActivityFileNameArray = new String[1][1];
 
     /**
      * ITestContext contains all the information for a given test run. A Data
@@ -128,6 +132,46 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         }        
     }
 
+    @DataProvider(name = "RevealPasswordAssignmentName")
+    public static Object[][] RevealPasswordAssignmentName(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("DebugTests")) {
+            System.out.println("Inside AssignmentName: " + test);
+            return (revealPasswordAssignmentNameArray);
+        } else {
+            System.out.println("Inside AssignmentName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("allInOneAssignmentActivityNameWithRevealPassword")}};
+        }
+    }
+
+    @DataProvider(name = "OfflineActivityName")
+    public static Object[][] OfflineActivityName(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("DebugTests")) {
+            System.out.println("Inside AssignmentName: " + test);
+            return (offlineActivityNameArray);
+        } else {
+            System.out.println("Inside AssignmentName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("offlineActivityName")}};
+        }
+    }
+    
+    @DataProvider(name = "LiveSessionActivityName")
+    public static Object[][] LiveSessionActivityName(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests") || test.equalsIgnoreCase("DebugTests")) {
+            System.out.println("Inside AssignmentName: " + test);
+            return (liveSessionActivityNameArray);
+        } else {
+            System.out.println("Inside AssignmentName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("LiveSessionActivityName")}};
+        }
+    }
+    
+    @DataProvider(name = "OfflineActivityFile")
+    public static Object[][] OfflineActivityFile(ITestContext context) throws Exception {
+        offlineActivityFileNameArray[0][0] = "Offline activity.txt";
+        return (offlineActivityFileNameArray);        
+    }
+
+    
     @DataProvider(name = "GroupCourseActivities")
     public static Iterator<Object[]> GroupCourseActivities(ITestContext context) throws Exception {
         System.out.println("init GroupCourseActivities");
@@ -195,10 +239,29 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     }
 
     @DataProvider(name = "GroupCourseShortName")
-    public static Iterator<Object[]> GroupCourseShort(ITestContext context) throws Exception {
-        System.out.println("init GroupCourseShort");
+    public static Iterator<Object[]> GroupCourseShortName(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseShortName");
         return DataProviderUtility.cartesianProviderFrom(CourseShortName(context), Course(context));
     }
+    
+    @DataProvider(name = "GroupCourseOfflineActivityName")
+    public static Iterator<Object[]> GroupCourseOfflineActivityName(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseOfflineActivityName");
+        return DataProviderUtility.cartesianProviderFrom(Course(context), OfflineActivityName(context));
+    }
+
+    @DataProvider(name = "GroupCourseallInOneAssignmentActivityNameWithRevealPassword")
+    public static Iterator<Object[]> GroupCourseallInOneAssignmentActivityNameWithRevealPassword(ITestContext context) throws Exception {
+        System.out.println("GroupCourseallInOneAssignmentActivityNameWithRevealPassword");
+        return DataProviderUtility.cartesianProviderFrom(Course(context), RevealPasswordAssignmentName(context));
+    }
+    
+    @DataProvider(name = "GroupCourseOfflineActivityFile")
+    public static Iterator<Object[]> GroupCourseOfflineActivityFile(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseOfflineActivityFile");
+        return DataProviderUtility.cartesianProviderFrom(Course(context), OfflineActivityFile(context));
+    }
+
 
     /**
      * The annotated method will be run before the first test method in the
@@ -412,4 +475,72 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     public void testContentAdminLogOut() throws Exception {
         a.logOut();
     }
+    
+     /**
+     * Create - Offline Activity
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseOfflineActivityFile", groups = {"offlineactivity.creation"})
+    public void testContentAdminOfflineActivtyCreation(String groupCourseName, String txt) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        offlineActivityNameArray[0][0] = a.createOfflineActivity(txt);
+        Reporter.log("OfflineActivityName: " + offlineActivityNameArray[0][0], true);
+    }
+
+     /**
+     * Create All In One Assignment Activity with Reveal Password Setting
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"revealpasswordassignmentactivity.creation"})
+    public void testcreateAllInOneAssignmentActivityWithRevealPassword(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        revealPasswordAssignmentNameArray[0][0] = a.createAllInOneAssignmentActivityWithRevealPassword();
+        Reporter.log("RevealPasswordAssignmentNameArray: " + revealPasswordAssignmentNameArray[0][0], true);
+    }
+
+    
+    /**
+     * Create & Verify LiveSession Activity while selecting values other
+     * than "100 point and Credit/No Credit"
+     * 
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"livesessionactivity.creation"})    
+    public void testcreateLiveSessionActivity(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        liveSessionActivityNameArray[0][0] = a.createLiveSessiobActivity();
+        Reporter.log("LiveSessionActivityNameArrayName: " + liveSessionActivityNameArray[0][0], true);
+    }
+    
+     /**
+     * Disable Date in Course Settings Page and verify the same on
+     * CourseWork Page
+     * 
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"coursesettingspage.disabledate"})    
+    public void testDisableAndEnableDateInCourseSettingsPage(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.disableAndEnableDateInCourseSettingsPage();
+    }
+
+     /**
+     * Verify Edit Course Unit Dates when 'Disable Date in Section' check box
+     * is checked
+     * 
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"editcourseunitdates.disabledatechecked"})    
+    public void testVerifyEditCourseUnitDatesWhenDisableDateIsChecked(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.verifyEditCourseUnitDatesWhenDisableDateIsChecked();
+    }
+    
 }

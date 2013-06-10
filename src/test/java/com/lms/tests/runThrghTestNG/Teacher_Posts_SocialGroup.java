@@ -267,6 +267,22 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         Reporter.log("teacherGlossaryCategoryName: " + teacherGlossaryCategoryNameArray[0][0], true);
     }
     
+     /**
+     * Teacher verify the elements on the right sidebar of course work page  
+     *
+     * @param groupCourseName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"rightSideBarCourseworkPage.teacher"})
+    public void testVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToCourseWorkPage();
+        a.verifyRightSidebarOfCourseWorkPage();
+    }
+    
+    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Teacher verify Login message - Currently commented as it affects all system users

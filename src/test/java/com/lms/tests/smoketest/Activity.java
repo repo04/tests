@@ -16,6 +16,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Activity extends BaseClass {
 
@@ -23,6 +27,8 @@ public class Activity extends BaseClass {
     private String questionTitle, question, ans;
     private String name;
     private String intro;
+    private String unitEndDate;
+    private String unitStartDate;
     private String dateAndTime;
     StackTraceElement[] stackTraceElements;
     Actions a = new Actions();
@@ -740,5 +746,244 @@ public class Activity extends BaseClass {
      */
     public String getActivityName() {
         return this.name;
+    }
+    
+      /**
+     * Create & Verify Offline Activity
+     */
+    public void createOfflineActivity(String file) {
+        String filepath = null;
+        try {
+            filepath = directory.getCanonicalPath() + java.io.File.separator + "data" + java.io.File.separator;
+        } catch (IOException ex) {
+            Logger.getLogger(File.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Offline " + this.dateAndTime;
+        this.intro = test + " intro " + this.dateAndTime;
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Offline activity");
+        createActivity(this.name, this.intro);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))).clear();
+        Utility.readAndCopyContentsToTextField(filepath + file, xpv.getTokenValue("fieldActvyIntroXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isElementPresentContainsTextByXPATH(driver, "Whizbang");
+    }
+    
+      /**
+     * Verify Student has read only access to Offline Activity created
+     */    
+    public void readOnlyAccessToOfflineActivityForStudent(String offlineActivityName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + offlineActivityName + "')]")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH")))));
+    }
+    
+      /**
+     * Verify Reveal Password button is visible to student for All In One Assignment Created with 
+     * Reveal Password Functionality
+     */    
+    public void revealPasswordButtonVisibleForStudent(String allInOneAssignmentActivityNameWithRevealPassword) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityNameWithRevealPassword + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
+        ip.isTextPresentByID(driver, "ext-gen79", xpv.getTokenValue("revealDocumentPasswordConfirmationText"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
+        ip.isTextPresentByID(driver, "ext-gen79", xpv.getTokenValue("revealPasswordText"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("revealPasswordPopUpButtonXPATH"))).click();
+    }
+    
+      /**
+     * Create & Verify AllInOneAsgnmnt Activity with Reveal Password Functionality
+     */
+    public void createAllInOneAssignmentActivityWithRevealPassword() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " All in One -Reveal Password " + this.dateAndTime;
+        this.intro = test + " intro -Reveal Password " + this.dateAndTime;
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
+        createActivity(this.name, this.intro);
+        //Checks whether the document password check box is selected or not if not then select it
+        Boolean documentpasswordcheckbox = driver.findElement(By.xpath(xpv.getTokenValue("documentPasswordManagementCheckboxXPATH"))).isSelected();
+        if(documentpasswordcheckbox == false) {
+        driver.findElement(By.xpath(xpv.getTokenValue("documentPasswordManagementCheckboxXPATH"))).click();
+        } else {
+            Utility.illegalStateException("Document Password Management Checkbox varies, "
+                    + "expected: 'Not Checked' but actual: Checked'");
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("documentPasswordTextBoxXPATH"))).sendKeys(xpv.getTokenValue("documentPassword"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
+    }
+
+       /**
+     * Create & Verify LiveSession Activity while selecting values other
+     * than "100 point and Credit/No Credit"
+     */
+    public void createLiveSessionActivity() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + "Live Session" + this.dateAndTime;
+        this.intro = test + "Live Session" + this.dateAndTime;
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Livesession activity");
+        createActivity(this.name, this.intro);
+        driver.findElement(By.xpath(xpv.getTokenValue("gradeDropDownXPATH"))).click();
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("gradeDropDownXPATH")))).selectByVisibleText(xpv.getTokenValue("gradeSelect"));
+        ip.isTextPresentByID(driver, "ext-gen61", xpv.getTokenValue("nonAutoGradableGradePopUpText"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("nonAutoGradableGradePopUpYesButtonXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
+    }
+   
+     /**
+     * Verify the Graded And Submitted Column For Offline Activity In
+     * Grades Page
+     */
+    public void verifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(String offlineActivityName) {
+        int rows = driver.findElements(By.xpath(xpv.getTokenValue("gradeTableXPATH"))).size();
+        System.out.println("rows: " + rows);
+        for (int i = 2; i <= rows; i+=2) {
+             String assignmentName = driver.findElement(By.xpath(xpv.getTokenValue("gradeTableXPATH") + "[" + i + "]/td[1]")).getText();
+             if (assignmentName.equals(offlineActivityName)) {
+                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("gradeTableXPATH") + "[" + i + "]/td[3]" , "N/A");
+                 new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
+                    textToBePresentInElement(By.xpath(xpv.getTokenValue("gradeTableXPATH") + "[" + i + "]/td[4]"), "N/A")));
+                 break;
+             }
+             else {
+             System.out.println(offlineActivityName + "not found");
+             }
+        }
+    }
+    
+     /**
+     * Disable And Enable Date in Course Settings Page and verify the same on
+     * CourseWork Page
+     */
+    public void disableAndEnableDateInCourseSettingsPage() {
+        Calendar cal=Calendar.getInstance();
+        int currentYear = cal.get(Calendar.YEAR);
+        int currentMonth = cal.get(Calendar.MONTH);
+        int currentDate = cal.get(Calendar.DATE);
+        unitStartDate = Integer.toString(currentDate);
+        int currentMonthID = currentMonth + 1;
+        if (currentMonthID == 1 || currentMonthID == 3 || currentMonthID == 5 || currentMonthID == 7 || currentMonthID == 8 || currentMonthID == 10 || currentMonthID == 12) {
+                unitEndDate = "31";
+        } else if (currentMonthID == 4 || currentMonthID == 6 || currentMonthID == 9 || currentMonthID == 11) {
+                unitEndDate = "30";
+        } else if (currentMonthID == 2) {
+                if ((currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0) {
+                    unitEndDate = "29";
+                }
+                else {
+                    unitEndDate = "28";
+                }
+        }
+        System.out.println(unitEndDate);
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEditXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartDateXPATH"))).click();
+        String yearSelected = driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartYearXPATH"))).getText();
+        int yearSelectedStartDate = Integer.parseInt(yearSelected);
+        int yearDifference = currentYear - yearSelectedStartDate;
+        if (yearDifference > 0) {
+            int x = yearDifference * 12;
+            for(int i=0; i<x; i++) {    
+            driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarForwardButtonCSS"))).click();
+            }
+        } else if (yearDifference < 0) {
+            int x = yearDifference * 12;
+            for(int i=0; i<x; i++) {    
+            driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarBackwardButtonCSS"))).click();
+            }
+        }
+        driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
+        driver.findElement(By.xpath("//option[" + currentMonthID + "]")).click();
+        driver.findElement(By.linkText(unitStartDate)).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEndDateXPATH"))).click();
+        driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
+        driver.findElement(By.linkText(unitEndDate)).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("editCourseSettingLinkXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingsPageHeaderXPATH"), "Edit course settings");
+        //Checks whether the "Disable Date in sections" check box is selected or not - if yes then deselect it
+        Boolean disabledatecheckbox = driver.findElement(By.name("datelessflag")).isSelected();
+        if(disabledatecheckbox == true) {
+           driver.findElement(By.name("datelessflag")).click();
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("showHideContentsXPATH"), "Hide Contents");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("assignmentRowUnderShowContentsXPATH"));
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("editCourseSettingLinkXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingsPageHeaderXPATH"), "Edit course settings");
+        //Checks whether the "Disable Date in sections" check box is selected or not - if no then select it
+        disabledatecheckbox = driver.findElement(By.name("datelessflag")).isSelected();
+        if(disabledatecheckbox == false) {
+           driver.findElement(By.name("datelessflag")).click();
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("showHideContentsXPATH"), "Show Contents");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.xpath(xpv.getTokenValue("assignmentRowUnderShowContentsXPATH")))));
+    }
+    
+     /**
+     * Verify Edit Course Unit Dates when 'Disable Date in Section' check box
+     * is checked
+     */
+    public void verifyEditCourseUnitDatesWhenDisableDateIsChecked() {
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("editCourseSettingLinkXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingsPageHeaderXPATH"), "Edit course settings");
+        //Checks whether the "Disable Date in sections" check box is selected or not - if no then select it
+        Boolean disabledatecheckbox = driver.findElement(By.name("datelessflag")).isSelected();
+        if(disabledatecheckbox == false) {
+           driver.findElement(By.name("datelessflag")).click();
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEditXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartDateXPATH"))).click();
+        driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
+        driver.findElement(By.linkText("1")).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEndDateXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS")))));        
+        driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.linkText("15"))));
+        driver.findElement(By.linkText("15")).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEditXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("courseUnitStartDateXPATH")), "01"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElementValue(By.xpath(xpv.getTokenValue("courseUnitEndDateXPATH")), "15"));
+    }
+    
+     /**
+     * Verify the elements on the right sidebar of course work page 
+     */
+    public void verifyRightSidebarOfCourseWorkPage() {
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("toolBoxTextXPATH"), "Tool Box");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("toolBoxTextBoxXPATH"));
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("upcomingEventsTextXPATH"), "Upcoming Events");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("calendarTextXPATH"), "Calendar");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("calendarXPATH"));
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("resourcesTextXPATH"), "Resources");
+    }
+        
+        
+     /**
+     * Verify the elements on the right sidebar of course work page 
+     */
+    public void verifyMarkCompleteCheckBoxForAllInOneAssignment(String allInOneAssignmentActivityNameWithRevealPassword) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityNameWithRevealPassword + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("markCompletecheckBoxXPATH"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("markCompletecheckBoxXPATH")))));
     }
 }

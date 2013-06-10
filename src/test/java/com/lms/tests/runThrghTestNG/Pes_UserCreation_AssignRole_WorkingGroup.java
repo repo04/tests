@@ -468,8 +468,25 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateTo2torSiteAdministrator();
         a.navigateToCourseRosters();
         a.verifySectionDropdownCourseRostersPage(courseShortName, groupCourseName);
-        }    
-
+        }
+    
+     /**
+     * Verify the Graded And Submitted Column For Offline Activity In
+     * Grades Page
+     * 
+     * @param groupCourseName
+     * @param offlineActivityName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseOfflineActivityName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"gradedandsubmittedcolumnsofflineactivity.pesadmin"})
+    public void testVerifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(String groupCourseName, String offlineActivityName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToGrades();
+        a.verifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(offlineActivityName);
+    }
+    
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * PesAdmin Set Faculty Login Message

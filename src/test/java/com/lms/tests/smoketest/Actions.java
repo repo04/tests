@@ -1470,4 +1470,116 @@ public class Actions extends BaseClass {
         driver.findElement(By.linkText("Student Support")).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
     }*/
+    
+    /**
+     * Create OfflineActivity
+     *
+     * @param file
+     * @return
+     */
+    public String createOfflineActivity(String file) {
+        Activity actvty = new Activity();
+        actvty.createOfflineActivity(file);
+        return actvty.getActivityName();
+    }
+
+    /**
+     * Create All In One Assignment Activity with Reveal Password Setting
+     *
+     * @return
+     */
+    public String createAllInOneAssignmentActivityWithRevealPassword() {
+        Activity actvty = new Activity();
+        actvty.createAllInOneAssignmentActivityWithRevealPassword();
+        return actvty.getActivityName();
+    }
+
+    /**
+     * Create & Verify LiveSession Activity while selecting values other
+     * than "100 point and Credit/No Credit"
+     *
+     * @return
+     */
+    public String createLiveSessiobActivity() {
+        Activity actvty = new Activity();
+        actvty.createLiveSessionActivity();
+        return actvty.getActivityName();
+    }
+
+    /**
+     * Verify Reveal Password button is visible to student for All In One Assignment Created with 
+     * Reveal Password Functionality
+     *
+     * @param allInOneAssignmentActivityNameWithRevealPassword
+     */
+    public void verifyRevealPasswordButtonVisibleForStudent(String allInOneAssignmentActivityNameWithRevealPassword) {
+        Activity actvty = new Activity();
+        actvty.revealPasswordButtonVisibleForStudent(allInOneAssignmentActivityNameWithRevealPassword);
+    }
+
+    /**
+     * Verify Student has read only access to Offline Activity created
+     *
+     * @param offlineActivityName
+     */
+    public void verifyReadOnlyAccessToOfflineActivityForStudent(String offlineActivityName) {
+        Activity actvty = new Activity();
+        actvty.readOnlyAccessToOfflineActivityForStudent(offlineActivityName);
+    }
+
+    /**
+     * Verify the Graded And Submitted Column For Offline Activity In
+     * Grades Page
+     * 
+     * @param offlineActivityName
+     */
+    public void verifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(String offlineActivityName) {
+        Activity actvty = new Activity();
+        actvty.verifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(offlineActivityName);
+    }
+
+     /**
+     * Disable Date in Course Settings Page and verify the same on
+     * CourseWork Page
+     * 
+     */
+    public void disableAndEnableDateInCourseSettingsPage() {
+        Activity actvty = new Activity();
+        actvty.disableAndEnableDateInCourseSettingsPage();
+    }
+
+     /**
+     * Verify Edit Course Unit Dates when 'Disable Date in Section' check box
+     * is checked
+     * 
+     */
+    public void verifyEditCourseUnitDatesWhenDisableDateIsChecked() {
+        Activity actvty = new Activity();
+        actvty.verifyEditCourseUnitDatesWhenDisableDateIsChecked();
+    }
+    
+     /**
+     * Navigate To course work page 
+     */
+    public void navigateToCourseWorkPage() {
+        ip.isElementClickableByXpath(driver, "//li[2]/a/span", 60);
+        driver.findElement(By.xpath("//li[2]/a/span")).click();
+        ip.isTextPresentByXPATH(driver, "//div[@id='region-main']/div/div/h2", "Coursework");
+    }    
+   
+     /**
+     * Verify the elements on the right sidebar of course work page 
+     */
+    public void verifyRightSidebarOfCourseWorkPage() {
+        Activity actvty = new Activity();
+        actvty.verifyRightSidebarOfCourseWorkPage();
+    }    
+    
+    /**
+    * Verify the elements on the right sidebar of course work page 
+    */
+    public void verifyMarkCompleteCheckBoxForAllInOneAssignment(String AssignmentName) {
+        Activity actvty = new Activity();
+        actvty.verifyMarkCompleteCheckBoxForAllInOneAssignment(AssignmentName);
+    }    
 }
