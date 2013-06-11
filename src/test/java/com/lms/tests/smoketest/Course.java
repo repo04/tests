@@ -376,13 +376,6 @@ public class Course extends BaseClass {
     }
     
     /**
-     * @return CourseName
-     */
-    public String getCourseShortName() {
-        return this.courseShortName;
-    }
-
-    /**
      * @return GroupCourseName
      */
     public String getGroupCourseName() {

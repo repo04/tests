@@ -117,14 +117,6 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * @return CourseName
-     */
-    public String getCourseShortName() {
-        Course cr = new Course();
-        return cr.getCourseShortName();
-    }
-    
-    /**
      * Delete Group Course
      *
      * @param groupCourseName
