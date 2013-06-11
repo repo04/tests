@@ -103,7 +103,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
         ScreenShot(tr);
-        markJobAsFailed();
+        //markJobAsFailed();
     }
 
     private void markJobAsFailed() {
@@ -130,7 +130,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
-        markJobAsPassed();
+        //markJobAsPassed();
     }
 
     private void markJobAsPassed() {
