@@ -860,6 +860,7 @@ public class Activity extends BaseClass {
                     //LMSII-3372
                     break;
                 case "Logs":
+                    ip.isElementClickableByXpath(driver, "//select[@id='menumodid']", 60);
                     Assert.assertEquals(quizName,
                             new Select(driver.findElement(By.xpath("//select[@id='menumodid']"))).getFirstSelectedOption().getText());
                     ip.isElementPresentByXPATH(driver, "//input[@value='Get these logs']");

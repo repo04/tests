@@ -64,6 +64,7 @@ public class File extends BaseClass {
             ip.isTextPresentByXPATH(driver, "//div[" + i + "]/table/tbody/tr/td/div/a", file);
             i++;
         }
+        ip.invisibilityOfElementByXpath(driver, "//input[@id='upload-btn']");
     }
 
     /**
