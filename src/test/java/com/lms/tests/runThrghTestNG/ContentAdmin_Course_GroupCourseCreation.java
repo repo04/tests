@@ -202,8 +202,9 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         courseName = a.createCourse();
-        courseShortName = a.getShortCourseName();
+        courseShortName = a.getCourseShortName();
         Reporter.log("courseName: " + courseName, true);
+        Reporter.log("courseShortName: " + courseShortName, true);
 
         a.navigateToMyCourse();
         a.navigateToCourseCategories();

@@ -119,9 +119,9 @@ public class Actions extends BaseClass {
     /**
      * @return CourseName
      */
-    public String getShortCourseName() {
+    public String getCourseShortName() {
         Course cr = new Course();
-        return cr.getShortCourseName();
+        return cr.getCourseShortName();
     }
     
     /**
@@ -928,9 +928,9 @@ public class Actions extends BaseClass {
     /**
      * Verify Personal Information
      */
-    public void verifyPersonalInformation() {
+    public void verifyPersonalInformation(String role) {
         Profile pf = new Profile();
-        pf.verifyPersonalInformation();
+        pf.verifyPersonalInformation(role);
     }
 
     /**
@@ -1108,9 +1108,9 @@ public class Actions extends BaseClass {
      */
     public void navigateToSystemCompatibility() {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))));
+        String HandleBefore = driver.getWindowHandle();
         driver.findElement(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
-        String HandleBefore = driver.getWindowHandle();
         for (String handle : driver.getWindowHandles()) {
             driver.switchTo().window(handle);
             if (driver.getTitle().contains("about:blank")) {

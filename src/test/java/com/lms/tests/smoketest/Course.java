@@ -375,7 +375,7 @@ public class Course extends BaseClass {
     /**
      * @return CourseName
      */
-    public String getShortCourseName() {
+    public String getCourseShortName() {
         return this.courseShortName;
     }
 

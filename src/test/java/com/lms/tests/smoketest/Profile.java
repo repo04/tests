@@ -8,15 +8,27 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 
 /**
  *
- * 
+ *
  */
 public class Profile extends BaseClass {
 
-    void verifyPersonalInformation() {
+    void verifyPersonalInformation(String role) {
         ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[4]", "Basic Information");
         ip.isTextPresentByXPATH(driver, "//div[6]/div/div", "Name:");
         ip.isTextPresentByXPATH(driver, "//div[6]/div[3]/div", "Birthday:");
         ip.isTextPresentByXPATH(driver, "//div[6]/div[4]/div", "Gender:");
+        switch (role) {
+            case "teacher":
+                ip.isTextPresentByXPATH(driver, "//span[3]", "Lecturer");
+                ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Female");
+                break;
+            case "coordinator":
+                ip.isTextPresentByXPATH(driver, "//span[3]", "Organizer");
+                break;
+            default:
+                ip.isTextPresentByXPATH(driver, "//span[3]", "Pupil");
+                ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Male");
+        }
 
         ip.isTextPresentByXPATH(driver, "//div[10]/div/div", "Email:");
         ip.isTextPresentByXPATH(driver, "//div[10]/div[2]/div", "Website:");
@@ -172,6 +184,18 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "Do you have Public Health experience? What state or country?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Past Education:");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Why are you pursuing an MPH?");
+                break;
+            case "corp-son":
+                ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Movies:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Place you'd most like to travel in the world:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Person/People you most admire:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "What is your hometown?");
+                ip.isTextPresentByXPATH(driver, "//div[16]", "Educational Information");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div/div", "What School do you attend?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "What's your major(s)?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[3]/div", "What internships have you had?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "Why did you decide to take Semester Online?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Estimated graduation date");
         }
     }
 }
