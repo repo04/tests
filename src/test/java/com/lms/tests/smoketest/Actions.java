@@ -110,7 +110,7 @@ public class Actions extends BaseClass {
      *
      * @return
      */
-    public String createCourse() {
+    public String[] createCourse() {
         Course cr = new Course();
         cr.createCourse();
         return cr.getCourseName();

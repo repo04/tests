@@ -20,6 +20,7 @@ import com.lms.tests.smoketest.Actions;
  */
 public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
+    public static String courseDetails[] = new String[2];
     public static String courseName;
     public static String courseShortName;
     Actions a = new Actions();
@@ -112,7 +113,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         } else {
             System.out.println("Inside GlossaryName: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("glossaryActivityName")}};
-        }        
+        }
     }
 
     @DataProvider(name = "GroupCourseActivities")
@@ -201,8 +202,10 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     public void testContentAdminCourseGroupCourseCreation() throws Exception {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
-        courseName = a.createCourse();
-        courseShortName = a.getCourseShortName();
+        courseDetails = a.createCourse();
+        //courseShortName = a.getCourseShortName();
+        courseName = courseDetails[0];
+        courseShortName = courseDetails[1];
         Reporter.log("courseName: " + courseName, true);
         Reporter.log("courseShortName: " + courseShortName, true);
 
@@ -243,12 +246,12 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         activitiesArray[0][3] = a.createPageResource();
         Reporter.log("pageActivityName: " + activitiesArray[0][3], true);
     }
-    
+
     /**
      * Create Quiz activity
-     * 
+     *
      * @param groupCourseName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "Course", groups = {"criticalDataSmoke"})
     public void testContentAdminQuizCreation(String groupCourseName) throws Exception {
@@ -357,12 +360,12 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.navigateToSettings();
         a.verifySettings();
     }
-    
+
     /**
      * Content Admin create Lesson Activity
-     * 
+     *
      * @param groupCourseName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "Course", groups = {"lesson.createActivity"})
     public void testContentAdminCreateLessonActivity(String groupCourseName) throws Exception {
@@ -370,10 +373,10 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.selectCourse(groupCourseName);
         a.createLessonActivity();
     }
-    
+
     /**
      * Content Admin verify Calendar on Home Page
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "calendar.contentAdminVerify"})
