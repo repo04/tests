@@ -25,7 +25,7 @@
                 <include name="prerequisite"/>
                 <include name="course.creation"/>
                 <include name="groupcourse.deletion"/>
-                <include name="course.archive"/>                    
+                <include name="course.archive"/>                                    
             </define>            
             <define name="ActivitiesCreation_AddQuizQuestion_Deletion">
                 <include name="prerequisite"/>
@@ -54,7 +54,9 @@
                 <include name="users.creation"/>
                 <include name="users.assignRole"/>
                 <include name="users.unAssignRole"/>
-                <include name="users.delete"/>         
+                <include name="users.delete"/>
+                <!--include name="users.coordinatorCreation"/>
+                <include name="users.assignRoleToCoordinator"/-->         
             </define>
             <define name="WorkingGroup">
                 <include name="prerequisite"/>
@@ -107,7 +109,8 @@
                 <include name="wall.teacherVerifyPESCoursePosts"/> 
                 <include name="wall.studentVerifyPESCoursePosts"/>
                 <include name="wall.studentCommentOnTeacherCoursePost"/> 
-                <include name="wall.studentRecommendPost"/>   
+                <include name="wall.studentRecommendPost"/>
+                <include name="wall.studentHTMLWallPost"/>   
                 <include name="wall.teacherVerifyStudentsPostRecommendation"/>
                 <include name="wall.teacherVerifyStudentsCommentOnPost"/> 
                 <include name="wall.teacherDeleteCourseURLPost"/>
@@ -169,7 +172,8 @@
                 <include name="settings.contentAdminVerify"/>
                 <include name="settings.pesAdminVerify"/>
                 <include name="settings.teacherVerify"/>
-                <include name="settings.studentVerify"/>                                
+                <include name="settings.studentVerify"/>
+                <!--include name="settings.coordinatorVerify"/-->                                
             </define>
             <define name="Glossary">
                 <include name="prerequisite"/>
@@ -239,7 +243,6 @@
                 <include name="rightSideBarCourseworkPage.student"/>
                 <include name="markcomplete.allinone"/>
             </define>
-
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     

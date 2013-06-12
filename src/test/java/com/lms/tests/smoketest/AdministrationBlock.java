@@ -238,11 +238,10 @@ public class AdministrationBlock extends BaseClass {
     public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sectionColumnXPATH"), "Section", 60);
         ip.isElementClickableByXpath(driver, "//td[3]/div/div/a/img", 60);
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("coursesDropdownXPATH"), 60);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).selectByVisibleText(courseShortName);
         WebElement courseNameSelected = new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).getFirstSelectedOption();
         courseNameSelected.isSelected();
-        ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", courseShortName);
-        ip.isElementClickableByXpath(driver, "//td[3]/div/div/a/img", 60);
         driver.findElement(By.xpath(xpv.getTokenValue("searchByNameTxtBoxXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("sectionDropdownXPATH"), 60);
         Select sectionDropdown = new Select(driver.findElement(By.xpath(xpv.getTokenValue("sectionDropdownXPATH"))));

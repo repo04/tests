@@ -13,6 +13,7 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 public class Course extends BaseClass {
 
     Date now = new Date();
+    private String courseDetails[] = new String[2];
     private String courseName;
     private String courseShortName;
     private String groupCourseName;
@@ -368,22 +369,24 @@ public class Course extends BaseClass {
     /**
      * @return CourseName
      */
-    public String getCourseName() {
-        return this.courseName;
+    public String[] getCourseName() {
+        courseDetails[0] = this.courseName;
+        courseDetails[1] = this.courseShortName;
+        return courseDetails;
     }
     
-    /**
-     * @return CourseName
-     */
-    public String getShortCourseName() {
-        return this.courseShortName;
-    }
-
     /**
      * @return GroupCourseName
      */
     public String getGroupCourseName() {
         return this.groupCourseName;
+    }
+
+    /**
+    * @return CourseShortName
+    */
+    public String getShortCourseName() {
+        return this.courseShortName;
     }
 
     /**

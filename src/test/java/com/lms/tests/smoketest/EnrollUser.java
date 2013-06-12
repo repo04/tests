@@ -57,6 +57,11 @@ public class EnrollUser extends BaseClass {
                 new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctRoleXPATH")))).selectByValue(userRole);
                 break;
 
+            case "coordin":
+                userRole = "9";
+                new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctRoleXPATH")))).selectByValue(userRole);
+                break;
+
             default:
                 SeleneseTestBase.fail("'teacher'/'student' not found in userName: " + user);
         }
@@ -144,6 +149,10 @@ public class EnrollUser extends BaseClass {
 
             case "5":
                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Student");
+                break;
+
+            case "9":
+                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Course Coordinator");
                 break;
 
             default:
