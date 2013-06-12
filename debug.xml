@@ -227,17 +227,17 @@
             </define> 
             <define name="Content">
                 <include name="prerequisite"/>
-                <!--include name="offlineactivity.creation"/>
+                <include name="offlineactivity.creation"/>
                 <include name="revealpasswordassignmentactivity.creation"/>
                 <include name="livesessionactivity.creation"/>
                 <include name="readonlyaccesstoofflineactivity.student"/>
                 <include name="revealpasswordbutton.visible"/>
                 <include name="gradedandsubmittedcolumnsofflineactivity.pesadmin"/>
-                <include name="coursesettingspage.disabledate"/-->
+                <include name="coursesettingspage.disabledate"/>
                 <include name="editcourseunitdates.disabledatechecked"/>
-                <!--include name="rightSideBarCourseworkPage.teacher"/>
+                <include name="rightSideBarCourseworkPage.teacher"/>
                 <include name="rightSideBarCourseworkPage.student"/>
-                <include name="markcomplete.allinone"/-->
+                <include name="markcomplete.allinone"/>
             </define>
 
             <!--run>

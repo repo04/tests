@@ -907,7 +907,8 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath("//option[" + currentMonthID + "]")).click();
         driver.findElement(By.linkText(unitStartDate)).click();
         driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEndDateXPATH"))).click();
-        driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("courseUnitCalendarMonthXPATH")))));        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.linkText(unitEndDate))));
         driver.findElement(By.linkText(unitEndDate)).click();
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
@@ -955,8 +956,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
         driver.findElement(By.linkText("1")).click();
         driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEndDateXPATH"))).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS")))));        
-        driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("courseUnitCalendarMonthXPATH")))));        
         new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.linkText("15"))));
         driver.findElement(By.linkText("15")).click();
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
