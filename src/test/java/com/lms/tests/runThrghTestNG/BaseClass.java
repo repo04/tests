@@ -27,7 +27,7 @@ import org.testng.Reporter;
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     //Add your username & key here
-    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("jchakraborty", "57bb5a35-dfc0-450e-99e3-9c5474d7ae46");
+    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
     public static XpathValues xpv, ldv;
     public static RemoteWebDriver driver;
     public IsPresent ip = new IsPresent();
@@ -101,6 +101,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         }
         capabilities.setCapability("name", this.test);
         capabilities.setCapability("max-duration", 3600);
+        capabilities.setCapability("build", "WINDOWS 7");
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);
         driver.setFileDetector(new LocalFileDetector());

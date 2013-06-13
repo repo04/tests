@@ -117,15 +117,13 @@ public class Actions extends BaseClass {
     }
 
     /**
-    * @return CourseShortName
-    */
+     * @return CourseShortName
+     */
     public String getShortCourseName() {
         Course cr = new Course();
         return cr.getShortCourseName();
     }
-        
-    
-    
+
     /**
      * Delete Group Course
      *
@@ -305,7 +303,7 @@ public class Actions extends BaseClass {
     public void navigateToGrades() {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
     }
 
     /**
@@ -1075,7 +1073,7 @@ public class Actions extends BaseClass {
     public void testSupportPage(String role) {
         Support ss = new Support();
         ss.verifySupport(role);
-     }
+    }
 
     /**
      * Verifies Mobile section on Support page
@@ -1277,9 +1275,10 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminReportEmailNotInDomainPage();
     }
-    
+
     /**
-     * Verify pes admin is able to see the related sections to the courses in the section drop down
+     * Verify pes admin is able to see the related sections to the courses in
+     * the section drop down
      */
     public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
         AdministrationBlock ablock = new AdministrationBlock();
@@ -1359,7 +1358,7 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminReportCourseRostersPage();
     }
-    
+
     /**
      * Verify 2tor Administrative Block -Deleted Live Session Section
      */
@@ -1367,7 +1366,7 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock();
         ablock.verifySiteAdminReportDeletedLiveSessionPage();
     }
-    
+
     /**
      * Verify 2tor Administrative Block -Student Engagement Report UI Verify
      */
@@ -1468,21 +1467,21 @@ public class Actions extends BaseClass {
      * Navigate To Student Support page
      */
     /*public void navigateToStudentSupportPage() {
-        ip.isElementPresentByLINK(driver, "Student Support");
-        driver.findElement(By.linkText("Student Support")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
-    }*/
+     ip.isElementPresentByLINK(driver, "Student Support");
+     driver.findElement(By.linkText("Student Support")).click();
+     ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
+     }*/
     
     /**
-     * Create OfflineActivity
+     * Create Offline Activity
      *
      * @param file
      * @return
      */
     public String createOfflineActivity(String file) {
-        Activity actvty = new Activity();
-        actvty.createOfflineActivity(file);
-        return actvty.getActivityName();
+        Activity activity = new Activity();
+        activity.createOfflineActivity(file);
+        return activity.getActivityName();
     }
 
     /**
@@ -1491,32 +1490,31 @@ public class Actions extends BaseClass {
      * @return
      */
     public String createAllInOneAssignmentActivityWithRevealPassword() {
-        Activity actvty = new Activity();
-        actvty.createAllInOneAssignmentActivityWithRevealPassword();
-        return actvty.getActivityName();
+        Activity activity = new Activity();
+        activity.createAllInOneAssignmentActivityWithRevealPassword();
+        return activity.getActivityName();
     }
 
     /**
-     * Create & Verify LiveSession Activity while selecting values other
-     * than "100 point and Credit/No Credit"
+     * Create & Verify LiveSession Activity while selecting values other than
+     * "100 point and Credit/No Credit"
      *
      * @return
      */
     public String createLiveSessiobActivity() {
-        Activity actvty = new Activity();
-        actvty.createLiveSessionActivity();
-        return actvty.getActivityName();
+        Activity activity = new Activity();
+        activity.createLiveSessionActivity();
+        return activity.getActivityName();
     }
 
     /**
-     * Verify Reveal Password button is visible to student for All In One Assignment Created with 
-     * Reveal Password Functionality
+     * View Reveal Password button for All In One Assignment
      *
      * @param allInOneAssignmentActivityNameWithRevealPassword
      */
-    public void verifyRevealPasswordButtonVisibleForStudent(String allInOneAssignmentActivityNameWithRevealPassword) {
-        Activity actvty = new Activity();
-        actvty.revealPasswordButtonVisibleForStudent(allInOneAssignmentActivityNameWithRevealPassword);
+    public void viewRevealPasswordButtonForAllInOneAssignemnt(String allInOneAssignmentActivityNameWithRevealPassword) {
+        Activity activity = new Activity();
+        activity.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
     }
 
     /**
@@ -1524,64 +1522,45 @@ public class Actions extends BaseClass {
      *
      * @param offlineActivityName
      */
-    public void verifyReadOnlyAccessToOfflineActivityForStudent(String offlineActivityName) {
-        Activity actvty = new Activity();
-        actvty.readOnlyAccessToOfflineActivityForStudent(offlineActivityName);
+    public void verifyReadOnlyAccessToOfflineActivity(String offlineActivityName) {
+        Activity activity = new Activity();
+        activity.readOnlyAccessToOfflineActivity(offlineActivityName);
     }
 
     /**
-     * Verify the Graded And Submitted Column For Offline Activity In
-     * Grades Page
-     * 
+     * Verify graded & submitted section of Offline Activity
+     *
      * @param offlineActivityName
      */
-    public void verifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(String offlineActivityName) {
-        Activity actvty = new Activity();
-        actvty.verifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(offlineActivityName);
+    public void verifyOfflineActivitySubmittedAndGradedSection(String offlineActivityName) {
+        Activity activity = new Activity();
+        activity.verifyOfflineActivitySubmittedAndGradedSection(offlineActivityName);
     }
 
-     /**
-     * Disable Date in Course Settings Page and verify the same on
-     * CourseWork Page
-     * 
+    /**
+     * Verify coursework unit is Expandable or not while changing 'Disable date
+     * in Section' Field
+     *
      */
-    public void disableAndEnableDateInCourseSettingsPage() {
-        Activity actvty = new Activity();
-        actvty.disableAndEnableDateInCourseSettingsPage();
+    public void courseworkUnitExpandableOrNotWhileChangingDisableDateField() {
+        Activity activity = new Activity();
+        activity.courseworkUnitExpandableOrNotWhileChangingDisableDateField();
     }
 
-     /**
-     * Verify Edit Course Unit Dates when 'Disable Date in Section' check box
-     * is checked
-     * 
-     */
-    public void verifyEditCourseUnitDatesWhenDisableDateIsChecked() {
-        Activity actvty = new Activity();
-        actvty.verifyEditCourseUnitDatesWhenDisableDateIsChecked();
-    }
-    
-     /**
-     * Navigate To course work page 
+    /**
+     * Navigate To course work page
      */
     public void navigateToCourseWorkPage() {
         ip.isElementClickableByXpath(driver, "//li[2]/a/span", 60);
         driver.findElement(By.xpath("//li[2]/a/span")).click();
         ip.isTextPresentByXPATH(driver, "//div[@id='region-main']/div/div/h2", "Coursework");
-    }    
-   
-     /**
-     * Verify the elements on the right sidebar of course work page 
+    }
+
+    /**
+     * Verify the elements on the right sidebar of course work page
      */
     public void verifyRightSidebarOfCourseWorkPage() {
         Activity actvty = new Activity();
         actvty.verifyRightSidebarOfCourseWorkPage();
-    }    
-    
-    /**
-    * Verify the elements on the right sidebar of course work page 
-    */
-    public void verifyMarkCompleteCheckBoxForAllInOneAssignment(String AssignmentName) {
-        Activity actvty = new Activity();
-        actvty.verifyMarkCompleteCheckBoxForAllInOneAssignment(AssignmentName);
-    }    
+    }
 }

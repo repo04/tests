@@ -251,9 +251,9 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         return DataProviderUtility.cartesianProviderFrom(Course(context), OfflineActivityName(context));
     }
 
-    @DataProvider(name = "GroupCourseallInOneAssignmentActivityNameWithRevealPassword")
-    public static Iterator<Object[]> GroupCourseallInOneAssignmentActivityNameWithRevealPassword(ITestContext context) throws Exception {
-        System.out.println("GroupCourseallInOneAssignmentActivityNameWithRevealPassword");
+    @DataProvider(name = "GroupCourseAllInOneActivityNameWithRevealPassword")
+    public static Iterator<Object[]> GroupCourseAllInOneActivityNameWithRevealPassword(ITestContext context) throws Exception {
+        System.out.println("GroupCourseAllInOneActivityNameWithRevealPassword");
         return DataProviderUtility.cartesianProviderFrom(Course(context), RevealPasswordAssignmentName(context));
     }
     
@@ -289,12 +289,11 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         courseShortName = courseDetails[1];
         Reporter.log("courseName: " + courseName, true);
         Reporter.log("courseShortName: " + courseShortName, true);
+
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         groupCourseNameArray[0][0] = a.createGrpCourse(courseName);
         Reporter.log("groupCourseName: " + groupCourseNameArray[0][0], true);
-        courseShortNameArray[0][0] = a.getShortCourseName();
-        Reporter.log("courseShortName: " + courseShortNameArray[0][0], true);
     }
 
     /**
@@ -381,6 +380,49 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         passwordQuizNameArray[0][0] = a.createPasswordQuizActivity();
         Reporter.log("passwordQuizActivityName: " + passwordQuizNameArray[0][0], true);
+    }
+    
+    /**
+     * Create Offline Activity
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseOfflineActivityFile", groups = {"regressionSmoke", 
+        "content.offlineActivityCreationWithHtmlFile"})
+    public void testContentAdminCreateOfflineActivityWithHtmlFile(String groupCourseName, String txt) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        offlineActivityNameArray[0][0] = a.createOfflineActivity(txt);
+        Reporter.log("OfflineActivityName: " + offlineActivityNameArray[0][0], true);
+    }
+
+     /**
+     * Create All In One Assignment Activity with Reveal Password Setting
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"regressionSmoke", 
+        "content.allInOneActivityCreationWithRevealPassword"})
+    public void testContentAdminCreateAllInOneWithRevealPassword(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        revealPasswordAssignmentNameArray[0][0] = a.createAllInOneAssignmentActivityWithRevealPassword();
+        Reporter.log("RevealPasswordAllInOneName: " + revealPasswordAssignmentNameArray[0][0], true);
+    }
+
+    
+    /**
+     * Create & Verify LiveSession Activity while selecting values other
+     * than "100 point and Credit/No Credit"
+     * 
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", groups = {"content.liveSessionActivityCreationWithoutFullGrade"})    
+    public void testContentAdminCreateLiveSessionActivityWithoutFullGrade(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        liveSessionActivityNameArray[0][0] = a.createLiveSessiobActivity();
+        Reporter.log("LiveSessionActivityName: " + liveSessionActivityNameArray[0][0], true);
     }
 
     /**
@@ -478,72 +520,4 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     public void testContentAdminLogOut() throws Exception {
         a.logOut();
     }
-    
-     /**
-     * Create - Offline Activity
-     *
-     * @throws Exception
-     */
-    @Test(dataProvider = "GroupCourseOfflineActivityFile", groups = {"offlineactivity.creation"})
-    public void testContentAdminOfflineActivtyCreation(String groupCourseName, String txt) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        offlineActivityNameArray[0][0] = a.createOfflineActivity(txt);
-        Reporter.log("OfflineActivityName: " + offlineActivityNameArray[0][0], true);
-    }
-
-     /**
-     * Create All In One Assignment Activity with Reveal Password Setting
-     *
-     * @throws Exception
-     */
-    @Test(dataProvider = "Course", groups = {"revealpasswordassignmentactivity.creation"})
-    public void testcreateAllInOneAssignmentActivityWithRevealPassword(String groupCourseName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        revealPasswordAssignmentNameArray[0][0] = a.createAllInOneAssignmentActivityWithRevealPassword();
-        Reporter.log("RevealPasswordAssignmentNameArray: " + revealPasswordAssignmentNameArray[0][0], true);
-    }
-
-    
-    /**
-     * Create & Verify LiveSession Activity while selecting values other
-     * than "100 point and Credit/No Credit"
-     * 
-     * @throws Exception
-     */
-    @Test(dataProvider = "Course", groups = {"livesessionactivity.creation"})    
-    public void testcreateLiveSessionActivity(String groupCourseName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        liveSessionActivityNameArray[0][0] = a.createLiveSessiobActivity();
-        Reporter.log("LiveSessionActivityNameArrayName: " + liveSessionActivityNameArray[0][0], true);
-    }
-    
-     /**
-     * Disable Date in Course Settings Page and verify the same on
-     * CourseWork Page
-     * 
-     * @throws Exception
-     */
-    @Test(dataProvider = "Course", groups = {"coursesettingspage.disabledate"})    
-    public void testDisableAndEnableDateInCourseSettingsPage(String groupCourseName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        a.disableAndEnableDateInCourseSettingsPage();
-    }
-
-     /**
-     * Verify Edit Course Unit Dates when 'Disable Date in Section' check box
-     * is checked
-     * 
-     * @throws Exception
-     */
-    @Test(dataProvider = "Course", groups = {"editcourseunitdates.disabledatechecked"})    
-    public void testVerifyEditCourseUnitDatesWhenDisableDateIsChecked(String groupCourseName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        a.verifyEditCourseUnitDatesWhenDisableDateIsChecked();
-    }
-    
 }

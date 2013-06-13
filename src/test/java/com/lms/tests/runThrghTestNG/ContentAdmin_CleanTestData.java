@@ -115,6 +115,20 @@ public class ContentAdmin_CleanTestData {
         a.restoreAsNewArchiveCourse(passwordQuizName, forumActivityName, quizActivityName,
                 allInOneAssignmentActivityName, pageActivityName, glossaryActivityName, backupFile);
     }
+    
+    /**
+     * Verify that coursework unit should not be expandable (by default) when 
+     * 'Disable date in section' check box is checked & vice versa
+     * 
+     * @throws Exception
+     */
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "content.contentAdminVerifyCourseworkUnitExpandableOrNot"})    
+    public void testContentAdminVerifyCourseworkUnitExpandableOrNotWhileChangingDisableDateField(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.courseworkUnitExpandableOrNotWhileChangingDisableDateField();
+    }
 
     /**
      * The annotated method will be run after all the test methods in the

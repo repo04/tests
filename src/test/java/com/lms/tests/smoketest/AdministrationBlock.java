@@ -4,15 +4,12 @@
  */
 package com.lms.tests.smoketest;
 
-import java.util.List;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import com.lms.tests.runThrghTestNG.BaseClass;
 import java.util.List;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AdministrationBlock extends BaseClass {
 
@@ -226,8 +223,7 @@ public class AdministrationBlock extends BaseClass {
         System.out.println("rows: " + rows);
         for (int i = 1; i <= rows; i++) {
             //System.out.println("i: " + i);
-            new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
-                    textToBePresentInElement(By.xpath("//*[@id='region-main']/div/table/tbody/tr[" + i + "]/td[2]"), emailDomain)));
+            ip.invisibilityOfElementByXpathWithText(driver, "//*[@id='region-main']/div/table/tbody/tr[" + i + "]/td[2]", emailDomain);            
         }
     }
     

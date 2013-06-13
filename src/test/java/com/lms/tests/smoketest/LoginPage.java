@@ -9,7 +9,7 @@ public class LoginPage extends BaseClass {
     private static String username;
 
     /**
-     * Attemps to login based on user type and values from property file
+     * Attempts to login based on user type and values from property file
      *
      * @param user
      */

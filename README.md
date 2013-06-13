@@ -95,7 +95,7 @@ Automation can run when above steps are followed in order.
                mvn clean test -DmvnSuite=debug -DmvnGrp=SystemCompatibility -DmvnUrl={gu-msn} -DmvnProgram=gu-msn -DmvnBrwsr=chrome -DmvnOS=win
 	
         Applicable Parameters (Case Sensitive)
-        1> mvnSuite: critical/ smoke / regression / debug / criticalData
+        1> mvnSuite: critical / smoke / regression / debug / criticalData
                 * Only one Suite to be passed
         2> mvnUrl:
         	* gu-msn:  https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || 

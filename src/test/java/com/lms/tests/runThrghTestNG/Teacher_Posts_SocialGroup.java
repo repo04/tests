@@ -269,8 +269,8 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"rightSideBarCourseworkPage.teacher"})
-    public void testVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
+          groups = {"regressionSmoke", "content.teacherVerifyRightSideBarOfCourseworkPage"})
+    public void testTeacherVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToCourseWorkPage();

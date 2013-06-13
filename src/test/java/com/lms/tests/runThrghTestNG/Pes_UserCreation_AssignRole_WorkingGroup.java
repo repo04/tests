@@ -4,7 +4,6 @@
  */
 package com.lms.tests.runThrghTestNG;
 
-import com.google.common.collect.Lists;
 import java.util.Iterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,8 +15,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
@@ -514,24 +511,23 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.verifySectionDropdownCourseRostersPage(courseShortName, groupCourseName);
         }
     
-     /**
-     * Verify the Graded And Submitted Column For Offline Activity In
-     * Grades Page
+    /**
+     * Verify graded & submitted section of Offline Activity
      * 
      * @param groupCourseName
      * @param offlineActivityName
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseOfflineActivityName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"gradedandsubmittedcolumnsofflineactivity.pesadmin"})
-    public void testVerifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(String groupCourseName, String offlineActivityName) throws Exception {
+          groups = {"regressionSmoke", "content.pesadminVerifyOfflineActivitySubmittedAndGradedSection"})
+    public void testPesAdminVerifyOfflineActivitySubmittedAndGradedSection(String groupCourseName, String offlineActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToGrades();
-        a.verifyGradedAndSubmittedColumnForOfflineActivityInGradesPage(offlineActivityName);
+        a.verifyOfflineActivitySubmittedAndGradedSection(offlineActivityName);
     }
     
-    //Following functional test methods affect all system users - so currently we are skipping this
+     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * PesAdmin Set Faculty Login Message
      *

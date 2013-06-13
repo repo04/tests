@@ -195,7 +195,7 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "What's your major(s)?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[3]/div", "What internships have you had?");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "Why did you decide to take Semester Online?");
-                ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Estimated graduation date");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Estimated graduation date");                
         }
     }
 }

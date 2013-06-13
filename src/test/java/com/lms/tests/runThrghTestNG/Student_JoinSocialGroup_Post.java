@@ -26,25 +26,24 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     static String[][] noteWallNameArray = new String[1][1];
     static String[][] studentGlossaryEntryArray = new String[1][1];
     String studentPostHTMLOnOwnWall;
-    
     Actions a = new Actions();
 
     @DataProvider(name = "Note")
     public static Object[][] Note(ITestContext context) throws Exception {
         return (noteWallNameArray);
     }
-    
+
     @DataProvider(name = "TeacherSocialGroupStudentUrlPost")
     public static Iterator<Object[]> TeacherSocialGroupStudentUrlPost(ITestContext context) throws Exception {
         System.out.println("init TeacherSocialGroupStudentUrlPost");
         return DataProviderUtility.cartesianProviderFrom(Teacher_Posts_SocialGroup.TeacherSocialGroup(context), studentUrlPostOnTeacherSocialGroup);
     }
-    
+
     @DataProvider(name = "CourseStudentComment")
     public static Iterator<Object[]> StudentTextCommentOnTeacherCoursePost(ITestContext context) throws Exception {
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), studentTextCommentOnTeacherCoursePost);
     }
-    
+
     @DataProvider(name = "StudentGlossaryEntryName")
     public static Object[][] StudentGlossaryEntryName(ITestContext context) throws Exception {
         System.out.println("init StudentGlossaryEntryName");
@@ -73,7 +72,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentJoinTeachers"})
+    groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentJoinTeachers"})
     public void testStudentJoinsTeacherSocialGroup(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
         a.findSocialGroup(teacherSocialGroupName);
@@ -86,7 +85,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentPostURLOnTeachers"})
+    groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentPostURLOnTeachers"})
     public void testStudentPostURLOnTeacherSocialGroup(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
@@ -100,45 +99,45 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseTeacherUrlCoursePost", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.studentCommentOnTeacherCoursePost"})
+    groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.studentCommentOnTeacherCoursePost"})
     public void testStudentCommentOnTeacherCoursePost(String groupCourseName, String teacherUrlCoursePost) throws Exception {
         a.selectGroupCourse(groupCourseName);
         studentTextCommentOnTeacherCoursePost[0][0] = a.textCommentPost(teacherUrlCoursePost, "txtCmntOnTchrCrsPst");
         Reporter.log("studentTextCommentOnTeacherCoursePost: " + studentTextCommentOnTeacherCoursePost[0][0], true);
     }
-    
+
     /**
      * Student verifies PES posts on Course Wall
-     * 
+     *
      * @param groupCourseName
      * @param pesTextCourseSectionPost
      * @param pesTxtCoursePostCommentsOn
      * @param pesTextCoursePostCommentsOff
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GroupCoursePesCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-          groups = {"regressionSmoke", "wall.studentVerifyPESCoursePosts"})
+    groups = {"regressionSmoke", "wall.studentVerifyPESCoursePosts"})
     public void testStudentVerifyPESCoursePost(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.verifyCoursePost(pesTextCourseSectionPost, pesTxtCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
     }
-    
+
     /**
      * Student recommend Teacher's URL Course Post
-     * 
+     *
      * @param groupCourseName
      * @param teacherUrlCoursePost
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GroupCourseTeacherUrlCoursePost", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "wall.studentRecommendPost"})
+    groups = {"regressionSmoke", "wall.studentRecommendPost"})
     public void testStudentRecommendCourseURLPost(String groupCourseName, String teacherUrlCoursePost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.recommendURLCoursePost(teacherUrlCoursePost);
     }
-    
+
     /**
      * Submit Assignment
      *
@@ -147,7 +146,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "assignment.submit"})
+    groups = {"regressionSmoke", "fullSmoke", "assignment.submit"})
     public void testStudentSubmitAssignment(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -162,7 +161,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "note.createOnCourseWall"})
+    groups = {"regressionSmoke", "note.createOnCourseWall"})
     public void testStudentCreateNoteOnCourseWall(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -179,12 +178,12 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.navigateToMyWall();
         noteWallNameArray[0][0] = a.createNote("Profile");
     }
-    
+
     /**
-     * Verify Note Sorting 
-     * 
+     * Verify Note Sorting
+     *
      * @param profileNote
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "Note", groups = {"regressionSmoke", "note.verifySorting"})
     public void testStudentVerifyNoteSorting(String profileNote) throws Exception {
@@ -193,67 +192,67 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     }
 
     /**
-     * Delete Note 
-     * 
+     * Delete Note
+     *
      * @param profileNote
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "Note", groups = {"regressionSmoke", "note.deleteProfile"})
     public void testStudentDeleteProfileNote(String profileNote) throws Exception {
         a.navigateToMyWall();
         a.deleteNote(profileNote);
     }
-    
+
     /**
      * Verify Resources
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "resources.studentVerify"})
     public void testStudentVerifyResources() throws Exception {
         a.navigateToMyHome();
         a.verifyResources();
     }
-    
+
     /**
      * Verify Footers
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "footers.verify"})
+    @Test(groups = {"regressionSmoke", "footers.studentVerify"})
     public void testStudentVerifyFooters() throws Exception {
         a.navigateToMyHome();
         a.verifyFooters();
     }
-    
+
     /**
      * Verify Syllabus Activity
-     * 
+     *
      * @param groupCourseName
-     * @throws Exception 
+     * @throws Exception
      */
     /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class, 
-          groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
-    public void testStudentVerifySyllabusActivity(String groupCourseName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        a.verifySyllabusActivity();
-    }*/
+     groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
+     public void testStudentVerifySyllabusActivity(String groupCourseName) throws Exception {
+     a.navigateToMyCourse();
+     a.selectGroupCourse(groupCourseName);
+     a.verifySyllabusActivity();
+     }*/
     
     /**
      * Student verify Resume
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "resume.studentVerify"})
     public void testStudentVerifyResume() throws Exception {
         a.navigateToMyWall();
         a.verifyResume();
     }
-    
+
     /**
      * Student verify Personal Information
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "personalInformation.studentVerify"})
@@ -261,49 +260,49 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.navigateToMyPersonalInformation();
         a.verifyPersonalInformation("student");
     }
-    
+
     /**
      * Student verify Feedback Window
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "feedback.studentVerify"})
-        public void testStudentVerifyFeedbackWindow() throws Exception {
+    public void testStudentVerifyFeedbackWindow() throws Exception {
         a.navigateToMyHome();
         a.verifyFeedbackWindow();
     }
-    
+
     /**
      * Student verify Help Window on Home Page
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     /*@Test(groups = {"regressionSmoke", "help.studentVerify"})
-    public void testStudentVerifyHelpWindow() throws Exception {
-        a.navigateToMyHome();
-        a.verifyHelpWindow();
-    }*/
+     public void testStudentVerifyHelpWindow() throws Exception {
+     a.navigateToMyHome();
+     a.verifyHelpWindow();
+     }*/
     
     /**
      * Verify Settings page specific to user role
-     * 
-     * @throws Exception 
+     *
+     * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "settings.studentVerify"})
     public void testStudentVerifySettings() throws Exception {
         a.navigateToSettings();
         a.verifySettings();
     }
-    
+
     /**
      * Student create Glossary entry
-     * 
+     *
      * @param groupCourseName
      * @param glossaryName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "activities.studentCreateGlossaryEntry"})
+    groups = {"regressionSmoke", "activities.studentCreateGlossaryEntry"})
     public void testStudentCreateGlossaryEntry(String groupCourseName, String glossaryName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -312,27 +311,27 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         studentGlossaryEntryArray[0][0] = a.createGlossaryEntry(glossaryName);
         Reporter.log("studentGlossaryEntryName: " + studentGlossaryEntryArray[0][0], true);
     }
-    
+
     /**
      * Student verify Calendar on Home Page
-     * 
+     *
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "calendar.studentVerify"})
     public void testStudentVerifyCalendar() throws Exception {
         a.navigateToMyHome();
         a.verifyCalendar();
-    }    
+    }
 
     /**
      * Student confirm contact request
-     * 
+     *
      * @param teacherUserName
      * @param studentUserName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-          groups = {"regressionSmoke", "criticalDataSmoke", "contact.studentConfirmRequest"})
+    groups = {"regressionSmoke", "criticalDataSmoke", "contact.studentConfirmRequest"})
     public void testStudentConfirmContactRequest(String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyContacts();
         a.confirmContactRequest(teacherUserName);
@@ -340,30 +339,32 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
 
     //The below method affects all system users - so currently we are skipping this
     /**
-     * Student verify Support Message - Currently commented as it affects all system users
+     * Student verify Support Message - Currently commented as it affects all
+     * system users
      *
      * @throws Exception
      */
     /*
-    @Test(groups = {"2torAdministrativeBlock.studentSupportMessageVerification"})
-    public void testStudentVerifySupportMessage() throws Exception {
-        a.navigateToStudentSupportPage();
-        a.studentVerificationSupportMessage();
-    } */
+     @Test(groups = {"2torAdministrativeBlock.studentSupportMessageVerification"})
+     public void testStudentVerifySupportMessage() throws Exception {
+     a.navigateToStudentSupportPage();
+     a.studentVerificationSupportMessage();
+     } */
     
     //The below method affects all system users - so currently we are skipping this
     /**
-     * Student verify Login Message - Currently commented as it affects all system users
+     * Student verify Login Message - Currently commented as it affects all
+     * system users
      *
      * @throws Exception
      */
     /*
-    @Test(groups = {"2torAdministrativeBlock.studentLoginMessageVerification"})
-    public void testStudentVerifyLoginMessage() throws Exception {
-        a.studentVerificationLoginMessage();
-    } */
+     @Test(groups = {"2torAdministrativeBlock.studentLoginMessageVerification"})
+     public void testStudentVerifyLoginMessage() throws Exception {
+     a.studentVerificationLoginMessage();
+     } */
     
-     /**
+    /**
      * Student post HTML on own Wall
      */
     @Test(groups = {"regressionSmoke", "wall.studentHTMLWallPost"})
@@ -373,71 +374,53 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         Reporter.log("studentPostHTMLOnOwnWall: " + studentPostHTMLOnOwnWall, true);
     }
 
-     /**
-     * Verify Reveal Password button is visible to student for All In One Assignment Created with 
-     * Reveal Password Functionality
+    /**
+     * View Reveal Password button for All In One Assignment
      *
      * @param groupCourseName
      * @param allInOneAssignmentActivityNameWithRevealPassword
      * @throws Exception
      */
-    @Test(dataProvider = "GroupCourseallInOneAssignmentActivityNameWithRevealPassword", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"revealpasswordbutton.visible"})
-    public void testVerifyRevealPasswordButtonVisibleForStudent(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
+    @Test(dataProvider = "GroupCourseAllInOneActivityNameWithRevealPassword", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "content.studentViewRevealPasswordButtonForAllInOne"})
+    public void testStuentViewRevealPasswordButtonForAllInOneAssignemnt(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.verifyRevealPasswordButtonVisibleForStudent(allInOneAssignmentActivityNameWithRevealPassword);
+        a.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
     }
 
-     /**
-     * Verify Student has read only access to Offline Activity created 
+    /**
+     * Verify Student has read only access to Offline Activity created
      *
      * @param groupCourseName
      * @param offlineActivityName
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseOfflineActivityName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"readonlyaccesstoofflineactivity.student"})
-    public void testverifyReadOnlyAccessToOfflineActivityForStudent(String groupCourseName, String offlineActivityName) throws Exception {
+    groups = {"regressionSmoke", "content.studentVerifyReadOnlyAccessToOfflineActivity"})
+    public void testStudentVerifyReadOnlyAccessToOfflineActivity(String groupCourseName, String offlineActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.verifyReadOnlyAccessToOfflineActivityForStudent(offlineActivityName);
+        a.verifyReadOnlyAccessToOfflineActivity(offlineActivityName);
     }
 
-     /**
-     * Student verify the elements on the right sidebar of course work page  
+    /**
+     * Student verify the elements on the right sidebar of course work page
      *
      * @param groupCourseName
      * @throws Exception
      */
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"rightSideBarCourseworkPage.student"})
-    public void testVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
+    groups = {"regressionSmoke", "content.studentVerifyRightSideBarOfCourseworkPage"})
+    public void testStudentVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToCourseWorkPage();
         a.verifyRightSidebarOfCourseWorkPage();
     }
-     
-     /**
-     * Verify Reveal Password button is visible to student for All In One Assignment Created with 
-     * Reveal Password Functionality
-     *
-     * @param groupCourseName
-     * @param allInOneAssignmentActivityNameWithRevealPassword
-     * @throws Exception
-     */
-    @Test(dataProvider = "GroupCourseallInOneAssignmentActivityNameWithRevealPassword", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"markcomplete.allinone"})
-    public void testVerifyMarkCompleteCheckBoxForAllInOneAssignment(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        a.navigateToActivityReport();
-        a.verifyMarkCompleteCheckBoxForAllInOneAssignment(allInOneAssignmentActivityNameWithRevealPassword);
-    }
-    
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

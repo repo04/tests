@@ -197,13 +197,13 @@ public class Utility extends BaseClass {
         } catch (TimeoutException e) {
             //Do Nothing
             System.out.println("No unknown modal dialog present");
-        }        
+        }
         ip.isTitlePresent(driver, "Gmail: Email from Google");
     }
 
     /**
-     * 
-     * @param alert 
+     *
+     * @param alert
      */
     private static void handleAlertException(Alert alert) {
         String error = "###**Unexpected Alert located with Text as: " + alert.getText() + "**###";
@@ -436,22 +436,18 @@ public class Utility extends BaseClass {
      * @param filePathName
      * @param xPath
      */
-    
-    public static void readAndCopyContentsToTextField(String filePathName, String xPath) {
+    public static void readAndCopyContentsToTextField(WebDriver driver, String filePathName, String xPath) {
         try {
-            FileInputStream fstream=new FileInputStream(filePathName);
-            try (DataInputStream in = new DataInputStream (fstream)) {
-                BufferedReader br=new BufferedReader(new InputStreamReader(in));
+            FileInputStream fstream = new FileInputStream(filePathName);
+            try (DataInputStream in = new DataInputStream(fstream)) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
                 String str;
-                while((str=br.readLine())!=null){
-                    System.out.println(str);
+                while ((str = br.readLine()) != null) {
                     driver.findElement(By.xpath(xPath)).sendKeys(str);
                 }
             }
-        }
-        catch(Exception e){
-        System.err.println(e);
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 }
-    
