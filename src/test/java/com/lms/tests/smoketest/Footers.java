@@ -177,10 +177,10 @@ public class Footers extends BaseClass {
                         + "anything within it, please email us at privacy@2U.com or write to us "
                         + "at Semester Online Privacy Officer, 8201 Corporate Drive, "
                         + "Suite 190, Landover, MD 20785.";
-                ;
+                aboutUS = "ABOUT SEMESTER ONLINE";                
                 termsOfAgreement = "SEMESTER ONLINE WEBSITE TERMS OF USE AGREEMENT";
-                contactUSLink = "";
-                contactUSTollFree = "";
+                contactUSLink = "StudentSupport@semesteronline.org";
+                contactUSTollFree = "855-896-4493";
         }
         verify2 = "Terms And Conditions";
         verify3 = "Privacy Statement";
@@ -228,22 +228,28 @@ public class Footers extends BaseClass {
             } else {
                 ip.isTextPresentByXPATH(driver, "//div[7]/div/span[" + i + "]/a", footer);
                 driver.findElement(By.xpath("//div[7]/div/span[" + i + "]/a")).click();
-                ip.isTitleContains(driver, footer);
-                if (i == 4) {
-                    switch (program) {
-                        case "wu-llm":
-                            ip.isTextPresentByXPATH(driver, "//p", aboutUS);
-                            break;
-                        default:
-                            ip.isTextPresentByCSS(driver, "div.desc", aboutUS);
+                try {
+                    ip.isTitleContains(driver, footer);
+                    if (i == 4) {
+                        switch (program) {
+                            case "wu-llm":
+                                ip.isTextPresentByXPATH(driver, "//p", aboutUS);
+                                break;
+                            default:
+                                ip.isTextPresentByCSS(driver, "div.desc", aboutUS);
+                        }
+                    } else if (i == 5) {
+                        driver.findElement(By.linkText(contactUSLink));
+                        String tollfree = driver.findElement(By.className("desc")).getText();
+                        if (!tollfree.contains(contactUSTollFree)) {
+                            driver.findElement(By.linkText("Home")).click();
+                            Utility.illegalStateException("TollFree Number varies, Expected: "
+                                    + contactUSTollFree + " || Actual : " + tollfree);
+                        }
                     }
-                } else if (i == 5) {
-                    driver.findElement(By.linkText(contactUSLink));
-                    String tollfree = driver.findElement(By.className("desc")).getText();
-                    if (!tollfree.contains(contactUSTollFree)) {
-                        Utility.illegalStateException("TollFree Number varies, Expected: " 
-                                + contactUSTollFree + " - Actual : " + tollfree);
-                    }
+                } catch (TimeoutException e) {
+                    driver.findElement(By.linkText("Home")).click();
+                    throw e;
                 }
                 driver.findElement(By.linkText("Home")).click();
                 ip.isElementClickableByXpath(driver, xpv.getTokenValue("wallPublishPanelXPATH"), 60);
