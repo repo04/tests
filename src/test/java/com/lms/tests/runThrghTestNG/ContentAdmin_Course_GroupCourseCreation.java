@@ -22,7 +22,6 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
     public static String courseDetails[] = new String[2];
     public static String courseName;
-    public static String courseShortName;
     Actions a = new Actions();
     static String[][] groupCourseNameArray = new String[1][1];
     static String[][] courseShortNameArray = new String[1][1];
@@ -286,9 +285,9 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.navigateToCourseCategories();
         courseDetails = a.createCourse();
         courseName = courseDetails[0];
-        courseShortName = courseDetails[1];
+        courseShortNameArray[0][0] = courseDetails[1];
         Reporter.log("courseName: " + courseName, true);
-        Reporter.log("courseShortName: " + courseShortName, true);
+        Reporter.log("courseShortName: " + courseShortNameArray[0][0], true);
 
         a.navigateToMyCourse();
         a.navigateToCourseCategories();

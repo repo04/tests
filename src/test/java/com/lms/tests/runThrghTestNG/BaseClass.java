@@ -101,7 +101,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         }
         capabilities.setCapability("name", this.test);
         capabilities.setCapability("max-duration", 3600);
-        capabilities.setCapability("build", "WINDOWS 7");
+        //capabilities.setCapability("build", "WINDOWS 7");
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);
         driver.setFileDetector(new LocalFileDetector());

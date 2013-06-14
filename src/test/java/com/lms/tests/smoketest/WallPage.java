@@ -169,9 +169,6 @@ public class WallPage extends BaseClass {
      */
     public void setUpWallPost() {
         textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
-        for (String handle : driver.getWindowHandles()) {
-            driver.switchTo().window(handle);
-        }
         Utility.actionBuilderClick(driver, xpv.getTokenValue("wallPublishPanelXPATH"));
         try {
             buttonWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnWallShareXPATH"))));
