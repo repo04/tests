@@ -888,6 +888,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("courseUnitEditXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEditXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("courseUnitStartDateXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartDateXPATH"))).click();
         String yearSelected = driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartYearXPATH"))).getText();
         int yearSelectedStartDate = Integer.parseInt(yearSelected);
@@ -905,6 +906,7 @@ public class Activity extends BaseClass {
         }
         driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
         driver.findElement(By.xpath("//option[" + currentMonthID + "]")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText(unitStartDate)));
         driver.findElement(By.linkText(unitStartDate)).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("courseUnitEndDateXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEndDateXPATH"))).click();
