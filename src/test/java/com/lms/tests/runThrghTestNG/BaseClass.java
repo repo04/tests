@@ -15,6 +15,8 @@ import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
 import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterTest;
@@ -26,7 +28,6 @@ import org.testng.Reporter;
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     //Add your username & key here
-    //public static ThreadLocal<RemoteWebDriver> threadLocalDriver = new ThreadLocal<>();
     private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
     public static XpathValues xpv, ldv;
     public RemoteWebDriver driver;
@@ -38,7 +39,25 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     public String os;
     public String currentURL;
     public static File directory = new File(".");
-    DesiredCapabilities capabilities;    
+    private final static String WEBDRIVER = "webdriver";
+    DesiredCapabilities capabilities;
+    
+    
+    /*private static ThreadLocal<RemoteWebDriver> threadLocalDriver = new ThreadLocal<>() {
+     @Override
+     protected RemoteWebDriver initialValue() {
+     return driver;
+     }
+     };*/
+    
+    
+    private static ThreadLocal<Map<String, Object>> sessions =
+            new InheritableThreadLocal<>();
+
+    public static RemoteWebDriver webdriver() {
+        RemoteWebDriver driver = (RemoteWebDriver) get(WEBDRIVER);
+        return driver;
+    }
 
     /**
      * The annotated method will be run before any test method belonging to the
@@ -58,6 +77,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     @Parameters({"url", "program", "browser", "os", "test"})
     public void setUp(String url, String program, String browser, String os, String test) throws Exception {
 
+        RemoteWebDriver driver;
         this.program = program;
         this.browser = browser;
         this.test = test;
@@ -100,15 +120,16 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
                 capabilities.setCapability("platform", "WINDOWS 7");
         }
         capabilities.setCapability("name", this.test);
-        ///threadLocalDriver.set(new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
-        //     capabilities));
-        //driver = threadLocalDriver.get();
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabilities);        
+                capabilities);
         driver.get(this.url);
+        put(WEBDRIVER, driver);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 
+    /*protected static RemoteWebDriver getDriver() {
+     return threadLocalDriver.get();
+     }*/
     /**
      * The annotated method will be run after all the test methods belonging to
      * the classes inside the <test> tag have run.
@@ -117,17 +138,34 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
      */
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
-        driver.quit();
+        webdriver().quit();
     }
 
     @Override
     public String getSessionId() {
-        SessionId sessionId = ((RemoteWebDriver) driver).getSessionId();
+        SessionId sessionId = ((RemoteWebDriver) webdriver()).getSessionId();
         return (sessionId == null) ? null : sessionId.toString();
     }
 
     @Override
     public SauceOnDemandAuthentication getAuthentication() {
         return authentication;
+    }
+
+    private static Object get(String key) {
+        return getSession().get(key);
+    }
+
+    private static void put(String key, Object value) {
+        getSession().put(key, value);
+    }
+
+    private static Map<String, Object> getSession() {
+        Map<String, Object> res = sessions.get();
+        if (res == null) {
+            res = new HashMap<>();
+            sessions.set(res);
+        }
+        return res;
     }
 }

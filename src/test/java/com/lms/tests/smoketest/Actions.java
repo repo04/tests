@@ -21,7 +21,7 @@ public class Actions extends BaseClass {
     
     public Actions(RemoteWebDriver driver){
         this.driver = driver;
-        System.out.println("//Action//: " + this.driver);
+        System.out.println("//New Action//: " + this.driver);
     }
     
     public Actions(){

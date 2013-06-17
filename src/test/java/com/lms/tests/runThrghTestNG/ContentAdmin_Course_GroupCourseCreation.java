@@ -20,8 +20,8 @@ import com.lms.tests.smoketest.Actions;
  */
 public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
-    public static String courseName;
     Actions a;
+    public static String courseName;
     static String[][] groupCourseNameArray = new String[1][1];
     static String[][] quizNameArray = new String[1][1];
     static String[][] assignmentNameArray = new String[1][1];
@@ -188,7 +188,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testContentAdminLogIn() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(webdriver());
         a.login("contentAdmin");
     }
 
