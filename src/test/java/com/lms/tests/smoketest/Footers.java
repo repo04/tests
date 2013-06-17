@@ -244,7 +244,7 @@ public class Footers extends BaseClass {
                         if (!tollfree.contains(contactUSTollFree)) {
                             driver.findElement(By.linkText("Home")).click();
                             Utility.illegalStateException("TollFree Number varies, Expected: "
-                                    + contactUSTollFree + " || Actual : " + tollfree);
+                                    + contactUSTollFree + " - Actual : " + tollfree);
                         }
                     }
                 } catch (TimeoutException e) {

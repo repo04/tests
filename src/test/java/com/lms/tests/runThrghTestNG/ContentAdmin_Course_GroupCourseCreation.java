@@ -20,9 +20,9 @@ import com.lms.tests.smoketest.Actions;
  */
 public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
-    public static String courseDetails[] = new String[2];
-    public static String courseName;
     Actions a = new Actions();
+    public static String courseDetails[] = new String[2];
+    static String[][] courseNameArray = new String[1][1];
     static String[][] groupCourseNameArray = new String[1][1];
     static String[][] courseShortNameArray = new String[1][1];
     static String[][] quizNameArray = new String[1][1];
@@ -48,28 +48,40 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param context
      * @return
      * @throws Exception
-     */
-    @DataProvider(name = "Course")
-    public static Object[][] Course(ITestContext context) throws Exception {
+     */    
+    @DataProvider(name = "CourseName")
+    public static Object[][] CourseName(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
                 || test.equalsIgnoreCase("CriticalDataTests")) {
-            System.out.println("Inside Course: " + test);
-            return (groupCourseNameArray);
+            System.out.println("Inside CourseName: " + test);
+            return (courseNameArray);
         } else {
-            System.out.println("Inside Course: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("groupCourseName")}};
+            System.out.println("Inside CourseName: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("courseName")}};
         }
     }
-
+    
     @DataProvider(name = "CourseShortName")
     public static Object[][] CourseShortName(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
                 || test.equalsIgnoreCase("CriticalDataTests")) {
-            System.out.println("Inside Course: " + test);
+            System.out.println("Inside CourseShortName: " + test);
             return (courseShortNameArray);
         } else {
-            System.out.println("Inside Course: " + test);
+            System.out.println("Inside CourseShortName: " + test);
             return new Object[][]{{context.getCurrentXmlTest().getParameter("courseShortName")}};
+        }
+    }
+    
+    @DataProvider(name = "GroupCourse")
+    public static Object[][] GroupCourse(ITestContext context) throws Exception {
+        if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
+                || test.equalsIgnoreCase("CriticalDataTests")) {
+            System.out.println("Inside GroupCourse: " + test);
+            return (groupCourseNameArray);
+        } else {
+            System.out.println("Inside GroupCourse: " + test);
+            return new Object[][]{{context.getCurrentXmlTest().getParameter("groupCourseName")}};
         }
     }
 
@@ -117,7 +129,11 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
             return (passwordQuizNameArray);
         } else {
             System.out.println("Inside PasswordQuizName: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("passwordQuizName")}};
+            if (program.equalsIgnoreCase("gu-msn")) {
+                return new Object[][]{{context.getCurrentXmlTest().getParameter("passwordQuizName")}};
+            } else {
+                return new Object[][]{{""}};
+            }
         }
     }
 
@@ -175,19 +191,19 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GroupCourseActivities")
     public static Iterator<Object[]> GroupCourseActivities(ITestContext context) throws Exception {
         System.out.println("init GroupCourseActivities");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), Activities(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), Activities(context));
     }
 
     @DataProvider(name = "GroupCourseQuiz")
     public static Iterator<Object[]> GroupCourseQuiz(ITestContext context) throws Exception {
         System.out.println("init GroupCourseQuiz");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), QuizName(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), QuizName(context));
     }
 
     @DataProvider(name = "GroupCourseAssignment")
     public static Iterator<Object[]> GroupCourseAssignment(ITestContext context) throws Exception {
         System.out.println("init GroupCourseAssignment");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), AssignmentName(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), AssignmentName(context));
     }
 
     @DataProvider(name = "GroupCourseDebug")
@@ -205,7 +221,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GroupCourseActivitiesDebug")
     public static Iterator<Object[]> GroupCourseActivitiesDebug(ITestContext context) throws Exception {
         System.out.println("init GroupCourseActivitiesDebug");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), ActivitiesDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), ActivitiesDebug(context));
     }
 
     @DataProvider(name = "QuizDebug")
@@ -217,51 +233,50 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GroupCourseQuizDebug")
     public static Iterator<Object[]> GroupCourseQuizDebug(ITestContext context) throws Exception {
         System.out.println("init GroupCourseQuizDebug");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), QuizDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), QuizDebug(context));
     }
 
     @DataProvider(name = "GroupCoursePasswordQuizName")
     public static Iterator<Object[]> GroupCoursePasswordQuizName(ITestContext context) throws Exception {
         System.out.println("init GroupCoursePasswordQuizName");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), PasswordQuizName(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), PasswordQuizName(context));
     }
 
-    @DataProvider(name = "PasswordQuizNameActivities")
-    public static Iterator<Object[]> PasswordQuizNameActivities(ITestContext context) throws Exception {
-        System.out.println("init PasswordQuizNameActivities");
-        return DataProviderUtility.cartesianProviderFrom(PasswordQuizName(context), Activities(context), GlossaryName(context));
+    @DataProvider(name = "CoursePasswordQuizNameActivities")
+    public static Iterator<Object[]> CoursePasswordQuizNameActivities(ITestContext context) throws Exception {
+        System.out.println("init CoursePasswordQuizNameActivities");
+        return DataProviderUtility.cartesianProviderFrom(CourseName(context), PasswordQuizName(context), Activities(context), GlossaryName(context));
     }
 
     @DataProvider(name = "CourseGlossaryName")
     public static Iterator<Object[]> CourseGlossaryName(ITestContext context) throws Exception {
         System.out.println("init CourseGlossaryName");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), GlossaryName(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), GlossaryName(context));
     }
-
-    @DataProvider(name = "GroupCourseShortName")
-    public static Iterator<Object[]> GroupCourseShortName(ITestContext context) throws Exception {
-        System.out.println("init GroupCourseShortName");
-        return DataProviderUtility.cartesianProviderFrom(CourseShortName(context), Course(context));
+    
+    @DataProvider(name = "CourseShortGroupCourseName")
+    public static Iterator<Object[]> CourseShortGroupCourseName(ITestContext context) throws Exception {
+        System.out.println("init CourseShortGroupCourseName");
+        return DataProviderUtility.cartesianProviderFrom(CourseShortName(context), GroupCourse(context));
     }
     
     @DataProvider(name = "GroupCourseOfflineActivityName")
     public static Iterator<Object[]> GroupCourseOfflineActivityName(ITestContext context) throws Exception {
         System.out.println("init GroupCourseOfflineActivityName");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), OfflineActivityName(context));
+        return DataProviderUtility.cartesianProviderFrom(CourseName(context), OfflineActivityName(context));
     }
 
     @DataProvider(name = "GroupCourseAllInOneActivityNameWithRevealPassword")
     public static Iterator<Object[]> GroupCourseAllInOneActivityNameWithRevealPassword(ITestContext context) throws Exception {
         System.out.println("GroupCourseAllInOneActivityNameWithRevealPassword");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), RevealPasswordAssignmentName(context));
+        return DataProviderUtility.cartesianProviderFrom(CourseName(context), RevealPasswordAssignmentName(context));
     }
     
     @DataProvider(name = "GroupCourseOfflineActivityFile")
     public static Iterator<Object[]> GroupCourseOfflineActivityFile(ITestContext context) throws Exception {
         System.out.println("init GroupCourseOfflineActivityFile");
-        return DataProviderUtility.cartesianProviderFrom(Course(context), OfflineActivityFile(context));
+        return DataProviderUtility.cartesianProviderFrom(CourseName(context), OfflineActivityFile(context));
     }
-
 
     /**
      * The annotated method will be run before the first test method in the
@@ -284,14 +299,14 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         courseDetails = a.createCourse();
-        courseName = courseDetails[0];
+        courseNameArray[0][0] = courseDetails[0];
         courseShortNameArray[0][0] = courseDetails[1];
-        Reporter.log("courseName: " + courseName, true);
+        Reporter.log("courseName: " + courseNameArray[0][0], true);
         Reporter.log("courseShortName: " + courseShortNameArray[0][0], true);
 
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
-        groupCourseNameArray[0][0] = a.createGrpCourse(courseName);
+        groupCourseNameArray[0][0] = a.createGrpCourse(courseNameArray[0][0]);
         Reporter.log("groupCourseName: " + groupCourseNameArray[0][0], true);
     }
 
@@ -302,7 +317,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "activities.creation"})
+    @Test(dataProvider = "GroupCourse", groups = {"regressionSmoke", "fullSmoke", "activities.creation"})
     public void testContentAdminActivitiesCreation(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -333,7 +348,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"criticalDataSmoke"})
+    @Test(dataProvider = "GroupCourse", groups = {"criticalDataSmoke"})
     public void testContentAdminQuizCreation(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -347,7 +362,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"regressionSmoke", "activities.createGlossary"})
+    @Test(dataProvider = "GroupCourse", groups = {"regressionSmoke", "activities.createGlossary"})
     public void testContentAdminGlossaryActivityCreation(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -361,7 +376,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    /*@Test(dataProvider = "Course", groups = {"regressionSmoke", "activity.syllabusCreation"})
+    /*@Test(dataProvider = "GroupCourse", groups = {"regressionSmoke", "activity.syllabusCreation"})
      public void testSyllabus_Creation(String groupCourseName) throws Exception {
      a.navigateToMyCourse();
      a.selectGroupCourse(groupCourseName);
@@ -373,7 +388,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.activityCreation"})
+    @Test(dataProvider = "GroupCourse", groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.activityCreation"})
     public void testContentAdminCreateQuizPasswordActivity(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -400,7 +415,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"regressionSmoke", 
+    @Test(dataProvider = "GroupCourse", groups = {"regressionSmoke", 
         "content.allInOneActivityCreationWithRevealPassword"})
     public void testContentAdminCreateAllInOneWithRevealPassword(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -416,7 +431,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * 
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"content.liveSessionActivityCreationWithoutFullGrade"})    
+    @Test(dataProvider = "GroupCourse", groups = {"content.liveSessionActivityCreationWithoutFullGrade"})    
     public void testContentAdminCreateLiveSessionActivityWithoutFullGrade(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -490,7 +505,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", groups = {"lesson.createActivity"})
+    @Test(dataProvider = "GroupCourse", groups = {"lesson.createActivity"})
     public void testContentAdminCreateLessonActivity(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectCourse(groupCourseName);

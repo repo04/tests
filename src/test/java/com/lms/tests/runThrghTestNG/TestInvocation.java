@@ -51,6 +51,14 @@ public class TestInvocation implements IInvokedMethodListener {
                 System.out.println("Skipping Test Method");
                 throw new SkipException("Skipping Mobile App Test in Student Support: Not available for '" + BaseClass.program + "'");
             }
+        }        
+        
+        // Skip Backup/Restore TCs for Env other than Standalone
+        if (!"setUp".equals(method.getName()) && !BaseClass.url.contains("standalone")) {
+            if ("testContentAdminBackupCourse".equals(method.getName())) {
+                System.out.println("Skipping Test Method");
+                throw new SkipException("Skipping: Course Backup/Restore TC's as these are executable only on Standalone Env");
+            }
         }
     }
 

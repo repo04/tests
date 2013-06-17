@@ -126,6 +126,13 @@ public class TransformCritical implements IAnnotationTransformer {
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testContentAdminRestoreCourseAsNewArchiveCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminRestoreCourseAsNewArchiveCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testContentAdminBackupCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
         if ("testTeacherVerifyCriticalSmokeTestEmails".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherVerifyCriticalSmokeTestEmails");

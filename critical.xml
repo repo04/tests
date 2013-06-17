@@ -6,9 +6,14 @@
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="CriticalTests" preserve-order="true" parallel="false">
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -22,6 +27,7 @@
             <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
         </classes>
     </test>    
 </suite>

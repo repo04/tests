@@ -108,7 +108,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.teacherVerifyStudentsPostRecommendation"})
     public void testTeacherVerifyStudentsPostRecommendation(String groupCourseName) throws Exception {
         a.navigateToMyCourse();

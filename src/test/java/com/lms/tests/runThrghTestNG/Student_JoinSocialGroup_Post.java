@@ -41,7 +41,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
 
     @DataProvider(name = "CourseStudentComment")
     public static Iterator<Object[]> StudentTextCommentOnTeacherCoursePost(ITestContext context) throws Exception {
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), studentTextCommentOnTeacherCoursePost);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), studentTextCommentOnTeacherCoursePost);
     }
 
     @DataProvider(name = "StudentGlossaryEntryName")
@@ -160,7 +160,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "note.createOnCourseWall"})
     public void testStudentCreateNoteOnCourseWall(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -231,7 +231,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class, 
+    /*@Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class, 
      groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
      public void testStudentVerifySyllabusActivity(String groupCourseName) throws Exception {
      a.navigateToMyCourse();
@@ -412,7 +412,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "content.studentVerifyRightSideBarOfCourseworkPage"})
     public void testStudentVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
         a.navigateToMyCourse();

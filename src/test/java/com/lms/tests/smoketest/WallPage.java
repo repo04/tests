@@ -67,7 +67,7 @@ public class WallPage extends BaseClass {
                     Utility.verifyDatePresentInElementValue(driver, By.id("endtime-date"));
                     driver.findElement(By.id("endtime-date")).click();
                     ip.isTextPresentByXPATH(driver, "//li/div/table/tbody/tr[3]/td", "Today");
-                    driver.findElement(By.xpath("//tr[6]/td[7]/a")).click();
+                    driver.findElement(By.xpath("//td/table/tbody/tr[6]/td[7]/a")).click();
                     driver.findElement(By.id("audience_allcoursesections")).click();
                     driver.findElement(By.xpath("//div[11]/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]")).click();
                     break;

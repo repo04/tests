@@ -33,9 +33,10 @@ public class Pes_ArchiveCourse {
      * 
      * @throws Exception 
      */
-    @Test(groups = {"regressionSmoke", "fullSmoke", "course.archive"})
-    public void testPESAdminArchiveCourse() throws Exception {
-        a.archiveCourse(ContentAdmin_Course_GroupCourseCreation.courseName);
+    @Test(dataProvider = "CourseName", dataProviderClass=ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "course.archive"})
+    public void testPESAdminArchiveCourse(String courseName) throws Exception {
+        a.archiveCourse(courseName);
     }
     
      /**
