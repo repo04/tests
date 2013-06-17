@@ -886,6 +886,7 @@ public class Activity extends BaseClass {
         System.out.println(unitEndDate);
         ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
         driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("courseUnitEditXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEditXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartDateXPATH"))).click();
         String yearSelected = driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartYearXPATH"))).getText();

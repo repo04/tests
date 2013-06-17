@@ -263,19 +263,19 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "GroupCourseOfflineActivityName")
     public static Iterator<Object[]> GroupCourseOfflineActivityName(ITestContext context) throws Exception {
         System.out.println("init GroupCourseOfflineActivityName");
-        return DataProviderUtility.cartesianProviderFrom(CourseName(context), OfflineActivityName(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), OfflineActivityName(context));
     }
 
     @DataProvider(name = "GroupCourseAllInOneActivityNameWithRevealPassword")
     public static Iterator<Object[]> GroupCourseAllInOneActivityNameWithRevealPassword(ITestContext context) throws Exception {
         System.out.println("GroupCourseAllInOneActivityNameWithRevealPassword");
-        return DataProviderUtility.cartesianProviderFrom(CourseName(context), RevealPasswordAssignmentName(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), RevealPasswordAssignmentName(context));
     }
     
     @DataProvider(name = "GroupCourseOfflineActivityFile")
     public static Iterator<Object[]> GroupCourseOfflineActivityFile(ITestContext context) throws Exception {
         System.out.println("init GroupCourseOfflineActivityFile");
-        return DataProviderUtility.cartesianProviderFrom(CourseName(context), OfflineActivityFile(context));
+        return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), OfflineActivityFile(context));
     }
 
     /**
