@@ -43,7 +43,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     @DataProvider(name = "GroupCourseTeacherUrlCoursePost")
     public static Iterator<Object[]> GroupCourseTeacherUrlCoursePost(ITestContext context) throws Exception {
         System.out.println("init GroupCourseTeacherUrlCoursePost");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), teacherUrlCoursePost(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), teacherUrlCoursePost(context));
     }
 
     @DataProvider(name = "TeacherGlossaryEntryName")
@@ -79,7 +79,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String groupCourseName) throws Exception {
         a.navigateToMyWall();
@@ -145,7 +145,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    /*@Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
      groups = {"regressionSmoke", "activity.teacherVerifySyllabus"})
      public void testTeacherVerifySyllabusActivity(String groupCourseName) throws Exception {
      a.navigateToMyCourse();
@@ -261,6 +261,21 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a.navigateToContentPage(glossaryName);
         teacherGlossaryCategoryNameArray[0][0] = a.createGlossaryCategory(glossaryName);
         Reporter.log("teacherGlossaryCategoryName: " + teacherGlossaryCategoryNameArray[0][0], true);
+    }
+    
+    /**
+     * Teacher verify the elements on the right sidebar of course work page  
+     *
+     * @param groupCourseName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "content.teacherVerifyRightSideBarOfCourseworkPage"})
+    public void testTeacherVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToCourseWorkPage();
+        a.verifyRightSidebarOfCourseWorkPage();
     }
 
     /**

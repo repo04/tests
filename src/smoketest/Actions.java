@@ -110,18 +110,10 @@ public class Actions extends BaseClass {
      *
      * @return
      */
-    public String createCourse() {
+    public String[] createCourse() {
         Course cr = new Course();
         cr.createCourse();
         return cr.getCourseName();
-    }
-
-    /**
-     * @return CourseName
-     */
-    public String getShortCourseName() {
-        Course cr = new Course();
-        return cr.getShortCourseName();
     }
 
     /**
@@ -303,7 +295,7 @@ public class Actions extends BaseClass {
     public void navigateToGrades() {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
     }
 
     /**
@@ -1487,4 +1479,96 @@ public class Actions extends BaseClass {
      driver.findElement(By.linkText("Student Support")).click();
      ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
      }*/
+    
+    /**
+     * Create Offline Activity
+     *
+     * @param file
+     * @return
+     */
+    public String createOfflineActivity(String file) {
+        Activity activity = new Activity();
+        activity.createOfflineActivity(file);
+        return activity.getActivityName();
+    }
+
+    /**
+     * Create All In One Assignment Activity with Reveal Password Setting
+     *
+     * @return
+     */
+    public String createAllInOneAssignmentActivityWithRevealPassword() {
+        Activity activity = new Activity();
+        activity.createAllInOneAssignmentActivityWithRevealPassword();
+        return activity.getActivityName();
+    }
+
+    /**
+     * Create & Verify LiveSession Activity while selecting values other than
+     * "100 point and Credit/No Credit"
+     *
+     * @return
+     */
+    public String createLiveSessiobActivity() {
+        Activity activity = new Activity();
+        activity.createLiveSessionActivity();
+        return activity.getActivityName();
+    }
+
+    /**
+     * View Reveal Password button for All In One Assignment
+     *
+     * @param allInOneAssignmentActivityNameWithRevealPassword
+     */
+    public void viewRevealPasswordButtonForAllInOneAssignemnt(String allInOneAssignmentActivityNameWithRevealPassword) {
+        Activity activity = new Activity();
+        activity.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
+    }
+
+    /**
+     * Verify Student has read only access to Offline Activity created
+     *
+     * @param offlineActivityName
+     */
+    public void verifyReadOnlyAccessToOfflineActivity(String offlineActivityName) {
+        Activity activity = new Activity();
+        activity.readOnlyAccessToOfflineActivity(offlineActivityName);
+    }
+
+    /**
+     * Verify graded & submitted section of Offline Activity
+     *
+     * @param offlineActivityName
+     */
+    public void verifyOfflineActivitySubmittedAndGradedSection(String offlineActivityName) {
+        Activity activity = new Activity();
+        activity.verifyOfflineActivitySubmittedAndGradedSection(offlineActivityName);
+    }
+
+    /**
+     * Verify coursework unit is Expandable or not while changing 'Disable date
+     * in Section' Field
+     *
+     */
+    public void courseworkUnitExpandableOrNotWhileChangingDisableDateField() {
+        Activity activity = new Activity();
+        activity.courseworkUnitExpandableOrNotWhileChangingDisableDateField();
+    }
+
+    /**
+     * Navigate To course work page
+     */
+    public void navigateToCourseWorkPage() {
+        ip.isElementClickableByXpath(driver, "//li[2]/a/span", 60);
+        driver.findElement(By.xpath("//li[2]/a/span")).click();
+        ip.isTextPresentByXPATH(driver, "//div[@id='region-main']/div/div/h2", "Coursework");
+    }
+
+    /**
+     * Verify the elements on the right sidebar of course work page
+     */
+    public void verifyRightSidebarOfCourseWorkPage() {
+        Activity actvty = new Activity();
+        actvty.verifyRightSidebarOfCourseWorkPage();
+    }
 }

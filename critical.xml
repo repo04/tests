@@ -6,9 +6,14 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="CriticalTests" preserve-order="true" parallel="false">
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -16,12 +21,14 @@
             </run>
         </groups>
         <classes>
+            <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
             <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="runThrghTestNG.ContentAdmin_CleanTestData"/>
         </classes>
     </test>    
 </suite>

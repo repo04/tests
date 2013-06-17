@@ -53,7 +53,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
     @DataProvider(name = "AllGlossaryData")
     public static Iterator<Object[]> AllGlossaryData(ITestContext context) throws Exception {
         System.out.println("init AllGlossaryData");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), ContentAdmin_Course_GroupCourseCreation.GlossaryName(context),
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), ContentAdmin_Course_GroupCourseCreation.GlossaryName(context),
                 Student_JoinSocialGroup_Post.StudentGlossaryEntryName(context), Teacher_Posts_SocialGroup.GlossaryCategoryName(context),
                 Teacher_Posts_SocialGroup.TeacherGlossaryEntryName(context));
     }

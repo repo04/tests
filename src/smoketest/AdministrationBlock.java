@@ -221,8 +221,7 @@ public class AdministrationBlock extends BaseClass {
         int rows = driver.findElements(By.xpath("//*[@id='region-main']/div/table/tbody/tr")).size();
         System.out.println("rows: " + rows);
         for (int i = 1; i <= rows; i++) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
-                    textToBePresentInElement(By.xpath("//*[@id='region-main']/div/table/tbody/tr[" + i + "]/td[2]"), emailDomain)));
+            ip.invisibilityOfElementByXpathWithText(driver, "//*[@id='region-main']/div/table/tbody/tr[" + i + "]/td[2]", emailDomain);            
         }
     }
 

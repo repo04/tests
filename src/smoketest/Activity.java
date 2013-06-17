@@ -4,11 +4,16 @@
  */
 package smoketest;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -25,6 +30,8 @@ public class Activity extends BaseClass {
     private String questionTitle, question, ans;
     private String name;
     private String intro;
+    private String unitEndDate;
+    private String unitStartDate;
     private String dateAndTime;
     StackTraceElement[] stackTraceElements;
     Actions a = new Actions();
@@ -451,7 +458,7 @@ public class Activity extends BaseClass {
         new WebDriverWait(driver, 60).until(ExpectedConditions.
                 presenceOfElementLocated(By.xpath("//tr[" + i + "]/td[5]/a")));
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         int x = locateElement(quizActivityName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "(100%)");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "(100%)");
@@ -652,7 +659,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath("//tr[" + y + "]/td/div/div/a")).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Your grading changes have been saved.");
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "1 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/a")).click();
         ip.isElementPresentByLINK(driver, "View 1 submitted assignments");
@@ -686,7 +693,7 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + studentUserName + " and mail sent.");
         driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "0 of 1");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "0 of 1");
     }
@@ -875,6 +882,214 @@ public class Activity extends BaseClass {
                     ip.isTextPresentByXPATH(driver, "//div[3]/div/h2", "Check permissions in Quiz: " + quizName);
             }
         }
+    }
+    
+    /**
+     * Create & Verify Offline Activity
+     *
+     * @param file
+     */
+    public void createOfflineActivity(String file) {
+        String filepath = null;
+        try {
+            filepath = directory.getCanonicalPath() + java.io.File.separator + "data" + java.io.File.separator;
+        } catch (IOException ex) {
+            Logger.getLogger(File.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " Offline " + this.dateAndTime;
+        this.intro = test + " intro " + this.dateAndTime;
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Offline activity");
+        createActivity(this.name, this.intro);
+        driver.findElement(By.xpath(xpv.getTokenValue("fieldActvyIntroXPATH"))).clear();
+        Utility.readAndCopyContentsToTextField(driver, filepath + file, xpv.getTokenValue("fieldActvyIntroXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isElementPresentContainsTextByXPATH(driver, "Whizbang");
+    }
+
+    /**
+     * Verify Student has read only access to Offline Activity
+     *
+     * @param offlineActivityName
+     */
+    public void readOnlyAccessToOfflineActivity(String offlineActivityName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + offlineActivityName + "')]")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH")))));
+    }
+
+    /**
+     * View Reveal Password button for All In One Assignment
+     *
+     * @param allInOneAssignmentActivityNameWithRevealPassword
+     */
+    public void viewRevealPasswordButtonForAllInOneAssignemnt(String allInOneAssignmentActivityNameWithRevealPassword) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityNameWithRevealPassword + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"), 60);
+        String text = driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div[2]/span")).getText();
+        if(!text.equals(xpv.getTokenValue("revealDocumentPasswordConfirmationText"))){
+            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealDocumentPasswordConfirmationText") +
+                    "- Actual: " + text);
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealPasswordPopUpButtonXPATH"), 60);
+        text = driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div[2]/span")).getText();
+        if(!text.equals(xpv.getTokenValue("revealPasswordText"))){
+            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealPasswordText") +
+                    "- Actual: " + text);
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("revealPasswordPopUpButtonXPATH"))).click();
+    }
+
+    /**
+     * Create All In One Assignment Activity with Reveal Password
+     */
+    public void createAllInOneAssignmentActivityWithRevealPassword() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + " All in One-Reveal Password " + this.dateAndTime;
+        this.intro = test + " intro-Reveal Password " + this.dateAndTime;
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("All in one assignment");
+        createActivity(this.name, this.intro);
+
+        //Checks whether the document password check box is selected or not if not then select it
+        Boolean documentpasswordcheckbox = driver.findElement(By.xpath(xpv.getTokenValue("documentPasswordManagementCheckboxXPATH"))).isSelected();
+        if (documentpasswordcheckbox == false) {
+            driver.findElement(By.xpath(xpv.getTokenValue("documentPasswordManagementCheckboxXPATH"))).click();
+        } else {
+            Utility.illegalStateException("Document Password Management Checkbox varies, "
+                    + "expected: 'Not Checked' but actual: 'Checked'");
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("documentPasswordTextBoxXPATH"))).sendKeys(xpv.getTokenValue("documentPassword"));
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
+    }
+
+    /**
+     * Create & Verify LiveSession Activity while selecting values other than
+     * "100 point and Credit/No Credit"
+     */
+    public void createLiveSessionActivity() {
+        this.dateAndTime = a.currentDateTime();
+        this.name = test + "Live Session" + this.dateAndTime;
+        this.intro = test + "Live Session" + this.dateAndTime;
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctAddAnActvtyXPATH"));
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctAddAnActvtyXPATH")))).selectByVisibleText("Livesession activity");
+        createActivity(this.name, this.intro);
+        driver.findElement(By.xpath(xpv.getTokenValue("gradeDropDownXPATH"))).click();
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("gradeDropDownXPATH")))).selectByVisibleText(xpv.getTokenValue("gradeSelect"));
+        ip.isTextPresentByID(driver, "ext-gen61", xpv.getTokenValue("nonAutoGradableGradePopUpText"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("nonAutoGradableGradePopUpYesButtonXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
+    }
+
+    /**
+     * Verify graded & submitted section of Offline Activity
+     *
+     * @param offlineActivityName
+     */
+    public void verifyOfflineActivitySubmittedAndGradedSection(String offlineActivityName) {
+        int x = locateElement(offlineActivityName);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("gradeTableXPATH") + "[" + x + "]/td[3]", "N/A");
+        ip.invisibilityOfElementByXpathWithText(driver, xpv.getTokenValue("gradeTableXPATH") + "[" + x + "]/td[4]", "N/A");        
+    }
+
+    /**
+     * Verify coursework unit is Expandable or not while changing 
+     * 'Disable date in section' Field 
+     * 
+     */
+    public void courseworkUnitExpandableOrNotWhileChangingDisableDateField() {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"));
+        int currentYear = cal.get(Calendar.YEAR);
+        int currentMonth = cal.get(Calendar.MONTH);
+        int currentDate = cal.get(Calendar.DATE);
+        unitStartDate = Integer.toString(currentDate);
+        int currentMonthID = currentMonth + 1;
+        if (currentMonthID == 1 || currentMonthID == 3 || currentMonthID == 5 || currentMonthID == 7 || currentMonthID == 8 || currentMonthID == 10 || currentMonthID == 12) {
+            unitEndDate = "31";
+        } else if (currentMonthID == 4 || currentMonthID == 6 || currentMonthID == 9 || currentMonthID == 11) {
+            unitEndDate = "30";
+        } else if (currentMonthID == 2) {
+            if ((currentYear % 4 == 0 && currentYear % 100 != 0) || currentYear % 400 == 0) {
+                unitEndDate = "29";
+            } else {
+                unitEndDate = "28";
+            }
+        }
+        System.out.println(unitEndDate);
+        ip.isElementPresentContainsTextByXPATH(driver, xpv.getTokenValue("lnkTrnEdtngOnTEXT"));
+        driver.findElement(By.xpath("//*[contains(text(),'" + xpv.getTokenValue("lnkTrnEdtngOnTEXT") + "')]")).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEditXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartDateXPATH"))).click();
+        String yearSelected = driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartYearXPATH"))).getText();
+        int yearSelectedStartDate = Integer.parseInt(yearSelected);
+        int yearDifference = currentYear - yearSelectedStartDate;
+        if (yearDifference > 0) {
+            int x = yearDifference * 12;
+            for (int i = 0; i < x; i++) {
+                driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarForwardButtonCSS"))).click();
+            }
+        } else if (yearDifference < 0) {
+            int x = yearDifference * 12;
+            for (int i = 0; i < x; i++) {
+                driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarBackwardButtonCSS"))).click();
+            }
+        }
+        driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarMonthCSS"))).click();
+        driver.findElement(By.xpath("//option[" + currentMonthID + "]")).click();
+        driver.findElement(By.linkText(unitStartDate)).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("courseUnitEndDateXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("courseUnitEndDateXPATH"))).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText(unitEndDate)));
+        driver.findElement(By.linkText(unitEndDate)).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("editCourseSettingLinkXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingsPageHeaderXPATH"), "Edit course settings");
+        
+        //Checks whether the "Disable Date in sections" check box is selected or not - if yes then deselect it
+        Boolean disabledatecheckbox = driver.findElement(By.name("datelessflag")).isSelected();
+        if (disabledatecheckbox == true) {
+            driver.findElement(By.name("datelessflag")).click();
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("showHideContentsXPATH"), "Hide Contents");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("assignmentRowUnderShowContentsXPATH"));
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
+        driver.findElement(By.xpath(xpv.getTokenValue("editCourseSettingLinkXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingsPageHeaderXPATH"), "Edit course settings");
+        
+        //Checks whether the "Disable Date in sections" check box is selected or not - if no then select it
+        disabledatecheckbox = driver.findElement(By.name("datelessflag")).isSelected();
+        if (disabledatecheckbox == false) {
+            driver.findElement(By.name("datelessflag")).click();
+        }
+        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("showHideContentsXPATH"), "Show Contents");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
+                presenceOfElementLocated(By.xpath(xpv.getTokenValue("assignmentRowUnderShowContentsXPATH")))));
+    }
+
+    /**
+     * Verify the elements on the right side bar of course work page
+     */
+    public void verifyRightSidebarOfCourseWorkPage() {
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("toolBoxTextXPATH"), "Tool Box");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("toolBoxTextBoxXPATH"));
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("upcomingEventsTextXPATH"), "Upcoming Events");
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("calendarTextXPATH"), "Calendar");
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("calendarXPATH"));
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("resourcesTextXPATH"), "Resources");
     }
 
     /**

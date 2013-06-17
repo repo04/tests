@@ -33,7 +33,10 @@ public class TransformRegression implements IAnnotationTransformer {
     public void transform(ITestAnnotation annotation, Class testClass,
             Constructor testConstructor, Method testMethod) {
 
-        if ("testContentAdminActivitiesCreation".equals(testMethod.getName())) {
+        if ("testContentAdminActivitiesCreation".equals(testMethod.getName())
+               || "testContentAdminGlossaryActivityCreation".equals(testMethod.getName())
+               || "testContentAdminCreateOfflineActivityWithHtmlFile".equals(testMethod.getName())
+               || "testContentAdminCreateAllInOneWithRevealPassword".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminActivitiesCreation");
             DependentMethods = new String[1];
             DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
@@ -459,13 +462,6 @@ public class TransformRegression implements IAnnotationTransformer {
         }
         
         //GroupName = Glossary
-        if ("testContentAdminGlossaryActivityCreation".equals(testMethod.getName())) {
-            System.out.println("Inside testContentAdminGlossaryActivityCreation");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
-            annotation.setDependsOnMethods(DependentMethods);
-        }
-        
         if ("testTeacherCreateGlossaryEntry".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherCreateGlossaryEntry");
             DependentMethods = new String[1];

@@ -108,7 +108,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.teacherVerifyStudentsPostRecommendation"})
     public void testTeacherVerifyStudentsPostRecommendation(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -221,7 +221,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseQuiz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "quiz.teacherVerifyUI"})
-    public void testTeacherVerifyverifyQuizUIPage(String groupCourseName, String quizActivityName) throws Exception {
+    public void testTeacherVerifyQuizUIPage(String groupCourseName, String quizActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();

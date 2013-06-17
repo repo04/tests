@@ -42,7 +42,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
 
     @DataProvider(name = "CourseStudentComment")
     public static Iterator<Object[]> StudentTextCommentOnTeacherCoursePost(ITestContext context) throws Exception {
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), studentTextCommentOnTeacherCoursePost);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), studentTextCommentOnTeacherCoursePost);
     }
 
     @DataProvider(name = "StudentGlossaryEntryName")
@@ -161,7 +161,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "note.createOnCourseWall"})
     public void testStudentCreateNoteOnCourseWall(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -220,7 +220,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "footers.verify"})
+    @Test(groups = {"regressionSmoke", "footers.studentVerify"})
     public void testStudentVerifyFooters() throws Exception {
         a.navigateToMyHome();
         a.verifyFooters();
@@ -232,7 +232,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class, 
+    /*@Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class, 
      groups = {"regressionSmoke", "activity.studentVerifySyllabus"})
      public void testStudentVerifySyllabusActivity(String groupCourseName) throws Exception {
      a.navigateToMyCourse();
@@ -347,6 +347,53 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         studentPostHTMLOnOwnWall = a.textPost("txtHTMLWallPost");
         Reporter.log("studentPostHTMLOnOwnWall: " + studentPostHTMLOnOwnWall, true);
     }
+
+    /**
+     * View Reveal Password button for All In One Assignment
+     *
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityNameWithRevealPassword
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseAllInOneActivityNameWithRevealPassword", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "content.studentViewRevealPasswordButtonForAllInOne"})
+    public void testStuentViewRevealPasswordButtonForAllInOneAssignemnt(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
+    }
+    
+    /**
+     * Verify Student has read only access to Offline Activity created
+     *
+     * @param groupCourseName
+     * @param offlineActivityName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseOfflineActivityName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "content.studentVerifyReadOnlyAccessToOfflineActivity"})
+    public void testStudentVerifyReadOnlyAccessToOfflineActivity(String groupCourseName, String offlineActivityName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.verifyReadOnlyAccessToOfflineActivity(offlineActivityName);
+    }
+
+    /**
+     * Student verify the elements on the right sidebar of course work page
+     *
+     * @param groupCourseName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "content.studentVerifyRightSideBarOfCourseworkPage"})
+    public void testStudentVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToCourseWorkPage();
+        a.verifyRightSidebarOfCourseWorkPage();
+    }    
 
     /**
      * The annotated method will be run after all the test methods in the

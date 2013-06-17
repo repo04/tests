@@ -5,6 +5,10 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -422,6 +426,27 @@ public class Utility {
 
         if (x > 2400) {
             Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by ID: " + id);
+        }
+    }
+    
+    /**
+     * Read contents from a file and paste the contents in a text box field in website
+     *
+     * @param filePathName
+     * @param xPath
+     */
+    public static void readAndCopyContentsToTextField(WebDriver driver, String filePathName, String xPath) {
+        try {
+            FileInputStream fstream = new FileInputStream(filePathName);
+            try (DataInputStream in = new DataInputStream(fstream)) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String str;
+                while ((str = br.readLine()) != null) {
+                    driver.findElement(By.xpath(xPath)).sendKeys(str);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 }

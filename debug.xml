@@ -6,6 +6,7 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
+        <parameter name="courseShortName" value="AutoCourse-DNT"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
@@ -15,7 +16,9 @@
         <parameter name="pageActivityName" value="AutoPage"/>
         <parameter name="glossaryActivityName" value="AutoGlossary"/>
         <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
-        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>         
+        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
+        <parameter name="allInOneAssignmentActivityNameWithRevealPassword" value="AutoAllInOnePasswordActivity"/>
+        <parameter name="offlineActivityName" value="AutoOfflineActivity"/>         
          
         <groups>
             <define name="Course_GroupCourse">
@@ -115,7 +118,7 @@
             </define>
             <define name="Footers">
                 <include name="prerequisite"/>
-                <include name="footers.verify"/>                                              
+                <include name="footers.studentVerify"/>                                              
             </define>
             <define name="Syllabus">
                 <include name="prerequisite"/>
@@ -231,6 +234,17 @@
                 <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
                 <include name="2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"/-->
             </define>
+            <define name="Content">
+                <include name="content.allInOneActivityCreationWithRevealPassword"/>
+                <include name="content.offlineActivityCreationWithHtmlFile"/>
+                <include name="content.pesadminVerifyOfflineActivitySubmittedAndGradedSection"/>
+                <include name="content.teacherVerifyRightSideBarOfCourseworkPage"/>
+                <include name="content.studentVerifyReadOnlyAccessToOfflineActivity"/>
+                <include name="content.studentViewRevealPasswordButtonForAllInOne"/>
+                <include name="content.studentVerifyRightSideBarOfCourseworkPage"/>
+                <include name="content.contentAdminVerifyCourseworkUnitExpandableOrNot"/>
+                <!--include name="content.liveSessionActivityCreationWithoutFullGrade"/-->                                                
+             </define>
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     

@@ -13,6 +13,7 @@ import runThrghTestNG.BaseClass;
 public class Course extends BaseClass {
 
     Date now = new Date();
+    private String courseDetails[] = new String[2];
     private String courseName;
     private String courseShortName;
     private String groupCourseName;
@@ -257,13 +258,21 @@ public class Course extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//legend", "Course settings");
 
         String fetchedCourseName = driver.findElement(By.id("id_setting_course_course_fullname")).getAttribute("value");
-        String shortCourseName = driver.findElement(By.id("id_setting_course_course_shortname")).getAttribute("value");
+        String fetchedShortCourseName = driver.findElement(By.id("id_setting_course_course_shortname")).getAttribute("value");
         int whiteSpaceCourseName = fetchedCourseName.indexOf(" ");
-        int whiteSpaceShortCourseName = shortCourseName.indexOf(" ");
-        String restoredCourseName = fetchedCourseName.substring(0, whiteSpaceCourseName)
-                + " Restore " + fetchedCourseName.substring(whiteSpaceCourseName + 1);
-        String restoredShortCourseName = shortCourseName.substring(0, whiteSpaceShortCourseName)
-                + " Restore " + shortCourseName.substring(whiteSpaceShortCourseName + 1);
+        int whiteSpaceShortCourseName = fetchedShortCourseName.indexOf(" ");
+        String restoredCourseName, restoredShortCourseName;
+        if (!test.contentEquals("CriticalTests")) {
+            restoredCourseName = fetchedCourseName.substring(0, whiteSpaceCourseName)
+                    + " Restore " + fetchedCourseName.substring(whiteSpaceCourseName + 1);
+            restoredShortCourseName = fetchedShortCourseName.substring(0, whiteSpaceShortCourseName)
+                    + " Restore " + fetchedShortCourseName.substring(whiteSpaceShortCourseName + 1);
+        } else {
+             restoredCourseName = fetchedCourseName.substring(0, 11)
+                    + "Restore-" + fetchedCourseName.substring(11);
+             restoredShortCourseName = fetchedShortCourseName.substring(0, 11)
+                    + "Restore-" + fetchedShortCourseName.substring(11);
+        }
         driver.findElement(By.id("id_setting_course_course_fullname")).clear();
         driver.findElement(By.id("id_setting_course_course_shortname")).clear();
         driver.findElement(By.id("id_setting_course_course_fullname")).sendKeys(restoredCourseName);
@@ -368,15 +377,10 @@ public class Course extends BaseClass {
     /**
      * @return CourseName
      */
-    public String getCourseName() {
-        return this.courseName;
-    }
-    
-    /**
-     * @return CourseName
-     */
-    public String getShortCourseName() {
-        return this.courseShortName;
+    public String[] getCourseName() {
+        courseDetails[0] = this.courseName;
+        courseDetails[1] = this.courseShortName;
+        return courseDetails;
     }
 
     /**
