@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="smoketest" default="run" basedir=".">
+    
+    <path id="selenium.classpath">
+        <pathelement path="${basedir}/"/>
+        <fileset dir="${basedir}">
+            <include name="selenium-server-standalone-2.32.0.jar"/>
+            <include name="sauce-grid-plugin-1.0.10.jar"/>
+        </fileset>
+        <pathelement path="${java.class.path}/"/>
+    </path>
+    
+    <target name="launch-hub"
+            description="Launch Selenium Hub">
+        <java classname="org.openqa.grid.selenium.GridLauncher"
+              classpathref="selenium.classpath"
+              fork="true"
+              failonerror="true">
+            <arg value="-servlets"/>
+            <arg value="com.saucelabs.grid.SauceOnDemandAdminServlet,com.saucelabs.grid.SauceOnDemandConsoleServlet"/>
+            <arg value="-role"/>
+            <arg value="hub"/>            
+        </java>
+    </target>    
+</project>  
