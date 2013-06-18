@@ -19,7 +19,7 @@ public class System_Compatibility extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void navigateToSystemCompatibilityPage() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToSystemCompatibility();
     }
 
@@ -30,7 +30,7 @@ public class System_Compatibility extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "systemCompatibility.contentVerify"})
     public void testSystemCompatibilityUIVerify() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.systemCompatibilityUIVerify();
     }
 
@@ -41,7 +41,7 @@ public class System_Compatibility extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "systemCompatibility.contentVerify"})
     public void testComponentCompatibilityUIVerify() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.systemCompatibilityComponentCompatibilityUIVerify();
     }
 
@@ -52,7 +52,7 @@ public class System_Compatibility extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "systemCompatibility.contentVerify"})
     public void testSystemCompatibilityMeetingConnectionDiagnosticUIVerify() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.systemCompatibilityMeetingConnectionDiagnosticUIVerify();
     }
 
@@ -63,7 +63,7 @@ public class System_Compatibility extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "systemCompatibility.faqSectionUIVerify"})
     public void testSystemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.systemCompatibilityVerifyQuestionsAndBrowserCompatibleIcons();
     }
 
@@ -74,7 +74,7 @@ public class System_Compatibility extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "systemCompatibility.expressUploader"})
     public void testSystemCompatibilityExpressUploader() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.systemCompatibilityExpressUploader();
     }
 
@@ -94,7 +94,7 @@ public class System_Compatibility extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "systemCompatibility.mobileApplicationsUIVerify"})
     public void testSystemCompatibilityMobileApplicationsUIVerify() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.systemCompatibilityMobileApplicationsUIVerify();
     }
 
@@ -106,7 +106,7 @@ public class System_Compatibility extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "systemCompatibility.backToTopAndMoreInfoLinksVerify"})
     public void testSystemCompatibilityVerifyBackToTopAndMoreInfoLinks() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.systemCompatibilityVerifyBackToTopAndMoreInfoLinks();
     }
 
@@ -118,7 +118,7 @@ public class System_Compatibility extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"}, alwaysRun = true)
     public void testNavigateToHomePage() throws Exception {
-        driver.get(url);
-        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
+        getWebdriver().get(url);
+        Utility.verifyCurrentUrl(getWebdriver(), xpv.getTokenValue("loginPageURL"));
     }
 }

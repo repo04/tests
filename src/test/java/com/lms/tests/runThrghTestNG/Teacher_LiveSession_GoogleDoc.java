@@ -63,8 +63,8 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testTeacherLogInB(ITestContext context) throws Exception {
-        a = new Actions(driver);
+    public void testTeacherLogInC(ITestContext context) throws Exception {
+        a = new Actions(getWebdriver());
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
         } else {
@@ -80,7 +80,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "liveSession.teacherCreate"})
     public void testTeacherCreateLiveSession(String teacherSocialGroupName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
         a.accessLiveSessionWall();
@@ -142,7 +142,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseFiles", groups = {"regressionSmoke", "criticalSmoke", "files.teacherUploadInCourse"})
     public void testTeacherUploadFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToFiles();
@@ -160,7 +160,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      */
     @Test(dataProvider = "Files", groups = {"regressionSmoke", "criticalSmoke", "files.teacherVerifyInPortfolio"})
     public void testTeacherVerifyFilesInPortfolio(String pdf, String pptx, String doc) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyHome();
         a.navigateToPortfolio();
         a.verifyFilesInPortfolio(doc, pptx, pdf);
@@ -188,8 +188,8 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testTeacherLogOutB() throws Exception {
-        a = new Actions(driver);
+    public void testTeacherLogOutC() throws Exception {
+        a = new Actions(getWebdriver());
         a.logOut();
     }
 }

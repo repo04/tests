@@ -33,7 +33,7 @@ public class Footers extends BaseClass {
      * Verify Footers
      */
     void verifyFooters() {
-        switch (program) {
+        switch (getProgram()) {
             case "unc-mba":
                 verify1 = "University of North Carolina at Chapel Hill";
                 programTitle = "UNC Kenan-Flagler Business School MBA@UNC:";

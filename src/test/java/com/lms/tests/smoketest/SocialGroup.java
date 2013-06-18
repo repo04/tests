@@ -13,30 +13,62 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class SocialGroup extends BaseClass {
-    
+
     /*private EventFiringWebDriver driver;
     
-    public SocialGroup(EventFiringWebDriver driver){
-        this.driver = driver;        
-    }*/
-    
+     public SocialGroup(EventFiringWebDriver driver){
+     this.driver = driver;        
+     }*/
     private RemoteWebDriver driver;
-    
-    public SocialGroup(RemoteWebDriver driver){
-        this.driver = driver;
-        System.out.println("//Action//: " + this.driver);
-    }
 
+    public SocialGroup(RemoteWebDriver driver) {
+        this.driver = driver;
+    }
     Date now = new Date();
     private String socialGroupName;
-    
+
     /**
      * Create & verify SocialGroup
      */
     public void buildSocialGroup() {
 
         String user = LoginPage.getUser();
+        String groupMemberName = null;
 
+        switch (getProgram()) {
+            case "gu-msn":
+                groupMemberName = "Hoyas";
+                break;
+            case "usc-msw":
+            case "usc-mat":
+                groupMemberName = "Trojans";
+                break;
+            case "unc-mba":
+            case "unc-mpa":
+                groupMemberName = "Tar Heels";
+                break;
+            case "wu-llm":
+                groupMemberName = "Bers";
+                break;
+            //This will be corrected once LMS-2809 is resolved
+            case "au-mir":
+            case "gwu-mph":
+            case "corp-son":
+                groupMemberName = "student";
+        }
+        
+        driver.findElement(By.xpath(xpv.getTokenValue("linkStrtSclGrpXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpNameXPATH"));
+        try {
+            ip.isTextPresentByXPATH(driver, "//b/div/font", "Topics are keywords or labels that make a group easy to find. "
+                    + "Enter up to 7 short and simple topics to describe your group. "
+                    + "For example, a group called \"New York City\" might have topics like Statue of Liberty, "
+                    + "Hot Dogs, Yankees, or Empire State Building. "
+                    + "Be creative in describing your group so fellow " + groupMemberName + " want to join!");
+        } catch (TimeoutException e) {
+            System.out.print("@@@TimeoutException:_" + getProgram() +  "@@@_\n");
+        }
+        
         //Split username
         switch (user.substring(0, 7)) {
             case "student":
@@ -46,7 +78,7 @@ public class SocialGroup extends BaseClass {
                 } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.socialGroupName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
-                    this.socialGroupName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);                    
                 } else {
                     this.socialGroupName = "DbgTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
@@ -68,8 +100,7 @@ public class SocialGroup extends BaseClass {
         }
 
         String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        driver.findElement(By.xpath(xpv.getTokenValue("linkStrtSclGrpXPATH"))).click();
-        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpNameXPATH"));
+        System.out.print("@@@Time: " + this.socialGroupName + "@@@\n");
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpNameXPATH"))).sendKeys(this.socialGroupName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
@@ -159,10 +190,10 @@ public class SocialGroup extends BaseClass {
         Utility.waitForAlertToBeAccepted(driver, 60, "Do you really want to delete this group?");
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + studentSocialGroupName + "')]")));
     }
-    
+
     /**
      * Verify post exits on Social Group wall
-     * 
+     *
      * @param studentUrlPostOnTeacherSocialGroup
      */
     public void verifyPostOnSocialGroupWall(String studentUrlPostOnTeacherSocialGroup) {

@@ -188,7 +188,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testContentAdminLogIn() throws Exception {
-        a = new Actions(webdriver());
+        a = new Actions(getWebdriver());
         a.login("contentAdmin");
     }
 
@@ -199,7 +199,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "course.creation"})
     public void testContentAdminCourseGroupCourseCreation() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         courseName = a.createCourse();
@@ -220,7 +220,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @Test(dataProvider = "Course", groups = {"regressionSmoke", "fullSmoke", "activities.creation"})
     public void testContentAdminActivitiesCreation(String groupCourseName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         activitiesArray[0][0] = a.createForumActivity();
@@ -252,7 +252,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @Test(dataProvider = "Course", groups = {"criticalDataSmoke"})
     public void testContentAdminQuizCreation(String groupCourseName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         quizNameArray[0][0] = a.createQuizActivity();
@@ -392,7 +392,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testContentAdminLogOut() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.logOut();
     }
 }

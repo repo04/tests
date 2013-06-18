@@ -632,7 +632,6 @@ public class Actions extends BaseClass {
      * @param studentSocialGroupName
      */
     public void deleteSocialGroup(String studentSocialGroupName) {
-
         SocialGroup sg = new SocialGroup(driver);
         sg.deleteSocialGroup(studentSocialGroupName);
     }
@@ -921,7 +920,7 @@ public class Actions extends BaseClass {
      * Verify Resume
      */
     public void verifyResume() {
-        switch (program) {
+        switch (getProgram()) {
             case "usc-mat":
                 new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
                 ip.isElementPresentByLINK(driver, "Resume");

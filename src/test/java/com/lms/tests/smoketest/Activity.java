@@ -449,7 +449,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
 
         //Until Jira Ticket 'LMSII-2827' is resolved
-        switch (program) {
+        switch (getProgram()) {
             case "unc-mpa":
             case "wu-llm":
                 ip.isElementPresentByXPATH(driver, "//input[@type='image']");
@@ -525,7 +525,7 @@ public class Activity extends BaseClass {
         driver.switchTo().window(HandleBefore);
 
         //Until Jira Ticket 'LMSII-2827' is resolved
-        switch (program) {
+        switch (getProgram()) {
             case "unc-mpa":
             case "wu-llm":
                 ip.isElementPresentByXPATH(driver, "//input[@type='image']");

@@ -19,7 +19,7 @@ public class AdministrationBlock extends BaseClass {
         this.driver = driver;        
     }
 
-    String programName = BaseClass.program;
+    String programName = getProgram();
     String studentSupportMessage = "This is support message created through Automation by pesadmin";
     String studentLoginMessage = "This is login message created through Automation by pesadmin for student";
     String teacherLoginMessage = "This is login message created through Automation by pesadmin for teacher";

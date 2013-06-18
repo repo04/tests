@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Utility;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Teacher_FetchActivityPassword extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherEmailFetchActivityPasswordLogIn() throws Exception {
-        Utility.userEmailLogIn(driver, xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
+        Utility.userEmailLogIn(getWebdriver(), xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
     }
 
     /**
@@ -55,6 +56,8 @@ public class Teacher_FetchActivityPassword extends BaseClass {
     @Test(dataProvider = "PasswordQuizName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "pswdQuiz.readMail"})
     public void testTeacherFetchQuizPassword(String passwordQuizName) throws Exception {
+        
+        RemoteWebDriver driver = getWebdriver();
         int x = 1;
         Boolean mailresult = null;
         loop:
@@ -97,6 +100,7 @@ public class Teacher_FetchActivityPassword extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testTeacherEmailFetchActivityPasswordLogOut() throws Exception {
+        RemoteWebDriver driver = getWebdriver();
         Utility.userEmailLogOut(driver);
         driver.get(url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));

@@ -140,7 +140,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testPESAdminLogIn() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.login("pesAdmin");
     }
 
@@ -232,7 +232,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         pesTextCoursePostCommentsOn[0][0] = a.textPost("txtCrsPostCmntsOn");
         Reporter.log("pesTxtCrsPost: " + pesTextCoursePostCommentsOn[0][0], true);
-        ip.isElementPresentByXPATH(driver, "//li[1]/div/div[4]/label/a/label");
+        ip.isElementPresentByXPATH(getWebdriver(), "//li[1]/div/div[4]/label/a/label");
     }
 
     /**
@@ -248,7 +248,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         pesTextCoursePostCommentsOff[0][0] = a.textPost("txtCrsPostCmntsOff");
         Reporter.log("pesTxtCrsPost: " + pesTextCoursePostCommentsOff[0][0], true);
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
+        new WebDriverWait(getWebdriver(), 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
     }
 
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
@@ -503,7 +503,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testPESAdminLogOut() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.logOut();
     }
 }

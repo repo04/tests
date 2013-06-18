@@ -23,8 +23,7 @@ public class WallPage extends BaseClass {
     private RemoteWebDriver driver;
     
     public WallPage(RemoteWebDriver driver){
-        this.driver = driver;
-        System.out.println("//Action//: " + this.driver);
+        this.driver = driver;        
     }
 
     Date now = new Date();

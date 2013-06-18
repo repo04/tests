@@ -13,8 +13,8 @@ import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 import com.lms.tests.smoketest.Utility;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
@@ -33,7 +33,7 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherEmailLogIn() throws Exception {
-        Utility.userEmailLogIn(driver, xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
+        Utility.userEmailLogIn(getWebdriver(), xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
     }
 
     /**
@@ -48,6 +48,7 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
           groups = {"teacherVerifyCriticalTestEmails"})
     public void testTeacherVerifyCriticalSmokeTestEmails(String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
+        RemoteWebDriver driver = getWebdriver();
         studentFullName = "Auto Student1";
 
         verify1 = "You are now a member of " + studentSocialGroupName;
@@ -77,16 +78,16 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
                         String environment;
-                        if (BaseClass.program.substring(0, 2).contains("gu")) {
+                        if (getProgram().substring(0, 2).contains("gu")) {
                             environment = "2GU";
-                        } else if (program.substring(0, 3).contains("vac")) {
+                        } else if (getProgram().substring(0, 3).contains("vac")) {
                             environment = "VAC";
-                        } else if (program.substring(0, 3).contains("mpa")) {
+                        } else if (getProgram().substring(0, 3).contains("mpa")) {
                             environment = "2SG";
-                        } else if (program.substring(0, 3).contains("llm")) {
+                        } else if (getProgram().substring(0, 3).contains("llm")) {
                             environment = "@WashuLaw";
                         } else {
-                            environment = "2" + program.substring(1, 3).toUpperCase();
+                            environment = "2" + getProgram().substring(1, 3).toUpperCase();
                         }
 
                         if (a.contentEquals(verify2)) {
@@ -134,6 +135,7 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
     public void testTeacherVerifyFullSmokeTestEmails(String teacherUserName, String studentUserName, String workingGroupName,
             String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
+        RemoteWebDriver driver = getWebdriver();
         studentFullName = studentUserName.substring(0, 1).toUpperCase() + studentUserName.substring(1);
         verify1 = "You are now a member of " + studentSocialGroupName;
         verify2 = studentFullName + "fstNm " + studentFullName + "sndNm has joined the group " + teacherSocialGroupName + ".";
@@ -172,7 +174,7 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
                          * "VAC"; } else { environment = "2" + program.substring(1,
                          * 3).toUpperCase(); }
                          */
-                        switch (program) {
+                        switch (getProgram()) {
                             case "unc-mba":
                                 environment = "2NC";
                                 break;
@@ -229,6 +231,6 @@ public class Teacher_VerifyEmailNotifications extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testTeacherEmailLogOut() throws Exception {
-        Utility.userEmailLogOut(driver);        
+        Utility.userEmailLogOut(getWebdriver());        
     }
 }

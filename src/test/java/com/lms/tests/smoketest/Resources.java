@@ -35,7 +35,7 @@ public class Resources extends BaseClass {
      * Verify Resources
      */
     public void verifyResources() {
-        switch (program) {
+        switch (getProgram()) {
             case "unc-mba":
                 //Jira Ticket not located
                 count = 7;

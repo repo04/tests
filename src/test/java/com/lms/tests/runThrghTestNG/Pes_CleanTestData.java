@@ -31,7 +31,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testPESAdminLogIn() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.login("pesAdmin");
     }
 
@@ -80,12 +80,12 @@ public class Pes_CleanTestData extends BaseClass {
     public void testPESAdminRemoveMembersFromWorkngGroup(String groupCourseName, String workingGroupName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
-        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
-        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))).click();
-        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"), 60);
-        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
-        ip.isElementClickableByXpath(driver, xpv.getTokenValue("linkScndNameXPATH"), 60);
-        driver.findElement(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))).click();
+        ip.isElementClickableByXpath(getWebdriver(), xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
+        getWebdriver().findElement(By.xpath(xpv.getTokenValue("lftPnlUsrLnkXPATH"))).click();
+        ip.isElementClickableByXpath(getWebdriver(), xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"), 60);
+        getWebdriver().findElement(By.xpath(xpv.getTokenValue("lftPnlEnrlUsrLnkXPATH"))).click();
+        ip.isElementClickableByXpath(getWebdriver(), xpv.getTokenValue("linkScndNameXPATH"), 60);
+        getWebdriver().findElement(By.xpath(xpv.getTokenValue("linkScndNameXPATH"))).click();
 
         String studentFullName;
         String teacherFullName;
@@ -105,7 +105,7 @@ public class Pes_CleanTestData extends BaseClass {
         int i = 1;
         while (true) {
             try {
-                driver.findElement(By.xpath("//tr[" + i + "]/td/div[2]"));
+                getWebdriver().findElement(By.xpath("//tr[" + i + "]/td/div[2]"));
             } catch (NoSuchElementException e) {
                 System.out.println("Total Elements i: " + i);
                 break;
@@ -196,7 +196,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testPESAdminLogOut() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.logOut();
     }
 
@@ -213,7 +213,7 @@ public class Pes_CleanTestData extends BaseClass {
         loop:
         do {
             try {
-                ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td/div[2]", FllNm, 5);
+                ip.isTextPresentByXPATH(getWebdriver(), "//tr[" + x + "]/td/div[2]", FllNm, 5);
                 status = true;
                 break loop;
             } catch (TimeoutException e) {

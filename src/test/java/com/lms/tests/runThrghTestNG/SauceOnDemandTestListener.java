@@ -102,8 +102,8 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     @Override
     public void onTestFailure(ITestResult tr) {
         super.onTestFailure(tr);
-        //ScreenShot(tr);
-        markJobAsFailed();
+        ScreenShot(tr);
+        //markJobAsFailed();
     }
 
     private void markJobAsFailed() {
@@ -130,7 +130,7 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult tr) {
         super.onTestSuccess(tr);
-        markJobAsPassed();
+        //markJobAsPassed();
     }
 
     private void markJobAsPassed() {
@@ -169,18 +169,16 @@ public class SauceOnDemandTestListener extends TestListenerAdapter {
             }
 
             NewFileNamePath = BaseClass.directory.getCanonicalPath() + File.separator + "target" + File.separator + "surefire-reports" + File.separator + "screenshots"
-                    + File.separator + methodName + "_" + dateFormat.format(date) + ".png";
+                    + File.separator + BaseClass.getProgram() + "_" + methodName + "_" + dateFormat.format(date) + ".png";
 
             System.out.println(NewFileNamePath);
-            /*System.out.println("//screenshot//: " + BaseClass.threadLocalDriver.get());
-            File screenshot = ((TakesScreenshot) new Augmenter().augment(BaseClass.threadLocalDriver.get())).
+            File screenshot = ((TakesScreenshot) new Augmenter().augment(BaseClass.getWebdriver())).
                     getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(screenshot, new File(NewFileNamePath));
             Reporter.log(methodName + " failed; Click on image to enlarge<br/>"
                     + "<a target=\"_blank\" href=\"" + NewFileNamePath + "\"><img src=\"file:///" + NewFileNamePath
                     + "\" alt=\"\"" + "height='100' width='100'/></a><br />");
-            Reporter.setCurrentTestResult(null);
-            System.out.println("//screenshot saved//");*/
+            Reporter.setCurrentTestResult(null);            
         } catch (IOException e) {
             e.printStackTrace();
         }

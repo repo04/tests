@@ -145,7 +145,7 @@ public class Utility {
         try {
             ip.isTitleContains(driver, emailUsername + " - 2U Mail");
         } catch (Exception e) {
-            driver.get(BaseClass.url);
+            //driver.get(BaseClass.url);
             verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
             throw e;
         }

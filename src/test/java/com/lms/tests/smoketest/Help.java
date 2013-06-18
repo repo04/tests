@@ -58,7 +58,7 @@ public class Help extends BaseClass {
                     } catch (TimeoutException e) {
                         System.out.println("count: " + i);
                         driver.navigate().refresh();
-                        ip.isTitlePresent(driver, xpv.getTokenValue(this.program + "homePageTitle"));
+                        ip.isTitlePresent(driver, xpv.getTokenValue(getProgram() + "homePageTitle"));
                         i++;
                     }
                 } else {

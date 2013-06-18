@@ -25,7 +25,7 @@ public class Pes_ArchiveCourse extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testPESAdminLogIn() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.login("pesAdmin");
     }
     
@@ -47,7 +47,7 @@ public class Pes_ArchiveCourse extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testPESAdminLogOut() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.logOut();
     }
     

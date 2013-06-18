@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.LocalFileDetector;
 import org.testng.annotations.AfterTest;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
@@ -30,16 +31,15 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     //Add your username & key here
     private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
     public static XpathValues xpv, ldv;
-    public RemoteWebDriver driver;
     public IsPresent ip = new IsPresent();
-    public static String program;
     public String browser;
     public static String test;
-    public static String url;
+    public String url;
     public String os;
     public String currentURL;
     public static File directory = new File(".");
     private final static String WEBDRIVER = "webdriver";
+    private final static String PROGRAM = "program";
     DesiredCapabilities capabilities;
     
     
@@ -48,15 +48,21 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
      protected RemoteWebDriver initialValue() {
      return driver;
      }
-     };*/
-    
+     };*/    
     
     private static ThreadLocal<Map<String, Object>> sessions =
             new InheritableThreadLocal<>();
+    
+    private static ThreadLocal<Map<String, String>> sessions2 =
+            new InheritableThreadLocal<>();
 
-    public static RemoteWebDriver webdriver() {
+    public static RemoteWebDriver getWebdriver() {
         RemoteWebDriver driver = (RemoteWebDriver) get(WEBDRIVER);
         return driver;
+    }
+    
+    public static String getProgram() {
+        return get2(PROGRAM);        
     }
 
     /**
@@ -78,7 +84,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     public void setUp(String url, String program, String browser, String os, String test) throws Exception {
 
         RemoteWebDriver driver;
-        this.program = program;
+        //this.program = program;
         this.browser = browser;
         this.test = test;
         this.url = url;
@@ -87,7 +93,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         xpv = new XpathValues("xPathAccountProperty");
         ldv = new XpathValues("loginDetails");
         System.out.println("url: " + url);
-        System.out.println("program: " + this.program);
+        System.out.println("program: " + program);
         System.out.println("browser: " + this.browser);
         System.out.println("os: " + os);
         System.out.println("test: " + this.test);
@@ -120,10 +126,13 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
                 capabilities.setCapability("platform", "WINDOWS 7");
         }
         capabilities.setCapability("name", this.test);
+        capabilities.setCapability("idle-timeout", 180);
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);
+        driver.setFileDetector(new LocalFileDetector());
         driver.get(this.url);
         put(WEBDRIVER, driver);
+        put2(PROGRAM, program);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 
@@ -138,12 +147,12 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
      */
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
-        webdriver().quit();
+        getWebdriver().quit();
     }
 
     @Override
     public String getSessionId() {
-        SessionId sessionId = ((RemoteWebDriver) webdriver()).getSessionId();
+        SessionId sessionId = ((RemoteWebDriver) getWebdriver()).getSessionId();
         return (sessionId == null) ? null : sessionId.toString();
     }
 
@@ -155,9 +164,17 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     private static Object get(String key) {
         return getSession().get(key);
     }
+    
+    private static String get2(String key) {
+        return getSession2().get(key);
+    }
 
     private static void put(String key, Object value) {
         getSession().put(key, value);
+    }
+    
+    private static void put2(String key, String value) {
+        getSession2().put(key, value);
     }
 
     private static Map<String, Object> getSession() {
@@ -165,6 +182,15 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         if (res == null) {
             res = new HashMap<>();
             sessions.set(res);
+        }
+        return res;
+    }
+    
+    private static Map<String, String> getSession2() {
+        Map<String, String> res = sessions2.get();
+        if (res == null) {
+            res = new HashMap<>();
+            sessions2.set(res);
         }
         return res;
     }

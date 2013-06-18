@@ -41,8 +41,8 @@ public class Settings extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//div[2]/div[4]/div", "New password");
         ip.isTextPresentByXPATH(driver, "//div[5]/div/label", "New password (again)");
         ip.isTextPresentByXPATH(driver, "//div[6]/div/label", "Timezone");
-        if (program.contentEquals("gu-msn")) {
-            ip.isTextPresentByXPATH(driver, "//div[7]/div/label", "Default Mail Client Separator");
+        if (getProgram().contentEquals("gu-msn")) {
+            ip.isTextPresentByXPATH(driver, "//div[7]/div/label", "Defult Mail Client Separator");
         } else {
             ip.isTextPresentByXPATH(driver, "//div[7]/div/label", "Mail Preferences");
         }

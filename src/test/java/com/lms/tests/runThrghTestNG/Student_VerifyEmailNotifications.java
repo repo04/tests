@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
 import com.lms.tests.smoketest.Utility;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  *
@@ -22,7 +23,7 @@ import com.lms.tests.smoketest.Utility;
  */
 public class Student_VerifyEmailNotifications extends BaseClass {
 
-    Actions a = new Actions(driver);
+    Actions a = new Actions(getWebdriver());
     String verify1, verify2, verify3, verify4;
     String teacherFullName;
 
@@ -34,7 +35,7 @@ public class Student_VerifyEmailNotifications extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testStudentEmailLogIn() throws Exception {
-        Utility.userEmailLogIn(driver, xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
+        Utility.userEmailLogIn(getWebdriver(), xpv, ldv.getTokenValue("emailUserName"), ldv.getTokenValue("emailPassword"));
     }
     
     /**
@@ -48,6 +49,7 @@ public class Student_VerifyEmailNotifications extends BaseClass {
           groups = {"studentVerifyCriticalSmokeTestEmails"})
     public void testStudentVerifyCriticalSmokeTestEmails(String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
+        RemoteWebDriver driver = getWebdriver();
         teacherFullName = "Auto Teacher1";
 
         verify1 = teacherFullName + " has joined the group " + studentSocialGroupName + ".";
@@ -77,16 +79,16 @@ public class Student_VerifyEmailNotifications extends BaseClass {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
                         String prod;
-                        if (BaseClass.program.substring(0, 2).contains("gu")) {
+                        if (getProgram().substring(0, 2).contains("gu")) {
                             prod = "2GU";
-                        } else if (BaseClass.program.substring(0, 3).contains("vac")) {
+                        } else if (getProgram().substring(0, 3).contains("vac")) {
                             prod = "VAC";
-                        } else if (BaseClass.program.substring(0, 3).contains("mpa")) {
+                        } else if (getProgram().substring(0, 3).contains("mpa")) {
                             prod = "2SG";
-                        } else if (BaseClass.program.substring(0, 3).contains("llm")) {
+                        } else if (getProgram().substring(0, 3).contains("llm")) {
                             prod = "@WashuLaw";
                         } else {
-                            prod = "2" + program.substring(1, 3).toUpperCase();
+                            prod = "2" + getProgram().substring(1, 3).toUpperCase();
                         }
 
                         if (a.contentEquals(verify4)) {
@@ -133,6 +135,7 @@ public class Student_VerifyEmailNotifications extends BaseClass {
     public void testStudentVerifyFullSmokeTestEmails(String teacherUserName, String studentUserName, String workingGroupName,
             String teacherSocialGroupName, String studentSocialGroupName) throws Exception {
 
+        RemoteWebDriver driver = getWebdriver();
         teacherFullName = teacherUserName.substring(0, 1).toUpperCase() + teacherUserName.substring(1);
         verify1 = teacherFullName + "fstNm " + teacherFullName + "sndNm has joined the group " + studentSocialGroupName + ".";
         verify2 = "You are now a member of " + studentSocialGroupName;
@@ -161,12 +164,12 @@ public class Student_VerifyEmailNotifications extends BaseClass {
                     try {
                         ip.isTextPresentByXPATH(driver, "//h1/span", a, 15);
                         String prod;
-                        if (BaseClass.program.substring(0, 2).contains("gu")) {
+                        if (getProgram().substring(0, 2).contains("gu")) {
                             prod = "2GU";
-                        } else if (BaseClass.program.substring(0, 3).contains("vac")) {
+                        } else if (getProgram().substring(0, 3).contains("vac")) {
                             prod = "VAC";
                         } else {
-                            prod = "2" + program.substring(1, 3).toUpperCase();
+                            prod = "2" + getProgram().substring(1, 3).toUpperCase();
                         }
                         ip.isTextPresentByXPATH(driver, "//div[6]/div/div[3]", "Thanks\n" + prod, 15);
 
@@ -202,6 +205,6 @@ public class Student_VerifyEmailNotifications extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testStudentEmailLogOut() throws Exception {
-        Utility.userEmailLogOut(driver);
+        Utility.userEmailLogOut(getWebdriver());
     }
 }

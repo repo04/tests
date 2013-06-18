@@ -38,7 +38,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testContentAdminLogIn() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.login("contentAdmin");
     }
 
@@ -56,7 +56,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
           groups = {"activities.deletion"})
     public void testContentAdminActivitiesDeletion(String groupCourseName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.deleteActivities(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
@@ -71,7 +71,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
     @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"groupcourse.deletion"})
     public void testContentAdminGroupCourseDeletion(String groupCourseName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.deleteGroupCourse(groupCourseName);
@@ -91,7 +91,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
           groups = {"regressionSmoke", "course.backup"})
     public void testContentAdminBackupCourse(String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(ContentAdmin_Course_GroupCourseCreation.courseName);
@@ -113,7 +113,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
     @Test(dataProvider = "PasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke", "course.restore"})
     public void testContentAdminRestoreCourseAsNewArchiveCourse(String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName, String backupFile) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.navigateToCourseCategories();
         a.selectCourse(ContentAdmin_Course_GroupCourseCreation.courseName);
@@ -129,7 +129,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testContentAdminLogOut() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.logOut();
     }
 }

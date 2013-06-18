@@ -56,8 +56,8 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testStudentLogIn(ITestContext context) throws Exception {
-        a = new Actions(driver);
+    public void testStudentLogInB(ITestContext context) throws Exception {
+        a = new Actions(getWebdriver());
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
                 || test.equalsIgnoreCase("CriticalDataTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][1]);
@@ -74,7 +74,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
     groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentJoinTeachers"})
     public void testStudentJoinsTeacherSocialGroup(String teacherSocialGroupName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMySocialGroups();
         a.findSocialGroup(teacherSocialGroupName);
         a.joinSocialGroup(teacherSocialGroupName);
@@ -88,7 +88,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
     groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.studentPostURLOnTeachers"})
     public void testStudentPostURLOnTeacherSocialGroup(String teacherSocialGroupName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
         studentUrlPostOnTeacherSocialGroup[0][0] = a.urlPost("urlSclGrpPost");
@@ -103,7 +103,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @Test(dataProvider = "GroupCourseTeacherUrlCoursePost", dataProviderClass = Teacher_Posts_SocialGroup.class,
     groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.studentCommentOnTeacherCoursePost"})
     public void testStudentCommentOnTeacherCoursePost(String groupCourseName, String teacherUrlCoursePost) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.selectGroupCourse(groupCourseName);
         studentTextCommentOnTeacherCoursePost[0][0] = a.textCommentPost(teacherUrlCoursePost, "txtCmntOnTchrCrsPst");
         Reporter.log("studentTextCommentOnTeacherCoursePost: " + studentTextCommentOnTeacherCoursePost[0][0], true);
@@ -293,6 +293,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "settings.studentVerify"})
     public void testStudentVerifySettings() throws Exception {
+        a = new Actions(getWebdriver());
         a.navigateToSettings();
         a.verifySettings();
     }
@@ -374,8 +375,8 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testStudentLogOut() throws Exception {
-        a = new Actions(driver);
+    public void testStudentLogOutB() throws Exception {
+        a = new Actions(getWebdriver());
         a.logOut();
     }
 }

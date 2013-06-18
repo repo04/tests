@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="Staging-DebugSuite">
+<suite name="Staging-DebugSuite" verbose="5" parallel="tests" thread-count="10">
     <listeners>
-        <listener class-name="com.lms.tests.runThrghTestNG.TransformDebug"/>
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
-    <test name="DebugTests" preserve-order="true" parallel="false">
+    <test name="DebugTests_1" preserve-order="true" parallel="false">
+        <parameter name="url" value="https://2gu.nursing.georgetown.edu"/>
+        <parameter name="program" value="gu-msn"/>
+        <parameter name="browser" value="ff"/>
+        <parameter name="os" value="win"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
@@ -18,212 +21,50 @@
         <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>         
          
         <groups>
-            <define name="Course_GroupCourse">
-                <include name="prerequisite"/>
-                <include name="course.creation"/>
-                <include name="groupcourse.deletion"/>
-                <include name="course.archive"/>                    
-            </define>            
-            <define name="ActivitiesCreation_AddQuizQuestion_Deletion">
-                <include name="prerequisite"/>
-                <include name="activities.creation"/>
-                <include name="activities.addQuizQuestion"/>
-                <include name="activities.deletion"/>              
-            </define>
-            <define name="ActivitiesVerification">
-                <include name="prerequisite"/>
-                <include name="activities.teacherVerify"/>
-                <include name="activities.studentVerify"/>          
-            </define>            
-            <define name="ActivitiesSubmitQuiz">
-                <include name="prerequisite"/>
-                <include name="activities.submitQuiz"/>          
-            </define>
-            <define name="Assignment_Grade">
-                <include name="prerequisite"/>
-                <include name="assignment.submit"/>
-                <include name="assignment.grade"/>
-                <include name="assignment.verifyGrade"/>
-                <include name="assignment.allowResubmit"/>
-            </define>            
-            <define name="Users">
-                <include name="prerequisite"/>
-                <include name="users.creation"/>
-                <include name="users.assignRole"/>
-                <include name="users.unAssignRole"/>
-                <include name="users.delete"/>         
-            </define>
-            <define name="WorkingGroup">
-                <include name="prerequisite"/>
-                <include name="workingGroup.create"/>
-                <include name="workingGroup.addMembers"/>
-                <include name="workingGroup.studentPost"/>
-                <include name="workingGroup.pesAdminDeleteAndVerifyStudentPostFromWorkingGroup"/>
-                <include name="workingGroup.removeMembers"/>                
-                <include name="workingGroup.delete"/>        
-            </define>              
-            <define name="GoogleDoc">
-                <include name="prerequisite"/>
-                <include name="workingGroup.teacherCreateGoogleDoc"/> 
-                <include name="workingGroup.studentVerifyGoogleDoc"/>                
-            </define>            
-            <define name="SocialGroup_LiveSession">
-                <include name="prerequisite"/>
-                <include name="socialGroup.teacherCreate"/>
-                <include name="socialGroup.studentJoinTeachers"/>
-                <include name="socialGroup.studentPostURLOnTeachers"/>
-                <include name="liveSession.teacherCreate"/>
-                <include name="socialGroup.teacherVerifyStudentPostOnOwnSocialGroupWall"/>
-                <include name="liveSession.studentCreate"/>
-                <include name="socialGroup.studentLeaveTeacherSocialGroup"/>
-                <include name="socialGroup.studentCreate"/>
-                <include name="socialGroup.teacherVerifyStudentsPostExistenceEvenStudentLeftTeacherSocialGroupWall"/>
-                <include name="socialGroup.teacherJoinStudents"/>
-                <include name="socialGroup.teacherLeaveStudents"/>
-                <include name="socialGroup.teacherDelete"/>                
-                <include name="socialGroup.studentDelete"/>                                                         
-            </define>            
-            <define name="Notes">
-                <include name="prerequisite"/>
-                <include name="note.createOnCourseWall"/>
-                <include name="note.createOnProfileWall"/>                
-                <include name="note.verifySorting"/>
-                <include name="note.deleteProfile"/> 
-            </define>
-            <define name="Resources">
-                <include name="prerequisite"/>
-                <include name="resources.studentVerify"/>                                              
-            </define>
-            <define name="Wall">
-                <include name="prerequisite"/>
-                <include name="wall.courseSectionPost"/>
-                <include name="wall.coursePostCommentsOn"/>
-                <include name="wall.coursePostCommentsOff"/>
-                <include name="wall.courseAnnouncementPost"/>
-                <include name="wall.teacherPostsOnProfileCourseWall"/>
-                <include name="wall.teacherVerifyPESCoursePosts"/> 
-                <include name="wall.studentVerifyPESCoursePosts"/>
-                <include name="wall.studentCommentOnTeacherCoursePost"/> 
-                <include name="wall.studentRecommendPost"/>   
-                <include name="wall.teacherVerifyStudentsPostRecommendation"/>
-                <include name="wall.teacherVerifyStudentsCommentOnPost"/> 
-                <include name="wall.teacherDeleteCourseURLPost"/>
-                <include name="wall.pesDeleteAnnouncement"/>            
-            </define>
-            <define name="Footers">
-                <include name="prerequisite"/>
-                <include name="footers.verify"/>                                              
-            </define>
-            <define name="Syllabus">
-                <include name="prerequisite"/>
-                <include name="activity.syllabusCreation"/>
-                <include name="activity.teacherVerifySyllabus"/>    
-                <include name="activity.studentVerifySyllabus"/>                                              
-            </define>
-            <define name="Resume">
-                <include name="prerequisite"/>
-                <include name="resume.teacherVerify"/>  
-                <include name="resume.studentVerify"/>                                              
-            </define>
-            <define name="PersonalInformation">
-                <include name="prerequisite"/>
-                <include name="personalInformation.teacherVerify"/>
-                <include name="personalInformation.studentVerify"/>     
-            </define>
-            <define name="Files">
-                <include name="prerequisite"/>
-                <include name="files.teacherUploadInCourse"/>
-                <include name="files.teacherVerifyInPortfolio"/>
-                <include name="files.studentVerifyInCourse"/>
-                <include name="files.teacherDelete"/>
-            </define>
-            <define name="Feedback">
-                <include name="prerequisite"/>
-                <include name="feedback.contentAdminVerify"/>               
-                <include name="feedback.pesAdminVerify"/>
-                <include name="feedback.teacherVerify"/>
-                <include name="feedback.studentVerify"/>
-            </define>
-            <define name="Image">
-                <include name="prerequisite"/>
-                <include name="image.upload"/>
-            </define>
-            <define name="Help">
-                <include name="prerequisite"/>
-                <include name="help.contentAdminVerify"/>
-                <include name="help.pesAdminVerify"/>
-                <include name="help.teacherVerify"/>
-                <include name="help.studentVerify"/>
-            </define>
-            <define name="PasswordQuiz">
-                <include name="prerequisite"/>
-                <include name="pswdQuiz.generatePassword"/>
-                <include name="pswdQuiz.readMail"/>
-                <include name="pswdQuiz.submitQuiz"/>                
-            </define>
             <define name="Settings">
                 <include name="prerequisite"/>
-                <include name="settings.contentAdminVerify"/>
-                <include name="settings.pesAdminVerify"/>
                 <include name="settings.teacherVerify"/>
                 <include name="settings.studentVerify"/>                                
-            </define>
-            <define name="Glossary">
+            </define>            
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.System_Compatibility"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>                        
+        </classes>
+    </test>
+    <test name="DebugTests_2" preserve-order="true" parallel="false">
+        <parameter name="url" value="https://2gw.publichealthonline.gwu.edu"/>
+        <parameter name="program" value="gwu-mph"/>
+        <parameter name="browser" value="ff"/>
+        <parameter name="os" value="win"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>        
+        <parameter name="workingGroupName" value="AutoWorkingGroup"/>
+        <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>         
+         
+        <groups>
+            <define name="Settings">
                 <include name="prerequisite"/>
-                <include name="activities.createGlossary"/>
-                <include name="activities.teacherCreateGlossaryEntry"/>
-                <include name="activities.teacherCreateGlossaryCategory"/>
-                <include name="activities.studentCreateGlossaryEntry"/>
-                <include name="activities.studentEditGlossary"/>           
-            </define>
-            <define name="CourseBackupRestore">
-                <include name="prerequisite"/>
-                <include name="course.backup"/>
-                <include name="course.restore"/>      
-            </define>
-            <define name="Contact">
-                <include name="prerequisite"/>
-                <include name="contact.teacherAddStudentAsContactfromCourse"/>
-                <include name="contact.studentConfirmRequest"/>                                
-            </define>
-            <define name="StudentSupport">
-                <include name="prerequisite"/>
-                <include name="support.uiVerify"/>
-                <include name="support.mobileAppURL"/>
-            </define>
-            <define name="LessonActivity">
-                <include name="prerequisite"/>
-                <include name="lesson.createActivity"/>
-            </define>
-            <define name="Calendar">
-                <include name="prerequisite"/>
-                <include name="calendar.contentAdminVerify"/>
-                <include name="calendar.pesAdminVerify"/>
-                <include name="calendar.teacherVerify"/>
-                <include name="calendar.studentVerify"/>
-            </define>
-            <define name="SystemCompatibility">
-                <include name="prerequisite"/>
-                <include name="systemCompatibility.contentVerify"/>                                  
-                <include name="systemCompatibility.faqSectionUIVerify"/>
-                <include name="systemCompatibility.expressUploader"/>
-                <include name="systemCompatibility.mobileApplicationsUIVerify"/>
-                <include name="systemCompatibility.backToTopAndMoreInfoLinksVerify"/>
-            </define>
-            <define name="2torAdministrativeBlock">
-                <include name="prerequisite"/>
-                <include name="2torAdministrativeBlock.contentVerify"/>
-                <!--include name="2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"/>
-                <include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
-                <include name="2torAdministrativeBlock.studentLoginMessageVerification"/>
-                <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
-                <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
-                <include name="2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"/-->
-            </define> 
-            <!--run>
-                <include name="feedback.contentAdminVerify"/>               
-                <include name="feedback.contentAdminVerify"/>     
-            </run-->
+                <include name="settings.teacherVerify"/>
+                <include name="settings.studentVerify"/>                                
+            </define>            
         </groups>
         <classes>
             <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>

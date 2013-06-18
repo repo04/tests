@@ -38,7 +38,7 @@ public class Profile extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//div[11]/div", "Availability:");
         ip.isTextPresentByXPATH(driver, "//div[12]", "Personal Information");
 
-        switch (program) {
+        switch (getProgram()) {
             case "usc-mat":
                 ip.isTextPresentByXPATH(driver, "//div[5]/div/div/div/div[8]", "Contact Information");
                 ip.isTextPresentByXPATH(driver, "//div[6]/div[2]/div", "City, State:");

@@ -289,7 +289,7 @@ public class Course extends BaseClass {
         //Verify Activities checkboxes
         int b = 3;
         int c;
-        if (!"gu-msn".equals(program)) {
+        if (!"gu-msn".equals(getProgram())) {
             c = 8;
         } else {
             c = 9;
@@ -318,7 +318,7 @@ public class Course extends BaseClass {
         int d = 1;
         for (String actvity : activities) {
             if (d < 7) {
-                if (!"gu-msn".equals(program)) {
+                if (!"gu-msn".equals(getProgram())) {
                     if (d > 1) {
                         ip.isElementPresentContainsTextByXPATH(driver, actvity);
                     }
@@ -358,7 +358,7 @@ public class Course extends BaseClass {
         int x = 1;
         for (String activity : activities) {
             if (x < 7) {
-                if (!"gu-msn".equals(program)) {
+                if (!"gu-msn".equals(getProgram())) {
                     if (x > 1) {
                         ip.isTextPresentByXPATH(driver, activityxpath1 + i + activityxpath2, activity, 60);
                         i++;

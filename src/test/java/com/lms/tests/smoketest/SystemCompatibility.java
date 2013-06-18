@@ -20,7 +20,7 @@ public class SystemCompatibility extends BaseClass {
         this.driver = driver;        
     }
     
-    String programName = program;
+    String programName = getProgram();
     String browserName = browser;
     String systemCompPageHeader = "Make sure your computer is ready for " + xpv.getTokenValue(programName + "SupportName");
     String sysCompatibleCheckDesc = "Your computer has been checked for potential technical issues while using " + xpv.getTokenValue(programName + "SupportName") + ".";

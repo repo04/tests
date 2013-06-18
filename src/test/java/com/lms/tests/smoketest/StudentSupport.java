@@ -26,6 +26,7 @@ public class StudentSupport extends BaseClass {
     public void testContactUS() {
         
         // Verifies the Days and Time Availability of Support
+        String program = getProgram();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("phoneNumberXPATH"), 
                                         xpv.getTokenValue(program + "PhoneNumber"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("mondayXPATH"), 
@@ -61,11 +62,11 @@ public class StudentSupport extends BaseClass {
         // Verify Mobile Path for iTunes Store
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("iOSAppXPATH"));
         String iOS = driver.findElement(By.xpath(xpv.getTokenValue("iOSAppXPATH"))).getAttribute("href");
-        Assert.assertEquals(iOS, xpv.getTokenValue(program + "AppleAppUrl"));
+        Assert.assertEquals(iOS, xpv.getTokenValue(getProgram() + "AppleAppUrl"));
         
         // Verify Mobile Path for Android Store
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("androidAppXPATH"));
         String android = driver.findElement(By.xpath(xpv.getTokenValue("androidAppXPATH"))).getAttribute("href");
-        Assert.assertEquals(android, xpv.getTokenValue(program + "AndroidAppUrl"));
+        Assert.assertEquals(android, xpv.getTokenValue(getProgram() + "AndroidAppUrl"));
     }    
 }

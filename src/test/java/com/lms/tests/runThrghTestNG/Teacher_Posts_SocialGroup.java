@@ -66,8 +66,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testTeacherLogInA(ITestContext context) throws Exception {
-        System.out.println("//Teacher_Posts_SocialGroup-login//: " + driver);
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
                 || test.equalsIgnoreCase("CriticalDataTests")) {
             a.login(Pes_UserCreation_AssignRole_WorkingGroup.userNamesArray[0][0]);
@@ -81,10 +80,10 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    //@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-    //groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.teacherPostsOnProfileCourseWall"})
+    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String groupCourseName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyWall();
         teacherTextWallPost = a.textPost("txtWallPost");
         System.out.println("teacherTextWallPost: " + teacherTextWallPost);
@@ -108,7 +107,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "socialGroup.teacherCreate"})
     public void testTeacherCreateSocialGroup() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMySocialGroups();
         teacherSocialGroupNameArray[0][0] = a.createSocialGroup();
         System.out.println("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
@@ -121,10 +120,10 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @param studentUserName
      * @throws Exception
      */
-    //@Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-    //groups = {"criticalSmoke", "teacherPosts.studentsWall"})
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+          groups = {"criticalSmoke", "teacherPosts.studentsWall"})
     public void testTeacherPostURLOnStudentsWall(String teacherUserName, String studentUserName) throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.navigateToMyContacts();
         a.navigateToContactsWall(studentUserName);
         teacherUrlPostOnStudentWall = a.textPost("tchrUrlPostOnStdtWall");
@@ -234,6 +233,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "settings.teacherVerify"})
     public void testTeacherVerifySettings() throws Exception {
+        a = new Actions(getWebdriver());
         a.navigateToSettings();
         a.verifySettings();
     }
@@ -292,7 +292,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"})
     public void testTeacherLogOutA() throws Exception {
-        a = new Actions(driver);
+        a = new Actions(getWebdriver());
         a.logOut();
     }
 }
