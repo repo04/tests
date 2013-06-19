@@ -17,7 +17,7 @@ import smoketest.Actions;
  *
  *
  */
-public class ContentAdmin_CleanTestData {
+public class ContentAdmin_CleanTestData extends BaseClass {
 
     Actions a = new Actions();
     static String[][] backupFileNameArray = new String[1][1];
@@ -38,7 +38,11 @@ public class ContentAdmin_CleanTestData {
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testContentAdminLogIn() throws Exception {
-        a.login("contentAdmin");
+        if (test.equalsIgnoreCase("CriticalTests") || test.equalsIgnoreCase("DebugTests")) {
+            a.login("contentadmin");
+        } else {
+            a.login("contentAdmin");
+        }
     }
 
     /**
