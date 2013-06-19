@@ -7,6 +7,7 @@ package com.lms.tests.runThrghTestNG;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
+import com.lms.tests.smoketest.Utility;
 import java.util.Iterator;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -22,22 +23,24 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     String teacherTextWallPost;
     String teacherUrlWallPost;
     String teacherUrlPostOnStudentWall;
-    static String[][] teacherUrlCoursePostArray = new String[1][1];
-    static String[][] teacherSocialGroupNameArray = new String[1][1];
+    String[][] teacherSocialGroupNameArray = new String[1][1];
+    String[][] teacherUrlCoursePostArray = new String[1][1];
     static String[][] teacherGlossaryEntryNameArray = new String[1][1];
     static String[][] teacherGlossaryCategoryNameArray = new String[1][1];
+    private final static String TEACHERSOCIALGROUPNAME = "TEACHERSOCIALGROUP";
+    private final static String TEACHERURLCOURSEPOSTNAME = "TEACHERURLCOURSEPOST";
     Actions a;
 
     @DataProvider(name = "teacherUrlCoursePost")
     public static Object[][] teacherUrlCoursePost(ITestContext context) throws Exception {
         System.out.println("init teacherUrlCoursePost");
-        return (teacherUrlCoursePostArray);
+        return (Utility.getObject(TEACHERURLCOURSEPOSTNAME));
     }
 
     @DataProvider(name = "TeacherSocialGroup")
     public static Object[][] TeacherSocialGroup(ITestContext context) throws Exception {
         System.out.println("init TeacherSocialGroup");
-        return (teacherSocialGroupNameArray);
+        return (Utility.getObject(TEACHERSOCIALGROUPNAME));
     }
 
     @DataProvider(name = "GroupCourseTeacherUrlCoursePost")
@@ -96,6 +99,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
 
         a.selectGroupCourse(groupCourseName);
         teacherUrlCoursePostArray[0][0] = a.urlPost("urlCrsPost");
+        Utility.put(TEACHERURLCOURSEPOSTNAME, teacherUrlCoursePostArray[0][0]);
         System.out.println("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0]);
         Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0]);
     }
@@ -110,6 +114,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a = new Actions(getWebdriver());
         a.navigateToMySocialGroups();
         teacherSocialGroupNameArray[0][0] = a.createSocialGroup();
+        Utility.put(TEACHERSOCIALGROUPNAME, teacherSocialGroupNameArray[0][0]);
         System.out.println("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
         Reporter.log("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
     }

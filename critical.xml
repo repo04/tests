@@ -5,10 +5,10 @@
         <listener class-name="com.lms.tests.runThrghTestNG.TransformCritical"/>
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
-    <test name="CriticalTests_WinFF" preserve-order="true">
-        <parameter name="url" value="https://2ir.ironline.american.edu"/>
-        <parameter name="program" value="au-mir"/>
-        <parameter name="browser" value="ff"/>
+    <test name="CriticalTests_WinChrome" preserve-order="true">
+        <parameter name="url" value="https://www.2nc.unc.edu"/>
+        <parameter name="program" value="unc-mba"/>
+        <parameter name="browser" value="chrome"/>
         <parameter name="os" value="win"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
@@ -28,10 +28,56 @@
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
         </classes>
     </test>
-    <test name="CriticalTests_WinChrome" preserve-order="true">
-        <parameter name="url" value="https://2law.onlinelaw.wustl.edu"/>
-        <parameter name="program" value="wu-llm"/>
+    <test name="CriticalTests_MacFF" preserve-order="true">
+        <parameter name="url" value="https://2gu.nursing.georgetown.edu"/>
+        <parameter name="program" value="gu-msn"/>
+        <parameter name="browser" value="ff"/>
+        <parameter name="os" value="mac"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_MacChrome" preserve-order="true">
+        <parameter name="url" value="https://www.2sc.usc.edu"/>
+        <parameter name="program" value="usc-mat"/>
         <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="mac"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="passwordQuizName" value="AutoPswdQuiz"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_Winff" preserve-order="true">
+        <parameter name="url" value="https://www.vac.usc.edu"/>
+        <parameter name="program" value="usc-msw"/>
+        <parameter name="browser" value="ff"/>
         <parameter name="os" value="win"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>

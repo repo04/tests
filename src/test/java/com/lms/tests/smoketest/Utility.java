@@ -8,7 +8,9 @@ import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,12 +26,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.lms.tests.runThrghTestNG.BaseClass;
 import org.testng.Reporter;
 
 public class Utility {
 
     public static IsPresent ip = new IsPresent();
+    private static ThreadLocal<Map<String, String>> sessions =
+            new InheritableThreadLocal<>();
+    
+    private static ThreadLocal<Map<String, Object>> sessions2 =
+            new InheritableThreadLocal<>();
 
     /**
      * Uses js to click on hidden element on the page by XPATH
@@ -410,5 +416,79 @@ public class Utility {
         if (x > 2400) {
             Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by ID: " + id);
         }
+    }
+
+    /**
+     * 
+     * @param key
+     * @return 
+     */
+    public static Object[][] getObject(String key) {
+        String abc[][] = new String[1][1];
+        abc[0][0] = getSession().get(key);
+        Object O[][] = abc;
+        return O;      
+    }
+    
+    /**
+     * 
+     * @param key
+     * @return 
+     */
+    public static String getString(String key) {
+        return getSession().get(key);
+    }
+    
+    /**
+     * 
+     * @param key
+     * @return 
+     */
+    public static Object getDriver(String key) {
+        return getSession2().get(key);
+    }
+
+    /**
+     * 
+     * @param key
+     * @param value 
+     */
+    public static void put(String key, String value) {
+        getSession().put(key, value);
+    }
+    
+    /**
+     * 
+     * @param key
+     * @param value 
+     */
+    public static void putDriver(String key, Object value) {
+        getSession2().put(key, value);
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public static Map<String, String> getSession() {
+        Map<String, String> res = sessions.get();
+        if (res == null) {
+            res = new HashMap<>();
+            sessions.set(res);
+        }
+        return res;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public static Map<String, Object> getSession2() {
+        Map<String, Object> res = sessions2.get();
+        if (res == null) {
+            res = new HashMap<>();
+            sessions2.set(res);
+        }
+        return res;
     }
 }

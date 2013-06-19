@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
+import com.lms.tests.smoketest.Utility;
 
 /**
  * Student logs in, Create Live Session in Teacher's Social Group, Creates own
@@ -20,14 +21,15 @@ import com.lms.tests.smoketest.Actions;
  */
 public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
 
-    static String[][] studentSocialGroupNameArray = new String[1][1];
+    String[][] studentSocialGroupNameArray = new String[1][1];
     static String[][] studentUrlPostOnWorkingGroup = new String[1][1];
+    private final static String STUDENTSOCIALGROUPNAME = "STUDENTSOCIALGROUP";
     Actions a;
 
     @DataProvider(name = "StudentSocialGroup")
     public static Object[][] StudentSocialGroup(ITestContext context) throws Exception {
         System.out.println("StudentSocialGroup: " + test);
-        return (studentSocialGroupNameArray);
+        return (Utility.getObject(STUDENTSOCIALGROUPNAME));
     }
 
     @DataProvider(name = "TeacherStudentSocialGroups")
@@ -99,6 +101,7 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
         a = new Actions(getWebdriver());
         a.navigateToMySocialGroups();
         studentSocialGroupNameArray[0][0] = a.createSocialGroup();
+        Utility.put(STUDENTSOCIALGROUPNAME, studentSocialGroupNameArray[0][0]);
         System.out.println("studentSocialGroupName: " + studentSocialGroupNameArray[0][0]);
         Reporter.log("studentSocialGroupName: " + studentSocialGroupNameArray[0][0]);
     }

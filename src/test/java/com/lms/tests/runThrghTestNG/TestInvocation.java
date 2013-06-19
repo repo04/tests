@@ -28,8 +28,9 @@ public class TestInvocation implements IInvokedMethodListener {
         System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
         if (!"setUp".equals(method.getName())) {
             System.out.print("*****ProgamName: " + BaseClass.getProgram() + "*****" + "\n");
+            
             if (!BaseClass.getProgram().contains("gu-msn")) {
-                if (BaseClass.test.equalsIgnoreCase("RegressionTests") 
+                if (BaseClass.test.equalsIgnoreCase("RegressionTests")
                         || BaseClass.test.equalsIgnoreCase("SmokeTests")) {
                     if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())
                             || "testTeacherEmailFetchActivityPasswordLogIn".equals(method.getName())) {
@@ -44,11 +45,8 @@ public class TestInvocation implements IInvokedMethodListener {
                     }
                 }
             }
-        }
 
-        // Checks For UNC-MPA and WU-LLM 
-        if (!"setUp".equals(method.getName())) {
-            System.out.print("*****ProgamName: " + BaseClass.getProgram() + "*****" + "\n");
+            // Checks For UNC-MPA and WU-LLM 
             if (!BaseClass.test.equalsIgnoreCase("CriticalTests")
                     && (BaseClass.getProgram().contains("unc-mpa") || BaseClass.getProgram().contains("wu-llm")
                     || BaseClass.getProgram().contains("gwu-mph") || BaseClass.getProgram().contains("au-mir"))) {
