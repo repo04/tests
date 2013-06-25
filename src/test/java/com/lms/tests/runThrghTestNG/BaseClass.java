@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.lms.tests.runThrghTestNG;
 
 import java.io.File;
@@ -25,63 +22,46 @@ import org.testng.Reporter;
 
 @Listeners({SauceOnDemandTestListener.class})
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
-
-    //Add your username & key here
-    private SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication("someshbansal", "10c353c4-24e9-434c-811d-f3aba9e14213");
-    public static XpathValues xpv, ldv;
-    public IsPresent ip = new IsPresent();
-    public String browser;
-    public static String test;
-    public String url;
+  
     public String os;
+    public String url;
+    public String browser;
     public String currentURL;
-    public static File directory = new File(".");
+    public static String test;
+    private RemoteWebDriver driver;
     private final static String WEBDRIVER = "webdriver";
     private final static String PROGRAM = "program";
-    DesiredCapabilities capabilities;
+    private final static File directory = new File(".");
+    private SauceOnDemandAuthentication authentication = 
+        new SauceOnDemandAuthentication("someshbansal","10c353c4-24e9-434c-811d-f3aba9e14213");
     
-    /**
-     * The annotated method will be run before any test method belonging to the
-     * classes inside the <test> tag is run. Following parameter values are
-     * received through 'Run Target' specified in build.xml. TestNG allows to
-     * perform sophisticated groupings of test methods which is called from XML
-     * file
-     *
-     * @param url
-     * @param program
-     * @param browser
-     * @param os
-     * @param test
-     * @throws Exception
-     */
+    public static XpathValues xpv; 
+    public static XpathValues ldv;
+    public IsPresent ip = new IsPresent();
+    
+    DesiredCapabilities capabilities;
+   
+   /*
+    * The method will be run before any test method belonging to the
+    * classes inside the <test> tag. Paramaters are passed via build.xml.
+    */
     @BeforeTest(groups = {"prerequisite"})
     @Parameters({"url", "program", "browser", "os", "test"})
     public void setUp(String url, String program, String browser, String os, String test) throws Exception {
-
-        RemoteWebDriver driver;
-        this.browser = browser;
-        this.test = test;
-        this.url = url;
-        this.os = os;
-
         xpv = new XpathValues("xPathAccountProperty");
         ldv = new XpathValues("loginDetails");
-        System.out.println("url: " + url);
-        System.out.println("program: " + program);
-        System.out.println("browser: " + this.browser);
-        System.out.println("os: " + os);
-        System.out.println("test: " + this.test);
+        
+        this.os      = os;
+        this.url     = url;
+        this.test    = test;
+        this.browser = browser;
 
+        // Why do we only set version for FF and not Chrome?
         switch (browser) {
             case "chrome":
                 capabilities = DesiredCapabilities.chrome();
-                Reporter.log("Browser: " + browser);
-                Reporter.log("OS: " + os);
                 break;
-            case "ie":
-                capabilities = DesiredCapabilities.internetExplorer();
-                Reporter.log("Browser: IE");
-                break;
+                
             default:
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("version", "20");
@@ -99,29 +79,18 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
             default:
                 capabilities.setCapability("platform", "WINDOWS 7");
         }
+        
         capabilities.setCapability("name", this.test);
         capabilities.setCapability("idle-timeout", 180);
-        driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
-                capabilities);
+        this.driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + 
+                                             ":" + authentication.getAccessKey() + 
+                                             "@ondemand.saucelabs.com:80/wd/hub"),
+                                             capabilities);
         driver.setFileDetector(new LocalFileDetector());
         driver.get(this.url);
         Utility.putDriver(WEBDRIVER, driver);
         Utility.put(PROGRAM, program);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
-    }
-
-    /*protected static RemoteWebDriver getDriver() {
-     return threadLocalDriver.get();
-     }*/
-    /**
-     * The annotated method will be run after all the test methods belonging to
-     * the classes inside the <test> tag have run.
-     *
-     * @throws Exception
-     */
-    @AfterTest(alwaysRun = true, groups = {"prerequisite"})
-    public void tearDown() throws Exception {
-        getWebdriver().quit();
     }
 
     @Override
@@ -139,8 +108,13 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         RemoteWebDriver driver = (RemoteWebDriver) Utility.getDriver(WEBDRIVER);
         return driver;
     }
-    
+
     public static String getProgram() {
         return Utility.getString(PROGRAM);        
+    }
+    
+    @AfterTest(alwaysRun = true, groups = {"prerequisite"})
+    public void tearDown() throws Exception {
+        getWebdriver().quit();
     }
 }
