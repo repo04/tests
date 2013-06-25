@@ -55,7 +55,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
      * @throws Exception
      */
     @BeforeTest(groups = {"prerequisite"})
-    @Parameters({"url", "program", "browser", "os", "test"})
+    @Parameters({"url", "program", "browser", "os", "test", "session"})
     public void setUp(String url, String program, String browser, String os,
                 String test, String session) throws Exception {
 
