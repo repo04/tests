@@ -82,7 +82,9 @@
                     <systemPropertyVariables>
                         <url>${mvnUrl}</url>
                         <program>${mvnProgram}</program>
-                        <test>${mvnSuite}Tests</test>                                               
+                        <browser>${mvnBrwsr}</browser>
+                        <os>${mvnOS}</os>
+                        <test>${mvnSuite}Tests</test>                                              
                     </systemPropertyVariables>                    
                     <suiteXmlFiles>
                         <suiteXmlFile>${project.basedir}/${mvnSuite}.xml</suiteXmlFile>                        

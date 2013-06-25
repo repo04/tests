@@ -21,7 +21,7 @@ import org.openqa.selenium.remote.SessionId;
 
 @Listeners({SauceOnDemandTestListener.class})
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
-  
+
     public String os;
     public String url;
     public String browser;
@@ -36,7 +36,6 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     public static XpathValues xpv; 
     public static XpathValues ldv;
     public IsPresent ip = new IsPresent();
-    
     DesiredCapabilities capabilities;
    
    /*
@@ -55,12 +54,13 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         this.test    = test;
         this.browser = browser;
 
+
         // Why do we only set version for FF and not Chrome?
         switch (browser) {
             case "chrome":
                 capabilities = DesiredCapabilities.chrome();
                 break;
-                
+
             default:
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("version", "20");
