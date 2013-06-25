@@ -10,7 +10,7 @@
         <parameter name="program" value="gu-msn"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="session" value="CriticalTests_LLM"/>
+        <parameter name="session" value="CriticalTests_GU"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -31,7 +31,7 @@
         <parameter name="program" value="unc-mba"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="session" value="CriticalTests_MPA"/>
+        <parameter name="session" value="CriticalTests_UNC"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -52,7 +52,7 @@
         <parameter name="program" value="usc-mat"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="session" value="CriticalTests_AU"/>
+        <parameter name="session" value="CriticalTests_USC"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -73,7 +73,7 @@
         <parameter name="program" value="wu-llm"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="session" value="CriticalTests_GWU"/>
+        <parameter name="session" value="CriticalTests_LLM"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -94,7 +94,7 @@
         <parameter name="program" value="usc-msw"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="session" value="CriticalTests_LLM"/>
+        <parameter name="session" value="CriticalTests_VAC"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
