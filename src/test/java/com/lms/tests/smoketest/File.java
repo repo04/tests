@@ -22,11 +22,11 @@ import org.openqa.selenium.remote.RemoteWebDriver;
  * @author somesh.bansal
  */
 public class File extends BaseClass {
-    
+
     private RemoteWebDriver driver;
-    
-    public File(RemoteWebDriver driver){
-        this.driver = driver;        
+
+    public File(RemoteWebDriver driver) {
+        this.driver = driver;
     }
 
     /**
@@ -56,6 +56,7 @@ public class File extends BaseClass {
                     + "/table/tbody/tr[2]/td[2]/em/button")).click();
             ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div/a", file, 300);
             System.out.print("file uploaded: " + file + "\n");
+            break;
         }
     }
 
@@ -66,9 +67,13 @@ public class File extends BaseClass {
      */
     public void verifyFilesInCourse(String[] files) {
         int i = 1;
+        int x = 1;
         for (String file : files) {
-            ip.isTextPresentByXPATH(driver, "//div[" + i + "]/table/tbody/tr/td/div/a", file);
-            i++;
+            if (x == 3) {
+                ip.isTextPresentByXPATH(driver, "//div[" + i + "]/table/tbody/tr/td/div/a", file);
+                i++;
+            }
+            x++;
         }
     }
 
@@ -79,9 +84,13 @@ public class File extends BaseClass {
      */
     public void verifyFilesInPortfolio(String[] files) {
         int i = 2;
+        int x = 1;
         for (String file : files) {
-            ip.isTextPresentByXPATH(driver, "//div[5]/div/div/table/tbody/tr[" + i + "]/td/a", file);
-            i++;
+            if (x == 3) {
+                ip.isTextPresentByXPATH(driver, "//div[5]/div/div/table/tbody/tr[" + i + "]/td/a", file);
+                i++;
+            }
+            x++;
         }
     }
 
@@ -91,30 +100,38 @@ public class File extends BaseClass {
      */
     public void deleteFiles(String[] files) {
         ip.isTextPresentByXPATH(driver, "//thead/tr/td/div", "File Name");
+        int x = 1;
         for (String file : files) {
-            ip.isElementClickableByXpath(driver, "//td[3]/div/div", 60);
-            driver.findElement(By.xpath("//td[3]/div/div")).click();
-            ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Are you sure you want to delete this file?");
-            driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/"
-                    + "tr/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
-            //Handled -> LMSII-3168 Exception
-            try {
-                Alert alert = new WebDriverWait(driver, 15).until(ExpectedConditions.alertIsPresent());
-                String error = "Unexpected Alert present with Text as: " + alert.getText();
-                alert.dismiss();
-                Utility.illegalStateException(error);
-            } catch (TimeoutException e) {
-                //Do Nothing
+            if (x == 3) {
+                ip.isElementClickableByXpath(driver, "//td[3]/div/div", 60);
+                driver.findElement(By.xpath("//td[3]/div/div")).click();
+                ip.isTextPresentByXPATH(driver, "//div/div/div/div/div[2]/span", "Are you sure you want to delete this file?");
+                driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/"
+                        + "tr/td/table/tbody/tr/td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
+                //Handled -> LMSII-3168 Exception
+                try {
+                    Alert alert = new WebDriverWait(driver, 15).until(ExpectedConditions.alertIsPresent());
+                    String error = "Unexpected Alert present with Text as: " + alert.getText();
+                    alert.dismiss();
+                    Utility.illegalStateException(error);
+                } catch (TimeoutException e) {
+                    //Do Nothing
+                }
+                new WebDriverWait(driver, 30).until(ExpectedConditions.
+                        invisibilityOfElementWithText(By.xpath("//div/table/tbody/tr/td/div/a"), file));
+                System.out.print("file deleted: " + file + "\n");
             }
-            new WebDriverWait(driver, 30).until(ExpectedConditions.
-                    invisibilityOfElementWithText(By.xpath("//div/table/tbody/tr/td/div/a"), file));
-            System.out.print("file deleted: " + file + "\n");
+            x++;
         }
-        
+
         Utility.clickByJavaScript(driver, "//li[2]/ul/li[3]/a");
+        int y = 1;
         for (String file : files) {
-            new WebDriverWait(driver, 30).until(ExpectedConditions.
-                    invisibilityOfElementWithText(By.xpath("//div[5]/div/div/table/tbody/tr[2]/td/a"), file));
+            if (y == 3) {
+                new WebDriverWait(driver, 30).until(ExpectedConditions.
+                        invisibilityOfElementWithText(By.xpath("//div[5]/div/div/table/tbody/tr[2]/td/a"), file));
+            }
+            y++;
         }
     }
 }

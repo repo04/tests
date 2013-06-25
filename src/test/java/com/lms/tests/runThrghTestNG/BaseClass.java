@@ -39,7 +39,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     private final static String WEBDRIVER = "webdriver";
     private final static String PROGRAM = "program";
     DesiredCapabilities capabilities;
-    
+
     /**
      * The annotated method will be run before any test method belonging to the
      * classes inside the <test> tag is run. Following parameter values are
@@ -56,7 +56,8 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
      */
     @BeforeTest(groups = {"prerequisite"})
     @Parameters({"url", "program", "browser", "os", "test"})
-    public void setUp(String url, String program, String browser, String os, String test) throws Exception {
+    public void setUp(String url, String program, String browser, String os,
+                String test, String session) throws Exception {
 
         RemoteWebDriver driver;
         this.browser = browser;
@@ -99,7 +100,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
             default:
                 capabilities.setCapability("platform", "WINDOWS 7");
         }
-        capabilities.setCapability("name", this.test);
+        capabilities.setCapability("name", session);
         capabilities.setCapability("idle-timeout", 180);
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);
@@ -107,7 +108,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         driver.get(this.url);
         Utility.putDriver(WEBDRIVER, driver);
         Utility.put(PROGRAM, program);
-        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
+        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));        
     }
 
     /*protected static RemoteWebDriver getDriver() {
@@ -134,13 +135,13 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     public SauceOnDemandAuthentication getAuthentication() {
         return authentication;
     }
-    
+
     public static RemoteWebDriver getWebdriver() {
         RemoteWebDriver driver = (RemoteWebDriver) Utility.getDriver(WEBDRIVER);
         return driver;
     }
-    
+
     public static String getProgram() {
-        return Utility.getString(PROGRAM);        
+        return Utility.getString(PROGRAM);
     }
 }
