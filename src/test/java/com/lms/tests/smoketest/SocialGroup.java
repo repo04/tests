@@ -14,11 +14,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class SocialGroup extends BaseClass {
 
-    /*private EventFiringWebDriver driver;
-    
-     public SocialGroup(EventFiringWebDriver driver){
-     this.driver = driver;        
-     }*/
     private RemoteWebDriver driver;
 
     public SocialGroup(RemoteWebDriver driver) {
@@ -48,7 +43,7 @@ public class SocialGroup extends BaseClass {
                 groupMemberName = "Tar Heels";
                 break;
             case "wu-llm":
-                groupMemberName = "Bers";
+                groupMemberName = "Bears";
                 break;
             //This will be corrected once LMS-2809 is resolved
             case "au-mir":
@@ -56,19 +51,15 @@ public class SocialGroup extends BaseClass {
             case "corp-son":
                 groupMemberName = "student";
         }
-        
+
         driver.findElement(By.xpath(xpv.getTokenValue("linkStrtSclGrpXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpNameXPATH"));
-        try {
-            ip.isTextPresentByXPATH(driver, "//b/div/font", "Topics are keywords or labels that make a group easy to find. "
-                    + "Enter up to 7 short and simple topics to describe your group. "
-                    + "For example, a group called \"New York City\" might have topics like Statue of Liberty, "
-                    + "Hot Dogs, Yankees, or Empire State Building. "
-                    + "Be creative in describing your group so fellow " + groupMemberName + " want to join!");
-        } catch (TimeoutException e) {
-            System.out.print("@@@TimeoutException:_" + getProgram() +  "@@@_\n");
-        }
-        
+        ip.isTextPresentByXPATH(driver, "//b/div/font", "Topics are keywords or labels that make a group easy to find. "
+                + "Enter up to 7 short and simple topics to describe your group. "
+                + "For example, a group called \"New York City\" might have topics like Statue of Liberty, "
+                + "Hot Dogs, Yankees, or Empire State Building. "
+                + "Be creative in describing your group so fellow " + groupMemberName + " want to join!");
+
         //Split username
         switch (user.substring(0, 7)) {
             case "student":
@@ -78,7 +69,7 @@ public class SocialGroup extends BaseClass {
                 } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.socialGroupName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
-                    this.socialGroupName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);                    
+                    this.socialGroupName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
                     this.socialGroupName = "DbgTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
@@ -100,7 +91,6 @@ public class SocialGroup extends BaseClass {
         }
 
         String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        System.out.print("@@@Time: " + this.socialGroupName + "@@@\n");
         driver.findElement(By.xpath(xpv.getTokenValue("fieldGrpNameXPATH"))).sendKeys(this.socialGroupName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldSrtNameXPATH"))).sendKeys(srtName);
         driver.findElement(By.xpath(xpv.getTokenValue("fieldAbtGrpXPATH"))).sendKeys("About");
@@ -108,7 +98,8 @@ public class SocialGroup extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtSclGrp"))).click();
 
         //Verify SocialGroup creation
-        ip.isElementPresentByLINK(driver, this.socialGroupName);
+        ip.isElementPresentByLINK(driver,
+                this.socialGroupName);
     }
 
     /**

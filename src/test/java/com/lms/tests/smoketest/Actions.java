@@ -10,18 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Actions extends BaseClass {
     
-//    private EventFiringWebDriver driver;
-//    
-//    public Actions(EventFiringWebDriver driver){
-//        this.driver = driver;
-//        System.out.println("//Action//: " + this.driver);
-//    }
-    
     private RemoteWebDriver driver;
     
     public Actions(RemoteWebDriver driver){
-        this.driver = driver;
-        System.out.println("//New Action//: " + this.driver);
+        this.driver = driver;        
     }
     
     public Actions(){
