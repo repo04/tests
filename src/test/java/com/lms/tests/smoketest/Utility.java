@@ -392,12 +392,12 @@ public class Utility {
         driver.switchTo().defaultContent();
     }
 
-    /**
-     * Verify Date Present In Element Value field
-     *
-     * @param driver
-     * @param id
-     */
+   /**
+    * Verify Date Present In Element Value field
+    *
+    * @param driver
+    * @param id
+    */
     public static void verifyDatePresentInElementValue(WebDriver driver, By id) {
         String regex = "^(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((20)\\d\\d)$";
         int x = 1;
@@ -418,11 +418,6 @@ public class Utility {
         }
     }
 
-    /**
-     * 
-     * @param key
-     * @return 
-     */
     public static Object[][] getObject(String key) {
         String abc[][] = new String[1][1];
         abc[0][0] = getSession().get(key);
@@ -430,46 +425,22 @@ public class Utility {
         return O;      
     }
     
-    /**
-     * 
-     * @param key
-     * @return 
-     */
     public static String getString(String key) {
         return getSession().get(key);
     }
     
-    /**
-     * 
-     * @param key
-     * @return 
-     */
     public static Object getDriver(String key) {
         return getSession2().get(key);
     }
 
-    /**
-     * 
-     * @param key
-     * @param value 
-     */
     public static void put(String key, String value) {
         getSession().put(key, value);
     }
     
-    /**
-     * 
-     * @param key
-     * @param value 
-     */
     public static void putDriver(String key, Object value) {
         getSession2().put(key, value);
     }
 
-    /**
-     * 
-     * @return 
-     */
     public static Map<String, String> getSession() {
         Map<String, String> res = sessions.get();
         if (res == null) {
@@ -478,11 +449,7 @@ public class Utility {
         }
         return res;
     }
-    
-    /**
-     * 
-     * @return 
-     */
+
     public static Map<String, Object> getSession2() {
         Map<String, Object> res = sessions2.get();
         if (res == null) {

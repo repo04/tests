@@ -29,7 +29,7 @@ public class TestInvocation implements IInvokedMethodListener {
         if (!"setUp".equals(method.getName())) {
             System.out.print("*****ProgamName: " + BaseClass.getProgram() + "*****" + "\n");
             
-            if (!BaseClass.getProgram().contains("gu-msn")) {
+            if (!BaseClass.getProgram().contains("gu-msn")) {   
                 if (BaseClass.test.equalsIgnoreCase("RegressionTests")
                         || BaseClass.test.equalsIgnoreCase("SmokeTests")) {
                     if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())
