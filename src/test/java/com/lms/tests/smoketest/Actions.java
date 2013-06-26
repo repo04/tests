@@ -4,6 +4,7 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -1103,13 +1104,20 @@ public class Actions extends BaseClass {
         String HandleBefore = driver.getWindowHandle();
         driver.findElement(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
-        for (String handle : driver.getWindowHandles()) {
-            driver.switchTo().window(handle);
-            if (driver.getTitle().contains("about:blank")) {
-                driver.close();
-            }
+        try {
+            new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.id("abc")));
+        } catch (TimeoutException e) {
+            //do nothing            
         }
-        driver.switchTo().window(HandleBefore);
+        if (driver.getWindowHandles().size() > 1) {
+            for (String handle : driver.getWindowHandles()) {
+                driver.switchTo().window(handle);
+                if (driver.getTitle().contains("about:blank")) {
+                    driver.close();
+                }
+            }
+            driver.switchTo().window(HandleBefore);
+        }        
     }
 
     /**
