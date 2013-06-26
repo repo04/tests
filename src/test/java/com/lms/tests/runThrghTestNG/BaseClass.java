@@ -1,7 +1,7 @@
 /*
-* To change this template, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.lms.tests.runThrghTestNG;
 
 import java.io.File;
@@ -41,19 +41,19 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     DesiredCapabilities capabilities;
 
     /**
-      * The annotated method will be run before any test method belonging to the
-      * classes inside the <test> tag is run. Following parameter values are
-      * received through 'Run Target' specified in build.xml. TestNG allows to
-      * perform sophisticated groupings of test methods which is called from XML
-      * file
-      *
-      * @param url
-      * @param program
-      * @param browser
-      * @param os
-      * @param test
-      * @throws Exception
-      */
+     * The annotated method will be run before any test method belonging to the
+     * classes inside the <test> tag is run. Following parameter values are
+     * received through 'Run Target' specified in build.xml. TestNG allows to
+     * perform sophisticated groupings of test methods which is called from XML
+     * file
+     *
+     * @param url
+     * @param program
+     * @param browser
+     * @param os
+     * @param test
+     * @throws Exception
+     */
     @BeforeTest(groups = {"prerequisite"})
     @Parameters({"url", "program", "browser", "os", "test"})
     public void setUp(String url, String program, String browser, String os, String test) throws Exception {
@@ -86,7 +86,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
                 capabilities = DesiredCapabilities.firefox();
                 capabilities.setCapability("version", "20");
         }
-        
+
         os:
         switch (os) {
             case "linux32":
@@ -99,9 +99,9 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
             default:
                 capabilities.setCapability("platform", "WINDOWS 7");
         }
-        capabilities.setCapability("name", this.test);
+        capabilities.setCapability("name", this.test + "_" + program);
         capabilities.setCapability("max-duration", 3600);
-        //capabilities.setCapability("build", "WINDOWS 7");
+        capabilities.setCapability("idle-timeout", 180);
         driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
                 capabilities);
         driver.setFileDetector(new LocalFileDetector());
@@ -110,11 +110,11 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
     }
 
     /**
-      * The annotated method will be run after all the test methods belonging to
-      * the classes inside the <test> tag have run.
-      *
-      * @throws Exception
-      */
+     * The annotated method will be run after all the test methods belonging to
+     * the classes inside the <test> tag have run.
+     *
+     * @throws Exception
+     */
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})
     public void tearDown() throws Exception {
         driver.quit();
