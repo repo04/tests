@@ -176,6 +176,21 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
         a.navigateToGroupWall(teacherSocialGroupName);
         a.verifyPostOnSocialGroupWall(studentUrlPostOnTeacherSocialGroup);
     }
+
+    /**
+     * Verify Email Address Is Not Visible To Teacher When "Hide My Email Address From EveryOne"
+     * Is Selected For Student
+     *
+     * @param teacherUserName
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    groups = {"user.hideMyEmailAddressFromEveryOne"})
+    public void testVerifyEmailAddressIsNotVisibleToTeacherWhenHideMyEmailAddressFromEveryOneIsSelectedForStudent(String teacherUserName, String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.verifyEmailAddressIsNotVisibleWhenHideMyEmailAddressFromEveryOneIsSelectedForUser(studentUserName);
+    }
     
     /**
      * The annotated method will be run after all the test methods in the

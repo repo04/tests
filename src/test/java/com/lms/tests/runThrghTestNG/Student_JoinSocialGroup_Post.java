@@ -67,6 +67,16 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     }
 
     /**
+     * Student Change Password from Force Password Change Page on First Time Login
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"users.forcePasswordChange"})
+    public void testStudentChangePasswordFromForcePasswordPageOnFirstLogin() throws Exception {
+        a.changePasswordFromForcePasswordPageOnStudentLogin();
+    }
+    
+    /**
      * Find & Join Teacher's Social Group
      *
      * @throws Exception

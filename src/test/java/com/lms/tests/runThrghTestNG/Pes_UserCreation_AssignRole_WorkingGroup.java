@@ -75,7 +75,8 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
             return (studentNameArray);
         } else {
             System.out.println("Inside StudentName: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("studentUserName")}};
+            //return new Object[][]{{context.getCurrentXmlTest().getParameter("studentUserName")}};
+            return new Object[][]{{ldv.getTokenValue("studentUserName")}};
         }
     }
 
@@ -170,10 +171,12 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.creation"})
     public void testPESAdminUserCreation() throws Exception {
         a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
         userNamesArray[0][0] = a.createUser("teacher");
         Reporter.log("teacherUserName: " + userNamesArray[0][0], true);
 
         a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
         userNamesArray[0][1] = a.createUser("student");
         studentNameArray[0][0] = userNamesArray[0][1];
         Reporter.log("studentUserName: " + userNamesArray[0][1], true);
@@ -186,6 +189,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     @Test(groups = {"users.coordinatorCreation"})
     public void testPESAdminCourseCoordinatorCreation() throws Exception {
         a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
         coordinatorNameArray[0][0] = a.createUser("coordinator");
         Reporter.log("coordinatorNamesArray: " + coordinatorNameArray[0][0], true);
     }
@@ -525,6 +529,85 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         a.navigateToGrades();
         a.verifyOfflineActivitySubmittedAndGradedSection(offlineActivityName);
+    }
+    
+    /**
+     * Verify the Default TimeZone Value in Create User Page
+     */
+    @Test(groups = {"users.defaultTimeZoneValue"})
+    public void testVerifyDefaultTimeZoneValueInCreateUserPage() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyDefaultTimeZoneValueInCreateUserPage();
+    }
+
+    /**
+     * Verify the presence of difference sections in Create User Page UI
+     */
+    @Test(groups = {"users.presenceOfUISections"})
+    public void testVerifyPresenceOfDifferentSectionsInCreateUserPageUI() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyPresenceOfDifferentSectionsInCreateUserPageUI();
+    }
+    
+    /**
+     * Verify the default state of unmask password field field in Create User Page UI
+     * is unchecked
+     */
+    @Test(groups = {"users.defaultUnmaskPasswordCheckBoxSate"})
+    public void testVerifyDefaultStateOfUnmaskPasswordCheckBoxInCreateUserPage() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyDefaultStateOfUnmaskPasswordCheckBoxInCreateUserPage();
+    }
+
+    /**
+     * Verify the password encryption is off and on when unmask password check box 
+     * is checked and unchecked
+     */
+    @Test(groups = {"users.unmaskPasswordFunctionality"})
+    public void testVerifyUnmaskPasswordCheckBoxFunctionalityInCreateUserPage() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyUnmaskPasswordCheckBoxFunctionalityInCreateUserPage();
+    }
+    
+    /**
+     * Edit "List Of Interests" filed of User
+     *
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "StudentName",groups = {"users.editListOfInterestsFieldOfStudent"})
+    public void testEditListOfInterestsFieldOfStudent(String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToBrowseListOfUsersPage();
+        a.editListOfInterestsFieldOfUser(studentUserName);
+    }
+    
+    /**
+     * Verify Browse List of Users Page
+     *
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "StudentName",groups = {"users.verifyBrowseListOfUsersPage"})
+    public void testVerifyBrowseListOfUsersPage(String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToBrowseListOfUsersPage();
+        a.verifyBrowseListOfUsersPage(studentUserName);
+    }
+
+     /**
+     * Verify the different values in "Authentication Method" drop down
+     * field in Create User Page
+     */
+    @Test(groups = {"users.authenticationMethodDropDown"})
+    public void testVerifyChooseAnAuthenticationMethodDropDownFieldInCreateUserPage() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyChooseAnAuthenticationMethodDropDownFieldInCreateUserPage();
     }
     
      //Following functional test methods affect all system users - so currently we are skipping this

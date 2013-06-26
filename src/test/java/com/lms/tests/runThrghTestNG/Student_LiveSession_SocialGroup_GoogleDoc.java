@@ -240,6 +240,22 @@ public class Student_LiveSession_SocialGroup_GoogleDoc extends BaseClass {
         a.editGlossaryEntry(glossaryName, studentGlossaryEntryName, glossaryCategoryName, teacherGlossaryEntryName);        
     }
     
+    /**
+     * Verify Email Address Is Visible To Student When "Allow everyone to see my Email address"
+     * Is Selected For Teacher
+     *
+     * @param teacherUserName
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    groups = {"user.allowEveryOneToSeeMyEmailAddress"})
+    public void testVerifyEmailAddressIsVisibleToStudentWhenAllowEveryoneToSeeMyEmailAddressIsSelectedForTeacher(String teacherUserName, String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.verifyEmailAddressIsVisibleWhenAllowEveryoneToSeeMyEmailAddressIsSelectedForUser(teacherUserName);
+    }
+    
+    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Student verify Login Message does not appear after again logging in - Currently commented as it affects all system users

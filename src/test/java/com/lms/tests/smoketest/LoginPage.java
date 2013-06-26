@@ -7,14 +7,23 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 public class LoginPage extends BaseClass {
 
     private static String username;
+    Actions a = new Actions();
 
+    
     /**
      * Attempts to login based on user type and values from property file
      *
      * @param user
      */
     public void attemptLogin(String user) {
-
+        Throwable t = new Throwable(); 
+        StackTraceElement[] elements = t.getStackTrace(); 
+        int i;
+        for(i=1; i<elements.length; i++) {
+            if (elements[i-1].getClassName().equalsIgnoreCase("com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post")) {
+                break;
+            }
+        }
         LoginPage.username = user;
         WebElement userName = driver.findElement(By.xpath(xpv.getTokenValue("userNameXPATH")));
         WebElement passWord = driver.findElement(By.xpath(xpv.getTokenValue("pswdXPATH")));
@@ -37,13 +46,17 @@ public class LoginPage extends BaseClass {
         }
         passWord.sendKeys(ldv.getTokenValue("password"));
         loginBtn.click();
-
-        //PesAdmin navigates to Course page after login
+        
+       //PesAdmin navigates to Course page after login
         
         if (user.equals("pesAdmin")) {
             Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));            
-        } else {
-            Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));
+        } else { 
+            if (test.equalsIgnoreCase("RegressionTests") && elements[i-1].getClassName().contains("Student_JoinSocialGroup_Post")) {
+                Utility.verifyCurrentUrl(driver, xpv.getTokenValue("settingsPageURL"));
+            } else {
+                Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));
+            }
         }
     }
 

@@ -52,11 +52,21 @@
             <define name="Users">
                 <include name="prerequisite"/>
                 <include name="users.creation"/>
+                <include name="users.forcePasswordChange"/>
                 <include name="users.assignRole"/>
+                <include name="users.defaultTimeZoneValue"/>
+                <include name="users.presenceOfUISections"/>
+                <include name="users.defaultUnmaskPasswordCheckBoxSate"/>
+                <include name="users.unmaskPasswordFunctionality"/>
+                <include name="user.hideMyEmailAddressFromEveryOne"/>
+                <include name="user.allowEveryOneToSeeMyEmailAddress"/>
                 <include name="users.unAssignRole"/>
                 <include name="users.delete"/>
+                <include name="users.editListOfInterestsFieldOfStudent"/>
+                <include name="users.verifyBrowseListOfUsersPage"/>
+                <include name="users.authenticationMethodDropDown"/>
                 <!--include name="users.coordinatorCreation"/>
-                <include name="users.assignRoleToCoordinator"/-->         
+                <include name="users.assignRoleToCoordinator"/-->
             </define>
             <define name="WorkingGroup">
                 <include name="prerequisite"/>

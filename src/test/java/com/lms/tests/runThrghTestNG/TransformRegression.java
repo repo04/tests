@@ -491,5 +491,35 @@ public class TransformRegression implements IAnnotationTransformer {
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentCreateGlossaryEntry";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testStudentJoinsTeacherSocialGroup".equals(testMethod.getName()) 
+             || "testStudentPostURLOnTeacherSocialGroup".equals(testMethod.getName()) 
+             || "testStudentCommentOnTeacherCoursePost".equals(testMethod.getName()) 
+             || "testStudentVerifyPESCoursePost".equals(testMethod.getName())
+             || "testStudentRecommendCourseURLPost".equals(testMethod.getName())
+             || "testStudentSubmitAssignment".equals(testMethod.getName())
+             || "testStudentCreateNoteOnCourseWall".equals(testMethod.getName())
+             || "testStudentCreateNoteOnProfileWall".equals(testMethod.getName())
+             || "testStudentVerifyNoteSorting".equals(testMethod.getName())
+             || "testStudentDeleteProfileNote".equals(testMethod.getName())
+             || "testStudentVerifyFooters".equals(testMethod.getName())
+             || "testStudentVerifySyllabusActivity".equals(testMethod.getName())
+             || "testStudentVerifyResume".equals(testMethod.getName())
+             || "testStudentVerifyPersonalInformation".equals(testMethod.getName())
+             || "testStudentVerifyFeedbackWindow".equals(testMethod.getName())
+             || "testStudentVerifyHelpWindow".equals(testMethod.getName())
+             || "testStudentVerifySettings".equals(testMethod.getName())
+             || "testStudentCreateGlossaryEntry".equals(testMethod.getName())
+             || "testStudentVerifyCalendar".equals(testMethod.getName())
+             || "testStudentConfirmContactRequest".equals(testMethod.getName())
+             || "testStudentPostHTMLOnOwnWall".equals(testMethod.getName())
+             || "testStuentViewRevealPasswordButtonForAllInOneAssignemnt".equals(testMethod.getName())
+             || "testStudentVerifyRightSidebarOfCourseWorkPage".equals(testMethod.getName())
+             || "testStudentVerifyReadOnlyAccessToOfflineActivity".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentJoinsTeacherSocialGroup");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testStudentChangePasswordFromForcePasswordPageOnFirstLogin";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
     }
 }

@@ -10,7 +10,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Actions extends BaseClass {
 
     Date now = new Date();
-
+    String callingClassName;
+    
     /**
      * Login
      *
@@ -1563,4 +1564,129 @@ public class Actions extends BaseClass {
         Activity actvty = new Activity();
         actvty.verifyRightSidebarOfCourseWorkPage();
     }
+    
+    /**
+     * Navigate To Create User Page
+     */
+    public void navigateToCreateUserPage() {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlSiteAdminXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsersXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAccntsXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAddNwUsrXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAddNwUsrXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldUsrnmXPATH"));
+    }
+
+    /**
+     * Navigate To Create User Page
+     */
+    public void navigateToBrowseListOfUsersPage() {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlSiteAdminXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsersXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAccntsXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlBrwsNwUsrXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlBrwsNwUsrXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldFindUsrXPATH"), 60);
+    }
+
+    
+    /**
+     * Verify the Default TimeZone Value in Create User Page
+     */
+    public void verifyDefaultTimeZoneValueInCreateUserPage() {
+        User usr = new User();
+        usr.verifyDefaultTimeZoneValueInCreateUserPage();
+     }    
+
+    /**
+     * Verify the presence of difference sections in Create User Page UI
+     */
+    public void verifyPresenceOfDifferentSectionsInCreateUserPageUI() {
+        User usr = new User();
+        usr.verifyPresenceOfDifferentSectionsInCreateUserPageUI();
+     }    
+
+    /**
+     * Verify the default state of unmask password field field in Create User Page UI
+     * is unchecked
+     */
+    public void verifyDefaultStateOfUnmaskPasswordCheckBoxInCreateUserPage() {
+        User usr = new User();
+        usr.verifyDefaultStateOfUnmaskPasswordCheckBoxInCreateUserPage();
+     }  
+    
+    /**
+     * Verify the password encryption is off and on when unmask password check box 
+     * is checked and unchecked
+     */
+    public void verifyUnmaskPasswordCheckBoxFunctionalityInCreateUserPage() {
+        User usr = new User();
+        usr.verifyUnmaskPasswordCheckBoxFunctionalityInCreateUserPage();
+     }    
+
+    /**
+     * Verify Email Address Is Not Visible When "Hide My Email Address From EveryOne"
+     * Is Selected For User
+     * 
+     * @param user
+     */
+    public void verifyEmailAddressIsNotVisibleWhenHideMyEmailAddressFromEveryOneIsSelectedForUser(String user) {
+        Contact c = new Contact();
+        c.verifyEmailAddressIsNotVisibleWhenHideMyEmailAddressFromEveryOneIsSelectedForUser(user);
+    }
+
+    /**
+     * Verify Email Address Is Visible When "Allow everyone to see my Email address"
+     * Is Selected For User
+     * 
+     * @param user
+     */
+    public void verifyEmailAddressIsVisibleWhenAllowEveryoneToSeeMyEmailAddressIsSelectedForUser(String user) {
+        Contact c = new Contact();
+        c.verifyEmailAddressIsVisibleWhenAllowEveryoneToSeeMyEmailAddressIsSelectedForUser(user);
+    }
+    
+    /**
+     * Edit "List Of Interests" filed of User
+     * 
+     * @param user
+     */
+    public void editListOfInterestsFieldOfUser(String user) {
+        User usr = new User();
+        usr.editListOfInterestsFieldOfUser(user);
+    }
+
+    /**
+     * Verify Browse List of Users Page
+     * 
+     * @param user
+     */
+    public void verifyBrowseListOfUsersPage(String user) {
+        User usr = new User();
+        usr.verifyBrowseListOfUsersPage(user);
+    }
+
+     /**
+     * Verify the different values in "Authentication Method" drop down
+     * field in Create User Page
+     */
+    public void verifyChooseAnAuthenticationMethodDropDownFieldInCreateUserPage() {
+        User usr = new User();
+        usr.verifyChooseAnAuthenticationMethodDropDownFieldInCreateUserPage();
+     }    
+
+    /**
+     * Change Password from Force Password Change Page on Student First Time Login
+     */
+    public void changePasswordFromForcePasswordPageOnStudentLogin() {
+        User usr = new User();
+        usr.changePasswordFromForcePasswordPageOnStudentLogin();
+     }    
+    
 }
