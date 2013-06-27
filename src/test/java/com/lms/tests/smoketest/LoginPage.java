@@ -9,17 +9,12 @@ public class LoginPage extends BaseClass {
 
     private final static String USERROLE = "userrole";    
     
-//    private EventFiringWebDriver driver;
-//
-//    public LoginPage(EventFiringWebDriver driver) {
-//        this.driver = driver;
-//    }
-
     private RemoteWebDriver driver;
     
     public LoginPage(RemoteWebDriver driver){
         this.driver = driver;        
     }
+    
     /**
      * Attempts to login based on user type and values from property file
      *

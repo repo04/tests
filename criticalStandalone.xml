@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="CriticalSmoke Suite" verbose="5" parallel="tests" thread-count="10">
+    <listeners>
+        <listener class-name="com.lms.tests.runThrghTestNG.TransformCritical"/>
+        <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
+    </listeners>
+    <test name="CriticalTests_GU" preserve-order="true">
+        <parameter name="url" value="https://gu-msn-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="gu-msn"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_GU-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_UNC" preserve-order="true">
+        <parameter name="url" value="https://unc-mba-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="unc-mba"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_UNC-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_USC" preserve-order="true">
+        <parameter name="url" value="https://usc-mat-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="usc-mat"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_USC-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_LLM" preserve-order="true">
+        <parameter name="url" value="https://wu-llm-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="wu-llm"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_LLM-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_VAC" preserve-order="true">
+        <parameter name="url" value="https://usc-msw-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="usc-msw"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_VAC-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_MPA" preserve-order="true">
+        <parameter name="url" value="https://unc-mpa-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="unc-mpa"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_MPA-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_AU" preserve-order="true">
+        <parameter name="url" value="https://au-mir-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="au-mir"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_AU-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>
+    <test name="CriticalTests_GWU" preserve-order="true">
+        <parameter name="url" value="https://gwu-mph-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="gwu-mph"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_GWU-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
+    </test>    
+</suite>

@@ -406,7 +406,7 @@ public class Activity extends BaseClass {
         if (attempt) {
             rows = driver.findElements(By.xpath("//div[@id='region-main']/div/table/tbody/tr")).size();
             i = rows + 1;
-            Reporter.log("This is students '" + i + "' Quiz Attempt", true);
+            Reporter.log("This is students '" + i + "' Quiz Attempt for " + getProgram(), true);
         }
 
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnEditQzXPATH"));

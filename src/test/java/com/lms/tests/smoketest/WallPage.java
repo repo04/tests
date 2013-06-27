@@ -14,12 +14,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class WallPage extends BaseClass {
     
-    /*private EventFiringWebDriver driver;
-    
-    public WallPage(EventFiringWebDriver driver){
-        this.driver = driver;        
-    }*/
-    
     private RemoteWebDriver driver;
     
     public WallPage(RemoteWebDriver driver){

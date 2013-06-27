@@ -113,7 +113,6 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a.navigateToMySocialGroups();
         teacherSocialGroupNameArray[0][0] = a.createSocialGroup();
         Utility.put(TEACHERSOCIALGROUPNAME, teacherSocialGroupNameArray[0][0]);
-        System.out.println("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
         Reporter.log("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0], true);
     }
 

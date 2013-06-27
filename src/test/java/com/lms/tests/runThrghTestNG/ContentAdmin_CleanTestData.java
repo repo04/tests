@@ -39,7 +39,11 @@ public class ContentAdmin_CleanTestData extends BaseClass {
     @BeforeClass(groups = {"prerequisite"})
     public void testContentAdminLogIn() throws Exception {
         a = new Actions(getWebdriver());
-        a.login("contentAdmin");
+        if (test.equalsIgnoreCase("RegressionTests")) {
+            a.login("contentAdmin");
+        } else {
+            a.login("contentadmin");
+        }
     }
 
     /**
@@ -53,7 +57,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"activities.deletion"})
+    groups = {"activities.deletion"})
     public void testContentAdminActivitiesDeletion(String groupCourseName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName) throws Exception {
         a = new Actions(getWebdriver());
@@ -69,7 +73,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"groupcourse.deletion"})
+    groups = {"groupcourse.deletion"})
     public void testContentAdminGroupCourseDeletion(String groupCourseName) throws Exception {
         a = new Actions(getWebdriver());
         a.navigateToMyCourse();
@@ -88,7 +92,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "CoursePasswordQuizNameActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "criticalSmoke", "course.backup"})
+    groups = {"regressionSmoke", "criticalSmoke", "course.backup"})
     public void testContentAdminBackupCourse(String courseName, String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName) throws Exception {
         a = new Actions(getWebdriver());
@@ -110,8 +114,8 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      * @param pageActivityName
      * @throws Exception
      */
-    @Test(dataProvider = "CoursePasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke", 
-          "criticalSmoke", "course.restore"})
+    @Test(dataProvider = "CoursePasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke",
+        "criticalSmoke", "course.restore"})
     public void testContentAdminRestoreCourseAsNewArchiveCourse(String courseName, String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName, String backupFile) throws Exception {
         a = new Actions(getWebdriver());
@@ -121,15 +125,15 @@ public class ContentAdmin_CleanTestData extends BaseClass {
         a.restoreAsNewArchiveCourse(passwordQuizName, forumActivityName, quizActivityName,
                 allInOneAssignmentActivityName, pageActivityName, glossaryActivityName, backupFile);
     }
-    
+
     /**
-     * Verify that coursework unit should not be expandable (by default) when 
+     * Verify that coursework unit should not be expandable (by default) when
      * 'Disable date in section' check box is checked & vice versa
-     * 
+     *
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "content.contentAdminVerifyCourseworkUnitExpandableOrNot"})    
+    groups = {"regressionSmoke", "content.contentAdminVerifyCourseworkUnitExpandableOrNot"})
     public void testContentAdminVerifyCourseworkUnitExpandableOrNotWhileChangingDisableDateField(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);

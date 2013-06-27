@@ -141,6 +141,14 @@ public class TransformCritical implements IAnnotationTransformer {
             annotation.setAlwaysRun(true);
         }
         
+        if ("testContentAdminBackupCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminBackupCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup.testStudentDeleteSocialGroup";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+        
         if ("testContentAdminRestoreCourseAsNewArchiveCourse".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminRestoreCourseAsNewArchiveCourse");
             DependentMethods = new String[1];

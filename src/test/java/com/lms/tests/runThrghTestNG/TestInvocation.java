@@ -47,7 +47,7 @@ public class TestInvocation implements IInvokedMethodListener {
             }
 
             // Checks For UNC-MPA and WU-LLM 
-            if (!BaseClass.test.equalsIgnoreCase("CriticalTests")
+            if (!BaseClass.test.contains("Critical")
                     && (BaseClass.getProgram().contains("unc-mpa") || BaseClass.getProgram().contains("wu-llm")
                     || BaseClass.getProgram().contains("gwu-mph") || BaseClass.getProgram().contains("au-mir"))) {
                 if ("testStudentSupportMobileURL".equals(method.getName())) {

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import java.text.SimpleDateFormat;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class Course extends BaseClass {
@@ -19,11 +20,10 @@ public class Course extends BaseClass {
     private String courseShortName;
     private String groupCourseName;
     private String backupFileName;
-    
     private RemoteWebDriver driver;
-    
-    public Course(RemoteWebDriver driver){
-        this.driver = driver;        
+
+    public Course(RemoteWebDriver driver) {
+        this.driver = driver;
     }
 
     /**
@@ -210,7 +210,7 @@ public class Course extends BaseClass {
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div[2]/div", "The backup file was successfully created.");
         driver.findElement(By.xpath("//div/input")).click();
-        ip.isTextPresentByXPATH(driver, "//div[3]/div/h2", "Import a backup file");
+        ip.isTextPresentByCSS(driver, "h2.main", "Import a backup file");
         driver.findElement(By.cssSelector("#region-main > div.region-content")).click();
         ip.isTextPresentByXPATH(driver, "//div[3]/table/tbody/tr/td", backupFileName);
     }
@@ -269,16 +269,17 @@ public class Course extends BaseClass {
         int whiteSpaceCourseName = fetchedCourseName.indexOf(" ");
         int whiteSpaceShortCourseName = fetchedShortCourseName.indexOf(" ");
         String restoredCourseName, restoredShortCourseName;
-        if (!test.contentEquals("CriticalTests")) {
+        DateFormat dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
+        if (test.contentEquals("RegressionTests")) {
             restoredCourseName = fetchedCourseName.substring(0, whiteSpaceCourseName)
                     + " Restore " + fetchedCourseName.substring(whiteSpaceCourseName + 1);
             restoredShortCourseName = fetchedShortCourseName.substring(0, whiteSpaceShortCourseName)
                     + " Restore " + fetchedShortCourseName.substring(whiteSpaceShortCourseName + 1);
-        } else {
-             restoredCourseName = fetchedCourseName.substring(0, 11)
-                    + "Restore-" + fetchedCourseName.substring(11);
-             restoredShortCourseName = fetchedShortCourseName.substring(0, 11)
-                    + "Restore-" + fetchedShortCourseName.substring(11);
+        } else {            
+            restoredCourseName = fetchedCourseName.substring(0, 11)
+                    + "Restore-" + dateFormat.format(now) + "_" + fetchedCourseName.substring(11);
+            restoredShortCourseName = fetchedShortCourseName.substring(0, 11)
+                    + "Restore-" + dateFormat.format(now) + "_" + fetchedShortCourseName.substring(11);
         }
         driver.findElement(By.id("id_setting_course_course_fullname")).clear();
         driver.findElement(By.id("id_setting_course_course_shortname")).clear();
