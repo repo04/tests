@@ -53,7 +53,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
     @DataProvider(name = "GroupCourseFiles")
     public static Iterator<Object[]> GroupCourseFiles(ITestContext context) throws Exception {
         System.out.println("init GroupCourseFiles");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Files(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), Files(context));
     }
 
     /**

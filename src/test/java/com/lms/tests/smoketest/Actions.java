@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -121,7 +122,7 @@ public class Actions extends BaseClass {
      *
      * @return
      */
-    public String createCourse() {
+    public String[] createCourse() {
         Course cr = new Course(driver);
         cr.createCourse();
         return cr.getCourseName();
@@ -237,9 +238,13 @@ public class Actions extends BaseClass {
     /**
      *
      */
-    public void navigateToStudentSupport() {
+    public void navigateToSupport(String role) {
         driver.findElement(By.xpath("//*[@id='footerlinks']/span[6]/a")).click();
-        ip.isElementPresentByXPATH(driver, "//*[@id='region-main']/div/h2[1]");
+        if (role.equalsIgnoreCase("Teacher")) {
+            ip.isTextPresentByXPATH(driver, "//h2", "Faculty Support");
+        } else {
+            ip.isTextPresentByXPATH(driver, "//h2", "Student Support");
+        }
     }
 
     /**
@@ -302,7 +307,7 @@ public class Actions extends BaseClass {
     public void navigateToGrades() {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
+        ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
     }
 
     /**
@@ -914,7 +919,6 @@ public class Actions extends BaseClass {
     public void verifyResume() {
         switch (getProgram()) {
             case "usc-mat":
-                new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.linkText("Resume")));
                 ip.isElementPresentByLINK(driver, "Resume");
                 driver.findElement(By.linkText("Resume")).click();
                 ip.isTextPresentByXPATH(driver, "//h2", "Resume");
@@ -927,9 +931,9 @@ public class Actions extends BaseClass {
     /**
      * Verify Personal Information
      */
-    public void verifyPersonalInformation() {
+    public void verifyPersonalInformation(String role) {
         Profile pf = new Profile(driver);
-        pf.verifyPersonalInformation();
+        pf.verifyPersonalInformation(role);
     }
 
     /**
@@ -1067,15 +1071,19 @@ public class Actions extends BaseClass {
 
     /**
      *
+     * Verifies Support page
      */
-    public void testStudentSupport() {
-        StudentSupport ss = new StudentSupport(driver);
-        ss.verifyStudentSupport();
+    public void testSupportPage(String role) {
+        Support ss = new Support(driver);
+        ss.verifySupport(role);
     }
 
-    public void testStudentSupportMobileAppURL() {
-        StudentSupport ss = new StudentSupport(driver);
-        ss.verifyStudentSupportMobileAppURL();
+    /**
+     * Verifies Mobile section on Support page
+     */
+    public void testSupportMobileAppURL(String role) {
+        Support ss = new Support(driver);
+        ss.verifySupportMobileAppURL(role);
     }
 
     public String currentDateTime() {
@@ -1103,16 +1111,23 @@ public class Actions extends BaseClass {
      */
     public void navigateToSystemCompatibility() {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))));
+        String HandleBefore = driver.getWindowHandle();
         driver.findElement(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
-        String HandleBefore = driver.getWindowHandle();
-        for (String handle : driver.getWindowHandles()) {
-            driver.switchTo().window(handle);
-            if (driver.getTitle().contains("about:blank")) {
-                driver.close();
-            }
+        try {
+            new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.id("abc")));
+        } catch (TimeoutException e) {
+            //do nothing            
         }
-        driver.switchTo().window(HandleBefore);
+        if (driver.getWindowHandles().size() > 1) {
+            for (String handle : driver.getWindowHandles()) {
+                driver.switchTo().window(handle);
+                if (driver.getTitle().contains("about:blank")) {
+                    driver.close();
+                }
+            }
+            driver.switchTo().window(HandleBefore);
+        }        
     }
 
     /**
@@ -1271,15 +1286,24 @@ public class Actions extends BaseClass {
         ablock.verifySiteAdminReportEmailNotInDomainPage();
     }
 
+    /**
+     * Verify pes admin is able to see the related sections to the courses in
+     * the section drop down
+     */
+    public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
+        AdministrationBlock ablock = new AdministrationBlock(driver);
+        ablock.verifySectionDropdownCourseRostersPage(courseShortName, groupCourse);
+    }
+
     //Commented -- As looping executes very slow on Sauce Lab
     /**
      * Verify 2tor Administrative Block - University Domain Email IDs are not
      * present in "Email Not In Domain" list
      */
-    /*public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
-        AdministrationBlock ablock = new AdministrationBlock();
+    public void verifyUniversityDomainNotPresentInEmailNotInDomainList() {
+        AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifyUniversityDomainNotPresentInEmailNotInDomainList();
-    }*/
+    }
 
     /**
      * Verify Site Administration Section
@@ -1352,7 +1376,7 @@ public class Actions extends BaseClass {
         AdministrationBlock ablock = new AdministrationBlock(driver);
         ablock.verifySiteAdminReportDeletedLiveSessionPage();
     }
-    
+
     /**
      * Verify 2tor Administrative Block -Student Engagement Report UI Verify
      */
@@ -1453,8 +1477,100 @@ public class Actions extends BaseClass {
      * Navigate To Student Support page
      */
     /*public void navigateToStudentSupportPage() {
-        ip.isElementPresentByLINK(driver, "Student Support");
-        driver.findElement(By.linkText("Student Support")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
-    }*/
+     ip.isElementPresentByLINK(driver, "Student Support");
+     driver.findElement(By.linkText("Student Support")).click();
+     ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
+     }*/
+    
+    /**
+     * Create Offline Activity
+     *
+     * @param file
+     * @return
+     */
+    public String createOfflineActivity(String file) {
+        Activity activity = new Activity(driver);
+        activity.createOfflineActivity(file);
+        return activity.getActivityName();
+    }
+
+    /**
+     * Create All In One Assignment Activity with Reveal Password Setting
+     *
+     * @return
+     */
+    public String createAllInOneAssignmentActivityWithRevealPassword() {
+        Activity activity = new Activity(driver);
+        activity.createAllInOneAssignmentActivityWithRevealPassword();
+        return activity.getActivityName();
+    }
+
+    /**
+     * Create & Verify LiveSession Activity while selecting values other than
+     * "100 point and Credit/No Credit"
+     *
+     * @return
+     */
+    public String createLiveSessiobActivity() {
+        Activity activity = new Activity(driver);
+        activity.createLiveSessionActivity();
+        return activity.getActivityName();
+    }
+
+    /**
+     * View Reveal Password button for All In One Assignment
+     *
+     * @param allInOneAssignmentActivityNameWithRevealPassword
+     */
+    public void viewRevealPasswordButtonForAllInOneAssignemnt(String allInOneAssignmentActivityNameWithRevealPassword) {
+        Activity activity = new Activity(driver);
+        activity.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
+    }
+
+    /**
+     * Verify Student has read only access to Offline Activity created
+     *
+     * @param offlineActivityName
+     */
+    public void verifyReadOnlyAccessToOfflineActivity(String offlineActivityName) {
+        Activity activity = new Activity(driver);
+        activity.readOnlyAccessToOfflineActivity(offlineActivityName);
+    }
+
+    /**
+     * Verify graded & submitted section of Offline Activity
+     *
+     * @param offlineActivityName
+     */
+    public void verifyOfflineActivitySubmittedAndGradedSection(String offlineActivityName) {
+        Activity activity = new Activity(driver);
+        activity.verifyOfflineActivitySubmittedAndGradedSection(offlineActivityName);
+    }
+
+    /**
+     * Verify coursework unit is Expandable or not while changing 'Disable date
+     * in Section' Field
+     *
+     */
+    public void courseworkUnitExpandableOrNotWhileChangingDisableDateField() {
+        Activity activity = new Activity(driver);
+        activity.courseworkUnitExpandableOrNotWhileChangingDisableDateField();
+    }
+
+    /**
+     * Navigate To course work page
+     */
+    public void navigateToCourseWorkPage() {
+        ip.isElementClickableByXpath(driver, "//li[2]/a/span", 60);
+        driver.findElement(By.xpath("//li[2]/a/span")).click();
+        ip.isTextPresentByXPATH(driver, "//div[@id='region-main']/div/div/h2", "Coursework");
+    }
+
+    /**
+     * Verify the elements on the right sidebar of course work page
+     */
+    public void verifyRightSidebarOfCourseWorkPage() {
+        Activity actvty = new Activity(driver);
+        actvty.verifyRightSidebarOfCourseWorkPage();
+    }
 }

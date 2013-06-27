@@ -129,6 +129,20 @@ public class Settings extends BaseClass {
                 }
                 x++;
             }
+        } else if (LoginPage.getUser().contains("coordinator")) {
+            for (WebElement checkbox : checkboxes) {
+                if (x == 1 || x == 17 || x == 20 || x == 21) {
+                    checkbox.isEnabled();
+                    if (checkbox.isSelected()) {
+                        Utility.illegalStateException("Checkbox: "
+                                + checkbox.getAttribute("name") + " should not be selected");
+                    }
+                } else {
+                    checkbox.isEnabled();
+                    checkbox.isSelected();
+                }
+                x++;
+            }
         } else {
             for (WebElement checkbox : checkboxes) {
                 if (x == 2 || x == 12 || x == 20) {

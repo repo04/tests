@@ -51,6 +51,7 @@ public class LoginPage extends BaseClass {
         loginBtn.click();
 
         //PesAdmin navigates to Course page after login
+        
         if (user.equals("pesAdmin")) {
             Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));
         } else {

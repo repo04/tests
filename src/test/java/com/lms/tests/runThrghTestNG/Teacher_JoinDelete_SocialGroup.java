@@ -112,7 +112,7 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "wall.teacherVerifyStudentsPostRecommendation"})
     public void testTeacherVerifyStudentsPostRecommendation(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -195,6 +195,26 @@ public class Teacher_JoinDelete_SocialGroup extends BaseClass {
     public void testTeacherVerifyCalendar() throws Exception {
         a.navigateToMyHome();
         a.verifyCalendar();
+    }
+    
+    /**
+     * Verifies Support page
+     */
+    @Test(groups = {"regressionSmoke", "support.teacherUIVerify"})
+    public void testTeacherSupportPage() {
+        a.navigateToMyHome();
+        a.navigateToSupport("Teacher");
+        a.testSupportPage("Teacher");
+    }
+
+    /**
+     * Verifies Mobile section on Support page
+     */
+    @Test(groups = {"regressionSmoke", "support.teacherMobileAppURL"})
+    public void testTeacherSupportMobileURL() {
+        a.navigateToMyHome();
+        a.navigateToSupport("Teacher");
+        a.testSupportMobileAppURL("Teacher");
     }
 
     /**

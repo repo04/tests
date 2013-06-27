@@ -26,10 +26,10 @@ public class TestInvocation implements IInvokedMethodListener {
         ConstructorOrMethod contructorOrMethod = testNgMethod.getConstructorOrMethod();
         Method method = contructorOrMethod.getMethod();
         System.out.print("*****MethodInvoking: " + method.getName() + "*****" + "\n");
-        if (!"setUp".equals(method.getName())) {
+        if (!"setUp".equals(method.getName())) {            
             System.out.print("*****ProgamName: " + BaseClass.getProgram() + "*****" + "\n");
             
-            if (!BaseClass.getProgram().contains("gu-msn")) {   
+            if (!BaseClass.getProgram().contains("gu-msn")) {
                 if (BaseClass.test.equalsIgnoreCase("RegressionTests")
                         || BaseClass.test.equalsIgnoreCase("SmokeTests")) {
                     if ("testContentAdminCreateQuizPasswordActivity".equals(method.getName())
@@ -53,6 +53,14 @@ public class TestInvocation implements IInvokedMethodListener {
                 if ("testStudentSupportMobileURL".equals(method.getName())) {
                     System.out.println("Skipping Test Method");
                     throw new SkipException("Skipping Mobile App Test in Student Support: Not Available For UNC-MPA and WU-LLM");
+                }
+            }
+
+            // Skip Backup/Restore TCs for Env other than Standalone
+            if (!BaseClass.getURL().contains("standalone")) {
+                if ("testContentAdminBackupCourse".equals(method.getName())) {
+                    System.out.println("Skipping Test Method");
+                    throw new SkipException("Skipping: Course Backup/Restore TC's as these are executable only on Standalone Env");
                 }
             }
         }

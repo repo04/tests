@@ -27,6 +27,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     static String[][] workingGroupNameArray = new String[1][1];
     static String[][] studentNameArray = new String[1][1];
     static String[][] teacherNameArray = new String[1][1];
+    static String[][] coordinatorNameArray = new String[1][1];
     static String[][] pesTextCourseSectionPost = new String[1][1];
     static String[][] pesTextAnnouncementCoursePost = new String[1][1];
     static String[][] pesTextCoursePostCommentsOn = new String[1][1];
@@ -42,6 +43,18 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
             System.out.println("else Users: " + test);
             return new Object[][]{{ldv.getTokenValue("teacherUserName"), ldv.getTokenValue("studentUserName")}};
         }
+    }
+
+    @DataProvider(name = "Coordinator")
+    public static Object[][] Coordinator(ITestContext context) throws Exception {
+        /*if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
+         System.out.println("if Coordinator: " + test);
+         return (coordinatorNameArray);
+         } else {
+         System.out.println("else Coordinator: " + test);
+         return new Object[][]{{ldv.getTokenValue("coordinatorUserName")}};
+         }*/
+        return (coordinatorNameArray);
     }
 
     @DataProvider(name = "WorkingGroup")
@@ -75,13 +88,19 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     @DataProvider(name = "GroupCourseUsers")
     public static Iterator<Object[]> GroupCourseUsers(ITestContext context) throws Exception {
         System.out.println("init GroupCourseUsers");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), Users(context));
+    }
+    
+    @DataProvider(name = "GroupCourseCoordinatorUser")
+    public static Iterator<Object[]> GroupCourseCoordinatorUser(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseCoordinatorUser");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), Coordinator(context));
     }
 
     @DataProvider(name = "GroupCourseWorkingGroupUsers")
     public static Iterator<Object[]> GroupCourseWorkingGroupUsers(ITestContext context) throws Exception {
         System.out.println("init GroupCourseWorkingGroupUsers");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WorkingGroup(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), WorkingGroup(context), Users(context));
     }
 
     @DataProvider(name = "UsersDebug")
@@ -105,31 +124,31 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     @DataProvider(name = "GroupCourseWorkingGroupDebugUsers")
     public static Iterator<Object[]> GroupCourseWorkingGroupDebugUsers(ITestContext context) throws Exception {
         System.out.println("init GroupCourseWorkingGroupDebugUsers");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), WorkingGroupDebug(context), Users(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), WorkingGroupDebug(context), Users(context));
     }
 
     @DataProvider(name = "GroupCourseUsersDebug")
     public static Iterator<Object[]> GroupCourseUsersDebug(ITestContext context) throws Exception {
         System.out.println("init GroupCourseUsersDebug");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), UsersDebug(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), UsersDebug(context));
     }
 
     @DataProvider(name = "GroupCourseAssignmentStudent")
     public static Iterator<Object[]> GroupCourseAssignmentStudent(ITestContext context) throws Exception {
         System.out.println("init GroupCourseAssignmentStudent");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), ContentAdmin_Course_GroupCourseCreation.AssignmentName(context), StudentName(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), ContentAdmin_Course_GroupCourseCreation.AssignmentName(context), StudentName(context));
     }
 
     @DataProvider(name = "GroupCoursePesCoursePosts")
     public static Iterator<Object[]> GroupCoursePesCoursePosts(ITestContext context) throws Exception {
         System.out.println("init GroupCoursePesCoursePosts");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTextCourseSectionPost, pesTextCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), pesTextCourseSectionPost, pesTextCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
     }
 
     @DataProvider(name = "GroupCourseAnnouncement")
     public static Iterator<Object[]> GroupCourseAnnouncement(ITestContext context) throws Exception {
         System.out.println("init GroupCourseAnnouncement");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), pesTextAnnouncementCoursePost);
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), pesTextAnnouncementCoursePost);
     }
 
     /**
@@ -145,7 +164,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     }
 
     /**
-     * Create Two UserstestUsrCrtn
+     * Create Two users
      *
      * @throws Exception
      */
@@ -153,14 +172,23 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     public void testPESAdminUserCreation() throws Exception {
         a.navigateToMyContacts();
         userNamesArray[0][0] = a.createUser("teacher");
-        System.out.println("teacherUserName: " + userNamesArray[0][0]);
-        Reporter.log("teacherUserName: " + userNamesArray[0][0]);
+        Reporter.log("teacherUserName: " + userNamesArray[0][0], true);
 
         a.navigateToMyContacts();
         userNamesArray[0][1] = a.createUser("student");
         studentNameArray[0][0] = userNamesArray[0][1];
-        System.out.println("studentUserName: " + userNamesArray[0][1]);
-        Reporter.log("studentUserName: " + userNamesArray[0][1]);
+        Reporter.log("studentUserName: " + userNamesArray[0][1], true);
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"users.coordinatorCreation"})
+    public void testPESAdminCourseCoordinatorCreation() throws Exception {
+        a.navigateToMyContacts();
+        coordinatorNameArray[0][0] = a.createUser("coordinator");
+        Reporter.log("coordinatorNamesArray: " + coordinatorNameArray[0][0], true);
     }
 
     /**
@@ -180,6 +208,19 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     }
 
     /**
+     *
+     * @param groupCourseName
+     * @param coordinatorUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseCoordinatorUser", groups = {"users.assignRoleToCoordinator"})
+    public void testPESAdminRoleToCoordinator(String groupCourseName, String coordinatorUserName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.enrollUserToRole_GroupCourse(coordinatorUserName, groupCourseName);
+    }
+
+    /**
      * Create Working Group
      *
      * @throws Exception
@@ -188,8 +229,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     public void testPESAdminCreateWorkingGroup() throws Exception {
         a.navigateToWorkingGroups();
         workingGroupNameArray[0][0] = a.createWorkingGroup();
-        System.out.println("wrkngGrp: " + workingGroupNameArray[0][0]);
-        Reporter.log("wrkngGrp: " + workingGroupNameArray[0][0]);
+        Reporter.log("workingGroupName: " + workingGroupNameArray[0][0], true);
     }
 
     /**
@@ -210,7 +250,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "wall.courseSectionPost"})
     public void testPesAdminPostTextOnCourseSection(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -225,7 +265,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "wall.coursePostCommentsOn"})
     public void testPesAdminPostTextOnCourseCommentsOn(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -241,7 +281,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "wall.coursePostCommentsOff"})
     public void testPesAdminPostTextOnCourseCommentsOff(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -251,7 +291,12 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         new WebDriverWait(getWebdriver(), 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//li[1]/div/div[4]/label/a/label")));
     }
 
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    /**
+     *
+     * @param groupCourseName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
     public void testPesAdminPostAnnouncementOnAllCourseSection(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -385,19 +430,18 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.verifySiteAdminReportEmailNotInDomainPage();
     }
 
-    //Commented -- As looping executes very slow on Sauce Lab
-    /**
+    /**Commented -- As looping executes very slow on Sauce Lab
      * PesAdmin verify University Domain Email IDs are not present in "Email Not
      * In Domain" list
      *
      * @throws Exception
      */
-    /*@Test(groups = {"2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"})
+    @Test(groups = {"2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"})
     public void testPesAdminVerifyUniversityDomainNotPresentInEmailNotInDomainList() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToEmailNotInDomain();
         a.verifyUniversityDomainNotPresentInEmailNotInDomainList();
-    }*/
+    }
 
     /**
      * PesAdmin verify the Report settings
@@ -453,6 +497,35 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.verifySiteAdminReportStudentEngagementReportPage();
     }
 
+    /**
+     * Verify Sections of the Course in the section drop down in Course Roster Page
+     *
+     * @throws Exception
+     */
+    @Test(dataProvider = "CourseShortGroupCourseName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
+    public void testPesAdminVerifySectionDropdownCourseRostersPage(String courseShortName, String groupCourseName) throws Exception {
+        a.navigateTo2torSiteAdministrator();
+        a.navigateToCourseRosters();
+        a.verifySectionDropdownCourseRostersPage(courseShortName, groupCourseName);
+    }
+
+    /**
+     * Verify graded & submitted section of Offline Activity
+     *
+     * @param groupCourseName
+     * @param offlineActivityName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourseOfflineActivityName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "content.pesadminVerifyOfflineActivitySubmittedAndGradedSection"})
+    public void testPesAdminVerifyOfflineActivitySubmittedAndGradedSection(String groupCourseName, String offlineActivityName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToGrades();
+        a.verifyOfflineActivitySubmittedAndGradedSection(offlineActivityName);
+    }
+
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * PesAdmin Set Faculty Login Message
@@ -493,8 +566,8 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      a.navigateTo2torSiteAdministrator();
      a.navigateToUserStickyNotes();
      a.adminBlockStickyNotesPostURL();
-     } */    
-
+     } */
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

@@ -21,19 +21,24 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
+import com.lms.tests.runThrghTestNG.BaseClass;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
-public class Utility {
+public class Utility extends BaseClass {
 
     public static IsPresent ip = new IsPresent();
     private static ThreadLocal<Map<String, String>> sessions =
             new InheritableThreadLocal<>();
-    
     private static ThreadLocal<Map<String, Object>> sessions2 =
             new InheritableThreadLocal<>();
 
@@ -186,17 +191,29 @@ public class Utility {
      */
     public static void userEmailLogOut(WebDriver driver) {
         ip.isElementPresentByXPATH(driver, "//td[2]/a");
-        Utility.clickByJavaScript(driver, "//td[2]/a");
-
         try {
+            Utility.clickByJavaScript(driver, "//td[2]/a");
             Alert alert = new WebDriverWait(driver, 30).until(ExpectedConditions.alertIsPresent());
-            String error = "###Unexpected Alert located with Text as: " + alert.getText() + "###";
-            alert.accept();
-            Reporter.log(error, true);
+            handleAlertException(alert);
+        } catch (UnhandledAlertException e) {
+            Alert alert = driver.switchTo().alert();
+            handleAlertException(alert);
+            System.out.println("Inside UnhandledAlertException");
         } catch (TimeoutException e) {
             //Do Nothing
+            System.out.println("No unknown modal dialog present");
         }
         ip.isTitlePresent(driver, "Gmail: Email from Google");
+    }
+
+    /**
+     *
+     * @param alert
+     */
+    private static void handleAlertException(Alert alert) {
+        String error = "###**Unexpected Alert located with Text as: " + alert.getText() + "**###";
+        alert.accept();
+        Reporter.log(error, true);
     }
 
     /**
@@ -392,12 +409,12 @@ public class Utility {
         driver.switchTo().defaultContent();
     }
 
-   /**
-    * Verify Date Present In Element Value field
-    *
-    * @param driver
-    * @param id
-    */
+    /**
+     * Verify Date Present In Element Value field
+     *
+     * @param driver
+     * @param id
+     */
     public static void verifyDatePresentInElementValue(WebDriver driver, By id) {
         String regex = "^(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((20)\\d\\d)$";
         int x = 1;
@@ -417,18 +434,40 @@ public class Utility {
             Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by ID: " + id);
         }
     }
+    
+    /**
+     * Read contents from a file and paste the contents in a text box field in
+     * website
+     *
+     * @param filePathName
+     * @param xPath
+     */
+    public static void readAndCopyContentsToTextField(WebDriver driver, String filePathName, String xPath) {
+        try {
+            FileInputStream fstream = new FileInputStream(filePathName);
+            try (DataInputStream in = new DataInputStream(fstream)) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                String str;
+                while ((str = br.readLine()) != null) {
+                    driver.findElement(By.xpath(xPath)).sendKeys(str);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }    
 
     public static Object[][] getObject(String key) {
         String abc[][] = new String[1][1];
         abc[0][0] = getSession().get(key);
         Object O[][] = abc;
-        return O;      
+        return O;
     }
-    
+
     public static String getString(String key) {
         return getSession().get(key);
     }
-    
+
     public static Object getDriver(String key) {
         return getSession2().get(key);
     }
@@ -436,7 +475,7 @@ public class Utility {
     public static void put(String key, String value) {
         getSession().put(key, value);
     }
-    
+
     public static void putDriver(String key, Object value) {
         getSession2().put(key, value);
     }

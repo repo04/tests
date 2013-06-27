@@ -1,0 +1,92 @@
+<div id="contentwrap">
+<h2>Whizbang</h2>
+<script type="text/javascript">
+var tlcounter = 0;
+var tlscounter = 1;
+var tlcurrent = 1;
+function nextSlide(slideId) {
+	tlcounter = 0;
+	tlcurrent = parseInt(slideId)+1;
+	tlscounter = tlcurrent;
+	var currSlide = document.getElementById('qslide-'+slideId);
+	var nextSlide = document.getElementById('qslide-'+tlcurrent);
+	currSlide.style.display='none';
+	nextSlide.style.display='block';
+	document.getElementById('qslidejump-'+tlcurrent).style.color='blue';
+}
+function jumpToSlide(slideId) {
+	if(parseInt(slideId)==slideId && (Math.max(slideId,tlscounter)==tlscounter || override)) {
+		var currSlide = document.getElementById('qslide-'+tlcurrent);
+		var jumpSlide = document.getElementById('qslide-'+slideId);
+		tlcurrent = slideId
+		currSlide.style.display='none';
+		jumpSlide.style.display='block';
+	} else {
+		return false;
+	}
+}
+$(document).ready(function() {
+  $('.validator-reveal').css('visibility', 'hidden');
+});
+</script>
+<p id="qslide-counter" style="text-align:right">
+<a id="qslidejump-1" onclick="jumpToSlide(1)" style="color:blue;display:inline-block;margin-left:10px;">1</a>
+<iframe name="hidden_iframe_bhctutxh" id="hidden_iframe_bhctutxh" style="display:none;"></iframe>
+</p><form action="https://docs.google.com/spreadsheet/formResponse?pli=1&amp;formkey=dDd5NGo0S2dTSWp4NW9oZVRvWjJZRWc6MQ&amp;ifq" method="post" target="hidden_iframe_bhctutxh">
+<h3>Problem Setup</h3>
+<p>Whizbang Inc. has developed an innovative new software product that will significantly impact the ability of your sales-force to drive sales via encouraging customers to switch service providers.  In the next 5 years, should you agree to their terms, you will be the only provider in your sales area to whom they will license use of the product.  After which time, they will license multiple users.  They promise significant market share improvements which they can verify from the use of the product in other areas.  Their marketing materials (below) show average sales increases seen by comparable firms.  This is significant, because your sales have not grown in recent memory due to a reluctance of customers to switch providers.  The up-front IT upgrades would cost your firm $1M (which will depreciate at a constant rate over 6 years).  One element of the agreement you are unsure about, is they include a “profit-share” component on top of their one time license fee of $1.6M (after tax).  If you pay the license fee up-front, the profit-share is 20%,.  However, to help you mitigate your risk, they also will allow you to pay the license fee at the back-end which they will delay until the end of year 6.  The draw-back is, they will require a 45% profit-share in exchange for these credit terms.  Which option should you choose?  Use 35% as your tax rate in the analysis.</p>
+
+<p><strong>Do not include commas or dollar signs in your answers. All answers are in $K (omit 3 zeros).</strong></p>
+<div id="qslide-1">
+
+	<table class="table_builder grid small">
+	<tbody><tr>
+	<td class="shaded cfirst rfirst"></td><td class="shaded rfirst" align="center">0</td><td class="shaded rfirst" align="center">1</td><td class="shaded rfirst" align="center">2</td><td class="shaded rfirst" align="center">3</td><td class="shaded rfirst" align="center">4</td><td class="shaded rfirst" align="center">5</td><td class="shaded clast rfirst" align="center">6</td>
+	</tr>
+	<tr>
+	<td class="cfirst">New Revenues ($K)</td><td align="right"></td><td align="center">$4,000</td><td align="right">$5,000</td><td align="right">$6,000</td><td align="right">$6,900</td><td align="right">$7,590</td><td class="clast" align="right">$3,795</td>
+	</tr>
+	<tr>
+	<td class="cfirst">Profit Margins</td><td align="right"></td><td align="right">40%</td><td align="right">42%</td><td align="right">47%</td><td align="right">47%</td><td align="right">47%</td><td class="clast" align="right">47%</td>
+	</tr>
+         <tr>
+	<td class="cfirst validator-reveal">COGS</td><td align="right" class="validator-reveal"></td><td align="right" class="validator-reveal">-$2,400</td><td align="right" class="validator-reveal">-$2,900</td><td align="right" class="validator-reveal">-$3,180</td><td align="right" class="validator-reveal">-$3,657</td><td align="right" class="validator-reveal">-$4,023</td><td class="clast validator-reveal" align="right">-$2,011</td>
+	</tr>
+	<tr>
+	<td class="cfirst validator-reveal">Depreciation</td><td align="right" class="validator-reveal"></td><td align="right" class="validator-reveal">-$167</td><td align="right" class="validator-reveal">-$167</td><td align="right" class="validator-reveal">-$167</td><td align="right" class="validator-reveal">-$167</td><td align="right" class="validator-reveal">-$167</td><td class="clast validator-reveal" align="right">-$167</td>
+	</tr>
+	<tr>
+	<td class="cfirst validator-reveal">EBIT</td><td align="right" class="validator-reveal"></td><td align="right" class="validator-reveal">$1,433</td><td align="right" class="validator-reveal">$1,933</td><td align="right" class="validator-reveal">$2,653</td><td align="right" class="validator-reveal">$3,076</td><td align="right" class="validator-reveal">$3,401</td><td class="highlight clast validator-reveal" align="right">$1,617</td>
+	</tr>
+	</tbody></table>
+
+	<div id="q1att1">
+	<label class="ss-q-title" for="entry_0">Question 1 (Attempt 1) - First, estimate the CF to the project without considering the up-front payment or the profit share. What is the EBIT for this project in year 6?</label><br>
+	<input type="text" name="entry.0.single" value="" class="ss-q-short" id="entry_0">
+	<p><input type="button" value="Submit" onclick="if(Math.abs(Math.round(document.getElementById('entry_0').value)-1617)&lt;2) {document.getElementById('q1att1').style.display='none';document.getElementById('qslide-1-complete').style.display='block';$('#qslide-1 .validator-reveal').css('visibility', 'visible');} else {document.getElementById('q1att1').style.display='none';document.getElementById('q1att2').style.display='block';}"></p>
+	</div>
+
+	<div style="display:none;" id="q1att2">
+	<p style="color:red;">INCORRECT, please try again.</p>
+	<label class="ss-q-title" for="entry_2">Question 1 (Attempt 2) - First, estimate the CF to the project without considering the up-front payment or the profit share. What is the EBIT for this project in year 6?</label><br>
+	<input type="text" name="entry.2.single" value="" class="ss-q-short" id="entry_2">
+	<p><input type="button" value="Submit" onclick="if(Math.abs(Math.round(document.getElementById('entry_2').value)-1617)&lt;2) {document.getElementById('q1att2').style.display='none';document.getElementById('qslide-1-complete').style.display='block';$('#qslide-1 .validator-reveal').css('visibility', 'visible');} else {document.getElementById('q1att2').style.display='none';document.getElementById('q1att3').style.display='block';}"></p>
+	</div>
+
+	<div style="display:none;" id="q1att3">
+	<p style="color:red;">INCORRECT, please try again.</p>
+	<label class="ss-q-title" for="entry_4">Question 1 (Attempt 3) - First, estimate the CF to the project without considering the up-front payment or the profit share. What is the EBIT for this project in year 6?</label><br>
+	<input type="text" name="entry.4.single" value="" class="ss-q-short" id="entry_4">
+	<p><input type="button" value="Submit" onclick="document.getElementById('q1att3').style.display='none';document.getElementById('qslide-1-complete').style.display='block';$('#qslide-1 .validator-reveal').css('visibility', 'visible');"></p>
+	</div>
+
+	<div id="qslide-1-complete" style="display:none;">
+		<p>NUMERICAL ANSWER: $1,617</p>
+		<p>ANSWER FORMULA: EBIT = New Revenues - COGS - Depreciation<br>$1,617 = $3,795 - $2,011 - $167</p>
+		<input type="button" value="Next Question" onclick="nextSlide(1)">
+	</div>
+</div>
+<input type="hidden" name="pageNumber" value="0">
+<input type="hidden" name="backupCache" value="">
+</form>
+<p></p></div>

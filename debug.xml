@@ -6,6 +6,7 @@
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
+        <parameter name="courseShortName" value="AutoCourse-DNT"/>        
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
         <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
@@ -15,14 +16,16 @@
         <parameter name="pageActivityName" value="AutoPage"/>
         <parameter name="glossaryActivityName" value="AutoGlossary"/>
         <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
-        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>         
+        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
+        <parameter name="allInOneAssignmentActivityNameWithRevealPassword" value="AutoAllInOnePasswordActivity"/>
+        <parameter name="offlineActivityName" value="AutoOfflineActivity"/>
          
         <groups>
             <define name="Course_GroupCourse">
                 <include name="prerequisite"/>
                 <include name="course.creation"/>
                 <include name="groupcourse.deletion"/>
-                <include name="course.archive"/>                    
+                <include name="course.archive"/>                                    
             </define>            
             <define name="ActivitiesCreation_AddQuizQuestion_Deletion">
                 <include name="prerequisite"/>
@@ -51,7 +54,9 @@
                 <include name="users.creation"/>
                 <include name="users.assignRole"/>
                 <include name="users.unAssignRole"/>
-                <include name="users.delete"/>         
+                <include name="users.delete"/>
+                <!--include name="users.coordinatorCreation"/>
+                <include name="users.assignRoleToCoordinator"/-->         
             </define>
             <define name="WorkingGroup">
                 <include name="prerequisite"/>
@@ -104,7 +109,8 @@
                 <include name="wall.teacherVerifyPESCoursePosts"/> 
                 <include name="wall.studentVerifyPESCoursePosts"/>
                 <include name="wall.studentCommentOnTeacherCoursePost"/> 
-                <include name="wall.studentRecommendPost"/>   
+                <include name="wall.studentRecommendPost"/>
+                <include name="wall.studentHTMLWallPost"/>   
                 <include name="wall.teacherVerifyStudentsPostRecommendation"/>
                 <include name="wall.teacherVerifyStudentsCommentOnPost"/> 
                 <include name="wall.teacherDeleteCourseURLPost"/>
@@ -112,7 +118,7 @@
             </define>
             <define name="Footers">
                 <include name="prerequisite"/>
-                <include name="footers.verify"/>                                              
+                <include name="footers.studentVerify"/>                                              
             </define>
             <define name="Syllabus">
                 <include name="prerequisite"/>
@@ -166,7 +172,8 @@
                 <include name="settings.contentAdminVerify"/>
                 <include name="settings.pesAdminVerify"/>
                 <include name="settings.teacherVerify"/>
-                <include name="settings.studentVerify"/>                                
+                <include name="settings.studentVerify"/>
+                <!--include name="settings.coordinatorVerify"/-->                                
             </define>
             <define name="Glossary">
                 <include name="prerequisite"/>
@@ -186,10 +193,12 @@
                 <include name="contact.teacherAddStudentAsContactfromCourse"/>
                 <include name="contact.studentConfirmRequest"/>                                
             </define>
-            <define name="StudentSupport">
+            <define name="Support">
                 <include name="prerequisite"/>
-                <include name="support.uiVerify"/>
-                <include name="support.mobileAppURL"/>
+                <include name="support.teacherUIVerify"/>
+                <include name="support.teacherMobileAppURL"/>
+                <include name="support.studentUIVerify"/>
+                <include name="support.studentMobileAppURL"/>
             </define>
             <define name="LessonActivity">
                 <include name="prerequisite"/>
@@ -213,13 +222,25 @@
             <define name="2torAdministrativeBlock">
                 <include name="prerequisite"/>
                 <include name="2torAdministrativeBlock.contentVerify"/>
-                <!--include name="2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"/>
-                <include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
+                <include name="2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"/>
+                <!--include name="2torAdministrativeBlock.facultyVerificationLoginMessage"/>
                 <include name="2torAdministrativeBlock.studentLoginMessageVerification"/>
                 <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
                 <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
                 <include name="2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"/-->
             </define> 
+            <define name="Content">
+                <include name="prerequisite"/>
+                <include name="content.allInOneActivityCreationWithRevealPassword"/>
+                <include name="content.offlineActivityCreationWithHtmlFile"/>
+                <include name="content.pesadminVerifyOfflineActivitySubmittedAndGradedSection"/>
+                <include name="content.teacherVerifyRightSideBarOfCourseworkPage"/>
+                <include name="content.studentVerifyReadOnlyAccessToOfflineActivity"/>
+                <include name="content.studentViewRevealPasswordButtonForAllInOne"/>
+                <include name="content.studentVerifyRightSideBarOfCourseworkPage"/>
+                <include name="content.contentAdminVerifyCourseworkUnitExpandableOrNot"/>
+                <!--include name="content.liveSessionActivityCreationWithoutFullGrade"/-->                                                
+            </define>
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     

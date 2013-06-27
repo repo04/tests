@@ -33,7 +33,7 @@ public class Teacher_FetchActivityPassword extends BaseClass {
     @DataProvider(name = "GroupCoursePasswordQuizNamePassword")
     public static Iterator<Object[]> GroupCoursePasswordQuizNamePassword(ITestContext context) throws Exception {
         System.out.println("init GroupCoursePasswordQuizNamePassword");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context),
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context),
                 ContentAdmin_Course_GroupCourseCreation.PasswordQuizName(context), quizPassword(context));
     }
 
@@ -102,7 +102,7 @@ public class Teacher_FetchActivityPassword extends BaseClass {
     public void testTeacherEmailFetchActivityPasswordLogOut() throws Exception {
         RemoteWebDriver driver = getWebdriver();
         Utility.userEmailLogOut(driver);
-        driver.get(url);
+        driver.get(getURL());
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 }

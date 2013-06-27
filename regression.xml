@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="FullSmoke Suite">
+<suite name="Essential Regression Suite">
     <listeners>
         <listener class-name="com.lms.tests.runThrghTestNG.TransformRegression"/>
         <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
-    <test name="SmokeTests" preserve-order="true" parallel="false">
+    <test name="RegressionTest" preserve-order="true" parallel="false">
         <groups>
             <run>
                 <include name="prerequisite"/>

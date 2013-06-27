@@ -23,13 +23,13 @@ import org.openqa.selenium.remote.SessionId;
 public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     public String os;
-    public String url;
     public String browser;
     public String currentURL;
     public static String test;
     private RemoteWebDriver driver;
     private final static String WEBDRIVER = "webdriver";
     private final static String PROGRAM = "program";
+    private final static String URL = "url";
     public final static File directory = new File(".");
     private SauceOnDemandAuthentication authentication = 
         new SauceOnDemandAuthentication("someshbansal","10c353c4-24e9-434c-811d-f3aba9e14213");    
@@ -50,7 +50,6 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
         ldv = new XpathValues("loginDetails");
         
         this.os      = os;
-        this.url     = url;
         this.test    = test;
         this.browser = browser;
 
@@ -79,15 +78,17 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
                 capabilities.setCapability("platform", "WINDOWS 7");
         }
         capabilities.setCapability("name", session);
+        capabilities.setCapability("max-duration", 3600);
         capabilities.setCapability("idle-timeout", 180);
         this.driver = new RemoteWebDriver(new URL("http://" + authentication.getUsername() + 
                                              ":" + authentication.getAccessKey() + 
                                              "@ondemand.saucelabs.com:80/wd/hub"),
                                              capabilities);
         driver.setFileDetector(new LocalFileDetector());
-        driver.get(this.url);
+        driver.get(url);
         Utility.putDriver(WEBDRIVER, driver);
         Utility.put(PROGRAM, program);
+        Utility.put(URL, url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));        
     }
 
@@ -109,6 +110,10 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
 
     public static String getProgram() {
         return Utility.getString(PROGRAM);
+    }
+    
+    public static String getURL() {
+        return Utility.getString(URL);
     }
     
     @AfterTest(alwaysRun = true, groups = {"prerequisite"})

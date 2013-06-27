@@ -46,7 +46,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     @DataProvider(name = "GroupCourseTeacherUrlCoursePost")
     public static Iterator<Object[]> GroupCourseTeacherUrlCoursePost(ITestContext context) throws Exception {
         System.out.println("init GroupCourseTeacherUrlCoursePost");
-        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.Course(context), teacherUrlCoursePost(context));
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), teacherUrlCoursePost(context));
     }
 
     @DataProvider(name = "TeacherGlossaryEntryName")
@@ -83,25 +83,23 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.teacherPostsOnProfileCourseWall"})
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.teacherPostsOnProfileCourseWall"})
     public void testTeacherPostsOn_Wall_CourseWall(String groupCourseName) throws Exception {
         a = new Actions(getWebdriver());
         a.navigateToMyWall();
         teacherTextWallPost = a.textPost("txtWallPost");
-        System.out.println("teacherTextWallPost: " + teacherTextWallPost);
-        Reporter.log("teacherTextWallPost: " + teacherTextWallPost);
+        Reporter.log("teacherTextWallPost: " + teacherTextWallPost, true);
 
         a.navigateToMyWall();
         teacherUrlWallPost = a.urlPost("urlWallPost");
-        System.out.println("teacherUrlWallPost: " + teacherUrlWallPost);
-        Reporter.log("teacherUrlWallPost: " + teacherUrlWallPost);
+        Reporter.log("teacherUrlWallPost: " + teacherUrlWallPost, true);
 
         a.selectGroupCourse(groupCourseName);
         teacherUrlCoursePostArray[0][0] = a.urlPost("urlCrsPost");
         Utility.put(TEACHERURLCOURSEPOSTNAME, teacherUrlCoursePostArray[0][0]);
         System.out.println("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0]);
-        Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0]);
+        Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0], true);
     }
 
     /**
@@ -116,7 +114,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         teacherSocialGroupNameArray[0][0] = a.createSocialGroup();
         Utility.put(TEACHERSOCIALGROUPNAME, teacherSocialGroupNameArray[0][0]);
         System.out.println("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
-        Reporter.log("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0]);
+        Reporter.log("teacherSocialGroupName: " + teacherSocialGroupNameArray[0][0], true);
     }
 
     /**
@@ -132,8 +130,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a.navigateToMyContacts();
         a.navigateToContactsWall(studentUserName);
         teacherUrlPostOnStudentWall = a.textPost("tchrUrlPostOnStdtWall");
-        System.out.println("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall);
-        Reporter.log("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall);
+        Reporter.log("teacherUrlPostOnStudentWall: " + teacherUrlPostOnStudentWall, true);
     }
 
     /**
@@ -159,7 +156,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @param groupCourseName
      * @throws Exception
      */
-    /*@Test(dataProvider = "Course", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    /*@Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
      groups = {"regressionSmoke", "activity.teacherVerifySyllabus"})
      public void testTeacherVerifySyllabusActivity(String groupCourseName) throws Exception {
      a.navigateToMyCourse();
@@ -185,7 +182,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     @Test(groups = {"regressionSmoke", "personalInformation.teacherVerify"})
     public void testTeacherVerifyPersonalInformation() throws Exception {
         a.navigateToMyPersonalInformation();
-        a.verifyPersonalInformation();
+        a.verifyPersonalInformation("teacher");
     }
 
     /**
@@ -276,7 +273,23 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         teacherGlossaryCategoryNameArray[0][0] = a.createGlossaryCategory(glossaryName);
         Reporter.log("teacherGlossaryCategoryName: " + teacherGlossaryCategoryNameArray[0][0], true);
     }
-
+    
+     /**
+     * Teacher verify the elements on the right sidebar of course work page  
+     *
+     * @param groupCourseName
+     * @throws Exception
+     */
+    @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+          groups = {"regressionSmoke", "content.teacherVerifyRightSideBarOfCourseworkPage"})
+    public void testTeacherVerifyRightSidebarOfCourseWorkPage(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToCourseWorkPage();
+        a.verifyRightSidebarOfCourseWorkPage();
+    }
+    
+    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Teacher verify Login message - Currently commented as it affects all

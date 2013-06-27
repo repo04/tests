@@ -53,7 +53,13 @@ public class WallPage extends BaseClass {
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         String user = LoginPage.getUser();
-        this.textPost = xpv.getTokenValue(textPost) + "by" + user.substring(0, 7) + " " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        if (!textPost.contains("HTML")) {
+            this.textPost = xpv.getTokenValue(textPost) + "by" + user.substring(0, 7) + " "
+                    + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        } else {
+            this.textPost = xpv.getTokenValue(textPost + "1") + "by" + user.substring(0, 7) + " "
+                    + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now) + xpv.getTokenValue(textPost + "2");
+        }
         editableTxtArea.sendKeys(this.textPost);
 
         //Switches back to default focus
@@ -74,7 +80,7 @@ public class WallPage extends BaseClass {
                     Utility.verifyDatePresentInElementValue(driver, By.id("endtime-date"));
                     driver.findElement(By.id("endtime-date")).click();
                     ip.isTextPresentByXPATH(driver, "//li/div/table/tbody/tr[3]/td", "Today");
-                    driver.findElement(By.xpath("//tr[6]/td[7]/a")).click();
+                    driver.findElement(By.xpath("//td/table/tbody/tr[6]/td[7]/a")).click();
                     driver.findElement(By.id("audience_allcoursesections")).click();
                     driver.findElement(By.xpath("//div[11]/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]")).click();
                     break;
@@ -90,6 +96,8 @@ public class WallPage extends BaseClass {
                     driver.findElement(By.xpath("//fieldset/div/div/div[2]/div/div/input")).click();
                     driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
             }
+        } else {
+            new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.id("sharetype")));
         }
         buttonWallShare.click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("textWallCSS"), this.textPost);
@@ -134,6 +142,21 @@ public class WallPage extends BaseClass {
         }
         buttonWallShare.click();
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + this.urlPost);
+        if (urlPost.contains("urlCrsPost")) {
+            String mainWindow = driver.getWindowHandle();
+            driver.findElement(By.linkText("http://" + this.urlPost)).click();
+            Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
+            int z = 1;
+            for (String handle : driver.getWindowHandles()) {
+                System.out.println("window handle: " + handle);
+                driver.switchTo().window(handle);
+                if (z > 1) {
+                    driver.close();
+                }
+                z++;
+            }
+            driver.switchTo().window(mainWindow);
+        }
     }
 
     /**
@@ -143,7 +166,7 @@ public class WallPage extends BaseClass {
      * @param txtCmntOnTchrCrsPst
      */
     public void textCommentPost(String urlCoursePost, String txtCmntOnTchrCrsPst) {
-        textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
         ip.isElementPresentContainsTextByXPATH(driver, "http://" + urlCoursePost);
         driver.findElement(By.xpath("//a/label")).click();
         WebElement cmntTxtArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//li/div/div/div/textarea")));
@@ -155,19 +178,17 @@ public class WallPage extends BaseClass {
     }
 
     /**
-     * Click on TextArea & enable share button
+     * Click on TextArea, Enable share button & verify WYSIWYGEditor TestArea
      */
     public void setUpWallPost() {
         textArea = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("wallPublishPanelXPATH"))));
-        for (String handle : driver.getWindowHandles()) {
-            driver.switchTo().window(handle);
-        }
         Utility.actionBuilderClick(driver, xpv.getTokenValue("wallPublishPanelXPATH"));
         try {
             buttonWallShare = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnWallShareXPATH"))));
         } catch (TimeoutException e) {
             Utility.illegalStateException("Selenium is unable to click on TextArea, this is an Automation Limitation");
         }
+        verifyWYSIWYGEditor();
     }
 
     /**
@@ -177,6 +198,7 @@ public class WallPage extends BaseClass {
      */
     public void recommendURLCoursePost(String teacherUrlCoursePost) {
         ip.isTextPresentByXPATH(driver, "//div[3]/div/a", "http://" + teacherUrlCoursePost);
+        driver.findElement(By.cssSelector("span.icon.like"));
         ip.isElementClickableByXpath(driver, "//label[2]/a", 60);
         driver.findElement(By.xpath("//label[2]/a")).click();
         ip.isTextPresentByXPATH(driver, "//label[3]", "(You Recommend This)");
@@ -195,7 +217,7 @@ public class WallPage extends BaseClass {
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
             Utility.clickByJavaScript(driver, "//li/div/div/a");
-            ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Are you sure you want to delete this post");
+            ip.isTextPresentByXPATH(driver, "//div/div/div/div/div/div[2]/span", "Are you sure you want to delete this post");
         } else if (post.contains("urlstdtwrknggrppost")) {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
@@ -236,6 +258,18 @@ public class WallPage extends BaseClass {
         ip.isElementClickableByXpath(driver, "//a/label", 60);
         driver.findElement(By.xpath("//a/label")).click();
         ip.isTextPresentByXPATH(driver, "//li[2]/div/div[3]/div[3]", studentTextCommentOnTeacherCoursePost);
+    }
+
+    /**
+     * Verify WYSIWYG Editor
+     */
+    private void verifyWYSIWYGEditor() {
+        ip.isElementPresentByXPATH(driver, "//select");
+        for (int x = 3; x < 19; x++) {
+            if (x != 6 && x != 9 && x != 12 && x != 16) {
+                ip.isElementPresentByXPATH(driver, "//td[" + x + "]/table/tbody/tr[2]/td[2]/em/button");
+            }
+        }
     }
 
     /**

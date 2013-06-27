@@ -118,7 +118,7 @@ public class System_Compatibility extends BaseClass {
      */
     @AfterClass(groups = {"prerequisite"}, alwaysRun = true)
     public void testNavigateToHomePage() throws Exception {
-        getWebdriver().get(url);
+        getWebdriver().get(getURL());
         Utility.verifyCurrentUrl(getWebdriver(), xpv.getTokenValue("loginPageURL"));
     }
 }

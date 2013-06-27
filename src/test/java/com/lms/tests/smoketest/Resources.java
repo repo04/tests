@@ -47,7 +47,7 @@ public class Resources extends BaseClass {
                 resource6 = "Leadership Team";
                 resource7 = "KF Email";
                 addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6, resource7);
-                
+
                 href1 = "https://www.2nc.unc.edu/local/symplicity.php";
                 href2 = "http://www.unc.edu/myunc/";
                 href3 = "https://onlinemba.kenan-flagler.unc.edu/Pages/default.aspx"; //LMSII-1549
@@ -66,7 +66,7 @@ public class Resources extends BaseClass {
                 resource4 = "NetID Mgmt";
                 resource5 = "Handbooks & Info";
                 addToResourceList(resource1, resource2, resource3, resource4, resource5);
-                
+
                 href1 = "http://apps.georgetown.edu/"; // Updated LMSII-2110
                 href2 = "http://dml.georgetown.edu/";
                 href3 = "https://myaccess.georgetown.edu/pls/bninbp/twbkwbis.P_WWWLogin";
@@ -83,7 +83,7 @@ public class Resources extends BaseClass {
                 resource3 = "Email";
                 resource4 = "Docs";
                 addToResourceList(resource1, resource2, resource3, resource4);
-                
+
                 href1 = "http://my.usc.edu/";
                 href2 = "http://www.usc.edu/dept/publications/cat2011/";
                 href3 = "https://email.usc.edu/";
@@ -100,7 +100,7 @@ public class Resources extends BaseClass {
                 resource6 = "Leadership Team";
                 resource7 = "Daily Tarheel";
                 addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6);
-                
+
                 href1 = "http://www.unc.edu/myunc/";
                 href2 = "http://heelmail.unc.edu/";
                 href3 = "https://onyen.unc.edu/cgi-bin/unc_id/services";
@@ -119,7 +119,7 @@ public class Resources extends BaseClass {
                 resource5 = "Library Home Page";
                 resource6 = "Library Database";
                 addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6);
-                
+
                 href1 = "https://mylaw.wustl.edu/";
                 href2 = "http://go.wustl.edu/";
                 href3 = "https://acadinfo.wustl.edu/";
@@ -172,6 +172,19 @@ public class Resources extends BaseClass {
                         + "langId=-1&storeId=10370&demoKey=d&catalogId=10001";
                 addToHrefList(href1, href2, href3, href4, href5, href6, href7,
                         href8, href9, href10, href11, href12);
+                break;
+            case "corp-son":
+                count = 2;
+                resource1 = "Semester Online Twitter Page >";
+                resource2 = "Semester Online Facebook Page >";
+                addToResourceList(resource1, resource2);
+
+                href1 = "https://twitter.com/SemesterOnline";
+                href2 = "https://www.facebook.com/SemesterOnline";
+                addToHrefList(href1, href2);
+                break;
+            default:
+                Utility.illegalStateException("No program available: " + getProgram());
         }
         resourceWindow(count, resources, hrefs);
     }
@@ -189,14 +202,14 @@ public class Resources extends BaseClass {
     }
 
     /**
-     * 
+     *
      * @param i
      * @param resources
-     * @param hrefs 
+     * @param hrefs
      */
     private void resourceWindow(int i, List<String> resources, List<String> hrefs) {
         List<WebElement> lists = driver.findElement(By.className("topnav_dropdown")).findElements(By.tagName("li"));
-        
+
         //Navigating through all Link lists, verifying hrefs respective to Resource Text
         int x = 0;
         if (i == lists.size()) {

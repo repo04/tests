@@ -171,6 +171,7 @@
             <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
         </classes>
     </test>    
 </suite>

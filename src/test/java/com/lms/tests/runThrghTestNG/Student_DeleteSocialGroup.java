@@ -47,21 +47,26 @@ public class Student_DeleteSocialGroup extends BaseClass {
         a.deleteSocialGroup(studentSocialGroupName);
     }
     
-    
     /**
-     * 
+     * Verifies Support page
      */
-    @Test(groups = {"regressionSmoke", "support.uiVerify"})
-    public void testStudentSupport() {
-        a.navigateToStudentSupport();
-        a.testStudentSupport();
+    @Test(groups = {"regressionSmoke", "support.studentUIVerify"})
+    public void testStudentSupportPage() {
+        a.navigateToMyHome();
+        a.navigateToSupport("Student");
+        a.testSupportPage("Student");
     }
-    
-    @Test(groups = {"regressionSmoke", "support.mobileAppURL"})
-    public void testStudentSupportMobileURL() {
-       a.testStudentSupportMobileAppURL();
-    }
-   
+
+    /**
+     * Verifies Mobile section on Support page
+     */
+    @Test(groups = {"regressionSmoke", "support.studentMobileAppURL"})
+     public void testStudentSupportMobileURL() {
+        a.navigateToMyHome();
+        a.navigateToSupport("Student");
+        a.testSupportMobileAppURL("Student");
+     }
+      
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run
