@@ -197,18 +197,20 @@ public class Course extends BaseClass {
         ip.isElementClickableByXpath(driver, "//li[6]/p/a", 60);
         driver.findElement(By.linkText("Backup")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div", "Your settings have been altered due to unmet dependencies");
-        new WebDriverWait(driver, 5).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath("//div[2]/span"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//fieldset/input")));
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//legend", "Backup settings");
         ip.isTextPresentByXPATH(driver, "//fieldset[2]/legend", "Include:");
 
         validateActivities(activities, "//div[", "]/div/div/div/div/label", 3);
-
+        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//fieldset/input")));
         driver.findElement(By.xpath("//fieldset/input")).click();
-        new WebDriverWait(driver, 5).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath("//span[5]"))));
         backupFileName = driver.findElement(By.id("id_setting_root_filename")).getAttribute("value");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//fieldset/input")));
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div[2]/div", "The backup file was successfully created.");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div/input")));
         driver.findElement(By.xpath("//div/input")).click();
         ip.isTextPresentByCSS(driver, "h2.main", "Import a backup file");
         driver.findElement(By.cssSelector("#region-main > div.region-content")).click();

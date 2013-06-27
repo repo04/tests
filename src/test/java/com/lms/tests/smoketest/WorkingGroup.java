@@ -37,7 +37,7 @@ public class WorkingGroup extends BaseClass {
             this.workingGroupName = "RgsnTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.workingGroupName = "SmkTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-        } else if (test.contains("Critical")) {
+        } else if (test.contains("critical")) {
             this.workingGroupName = "CrtclTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
             this.workingGroupName = "DbgTstWrkngGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
@@ -154,7 +154,7 @@ public class WorkingGroup extends BaseClass {
         } else if (test.equalsIgnoreCase("SmokeTests")) {
             this.googleDocumentName = "SmkTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "SmkTstGglDocDesc " + dateFormat.format(now);
-        } else if (test.contains("Critical")) {
+        } else if (test.contains("critical")) {
             this.googleDocumentName = "CrtclTstGglDoc " + dateFormat.format(now);
             gglDocDesc = "CrtclTstGglDocDesc " + dateFormat.format(now);
         } else {
