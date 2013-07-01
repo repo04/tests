@@ -106,7 +106,7 @@ public class ContentAdmin_CleanTestData {
      * @param pageActivityName
      * @throws Exception
      */
-    @Test(dataProvider = "CoursePasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke", 
+    @Test(dataProvider = "CoursePasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke",
           "criticalSmoke", "course.restore"})
     public void testContentAdminRestoreCourseAsNewArchiveCourse(String courseName, String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName, String backupFile) throws Exception {

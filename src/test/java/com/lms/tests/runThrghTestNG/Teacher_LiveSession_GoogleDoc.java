@@ -138,7 +138,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @param doc
      * @throws Exception 
      */
-    @Test(dataProvider = "GroupCourseFiles", groups = {"regressionSmoke", "criticalSmoke", "files.teacherUploadInCourse"})
+    @Test(dataProvider = "GroupCourseFiles", groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "files.teacherUploadInCourse"})
     public void testTeacherUploadFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -155,7 +155,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @param doc
      * @throws Exception 
      */
-    @Test(dataProvider = "Files", groups = {"regressionSmoke", "criticalSmoke", "files.teacherVerifyInPortfolio"})
+    @Test(dataProvider = "Files", groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "files.teacherVerifyInPortfolio"})
     public void testTeacherVerifyFilesInPortfolio(String pdf, String pptx, String doc) throws Exception {
         a.navigateToMyHome();
         a.navigateToPortfolio();
