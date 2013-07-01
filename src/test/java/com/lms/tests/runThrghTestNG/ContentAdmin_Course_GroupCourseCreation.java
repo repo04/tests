@@ -248,9 +248,9 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         return DataProviderUtility.cartesianProviderFrom(CourseName(context), PasswordQuizName(context), Activities(context), GlossaryName(context));
     }
 
-    @DataProvider(name = "CourseGlossaryName")
-    public static Iterator<Object[]> CourseGlossaryName(ITestContext context) throws Exception {
-        System.out.println("init CourseGlossaryName");
+    @DataProvider(name = "GroupCourseGlossaryName")
+    public static Iterator<Object[]> GroupCourseGlossaryName(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseGlossaryName");
         return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), GlossaryName(context));
     }
     

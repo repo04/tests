@@ -235,7 +235,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @param glossaryName
      * @throws Exception
      */
-    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "activities.teacherCreateGlossaryEntry"})
     public void testTeacherCreateGlossaryEntry(String groupCourseName, String glossaryName) throws Exception {
         a.navigateToMyCourse();
@@ -251,7 +251,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "activities.teacherCreateGlossaryCategory"})
     public void testTeacherCreateGlossaryCategory(String groupCourseName, String glossaryName) throws Exception {
         a.navigateToMyCourse();

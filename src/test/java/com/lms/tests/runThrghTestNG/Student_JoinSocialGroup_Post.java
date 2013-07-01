@@ -301,7 +301,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @param glossaryName
      * @throws Exception
      */
-    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "activities.studentCreateGlossaryEntry"})
     public void testStudentCreateGlossaryEntry(String groupCourseName, String glossaryName) throws Exception {
         a.navigateToMyCourse();
