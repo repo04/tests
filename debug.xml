@@ -19,6 +19,7 @@
         <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
         <parameter name="allInOneAssignmentActivityNameWithRevealPassword" value="AutoAllInOnePasswordActivity"/>
         <parameter name="offlineActivityName" value="AutoOfflineActivity"/>
+        <parameter name="studentUserName" value="autostudent1"/>
          
         <groups>
             <define name="Course_GroupCourse">

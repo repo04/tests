@@ -19,13 +19,8 @@ import org.testng.annotations.Parameters;
 import com.lms.tests.smoketest.IsPresent;
 import com.lms.tests.smoketest.Utility;
 import com.lms.tests.smoketest.XpathValues;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-//@Listeners({TestNGC.class})
-public class BaseClass {
+public class BaseClass_Copy {
 
     public static XpathValues xpv, ldv;
     public static WebDriver driver;
@@ -119,17 +114,10 @@ public class BaseClass {
             default:
                 driver = new FirefoxDriver();
                 driver.manage().window().maximize();
-                Reporter.log("Browser: firefox");
+                Reporter.log("Browser: firefox");                
         }
 
-        try {
-            driver.get(this.url);
-        } catch (Exception e) {
-            System.out.println("IN ExPTN");
-            Alert alert = new WebDriverWait(driver, 60).until(ExpectedConditions.alertIsPresent());
-            alert.accept();
-            driver.findElement(By.linkText("Continue")).click();
-        }
+        driver.get(this.url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
 

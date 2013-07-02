@@ -21,6 +21,8 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.openqa.selenium.JavascriptExecutor;
+import org.testng.Assert;
 
 public class Activity extends BaseClass {
 
@@ -31,6 +33,7 @@ public class Activity extends BaseClass {
     private String unitEndDate;
     private String unitStartDate;
     private String dateAndTime;
+    String asgmntRspns;
     StackTraceElement[] stackTraceElements;
     Actions a = new Actions();
 
@@ -122,7 +125,7 @@ public class Activity extends BaseClass {
                     + "expected: 'No' but actual: '" + lateSubmission + "'");
         }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngActvtyTextXPATH"), this.intro);
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/div[4]/div/div/div/div/div", this.intro);
     }
 
     /**
@@ -449,24 +452,12 @@ public class Activity extends BaseClass {
     public void submitAssignment(String allInOneAssignmentActivityName) {
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
-        String asgmntRspns = "asgmntRspns" + dateFormat.format(now);
+        asgmntRspns = "asgmntRspns" + dateFormat.format(now);
         driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
-        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnSbmtAsgnmntXPATH"));
-
-        //Until Jira Ticket 'LMSII-2827' is resolved
-        switch (program) {
-            case "unc-mpa":
-            case "wu-llm":
-                ip.isElementPresentByXPATH(driver, "//input[@type='image']");
-                break;
-            default:
-                new WebDriverWait(driver, 60).until(ExpectedConditions.
-                        presenceOfElementLocated(By.cssSelector("img[alt=\"You must submit this assignment to mark it complete.\"]")));
-        }
-        driver.findElement(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("lblVrfyRspsXPATH"), "Write a Response");
-
         String HandleBefore = driver.getWindowHandle();
+        WebElement uploadButton;
+        ip.isElementPresentByLINK(driver, "Submissions");
+        driver.findElement(By.linkText("Submissions")).click();
 
         //'Send for Marking' button with onclick attribute is not clicked by Selenium CLICK command for Chrome Browser
         //Robot code provides the work around to perform the operation. 
@@ -474,17 +465,19 @@ public class Activity extends BaseClass {
         int i = 1;
         end:
         while (i < 6) {
-            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Font family")));
-            Utility.typeInContentEditableIframe(driver, 1, asgmntRspns);
+            new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.
+                    xpath("//div[2]/span/table/tbody/tr[2]/td/table/tbody/tr/td[2]/a/span")));
+            uploadButton = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
+                    By.cssSelector("button[title=\"Click to start upload.\"]")));
 
-            List<WebElement> elements = driver.findElements(By.tagName("input"));
-            System.out.println("Total inputs: " + elements.size());
-            Utility.robotclick(elements.get(22));
+            Utility.typeInContentEditableIframe(driver, 2, asgmntRspns);
+            ip.isElementClickableByXpath(driver, "//button[3]", 60);
+            driver.findElement(By.xpath("//button[3]")).click();
             if (i < 5) {
                 if (browser.equalsIgnoreCase("chrome")) {
                     try {
-                        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"), "Are you sure you want to send this assignment "
-                                + "for marking? After submission, you will not be able to make any changes in any documents or text.", 30);
+                        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"),
+                                "Are you sure you want to submit this assignment for grading?", 30);
                         break end;
                     } catch (TimeoutException e) {
                         System.out.println("count: " + i);
@@ -493,20 +486,27 @@ public class Activity extends BaseClass {
                         i++;
                     }
                 } else {
-                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"), "Are you sure you want to send this assignment "
-                            + "for marking? After submission, you will not be able to make any changes in any documents or text.");
+                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"),
+                            "Are you sure you want to submit this assignment for grading?");
                     break end;
                 }
             } else {
                 Utility.illegalStateException("Selenium Chrome Browser limitation: Unable to click button with onclick event, works fine for FF");
             }
         }
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnCnfrmAsgntMrkngXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmAsgntMrkngXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtVrfyAsgntMrkngXPATH"),
+                "Your assignment has been submitted for grading.", 30);
+        driver.findElement(By.xpath("//div[4]/div/div/a")).click();
+        String text = Utility.getTextFromContentEditableIframe(driver, 2);
+        Assert.assertEquals(text, asgmntRspns);
 
+        //new WebDriverWait(driver, 60).until(ExpectedConditions.stalenessOf(uploadButton));
         //Temporary solution as Feedback window is not stable
         boolean wndwFnd;
         try {
-            Utility.waitForNumberOfWindowsToEqual(driver, 60, 2);
+            Utility.waitForNumberOfWindowsToEqual(driver, 30, 2);
             wndwFnd = true;
             System.out.println("feedback window found");
         } catch (TimeoutException e) {
@@ -530,16 +530,16 @@ public class Activity extends BaseClass {
         driver.switchTo().window(HandleBefore);
 
         //Until Jira Ticket 'LMSII-2827' is resolved
-        switch (program) {
-            case "unc-mpa":
-            case "wu-llm":
-                ip.isElementPresentByXPATH(driver, "//input[@type='image']");
-                break;
-            default:
-                new WebDriverWait(driver, 60).until(ExpectedConditions.
-                        presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
-        }
-        ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);
+        /*switch (program) {
+         case "unc-mpa":
+         case "wu-llm":
+         ip.isElementPresentByXPATH(driver, "//input[@type='image']");
+         break;
+         default:
+         new WebDriverWait(driver, 60).until(ExpectedConditions.
+         presenceOfElementLocated(By.cssSelector("img[alt=\"Completed\"]")));
+         }
+         ip.isTextPresentByXPATH(driver, "//td/div/p", asgmntRspns);*/
 
         //************NOT TO BE DELETED AS OF NOW************//
         //Temporary solution till the time 'BUG' is resolved
@@ -634,12 +634,17 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input")).clear();
         driver.findElement(By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input")).sendKeys("62");
         driver.findElement(By.xpath("//tr[" + y + "]/td/div/div/a")).click();
+        ip.isTextPresentByCSS(driver, "#confirmBox > p",
+                "Are you sure that you wish to save and release the grade & feedback for this assignment?");
+        driver.findElement(By.cssSelector("a.button.green")).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Your grading changes have been saved.");
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "1 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/a")).click();
-        ip.isElementPresentByLINK(driver, "View 1 submitted assignments");
+        ip.isElementPresentByLINK(driver, "Submissions");
+        driver.findElement(By.linkText("Submissions")).click();
+        ip.isElementPresentByLINK(driver, "View submissions for review or grading.");        
     }
 
     /**
@@ -662,10 +667,32 @@ public class Activity extends BaseClass {
     public void allowResubmitAssignment(String allInOneAssignmentActivityName, String studentUserName) {
         ip.isElementPresentContainsTextByXPATH(driver, allInOneAssignmentActivityName);
         int x = locateElement(allInOneAssignmentActivityName);
-        driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.linkText("Allow Resubmit")));
-        driver.findElement(By.linkText("Allow Resubmit")).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Do you want to allow " + studentUserName + " to resubmit this assignment?");
+
+        int z = 1;
+        loop:
+        while (true) {
+            driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
+            int y = x + 1;
+            WebElement elm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[6]/span/a")));
+            if (z < 6) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", elm);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", elm);
+                elm.click();
+                try {
+                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), 
+                            "Do you want to allow " + studentUserName + " to resubmit this assignment?", 30);
+                    break loop;
+                } catch (TimeoutException e) {
+                    z++;
+                    System.out.println("count: " + z);
+                    driver.navigate().refresh();
+                    ip.isElementClickableByXpath(driver, "//tr[" + x + "]/td/span/a/span", 60);
+                }
+            } else {
+                Utility.illegalStateException("Selenium Chrome Browser limitation: Unable to click on Image button after multiple tries also, works fine for FF");
+            }
+        }
         driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + studentUserName + " and mail sent.");
         driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
@@ -788,16 +815,16 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"), 60);
         String text = driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div[2]/span")).getText();
-        if(!text.equals(xpv.getTokenValue("revealDocumentPasswordConfirmationText"))){
-            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealDocumentPasswordConfirmationText") +
-                    "- Actual: " + text);
+        if (!text.equals(xpv.getTokenValue("revealDocumentPasswordConfirmationText"))) {
+            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealDocumentPasswordConfirmationText")
+                    + "- Actual: " + text);
         }
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealPasswordPopUpButtonXPATH"), 60);
         text = driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div[2]/span")).getText();
-        if(!text.equals(xpv.getTokenValue("revealPasswordText"))){
-            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealPasswordText") +
-                    "- Actual: " + text);
+        if (!text.equals(xpv.getTokenValue("revealPasswordText"))) {
+            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealPasswordText")
+                    + "- Actual: " + text);
         }
         driver.findElement(By.xpath(xpv.getTokenValue("revealPasswordPopUpButtonXPATH"))).click();
     }
@@ -857,13 +884,12 @@ public class Activity extends BaseClass {
     public void verifyOfflineActivitySubmittedAndGradedSection(String offlineActivityName) {
         int x = locateElement(offlineActivityName);
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("gradeTableXPATH") + "[" + x + "]/td[3]", "N/A");
-        ip.invisibilityOfElementByXpathWithText(driver, xpv.getTokenValue("gradeTableXPATH") + "[" + x + "]/td[4]", "N/A");        
+        ip.invisibilityOfElementByXpathWithText(driver, xpv.getTokenValue("gradeTableXPATH") + "[" + x + "]/td[4]", "N/A");
     }
 
     /**
-     * Verify coursework unit is Expandable or not while changing 
-     * 'Disable date in section' Field 
-     * 
+     * Verify coursework unit is Expandable or not while changing 'Disable date in section' Field
+     *
      */
     public void courseworkUnitExpandableOrNotWhileChangingDisableDateField() {
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"));
@@ -916,7 +942,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("editCourseSettingLinkXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingsPageHeaderXPATH"), "Edit course settings");
-        
+
         //Checks whether the "Disable Date in sections" check box is selected or not - if yes then deselect it
         Boolean disabledatecheckbox = driver.findElement(By.name("datelessflag")).isSelected();
         if (disabledatecheckbox == true) {
@@ -928,7 +954,7 @@ public class Activity extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingLinkXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("editCourseSettingLinkXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("editCourseSettingsPageHeaderXPATH"), "Edit course settings");
-        
+
         //Checks whether the "Disable Date in sections" check box is selected or not - if no then select it
         disabledatecheckbox = driver.findElement(By.name("datelessflag")).isSelected();
         if (disabledatecheckbox == false) {

@@ -390,8 +390,8 @@ public class Utility extends BaseClass {
         int x = 1;
         loop:
         for (WebElement frame : iframes) {
+            System.out.println("Iframe ID: " + frame.getAttribute("id"));
             if (x == iframeIndex) {
-                System.out.println("Iframe ID: " + frame.getAttribute("id"));
                 driver.switchTo().frame(frame.getAttribute("id"));
                 break loop;
             }
@@ -449,5 +449,30 @@ public class Utility extends BaseClass {
         } catch (Exception e) {
             System.err.println(e);
         }
+    }
+    
+    /**
+     * 
+     * @param driver
+     * @param iframeIndex
+     * @return 
+     */
+    public static String getTextFromContentEditableIframe(WebDriver driver, int iframeIndex) {
+        List<WebElement> iFrames = driver.findElements(By.tagName("iframe"));
+        
+        int x = 1;
+        for (WebElement iframe : iFrames) {
+            System.out.println("Iframe ID: " + iframe.getAttribute("id"));
+            if (x == iframeIndex) {
+                driver.switchTo().frame(iframe.getAttribute("id"));
+            }
+            x++;
+        }
+
+        //Switch focus
+        WebElement editableTxtArea = driver.switchTo().activeElement();
+        String text = editableTxtArea.getText();
+        driver.switchTo().defaultContent();
+        return text;
     }
 }
