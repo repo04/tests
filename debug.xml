@@ -45,6 +45,7 @@
             </define>
             <define name="Assignment_Grade">
                 <include name="prerequisite"/>
+                <include name="assignment.teacherVerifyNoSubmissionAndCannotBeGraded"/>
                 <include name="assignment.submit"/>
                 <include name="assignment.grade"/>
                 <include name="assignment.verifyGrade"/>
@@ -56,7 +57,7 @@
                 <include name="users.assignRole"/>
                 <include name="users.unAssignRole"/>
                 <include name="users.delete"/>
-                <!--include name="users.coordinatorCreation"/>
+                <!--AutoAllInOneAsgnmntinclude name="users.coordinatorCreation"/>
                 <include name="users.assignRoleToCoordinator"/-->         
             </define>
             <define name="WorkingGroup">

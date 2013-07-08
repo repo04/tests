@@ -1563,4 +1563,32 @@ public class Actions extends BaseClass {
         Activity actvty = new Activity();
         actvty.verifyRightSidebarOfCourseWorkPage();
     }
+
+    /**
+     * 
+     * @param allInOneAssignmentActivityName 
+     */
+    public void navigateToActivity(String allInOneAssignmentActivityName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
+    }
+
+    /**
+     * 
+     */
+    public void verifyAssignmentHasNoSubmission() {
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]", 
+                "There are no student submissions ready to review or grade.");
+        driver.findElement(By.linkText("Submissions")).click();
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]", 
+                "There are no student submissions ready to review or grade.");
+    }
+
+    /**
+     * 
+     * @param allInOneAssignmentActivityName 
+     */
+    public void verifyAssignmentCannotBeGraded(String allInOneAssignmentActivityName) {
+        Activity activity = new Activity();
+        activity.verifyAssignmentCannotBeGraded(allInOneAssignmentActivityName);
+    }
 }
