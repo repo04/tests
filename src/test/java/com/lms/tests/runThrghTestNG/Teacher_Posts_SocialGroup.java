@@ -123,7 +123,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     }
 
     /**
-     * Teacher verifies PES posts on Course Wall
+     * Teacher verifies Pes posts on Course Wall
      *
      * @param groupCourseName
      * @param pesTextCourseSectionPost
@@ -132,8 +132,8 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCoursePesCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-    groups = {"regressionSmoke", "wall.teacherVerifyPESCoursePosts"})
-    public void testTeacherVerifyPESCoursePosts(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
+    groups = {"regressionSmoke", "wall.teacherVerifyPesCoursePosts"})
+    public void testTeacherVerifyPesCoursePosts(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.verifyCoursePost(pesTextCourseSectionPost, pesTxtCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);

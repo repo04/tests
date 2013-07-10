@@ -3,11 +3,11 @@
  * and open the template in the editor.
  */
 package com.lms.tests.runThrghTestNG;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
 import com.lms.tests.smoketest.Utility;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 
 public class System_Compatibility extends BaseClass{

@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
 import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -11,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /**
  *
@@ -41,15 +41,15 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
         System.out.println("init WorkingGroupGoogleDocument");
         return DataProviderUtility.cartesianProviderFrom(Pes_UserCreation_AssignRole_WorkingGroup.WorkingGroup(context), GoogleDocument(context));
     }
-    
+
     @DataProvider(name = "Files")
     public static Object[][] Files(ITestContext context) throws Exception {
         filesArray[0][0] = "UploadPDF_2Mb.pdf";
         filesArray[0][1] = "UploadPPT_4Mb.pptx";
         filesArray[0][2] = "UploadWord_14Mb.doc";
-        return (filesArray);        
+        return (filesArray);
     }
-    
+
     @DataProvider(name = "GroupCourseFiles")
     public static Iterator<Object[]> GroupCourseFiles(ITestContext context) throws Exception {
         System.out.println("init GroupCourseFiles");
@@ -77,7 +77,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "TeacherSocialGroup", dataProviderClass = Teacher_Posts_SocialGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "liveSession.teacherCreate"})
+    groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "liveSession.teacherCreate"})
     public void testTeacherCreateLiveSession(String teacherSocialGroupName) throws Exception {
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
@@ -91,7 +91,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WorkingGroup", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-          groups = {"regressionSmoke", "fullSmoke", "workingGroup.teacherCreateGoogleDoc"})
+    groups = {"regressionSmoke", "fullSmoke", "workingGroup.teacherCreateGoogleDoc"})
     public void testTeacherCreateGoogleDoc(String workingGroupName) throws Exception {
         a.navigateToWorkingGroups();
         googleDocumentNameArray[0][0] = a.createGoogleDoc(workingGroupName);
@@ -105,7 +105,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "activities.teacherVerify"})
+    groups = {"regressionSmoke", "fullSmoke", "activities.teacherVerify"})
     public void testTeacherVerifyActivities(String groupCourseName, String forumActivityName, String quizActivityName, String allInOneAssignmentActivityName, String pageActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -121,7 +121,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "assignment.grade"})
+    groups = {"regressionSmoke", "fullSmoke", "assignment.grade"})
     public void testTeacherGradeAssignment(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -131,12 +131,12 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
 
     /**
      * Teacher upload files of multiple formats(pdf, pptx, doc)
-     * 
+     *
      * @param groupCourseName
      * @param pdf
      * @param pptx
      * @param doc
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GroupCourseFiles", groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "files.teacherUploadInCourse"})
     public void testTeacherUploadFilesInCourse(String groupCourseName, String pdf, String pptx, String doc) throws Exception {
@@ -148,12 +148,12 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
 
     /**
      * Teacher verify all uploaded files in Portfolio
-     * 
+     *
      * @param groupCourseName
      * @param pdf
      * @param pptx
      * @param doc
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "Files", groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "files.teacherVerifyInPortfolio"})
     public void testTeacherVerifyFilesInPortfolio(String pdf, String pptx, String doc) throws Exception {
@@ -161,22 +161,37 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
         a.navigateToPortfolio();
         a.verifyFilesInPortfolio(doc, pptx, pdf);
     }
-    
+
     /**
      * Teacher verify Student post on own Social Group wall
-     * 
+     *
      * @param teacherSocialGroupName
      * @param studentUrlPostOnTeacherSocialGroup
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "TeacherSocialGroupStudentUrlPost", dataProviderClass = Student_JoinSocialGroup_Post.class,
-          groups = {"regressionSmoke", "socialGroup.teacherVerifyStudentPostOnOwnSocialGroupWall"})
+    groups = {"regressionSmoke", "socialGroup.teacherVerifyStudentPostOnOwnSocialGroupWall"})
     public void testTeacherVerifyStudentPostOnOwnSocialGroupWall(String teacherSocialGroupName, String studentUrlPostOnTeacherSocialGroup) throws Exception {
         a.navigateToMySocialGroups();
         a.navigateToGroupWall(teacherSocialGroupName);
         a.verifyPostOnSocialGroupWall(studentUrlPostOnTeacherSocialGroup);
     }
-    
+
+    /**
+     * Verify Email Address Is Not Visible To Teacher When "Hide My Email
+     * Address From EveryOne" Is Selected For Student
+     *
+     * @param teacherUserName
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    groups = {"users.teacherVerifyStudentsEmailAddressIsNotVisible"})
+    public void testTeacherVerifyStudentsEmailAddressIsNotVisibleAsHideEmailAddressFromEveryoneIsSelected(String teacherUserName, String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.verifyUsersEmailAddressIsNotVisibleAsHideEmailAddressFromEveryoneIsSelected(studentUserName);
+    }
+
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

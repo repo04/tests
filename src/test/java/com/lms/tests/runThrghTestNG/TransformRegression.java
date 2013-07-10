@@ -50,19 +50,27 @@ public class TransformRegression implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testPESAdminAssignRole".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminAssignRole");
+        if ("testPesAdminAssignRole".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminAssignRole");
             DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminCourseGroupCourseCreation";
-            DependentMethods[1] = "testPESAdminUserCreation";
+            DependentMethods[1] = "testPesAdminUserCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testPESAdminAddMembersToWorkingGroup".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminAddMembersToWorkingGroup");
+        if ("testPesAdminAddMembersToWorkingGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminAddMembersToWorkingGroup");
             DependentMethods = new String[2];
-            DependentMethods[0] = "testPESAdminCreateWorkingGroup";
-            DependentMethods[1] = "testPESAdminAssignRole";
+            DependentMethods[0] = "testPesAdminCreateWorkingGroup";
+            DependentMethods[1] = "testPesAdminAssignRole";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testPesAdminVerifyListOfInterestsFieldUpdation".equals(testMethod.getName())
+                || "testPesAdminVerifyBrowseListOfUsersPage".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testPesAdminUserCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -72,42 +80,46 @@ public class TransformRegression implements IAnnotationTransformer {
                 || "testTeacherAddStudentAsContactfromCourse".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherVerifyPersonalInformation".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherVerifyPersonalInformation");
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testStudentJoinsTeacherSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentJoinsTeacherSocialGroup");
-            DependentMethods = new String[1];
+            DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateSocialGroup";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testStudentPostURLOnTeacherSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentPostURLOnTeacherSocialGroup");
-            DependentMethods = new String[1];
+            DependentMethods = new String[2];
             DependentMethods[0] = "testStudentJoinsTeacherSocialGroup";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testStudentCommentOnTeacherCoursePost".equals(testMethod.getName())) {
             System.out.println("Inside testStudentCommentOnTeacherCoursePost");
-            DependentMethods = new String[1];
+            DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherPostsOn_Wall_CourseWall";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testStudentConfirmContactRequest".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
-            DependentMethods = new String[1];
+            DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherAddStudentAsContactfromCourse";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -121,7 +133,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testTeacherCreateGoogleDoc".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherCreateGoogleDoc");
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAddMembersToWorkingGroup";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAddMembersToWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -130,7 +142,7 @@ public class TransformRegression implements IAnnotationTransformer {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminActivitiesCreation";
-            DependentMethods[1] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
+            DependentMethods[1] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -153,7 +165,7 @@ public class TransformRegression implements IAnnotationTransformer {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminAddQuizQuestion";
-            DependentMethods[1] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
+            DependentMethods[1] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -191,7 +203,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testStudentPostOnWorkingGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentPostOnWorkingGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAddMembersToWorkingGroup";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAddMembersToWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -235,41 +247,42 @@ public class TransformRegression implements IAnnotationTransformer {
         }
 
         //Pes_CleanTestData
-        if ("testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup");
+        if ("testPesAdminDeleteAndVerifyStudentPostFromWorkingGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminDeleteAndVerifyStudentPostFromWorkingGroup");
             DependentMethods = new String[1];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentPostOnWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testPESAdminDeleteWorkingGroup".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminDeleteWorkingGroup");
+        if ("testPesAdminDeleteWorkingGroup".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminDeleteWorkingGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup";
+            DependentMethods[0] = "testPesAdminDeleteAndVerifyStudentPostFromWorkingGroup";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
 
-        if ("testPESAdminDeleteUsers".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminDeleteUsers");
+        if ("testPesAdminDeleteUsers".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminDeleteUsers");
             DependentMethods = new String[1];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup.testStudentDeleteSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
 
-        if ("testPESAdminArchiveCourse".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminArchiveCourse");
+        if ("testPesAdminArchiveCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminArchiveCourse");
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_CleanTestData.testPESAdminDeleteUsers";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_CleanTestData.testPesAdminDeleteUsers";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
 
         if ("testStudentCreateNoteOnProfileWall".equals(testMethod.getName())) {
             System.out.println("Inside testStudentCreateNoteOnProfileWall");
-            DependentMethods = new String[1];
+            DependentMethods = new String[2];
             DependentMethods[0] = "testStudentCreateNoteOnCourseWall";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -315,17 +328,18 @@ public class TransformRegression implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTeacherVerifyPESCoursePosts".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherVerifyPESCoursePosts");
+        if ("testTeacherVerifyPesCoursePosts".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyPesCoursePosts");
             DependentMethods = new String[1];
             DependentMethods[0] = "testTeacherPostsOn_Wall_CourseWall";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStudentVerifyPESCoursePost".equals(testMethod.getName())) {
-            System.out.println("Inside testStudentVerifyPESCoursePost");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherVerifyPESCoursePosts";
+        if ("testStudentVerifyPesCoursePost".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyPesCoursePost");
+            DependentMethods = new String[2];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherVerifyPesCoursePosts";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -339,7 +353,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testStudentRecommendCourseURLPost".equals(testMethod.getName())) {
             System.out.println("Inside testStudentRecommendCourseURLPost");
             DependentMethods = new String[1];
-            DependentMethods[0] = "testStudentVerifyPESCoursePost";
+            DependentMethods[0] = "testStudentVerifyPesCoursePost";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -364,8 +378,8 @@ public class TransformRegression implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testPESAdminDeleteAnnouncement".equals(testMethod.getName())) {
-            System.out.println("Inside testPESAdminDeleteAnnouncement");
+        if ("testPesAdminDeleteAnnouncement".equals(testMethod.getName())) {
+            System.out.println("Inside testPesAdminDeleteAnnouncement");
             DependentMethods = new String[1];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherDeleteCourseURLPost";
             annotation.setDependsOnMethods(DependentMethods);
@@ -390,7 +404,7 @@ public class TransformRegression implements IAnnotationTransformer {
         if ("testTeacherUploadFilesInCourse".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherUploadFilesInCourse");
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -428,7 +442,7 @@ public class TransformRegression implements IAnnotationTransformer {
             System.out.println("Inside testContentAdminAddQuesToQuizPasswordActivity");
             DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminAddQuesToQuizPasswordActivity";
-            DependentMethods[1] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
+            DependentMethods[1] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPesAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -478,17 +492,45 @@ public class TransformRegression implements IAnnotationTransformer {
 
         if ("testStudentCreateGlossaryEntry".equals(testMethod.getName())) {
             System.out.println("Inside testStudentCreateGlossaryEntry");
-            DependentMethods = new String[1];
+            DependentMethods = new String[2];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminGlossaryActivityCreation";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testStudentEditGlossary".equals(testMethod.getName())) {
             System.out.println("Inside testStudentEditGlossary");
-            DependentMethods = new String[1];
+            DependentMethods = new String[3];
             DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateGlossaryEntry";
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateGlossaryCategory";
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentCreateGlossaryEntry";
+            DependentMethods[1] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateGlossaryCategory";
+            DependentMethods[2] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentCreateGlossaryEntry";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentSubmitAssignment".equals(testMethod.getName())
+             || "testStudentCreateNoteOnCourseWall".equals(testMethod.getName())
+             || "testStudentVerifyResources".equals(testMethod.getName())
+             || "testStudentVerifyFooters".equals(testMethod.getName())
+             || "testStudentVerifyResume".equals(testMethod.getName())
+             || "testStudentVerifyPersonalInformation".equals(testMethod.getName())
+             || "testStudentVerifyFeedbackWindow".equals(testMethod.getName())
+             || "testStudentVerifySettings".equals(testMethod.getName())
+             || "testStudentVerifyCalendar".equals(testMethod.getName())
+             || "testStudentPostHTMLOnOwnWall".equals(testMethod.getName())
+             || "testStuentViewRevealPasswordButtonForAllInOneAssignemnt".equals(testMethod.getName())
+             || "testStudentVerifyRightSidebarOfCourseWorkPage".equals(testMethod.getName())
+             || "testStudentVerifyReadOnlyAccessToOfflineActivity".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testStudentForceChangePasswordOnFirstLogin";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentViewTeachersEmailAddressAsAllowEveryoneToSeeEmailAddressIsSelected".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentViewTeachersEmailAddressAsAllowEveryoneToSeeEmailAddressIsSelected");
+            DependentMethods = new String[2];
+            DependentMethods[0] = "testStudentConfirmContactRequest";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
     }

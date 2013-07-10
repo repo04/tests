@@ -25,12 +25,12 @@ public class Pes_CleanTestData extends BaseClass {
 
     /**
      * The annotated method will be run before the first test method in the
-     * current class is invoked, Student logs in, PES Admin Logs in
+     * current class is invoked, Student logs in, Pes Admin Logs in
      *
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLogIn() throws Exception {
+    public void testPesAdminLogIn() throws Exception {
         a.login("pesAdmin");
     }
 
@@ -44,14 +44,14 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"users.unAssignRole"})
-    public void testPESAdminUnerolUsers(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
+    public void testPesAdminUnerolUsers(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.unenrolUsers(studentUserName, teacherUserName);
     }
     
     /**
-     * PES Admin verify Student post deletion from Working Group
+     * Pes Admin verify Student post deletion from Working Group
      * 
      * @param workingGroupName
      * @param studentUrlPostOnWorkingGroup
@@ -59,7 +59,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "WorkingGroupStudentURLPost", dataProviderClass = Student_LiveSession_SocialGroup_GoogleDoc.class,
           groups = {"regressionSmoke", "workingGroup.pesAdminDeleteAndVerifyStudentPostFromWorkingGroup"})
-    public void testPESAdminDeleteAndVerifyStudentPostFromWorkingGroup(String workingGroupName, String studentUrlPostOnWorkingGroup) throws Exception {
+    public void testPesAdminDeleteAndVerifyStudentPostFromWorkingGroup(String workingGroupName, String studentUrlPostOnWorkingGroup) throws Exception {
         a.navigateToWorkingGroups();
         a.navigateToGroupWall(workingGroupName);
         a.deletePost(studentUrlPostOnWorkingGroup);
@@ -76,7 +76,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseWorkingGroupUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"workingGroup.removeMembers"})
-    public void testPESAdminRemoveMembersFromWorkngGroup(String groupCourseName, String workingGroupName, String teacherUserName, String studentUserName) throws Exception {
+    public void testPesAdminRemoveMembersFromWorkngGroup(String groupCourseName, String workingGroupName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsrLnkXPATH"), 60);
@@ -128,7 +128,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "WorkingGroup", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "workingGroup.delete"})
-    public void testPESAdminDeleteWorkingGroup(String workingGroupName) throws Exception {
+    public void testPesAdminDeleteWorkingGroup(String workingGroupName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWorkingGroup(workingGroupName);
         a.deleteWorkingGroup(workingGroupName);
@@ -141,7 +141,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "fullSmoke", "users.delete"})
-    public void testPESAdminDeleteUsers(String teacherUser, String studentUser) throws Exception {
+    public void testPesAdminDeleteUsers(String teacherUser, String studentUser) throws Exception {
         a.navigateToMyContacts();
         a.deleteUsers(teacherUser, studentUser);
     }
@@ -155,7 +155,7 @@ public class Pes_CleanTestData extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseAnnouncement", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
           groups = {"regressionSmoke", "wall.pesDeleteAnnouncement"})
-    public void testPESAdminDeleteAnnouncement(String groupCourseName, String pesTextAnnouncementCoursePost) throws Exception {
+    public void testPesAdminDeleteAnnouncement(String groupCourseName, String pesTextAnnouncementCoursePost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.deletePost(pesTextAnnouncementCoursePost);
@@ -194,7 +194,7 @@ public class Pes_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testPESAdminLogOut() throws Exception {
+    public void testPesAdminLogOut() throws Exception {
         a.logOut();
     }
 

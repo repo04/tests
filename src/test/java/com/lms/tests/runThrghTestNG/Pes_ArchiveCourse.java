@@ -19,12 +19,12 @@ public class Pes_ArchiveCourse {
     
     /**
      * The annotated method will be run before the first test method in the
-     * current class is invoked, Student logs in, PES Admin Logs in
+     * current class is invoked, Student logs in, Pes Admin Logs in
      *
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLogIn() throws Exception {
+    public void testPesAdminLogIn() throws Exception {
         a.login("pesAdmin");
     }
     
@@ -35,7 +35,7 @@ public class Pes_ArchiveCourse {
      */
     @Test(dataProvider = "CourseName", dataProviderClass=ContentAdmin_Course_GroupCourseCreation.class,
           groups = {"regressionSmoke", "fullSmoke", "course.archive"})
-    public void testPESAdminArchiveCourse(String courseName) throws Exception {
+    public void testPesAdminArchiveCourse(String courseName) throws Exception {
         a.archiveCourse(courseName);
     }
     
@@ -46,7 +46,7 @@ public class Pes_ArchiveCourse {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testPESAdminLogOut() throws Exception {
+    public void testPesAdminLogOut() throws Exception {
         a.logOut();
     }
     

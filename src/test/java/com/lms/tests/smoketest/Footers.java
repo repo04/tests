@@ -177,7 +177,7 @@ public class Footers extends BaseClass {
                         + "anything within it, please email us at privacy@2U.com or write to us "
                         + "at Semester Online Privacy Officer, 8201 Corporate Drive, "
                         + "Suite 190, Landover, MD 20785.";
-                aboutUS = "ABOUT SEMESTER ONLINE";                
+                aboutUS = "Imagine a new way to experience college…";
                 termsOfAgreement = "SEMESTER ONLINE WEBSITE TERMS OF USE AGREEMENT";
                 contactUSLink = "StudentSupport@semesteronline.org";
                 contactUSTollFree = "855-896-4493";
@@ -233,6 +233,7 @@ public class Footers extends BaseClass {
                     if (i == 4) {
                         switch (program) {
                             case "wu-llm":
+                            case "corp-son":
                                 ip.isTextPresentByXPATH(driver, "//p", aboutUS);
                                 break;
                             default:

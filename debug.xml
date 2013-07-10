@@ -51,12 +51,22 @@
             </define>            
             <define name="Users">
                 <include name="prerequisite"/>
-                <include name="users.creation"/>
-                <include name="users.assignRole"/>
+                <include name="users.pesAdminVerifyUsersDefaultTimeZone"/>
+                <include name="users.pesAdminVerifySectionsOfUserCreationPage"/>
+                <include name="users.pesAdminVerifyAuthenticationMethodValues"/>
+                <include name="users.pesAdminVerifyDefaultUnmaskPasswordCheckBoxState"/>
+                <include name="users.pesAdminVerifyUnmaskPasswordFunctionality"/>
+                <include name="users.pesAdminVerifyListOfInterestsFieldUpdation"/>
+                <include name="users.pesAdminVerifyBrowseListOfUsersPage"/>
+                <!--include name="users.studentForceChangePasswordOnFirstLogin"/>
+                <include name="users.pesAdminAssignRole"/>
+                <include name="users.pesAdminCreateUsers"/>
+                <include name="users.studentViewTeachersEmailAddress"/>
+                <include name="users.teacherVerifyStudentsEmailAddressIsNotVisible"/>                
                 <include name="users.unAssignRole"/>
                 <include name="users.delete"/>
-                <!--include name="users.coordinatorCreation"/>
-                <include name="users.assignRoleToCoordinator"/-->         
+                <include name="users.coordinatorCreation"/>
+                <include name="users.assignRoleToCoordinator"/-->
             </define>
             <define name="WorkingGroup">
                 <include name="prerequisite"/>
@@ -106,8 +116,8 @@
                 <include name="wall.coursePostCommentsOff"/>
                 <include name="wall.courseAnnouncementPost"/>
                 <include name="wall.teacherPostsOnProfileCourseWall"/>
-                <include name="wall.teacherVerifyPESCoursePosts"/> 
-                <include name="wall.studentVerifyPESCoursePosts"/>
+                <include name="wall.teacherVerifyPesCoursePosts"/> 
+                <include name="wall.studentVerifyPesCoursePosts"/>
                 <include name="wall.studentCommentOnTeacherCoursePost"/> 
                 <include name="wall.studentRecommendPost"/>
                 <include name="wall.studentHTMLWallPost"/>   

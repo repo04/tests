@@ -191,11 +191,11 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Person/People you most admire:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "What is your hometown?");
                 ip.isTextPresentByXPATH(driver, "//div[16]", "Educational Information");
-                ip.isTextPresentByXPATH(driver, "//div[18]/div/div", "What School do you attend?");
-                ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "What's your major(s)?");
-                ip.isTextPresentByXPATH(driver, "//div[18]/div[3]/div", "What internships have you had?");
-                ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "Why did you decide to take Semester Online?");
-                ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Estimated graduation date");                
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "What School do you attend?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[3]/div", "What's your major(s)?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[4]/div", "What internships have you had?");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[5]/div", "Why did you decide to take Semester Online/I enrolled in Semester Online because…:");
+                ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Estimated Graduation Date");                
         }
     }
 }

@@ -4,6 +4,8 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
+import com.lms.tests.smoketest.Utility;
 import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -11,7 +13,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /**
  * Student logs in, Find & Join Teacher's Social Group, Post/Verify URL on
@@ -67,6 +68,21 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     }
 
     /**
+     * Student Change Password from Force Password Change Page on First Time
+     * Login
+     *
+     * @throws Exception
+     */
+    @Test(groups = {"regressionSmoke", "users.studentForceChangePasswordOnFirstLogin"})
+    public void testStudentForceChangePasswordOnFirstLogin() throws Exception {
+        a.forceChangePasswordOnFirstLogin();
+        //Bug -- LMSII-3484
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("lnkToHomeXPATH"));
+        Utility.waitForAlertToBeAccepted(driver, 60, "Your password has been successfully changed");
+        Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));
+    }
+
+    /**
      * Find & Join Teacher's Social Group
      *
      * @throws Exception
@@ -107,7 +123,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     }
 
     /**
-     * Student verifies PES posts on Course Wall
+     * Student verifies Pes posts on Course Wall
      *
      * @param groupCourseName
      * @param pesTextCourseSectionPost
@@ -116,8 +132,8 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCoursePesCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-    groups = {"regressionSmoke", "wall.studentVerifyPESCoursePosts"})
-    public void testStudentVerifyPESCoursePost(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
+    groups = {"regressionSmoke", "wall.studentVerifyPesCoursePosts"})
+    public void testStudentVerifyPesCoursePost(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.verifyCoursePost(pesTextCourseSectionPost, pesTxtCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
@@ -238,7 +254,6 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      a.selectGroupCourse(groupCourseName);
      a.verifySyllabusActivity();
      }*/
-    
     /**
      * Student verify Resume
      *
@@ -282,7 +297,6 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      a.navigateToMyHome();
      a.verifyHelpWindow();
      }*/
-    
     /**
      * Verify Settings page specific to user role
      *
@@ -337,33 +351,6 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.confirmContactRequest(teacherUserName);
     }
 
-    //The below method affects all system users - so currently we are skipping this
-    /**
-     * Student verify Support Message - Currently commented as it affects all
-     * system users
-     *
-     * @throws Exception
-     */
-    /*
-     @Test(groups = {"2torAdministrativeBlock.studentSupportMessageVerification"})
-     public void testStudentVerifySupportMessage() throws Exception {
-     a.navigateToStudentSupportPage();
-     a.studentVerificationSupportMessage();
-     } */
-    
-    //The below method affects all system users - so currently we are skipping this
-    /**
-     * Student verify Login Message - Currently commented as it affects all
-     * system users
-     *
-     * @throws Exception
-     */
-    /*
-     @Test(groups = {"2torAdministrativeBlock.studentLoginMessageVerification"})
-     public void testStudentVerifyLoginMessage() throws Exception {
-     a.studentVerificationLoginMessage();
-     } */
-    
     /**
      * Student post HTML on own Wall
      */
@@ -383,7 +370,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseAllInOneActivityNameWithRevealPassword", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "content.studentViewRevealPasswordButtonForAllInOne"})
-    public void testStuentViewRevealPasswordButtonForAllInOneAssignemnt(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
+    public void testStudentViewRevealPasswordButtonForAllInOneAssignemnt(String groupCourseName, String allInOneAssignmentActivityNameWithRevealPassword) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
@@ -421,6 +408,48 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.verifyRightSidebarOfCourseWorkPage();
     }
 
+    /**
+     * Verify Email Address Is Visible To Student When "Allow everyone to see my
+     * Email address" Is Selected For Teacher
+     *
+     * @param teacherUserName
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
+    groups = {"users.studentViewTeachersEmailAddress"})
+    public void testStudentViewTeachersEmailAddressAsAllowEveryoneToSeeEmailAddressIsSelected(String teacherUserName, String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.verifyUsersEmailAddressIsVisibleAsAllowEveryoneToSeeEmailAddressIsSelected(teacherUserName);
+    }
+
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Student verify Support Message - Currently commented as it affects all
+     * system users
+     *
+     * @throws Exception
+     */
+    /*
+     @Test(groups = {"2torAdministrativeBlock.studentSupportMessageVerification"})
+     public void testStudentVerifySupportMessage() throws Exception {
+     a.navigateToStudentSupportPage();
+     a.studentVerificationSupportMessage();
+     } */
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Student verify Login Message - Currently commented as it affects all
+     * system users
+     *
+     * @throws Exception
+     */
+    /*
+     @Test(groups = {"2torAdministrativeBlock.studentLoginMessageVerification"})
+     public void testStudentVerifyLoginMessage() throws Exception {
+     a.studentVerificationLoginMessage();
+     } */
+    
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run

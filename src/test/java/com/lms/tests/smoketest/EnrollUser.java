@@ -4,6 +4,7 @@
  */
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import com.thoughtworks.selenium.SeleneseTestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -12,7 +13,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.lms.tests.runThrghTestNG.BaseClass;
 
 public class EnrollUser extends BaseClass {
 
@@ -141,25 +141,33 @@ public class EnrollUser extends BaseClass {
 
         driver.findElement(By.xpath(xpv.getTokenValue("lnkCrsPrsntXPATH"))).click();
 
+        String roleXpath, groupCourseXpath;
+        if ("4".equals(userRole) && test.equals("regressionTests")) {
+            roleXpath = "//tr[3]/td[2]/a";
+            groupCourseXpath = "//tr[4]/td[2]/a";
+        } else {
+            roleXpath = "//td[2]/a";
+            groupCourseXpath = "//tr[3]/td[2]/a";
+        }
         switch (userRole) {
 
             case "4":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Non-editing teacher");
+                ip.isTextPresentByXPATH(driver, roleXpath, "Non-editing teacher");
                 break;
 
             case "5":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Student");
+                ip.isTextPresentByXPATH(driver, roleXpath, "Student");
                 break;
 
             case "9":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Course Coordinator");
+                ip.isTextPresentByXPATH(driver, roleXpath, "Course Coordinator");
                 break;
 
             default:
                 SeleneseTestBase.fail("'Non-editing teacher(4)'/'Student(5)' not found in userRole: " + userRole);
         }
 
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrGrpCrsXPATH"), groupCourse);
+        ip.isTextPresentByXPATH(driver, groupCourseXpath, groupCourse);
     }
 
     /**
