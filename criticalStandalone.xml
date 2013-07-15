@@ -228,5 +228,33 @@
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
         </classes>
+    </test>
+    <test name="CriticalTests_SON" preserve-order="true">
+        <parameter name="url" value="https://corp-son-lms-standalone-prod.2u.com"/>
+        <parameter name="program" value="corp-son"/>
+        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
+        <parameter name="forumActivityName" value="AutoForum"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
+        <parameter name="pageActivityName" value="AutoPage"/>
+        <parameter name="glossaryActivityName" value="AutoGlossary"/>
+        <parameter name="session" value="CrtclSuite_SON-StdAln"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+        </classes>
     </test>    
 </suite>

@@ -172,5 +172,26 @@
             <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
         </classes>
+    </test>
+    <test name="CriticalTests_SON" preserve-order="true">
+        <parameter name="url" value="https://experience.semesteronline.org"/>
+        <parameter name="program" value="corp-son"/>
+        <parameter name="groupCourseName" value="AutoGroupCourse"/>
+        <parameter name="quizActivityName" value="AutoQuiz"/>
+        <parameter name="session" value="CriticalTests_SON"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+        </classes>
     </test>    
 </suite>
