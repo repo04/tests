@@ -548,8 +548,11 @@ public class Activity extends BaseClass {
         ip.isTextPresentByCSS(driver, "#confirmBox > p",
                 "Are you sure that you wish to save and release the grade & feedback for this assignment?");
         driver.findElement(By.cssSelector("a.button.green")).click();
-        Utility.waitForAlertToBeAccepted(driver, 60, "Your grading changes have been saved.");
-        driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
+        ip.isTextPresentByCSS(driver, "#confirmBox > p",
+                "Your grading changes have been saved.");
+        driver.findElement(By.cssSelector("a.button.green")).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"), 60);
+        Utility.actionBuilderClick(driver, xpv.getTokenValue("lnkLftPnlGradeXPATH"));
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[4]/span", "1 of 1");
         driver.findElement(By.xpath("//tr[" + x + "]/td/a")).click();
@@ -584,8 +587,17 @@ public class Activity extends BaseClass {
         while (true) {
             driver.findElement(By.xpath("//tr[" + x + "]/td/span/a/span")).click();
             int y = x + 1;
-            WebElement elm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[6]/span/a")));
+            WebElement elm;
+            switch (program) {
+                case "usc-mat":
+                case "usc-msw":
+                    elm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[6]/span/a")));
+                    break;
+                default:
+                    elm = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[5]/span/a")));
+            }
             if (z < 6) {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", elm);
                 ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", elm);
@@ -799,8 +811,8 @@ public class Activity extends BaseClass {
     }
 
     /**
-     * Verify coursework unit is Expandable or not while changing 
-     * 'Disable date in section' Field 
+     * Verify coursework unit is Expandable or not while changing 'Disable date
+     * in section' Field
      *
      */
     public void courseworkUnitExpandableOrNotWhileChangingDisableDateField() {
