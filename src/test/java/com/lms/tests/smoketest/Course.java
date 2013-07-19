@@ -1,5 +1,6 @@
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
@@ -8,7 +9,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.lms.tests.runThrghTestNG.BaseClass;
 
 public class Course extends BaseClass {
 

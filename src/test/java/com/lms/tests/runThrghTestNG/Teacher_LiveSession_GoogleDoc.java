@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
 import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -11,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /**
  *
@@ -23,6 +23,7 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
 
     static String[][] googleDocumentNameArray = new String[1][1];
     static String[][] filesArray = new String[1][3];
+    static String[][] teacherAddFeedbackToStudentSubmission = new String[1][1];
     Actions a = new Actions();
 
     @DataProvider(name = "GoogleDocument")
@@ -54,6 +55,19 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
     public static Iterator<Object[]> GroupCourseFiles(ITestContext context) throws Exception {
         System.out.println("init GroupCourseFiles");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), Files(context));
+    }
+    
+    @DataProvider(name = "GroupCourseAssignmentReviewText")
+    public static Iterator<Object[]> GroupCourseAssignmentReviewText(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseAssignmentReviewText");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), ContentAdmin_Course_GroupCourseCreation.AssignmentName(context),
+                Student_JoinSocialGroup_Post.StudentAllInOneReviewText(context));
+    }
+    
+    @DataProvider(name = "TeacherFeedbackToStudentSubmissionText")
+    public static Object[][] TeacherFeedbackToStudentSubmissionText(ITestContext context) throws Exception {
+        System.out.println("init TeacherFeedbackToStudentSubmissionText");
+        return (teacherAddFeedbackToStudentSubmission);
     }
 
     /**
@@ -112,21 +126,22 @@ public class Teacher_LiveSession_GoogleDoc extends BaseClass {
         a.navigateToActivityReport();
         a.verifyActivities(forumActivityName, quizActivityName, allInOneAssignmentActivityName, pageActivityName);
     }
-
+    
     /**
-     * Grade Assignment
-     *
+     * 
      * @param groupCourseName
      * @param allInOneAssignmentActivityName
-     * @throws Exception
+     * @param reviewAssignmentText
+     * @throws Exception 
      */
-    @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "fullSmoke", "assignment.grade"})
-    public void testTeacherGradeAssignment(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
+    @Test(dataProvider = "GroupCourseAssignmentReviewText", groups = {"regressionSmoke", "fullSmoke", "allinone.teacherReviewAndAddFeedbackOnSubmissionPage"})
+    public void testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage(String groupCourseName, String allInOneAssignmentActivityName, String reviewAssignmentText) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
-        a.navigateToGrades();
-        a.gradeAssignment(allInOneAssignmentActivityName);
+        a.navigateToActivityReport();
+        a.navigateToActivity(allInOneAssignmentActivityName);
+        teacherAddFeedbackToStudentSubmission[0][0] = a.reviewAndAddFeedbackToAllInOneOnSubmissionPage(reviewAssignmentText);
+        Reporter.log("teacherAddFeedbackToStudentSubmissionText: " + teacherAddFeedbackToStudentSubmission[0][0], true);
     }
 
     /**

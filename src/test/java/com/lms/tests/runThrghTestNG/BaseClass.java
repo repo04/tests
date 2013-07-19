@@ -4,7 +4,12 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.IsPresent;
+import com.lms.tests.smoketest.Utility;
+import com.lms.tests.smoketest.XpathValues;
 import java.io.File;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,17 +17,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
-import com.lms.tests.smoketest.IsPresent;
-import com.lms.tests.smoketest.Utility;
-import com.lms.tests.smoketest.XpathValues;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 //@Listeners({TestNGC.class})
 public class BaseClass {

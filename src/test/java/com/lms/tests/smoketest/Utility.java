@@ -390,14 +390,15 @@ public class Utility extends BaseClass {
         int x = 1;
         loop:
         for (WebElement frame : iframes) {
-            System.out.println("Iframe ID: " + frame.getAttribute("id"));
+            String iframeID = frame.getAttribute("id");
+            System.out.println("Iframe ID: " + iframeID);
             if (x == iframeIndex) {
-                driver.switchTo().frame(frame.getAttribute("id"));
+                driver.switchTo().frame(iframeID);
                 break loop;
             }
             x++;
         }
-
+        
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), textInIframe);
@@ -459,12 +460,13 @@ public class Utility extends BaseClass {
      */
     public static String getTextFromContentEditableIframe(WebDriver driver, int iframeIndex) {
         List<WebElement> iFrames = driver.findElements(By.tagName("iframe"));
-        
+        System.out.println("iFrames count:" + iFrames.size());
         int x = 1;
         for (WebElement iframe : iFrames) {
-            System.out.println("Iframe ID: " + iframe.getAttribute("id"));
+            String iframeID = iframe.getAttribute("id");
+            System.out.println("Iframe ID: " + iframeID);
             if (x == iframeIndex) {
-                driver.switchTo().frame(iframe.getAttribute("id"));
+                driver.switchTo().frame(iframeID);
             }
             x++;
         }

@@ -756,13 +756,32 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Submit Assignment
-     *
-     * @param allInOneAssignmentActivityName
+     * 
      */
-    public void submitAssignment(String allInOneAssignmentActivityName) {
+    public String uploadFileAndSendAllInOneForReview() {
         Activity actvty = new Activity();
-        actvty.submitAssignment(allInOneAssignmentActivityName);
+        actvty.uploadFileAndSendAllInOneForReview();
+        return actvty.getAssignmentText();
+    }
+    
+    /**
+     * 
+     * @param reviewAssignmentText 
+     */
+    public String reviewAndAddFeedbackToAllInOneOnSubmissionPage(String reviewAssignmentText) {
+        Activity actvty = new Activity();
+        actvty.reviewAndAddFeedbackToAllInOneOnSubmissionPage(reviewAssignmentText);
+        return actvty.getAssignmentText();
+    }
+
+    /**
+     * 
+     * @param feedbackAssignmentText 
+     */
+    public String updateAllInOneBasedOnFeedbackAndSubmitForGrading(String feedbackAssignmentText) {
+        Activity actvty = new Activity();
+        actvty.updateAllInOneBasedOnFeedbackAndSubmitForGrading(feedbackAssignmentText);
+        return actvty.getAssignmentText();
     }
 
     /**
@@ -770,29 +789,40 @@ public class Actions extends BaseClass {
      *
      * @param quizActivityName
      */
-    public void gradeAssignment(String allInOneAssignmentActivityName) {
+    public String verifyStudentsAllInOneFinalSubmissionThenAddGradeAndCommentOnGradePage(String allInOneAssignmentActivityName, String studentAssignmentGradingText) {
         Activity actvty = new Activity();
-        actvty.gradeAssignment(allInOneAssignmentActivityName);
+        actvty.verifyStudentsAllInOneFinalSubmissionThenAddGradeAndCommentOnGradePage(allInOneAssignmentActivityName, studentAssignmentGradingText);
+        return actvty.getAssignmentText();
     }
 
     /**
-     * Verify Assignment Grade
-     *
+     * 
      * @param allInOneAssignmentActivityName
+     * @param assignmentGradedText 
      */
-    public void verifyAssignmentGrade(String allInOneAssignmentActivityName) {
+    public void verifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(String allInOneAssignmentActivityName, String assignmentGradedText) {
         Activity actvty = new Activity();
-        actvty.verifyAssignmentGrade(allInOneAssignmentActivityName);
+        actvty.verifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(allInOneAssignmentActivityName, assignmentGradedText);
     }
 
     /**
-     * Allow Assignment to be resubmitted
-     *
+     * 
      * @param allInOneAssignmentActivityName
+     * @param studentUserName 
      */
-    public void allowResubmitAssignment(String allInOneAssignmentActivityName, String studentUserName) {
+    public String allowStudentToResubmitAllInOne(String allInOneAssignmentActivityName, String studentUserName) {
         Activity actvty = new Activity();
-        actvty.allowResubmitAssignment(allInOneAssignmentActivityName, studentUserName);
+        actvty.allowStudentToResubmitAllInOne(allInOneAssignmentActivityName, studentUserName);
+        return actvty.getAssignmentText();
+    }
+    
+    /**
+     * 
+     * @param resubmissionText 
+     */
+    public void verifyAllInOneCanBeResubmitted(String resubmissionText) {
+        Activity actvty = new Activity();
+        actvty.verifyAllInOneCanBeResubmitted(resubmissionText);
     }
 
     /**
@@ -1117,7 +1147,7 @@ public class Actions extends BaseClass {
                 }
             }
             driver.switchTo().window(HandleBefore);
-        }        
+        }
     }
 
     /**
@@ -1384,7 +1414,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock. teacherSupportSettingsLoginMessage();
      } */
-    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block -Sticky Notes Post Text
@@ -1394,7 +1423,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentSupportSettingsStickyNotesPostText();
      } */
-    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block -Sticky Notes Post URL
@@ -1404,7 +1432,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentSupportSettingsStickyNotesPostURL();
      } */
-    
     /**
      * Verify the Student Support Message previously created by pes admin
      */
@@ -1413,7 +1440,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentVerificationSupportMessage();
      } */
-    
     /**
      * Verify the student Login Message previously created by pes admin
      */
@@ -1422,7 +1448,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.studentVerificationLoginMessage();
      } */
-    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Verify the faculty Login Message previously created by pes admin
@@ -1432,7 +1457,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.facultyVerificationLoginMessage();
      } */
-    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Reverify the Login message
@@ -1442,7 +1466,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.loginMessageAlertNotPresent();
      } */
-    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Pes admin disables the support message
@@ -1452,7 +1475,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.disableStudentSupportMessageByPesAdmin();
      } */
-    
     //The below method affects all system users - so currently we are skipping this
     /**
      * Pes admin disables the Login message
@@ -1462,7 +1484,6 @@ public class Actions extends BaseClass {
      AdministrationBlock ablock=new AdministrationBlock();
      ablock.disableLoginMessageByPesAdmin();
      } */
-    
     /**
      * Navigate To Student Support page
      */
@@ -1471,7 +1492,6 @@ public class Actions extends BaseClass {
      driver.findElement(By.linkText("Student Support")).click();
      ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportPageHeadingXPATH"), "Student Support");
      }*/
-    
     /**
      * Create Offline Activity
      *
@@ -1565,30 +1585,30 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * 
-     * @param allInOneAssignmentActivityName 
+     *
+     * @param allInOneAssignmentActivityName
      */
     public void navigateToActivity(String allInOneAssignmentActivityName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
     }
 
     /**
-     * 
+     *
      */
-    public void verifyAssignmentHasNoSubmission() {
-        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]", 
+    public void verifyAllInOneHasNoSubmission() {
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]",
                 "There are no student submissions ready to review or grade.");
         driver.findElement(By.linkText("Submissions")).click();
-        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]", 
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]",
                 "There are no student submissions ready to review or grade.");
     }
 
     /**
-     * 
-     * @param allInOneAssignmentActivityName 
+     *
+     * @param allInOneAssignmentActivityName
      */
-    public void verifyAssignmentCannotBeGraded(String allInOneAssignmentActivityName) {
+    public void verifyAllInOneCannotBeGraded(String allInOneAssignmentActivityName) {
         Activity activity = new Activity();
-        activity.verifyAssignmentCannotBeGraded(allInOneAssignmentActivityName);
+        activity.verifyAllInOneCannotBeGraded(allInOneAssignmentActivityName);
     }
 }

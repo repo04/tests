@@ -247,15 +247,15 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     }
     
     @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-    groups = {"regressionSmoke", "fullSmoke", "assignment.teacherVerifyNoSubmissionAndCannotBeGraded"})
-    public void testTeacherVerifyAssignmentHasNoSubmissionAndCannotBeGraded(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
+    groups = {"regressionSmoke", "fullSmoke", "allinone.teacherVerifyNoSubmissionAndCannotBeGraded"})
+    public void testTeacherVerifyAllInOneHasNoSubmissionAndCannotBeGraded(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
         a.navigateToActivity(allInOneAssignmentActivityName);
-        a.verifyAssignmentHasNoSubmission();
+        a.verifyAllInOneHasNoSubmission();
         a.navigateToGrades();
-        a.verifyAssignmentCannotBeGraded(allInOneAssignmentActivityName);
+        a.verifyAllInOneCannotBeGraded(allInOneAssignmentActivityName);
     }
 
     /**

@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
 import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -11,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /**
  * Student logs in, Find & Join Teacher's Social Group, Post/Verify URL on
@@ -25,6 +25,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     static String[][] noteCourseNameArray = new String[1][1];
     static String[][] noteWallNameArray = new String[1][1];
     static String[][] studentGlossaryEntryArray = new String[1][1];
+    static String[][] studentSubmitAllInOneForReview = new String[1][1];
     String studentPostHTMLOnOwnWall;
     Actions a = new Actions();
 
@@ -48,6 +49,12 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     public static Object[][] StudentGlossaryEntryName(ITestContext context) throws Exception {
         System.out.println("init StudentGlossaryEntryName");
         return (studentGlossaryEntryArray);
+    }
+    
+    @DataProvider(name = "StudentAllInOneReviewText")
+    public static Object[][] StudentAllInOneReviewText(ITestContext context) throws Exception {
+        System.out.println("init StudentAllInOneReviewText");
+        return (studentSubmitAllInOneForReview);
     }
 
     /**
@@ -137,7 +144,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         a.recommendURLCoursePost(teacherUrlCoursePost);
     }
-
+    
     /**
      * Submit Assignment
      *
@@ -146,14 +153,16 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-    groups = {"regressionSmoke", "fullSmoke", "assignment.submit"})
-    public void testStudentSubmitAssignment(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
+    groups = {"regressionSmoke", "fullSmoke", "allinone.studentUploadFileAndSendForReview"})
+    public void testStudentUploadFileAndSendAllInOneForReview(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.submitAssignment(allInOneAssignmentActivityName);
+        a.navigateToActivity(allInOneAssignmentActivityName);
+        studentSubmitAllInOneForReview[0][0] = a.uploadFileAndSendAllInOneForReview();
+        Reporter.log("studentSubmitAllInOneForReviewText: " + studentSubmitAllInOneForReview[0][0], true);
     }
-
+    
     /**
      * Create Note on Course Wall
      *
