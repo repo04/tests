@@ -45,7 +45,7 @@ public class TestInvocation implements IInvokedMethodListener {
         // Checks For UNC-MPA and WU-LLM 
         if (!"setUp".equals(method.getName()) && (BaseClass.program.contains("unc-mpa") 
                 || BaseClass.program.contains("wu-llm") || BaseClass.program.contains("gwu-mph") 
-                || BaseClass.program.contains("au-mir"))) {
+                || BaseClass.program.contains("au-mir") || BaseClass.program.contains("sc-msn"))) {
             if ("testStudentSupportMobileURL".equals(method.getName()) || 
                     "testTeacherSupportMobileURL".equals(method.getName())) {
                 System.out.println("Skipping Test Method");

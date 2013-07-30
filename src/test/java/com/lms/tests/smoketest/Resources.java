@@ -4,11 +4,11 @@
  */
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import java.util.ArrayList;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import com.lms.tests.runThrghTestNG.BaseClass;
 
 /**
  *
@@ -175,6 +175,18 @@ public class Resources extends BaseClass {
                 href1 = "https://twitter.com/SemesterOnline";
                 href2 = "https://www.facebook.com/SemesterOnline";
                 addToHrefList(href1, href2);
+                break;
+            case "sc-msn":
+                count = 3;
+                resource1 = "Simmons College Facebook Page";
+                resource2 = "Simmons College Twitter Page";
+                resource3 = "Simmons College Youtube Page";
+                addToResourceList(resource1, resource2, resource3);
+
+                href1 = "https://www.facebook.com/SimmonsNursingOnline";
+                href2 = "https://twitter.com/SimmonsNursing";
+                href3 = "https://www.youtube.com/user/SimmonsNursingOnline";
+                addToHrefList(href1, href2, href3);
                 break;
             default:
                 Utility.illegalStateException("No program available: " + program);

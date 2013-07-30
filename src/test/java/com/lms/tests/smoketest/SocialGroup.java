@@ -43,6 +43,7 @@ public class SocialGroup extends BaseClass {
             case "au-mir":
             case "gwu-mph":
             case "corp-son":
+            case "sc-msn":
                 groupMemberName = "student";
         }
 
@@ -173,10 +174,10 @@ public class SocialGroup extends BaseClass {
         Utility.waitForAlertToBeAccepted(driver, 60, "Do you really want to delete this group?");
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + studentSocialGroupName + "')]")));
     }
-    
+
     /**
      * Verify post exits on Social Group wall
-     * 
+     *
      * @param studentUrlPostOnTeacherSocialGroup
      */
     public void verifyPostOnSocialGroupWall(String studentUrlPostOnTeacherSocialGroup) {
