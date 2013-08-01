@@ -19,6 +19,7 @@
         <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
         <parameter name="allInOneAssignmentActivityNameWithRevealPassword" value="AutoAllInOnePasswordActivity"/>
         <parameter name="offlineActivityName" value="AutoOfflineActivity"/>
+        <parameter name="studentUserName" value="autostudent1"/>
          
         <groups>
             <define name="Course_GroupCourse">
@@ -42,12 +43,16 @@
                 <include name="prerequisite"/>
                 <include name="activities.submitQuiz"/>          
             </define>
-            <define name="Assignment_Grade">
+            <define name="AllInOne">
                 <include name="prerequisite"/>
-                <include name="assignment.submit"/>
-                <include name="assignment.grade"/>
-                <include name="assignment.verifyGrade"/>
-                <include name="assignment.allowResubmit"/>
+                <include name="allinone.teacherVerifyNoSubmissionAndCannotBeGraded"/>
+                <include name="allinone.studentUploadFileAndSendForReview"/>
+                <include name="allinone.teacherReviewAndAddFeedbackOnSubmissionPage"/>
+                <include name="allinone.studentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading"/>
+                <include name="allinone.teacherVerifyStudentsGradedSubmissionThenAddGradeAndCommentOnGradePage"/>
+                <include name="allinone.StudentVerifyGradeAndTeachersCommentOnSubmissionAndGradePage"/>
+                <include name="allinone.teacherAllowStudentToResubmit"/>
+                <include name="allinone.studentVerifyItCanBeResubmitted"/>
             </define>            
             <define name="Users">
                 <include name="prerequisite"/>
@@ -66,7 +71,9 @@
                 <include name="users.unAssignRole"/>
                 <include name="users.delete"/>
                 <include name="users.coordinatorCreation"/>
-                <include name="users.assignRoleToCoordinator"/-->
+                <include name="users.assignRoleToCoordinator"/>
+                <include name="users.coordinatorCreation"/>
+                <include name="users.assignRoleToCoordinator"/-->         
             </define>
             <define name="WorkingGroup">
                 <include name="prerequisite"/>
@@ -267,6 +274,8 @@
             <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>
             <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_ResubmitAllInOne"/>            
+            <class name="com.lms.tests.runThrghTestNG.Student_AllInOneEnable"/>
             <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
             <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
             <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>                        

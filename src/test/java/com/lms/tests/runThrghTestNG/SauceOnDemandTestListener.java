@@ -6,14 +6,10 @@ package com.lms.tests.runThrghTestNG;
 
 import com.saucelabs.common.SauceOnDemandAuthentication;
 import com.saucelabs.common.SauceOnDemandSessionIdProvider;
-import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.common.Utils;
+import com.saucelabs.saucerest.SauceREST;
 import com.saucelabs.testng.SauceOnDemandAuthenticationProvider;
 import java.io.File;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
-import org.testng.TestListenerAdapter;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +19,10 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.Augmenter;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.Reporter;
+import org.testng.TestListenerAdapter;
 
 /**
  *

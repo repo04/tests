@@ -52,7 +52,7 @@ public class Course extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsStrtDtYrXPATH")))).selectByValue("2012");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsEndDtDyXPATH")))).selectByValue("31");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctXrsEndDtMnthXPATH")))).selectByValue("7");
-        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsEndDtYrXPATH")))).selectByValue("2013");
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsEndDtYrXPATH")))).selectByValue("2014");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
 
         //Verify Course is created or not

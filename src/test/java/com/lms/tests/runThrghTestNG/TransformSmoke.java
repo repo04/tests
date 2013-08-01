@@ -235,6 +235,36 @@ public class TransformSmoke implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
+        
+        //GroupName = Files
+        if ("testTeacherUploadFilesInCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherUploadFilesInCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup.testPESAdminAssignRole";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherVerifyFilesInPortfolio".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherVerifyFilesInPortfolio");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testTeacherUploadFilesInCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentVerifyFilesInCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentVerifyFilesInCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherVerifyFilesInPortfolio";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherDeleteFiles".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherDeleteFiles");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherUploadFilesInCourse";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
 
         if ("testTeacherVerifyFullSmokeTestEmails".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherVerifyFullSmokeTestEmails");

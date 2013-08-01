@@ -1,10 +1,15 @@
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,11 +31,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
-import com.lms.tests.runThrghTestNG.BaseClass;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 
 public class Utility extends BaseClass {
 
@@ -390,14 +390,15 @@ public class Utility extends BaseClass {
         int x = 1;
         loop:
         for (WebElement frame : iframes) {
+            String iframeID = frame.getAttribute("id");
+            System.out.println("Iframe ID: " + iframeID);
             if (x == iframeIndex) {
-                System.out.println("Iframe ID: " + frame.getAttribute("id"));
-                driver.switchTo().frame(frame.getAttribute("id"));
+                driver.switchTo().frame(iframeID);
                 break loop;
             }
             x++;
         }
-
+        
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), textInIframe);
@@ -449,5 +450,31 @@ public class Utility extends BaseClass {
         } catch (Exception e) {
             System.err.println(e);
         }
+    }
+    
+    /**
+     * 
+     * @param driver
+     * @param iframeIndex
+     * @return 
+     */
+    public static String getTextFromContentEditableIframe(WebDriver driver, int iframeIndex) {
+        List<WebElement> iFrames = driver.findElements(By.tagName("iframe"));
+        System.out.println("iFrames count:" + iFrames.size());
+        int x = 1;
+        for (WebElement iframe : iFrames) {
+            String iframeID = iframe.getAttribute("id");
+            System.out.println("Iframe ID: " + iframeID);
+            if (x == iframeIndex) {
+                driver.switchTo().frame(iframeID);
+            }
+            x++;
+        }
+
+        //Switch focus
+        WebElement editableTxtArea = driver.switchTo().activeElement();
+        String text = editableTxtArea.getText();
+        driver.switchTo().defaultContent();
+        return text;
     }
 }

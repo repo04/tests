@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
 import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -11,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /* 
  * Content Admin logs in 
@@ -186,7 +186,6 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         offlineActivityFileNameArray[0][0] = "Offline activity.txt";
         return (offlineActivityFileNameArray);        
     }
-
     
     @DataProvider(name = "GroupCourseActivities")
     public static Iterator<Object[]> GroupCourseActivities(ITestContext context) throws Exception {
