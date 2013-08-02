@@ -7,6 +7,9 @@ package com.lms.tests.runThrghTestNG;
 import com.lms.tests.smoketest.Actions;
 import com.lms.tests.smoketest.Utility;
 import java.util.Iterator;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
@@ -51,7 +54,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         System.out.println("init StudentGlossaryEntryName");
         return (studentGlossaryEntryArray);
     }
-    
+
     @DataProvider(name = "StudentAllInOneReviewText")
     public static Object[][] StudentAllInOneReviewText(ITestContext context) throws Exception {
         System.out.println("init StudentAllInOneReviewText");
@@ -82,10 +85,19 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "users.studentForceChangePasswordOnFirstLogin"})
     public void testStudentForceChangePasswordOnFirstLogin() throws Exception {
-        a.forceChangePasswordOnFirstLogin();        
-        //Bug -- LMSII-3484
+        a.forceChangePasswordOnFirstLogin();
+        //Bug --> LMSII-3484
         Utility.clickByJavaScript(driver, xpv.getTokenValue("lnkToHomeXPATH"));
-        Utility.waitForAlertToBeAccepted(driver, 60, "Your password has been successfully changed");
+        boolean alert = false;
+        try {
+            new WebDriverWait(driver, 15).until(ExpectedConditions.alertIsPresent());
+            alert = true;
+        } catch (TimeoutException e) {
+            // Do Nothing
+        }
+        if (alert) {
+            Utility.waitForAlertToBeAccepted(driver, 60, "Your password has been successfully changed");
+        }
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));
     }
 
@@ -160,7 +172,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         a.recommendURLCoursePost(teacherUrlCoursePost);
     }
-    
+
     /**
      * Submit Assignment
      *
@@ -178,7 +190,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         studentSubmitAllInOneForReview[0][0] = a.uploadFileAndSendAllInOneForReview();
         Reporter.log("studentSubmitAllInOneForReviewText: " + studentSubmitAllInOneForReview[0][0], true);
     }
-    
+
     /**
      * Create Note on Course Wall
      *
@@ -383,7 +395,8 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToActivityReport();
-        a.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
+        a.navigateToActivity(allInOneAssignmentActivityNameWithRevealPassword);
+        a.viewRevealPasswordButtonForAllInOneAssignemnt();
     }
 
     /**

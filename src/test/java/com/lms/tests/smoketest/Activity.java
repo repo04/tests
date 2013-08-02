@@ -924,23 +924,20 @@ public class Activity extends BaseClass {
     }
 
     /**
-     * View Reveal Password button for All In One Assignment
-     *
-     * @param allInOneAssignmentActivityNameWithRevealPassword
+     * View Reveal Password button for All In One Assignment 
      */
-    public void viewRevealPasswordButtonForAllInOneAssignemnt(String allInOneAssignmentActivityNameWithRevealPassword) {
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityNameWithRevealPassword + "')]")).click();
+    public void viewRevealPasswordButtonForAllInOneAssignemnt() {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"), 60);
-        String text = driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div[2]/span")).getText();
+        String text = driver.findElement(By.xpath("//div[9]/div/p")).getText();
         if (!text.equals(xpv.getTokenValue("revealDocumentPasswordConfirmationText"))) {
             Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealDocumentPasswordConfirmationText")
                     + "- Actual: " + text);
         }
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealPasswordPopUpButtonXPATH"), 60);
-        text = driver.findElement(By.xpath("//div[2]/div/div/div/div/div/div[2]/span")).getText();
+        text = driver.findElement(By.xpath("//div[9]/div/p")).getText();
         if (!text.equals(xpv.getTokenValue("revealPasswordText"))) {
             Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealPasswordText")
                     + "- Actual: " + text);
@@ -1039,9 +1036,13 @@ public class Activity extends BaseClass {
         String yearSelected = driver.findElement(By.xpath(xpv.getTokenValue("courseUnitStartYearXPATH"))).getText();
         int yearSelectedStartDate = Integer.parseInt(yearSelected);
         int yearDifference = currentYear - yearSelectedStartDate;
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector(xpv.getTokenValue("courseUnitCalendarForwardButtonCSS"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector(xpv.getTokenValue("courseUnitCalendarBackwardButtonCSS"))));
         if (yearDifference > 0) {
             int x = yearDifference * 12;
-            for (int i = 0; i < x; i++) {
+            for (int i = 0; i < x; i++) {                
                 driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarForwardButtonCSS"))).click();
             }
         } else if (yearDifference < 0) {

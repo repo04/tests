@@ -18,6 +18,17 @@ public class Profile extends BaseClass {
         switch (role) {
             case "teacher":
                 ip.isTextPresentByXPATH(driver, "//span[3]", "Lecturer");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div/div", "Email:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[2]/div", "Website:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[3]/div", "Phone:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[4]/div", "Linkedin:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[5]/div", "Twitter:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[6]/div", "Skype:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[7]/div", "GTalk:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[8]/div", "Yahoo:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[9]/div", "MSN:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[10]/div", "AIM:");
+                ip.isTextPresentByXPATH(driver, "//div[11]/div", "Availability:");
                 if (!program.equalsIgnoreCase("sc-msn")) {
                     ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Female");
                 } else {
@@ -29,6 +40,17 @@ public class Profile extends BaseClass {
                 break;
             default:
                 ip.isTextPresentByXPATH(driver, "//span[3]", "Pupil");
+                ip.invisibilityOfElementByXpathWithText(driver, "//div[10]/div/div", "Email:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[1]/div", "Website:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[2]/div", "Phone:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[3]/div", "Linkedin:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[4]/div", "Twitter:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[5]/div", "Skype:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[6]/div", "GTalk:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[7]/div", "Yahoo:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[8]/div", "MSN:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[9]/div", "AIM:");
+                ip.isTextPresentByXPATH(driver, "//div[10]/div[10]/div", "Availability:");
                 if (!program.equalsIgnoreCase("sc-msn")) {
                     ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Male");
                 } else {
@@ -36,17 +58,6 @@ public class Profile extends BaseClass {
                 }
         }
 
-        ip.isTextPresentByXPATH(driver, "//div[10]/div/div", "Email:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[2]/div", "Website:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[3]/div", "Phone:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[4]/div", "Linkedin:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[5]/div", "Twitter:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[6]/div", "Skype:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[7]/div", "GTalk:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[8]/div", "Yahoo:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[9]/div", "MSN:");
-        ip.isTextPresentByXPATH(driver, "//div[10]/div[10]/div", "AIM:");
-        ip.isTextPresentByXPATH(driver, "//div[11]/div", "Availability:");
         ip.isTextPresentByXPATH(driver, "//div[12]", "Personal Information");
 
         switch (program) {

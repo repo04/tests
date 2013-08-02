@@ -9,14 +9,12 @@
         <parameter name="courseShortName" value="AutoCourse-DNT"/>        
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
-        <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
         <parameter name="forumActivityName" value="AutoForum"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
         <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActivityName" value="AutoPage"/>
         <parameter name="glossaryActivityName" value="AutoGlossary"/>
         <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
-        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
         <parameter name="allInOneAssignmentActivityNameWithRevealPassword" value="AutoAllInOnePasswordActivity"/>
         <parameter name="offlineActivityName" value="AutoOfflineActivity"/>
         <parameter name="studentUserName" value="autostudent1"/>
