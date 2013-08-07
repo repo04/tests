@@ -4,8 +4,8 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -223,7 +223,7 @@ public class Actions extends BaseClass {
      * Navigates to MyCourse Page
      */
     public void navigateToMyCourse() {
-        Utility.clickByJavaScriptUsingCSS(driver, xpv.getTokenValue("linkToCourseCSS"));
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));
     }
 
@@ -363,7 +363,7 @@ public class Actions extends BaseClass {
                 break;
 
             default:
-                Utility.clickByJavaScript(driver, "//*[contains(text(),'" + groupCourseName + "')]");
+                Utility.clickByJavaScriptUsingCSS(driver, xpv.getTokenValue("linkToCourseCSS"));
 
         }
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("lblCrsLftPnlCSS"), groupCourseName.toUpperCase());
