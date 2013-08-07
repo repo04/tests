@@ -73,18 +73,52 @@ public class TransformDebug implements IAnnotationTransformer {
         }
 
         //GroupName = Assignment_Grade
-        if ("testTeacherGradeAssignment".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherGradeAssignment");
+        if ("testStudentUploadFileAndSendAllInOneForReview".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentUploadFileAndSendAllInOneForReview");
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentSubmitAssignment";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherVerifyAllInOneHasNoSubmissionAndCannotBeGraded";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStudentVerifyAssignmentGrade".equals(testMethod.getName())
-                || "testTeacherAllowResubmitAssignment".equals(testMethod.getName())) {
+        if ("testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentUploadFileAndSendAllInOneForReview";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherVerifyStudentsAllInOneGradedSubmissionThenAddGradeAndCommentOnGradePage".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherGradeAssignment";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentVerifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherVerifyStudentsAllInOneGradedSubmissionThenAddGradeAndCommentOnGradePage";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testTeacherAllowStudentToResubmitAllInOne".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup.testStudentVerifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+        
+        if ("testStudentVerifyAllInOneCanBeResubmitted".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_ResubmitAllInOne.testTeacherAllowStudentToResubmitAllInOne";
             annotation.setDependsOnMethods(DependentMethods);
         }
 

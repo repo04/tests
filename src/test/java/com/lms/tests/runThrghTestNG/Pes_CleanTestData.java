@@ -4,14 +4,14 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
+import com.lms.tests.smoketest.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
-import com.lms.tests.smoketest.Utility;
 
 /**
  *

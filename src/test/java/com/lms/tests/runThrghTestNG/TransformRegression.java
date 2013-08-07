@@ -34,9 +34,9 @@ public class TransformRegression implements IAnnotationTransformer {
             Constructor testConstructor, Method testMethod) {
 
         if ("testContentAdminActivitiesCreation".equals(testMethod.getName())
-               || "testContentAdminGlossaryActivityCreation".equals(testMethod.getName())
-               || "testContentAdminCreateOfflineActivityWithHtmlFile".equals(testMethod.getName())
-               || "testContentAdminCreateAllInOneWithRevealPassword".equals(testMethod.getName())) {
+                || "testContentAdminGlossaryActivityCreation".equals(testMethod.getName())
+                || "testContentAdminCreateOfflineActivityWithHtmlFile".equals(testMethod.getName())
+                || "testContentAdminCreateAllInOneWithRevealPassword".equals(testMethod.getName())) {
             System.out.println("Inside testContentAdminActivitiesCreation");
             DependentMethods = new String[1];
             DependentMethods[0] = "testContentAdminCourseGroupCourseCreation";
@@ -65,7 +65,7 @@ public class TransformRegression implements IAnnotationTransformer {
             DependentMethods[1] = "testPesAdminAssignRole";
             annotation.setDependsOnMethods(DependentMethods);
         }
-        
+
         if ("testPesAdminVerifyListOfInterestsFieldUpdation".equals(testMethod.getName())
                 || "testPesAdminVerifyBrowseListOfUsersPage".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
@@ -146,18 +146,54 @@ public class TransformRegression implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testTeacherGradeAssignment".equals(testMethod.getName())
-                || "testTeacherAllowResubmitAssignment".equals(testMethod.getName())) {
-            System.out.println("Inside testTeacherGradeAssignment");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentSubmitAssignment";
+        //GroupName = Assignment_Grade
+        if ("testStudentUploadFileAndSendAllInOneForReview".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentUploadFileAndSendAllInOneForReview");
+            DependentMethods = new String[2];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherVerifyAllInOneHasNoSubmissionAndCannotBeGraded";
+            DependentMethods[1] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
-        if ("testStudentVerifyAssignmentGrade".equals(testMethod.getName())) {
+        if ("testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage".equals(testMethod.getName())) {
+            System.out.println("Inside testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentUploadFileAndSendAllInOneForReview";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading".equals(testMethod.getName())) {
+            System.out.println("Inside testStudentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherVerifyStudentsAllInOneGradedSubmissionThenAddGradeAndCommentOnGradePage".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherGradeAssignment";
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentVerifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherVerifyStudentsAllInOneGradedSubmissionThenAddGradeAndCommentOnGradePage";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testTeacherAllowStudentToResubmitAllInOne".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup.testStudentVerifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
+
+        if ("testStudentVerifyAllInOneCanBeResubmitted".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_ResubmitAllInOne.testTeacherAllowStudentToResubmitAllInOne";
             annotation.setDependsOnMethods(DependentMethods);
         }
 
@@ -506,26 +542,26 @@ public class TransformRegression implements IAnnotationTransformer {
             DependentMethods[2] = "com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post.testStudentCreateGlossaryEntry";
             annotation.setDependsOnMethods(DependentMethods);
         }
-        
-        if ("testStudentSubmitAssignment".equals(testMethod.getName())
-             || "testStudentCreateNoteOnCourseWall".equals(testMethod.getName())
-             || "testStudentVerifyResources".equals(testMethod.getName())
-             || "testStudentVerifyFooters".equals(testMethod.getName())
-             || "testStudentVerifyResume".equals(testMethod.getName())
-             || "testStudentVerifyPersonalInformation".equals(testMethod.getName())
-             || "testStudentVerifyFeedbackWindow".equals(testMethod.getName())
-             || "testStudentVerifySettings".equals(testMethod.getName())
-             || "testStudentVerifyCalendar".equals(testMethod.getName())
-             || "testStudentPostHTMLOnOwnWall".equals(testMethod.getName())
-             || "testStuentViewRevealPasswordButtonForAllInOneAssignemnt".equals(testMethod.getName())
-             || "testStudentVerifyRightSidebarOfCourseWorkPage".equals(testMethod.getName())
-             || "testStudentVerifyReadOnlyAccessToOfflineActivity".equals(testMethod.getName())) {
+
+        if ("testStudentCreateNoteOnCourseWall".equals(testMethod.getName())
+                || "testStudentVerifyResources".equals(testMethod.getName())
+                || "testStudentVerifyFooters".equals(testMethod.getName())
+                || "testStudentVerifyResume".equals(testMethod.getName())
+                || "testStudentVerifyPersonalInformation".equals(testMethod.getName())
+                || "testStudentVerifyFeedbackWindow".equals(testMethod.getName())
+                || "testStudentVerifySettings".equals(testMethod.getName())
+                || "testStudentVerifyCalendar".equals(testMethod.getName())
+                || "testStudentPostHTMLOnOwnWall".equals(testMethod.getName())
+                || "testStuentViewRevealPasswordButtonForAllInOneAssignemnt".equals(testMethod.getName())
+                || "testStudentVerifyRightSidebarOfCourseWorkPage".equals(testMethod.getName())
+                || "testStudentVerifyReadOnlyAccessToOfflineActivity".equals(testMethod.getName())
+                || "testStudentViewRevealPasswordButtonForAllInOneAssignemnt".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
             DependentMethods = new String[1];
             DependentMethods[0] = "testStudentForceChangePasswordOnFirstLogin";
             annotation.setDependsOnMethods(DependentMethods);
         }
-        
+
         if ("testStudentViewTeachersEmailAddressAsAllowEveryoneToSeeEmailAddressIsSelected".equals(testMethod.getName())) {
             System.out.println("Inside testStudentViewTeachersEmailAddressAsAllowEveryoneToSeeEmailAddressIsSelected");
             DependentMethods = new String[2];

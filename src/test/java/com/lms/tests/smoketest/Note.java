@@ -80,11 +80,7 @@ public class Note extends BaseClass {
         driver.findElement(By.id("txtnoteText")).sendKeys(this.noteName);
         driver.findElement(By.linkText("See all notes"));
         driver.findElement(By.id("btnNoteSave")).click();
-        if (wallType.contentEquals("Profile")) {
-            ip.isTextPresentByXPATH(driver, "//div[15]/div[2]/div/div/div/div/div/div[2]/span", "Note Saved.");
-        } else {
-            ip.isTextPresentByXPATH(driver, "//div/div/div[2]/span", "Note Saved.");
-        }
+        ip.isTextPresentByXPATH(driver, "//span[@id='ext-gen411']", "Note Saved.");
         driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td/table"
                 + "/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
         Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToWallXPATH"));

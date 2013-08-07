@@ -193,6 +193,7 @@ public class User extends BaseClass {
             case "usc-msw":
             case "usc-mat":
             case "corp-son":
+            case "sc-msn":
                 ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sectionCommonXPATH") + "[6]/legend", "Educational Information");
                 break;
             default:

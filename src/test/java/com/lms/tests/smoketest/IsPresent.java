@@ -154,4 +154,15 @@ public class IsPresent {
     public void invisibilityOfElementByXpathWithText(WebDriver driver, String elementXpath, String text) {
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath(elementXpath), text));
     }
+    
+    /**
+     * An expectation for checking that an element is either invisible or not present on the DOM
+     * 
+     * @param driver
+     * @param elementXpath
+     * @param text 
+     */
+    public void invisibilityOfElementByXpath(WebDriver driver, String elementXpath) {
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(elementXpath)));
+    }
 }

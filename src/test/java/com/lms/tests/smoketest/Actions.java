@@ -4,13 +4,15 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Actions extends BaseClass {
 
-    Date now = new Date();    
+    Date now = new Date();
 
     /**
      * Login
@@ -212,7 +214,9 @@ public class Actions extends BaseClass {
      * Navigates to MyCourse Page
      */
     public void navigateToMyCourse() {
-        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
+        //Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
+        WebElement hiddenElement = driver.findElement(By.cssSelector("li.course-section > a"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));
     }
 
@@ -286,7 +290,8 @@ public class Actions extends BaseClass {
      * Navigate To MySocialGroups Page
      */
     public void navigateToMySocialGroups() {
-        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
+        WebElement hiddenElement = driver.findElement(By.cssSelector("li.groups-menu.menu > ul > li > a"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
 
@@ -756,13 +761,32 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Submit Assignment
      *
-     * @param allInOneAssignmentActivityName
      */
-    public void submitAssignment(String allInOneAssignmentActivityName) {
+    public String uploadFileAndSendAllInOneForReview() {
         Activity actvty = new Activity();
-        actvty.submitAssignment(allInOneAssignmentActivityName);
+        actvty.uploadFileAndSendAllInOneForReview();
+        return actvty.getAssignmentText();
+    }
+
+    /**
+     *
+     * @param reviewAssignmentText
+     */
+    public String reviewAndAddFeedbackToAllInOneOnSubmissionPage(String reviewAssignmentText) {
+        Activity actvty = new Activity();
+        actvty.reviewAndAddFeedbackToAllInOneOnSubmissionPage(reviewAssignmentText);
+        return actvty.getAssignmentText();
+    }
+
+    /**
+     *
+     * @param feedbackAssignmentText
+     */
+    public String updateAllInOneBasedOnFeedbackAndSubmitForGrading(String feedbackAssignmentText) {
+        Activity actvty = new Activity();
+        actvty.updateAllInOneBasedOnFeedbackAndSubmitForGrading(feedbackAssignmentText);
+        return actvty.getAssignmentText();
     }
 
     /**
@@ -770,29 +794,40 @@ public class Actions extends BaseClass {
      *
      * @param quizActivityName
      */
-    public void gradeAssignment(String allInOneAssignmentActivityName) {
+    public String verifyStudentsAllInOneFinalSubmissionThenAddGradeAndCommentOnGradePage(String allInOneAssignmentActivityName, String studentAssignmentGradingText) {
         Activity actvty = new Activity();
-        actvty.gradeAssignment(allInOneAssignmentActivityName);
+        actvty.verifyStudentsAllInOneFinalSubmissionThenAddGradeAndCommentOnGradePage(allInOneAssignmentActivityName, studentAssignmentGradingText);
+        return actvty.getAssignmentText();
     }
 
     /**
-     * Verify Assignment Grade
      *
      * @param allInOneAssignmentActivityName
+     * @param assignmentGradedText
      */
-    public void verifyAssignmentGrade(String allInOneAssignmentActivityName) {
+    public void verifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(String allInOneAssignmentActivityName, String assignmentGradedText) {
         Activity actvty = new Activity();
-        actvty.verifyAssignmentGrade(allInOneAssignmentActivityName);
+        actvty.verifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(allInOneAssignmentActivityName, assignmentGradedText);
     }
 
     /**
-     * Allow Assignment to be resubmitted
      *
      * @param allInOneAssignmentActivityName
+     * @param studentUserName
      */
-    public void allowResubmitAssignment(String allInOneAssignmentActivityName, String studentUserName) {
+    public String allowStudentToResubmitAllInOne(String allInOneAssignmentActivityName, String studentUserName) {
         Activity actvty = new Activity();
-        actvty.allowResubmitAssignment(allInOneAssignmentActivityName, studentUserName);
+        actvty.allowStudentToResubmitAllInOne(allInOneAssignmentActivityName, studentUserName);
+        return actvty.getAssignmentText();
+    }
+
+    /**
+     *
+     * @param resubmissionText
+     */
+    public void verifyAllInOneCanBeResubmitted(String resubmissionText) {
+        Activity actvty = new Activity();
+        actvty.verifyAllInOneCanBeResubmitted(resubmissionText);
     }
 
     /**
@@ -1509,12 +1544,10 @@ public class Actions extends BaseClass {
 
     /**
      * View Reveal Password button for All In One Assignment
-     *
-     * @param allInOneAssignmentActivityNameWithRevealPassword
      */
-    public void viewRevealPasswordButtonForAllInOneAssignemnt(String allInOneAssignmentActivityNameWithRevealPassword) {
+    public void viewRevealPasswordButtonForAllInOneAssignemnt() {
         Activity activity = new Activity();
-        activity.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
+        activity.viewRevealPasswordButtonForAllInOneAssignemnt();
     }
 
     /**
@@ -1686,5 +1719,32 @@ public class Actions extends BaseClass {
     public void forceChangePasswordOnFirstLogin() {
         User usr = new User();
         usr.forceChangePasswordOnFirstLogin();
+    }
+
+    /**
+     * @param allInOneAssignmentActivityName
+     */
+    public void navigateToActivity(String allInOneAssignmentActivityName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
+    }
+
+    /**
+     *
+     */
+    public void verifyAllInOneHasNoSubmission() {
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]",
+                "There are no student submissions ready to review or grade.");
+        driver.findElement(By.linkText("Submissions")).click();
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]",
+                "There are no student submissions ready to review or grade.");
+    }
+
+    /**
+     *
+     * @param allInOneAssignmentActivityName
+     */
+    public void verifyAllInOneCannotBeGraded(String allInOneAssignmentActivityName) {
+        Activity activity = new Activity();
+        activity.verifyAllInOneCannotBeGraded(allInOneAssignmentActivityName);
     }
 }
