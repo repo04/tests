@@ -363,6 +363,7 @@ public class Actions extends BaseClass {
                 break;
 
             default:
+                ip.isElementClickableByXpath(driver, "//div[2]/ul/li/div/a", 60);
                 Utility.clickByJavaScriptUsingCSS(driver, xpv.getTokenValue("linkToCourseCSS"));
 
         }
