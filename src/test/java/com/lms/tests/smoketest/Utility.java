@@ -1,10 +1,15 @@
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,15 +29,11 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
-import com.lms.tests.runThrghTestNG.BaseClass;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 
 public class Utility extends BaseClass {
 
@@ -50,6 +51,17 @@ public class Utility extends BaseClass {
      */
     public static void clickByJavaScript(WebDriver driver, String menuXPATH) {
         WebElement hiddenElement = driver.findElement(By.xpath(menuXPATH));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
+    }
+    
+    /**
+     * Uses js to click on hidden element on the page by CSS
+     * 
+     * @param driver
+     * @param menuCSS 
+     */
+    public static void clickByJavaScriptUsingCSS(RemoteWebDriver driver, String menuCSS) {
+        WebElement hiddenElement = driver.findElement(By.cssSelector(menuCSS));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
     }
 

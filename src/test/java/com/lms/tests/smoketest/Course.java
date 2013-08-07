@@ -125,7 +125,7 @@ public class Course extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnCnfrmDltCrsXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnCnfrmDltCrsXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("slctGrpCrs"));
-        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
+        Utility.clickByJavaScriptUsingCSS(driver, xpv.getTokenValue("linkToCourseCSS"));
         new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + groupCourseName + "')]")));
     }
 

@@ -223,7 +223,7 @@ public class Actions extends BaseClass {
      * Navigates to MyCourse Page
      */
     public void navigateToMyCourse() {
-        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
+        Utility.clickByJavaScriptUsingCSS(driver, xpv.getTokenValue("linkToCourseCSS"));
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));
     }
 
