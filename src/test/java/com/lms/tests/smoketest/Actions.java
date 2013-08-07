@@ -297,7 +297,7 @@ public class Actions extends BaseClass {
      * Navigate To MySocialGroups Page
      */
     public void navigateToMySocialGroups() {
-        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
+        Utility.clickByJavaScriptUsingCSS(driver, "li.groups-menu.menu > ul > li > a");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
 
@@ -330,7 +330,7 @@ public class Actions extends BaseClass {
      * Navigate to Portfolio page
      */
     public void navigateToPortfolio() {
-        Utility.clickByJavaScript(driver, "//li[3]/a");
+        Utility.clickByJavaScriptUsingCSS(driver, "li.profile-menu.menu > ul > li:nth-child(3) > a");
         ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
     }
 
