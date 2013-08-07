@@ -4,9 +4,7 @@ import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -214,9 +212,7 @@ public class Actions extends BaseClass {
      * Navigates to MyCourse Page
      */
     public void navigateToMyCourse() {
-        //Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
-        WebElement hiddenElement = driver.findElement(By.cssSelector("li.course-section > a"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
+        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToCourseXPATH"));
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("myCourseURL"));
     }
 
@@ -290,8 +286,7 @@ public class Actions extends BaseClass {
      * Navigate To MySocialGroups Page
      */
     public void navigateToMySocialGroups() {
-        WebElement hiddenElement = driver.findElement(By.cssSelector("li.groups-menu.menu > ul > li > a"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
+        Utility.clickByJavaScriptUsingCSS(driver, "li.groups-menu.menu > ul > li > a");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
 
@@ -324,7 +319,7 @@ public class Actions extends BaseClass {
      * Navigate to Portfolio page
      */
     public void navigateToPortfolio() {
-        Utility.clickByJavaScript(driver, "//li[3]/a");
+        Utility.clickByJavaScriptUsingCSS(driver, "li.profile-menu.menu > ul > li:nth-child(3) > a");
         ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
     }
 
@@ -357,6 +352,7 @@ public class Actions extends BaseClass {
                 break;
 
             default:
+                ip.isElementClickableByXpath(driver, "//div[2]/ul/li/div/a", 60);
                 Utility.clickByJavaScript(driver, "//*[contains(text(),'" + groupCourseName + "')]");
 
         }

@@ -90,6 +90,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         teacherUrlWallPost = a.urlPost("urlWallPost");
         Reporter.log("teacherUrlWallPost: " + teacherUrlWallPost, true);
 
+        a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         teacherUrlCoursePostArray[0][0] = a.urlPost("urlCrsPost");
         Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0], true);

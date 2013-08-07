@@ -136,6 +136,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @Test(dataProvider = "GroupCourseTeacherUrlCoursePost", dataProviderClass = Teacher_Posts_SocialGroup.class,
     groups = {"regressionSmoke", "fullSmoke", "criticalSmoke", "wall.studentCommentOnTeacherCoursePost"})
     public void testStudentCommentOnTeacherCoursePost(String groupCourseName, String teacherUrlCoursePost) throws Exception {
+        a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         studentTextCommentOnTeacherCoursePost[0][0] = a.textCommentPost(teacherUrlCoursePost, "txtCmntOnTchrCrsPst");
         Reporter.log("studentTextCommentOnTeacherCoursePost: " + studentTextCommentOnTeacherCoursePost[0][0], true);

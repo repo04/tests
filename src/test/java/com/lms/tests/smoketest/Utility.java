@@ -47,6 +47,17 @@ public class Utility extends BaseClass {
         WebElement hiddenElement = driver.findElement(By.xpath(menuXPATH));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
     }
+    
+    /**
+     * Uses js to click on hidden element on the page by CSS
+     * 
+     * @param driver
+     * @param menuCSS 
+     */
+    public static void clickByJavaScriptUsingCSS(WebDriver driver, String menuCSS) {
+        WebElement hiddenElement = driver.findElement(By.cssSelector(menuCSS));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
+    }
 
     /**
      * Find Group from whole list
