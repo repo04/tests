@@ -54,10 +54,8 @@ public class TestInvocation implements IInvokedMethodListener {
         }        
         
         // Skip Backup/Restore TCs for Env other than Standalone
-        if (!"setUp".equals(method.getName()) && !BaseClass.url.contains("standalone")
-                && "criticalTests".equals(BaseClass.test)) {
-            if ("testContentAdminLogIn".equals(method.getName())
-                    || "testContentAdminBackupCourse".equals(method.getName())) {
+        if (!"setUp".equals(method.getName()) && !BaseClass.url.contains("standalone")) {
+            if ("testContentAdminBackupCourse".equals(method.getName())) {
                 System.out.println("Skipping Test Method");
                 throw new SkipException("Skipping: Course Backup/Restore TC's as these are to be executable only on Standalone Env");
             }

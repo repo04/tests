@@ -128,6 +128,8 @@ public class Activity extends BaseClass {
             Utility.illegalStateException("All in one assignment's prevent late submission value differs, "
                     + "expected: 'No' but actual: '" + lateSubmission + "'");
         }
+        driver.findElement(By.xpath(xpv.getTokenValue("allowStudentsToSendSubmissionForReviewCheckboxXPATH"))).click();
+        driver.findElement(By.xpath(xpv.getTokenValue("allowStudentsToSendSubmissionForReviewCheckboxXPATH"))).isSelected();
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div[4]/div/div/div/div/div", this.intro);
     }
