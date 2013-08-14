@@ -43,23 +43,29 @@ public class TestInvocation implements IInvokedMethodListener {
         }
 
         // Checks For UNC-MPA and WU-LLM 
-        if (!"setUp".equals(method.getName()) && (BaseClass.program.contains("unc-mpa") 
-                || BaseClass.program.contains("wu-llm") || BaseClass.program.contains("gwu-mph") 
+        if (!"setUp".equals(method.getName()) && (BaseClass.program.contains("unc-mpa")
+                || BaseClass.program.contains("wu-llm") || BaseClass.program.contains("gwu-mph")
                 || BaseClass.program.contains("au-mir") || BaseClass.program.contains("sc-msn"))) {
-            if ("testStudentSupportMobileURL".equals(method.getName()) || 
-                    "testTeacherSupportMobileURL".equals(method.getName())) {
+            if ("testStudentSupportMobileURL".equals(method.getName())
+                    || "testTeacherSupportMobileURL".equals(method.getName())) {
                 System.out.println("Skipping Test Method");
                 throw new SkipException("Skipping Mobile App Test in Student Support: Not available for '" + BaseClass.program + "'");
             }
-        }        
-        
+        }
+
         // Skip Backup/Restore TCs for Env other than Standalone
-        if (!"setUp".equals(method.getName()) && !BaseClass.url.contains("standalone")
-                && "criticalTests".equals(BaseClass.test)) {
-            if ("testContentAdminLogIn".equals(method.getName())
-                    || "testContentAdminBackupCourse".equals(method.getName())) {
-                System.out.println("Skipping Test Method");
-                throw new SkipException("Skipping: Course Backup/Restore TC's as these are to be executable only on Standalone Env");
+        if (!"setUp".equals(method.getName()) && !BaseClass.url.contains("standalone")) {
+            if ("criticalTests".equals(BaseClass.test)) {
+                if ("testContentAdminLogIn".equals(method.getName())
+                        || "testContentAdminBackupCourse".equals(method.getName())) {
+                    System.out.println("Skipping Test Method");
+                    throw new SkipException("Skipping: Course Backup/Restore TC's as these are to be executable only on Standalone Env");
+                }
+            } else {
+                if ("testContentAdminBackupCourse".equals(method.getName())) {
+                    System.out.println("Skipping Test Method");
+                    throw new SkipException("Skipping: Course Backup/Restore TC's as these are to be executable only on Standalone Env");
+                }
             }
         }
     }
