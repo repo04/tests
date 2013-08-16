@@ -931,20 +931,10 @@ public class Activity extends BaseClass {
     public void viewRevealPasswordButtonForAllInOneAssignemnt() {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"));
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
-        ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"), 60);
-        String text = driver.findElement(By.xpath("//div[9]/div/p")).getText();
-        if (!text.equals(xpv.getTokenValue("revealDocumentPasswordConfirmationText"))) {
-            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealDocumentPasswordConfirmationText")
-                    + "- Actual: " + text);
-        }
-        driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
-        ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealPasswordPopUpButtonXPATH"), 60);
-        text = driver.findElement(By.xpath("//div[9]/div/p")).getText();
-        if (!text.equals(xpv.getTokenValue("revealPasswordText"))) {
-            Utility.illegalStateException("Text does not match, Expected: " + xpv.getTokenValue("revealPasswordText")
-                    + "- Actual: " + text);
-        }
-        driver.findElement(By.xpath(xpv.getTokenValue("revealPasswordPopUpButtonXPATH"))).click();
+        ip.isTextPresentByCSS(driver, "#confirmBox > p", xpv.getTokenValue("revealDocumentPasswordConfirmationText"));
+        driver.findElement(By.cssSelector(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
+        ip.isTextPresentByCSS(driver, "#confirmBox > p", xpv.getTokenValue("revealPasswordText"));
+        driver.findElement(By.cssSelector(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
     }
 
     /**
