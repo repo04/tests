@@ -1,9 +1,11 @@
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import com.lms.tests.runThrghTestNG.BaseClass;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BaseClass {
 
@@ -23,7 +25,8 @@ public class LoginPage extends BaseClass {
     public void attemptLogin(String user) {
 
         Utility.put(USERROLE, user);
-        WebElement userName = driver.findElement(By.xpath(xpv.getTokenValue("userNameXPATH")));
+        WebElement userName = new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(
+                            By.xpath(xpv.getTokenValue("userNameXPATH"))));
         WebElement passWord = driver.findElement(By.xpath(xpv.getTokenValue("pswdXPATH")));
         WebElement loginBtn = driver.findElement(By.xpath(xpv.getTokenValue("btnLoginXPATH")));
 
