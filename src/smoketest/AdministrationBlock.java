@@ -4,13 +4,11 @@
  */
 package smoketest;
 
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
 
 public class AdministrationBlock extends BaseClass {
@@ -25,7 +23,7 @@ public class AdministrationBlock extends BaseClass {
     WebElement linkBtn;
     String textPost = null;
     Date now = new Date();
-    String urlPost = null;
+    String urlPost = null;    
 
     /**
      * Verifies the UI of 2tor Site administration section
@@ -61,7 +59,7 @@ public class AdministrationBlock extends BaseClass {
         ip.isElementPresentByID(driver, "drag-handle");
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("uploadWindowTitleTxtXPATH"), "Upload Video");
     }
-
+                                                                 
     /**
      * Verifies the UI and functionality of Support Message
      */
@@ -72,6 +70,7 @@ public class AdministrationBlock extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("studentSupportmessageTextXPATH"), ", just under the phone support schedule.");
 
         //The below lines of Code are related to posting of Support Message which affects all system users - so currently we are skipping this
+
         /*
          driver.findElement(By.xpath(xpv.getTokenValue("loginmessageBoxXPATH"))).clear();
          driver.findElement(By.xpath(xpv.getTokenValue("loginmessageBoxXPATH"))).sendKeys(studentSupportMessage);
@@ -112,7 +111,7 @@ public class AdministrationBlock extends BaseClass {
          * driver.findElement(By.xpath(xpv.getTokenValue("saveChangesButtonXPATH"))).click();
          */
     }
-
+    
     /**
      * Verifies the UI and all fields/columns of course Roster Report
      */
@@ -132,9 +131,10 @@ public class AdministrationBlock extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("programColumnXPATH"));
 
         //Verifies if the Category dropdown first value is selected or not
-        WebElement element = new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
+        WebElement element =  new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
+        System.out.println("text: " + element.getText());
         element.isSelected();
-
+                
         //Verifies if the Category dropdown values- Active and Archive are selectable or not
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).selectByVisibleText("Active");
         WebElement active = new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
@@ -144,7 +144,7 @@ public class AdministrationBlock extends BaseClass {
         WebElement archive = new Select(driver.findElement(By.xpath(xpv.getTokenValue("categoryDropdownXPATH")))).getFirstSelectedOption();
         archive.isSelected();
     }
-
+    
     /**
      * Verifies the UI and elements of deleted Live Session
      */
@@ -196,7 +196,7 @@ public class AdministrationBlock extends BaseClass {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("deniedPermissionMessageXPATH"), "Access denied");
         driver.findElement(By.xpath(xpv.getTokenValue("continueBtnXPATH"))).click();
     }
-
+    
     /**
      * Verifies the UI and fields/columns of Student Engagement Report
      */
@@ -213,6 +213,7 @@ public class AdministrationBlock extends BaseClass {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("searchbuttonXPATH"));
     }
 
+    //Commented -- As looping executes very slow on Sauce Lab
     /**
      * Verifies the University Domain Email IDs are not present in "Email Not In
      * Domain" list
@@ -224,7 +225,7 @@ public class AdministrationBlock extends BaseClass {
             ip.invisibilityOfElementByXpathWithText(driver, "//*[@id='region-main']/div/table/tbody/tr[" + i + "]/td[2]", emailDomain);            
         }
     }
-
+    
     /**
      * Verifies if pes admin is able to see the related sections to the courses
      * in the section drop down
@@ -232,11 +233,10 @@ public class AdministrationBlock extends BaseClass {
     public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sectionColumnXPATH"), "Section", 60);
         ip.isElementClickableByXpath(driver, "//td[3]/div/div/a/img", 60);
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("coursesDropdownXPATH"), 60);
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).selectByVisibleText(courseShortName);
         WebElement courseNameSelected = new Select(driver.findElement(By.xpath(xpv.getTokenValue("coursesDropdownXPATH")))).getFirstSelectedOption();
         courseNameSelected.isSelected();
-        ip.isTextPresentByXPATH(driver, "//div/table/tbody/tr/td/div", courseShortName);
-        ip.isElementClickableByXpath(driver, "//td[3]/div/div/a/img", 60);
         driver.findElement(By.xpath(xpv.getTokenValue("searchByNameTxtBoxXPATH"))).click();
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("sectionDropdownXPATH"), 60);
         Select sectionDropdown = new Select(driver.findElement(By.xpath(xpv.getTokenValue("sectionDropdownXPATH"))));
@@ -255,7 +255,7 @@ public class AdministrationBlock extends BaseClass {
             size++;
         }
     }
-    
+
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * Pes admin disables the Student support message created previously
@@ -268,6 +268,7 @@ public class AdministrationBlock extends BaseClass {
      driver.findElement(By.xpath(xpv.getTokenValue("saveChangesButtonXPATH"))).click();
      }*/
     
+    //The below lines of code affects all system users - so currently we are skipping this
     /**
      * Pes admin disables the login message created previously
      *
@@ -292,6 +293,7 @@ public class AdministrationBlock extends BaseClass {
      }
      */
     
+    //The below lines of code affects all system users - so currently we are skipping this
     /**
      * Verifies the login message which is entered by the pes admin after login
      * with student

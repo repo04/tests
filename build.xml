@@ -119,9 +119,19 @@
             <elseif>
                 <or>
                     <contains string="${callUrl}" substring="corp-son"/>
+                    <contains string="${callUrl}" substring="experience"/>
                 </or>
                 <then>
                     <var name="program" value="corp-son"/>
+                </then>
+            </elseif>
+            <elseif>
+                <or>
+                    <contains string="${callUrl}" substring="sc-msn"/>
+                    <contains string="${callUrl}" substring="2sn"/>
+                </or>
+                <then>
+                    <var name="program" value="sc-msn"/>
                 </then>
             </elseif>
         </if>   
@@ -226,7 +236,7 @@
                             <sysproperty key="environment" value="${environment}"/>   
                             <sysproperty key="browser" value="@{browser}"/>
                             <sysproperty key="os" value="${antOS}"/>
-                            <sysproperty key="test" value="RegressionTests"/>
+                            <sysproperty key="test" value="regressionTests"/>
                         </testng>
                     </sequential>
                 </for>

@@ -54,11 +54,21 @@ public class TransformCritical implements IAnnotationTransformer {
             annotation.setDependsOnMethods(DependentMethods);
         }
 
+        if ("testTeacherUploadFilesInCourse".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentPostURLOnTeacherSocialGroup";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+        
         if ("testTeacherCreateLiveSession".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherCreateLiveSession");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateSocialGroup";
+            DependentMethods = new String[2];
+            DependentMethods[0] = "runThrghTestNG.Student_JoinSocialGroup_Post.testStudentPostURLOnTeacherSocialGroup";
+            DependentMethods[1] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
         }
         
         if ("testTeacherVerifyFilesInPortfolio".equals(testMethod.getName())) {
@@ -78,7 +88,7 @@ public class TransformCritical implements IAnnotationTransformer {
         if ("testTeacherDeleteFiles".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeleteFiles");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Teacher_LiveSession_GoogleDoc.testTeacherUploadFilesInCourse";
+            DependentMethods[0] = "runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentVerifyFilesInCourse";
             annotation.setDependsOnMethods(DependentMethods);
             annotation.setAlwaysRun(true);
         }
@@ -116,16 +126,27 @@ public class TransformCritical implements IAnnotationTransformer {
 
         if ("testTeacherDeleteSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testTeacherDeleteSocialGroup");
-            DependentMethods = new String[1];
+            DependentMethods = new String[2];
             DependentMethods[0] = "runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherCreateSocialGroup";
+            DependentMethods[1] = "runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentVerifyFilesInCourse";
             annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
         }
 
         if ("testStudentDeleteSocialGroup".equals(testMethod.getName())) {
             System.out.println("Inside testStudentDeleteSocialGroup");
             DependentMethods = new String[1];
-            DependentMethods[0] = "runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc.testStudentCreateSocialGroup";
+            DependentMethods[0] = "runThrghTestNG.Teacher_JoinDelete_SocialGroup.testTeacherLeavesStudentSocialGroup";
             annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
+        }
+        
+        if ("testContentAdminBackupCourse".equals(testMethod.getName())) {
+            System.out.println("Inside testContentAdminBackupCourse");
+            DependentMethods = new String[1];
+            DependentMethods[0] = "runThrghTestNG.Student_DeleteSocialGroup.testStudentDeleteSocialGroup";
+            annotation.setDependsOnMethods(DependentMethods);
+            annotation.setAlwaysRun(true);
         }
         
         if ("testContentAdminRestoreCourseAsNewArchiveCourse".equals(testMethod.getName())) {

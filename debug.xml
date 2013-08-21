@@ -6,20 +6,18 @@
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="DebugTests" preserve-order="true" parallel="false">
-        <parameter name="courseShortName" value="AutoCourse-DNT"/>
-        <parameter name="courseName" value="AutoCourse-DoNotTouch"/>        
+        <parameter name="courseShortName" value="AutoCourse-DNT"/>        
         <parameter name="groupCourseName" value="AutoGroupCourse"/>        
         <parameter name="workingGroupName" value="AutoWorkingGroup"/>
-        <parameter name="teacherSocialGroupName" value="AutoTchrSclGrp"/>
         <parameter name="forumActivityName" value="AutoForum"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
         <parameter name="allInOneAssignmentActivityName" value="AutoAllInOneAsgnmnt"/>
         <parameter name="pageActivityName" value="AutoPage"/>
         <parameter name="glossaryActivityName" value="AutoGlossary"/>
         <parameter name="passwordQuizName" value="AutoPasswordQuiz"/>
-        <parameter name="studentSocialGroupName" value="AutoStdtSclGrp"/>
         <parameter name="allInOneAssignmentActivityNameWithRevealPassword" value="AutoAllInOnePasswordActivity"/>
-        <parameter name="offlineActivityName" value="AutoOfflineActivity"/>         
+        <parameter name="offlineActivityName" value="AutoOfflineActivity"/>
+        <parameter name="studentUserName" value="autostudent1"/>
          
         <groups>
             <define name="Course_GroupCourse">
@@ -43,20 +41,36 @@
                 <include name="prerequisite"/>
                 <include name="activities.submitQuiz"/>          
             </define>
-            <define name="Assignment_Grade">
+            <define name="AllInOne">
                 <include name="prerequisite"/>
-                <include name="assignment.submit"/>
-                <include name="assignment.grade"/>
-                <include name="assignment.verifyGrade"/>
-                <include name="assignment.allowResubmit"/>
+                <include name="allinone.teacherVerifyNoSubmissionAndCannotBeGraded"/>
+                <include name="allinone.studentUploadFileAndSendForReview"/>
+                <include name="allinone.teacherReviewAndAddFeedbackOnSubmissionPage"/>
+                <include name="allinone.studentUpdateAllInOneBasedOnFeedbackAndSubmitForGrading"/>
+                <include name="allinone.teacherVerifyStudentsGradedSubmissionThenAddGradeAndCommentOnGradePage"/>
+                <include name="allinone.StudentVerifyGradeAndTeachersCommentOnSubmissionAndGradePage"/>
+                <include name="allinone.teacherAllowStudentToResubmit"/>
+                <include name="allinone.studentVerifyItCanBeResubmitted"/>
             </define>            
             <define name="Users">
                 <include name="prerequisite"/>
-                <include name="users.creation"/>
-                <include name="users.assignRole"/>
+                <include name="users.pesAdminVerifyUsersDefaultTimeZone"/>
+                <include name="users.pesAdminVerifySectionsOfUserCreationPage"/>
+                <include name="users.pesAdminVerifyAuthenticationMethodValues"/>
+                <include name="users.pesAdminVerifyDefaultUnmaskPasswordCheckBoxState"/>
+                <include name="users.pesAdminVerifyUnmaskPasswordFunctionality"/>
+                <include name="users.pesAdminVerifyListOfInterestsFieldUpdation"/>
+                <include name="users.pesAdminVerifyBrowseListOfUsersPage"/>
+                <!--include name="users.studentForceChangePasswordOnFirstLogin"/>
+                <include name="users.pesAdminAssignRole"/>
+                <include name="users.pesAdminCreateUsers"/>
+                <include name="users.studentViewTeachersEmailAddress"/>
+                <include name="users.teacherVerifyStudentsEmailAddressIsNotVisible"/>                
                 <include name="users.unAssignRole"/>
                 <include name="users.delete"/>
-                <!--include name="users.coordinatorCreation"/>
+                <include name="users.coordinatorCreation"/>
+                <include name="users.assignRoleToCoordinator"/>
+                <include name="users.coordinatorCreation"/>
                 <include name="users.assignRoleToCoordinator"/-->         
             </define>
             <define name="WorkingGroup">
@@ -107,8 +121,8 @@
                 <include name="wall.coursePostCommentsOff"/>
                 <include name="wall.courseAnnouncementPost"/>
                 <include name="wall.teacherPostsOnProfileCourseWall"/>
-                <include name="wall.teacherVerifyPESCoursePosts"/> 
-                <include name="wall.studentVerifyPESCoursePosts"/>
+                <include name="wall.teacherVerifyPesCoursePosts"/> 
+                <include name="wall.studentVerifyPesCoursePosts"/>
                 <include name="wall.studentCommentOnTeacherCoursePost"/> 
                 <include name="wall.studentRecommendPost"/>
                 <include name="wall.studentHTMLWallPost"/>   
@@ -220,11 +234,6 @@
                 <include name="systemCompatibility.mobileApplicationsUIVerify"/>
                 <include name="systemCompatibility.backToTopAndMoreInfoLinksVerify"/>
             </define>
-            <define name="Quiz">
-                <include name="prerequisite"/>
-                <include name="quiz.pesVerifyReportSection"/>                                  
-                <include name="quiz.teacherVerifyReportSection"/>                
-            </define>
             <define name="2torAdministrativeBlock">
                 <include name="prerequisite"/>
                 <include name="2torAdministrativeBlock.contentVerify"/>
@@ -234,8 +243,9 @@
                 <include name="2torAdministrativeBlock.studentSupportMessageVerification"/>
                 <include name="2torAdministrativeBlock.studentVerificationLoginMessageOnRelogin"/>
                 <include name="2torAdministrativeBlock.supportAndLoginMessageDisableByPesAdmin"/-->
-            </define>
+            </define> 
             <define name="Content">
+                <include name="prerequisite"/>
                 <include name="content.allInOneActivityCreationWithRevealPassword"/>
                 <include name="content.offlineActivityCreationWithHtmlFile"/>
                 <include name="content.pesadminVerifyOfflineActivitySubmittedAndGradedSection"/>
@@ -245,24 +255,25 @@
                 <include name="content.studentVerifyRightSideBarOfCourseworkPage"/>
                 <include name="content.contentAdminVerifyCourseworkUnitExpandableOrNot"/>
                 <!--include name="content.liveSessionActivityCreationWithoutFullGrade"/-->                                                
-             </define>
+            </define>
             <!--run>
                 <include name="feedback.contentAdminVerify"/>               
                 <include name="feedback.contentAdminVerify"/>     
             </run-->
         </groups>
         <classes>
-            <class name="runThrghTestNG.System_Compatibility"/>
             <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
             <class name="runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="runThrghTestNG.System_Compatibility"/>
             <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
             <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
             <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
-            <class name="runThrghTestNG.Coordinator_Course_Setting"/>
             <class name="runThrghTestNG.Teacher_FetchActivityPassword"/>
             <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>
             <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="runThrghTestNG.Teacher_ResubmitAllInOne"/>            
+            <class name="runThrghTestNG.Student_AllInOneEnable"/>
             <class name="runThrghTestNG.ContentAdmin_CleanTestData"/>
             <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.Pes_ArchiveCourse"/>                        

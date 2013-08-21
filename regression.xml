@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
-<suite name="FullSmoke Suite">
+<suite name="Essential Regression Suite">
     <listeners>
         <listener class-name="runThrghTestNG.TransformRegression"/>
         <listener class-name="runThrghTestNG.TestInvocation"/>
     </listeners>
-    <test name="SmokeTests" preserve-order="true" parallel="false">
+    <test name="RegressionTest" preserve-order="true" parallel="false">
         <groups>
             <run>
                 <include name="prerequisite"/>
@@ -23,6 +23,8 @@
             <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="runThrghTestNG.Teacher_ResubmitAllInOne"/>            
+            <class name="runThrghTestNG.Student_AllInOneEnable"/>
             <class name="runThrghTestNG.ContentAdmin_CleanTestData"/>
             <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.Pes_ArchiveCourse"/>

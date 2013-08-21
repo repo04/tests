@@ -13,11 +13,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
-/* 
- * Content Admin logs in 
- * Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page 
- * Logs out
- */
+/*
+* Content Admin logs in
+* Create - Course ,GrpCourse, Activities like Forum, Quiz, All In One Assignment & Page
+* Logs out
+*/
 public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
 
     Actions a = new Actions();
@@ -48,7 +48,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @param context
      * @return
      * @throws Exception
-     */    
+     */
     @DataProvider(name = "CourseName")
     public static Object[][] CourseName(ITestContext context) throws Exception {
         if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")
@@ -184,9 +184,8 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     @DataProvider(name = "OfflineActivityFile")
     public static Object[][] OfflineActivityFile(ITestContext context) throws Exception {
         offlineActivityFileNameArray[0][0] = "Offline activity.txt";
-        return (offlineActivityFileNameArray);        
+        return (offlineActivityFileNameArray);
     }
-
     
     @DataProvider(name = "GroupCourseActivities")
     public static Iterator<Object[]> GroupCourseActivities(ITestContext context) throws Exception {
@@ -248,9 +247,9 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         return DataProviderUtility.cartesianProviderFrom(CourseName(context), PasswordQuizName(context), Activities(context), GlossaryName(context));
     }
 
-    @DataProvider(name = "CourseGlossaryName")
-    public static Iterator<Object[]> CourseGlossaryName(ITestContext context) throws Exception {
-        System.out.println("init CourseGlossaryName");
+    @DataProvider(name = "GroupCourseGlossaryName")
+    public static Iterator<Object[]> GroupCourseGlossaryName(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseGlossaryName");
         return DataProviderUtility.cartesianProviderFrom(GroupCourse(context), GlossaryName(context));
     }
     
@@ -377,11 +376,11 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @throws Exception
      */
     /*@Test(dataProvider = "GroupCourse", groups = {"regressionSmoke", "activity.syllabusCreation"})
-     public void testSyllabus_Creation(String groupCourseName) throws Exception {
-     a.navigateToMyCourse();
-     a.selectGroupCourse(groupCourseName);
-     a.createSyllabusActivity();
-     }*/
+    public void testSyllabus_Creation(String groupCourseName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.createSyllabusActivity();
+    }*/
     
     /**
      *
@@ -395,13 +394,13 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
         passwordQuizNameArray[0][0] = a.createPasswordQuizActivity();
         Reporter.log("passwordQuizActivityName: " + passwordQuizNameArray[0][0], true);
     }
-
+    
     /**
      * Create Offline Activity
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GroupCourseOfflineActivityFile", groups = {"regressionSmoke", 
+    @Test(dataProvider = "GroupCourseOfflineActivityFile", groups = {"regressionSmoke",
         "content.offlineActivityCreationWithHtmlFile"})
     public void testContentAdminCreateOfflineActivityWithHtmlFile(String groupCourseName, String txt) throws Exception {
         a.navigateToMyCourse();
@@ -411,11 +410,11 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     }
 
      /**
-     * Create All In One Assignment Activity with Reveal Password Setting
-     *
-     * @throws Exception
-     */
-    @Test(dataProvider = "GroupCourse", groups = {"regressionSmoke", 
+      * Create All In One Assignment Activity with Reveal Password Setting
+      *
+      * @throws Exception
+      */
+    @Test(dataProvider = "GroupCourse", groups = {"regressionSmoke",
         "content.allInOneActivityCreationWithRevealPassword"})
     public void testContentAdminCreateAllInOneWithRevealPassword(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
@@ -428,17 +427,17 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
     /**
      * Create & Verify LiveSession Activity while selecting values other
      * than "100 point and Credit/No Credit"
-     * 
+     *
      * @throws Exception
      */
-    @Test(dataProvider = "GroupCourse", groups = {"content.liveSessionActivityCreationWithoutFullGrade"})    
+    @Test(dataProvider = "GroupCourse", groups = {"content.liveSessionActivityCreationWithoutFullGrade"})
     public void testContentAdminCreateLiveSessionActivityWithoutFullGrade(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         liveSessionActivityNameArray[0][0] = a.createLiveSessiobActivity();
         Reporter.log("LiveSessionActivityName: " + liveSessionActivityNameArray[0][0], true);
     }
-    
+
     /**
      * Add True/False question to Quiz Activity
      *
@@ -483,10 +482,10 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      * @throws Exception
      */
     /*@Test(groups = {"regressionSmoke", "help.contentAdminVerify"})
-     public void testContentAdminVerifyHelpWindow() throws Exception {
-     a.navigateToMyHome();
-     a.verifyHelpWindow();
-     }*/
+      public void testContentAdminVerifyHelpWindow() throws Exception {
+        a.navigateToMyHome();
+        a.verifyHelpWindow();
+      }*/
     
     /**
      * Verify Settings page specific to user role

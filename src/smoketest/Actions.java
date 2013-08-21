@@ -3,6 +3,7 @@ package smoketest;
 import java.text.DateFormat;
 import java.util.Date;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import runThrghTestNG.BaseClass;
@@ -224,7 +225,7 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Navigate to Support Page
+     *
      */
     public void navigateToSupport(String role) {
         driver.findElement(By.xpath("//*[@id='footerlinks']/span[6]/a")).click();
@@ -285,7 +286,7 @@ public class Actions extends BaseClass {
      * Navigate To MySocialGroups Page
      */
     public void navigateToMySocialGroups() {
-        Utility.clickByJavaScript(driver, xpv.getTokenValue("linkToSclGrpXPATH"));
+        Utility.clickByJavaScriptUsingCSS(driver, "li.groups-menu.menu > ul > li > a");
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("hdngPageXPATH"), xpv.getTokenValue("hdngMySclGrpTEXT"));
     }
 
@@ -318,7 +319,7 @@ public class Actions extends BaseClass {
      * Navigate to Portfolio page
      */
     public void navigateToPortfolio() {
-        Utility.clickByJavaScript(driver, "//li[3]/a");
+        Utility.clickByJavaScriptUsingCSS(driver, "li.profile-menu.menu > ul > li:nth-child(3) > a");
         ip.isTextPresentByXPATH(driver, "//h2", "Portfolio");
     }
 
@@ -351,6 +352,7 @@ public class Actions extends BaseClass {
                 break;
 
             default:
+                ip.isElementClickableByXpath(driver, "//div[2]/ul/li/div/a", 60);
                 Utility.clickByJavaScript(driver, "//*[contains(text(),'" + groupCourseName + "')]");
 
         }
@@ -682,7 +684,7 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * User verifies PES posts on Course Wall
+     * User verifies Pes posts on Course Wall
      *
      * @param courseposts
      */
@@ -755,13 +757,32 @@ public class Actions extends BaseClass {
     }
 
     /**
-     * Submit Assignment
      *
-     * @param allInOneAssignmentActivityName
      */
-    public void submitAssignment(String allInOneAssignmentActivityName) {
+    public String uploadFileAndSendAllInOneForReview() {
         Activity actvty = new Activity();
-        actvty.submitAssignment(allInOneAssignmentActivityName);
+        actvty.uploadFileAndSendAllInOneForReview();
+        return actvty.getAssignmentText();
+    }
+
+    /**
+     *
+     * @param reviewAssignmentText
+     */
+    public String reviewAndAddFeedbackToAllInOneOnSubmissionPage(String reviewAssignmentText) {
+        Activity actvty = new Activity();
+        actvty.reviewAndAddFeedbackToAllInOneOnSubmissionPage(reviewAssignmentText);
+        return actvty.getAssignmentText();
+    }
+
+    /**
+     *
+     * @param feedbackAssignmentText
+     */
+    public String updateAllInOneBasedOnFeedbackAndSubmitForGrading(String feedbackAssignmentText) {
+        Activity actvty = new Activity();
+        actvty.updateAllInOneBasedOnFeedbackAndSubmitForGrading(feedbackAssignmentText);
+        return actvty.getAssignmentText();
     }
 
     /**
@@ -769,29 +790,40 @@ public class Actions extends BaseClass {
      *
      * @param quizActivityName
      */
-    public void gradeAssignment(String allInOneAssignmentActivityName) {
+    public String verifyStudentsAllInOneFinalSubmissionThenAddGradeAndCommentOnGradePage(String allInOneAssignmentActivityName, String studentAssignmentGradingText) {
         Activity actvty = new Activity();
-        actvty.gradeAssignment(allInOneAssignmentActivityName);
+        actvty.verifyStudentsAllInOneFinalSubmissionThenAddGradeAndCommentOnGradePage(allInOneAssignmentActivityName, studentAssignmentGradingText);
+        return actvty.getAssignmentText();
     }
 
     /**
-     * Verify Assignment Grade
      *
      * @param allInOneAssignmentActivityName
+     * @param assignmentGradedText
      */
-    public void verifyAssignmentGrade(String allInOneAssignmentActivityName) {
+    public void verifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(String allInOneAssignmentActivityName, String assignmentGradedText) {
         Activity actvty = new Activity();
-        actvty.verifyAssignmentGrade(allInOneAssignmentActivityName);
+        actvty.verifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(allInOneAssignmentActivityName, assignmentGradedText);
     }
 
     /**
-     * Allow Assignment to be resubmitted
      *
      * @param allInOneAssignmentActivityName
+     * @param studentUserName
      */
-    public void allowResubmitAssignment(String allInOneAssignmentActivityName, String studentUserName) {
+    public String allowStudentToResubmitAllInOne(String allInOneAssignmentActivityName, String studentUserName) {
         Activity actvty = new Activity();
-        actvty.allowResubmitAssignment(allInOneAssignmentActivityName, studentUserName);
+        actvty.allowStudentToResubmitAllInOne(allInOneAssignmentActivityName, studentUserName);
+        return actvty.getAssignmentText();
+    }
+
+    /**
+     *
+     * @param resubmissionText
+     */
+    public void verifyAllInOneCanBeResubmitted(String resubmissionText) {
+        Activity actvty = new Activity();
+        actvty.verifyAllInOneCanBeResubmitted(resubmissionText);
     }
 
     /**
@@ -1059,6 +1091,7 @@ public class Actions extends BaseClass {
     }
 
     /**
+     *
      * Verifies Support page
      */
     public void testSupportPage(String role) {
@@ -1099,16 +1132,23 @@ public class Actions extends BaseClass {
      */
     public void navigateToSystemCompatibility() {
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))));
+        String HandleBefore = driver.getWindowHandle();
         driver.findElement(By.xpath(xpv.getTokenValue("btnCheckYourSysCompatibiltyXPATH"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
-        String HandleBefore = driver.getWindowHandle();
-        for (String handle : driver.getWindowHandles()) {
-            driver.switchTo().window(handle);
-            if (driver.getTitle().contains("about:blank")) {
-                driver.close();
-            }
+        try {
+            new WebDriverWait(driver, 15).until(ExpectedConditions.presenceOfElementLocated(By.id("abc")));
+        } catch (TimeoutException e) {
+            //do nothing            
         }
-        driver.switchTo().window(HandleBefore);
+        if (driver.getWindowHandles().size() > 1) {
+            for (String handle : driver.getWindowHandles()) {
+                driver.switchTo().window(handle);
+                if (driver.getTitle().contains("about:blank")) {
+                    driver.close();
+                }
+            }
+            driver.switchTo().window(HandleBefore);
+        }
     }
 
     /**
@@ -1268,6 +1308,16 @@ public class Actions extends BaseClass {
     }
 
     /**
+     * Verify pes admin is able to see the related sections to the courses in
+     * the section drop down
+     */
+    public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
+        AdministrationBlock ablock = new AdministrationBlock();
+        ablock.verifySectionDropdownCourseRostersPage(courseShortName, groupCourse);
+    }
+
+    //Commented -- As looping executes very slow on Sauce Lab
+    /**
      * Verify 2tor Administrative Block - University Domain Email IDs are not
      * present in "Email Not In Domain" list
      */
@@ -1356,35 +1406,6 @@ public class Actions extends BaseClass {
         ablock.verifySiteAdminReportStudentEngagementReportPage();
     }
 
-    /**
-     * Verify pes admin is able to see the related sections to the courses in
-     * the section drop down
-     */
-    public void verifySectionDropdownCourseRostersPage(String courseShortName, String groupCourse) {
-        AdministrationBlock ablock = new AdministrationBlock();
-        ablock.verifySectionDropdownCourseRostersPage(courseShortName, groupCourse);
-    }
-
-    /**
-     * Navigate to quiz page
-     * 
-     * @param quizActivityName
-     */
-    public void navigateToQuiz(String quizActivityName) {
-        driver.findElement(By.xpath("//*[starts-with(text(),'" + quizActivityName + "')]")).click();
-        ip.isTextPresentByXPATH(driver, "//div[3]/div/div[2]", "Quiz Reports");
-    }
-
-    /**
-     * Verify UI of Quiz Page
-     * 
-     * @param quizActivityName
-     */
-    public void verifyQuizUIPage(String quizActivityName) {
-        Activity a = new Activity();
-        a.verifyQuizUIPage(quizActivityName);        
-    }
-    
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block - Set faculty Login Message
@@ -1395,6 +1416,7 @@ public class Actions extends BaseClass {
      ablock. teacherSupportSettingsLoginMessage();
      } */
     
+    //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block -Sticky Notes Post Text
      */
@@ -1404,6 +1426,7 @@ public class Actions extends BaseClass {
      ablock.studentSupportSettingsStickyNotesPostText();
      } */
     
+    //The below method affects all system users - so currently we are skipping this
     /**
      * Verify 2tor Administrative Block -Sticky Notes Post URL
      */
@@ -1517,12 +1540,10 @@ public class Actions extends BaseClass {
 
     /**
      * View Reveal Password button for All In One Assignment
-     *
-     * @param allInOneAssignmentActivityNameWithRevealPassword
      */
-    public void viewRevealPasswordButtonForAllInOneAssignemnt(String allInOneAssignmentActivityNameWithRevealPassword) {
+    public void viewRevealPasswordButtonForAllInOneAssignemnt() {
         Activity activity = new Activity();
-        activity.viewRevealPasswordButtonForAllInOneAssignemnt(allInOneAssignmentActivityNameWithRevealPassword);
+        activity.viewRevealPasswordButtonForAllInOneAssignemnt();
     }
 
     /**
@@ -1570,5 +1591,156 @@ public class Actions extends BaseClass {
     public void verifyRightSidebarOfCourseWorkPage() {
         Activity actvty = new Activity();
         actvty.verifyRightSidebarOfCourseWorkPage();
+    }
+
+    /**
+     * Navigate To Create User Page
+     */
+    public void navigateToCreateUserPage() {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlSiteAdminXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsersXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAccntsXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAddNwUsrXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAddNwUsrXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldUsrnmXPATH"));
+    }
+
+    /**
+     * Navigate To Create User Page
+     */
+    public void navigateToBrowseListOfUsersPage() {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlSiteAdminXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlSiteAdminXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlUsersXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlUsersXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlAccntsXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlAccntsXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("lftPnlBrwsNwUsrXPATH"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("lftPnlBrwsNwUsrXPATH"))).click();
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("fieldFindUsrXPATH"), 60);
+    }
+
+    /**
+     * Verify the Default TimeZone Value in Create User Page
+     */
+    public void verifyDefaultTimeZoneValueWhileUserCreation() {
+        User usr = new User();
+        usr.verifyDefaultTimeZoneValueWhileUserCreation();
+    }
+
+    /**
+     * Verify the presence of difference sections in Create User Page UI
+     */
+    public void verifySectionsOfUserCreationPage() {
+        User usr = new User();
+        usr.verifySectionsOfUserCreationPage();
+    }
+
+    /**
+     * Verify the default state of unmask password field field in Create User
+     * Page UI is unchecked
+     */
+    public void verifyDefaultUnmaskPasswordCheckBoxState() {
+        User usr = new User();
+        usr.verifyDefaultUnmaskPasswordCheckBoxState();
+    }
+
+    /**
+     * Verify the password encryption is off and on when unmask password check
+     * box is checked and unchecked
+     */
+    public void verifyUnmaskPasswordCheckBoxFunctionality() {
+        User usr = new User();
+        usr.verifyUnmaskPasswordCheckBoxFunctionality();
+    }
+
+    /**
+     * Verify Email Address Is Not Visible When "Hide My Email Address From
+     * EveryOne" Is Selected For User
+     *
+     * @param user
+     */
+    public void verifyUsersEmailAddressIsNotVisibleAsHideEmailAddressFromEveryoneIsSelected(String user) {
+        Contact c = new Contact();
+        c.verifyUsersEmailAddressIsNotVisibleAsHideEmailAddressFromEveryoneIsSelected(user);
+    }
+
+    /**
+     * Verify Email Address Is Visible When "Allow everyone to see my Email
+     * address" Is Selected For User
+     *
+     * @param user
+     */
+    public void verifyUsersEmailAddressIsVisibleAsAllowEveryoneToSeeEmailAddressIsSelected(String user) {
+        Contact c = new Contact();
+        c.verifyUsersEmailAddressIsVisibleAsAllowEveryoneToSeeEmailAddressIsSelected(user);
+    }
+
+    /**
+     * Edit "List Of Interests" filed of User
+     *
+     * @param user
+     */
+    public void verifyListOfInterestsFieldUpdation(String user) {
+        User usr = new User();
+        usr.verifyListOfInterestsFieldUpdation(user);
+    }
+
+    /**
+     * Verify Browse List of Users Page
+     *
+     * @param user
+     */
+    public void verifyBrowseListOfUsersPage(String user) {
+        User usr = new User();
+        usr.verifyBrowseListOfUsersPage(user);
+    }
+
+    /**
+     * Verify the different values in "Authentication Method" drop down field in
+     * Create User Page
+     */
+    public void verifyChooseAnAuthenticationMethodValuesInCreateUserPage() {
+        User usr = new User();
+        usr.verifyChooseAnAuthenticationMethodValuesInCreateUserPage();
+    }
+
+    /**
+     * Change Password from Force Password Change Page on Student First Time
+     * Login
+     */
+    public void forceChangePasswordOnFirstLogin() {
+        User usr = new User();
+        usr.forceChangePasswordOnFirstLogin();
+    }
+
+    /**
+     * @param allInOneAssignmentActivityName
+     */
+    public void navigateToActivity(String allInOneAssignmentActivityName) {
+        driver.findElement(By.xpath("//*[starts-with(text(),'" + allInOneAssignmentActivityName + "')]")).click();
+    }
+
+    /**
+     *
+     */
+    public void verifyAllInOneHasNoSubmission() {
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]",
+                "There are no student submissions ready to review or grade.");
+        driver.findElement(By.linkText("Submissions")).click();
+        ip.isTextPresentByXPATH(driver, "//div[5]/div/div[4]/div/div/div/div[3]",
+                "There are no student submissions ready to review or grade.");
+    }
+
+    /**
+     *
+     * @param allInOneAssignmentActivityName
+     */
+    public void verifyAllInOneCannotBeGraded(String allInOneAssignmentActivityName) {
+        Activity activity = new Activity();
+        activity.verifyAllInOneCannotBeGraded(allInOneAssignmentActivityName);
     }
 }

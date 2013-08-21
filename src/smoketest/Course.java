@@ -52,7 +52,7 @@ public class Course extends BaseClass {
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsStrtDtYrXPATH")))).selectByValue("2012");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsEndDtDyXPATH")))).selectByValue("31");
         new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctXrsEndDtMnthXPATH")))).selectByValue("7");
-        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsEndDtYrXPATH")))).selectByValue("2013");
+        new Select(driver.findElement(By.xpath(xpv.getTokenValue("slctCrsEndDtYrXPATH")))).selectByValue("2014");
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
 
         //Verify Course is created or not
@@ -203,7 +203,7 @@ public class Course extends BaseClass {
         driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div[4]/div/div[2]/div", "The backup file was successfully created.");
         driver.findElement(By.xpath("//div/input")).click();
-        ip.isTextPresentByCSS(driver, "h2.main", "Import a backup file");
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/h2", "Import a backup file");
         driver.findElement(By.cssSelector("#region-main > div.region-content")).click();
         ip.isTextPresentByXPATH(driver, "//div[3]/table/tbody/tr/td", backupFileName);
     }
@@ -262,16 +262,16 @@ public class Course extends BaseClass {
         int whiteSpaceCourseName = fetchedCourseName.indexOf(" ");
         int whiteSpaceShortCourseName = fetchedShortCourseName.indexOf(" ");
         String restoredCourseName, restoredShortCourseName;
-        if (test.contentEquals("CriticalTests") || test.contentEquals("DebugTests")) {
-            restoredCourseName = fetchedCourseName.substring(0, 11)
-                    + "Restore-" + fetchedCourseName.substring(11);
-             restoredShortCourseName = fetchedShortCourseName.substring(0, 11)
-                    + "Restore-" + fetchedShortCourseName.substring(11);            
-        } else {
+        if (!test.contentEquals("CriticalTests")) {
             restoredCourseName = fetchedCourseName.substring(0, whiteSpaceCourseName)
                     + " Restore " + fetchedCourseName.substring(whiteSpaceCourseName + 1);
             restoredShortCourseName = fetchedShortCourseName.substring(0, whiteSpaceShortCourseName)
-                    + " Restore " + fetchedShortCourseName.substring(whiteSpaceShortCourseName + 1);             
+                    + " Restore " + fetchedShortCourseName.substring(whiteSpaceShortCourseName + 1);
+        } else {
+             restoredCourseName = fetchedCourseName.substring(0, 11)
+                    + "Restore-" + fetchedCourseName.substring(11);
+             restoredShortCourseName = fetchedShortCourseName.substring(0, 11)
+                    + "Restore-" + fetchedShortCourseName.substring(11);
         }
         driver.findElement(By.id("id_setting_course_course_fullname")).clear();
         driver.findElement(By.id("id_setting_course_course_shortname")).clear();

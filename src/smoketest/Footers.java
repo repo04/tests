@@ -112,7 +112,7 @@ public class Footers extends BaseClass {
                 privacyContact = "Should you have other questions or concerns about this Privacy Policy or "
                         + "anything within it, please email us at privacy@2U.com.";
                 aboutUS = "The @WashULaw Master of Laws (LL.M.) program is a dynamic online LL.M. "
-                        + "program offered by the Washington University School of Law, part of the "
+                        + "program for foreign lawyers offered by the Washington University School of Law, part of the "
                         + "elite Washington University in St. Louis. Taught by highly respected faculty, "
                         + "this program is designed to help the next generation of attorneys achieve "
                         + "their career goals and learn skills to succeed in the rapidly changing field "
@@ -177,10 +177,33 @@ public class Footers extends BaseClass {
                         + "anything within it, please email us at privacy@2U.com or write to us "
                         + "at Semester Online Privacy Officer, 8201 Corporate Drive, "
                         + "Suite 190, Landover, MD 20785.";
-                aboutUS = "ABOUT SEMESTER ONLINE";                
+                aboutUS = "Imagine a new way to experience college…";
                 termsOfAgreement = "SEMESTER ONLINE WEBSITE TERMS OF USE AGREEMENT";
                 contactUSLink = "StudentSupport@semesteronline.org";
                 contactUSTollFree = "855-896-4493";
+                break;
+            case "sc-msn":
+                verify1 = "Simmons College";
+                privacyConsent = "By using the " + xpv.getTokenValue(program + "SupportName")
+                        + " Website, you consent to our Privacy Policy.";
+                privacyContact = "Should you have other questions or concerns about this Privacy Policy or "
+                        + "anything within it, please email us at privacy@2U.com or write to us "
+                        + "at Master of Science in Nursing Privacy Officer, 8201 Corporate Drive, "
+                        + "Suite 190, Landover, MD 20785.";
+                aboutUS = "Nursing@Simmons is an innovative Master of Science in Nursing program delivered online "
+                        + "for aspiring family nurse practitioners (FNPs). Designed for licensed registered nurses "
+                        + "with a bachelor’s degree, the online FNP program prepares them to make an even greater "
+                        + "impact in their field by becoming clinical experts who can provide premium health care "
+                        + "to diverse populations across the lifespan. Students collaborate on a state-of-the-art "
+                        + "online learning platform that uses cutting-edge technology and familiar social networking "
+                        + "tools to create an intimate and interactive learning environment. Clinical placements "
+                        + "are carefully selected to maximize the learning experience and allow students to gain "
+                        + "hands-on, practical skills without having to relocate. Nursing@Simmons features the "
+                        + "same academically rigorous curriculum as the on-campus program, and courses are designed "
+                        + "and taught by the same faculty members who teach on campus.";
+                termsOfAgreement = xpv.getTokenValue(program + "SupportName") + " WEBSITE CAMPUS TERMS OF USE AGREEMENT";
+                contactUSLink = "studentsupport@onlinenursing.simmons.edu";
+                contactUSTollFree = "855-465-7466";
         }
         verify2 = "Terms And Conditions";
         verify3 = "Privacy Statement";
@@ -233,6 +256,7 @@ public class Footers extends BaseClass {
                     if (i == 4) {
                         switch (program) {
                             case "wu-llm":
+                            case "corp-son":
                                 ip.isTextPresentByXPATH(driver, "//p", aboutUS);
                                 break;
                             default:

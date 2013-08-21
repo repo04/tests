@@ -22,6 +22,8 @@
             <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
             <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="runThrghTestNG.Teacher_ResubmitAllInOne"/>            
+            <class name="runThrghTestNG.Student_AllInOneEnable"/>
             <class name="runThrghTestNG.ContentAdmin_CleanTestData"/>
             <class name="runThrghTestNG.Pes_CleanTestData"/>
             <class name="runThrghTestNG.Pes_ArchiveCourse"/>

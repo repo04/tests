@@ -5,7 +5,7 @@ import runThrghTestNG.BaseClass;
 import org.testng.Assert;
 
 public class Support extends BaseClass {
-
+        
     /**
      * Verifies Support page
      */
@@ -85,5 +85,5 @@ public class Support extends BaseClass {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("androidAppXPATH"), 60);
         String android = driver.findElement(By.xpath(xpv.getTokenValue("androidAppXPATH"))).getAttribute("href");
         Assert.assertEquals(android, xpv.getTokenValue(program + "AndroidAppUrl"));
-    }
+    }    
 }

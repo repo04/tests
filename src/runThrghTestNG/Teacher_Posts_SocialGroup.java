@@ -90,6 +90,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         teacherUrlWallPost = a.urlPost("urlWallPost");
         Reporter.log("teacherUrlWallPost: " + teacherUrlWallPost, true);
 
+        a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         teacherUrlCoursePostArray[0][0] = a.urlPost("urlCrsPost");
         Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0], true);
@@ -123,7 +124,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     }
 
     /**
-     * Teacher verifies PES posts on Course Wall
+     * Teacher verifies Pes posts on Course Wall
      *
      * @param groupCourseName
      * @param pesTextCourseSectionPost
@@ -132,8 +133,8 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCoursePesCoursePosts", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-    groups = {"regressionSmoke", "wall.teacherVerifyPESCoursePosts"})
-    public void testTeacherVerifyPESCoursePosts(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
+    groups = {"regressionSmoke", "wall.teacherVerifyPesCoursePosts"})
+    public void testTeacherVerifyPesCoursePosts(String groupCourseName, String pesTextCourseSectionPost, String pesTxtCoursePostCommentsOn, String pesTextCoursePostCommentsOff, String pesTextAnnouncementCoursePost) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.verifyCoursePost(pesTextCourseSectionPost, pesTxtCoursePostCommentsOn, pesTextCoursePostCommentsOff, pesTextAnnouncementCoursePost);
@@ -152,7 +153,6 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      a.selectGroupCourse(groupCourseName);
      a.verifySyllabusActivity();
      }*/
-    
     /**
      * Teacher verify Resume
      *
@@ -210,13 +210,13 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
-          groups = {"regressionSmoke", "criticalDataSmoke", "contact.teacherAddStudentAsContactfromCourse"})
+    groups = {"regressionSmoke", "criticalDataSmoke", "contact.teacherAddStudentAsContactfromCourse"})
     public void testTeacherAddStudentAsContactfromCourse(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToAllInstructorsStudentsPage("student");
         a.addUserAsContact(studentUserName);
-    }    
+    }
     
     /**
      * Verify Settings page specific to user role
@@ -236,7 +236,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
      * @param glossaryName
      * @throws Exception
      */
-    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "activities.teacherCreateGlossaryEntry"})
     public void testTeacherCreateGlossaryEntry(String groupCourseName, String glossaryName) throws Exception {
         a.navigateToMyCourse();
@@ -246,13 +246,31 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         teacherGlossaryEntryNameArray[0][0] = a.createGlossaryEntry(glossaryName);
         Reporter.log("teacherGlossaryEntryName: " + teacherGlossaryEntryNameArray[0][0], true);
     }
+    
+    /**
+     * 
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityName
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GroupCourseAssignment", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    groups = {"regressionSmoke", "fullSmoke", "allinone.teacherVerifyNoSubmissionAndCannotBeGraded"})
+    public void testTeacherVerifyAllInOneHasNoSubmissionAndCannotBeGraded(String groupCourseName, String allInOneAssignmentActivityName) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToActivityReport();
+        a.navigateToActivity(allInOneAssignmentActivityName);
+        a.verifyAllInOneHasNoSubmission();
+        a.navigateToGrades();
+        a.verifyAllInOneCannotBeGraded(allInOneAssignmentActivityName);
+    }
 
     /**
      * Teacher create Glossary Category
      *
      * @throws Exception
      */
-    @Test(dataProvider = "CourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
+    @Test(dataProvider = "GroupCourseGlossaryName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "activities.teacherCreateGlossaryCategory"})
     public void testTeacherCreateGlossaryCategory(String groupCourseName, String glossaryName) throws Exception {
         a.navigateToMyCourse();
@@ -263,7 +281,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         Reporter.log("teacherGlossaryCategoryName: " + teacherGlossaryCategoryNameArray[0][0], true);
     }
     
-    /**
+     /**
      * Teacher verify the elements on the right sidebar of course work page  
      *
      * @param groupCourseName
@@ -277,6 +295,19 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a.navigateToCourseWorkPage();
         a.verifyRightSidebarOfCourseWorkPage();
     }
+    
+    
+    //The below method affects all system users - so currently we are skipping this
+    /**
+     * Teacher verify Login message - Currently commented as it affects all system users
+     *
+     * @throws Exception
+     */
+    /*
+    @Test(groups = {"2torAdministrativeBlock.facultyVerificationLoginMessage"})
+    public void testTeacherVerifyLoginMessage() throws Exception {
+        a.facultyVerificationLoginMessage();
+    } */
 
     /**
      * The annotated method will be run after all the test methods in the

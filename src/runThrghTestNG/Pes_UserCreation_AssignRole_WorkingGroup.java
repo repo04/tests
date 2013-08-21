@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 import smoketest.Actions;
 
 /**
- * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
+ * Pes Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
  * Teacher/Student roles Create Working Group & add users as members Logs out
  */
 public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
@@ -44,16 +44,16 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
             return new Object[][]{{ldv.getTokenValue("teacherUserName"), ldv.getTokenValue("studentUserName")}};
         }
     }
-    
+
     @DataProvider(name = "Coordinator")
     public static Object[][] Coordinator(ITestContext context) throws Exception {
         /*if (test.equalsIgnoreCase("RegressionTests") || test.equalsIgnoreCase("SmokeTests")) {
-            System.out.println("if Coordinator: " + test);
-            return (coordinatorNameArray);
-        } else {
-            System.out.println("else Coordinator: " + test);
-            return new Object[][]{{ldv.getTokenValue("coordinatorUserName")}};
-        }*/
+         System.out.println("if Coordinator: " + test);
+         return (coordinatorNameArray);
+         } else {
+         System.out.println("else Coordinator: " + test);
+         return new Object[][]{{ldv.getTokenValue("coordinatorUserName")}};
+         }*/
         return (coordinatorNameArray);
     }
 
@@ -75,7 +75,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
             return (studentNameArray);
         } else {
             System.out.println("Inside StudentName: " + test);
-            return new Object[][]{{context.getCurrentXmlTest().getParameter("studentUserName")}};
+            return new Object[][]{{ldv.getTokenValue("studentUserName")}};
         }
     }
 
@@ -90,7 +90,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         System.out.println("init GroupCourseUsers");
         return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), Users(context));
     }
-    
+
     @DataProvider(name = "GroupCourseCoordinatorUser")
     public static Iterator<Object[]> GroupCourseCoordinatorUser(ITestContext context) throws Exception {
         System.out.println("init GroupCourseCoordinatorUser");
@@ -153,12 +153,12 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
 
     /**
      * The annotated method will be run before the first test method in the
-     * current class is invoked, Student logs in, PES Admin Logs in
+     * current class is invoked, Student logs in, Pes Admin Logs in
      *
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
-    public void testPESAdminLogIn() throws Exception {
+    public void testPesAdminLogIn() throws Exception {
         a.login("pesAdmin");
     }
 
@@ -167,13 +167,15 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.creation"})
-    public void testPESAdminUserCreation() throws Exception {
+    @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.pesAdminCreateUsers"})
+    public void testPesAdminUserCreation() throws Exception {
         a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
         userNamesArray[0][0] = a.createUser("teacher");
         Reporter.log("teacherUserName: " + userNamesArray[0][0], true);
 
         a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
         userNamesArray[0][1] = a.createUser("student");
         studentNameArray[0][0] = userNamesArray[0][1];
         Reporter.log("studentUserName: " + userNamesArray[0][1], true);
@@ -184,8 +186,9 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"users.coordinatorCreation"})
-    public void testPESAdminCourseCoordinatorCreation() throws Exception {
+    public void testPesAdminCourseCoordinatorCreation() throws Exception {
         a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
         coordinatorNameArray[0][0] = a.createUser("coordinator");
         Reporter.log("coordinatorNamesArray: " + coordinatorNameArray[0][0], true);
     }
@@ -195,8 +198,9 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.assignRole"})
-    public void testPESAdminAssignRole(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
+    @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", 
+        "criticalDataSmoke", "users.pesAdminAssignRole"})
+    public void testPesAdminAssignRole(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.enrollUserToRole_GroupCourse(teacherUserName, groupCourseName);
@@ -207,13 +211,13 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     }
 
     /**
-     * 
+     *
      * @param groupCourseName
      * @param coordinatorUserName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GroupCourseCoordinatorUser", groups = {"users.assignRoleToCoordinator"})
-    public void testPESAdminRoleToCoordinator(String groupCourseName, String coordinatorUserName) throws Exception {
+    public void testPesAdminRoleToCoordinator(String groupCourseName, String coordinatorUserName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.enrollUserToRole_GroupCourse(coordinatorUserName, groupCourseName);
@@ -225,10 +229,10 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "workingGroup.create"})
-    public void testPESAdminCreateWorkingGroup() throws Exception {
+    public void testPesAdminCreateWorkingGroup() throws Exception {
         a.navigateToWorkingGroups();
         workingGroupNameArray[0][0] = a.createWorkingGroup();
-        Reporter.log("wrkngGrp: " + workingGroupNameArray[0][0], true);
+        Reporter.log("workingGroupName: " + workingGroupNameArray[0][0], true);
     }
 
     /**
@@ -237,7 +241,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "WorkingGroupUsers", groups = {"regressionSmoke", "fullSmoke", "workingGroup.addMembers"})
-    public void testPESAdminAddMembersToWorkingGroup(String workingGroupName, String teacherUserName, String studentUserName) throws Exception {
+    public void testPesAdminAddMembersToWorkingGroup(String workingGroupName, String teacherUserName, String studentUserName) throws Exception {
         a.navigateToWorkingGroups();
         a.accessWorkingGroup(workingGroupName);
         a.addMembersToWorkingGroup(teacherUserName, studentUserName);
@@ -291,9 +295,9 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     }
 
     /**
-     * 
+     *
      * @param groupCourseName
-     * @throws Exception 
+     * @throws Exception
      */
     @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
     groups = {"regressionSmoke", "wall.courseAnnouncementPost"})
@@ -430,17 +434,17 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
     }
 
     /**
-     * PesAdmin verify University Domain Email IDs are not present in "Email Not
-     * In Domain" list
+     * Commented -- As looping executes very slow on Sauce Lab PesAdmin verify
+     * University Domain Email IDs are not present in "Email Not In Domain" list
      *
      * @throws Exception
      */
-    @Test(groups = {"regressionSmoke", "2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"})
+    /*@Test(groups = {"2torAdministrativeBlock.verifyUniversityDomainNotPresentInEmailList"})
     public void testPesAdminVerifyUniversityDomainNotPresentInEmailNotInDomainList() throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToEmailNotInDomain();
         a.verifyUniversityDomainNotPresentInEmailNotInDomainList();
-    }
+    }/*
 
     /**
      * PesAdmin verify the Report settings
@@ -502,13 +506,13 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "CourseShortGroupCourseName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
+    groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySectionDropdownCourseRostersPage(String courseShortName, String groupCourseName) throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToCourseRosters();
         a.verifySectionDropdownCourseRostersPage(courseShortName, groupCourseName);
     }
-    
+
     /**
      * Verify graded & submitted section of Offline Activity
      *
@@ -524,24 +528,86 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
         a.navigateToGrades();
         a.verifyOfflineActivitySubmittedAndGradedSection(offlineActivityName);
     }
-    
+
     /**
-     * Verify UI of Quiz Reports Section
-     * 
-     * @param groupCourseName
-     * @param quizActivityName
-     * @throws Exception 
+     * Verify the Default TimeZone Value in Create User Page
      */
-    @Test(dataProvider = "GroupCourseQuiz", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-    groups = {"regressionSmoke", "quiz.pesVerifyUI"})
-    public void testPesAdminVerifyQuizUIPage(String groupCourseName, String quizActivityName) throws Exception {
-        a.navigateToMyCourse();
-        a.selectGroupCourse(groupCourseName);
-        a.navigateToActivityReport();
-        a.navigateToQuiz(quizActivityName);
-        a.verifyQuizUIPage(quizActivityName);
+    @Test(groups = {"regressionSmoke", "users.pesAdminVerifyUsersDefaultTimeZone"})
+    public void testPesAdminVerifyUsersDefaultTimeZone() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyDefaultTimeZoneValueWhileUserCreation();
     }
-    
+
+    /**
+     * Verify the presence of difference sections in Create User Page UI
+     */
+    @Test(groups = {"regressionSmoke", "users.pesAdminVerifySectionsOfUserCreationPage"})
+    public void testPesAdminVerifySectionsOfUserCreationPage() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifySectionsOfUserCreationPage();
+    }
+
+    /**
+     * Verify the default state of unmask password field field in Create User
+     * Page UI is unchecked
+     */
+    @Test(groups = {"regressionSmoke", "users.pesAdminVerifyDefaultUnmaskPasswordCheckBoxState"})
+    public void testPesAdminVerifyDefaultUnmaskPasswordCheckBoxState() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyDefaultUnmaskPasswordCheckBoxState();
+    }
+
+    /**
+     * Verify the password encryption is off and on when unmask password check
+     * box is checked and unchecked
+     */
+    @Test(groups = {"regressionSmoke", "users.pesAdminVerifyUnmaskPasswordFunctionality"})
+    public void testPesAdminVerifyUnmaskPasswordCheckBoxFunctionality() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyUnmaskPasswordCheckBoxFunctionality();
+    }
+
+    /**
+     * Verify the different values in "Authentication Method" drop down field in
+     * Create User Page
+     */
+    @Test(groups = {"regressionSmoke", "users.pesAdminVerifyAuthenticationMethodValues"})
+    public void testPesAdminVerifyChooseAnAuthenticationMethodValuesInCreateUserPage() throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToCreateUserPage();
+        a.verifyChooseAnAuthenticationMethodValuesInCreateUserPage();
+    }
+
+    /**
+     * Edit "List Of Interests" filed of User
+     *
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "StudentName", groups = {"regressionSmoke", "users.pesAdminVerifyListOfInterestsFieldUpdation"})
+    public void testPesAdminVerifyListOfInterestsFieldUpdation(String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToBrowseListOfUsersPage();
+        a.verifyListOfInterestsFieldUpdation(studentUserName);
+    }
+
+    /**
+     * Verify Browse List of Users Page
+     *
+     * @param studentUserName
+     * @throws Exception
+     */
+    @Test(dataProvider = "StudentName", groups = {"regressionSmoke", "users.pesAdminVerifyBrowseListOfUsersPage"})
+    public void testPesAdminVerifyBrowseListOfUsersPage(String studentUserName) throws Exception {
+        a.navigateToMyContacts();
+        a.navigateToBrowseListOfUsersPage();
+        a.verifyBrowseListOfUsersPage(studentUserName);
+    }
+
     //Following functional test methods affect all system users - so currently we are skipping this
     /**
      * PesAdmin Set Faculty Login Message
@@ -562,7 +628,6 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    
     /*
      @Test(groups = {"2torAdministrativeBlock.contentVerify"})
      public void testPesAdminAdministrativeBlockStickyNotesPostText() throws Exception {
@@ -577,7 +642,6 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      *
      * @throws Exception
      */
-    
     /*
      @Test(groups = {"2torAdministrativeBlock.contentVerify"})
      public void testPesAdminAdministrativeBlockStickyNotesPostURL() throws Exception {
@@ -593,7 +657,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
-    public void testPESAdminLogOut() throws Exception {
+    public void testPesAdminLogOut() throws Exception {
         a.logOut();
     }
 }

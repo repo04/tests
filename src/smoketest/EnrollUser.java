@@ -141,25 +141,33 @@ public class EnrollUser extends BaseClass {
 
         driver.findElement(By.xpath(xpv.getTokenValue("lnkCrsPrsntXPATH"))).click();
 
+        String roleXpath, groupCourseXpath;
+        if ("4".equals(userRole) && test.equals("regressionTests")) {
+            roleXpath = "//tr[3]/td[2]/a";
+            groupCourseXpath = "//tr[4]/td[2]/a";
+        } else {
+            roleXpath = "//td[2]/a";
+            groupCourseXpath = "//tr[3]/td[2]/a";
+        }
         switch (userRole) {
 
             case "4":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Non-editing teacher");
+                ip.isTextPresentByXPATH(driver, roleXpath, "Non-editing teacher");
                 break;
 
             case "5":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Student");
+                ip.isTextPresentByXPATH(driver, roleXpath, "Student");
                 break;
 
             case "9":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrRoleXPATH"), "Course Coordinator");
+                ip.isTextPresentByXPATH(driver, roleXpath, "Course Coordinator");
                 break;
 
             default:
                 SeleneseTestBase.fail("'Non-editing teacher(4)'/'Student(5)' not found in userRole: " + userRole);
         }
 
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("vrfyUsrGrpCrsXPATH"), groupCourse);
+        ip.isTextPresentByXPATH(driver, groupCourseXpath, groupCourse);
     }
 
     /**

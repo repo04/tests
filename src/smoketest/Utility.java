@@ -32,9 +32,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import runThrghTestNG.BaseClass;
 
-public class Utility {
+public class Utility extends BaseClass {
 
     public static IsPresent ip = new IsPresent();
+    public static String str;
 
     /**
      * Uses js to click on hidden element on the page by XPATH
@@ -44,6 +45,17 @@ public class Utility {
      */
     public static void clickByJavaScript(WebDriver driver, String menuXPATH) {
         WebElement hiddenElement = driver.findElement(By.xpath(menuXPATH));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
+    }
+    
+    /**
+     * Uses js to click on hidden element on the page by CSS
+     * 
+     * @param driver
+     * @param menuCSS 
+     */
+    public static void clickByJavaScriptUsingCSS(WebDriver driver, String menuCSS) {
+        WebElement hiddenElement = driver.findElement(By.cssSelector(menuCSS));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
     }
 
@@ -196,13 +208,13 @@ public class Utility {
         } catch (TimeoutException e) {
             //Do Nothing
             System.out.println("No unknown modal dialog present");
-        }        
+        }
         ip.isTitlePresent(driver, "Gmail: Email from Google");
     }
 
     /**
-     * 
-     * @param alert 
+     *
+     * @param alert
      */
     private static void handleAlertException(Alert alert) {
         String error = "###**Unexpected Alert located with Text as: " + alert.getText() + "**###";
@@ -389,14 +401,15 @@ public class Utility {
         int x = 1;
         loop:
         for (WebElement frame : iframes) {
+            String iframeID = frame.getAttribute("id");
+            System.out.println("Iframe ID: " + iframeID);
             if (x == iframeIndex) {
-                System.out.println("Iframe ID: " + frame.getAttribute("id"));
-                driver.switchTo().frame(frame.getAttribute("id"));
+                driver.switchTo().frame(iframeID);
                 break loop;
             }
             x++;
         }
-
+        
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), textInIframe);
@@ -428,7 +441,7 @@ public class Utility {
             Utility.illegalStateException("Timed out after 60 seconds waiting for presence of DATE located by ID: " + id);
         }
     }
-    
+
     /**
      * Read contents from a file and paste the contents in a text box field in website
      *
@@ -448,5 +461,31 @@ public class Utility {
         } catch (Exception e) {
             System.err.println(e);
         }
+    }
+    
+    /**
+     * 
+     * @param driver
+     * @param iframeIndex
+     * @return 
+     */
+    public static String getTextFromContentEditableIframe(WebDriver driver, int iframeIndex) {
+        List<WebElement> iFrames = driver.findElements(By.tagName("iframe"));
+        System.out.println("iFrames count:" + iFrames.size());
+        int x = 1;
+        for (WebElement iframe : iFrames) {
+            String iframeID = iframe.getAttribute("id");
+            System.out.println("Iframe ID: " + iframeID);
+            if (x == iframeIndex) {
+                driver.switchTo().frame(iframeID);
+            }
+            x++;
+        }
+
+        //Switch focus
+        WebElement editableTxtArea = driver.switchTo().activeElement();
+        String text = editableTxtArea.getText();
+        driver.switchTo().defaultContent();
+        return text;
     }
 }

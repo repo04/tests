@@ -47,7 +47,7 @@ public class IsPresent {
     public void isTextPresentByXPATH(WebDriver driver, String path, String text, int wait) {
         new WebDriverWait(driver, wait).until(ExpectedConditions.textToBePresentInElement(By.xpath(path), text));
     }
-    
+
     /**
      * Driver checks if the given TEXT is present in the specified element by
      * ID till allocated time
@@ -61,6 +61,7 @@ public class IsPresent {
         new WebDriverWait(driver, wait).until(ExpectedConditions.textToBePresentInElement(By.id(id), text));
     }
 
+    
     /**
      * Driver checks if an element containing Text is present by XPATH on the
      * DOM of a page
@@ -143,8 +144,8 @@ public class IsPresent {
     public void isElementClickableByXpath(WebDriver driver, String elementClickable, int time) {
         new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(By.xpath(elementClickable)));
     }
-
-    /**
+    
+     /**
      * An expectation for checking that an element with text is either invisible or not present on the DOM
      * 
      * @param driver

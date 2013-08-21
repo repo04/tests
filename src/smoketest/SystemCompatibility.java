@@ -15,7 +15,7 @@ import runThrghTestNG.BaseClass;
  *
  * @author somesh.bansal
  */
-public class SystemCompatibility extends BaseClass{
+public class SystemCompatibility extends BaseClass {
 
     String programName = program;
     String browserName = browser;
@@ -189,7 +189,7 @@ public class SystemCompatibility extends BaseClass{
     public void backToTopAndMoreInfoLinks() {
 
         //TC: C57155 Verifies the "Back to top" and more info links are working
-        ip.isElementClickableByXpath(driver, "//td[3]/a", 60);
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("sysCompPageTitleXPATH"), "Home > System Compatibility");
         List<WebElement> backtotoplinks = driver.findElements(By.linkText("back to top"));
         System.out.println("Total back to top links: " + backtotoplinks.size());
 
@@ -291,7 +291,9 @@ public class SystemCompatibility extends BaseClass{
     public void mobileApplicationsUIVerify() {
 
         //TC: C57167 Verifies the content of "Mobile Application" section
-        if (programName.equalsIgnoreCase("gu-msn") || programName.equalsIgnoreCase("unc-mba") || programName.equalsIgnoreCase("usc-mat") || programName.equalsIgnoreCase("usc-msw")) {
+        if (programName.equalsIgnoreCase("gu-msn") || programName.equalsIgnoreCase("unc-mba") 
+                || programName.equalsIgnoreCase("usc-mat") || programName.equalsIgnoreCase("usc-msw")
+                || programName.equalsIgnoreCase("corp-son")) {
             ip.isElementPresentByLINK(driver, "Mobile Applications");
             ip.isTextPresentByXPATH(driver, xpv.getTokenValue("mobileAppHeadingXPATH"), "Mobile Applications");
             ip.isTextPresentByXPATH(driver, xpv.getTokenValue("mobileAppPoint1XPATH"), "View your course material, including lessons, documents, and videos");

@@ -65,10 +65,25 @@ public class Contact extends BaseClass {
 
     /**
      * User confirm contact request
-     * 
+     *
      * @param user
      */
     void confirmContactRequest(String user) {
+        int i = locateContact(user);
+        driver.findElement(By.xpath("//li[" + i + "]/div/div/a/span")).click();
+        ip.isElementClickableByXpath(driver, "//td[2]/table/tbody/tr[2]/td[2]/em/button", 60);
+        driver.findElement(By.xpath("//td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
+        ip.isTextPresentByXPATH(driver, "//li[1]/div/div[2]/div/a", Utility.getFullName(user));
+        ip.isTextPresentByXPATH(driver, "//li[1]/div/div/a/span", "Send Email");
+    }
+
+    /**
+     * Locate Contact in My Contacts Page
+     *
+     * @param user
+     * @return
+     */
+    private int locateContact(String user) {
         int i = 1;
         ip.isElementClickableByXpath(driver, "//li[" + i + "]/div/div[2]/div/a", 60);
         Boolean contact = true;
@@ -80,14 +95,34 @@ public class Contact extends BaseClass {
             }
             i++;
         } while (i < 6);
-
         if (contact) {
             Utility.illegalStateException("Contact not found: " + user);
         }
-        driver.findElement(By.xpath("//li[" + i + "]/div/div/a/span")).click();
-        ip.isElementClickableByXpath(driver, "//td[2]/table/tbody/tr[2]/td[2]/em/button", 60);
-        driver.findElement(By.xpath("//td[2]/table/tbody/tr[2]/td[2]/em/button")).click();
-        ip.isTextPresentByXPATH(driver, "//li[1]/div/div[2]/div/a", Utility.getFullName(user));
-        ip.isTextPresentByXPATH(driver, "//li[1]/div/div/a/span", "Send Email");
+        return i;
+    }
+
+    /**
+     * Verify Email Address Is Not Visible When "Hide My Email Address From
+     * EveryOne" Is Selected For User
+     *
+     * @param user
+     */
+    void verifyUsersEmailAddressIsNotVisibleAsHideEmailAddressFromEveryoneIsSelected(String user) {
+        int i = locateContact(user);
+        driver.findElement(By.xpath("//li[" + i + "]/div/div[2]/div/a")).click();
+        ip.isElementClickableByXpath(driver, "//div[11]/div/div[2]/a", 60);
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpv.getTokenValue("usrEmailXPATH"))));
+    }
+
+    /**
+     * Verify Email Address Is Visible When "Allow everyone to see my Email
+     * address" Is Selected For User
+     *
+     * @param user
+     */
+    void verifyUsersEmailAddressIsVisibleAsAllowEveryoneToSeeEmailAddressIsSelected(String user) {
+        int i = locateContact(user);
+        driver.findElement(By.xpath("//li[" + i + "]/div/div[2]/div/a")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.textToBePresentInElement(By.xpath(xpv.getTokenValue("usrEmailXPATH")), "@2u.com"));
     }
 }

@@ -4,9 +4,11 @@
  */
 package runThrghTestNG;
 
+import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import smoketest.Actions;
 
@@ -15,6 +17,13 @@ import smoketest.Actions;
  * Group
  */
 public class Student_DeleteSocialGroup extends BaseClass {
+    
+    @DataProvider(name = "GroupCourseAssignmentGradedText")
+    public static Iterator<Object[]> GroupCourseAssignmentGradedText(ITestContext context) throws Exception {
+        System.out.println("init GroupCourseAssignmentGradedText");
+        return DataProviderUtility.cartesianProviderFrom(ContentAdmin_Course_GroupCourseCreation.GroupCourse(context), ContentAdmin_Course_GroupCourseCreation.AssignmentName(context),
+                Teacher_JoinDelete_SocialGroup.TeacherGradeStudentAllInOneText(context));
+    }
 
     Actions a = new Actions();
 
@@ -63,6 +72,21 @@ public class Student_DeleteSocialGroup extends BaseClass {
         a.navigateToMyHome();
         a.navigateToSupport("Student");
         a.testSupportMobileAppURL("Student");
+    }
+
+    /**
+     * 
+     * @param groupCourseName
+     * @param allInOneAssignmentActivityName
+     * @param teacherGradeStudentAssignmentText
+     * @throws Exception 
+     */
+    @Test(dataProvider = "GroupCourseAssignmentGradedText", groups = {"regressionSmoke", "fullSmoke", "allinone.StudentVerifyGradeAndTeachersCommentOnSubmissionAndGradePage"})
+    public void testStudentVerifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(String groupCourseName, String allInOneAssignmentActivityName, String teacherGradeStudentAssignmentText) throws Exception {
+        a.navigateToMyCourse();
+        a.selectGroupCourse(groupCourseName);
+        a.navigateToGrades();
+        a.verifyAllInOneGradeAndTeachersCommentOnSubmissionAndGradePage(allInOneAssignmentActivityName, teacherGradeStudentAssignmentText);
     }
 
     /**

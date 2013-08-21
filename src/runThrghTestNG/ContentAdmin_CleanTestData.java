@@ -17,7 +17,7 @@ import smoketest.Actions;
  *
  *
  */
-public class ContentAdmin_CleanTestData extends BaseClass {
+public class ContentAdmin_CleanTestData {
 
     Actions a = new Actions();
     static String[][] backupFileNameArray = new String[1][1];
@@ -33,21 +33,17 @@ public class ContentAdmin_CleanTestData extends BaseClass {
     /**
      * The annotated method will be run before the first test method in the
      * current class is invoked, Content Admin logs in
-     *
+     *     
      * @throws Exception
      */
     @BeforeClass(groups = {"prerequisite"})
     public void testContentAdminLogIn() throws Exception {
-        if (test.equalsIgnoreCase("CriticalTests") || test.equalsIgnoreCase("DebugTests")) {
-            a.login("contentadmin");
-        } else {
-            a.login("contentAdmin");
-        }
+        a.login("contentAdmin");
     }
 
     /**
      * Delete all Activities
-     *
+     *     
      * @param groupCourseName
      * @param forumActivityName
      * @param quizActivityName
@@ -56,7 +52,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourseActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"activities.deletion"})
+    groups = {"activities.deletion"})
     public void testContentAdminActivitiesDeletion(String groupCourseName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName) throws Exception {
         a.navigateToMyCourse();
@@ -66,12 +62,12 @@ public class ContentAdmin_CleanTestData extends BaseClass {
 
     /**
      * Delete Group Course
-     *
+     *     
      * @param groupCourseName
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"groupcourse.deletion"})
+    groups = {"groupcourse.deletion"})
     public void testContentAdminGroupCourseDeletion(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -80,7 +76,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
 
     /**
      * Takes backup of course
-     *
+     *     
      * @param passwordQuizName
      * @param forumActivityName
      * @param quizActivityName
@@ -89,7 +85,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "CoursePasswordQuizNameActivities", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "criticalSmoke", "course.backup"})
+    groups = {"regressionSmoke", "criticalSmoke", "course.backup"})
     public void testContentAdminBackupCourse(String courseName, String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName) throws Exception {
         a.navigateToMyCourse();
@@ -102,7 +98,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
 
     /**
      * Restore course as new archive course
-     *
+     *     
      * @param passwordQuizName
      * @param forumActivityName
      * @param quizActivityName
@@ -110,8 +106,8 @@ public class ContentAdmin_CleanTestData extends BaseClass {
      * @param pageActivityName
      * @throws Exception
      */
-    @Test(dataProvider = "CoursePasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke", 
-          "criticalSmoke", "course.restore"})
+    @Test(dataProvider = "CoursePasswordQuizNameActvitiesBackupFile", groups = {"regressionSmoke",
+        "criticalSmoke", "course.restore"})
     public void testContentAdminRestoreCourseAsNewArchiveCourse(String courseName, String passwordQuizName, String forumActivityName, String quizActivityName,
             String allInOneAssignmentActivityName, String pageActivityName, String glossaryActivityName, String backupFile) throws Exception {
         a.navigateToMyCourse();
@@ -120,15 +116,15 @@ public class ContentAdmin_CleanTestData extends BaseClass {
         a.restoreAsNewArchiveCourse(passwordQuizName, forumActivityName, quizActivityName,
                 allInOneAssignmentActivityName, pageActivityName, glossaryActivityName, backupFile);
     }
-    
+
     /**
-     * Verify that coursework unit should not be expandable (by default) when 
+     * Verify that coursework unit should not be expandable (by default) when
      * 'Disable date in section' check box is checked & vice versa
-     * 
+     *     
      * @throws Exception
      */
     @Test(dataProvider = "GroupCourse", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-          groups = {"regressionSmoke", "content.contentAdminVerifyCourseworkUnitExpandableOrNot"})    
+    groups = {"regressionSmoke", "content.contentAdminVerifyCourseworkUnitExpandableOrNot"})
     public void testContentAdminVerifyCourseworkUnitExpandableOrNotWhileChangingDisableDateField(String groupCourseName) throws Exception {
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
@@ -138,7 +134,7 @@ public class ContentAdmin_CleanTestData extends BaseClass {
     /**
      * The annotated method will be run after all the test methods in the
      * current class have been run, User logsOut
-     *
+     *     
      * @throws Exception
      */
     @AfterClass(groups = {"prerequisite"})
