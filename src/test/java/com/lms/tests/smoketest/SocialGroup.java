@@ -169,6 +169,12 @@ public class SocialGroup extends BaseClass {
      * @param studentSocialGroupName
      */
     public void deleteSocialGroup(String studentSocialGroupName) {
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("btnEditGrp"), 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("btnEditGrp"))).click();
+        ip.isTextPresentByXPATH(driver, "//h2", "Edit a Group");
+        ip.isElementClickableByXpath(driver, "//*[@id='id_chk_private']", 60);
+        driver.findElement(By.xpath("//*[@id='id_chk_private']")).click();
+        driver.findElement(By.xpath("//fieldset/input")).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("btnDeleteGrp"));
         driver.findElement(By.xpath(xpv.getTokenValue("btnDeleteGrp"))).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Do you really want to delete this group?");
