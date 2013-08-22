@@ -56,7 +56,7 @@ public class SocialGroup extends BaseClass {
                 } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.socialGroupName = "SmkTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
-                    this.socialGroupName = "CrtclTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "CriticalTestStudentSocialGroup " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
                     this.socialGroupName = "DbgTstStdtSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
@@ -68,7 +68,7 @@ public class SocialGroup extends BaseClass {
                 } else if (test.equalsIgnoreCase("SmokeTests")) {
                     this.socialGroupName = "SmkTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("CriticalTests")) {
-                    this.socialGroupName = "CrtclTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    this.socialGroupName = "CriticalTestTeacherSocialGroup " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else {
                     this.socialGroupName = "DbgTstTchrSclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 }
@@ -77,7 +77,7 @@ public class SocialGroup extends BaseClass {
                 SeleneseTestBase.fail("Invalid user to create Social Group: " + user);
         }
 
-        String srtName = "Shrt" + LoginPage.getUser() + "SclGrp " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+        String srtName = "Short" + LoginPage.getUser() + "SocialGroup " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         driver.findElement(By.xpath(xpv.getTokenValue("linkStrtSclGrpXPATH"))).click();
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("fieldGrpNameXPATH"));
         ip.isTextPresentByXPATH(driver, "//b/div/font", "Topics are keywords or labels that make a group easy to find. "
