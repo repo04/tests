@@ -68,7 +68,7 @@
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
         </classes>
     </test>
-    <!--test name="CriticalTests_LLM" preserve-order="true">
+    <test name="CriticalTests_LLM" preserve-order="true">
         <parameter name="url" value="https://2law.onlinelaw.wustl.edu"/>
         <parameter name="program" value="wu-llm"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
@@ -88,7 +88,7 @@
             <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
             <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
         </classes>
-    </test-->
+    </test>
     <test name="CriticalTests_VAC" preserve-order="true">
         <parameter name="url" value="https://www.vac.usc.edu"/>
         <parameter name="program" value="usc-msw"/>
