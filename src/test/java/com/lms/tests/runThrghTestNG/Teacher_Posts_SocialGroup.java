@@ -99,7 +99,6 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
         a.selectGroupCourse(groupCourseName);
         teacherUrlCoursePostArray[0][0] = a.urlPost("urlCrsPost");
         Utility.put(TEACHERURLCOURSEPOSTNAME, teacherUrlCoursePostArray[0][0]);
-        System.out.println("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0]);
         Reporter.log("teacherUrlCoursePost: " + teacherUrlCoursePostArray[0][0], true);
     }
 

@@ -48,10 +48,10 @@ public class WallPage extends BaseClass {
         WebElement editableTxtArea = driver.switchTo().activeElement();
         String user = LoginPage.getUser();
         if (!textPost.contains("HTML")) {
-            this.textPost = xpv.getTokenValue(textPost) + "by" + user.substring(0, 7) + " "
+            this.textPost = xpv.getTokenValue(textPost) + "by" + user + " "
                     + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
         } else {
-            this.textPost = xpv.getTokenValue(textPost + "1") + "by" + user.substring(0, 7) + " "
+            this.textPost = xpv.getTokenValue(textPost + "1") + "by" + user + " "
                     + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now) + xpv.getTokenValue(textPost + "2");
         }
         editableTxtArea.sendKeys(this.textPost);
@@ -110,7 +110,7 @@ public class WallPage extends BaseClass {
         //Date need to be in specific format as Getinstance include special characters   
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         String user = LoginPage.getUser();
-        this.urlPost = xpv.getTokenValue(urlPost) + "by" + user.substring(0, 7) + dateFormat.format(now) + ".com";
+        this.urlPost = xpv.getTokenValue(urlPost) + "by" + user + dateFormat.format(now) + ".com";
 
         linkButton.click();
         WebElement linkTextBox = new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div/input[3]")));
