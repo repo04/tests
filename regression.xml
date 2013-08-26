@@ -2,8 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Essential Regression Suite">
     <listeners>
-        <listener class-name="runThrghTestNG.TransformRegression"/>
-        <listener class-name="runThrghTestNG.TestInvocation"/>
+        <listener class-name="com.lms.tests.runThrghTestNG.TransformRegression"/>
+        <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
     </listeners>
     <test name="RegressionTest" preserve-order="true" parallel="false">
         <groups>
@@ -13,23 +13,23 @@
             </run>
         </groups>
         <classes>
-            <class name="runThrghTestNG.System_Compatibility"/>
-            <class name="runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
-            <class name="runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
-            <class name="runThrghTestNG.Teacher_Posts_SocialGroup"/>
-            <class name="runThrghTestNG.Student_JoinSocialGroup_Post"/>
-            <class name="runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
-            <class name="runThrghTestNG.Teacher_FetchActivityPassword"/>
-            <class name="runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
-            <class name="runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
-            <class name="runThrghTestNG.Student_DeleteSocialGroup"/>
-            <class name="runThrghTestNG.Teacher_ResubmitAllInOne"/>            
-            <class name="runThrghTestNG.Student_AllInOneEnable"/>
-            <class name="runThrghTestNG.ContentAdmin_CleanTestData"/>
-            <class name="runThrghTestNG.Pes_CleanTestData"/>
-            <class name="runThrghTestNG.Pes_ArchiveCourse"/>
-            <!--class name="runThrghTestNG.Teacher_VerifyEmailNotifications"/>
-            <class name="runThrghTestNG.Student_VerifyEmailNotifications"/-->
+            <class name="com.lms.tests.runThrghTestNG.System_Compatibility"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_ResubmitAllInOne"/>            
+            <class name="com.lms.tests.runThrghTestNG.Student_AllInOneEnable"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+            <!--class name="com.lms.tests.runThrghTestNG.Teacher_VerifyEmailNotifications"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_VerifyEmailNotifications"/-->
         </classes>
     </test>
 </suite>
