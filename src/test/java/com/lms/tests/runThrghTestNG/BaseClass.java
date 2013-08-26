@@ -13,14 +13,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
-
 
 @Listeners({TestNGCustomReport.class})
 public class BaseClass {
@@ -105,22 +102,11 @@ public class BaseClass {
                 Reporter.log("Browser: " + browser);
                 Reporter.log("OS: " + os);
                 break;
-            case "ie":
-                DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
-                caps.setCapability("nativeEvents", false);
-                //caps.setCapability("nativeEvents", true);
-                //caps.setCapability("ignoreZoomSetting", true);
-                //caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-                driver = new InternetExplorerDriver(caps);
-                ip.isTitlePresent(driver, "WebDriver");
-                Reporter.log("Browser: IE");
-                break;
             default:
                 driver = new FirefoxDriver();
                 driver.manage().window().maximize();
                 Reporter.log("Browser: firefox");                
         }
-
         driver.get(this.url);
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("loginPageURL"));
     }
