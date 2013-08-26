@@ -555,8 +555,6 @@ public class Activity extends BaseClass {
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div/div", "Your submission has feedback");
-        ip.isTextPresentByXPATH(driver, "//div/div[2]/div/div/div[2]/div/div/div", "Grade");
-        ip.isTextPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div[2]", "/ 100");
         ip.isTextPresentByXPATH(driver, "//td/a", "Feedback_4Mb.pptx");
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
@@ -806,8 +804,6 @@ public class Activity extends BaseClass {
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div/div", "Your submission has feedback");
-        ip.isTextPresentByXPATH(driver, "//div/div[2]/div/div/div[2]/div/div/div", "Grade");
-        ip.isTextPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div[2]", "/ 100");
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
         for (WebElement frame : iframes) {
