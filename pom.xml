@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.8.1</version>
+            <version>6.8.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.32.0</version>
+            <version>2.34.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -73,7 +73,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.14.1</version>
+                <version>2.15</version>
                 <configuration>
                     <groups>${mvnGrp}</groups>
                     <systemPropertyVariables>
@@ -123,7 +123,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.14.1</version>
+                <version>2.15</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -135,7 +135,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.7</version>
             </plugin>
         </plugins>
     </reporting>
