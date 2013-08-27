@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="CriticalData Suite on Staging" verbose="5" parallel="tests" thread-count="10">
+    <listeners>
+        <listener class-name="com.lms.tests.runThrghTestNG.TransformCriticalData"/>
+        <listener class-name="com.lms.tests.runThrghTestNG.TestInvocation"/>
+    </listeners>
+    <test name="CriticalDataStgng_GU" preserve-order="true">
+        <parameter name="url" value="https://www-gu-msn-lms-stg.2u.com"/>
+        <parameter name="program" value="gu-msn"/>
+        <parameter name="session" value="CriticalDataStgng_GU"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_UNC" preserve-order="true">
+        <parameter name="url" value="https://www-unc-mba-lms-stg.2u.com"/>
+        <parameter name="program" value="unc-mba"/>
+        <parameter name="session" value="CriticalDataStgng_UNC"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_2SC" preserve-order="true">
+        <parameter name="url" value="https://www-usc-mat-lms-stg.2u.com"/>
+        <parameter name="program" value="usc-mat"/>
+        <parameter name="session" value="CriticalDataStgng_2SC"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_LLM" preserve-order="true">
+        <parameter name="url" value="https://www-wu-llm-lms-stg.2u.com"/>
+        <parameter name="program" value="wu-llm"/>
+        <parameter name="session" value="CriticalDataStgng_LLM"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_VAC" preserve-order="true">
+        <parameter name="url" value="https://www-usc-msw-lms-stg.2u.com"/>
+        <parameter name="program" value="usc-msw"/>
+        <parameter name="session" value="CriticalDataStgng_VAC"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_MPA" preserve-order="true">
+        <parameter name="url" value="https://www-unc-mpa-lms-stg.2u.com"/>
+        <parameter name="program" value="unc-mpa"/>
+        <parameter name="session" value="CriticalDataStgng_MPA"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_AU" preserve-order="true">
+        <parameter name="url" value="https://www-au-mir-lms-stg.2u.com"/>
+        <parameter name="program" value="au-mir"/>
+        <parameter name="session" value="CriticalDataStgng_AU"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_GW" preserve-order="true">
+        <parameter name="url" value="https://www-gwu-mph-lms-stg.2u.com"/>
+        <parameter name="program" value="gwu-mph"/>
+        <parameter name="session" value="CriticalDataStgng_GW"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_SON" preserve-order="true">
+        <parameter name="url" value="https://www-corp-son-lms-stg.2u.com"/>
+        <parameter name="program" value="corp-son"/>
+        <parameter name="session" value="CriticalDataStgng_SON"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+    <test name="CriticalDataStgng_SC" preserve-order="true">
+        <parameter name="url" value="https://www-sc-msn-lms-stg.2u.com"/>
+        <parameter name="program" value="sc-msn"/>
+        <parameter name="session" value="CriticalDataStgng_SC"/>
+        <groups>
+            <run>
+                <include name="prerequisite"/>
+                <include name="criticalDataSmoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_UserCreation_AssignRole_WorkingGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_JoinSocialGroup_Post"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_LiveSession_GoogleDoc"/>
+            <class name="com.lms.tests.runThrghTestNG.Teacher_FetchActivityPassword"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_LiveSession_SocialGroup_GoogleDoc"/>            
+            <class name="com.lms.tests.runThrghTestNG.Teacher_JoinDelete_SocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.Student_DeleteSocialGroup"/>
+            <class name="com.lms.tests.runThrghTestNG.ContentAdmin_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_CleanTestData"/>
+            <class name="com.lms.tests.runThrghTestNG.Pes_ArchiveCourse"/>
+        </classes>
+    </test>
+</suite>
