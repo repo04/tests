@@ -121,8 +121,17 @@ public class Activity extends BaseClass {
         createActivity(this.name, this.intro);
         driver.findElement(By.xpath("//div[3]/fieldset/span/input")).click();
         driver.findElement(By.xpath("//div[4]/fieldset/span/input")).click();
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select"))).selectByValue("30");
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[2]", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[2]"))).selectByVisibleText("December");
         ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[3]", 60);
         new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[3]"))).selectByValue("2014");
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[4]", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[4]"))).selectByValue("14");
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[5]", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[5]"))).selectByValue("55");
+
         String lateSubmission = new Select(driver.findElement(By.xpath("//select[@id='id_preventlate']"))).getFirstSelectedOption().getText();
         if (!lateSubmission.equalsIgnoreCase("No")) {
             Utility.illegalStateException("All in one assignment's prevent late submission value differs, "
@@ -448,6 +457,9 @@ public class Activity extends BaseClass {
         int x = locateElement(quizActivityName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "(100%)");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "(100%)");
+        driver.findElement(By.xpath("//tr[" + x + "]/td[3]/div[2]/a")).click();
+        ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div", "Grade");
+        ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div[2]", "1 / 1");
     }
 
     /**
