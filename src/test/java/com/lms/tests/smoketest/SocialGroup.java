@@ -49,6 +49,7 @@ public class SocialGroup extends BaseClass {
             case "au-mir":
             case "gwu-mph":
             case "corp-son":
+            case "sc-msn":
                 groupMemberName = "student";
         }
 

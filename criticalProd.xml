@@ -196,7 +196,7 @@
     </test>
     <test name="CriticalTests_SC" preserve-order="true">
         <parameter name="url" value="https://2sn.onlinenursing.simmons.edu"/>
-        <parameter name="program" value="corp-son"/>
+        <parameter name="program" value="sc-msn"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
         <parameter name="session" value="CriticalTests_SC"/>

@@ -199,7 +199,7 @@
         <parameter name="program" value="sc-msn"/>
         <parameter name="groupCourseName" value="AutoGroupCourse"/>
         <parameter name="quizActivityName" value="AutoQuiz"/>
-        <parameter name="session" value="CriticalTests_SC"/>
+        <parameter name="session" value="CriticalTestsStgng_SC"/>
         <groups>
             <run>
                 <include name="prerequisite"/>
