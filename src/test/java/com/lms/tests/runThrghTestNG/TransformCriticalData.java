@@ -46,12 +46,18 @@ public class TransformCriticalData implements IAnnotationTransformer {
             DependentMethods[0] = "testContentAdminQuizCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
+        
+        if ("testPESAdminUserCreation".equals(testMethod.getName())) {
+            System.out.println("Inside " + testMethod.getName());
+            DependentMethods = new String[1];
+            DependentMethods[0] = "com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminAddQuizQuestion";
+            annotation.setDependsOnMethods(DependentMethods);
+        }
 
         if ("testPESAdminAssignRole".equals(testMethod.getName())) {
             System.out.println("Inside " + testMethod.getName());
-            DependentMethods = new String[2];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.ContentAdmin_Course_GroupCourseCreation.testContentAdminCourseGroupCourseCreation";
-            DependentMethods[1] = "testPESAdminUserCreation";
+            DependentMethods = new String[1];
+            DependentMethods[0] = "testPESAdminUserCreation";
             annotation.setDependsOnMethods(DependentMethods);
         }
 

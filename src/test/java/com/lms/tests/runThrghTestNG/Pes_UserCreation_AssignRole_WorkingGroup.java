@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
 import java.util.Iterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +15,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /**
  * PES Admin Logs in Create Two Users Assign/Enroll users to GrpCourse as
@@ -170,6 +170,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      */
     @Test(groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.creation"})
     public void testPESAdminUserCreation() throws Exception {
+        a = new Actions(getWebdriver());
         a.navigateToMyContacts();
         userNamesArray[0][0] = a.createUser("teacher");
         Reporter.log("teacherUserName: " + userNamesArray[0][0], true);
@@ -198,6 +199,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseUsers", groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "users.assignRole"})
     public void testPESAdminAssignRole(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.enrollUserToRole_GroupCourse(teacherUserName, groupCourseName);

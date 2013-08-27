@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
 import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -11,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /**
  * Student logs in, Find & Join Teacher's Social Group, Post/Verify URL on
@@ -339,6 +339,7 @@ public class Student_JoinSocialGroup_Post extends BaseClass {
     @Test(dataProvider = "Users", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
     groups = {"regressionSmoke", "criticalDataSmoke", "contact.studentConfirmRequest"})
     public void testStudentConfirmContactRequest(String teacherUserName, String studentUserName) throws Exception {
+        a = new Actions(getWebdriver());
         a.navigateToMyContacts();
         a.confirmContactRequest(teacherUserName);
     }

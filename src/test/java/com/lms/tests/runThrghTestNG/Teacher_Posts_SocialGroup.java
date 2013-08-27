@@ -4,15 +4,15 @@
  */
 package com.lms.tests.runThrghTestNG;
 
-import org.testng.ITestContext;
-import org.testng.annotations.Test;
 import com.lms.tests.smoketest.Actions;
 import com.lms.tests.smoketest.Utility;
 import java.util.Iterator;
+import org.testng.ITestContext;
 import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 /**
  * Teacher LogIn, Posts on Wall & Course Wall, Creates Social Group
@@ -221,6 +221,7 @@ public class Teacher_Posts_SocialGroup extends BaseClass {
     @Test(dataProvider = "GroupCourseUsers", dataProviderClass = Pes_UserCreation_AssignRole_WorkingGroup.class,
     groups = {"regressionSmoke", "criticalDataSmoke", "contact.teacherAddStudentAsContactfromCourse"})
     public void testTeacherAddStudentAsContactfromCourse(String groupCourseName, String teacherUserName, String studentUserName) throws Exception {
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.navigateToAllInstructorsStudentsPage("student");

@@ -4,6 +4,7 @@
  */
 package com.lms.tests.runThrghTestNG;
 
+import com.lms.tests.smoketest.Actions;
 import java.util.Iterator;
 import org.testng.ITestContext;
 import org.testng.Reporter;
@@ -11,7 +12,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.lms.tests.smoketest.Actions;
 
 /* 
  * Content Admin logs in 
@@ -453,6 +453,7 @@ public class ContentAdmin_Course_GroupCourseCreation extends BaseClass {
      */
     @Test(dataProvider = "GroupCourseQuiz", groups = {"regressionSmoke", "fullSmoke", "criticalDataSmoke", "activities.addQuizQuestion"})
     public void testContentAdminAddQuizQuestion(String groupCourseName, String quizActivityName) throws Exception {
+        a = new Actions(getWebdriver());
         a.navigateToMyCourse();
         a.selectGroupCourse(groupCourseName);
         a.addQuizQuestion(quizActivityName);
