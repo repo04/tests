@@ -341,8 +341,6 @@ public class User extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("saveSettingsButtonXPATH"))).click();
         ip.isTextPresentByXPATH(driver, "//div[2]/div[2]/span", "Invalid current password provided", 60);
         driver.findElement(By.xpath(xpv.getTokenValue("oldPasswordFldXPATH"))).sendKeys("Moodle2!");
-        driver.findElement(By.xpath(xpv.getTokenValue("newPasswordFldXPATH"))).sendKeys(ldv.getTokenValue("password"));
-        driver.findElement(By.xpath(xpv.getTokenValue("newPasswordAgainFldXPATH"))).sendKeys(ldv.getTokenValue("password"));
         driver.findElement(By.xpath(xpv.getTokenValue("saveSettingsButtonXPATH"))).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Your password has been successfully changed");
         Utility.verifyCurrentUrl(driver, xpv.getTokenValue("homePageURL"));

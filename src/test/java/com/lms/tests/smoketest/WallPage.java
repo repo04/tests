@@ -61,7 +61,13 @@ public class WallPage extends BaseClass {
                     driver.findElement(By.xpath("//div[11]/div/div[1]")).click();
                     break;
                 case "txtAncmntCrsPost":
-                    driver.findElement(By.xpath("//div[11]/div/div[2]")).click();
+                  switch (program) {
+                        case "unc-mba":
+                            driver.findElement(By.xpath("//body/div[12]/div/div[2]")).click();
+                            break;
+                        default:
+                            driver.findElement(By.xpath("//div[11]/div/div[2]")).click();
+                    }
                     ip.isTextPresentByXPATH(driver, "//div[11]/div[2]/div/div/div/div/div/div/form/fieldset/div/div/div[2]/label",
                             "End Time:");
                     Utility.verifyDatePresentInElementValue(driver, By.id("endtime-date"));
@@ -72,13 +78,25 @@ public class WallPage extends BaseClass {
                     driver.findElement(By.xpath("//div[11]/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]")).click();
                     break;
                 case "txtCrsPostCmntsOn":
-                    driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    switch (program) {
+                        case "unc-mba":
+                            driver.findElement(By.xpath("//div[12]/div/div[3]")).click();
+                            break;
+                        default:
+                            driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    }
                     ip.isTextPresentByXPATH(driver, "//label/span", "On - Starts a course level discussion");
                     driver.findElement(By.xpath("//fieldset/div/div/div/div/div/input")).click();
                     driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
                     break;
                 case "txtCrsPostCmntsOff":
-                    driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    switch (program) {
+                        case "unc-mba":
+                            driver.findElement(By.xpath("//div[12]/div/div[3]")).click();
+                            break;
+                        default:
+                            driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    }
                     ip.isTextPresentByXPATH(driver, "//label/span", "On - Starts a course level discussion");
                     driver.findElement(By.xpath("//fieldset/div/div/div[2]/div/div/input")).click();
                     driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();

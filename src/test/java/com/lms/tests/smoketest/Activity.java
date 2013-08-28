@@ -122,7 +122,7 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath("//div[3]/fieldset/span/input")).click();
         driver.findElement(By.xpath("//div[4]/fieldset/span/input")).click();
         ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select", 60);
-        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select"))).selectByValue("30");
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select"))).selectByValue("31");
         ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[2]", 60);
         new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[2]"))).selectByVisibleText("December");
         ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[3]", 60);
@@ -466,6 +466,7 @@ public class Activity extends BaseClass {
      *
      */
     public void uploadFileAndSendAllInOneForReview() {
+        ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div/div[2]", "Due date: Tue Dec 31 2013 19:55");
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         String file = null;
@@ -930,14 +931,14 @@ public class Activity extends BaseClass {
      */
     public void readOnlyAccessToOfflineActivity(String offlineActivityName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + offlineActivityName + "')]")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH")))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.linkText("Submissions"))));
     }
 
     /**
      * View Reveal Password button for All In One Assignment 
      */
     public void viewRevealPasswordButtonForAllInOneAssignemnt() {
-        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))));
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
         ip.isTextPresentByCSS(driver, "#confirmBox > p", xpv.getTokenValue("revealDocumentPasswordConfirmationText"));
         driver.findElement(By.cssSelector(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
