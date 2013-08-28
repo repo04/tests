@@ -516,14 +516,18 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//td/a", "Review_4Mb.pptx");
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
+        try {
+            for (WebElement frame : iframes) {
+                driver.switchTo().frame(frame.getAttribute("id"));
+                break;
+            }
+            WebElement editableTxtArea = driver.switchTo().activeElement();
+            Assert.assertEquals(editableTxtArea.getText(), reviewAssignmentText);
+        } catch (Exception e) {
+            driver.switchTo().defaultContent();
+            throw e;
         }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), reviewAssignmentText);
         driver.switchTo().defaultContent();
-
         String file = null;
         try {
             file = directory.getCanonicalPath() + java.io.File.separator + "data"
@@ -570,12 +574,17 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//td/a", "Feedback_4Mb.pptx");
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
+        try {
+            for (WebElement frame : iframes) {
+                driver.switchTo().frame(frame.getAttribute("id"));
+                break;
+            }
+            WebElement editableTxtArea = driver.switchTo().activeElement();
+            Assert.assertEquals(editableTxtArea.getText(), feedbackAssignmentText);
+        } catch (Exception e) {
+            driver.switchTo().defaultContent();
+            throw e;
         }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), feedbackAssignmentText);
         driver.switchTo().defaultContent();
 
         //'Send for Marking' button with onclick attribute is not clicked by Selenium CLICK command for Chrome Browser
@@ -716,12 +725,17 @@ public class Activity extends BaseClass {
                 ExpectedConditions.elementToBeClickable(By.cssSelector("span.mceIcon.mce_insertunorderedlist")));
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
+        try {
+            for (WebElement frame : iframes) {
+                driver.switchTo().frame(frame.getAttribute("id"));
+                break;
+            }
+            WebElement editableTxtArea = driver.switchTo().activeElement();
+            Assert.assertEquals(editableTxtArea.getText(), assignmentGradedText);
+        } catch (Exception e) {
+            driver.switchTo().defaultContent();
+            throw e;
         }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), assignmentGradedText);
         driver.switchTo().defaultContent();
     }
 
@@ -818,12 +832,17 @@ public class Activity extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div/div", "Your submission has feedback");
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
+        try {
+            for (WebElement frame : iframes) {
+                driver.switchTo().frame(frame.getAttribute("id"));
+                break;
+            }
+            WebElement editableTxtArea = driver.switchTo().activeElement();
+            Assert.assertEquals(editableTxtArea.getText(), resubmissionText);
+        } catch (Exception e) {
+            driver.switchTo().defaultContent();
+            throw e;
         }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), resubmissionText);
         driver.switchTo().defaultContent();
         ip.isElementPresentByLINK(driver, "Review_4Mb.pptx");
         driver.findElement(By.xpath("//td/button")).click();
@@ -934,7 +953,7 @@ public class Activity extends BaseClass {
     }
 
     /**
-     * View Reveal Password button for All In One Assignment 
+     * View Reveal Password button for All In One Assignment
      */
     public void viewRevealPasswordButtonForAllInOneAssignemnt() {
         ip.isElementPresentByXPATH(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"));
@@ -1042,7 +1061,7 @@ public class Activity extends BaseClass {
                 By.cssSelector(xpv.getTokenValue("courseUnitCalendarBackwardButtonCSS"))));
         if (yearDifference > 0) {
             int x = yearDifference * 12;
-            for (int i = 0; i < x; i++) {                
+            for (int i = 0; i < x; i++) {
                 driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarForwardButtonCSS"))).click();
             }
         } else if (yearDifference < 0) {

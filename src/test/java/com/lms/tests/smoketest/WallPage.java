@@ -1,5 +1,6 @@
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +10,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.lms.tests.runThrghTestNG.BaseClass;
 
 public class WallPage extends BaseClass {
 
@@ -199,13 +199,13 @@ public class WallPage extends BaseClass {
     public void deletePost(String post) {
         WebElement postElement = null;
         String path;
-        if (post.contains("urlcrspost")) {
+        if (post.contains("urlcoursepost")) {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
             Utility.clickByJavaScript(driver, "//li/div/div/a");
             ip.isTextPresentByXPATH(driver, "//div/div/div/div/div/div[2]/span", "Are you sure you want to delete this post");
-        } else if (post.contains("urlstdtwrknggrppost")) {
+        } else if (post.contains("urlstudentworkinggrouppost")) {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));

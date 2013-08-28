@@ -506,7 +506,7 @@ public class Pes_UserCreation_AssignRole_WorkingGroup extends BaseClass {
      * @throws Exception
      */
     @Test(dataProvider = "CourseShortGroupCourseName", dataProviderClass = ContentAdmin_Course_GroupCourseCreation.class,
-    groups = {"regressionSmoke", "2torAdministrativeBlock.contentVerify"})
+    groups = {"2torAdministrativeBlock.contentVerify"})
     public void testPesAdminVerifySectionDropdownCourseRostersPage(String courseShortName, String groupCourseName) throws Exception {
         a.navigateTo2torSiteAdministrator();
         a.navigateToCourseRosters();

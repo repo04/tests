@@ -47,12 +47,12 @@ public class Utility extends BaseClass {
         WebElement hiddenElement = driver.findElement(By.xpath(menuXPATH));
         ((JavascriptExecutor) driver).executeScript("arguments[0].click()", hiddenElement);
     }
-    
+
     /**
      * Uses js to click on hidden element on the page by CSS
-     * 
+     *
      * @param driver
-     * @param menuCSS 
+     * @param menuCSS
      */
     public static void clickByJavaScriptUsingCSS(WebDriver driver, String menuCSS) {
         WebElement hiddenElement = driver.findElement(By.cssSelector(menuCSS));
@@ -409,7 +409,7 @@ public class Utility extends BaseClass {
             }
             x++;
         }
-        
+
         //Switch focus
         WebElement editableTxtArea = driver.switchTo().activeElement();
         editableTxtArea.sendKeys(Keys.chord(Keys.CONTROL, "a"), textInIframe);
@@ -462,29 +462,35 @@ public class Utility extends BaseClass {
             System.err.println(e);
         }
     }
-    
+
     /**
-     * 
+     *
      * @param driver
      * @param iframeIndex
-     * @return 
+     * @return
      */
     public static String getTextFromContentEditableIframe(WebDriver driver, int iframeIndex) {
         List<WebElement> iFrames = driver.findElements(By.tagName("iframe"));
         System.out.println("iFrames count:" + iFrames.size());
         int x = 1;
-        for (WebElement iframe : iFrames) {
-            String iframeID = iframe.getAttribute("id");
-            System.out.println("Iframe ID: " + iframeID);
-            if (x == iframeIndex) {
-                driver.switchTo().frame(iframeID);
+        String text;
+        try {
+            for (WebElement iframe : iFrames) {
+                String iframeID = iframe.getAttribute("id");
+                System.out.println("Iframe ID: " + iframeID);
+                if (x == iframeIndex) {
+                    driver.switchTo().frame(iframeID);
+                }
+                x++;
             }
-            x++;
-        }
 
-        //Switch focus
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        String text = editableTxtArea.getText();
+            //Switch focus
+            WebElement editableTxtArea = driver.switchTo().activeElement();
+            text = editableTxtArea.getText();
+        }catch(Exception e){
+            driver.switchTo().defaultContent();
+            throw e;
+        }       
         driver.switchTo().defaultContent();
         return text;
     }

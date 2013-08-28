@@ -98,25 +98,29 @@ Automation can run when above steps are followed in order.
         1> mvnSuite: critical / smoke / regression / debug / criticalData
                 * Only one Suite to be passed
         2> mvnUrl:
-        	* gu-msn:  https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || 
-			   https://www-gu-msn-lms-sb[01-10]-qa.2u.com || https://gu-msn-lms-standalone-prod.2u.com					  
-        	* unc-mba: https://www.2nc.unc.edu || https://www-unc-mba-lms-stg.2u.com || 
-			   https://www-unc-mba-lms-sb[01-10]-qa.2u.com || https://unc-mba-lms-standalone-prod.2u.com
-        	* usc-mat: https://www.2sc.usc.edu || https://www-usc-mat-lms-stg.2u.com || 
-			   https://www-usc-mat-lms-sb[01-10]-qa.2u.com || https://usc-mat-lms-standalone-prod.2u.com
-        	* wu-llm:  https://2law.onlinelaw.wustl.edu || https://www-wu-llm-lms-stg.2u.com || 
-			   https://www-wu-llm-lms-sb[01-10]-qa.2u.com || https://wu-llm-lms-standalone-prod.2u.com
-        	* usc-msw: https://www.vac.usc.edu || https://www-usc-msw-lms-stg.2u.com || 
-			   https://www-usc-msw-lms-sb[01-10]-qa.2u.com || https://usc-msw-lms-standalone-prod.2u.com
-        	* unc-mpa: https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || 
-			   https://www-unc-mpa-lms-sb[01-10]-qa.2u.com || https://unc-mpa-lms-standalone-prod.2u.com
-                * au-mir:  https://2ir.ironline.american.edu || https://www-au-mir-lms-stg.2u.com || 
-			   https://www-au-mir-lms-sb[01-10]-qa.2u.com || https://au-mir-lms-standalone-prod.2u.com
-        	* gwu-mph: https://2gw.publichealthonline.gwu.edu || https://www-gwu-mph-lms-stg.2u.com || 
-			   https://www-gwu-mph-lms-sb[01-10]-qa.2u.com || https://gwu-mph-lms-standalone-prod.2u.com
+        	* gu-msn:   https://2gu.nursing.georgetown.edu || https://www-gu-msn-lms-stg.2u.com || 
+			    https://www-gu-msn-lms-sb[01-10]-qa.2u.com || https://gu-msn-lms-standalone-prod.2u.com					  
+        	* unc-mba:  https://www.2nc.unc.edu || https://www-unc-mba-lms-stg.2u.com || 
+			    https://www-unc-mba-lms-sb[01-10]-qa.2u.com || https://unc-mba-lms-standalone-prod.2u.com
+        	* usc-mat:  https://www.2sc.usc.edu || https://www-usc-mat-lms-stg.2u.com || 
+			    https://www-usc-mat-lms-sb[01-10]-qa.2u.com || https://usc-mat-lms-standalone-prod.2u.com
+        	* wu-llm:   https://2law.onlinelaw.wustl.edu || https://www-wu-llm-lms-stg.2u.com || 
+			    https://www-wu-llm-lms-sb[01-10]-qa.2u.com || https://wu-llm-lms-standalone-prod.2u.com
+        	* usc-msw:  https://www.vac.usc.edu || https://www-usc-msw-lms-stg.2u.com || 
+			    https://www-usc-msw-lms-sb[01-10]-qa.2u.com || https://usc-msw-lms-standalone-prod.2u.com
+        	* unc-mpa:  https://2sg.onlinempa.unc.edu || https://www-unc-mpa-lms-stg.2u.com || 
+			    https://www-unc-mpa-lms-sb[01-10]-qa.2u.com || https://unc-mpa-lms-standalone-prod.2u.com
+                * gwu-mph:  https://2gw.publichealthonline.gwu.edu || https://www-gwu-mph-lms-stg.2u.com || 
+			    https://www-gwu-mph-lms-sb[01-10]-qa.2u.com || https://gwu-mph-lms-standalone-prod.2u.com
+        	* au-mir:   https://2ir.ironline.american.edu || https://www-au-mir-lms-stg.2u.com || 
+			    https://www-au-mir-lms-sb[01-10]-qa.2u.com || https://au-mir-lms-standalone-prod.2u.com
+        	* corp-son: https://experience.semesteronline.org || https://www-corp-son-lms-stg.2u.com || 
+			    https://www-corp-son-lms-sb[01-10]-qa.2u.com || https://corp-son-lms-standalone-prod.2u.com
+        	* sc-msn:   https://2sn.onlinenursing.simmons.edu || https://www-sc-msn-lms-stg.2u.com || 
+			    https://www-sc-msn-lms-sb[01-10]-qa.2u.com || https://sc-msn-lms-standalone-prod.2u.com
         	* Only one PROGRAM URL to be passed
         3> mvnProgram: 
-                * gu-msn || unc-mba || usc-mat || wu-llm || usc-msw || unc-mpa || au-mir || gwu-mph
+                * gu-msn || unc-mba || usc-mat || wu-llm || usc-msw || unc-mpa || au-mir || gwu-mph || corp-son || sc-msn
                 * Only one program domain name to be passed
         4> mvnBrwsr: 
                 * ff || chrome
