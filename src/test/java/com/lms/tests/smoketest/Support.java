@@ -1,12 +1,11 @@
-
 package com.lms.tests.smoketest;
 
-import org.openqa.selenium.By;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class Support extends BaseClass {
-        
+
     /**
      * Verifies Support page
      */
@@ -66,6 +65,7 @@ public class Support extends BaseClass {
             case "gu-msn":
             case "unc-mba":
             case "usc-msw":
+            case "corp-son":
                 ip.isElementClickableByXpath(driver, xpv.getTokenValue("expressUploadFAQXPATH"), 60);
                 urlFAQ = driver.findElement(By.xpath(xpv.getTokenValue("expressUploadFAQXPATH"))).getAttribute("href");
                 break;
@@ -86,5 +86,5 @@ public class Support extends BaseClass {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("androidAppXPATH"), 60);
         String android = driver.findElement(By.xpath(xpv.getTokenValue("androidAppXPATH"))).getAttribute("href");
         Assert.assertEquals(android, xpv.getTokenValue(program + "AndroidAppUrl"));
-    }    
+    }
 }
