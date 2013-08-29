@@ -466,7 +466,7 @@ public class Activity extends BaseClass {
      *
      */
     public void uploadFileAndSendAllInOneForReview() {
-        ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div/div[2]", "Due date: Tue Dec 31 2013 19:55");
+        //ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div/div[2]", "Due date: Tue Dec 31 2013 19:55");
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         String file = null;
@@ -831,6 +831,10 @@ public class Activity extends BaseClass {
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div/div", "Your submission has feedback");
+        ip.isElementPresentByLINK(driver, "Review_4Mb.pptx");
+        driver.findElement(By.xpath("//td/button")).click();
+        new WebDriverWait(driver, 60).until(ExpectedConditions.
+                invisibilityOfElementLocated(By.linkText("Review_4Mb.pptx")));
         List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
         System.out.println("iframes count:" + iframes.size());
         try {
@@ -839,16 +843,13 @@ public class Activity extends BaseClass {
                 break;
             }
             WebElement editableTxtArea = driver.switchTo().activeElement();
-            Assert.assertEquals(editableTxtArea.getText(), resubmissionText);
+            System.out.println("TEXT: " + editableTxtArea.getText());
+            Assert.assertEquals(editableTxtArea.getText(), "Review Grade: 62 / 100 (62%)\n" + resubmissionText);
         } catch (Exception e) {
             driver.switchTo().defaultContent();
             throw e;
         }
-        driver.switchTo().defaultContent();
-        ip.isElementPresentByLINK(driver, "Review_4Mb.pptx");
-        driver.findElement(By.xpath("//td/button")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.
-                invisibilityOfElementLocated(By.linkText("Review_4Mb.pptx")));
+        driver.switchTo().defaultContent();        
     }
 
     /**
@@ -950,14 +951,30 @@ public class Activity extends BaseClass {
      */
     public void readOnlyAccessToOfflineActivity(String offlineActivityName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + offlineActivityName + "')]")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.linkText("Submissions"))));
+        ip.isTextPresentByXPATH(driver, "//h2", "Whizbang");
+        ip.isTextPresentByXPATH(driver, "//form/p", "Whizbang Inc. has developed an innovative new software"
+                + " product that will significantly impact the ability of your sales-force to drive sales "
+                + "via encouraging customers to switch service providers. In the next 5 years, should you "
+                + "agree to their terms, you will be the only provider in your sales area to whom they will"
+                + " license use of the product. After which time, they will license multiple users. They "
+                + "promise significant market share improvements which they can verify from the use of the "
+                + "product in other areas. Their marketing materials (below) show average sales increases "
+                + "seen by comparable firms. This is significant, because your sales have not grown in "
+                + "recent memory due to a reluctance of customers to switch providers. The up-front IT "
+                + "upgrades would cost your firm $1M (which will depreciate at a constant rate over 6 years). "
+                + "One element of the agreement you are unsure about, is they include a “profit-share” component "
+                + "on top of their one time license fee of $1.6M (after tax). If you pay the license fee up-front,"
+                + " the profit-share is 20%,. However, to help you mitigate your risk, they also will allow you to"
+                + " pay the license fee at the back-end which they will delay until the end of year 6. The draw-back"
+                + " is, they will require a 45% profit-share in exchange for these credit terms. Which option should"
+                + " you choose? Use 35% as your tax rate in the analysis.");
     }
 
     /**
      * View Reveal Password button for All In One Assignment
      */
     public void viewRevealPasswordButtonForAllInOneAssignemnt() {
-        new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
         ip.isTextPresentByCSS(driver, "#confirmBox > p", xpv.getTokenValue("revealDocumentPasswordConfirmationText"));
         driver.findElement(By.cssSelector(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();

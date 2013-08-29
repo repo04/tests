@@ -10,3 +10,4 @@ src/test/resources/loginDetails.properties
 build.xml
 /target2/
 /target-corpson/
+/target-son2/

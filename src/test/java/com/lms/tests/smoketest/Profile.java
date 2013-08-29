@@ -17,7 +17,11 @@ public class Profile extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//div[6]/div/div", "Name:");
         switch (role) {
             case "teacher":
-                ip.isTextPresentByXPATH(driver, "//span[3]", "Lecturer");
+                if (!program.equalsIgnoreCase("usc-msw")) {
+                    ip.isTextPresentByXPATH(driver, "//span[3]", "Lecturer");
+                } else {
+                    ip.isTextPresentByXPATH(driver, "//div[2]/span[3]", "Lecturer");
+                }
                 ip.isTextPresentByXPATH(driver, "//div[10]/div/div", "Email:");
                 ip.isTextPresentByXPATH(driver, "//div[10]/div[2]/div", "Website:");
                 ip.isTextPresentByXPATH(driver, "//div[10]/div[3]/div", "Phone:");
@@ -29,10 +33,13 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[10]/div[9]/div", "MSN:");
                 ip.isTextPresentByXPATH(driver, "//div[10]/div[10]/div", "AIM:");
                 ip.isTextPresentByXPATH(driver, "//div[11]/div", "Availability:");
-                if (!program.equalsIgnoreCase("sc-msn")) {
-                    ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Female");
-                } else {
-                    ip.isTextPresentByXPATH(driver, "//div[5]/div[2]/span", "Female");
+                switch (program) {
+                    case "sc-msn":
+                    case "corp-son":
+                        ip.isTextPresentByXPATH(driver, "//div[5]/div[2]/span", "Female");
+                        break;
+                    default:
+                        ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Female");
                 }
                 break;
             case "coordinator":
@@ -51,10 +58,13 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[10]/div[8]/div", "MSN:");
                 ip.isTextPresentByXPATH(driver, "//div[10]/div[9]/div", "AIM:");
                 ip.isTextPresentByXPATH(driver, "//div[10]/div[10]/div", "Availability:");
-                if (!program.equalsIgnoreCase("sc-msn")) {
-                    ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Male");
-                } else {
-                    ip.isTextPresentByXPATH(driver, "//div[5]/div[2]/span", "Male");
+                switch (program) {
+                    case "sc-msn":
+                    case "corp-son":
+                        ip.isTextPresentByXPATH(driver, "//div[5]/div[2]/span", "Male");
+                        break;
+                    default:
+                        ip.isTextPresentByXPATH(driver, "//div[4]/div[2]/span", "Male");
                 }
         }
 
@@ -190,7 +200,7 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Are you a member of any Professional Associations?");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Where do you currently reside?");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "What languages are you proficient in?");
-                ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Please list a major accomplishment:");
+                ip.isTextPresentByXPATH(driver, "//div[14]/div[4]/div", "Please list a major accomplishments:");
                 ip.isTextPresentByXPATH(driver, "//div[16]", "Work Information");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div/div", "Courses:");
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[2]/div", "Where did you previously attend University?");
@@ -219,8 +229,8 @@ public class Profile extends BaseClass {
                 ip.isTextPresentByXPATH(driver, "//div[18]/div[6]/div", "Why are you pursuing an MPH?");
                 break;
             case "corp-son":
-                ip.isTextPresentByXPATH(driver, "//div[6]/div[3]/div", "Birthday:");
-                ip.isTextPresentByXPATH(driver, "//div[6]/div[4]/div", "Gender:");
+                ip.isTextPresentByXPATH(driver, "//div[6]/div[4]/div", "Birthday:");
+                ip.isTextPresentByXPATH(driver, "//div[6]/div[5]/div", "Gender:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div/div", "Favorite Movies:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[2]/div", "Place you'd most like to travel in the world:");
                 ip.isTextPresentByXPATH(driver, "//div[14]/div[3]/div", "Person/People you most admire:");
