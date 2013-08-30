@@ -1120,8 +1120,8 @@ public class Activity extends BaseClass {
         }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("showHideContentsXPATH"), "Show Contents");
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
-                presenceOfElementLocated(By.xpath(xpv.getTokenValue("assignmentRowUnderShowContentsXPATH")))));
+        driver.findElement(By.xpath(xpv.getTokenValue("showHideContentsXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("assignmentRowUnderShowContentsXPATH"));
     }
 
     /**
