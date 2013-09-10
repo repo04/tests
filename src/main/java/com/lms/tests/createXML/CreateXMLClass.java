@@ -30,8 +30,6 @@ public class CreateXMLClass {
         String text = null;
 
         for (String arg : args) {
-            //splitted = ArrayList<String>(Arrays.asList(arg.split(",")));
-            //splitted = (ArrayList<String>) Arrays.asList(arg.split(","));
             list = Arrays.asList(arg.split(","));
             splitted.addAll(list);
             totalSize = list.size();
@@ -169,9 +167,7 @@ public class CreateXMLClass {
             suite.addTest(test);
         }
         File file = new File(filename + ".xml");
-
-        System.out.println(
-                "file: " + file);
+        System.out.println("file: " + file);
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(suite.toXml());
         }
