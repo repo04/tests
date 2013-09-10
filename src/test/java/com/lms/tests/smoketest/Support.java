@@ -23,16 +23,8 @@ public class Support extends BaseClass {
 
     public void testContactUS(String role) {
         // Verifies the Days and Time Availability of Support
-        switch (program) {
-            case "wu-llm":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue(program + "phoneNumberXPATH"),
-                        xpv.getTokenValue(program + role + "PhoneNumber"));
-                break;
-            default:
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("phoneNumberXPATH"),
-                        xpv.getTokenValue(program + role + "PhoneNumber"));
-        }
-
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("phoneNumberXPATH"),
+                xpv.getTokenValue(program + role + "PhoneNumber"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("mondayXPATH"),
                 xpv.getTokenValue(program + role + "MondayTimes"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("tuesdayXPATH"),
