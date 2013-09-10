@@ -96,13 +96,13 @@ public class Settings extends BaseClass {
                 int x = 1;
                 if (LoginPage.getUser().contains("pes") || LoginPage.getUser().contains("content")) {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 1 || x == 24 || x == 29 || x == 30) {
+                        if (x == 23 || x == 28 || x == 29) {
                             if (checkbox.isSelected() || !checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & enabled");
                             }
-                        } else if (x == 4 || x == 7 || x == 10 || x == 13 || x == 16 || x == 19
-                                || x == 22 || x == 25 || x == 28 || x == 31 || x == 34) {
+                        } else if (x == 3 || x == 6 || x == 9 || x == 12 || x == 15 || x == 18
+                                || x == 21 || x == 24 || x == 27 || x == 30 || x == 33) {
                             if (checkbox.isDisplayed()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be hidden");
@@ -117,18 +117,18 @@ public class Settings extends BaseClass {
                     }
                 } else if (LoginPage.getUser().contains("teacher")) {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 8 || x == 11 || x == 23) {
+                        if (x == 7 || x == 10 || x == 22) {
                             if (!checkbox.isSelected() || checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: selected & not enabled");
                             }
-                        } else if (x == 1 || x == 24 || x == 29 || x == 30) {
+                        } else if (x == 23 || x == 28 || x == 29) {
                             if (checkbox.isSelected() || !checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & enabled");
                             }
-                        } else if (x == 4 || x == 7 || x == 10 || x == 13 || x == 16 || x == 19
-                                || x == 22 || x == 25 || x == 28 || x == 31 || x == 34) {
+                        } else if (x == 3 || x == 6 || x == 9 || x == 12 || x == 15 || x == 18
+                                || x == 21 || x == 24 || x == 27 || x == 30 || x == 33) {
                             if (checkbox.isDisplayed()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be hidden");
@@ -143,7 +143,7 @@ public class Settings extends BaseClass {
                     }
                 } else if (LoginPage.getUser().contains("coordinator")) {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 17 || x == 20 || x == 21) {
+                        if (x == 16 || x == 19 || x == 20) {
                             checkbox.isEnabled();
                             if (checkbox.isSelected()) {
                                 Utility.illegalStateException("Checkbox: "
@@ -159,18 +159,18 @@ public class Settings extends BaseClass {
                     }
                 } else {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 2 || x == 17 || x == 29) {
+                        if (x == 1 || x == 16 || x == 28) {
                             if (!checkbox.isSelected() || checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: selected & not enabled");
                             }
-                        } else if (x == 1 || x == 30 || x == 33 || x == 35 || x == 36) {
+                        } else if (x == 29 || x == 32 || x == 34 || x == 35) {
                             if (checkbox.isSelected() || !checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & enabled");
                             }
-                        } else if (x == 4 || x == 7 || x == 10 || x == 13 || x == 16 || x == 19
-                                || x == 22 || x == 25 || x == 28 || x == 31 || x == 34 || x == 37 || x == 40) {
+                        } else if (x == 3 || x == 6 || x == 9 || x == 12 || x == 15 || x == 18
+                                || x == 21 || x == 24 || x == 27 || x == 30 || x == 33 || x == 36 || x == 39) {
                             if (checkbox.isDisplayed()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be hidden");
@@ -192,8 +192,8 @@ public class Settings extends BaseClass {
                 x = 1;
                 if (LoginPage.getUser().contains("pes") || LoginPage.getUser().contains("content")) {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 1 || x == 4 || x == 7 || x == 13 || x == 16 || x == 19 || x == 24
-                                || x == 25 || x == 28 || x == 29 || x == 30 || x == 31 || x == 34) {
+                        if (x == 3 || x == 6 || x == 12 || x == 15 || x == 18 || x == 23
+                                || x == 24 || x == 27 || x == 28 || x == 29 || x == 30 || x == 33) {
                             if (checkbox.isSelected() || !checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & enabled");
@@ -208,18 +208,18 @@ public class Settings extends BaseClass {
                     }
                 } else if (LoginPage.getUser().contains("teacher")) {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 8 || x == 11 || x == 23) {
+                        if (x == 7 || x == 10 || x == 22) {
                             if (!checkbox.isSelected() || checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: selected & not enabled");
                             }
-                        } else if (x == 4 || x == 7 || x == 13 || x == 16 || x == 19
-                                || x == 25 || x == 28 || x == 31 || x == 34) {
+                        } else if (x == 3 || x == 6 || x == 12 || x == 15 || x == 18
+                                || x == 24 || x == 27 || x == 30 || x == 33) {
                             if (checkbox.isSelected() || checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & not enabled");
                             }
-                        } else if (x == 1 || x == 24 || x == 29 || x == 30) {
+                        } else if (x == 23 || x == 28 || x == 29) {
                             if (checkbox.isSelected() || !checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & enabled");
@@ -234,7 +234,7 @@ public class Settings extends BaseClass {
                     }
                 } else if (LoginPage.getUser().contains("coordinator")) {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 1 || x == 17 || x == 20 || x == 21) {
+                        if (x == 16 || x == 19 || x == 20) {
                             checkbox.isEnabled();
                             if (checkbox.isSelected()) {
                                 Utility.illegalStateException("Checkbox: "
@@ -250,18 +250,18 @@ public class Settings extends BaseClass {
                     }
                 } else {
                     for (WebElement checkbox : checkboxes) {
-                        if (x == 2 || x == 17 || x == 29) {
+                        if (x == 1 || x == 16 || x == 28) {
                             if (!checkbox.isSelected() || checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: selected & not enabled");
                             }
-                        } else if (x == 4 || x == 7 || x == 13 || x == 16 || x == 19
-                                || x == 28 || x == 31 || x == 37 || x == 40) {
+                        } else if (x == 3 || x == 6 || x == 12 || x == 15 || x == 18
+                                || x == 27 || x == 30 || x == 36 || x == 39) {
                             if (checkbox.isSelected() || checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & not enabled");
                             }
-                        } else if (x == 1 || x == 30 || x == 33 || x == 35 || x == 36) {
+                        } else if (x == 29 || x == 32 || x == 34 || x == 35) {
                             if (checkbox.isSelected() || !checkbox.isEnabled()) {
                                 Utility.illegalStateException("Checkbox: "
                                         + checkbox.getAttribute("name") + " should be: not selected & enabled");
