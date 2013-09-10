@@ -55,7 +55,7 @@ public class CreateXMLClass {
         System.out.print("****target***: " + target + "\n");
         String shortUrl = null;
         String env = null;
-        if (target.equalsIgnoreCase("Prod")) {
+        if (target.equalsIgnoreCase("Production")) {
             env = "Prod";
         } else if (target.equalsIgnoreCase("Staging")) {
             env = "Staging";
@@ -82,7 +82,7 @@ public class CreateXMLClass {
             XmlTest test = new XmlTest();
             System.out.print(split + "\n");
 
-            if (filename.equalsIgnoreCase("criticalProd")) {
+            if (filename.equalsIgnoreCase("criticalProduction")) {
                 switch (split) {
                     case "gu-msn":
                         test.addParameter("url", "https://2gu.nursing.georgetown.edu");
