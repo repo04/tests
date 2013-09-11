@@ -4,13 +4,13 @@
  */
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.lms.tests.runThrghTestNG.BaseClass;
 
 /**
  *
@@ -59,8 +59,8 @@ public class Contact extends BaseClass {
         ip.isTextPresentByXPATH(driver, "//div[10]/div/div/div/div/span", "Add " + Utility.getFullName(user) + " as contact", 60);
         driver.findElement(By.xpath("//div/textarea")).sendKeys("Add as contact");
         driver.findElement(By.xpath("//button")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath("//div[" + i + "]/div[3]/a/img"))));
-        new WebDriverWait(driver, 15).until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(By.xpath("//div[" + i + "]/div[3]/img"))));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[" + i + "]/div[3]/a/img")));
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[" + i + "]/div[3]/a[2]/img")));        
     }
 
     /**
