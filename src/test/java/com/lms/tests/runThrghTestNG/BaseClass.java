@@ -67,8 +67,7 @@ public class BaseClass implements SauceOnDemandSessionIdProvider, SauceOnDemandA
 
         os:
         switch (os) {
-            case "linux32":
-            case "linux64":
+            case "linux":
                 capabilities.setCapability("platform", Platform.LINUX);
                 break os;
             case "mac":
