@@ -446,6 +446,9 @@ public class Activity extends BaseClass {
         int x = locateElement(quizActivityName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "(100%)");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "(100%)");
+        driver.findElement(By.xpath("//tr[" + x + "]/td[3]/div[2]/a")).click();
+        ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div", "Grade");
+        ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div[2]", "1 / 1");
     }
 
     /**
