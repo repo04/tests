@@ -112,7 +112,7 @@ public class Footers extends BaseClass {
                 privacyContact = "Should you have other questions or concerns about this Privacy Policy or "
                         + "anything within it, please email us at privacy@2U.com.";
                 aboutUS = "The @WashULaw Master of Laws (LL.M.) program is a dynamic online LL.M. "
-                        + "program offered by the Washington University School of Law, part of the "
+                        + "program for foreign lawyers offered by the Washington University School of Law, part of the "
                         + "elite Washington University in St. Louis. Taught by highly respected faculty, "
                         + "this program is designed to help the next generation of attorneys achieve "
                         + "their career goals and learn skills to succeed in the rapidly changing field "

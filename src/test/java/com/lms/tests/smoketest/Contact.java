@@ -33,13 +33,8 @@ public class Contact extends BaseClass {
             userName = driver.findElement(By.xpath("//div[4]/div/div[" + i + "]/div[2]/a")).getText();
             if (userName.equalsIgnoreCase(Utility.getFullName(user))) {
                 do {
-                    if (i == 1) {
-                        imagePath = "//div[3]/a[2]/img";
-                        elm = driver.findElement(By.xpath(imagePath));
-                    } else {
-                        imagePath = "//div[" + i + "]/div[3]/a[2]/img";
-                        elm = driver.findElement(By.xpath(imagePath));
-                    }
+                    imagePath = "//div[" + i + "]/div[3]/a[2]/img";
+                    elm = driver.findElement(By.xpath(imagePath));
                     ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", elm);
                     ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", elm);
                     elm.click();
@@ -60,7 +55,7 @@ public class Contact extends BaseClass {
         driver.findElement(By.xpath("//div/textarea")).sendKeys("Add as contact");
         driver.findElement(By.xpath("//button")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.xpath("//div[" + i + "]/div[3]/a/img")));
-        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[" + i + "]/div[3]/a[2]/img")));        
+        new WebDriverWait(driver, 60).until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[" + i + "]/div[3]/a[2]/img")));
     }
 
     /**

@@ -34,7 +34,7 @@ public class User extends BaseClass {
         dateFormat = new SimpleDateFormat("ddMM-HHmm");
         now = new Date();
 
-        if (test.equalsIgnoreCase("regressionTests")) {
+        /*if (test.equalsIgnoreCase("regressionTests")) {
             switch (user) {
                 case "student":
                 case "autostu":
@@ -48,7 +48,7 @@ public class User extends BaseClass {
             }
         } else {
             this.emailDisplay = "Allow only other course members to see my email address";
-        }
+        }*/
 
         if (!test.equalsIgnoreCase("CriticalDataTests")) {
             switch (user) {
@@ -57,16 +57,19 @@ public class User extends BaseClass {
                     this.userName = "student" + dateFormat.format(now);
                     this.title = "Pupil";
                     this.gender = "1";
+                    this.emailDisplay = "Hide my email address from everyone";
                     break;
                 case "coordinator":
                     this.userName = "coordinator" + dateFormat.format(now);
                     this.title = "Organizer";
                     this.gender = "0";
+                    this.emailDisplay = "Allow only other course members to see my email address";
                     break;
                 default:
                     this.userName = "teacher" + dateFormat.format(now);
                     this.title = "Lecturer";
                     this.gender = "2";
+                    this.emailDisplay = "Allow everyone to see my email address";
             }
         } else {
             switch (user) {
@@ -75,13 +78,16 @@ public class User extends BaseClass {
                     this.userName = "autostudent1";
                     this.title = "Pupil";
                     this.gender = "1";
+                    this.emailDisplay = "Hide my email address from everyone";
                     break;
                 default:
                     this.userName = "autoteacher1";
                     this.title = "Lecturer";
                     this.gender = "2";
+                    this.emailDisplay = "Allow everyone to see my email address";
             }
         }
+        
         driver.findElement(By.xpath(xpv.getTokenValue("fieldUsrnmXPATH"))).sendKeys(userName);
         if (user.contains("student") && test.equalsIgnoreCase("regressionTests")) {
             driver.findElement(By.xpath(xpv.getTokenValue("fieldPswdXPATH"))).sendKeys("Moodle2!");
@@ -336,8 +342,14 @@ public class User extends BaseClass {
      */
     public void forceChangePasswordOnFirstLogin() {
         ip.isTextPresentByXPATH(driver, "//legend", "General");
-        driver.findElement(By.xpath(xpv.getTokenValue("oldPasswordFldXPATH"))).sendKeys("Moodle2!");
         driver.findElement(By.xpath(xpv.getTokenValue("newPasswordFldXPATH"))).sendKeys(ldv.getTokenValue("password"));
+        driver.findElement(By.xpath(xpv.getTokenValue("newPasswordAgainFldXPATH"))).sendKeys(ldv.getTokenValue("password"));
+        driver.findElement(By.xpath(xpv.getTokenValue("saveSettingsButtonXPATH"))).click();
+        ip.isTextPresentByXPATH(driver, "//div[2]/div[2]/span", "Invalid current password provided", 60);
+        driver.findElement(By.xpath(xpv.getTokenValue("oldPasswordFldXPATH"))).sendKeys("Moodle2!");
+        driver.findElement(By.xpath(xpv.getTokenValue("newPasswordFldXPATH"))).clear();
+        driver.findElement(By.xpath(xpv.getTokenValue("newPasswordFldXPATH"))).sendKeys(ldv.getTokenValue("password"));
+        driver.findElement(By.xpath(xpv.getTokenValue("newPasswordAgainFldXPATH"))).clear();
         driver.findElement(By.xpath(xpv.getTokenValue("newPasswordAgainFldXPATH"))).sendKeys(ldv.getTokenValue("password"));
         driver.findElement(By.xpath(xpv.getTokenValue("saveSettingsButtonXPATH"))).click();
         Utility.waitForAlertToBeAccepted(driver, 60, "Your password has been successfully changed");

@@ -106,20 +106,20 @@ public class Resources extends BaseClass {
             case "wu-llm":
                 count = 6;
                 resource1 = "MyLaw";
-                resource2 = "E-Mail";
-                resource3 = "WebSTAC";
-                resource4 = "Career Services";
-                resource5 = "Library Home Page";
-                resource6 = "Library Database";
-                addToResourceList(resource1, resource2, resource3, resource4, resource5, resource6);
+                //resource2 = "E-Mail";
+                resource2 = "WebSTAC";
+                resource3 = "Career Services";
+                resource4 = "Library Home Page";
+                resource5 = "Library Database";
+                addToResourceList(resource1, resource2, resource3, resource4, resource5);
 
                 href1 = "https://mylaw.wustl.edu/";
-                href2 = "http://go.wustl.edu/";
-                href3 = "https://acadinfo.wustl.edu/";
-                href4 = "http://law.wustl.edu/career_services/";
-                href5 = "http://law.wustl.edu/library";
-                href6 = "http://law.wustl.edu/library/pages.aspx?id=7813";
-                addToHrefList(href1, href2, href3, href4, href5, href6);
+                //href2 = "http://go.wustl.edu/";
+                href2 = "https://acadinfo.wustl.edu/";
+                href3 = "http://law.wustl.edu/career_services/";
+                href4 = "http://law.wustl.edu/library";
+                href5 = "http://law.wustl.edu/library/pages.aspx?id=7813";
+                addToHrefList(href1, href2, href3, href4, href5);
                 break;
             case "au-mir":
                 count = 3;

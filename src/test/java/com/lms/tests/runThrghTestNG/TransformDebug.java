@@ -75,9 +75,9 @@ public class TransformDebug implements IAnnotationTransformer {
         //GroupName = Assignment_Grade
         if ("testStudentUploadFileAndSendAllInOneForReview".equals(testMethod.getName())) {
             System.out.println("Inside testStudentUploadFileAndSendAllInOneForReview");
-            DependentMethods = new String[1];
-            DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherVerifyAllInOneHasNoSubmissionAndCannotBeGraded";
-            annotation.setDependsOnMethods(DependentMethods);
+            //DependentMethods = new String[1];
+            //DependentMethods[0] = "com.lms.tests.runThrghTestNG.Teacher_Posts_SocialGroup.testTeacherVerifyAllInOneHasNoSubmissionAndCannotBeGraded";
+            //annotation.setDependsOnMethods(DependentMethods);
         }
 
         if ("testTeacherReviewAndAddFeedbackToStudentsAllInOneOnSubmissionPage".equals(testMethod.getName())) {

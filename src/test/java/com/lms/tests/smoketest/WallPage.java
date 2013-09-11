@@ -1,5 +1,6 @@
 package com.lms.tests.smoketest;
 
+import com.lms.tests.runThrghTestNG.BaseClass;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +10,6 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.lms.tests.runThrghTestNG.BaseClass;
 
 public class WallPage extends BaseClass {
 
@@ -61,7 +61,13 @@ public class WallPage extends BaseClass {
                     driver.findElement(By.xpath("//div[11]/div/div[1]")).click();
                     break;
                 case "txtAncmntCrsPost":
-                    driver.findElement(By.xpath("//div[11]/div/div[2]")).click();
+                  switch (program) {
+                        case "unc-mba":
+                            driver.findElement(By.xpath("//body/div[12]/div/div[2]")).click();
+                            break;
+                        default:
+                            driver.findElement(By.xpath("//div[11]/div/div[2]")).click();
+                    }
                     ip.isTextPresentByXPATH(driver, "//div[11]/div[2]/div/div/div/div/div/div/form/fieldset/div/div/div[2]/label",
                             "End Time:");
                     Utility.verifyDatePresentInElementValue(driver, By.id("endtime-date"));
@@ -72,13 +78,25 @@ public class WallPage extends BaseClass {
                     driver.findElement(By.xpath("//div[11]/div[2]/div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]")).click();
                     break;
                 case "txtCrsPostCmntsOn":
-                    driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    switch (program) {
+                        case "unc-mba":
+                            driver.findElement(By.xpath("//div[12]/div/div[3]")).click();
+                            break;
+                        default:
+                            driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    }
                     ip.isTextPresentByXPATH(driver, "//label/span", "On - Starts a course level discussion");
                     driver.findElement(By.xpath("//fieldset/div/div/div/div/div/input")).click();
                     driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
                     break;
                 case "txtCrsPostCmntsOff":
-                    driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    switch (program) {
+                        case "unc-mba":
+                            driver.findElement(By.xpath("//div[12]/div/div[3]")).click();
+                            break;
+                        default:
+                            driver.findElement(By.xpath("//div[11]/div/div[3]")).click();
+                    }
                     ip.isTextPresentByXPATH(driver, "//label/span", "On - Starts a course level discussion");
                     driver.findElement(By.xpath("//fieldset/div/div/div[2]/div/div/input")).click();
                     driver.findElement(By.xpath("//div[2]/div/div/div/div/table/tbody/tr/td[2]/table/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[2]/td[2]/em/button")).click();
@@ -199,13 +217,13 @@ public class WallPage extends BaseClass {
     public void deletePost(String post) {
         WebElement postElement = null;
         String path;
-        if (post.contains("urlcrspost")) {
+        if (post.contains("urlcoursepost")) {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));
             Utility.clickByJavaScript(driver, "//li/div/div/a");
             ip.isTextPresentByXPATH(driver, "//div/div/div/div/div/div[2]/span", "Are you sure you want to delete this post");
-        } else if (post.contains("urlstdtwrknggrppost")) {
+        } else if (post.contains("urlstudentworkinggrouppost")) {
             path = "//li/div/div[4]/div/a";
             ip.isTextPresentByXPATH(driver, path, post);
             postElement = driver.findElement(By.xpath("//*[contains(text(),'" + post + "')]"));

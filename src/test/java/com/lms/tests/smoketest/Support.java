@@ -1,12 +1,11 @@
-
 package com.lms.tests.smoketest;
 
-import org.openqa.selenium.By;
 import com.lms.tests.runThrghTestNG.BaseClass;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class Support extends BaseClass {
-        
+
     /**
      * Verifies Support page
      */
@@ -24,16 +23,8 @@ public class Support extends BaseClass {
 
     public void testContactUS(String role) {
         // Verifies the Days and Time Availability of Support
-        switch (program) {
-            case "wu-llm":
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue(program + "phoneNumberXPATH"),
-                        xpv.getTokenValue(program + role + "PhoneNumber"));
-                break;
-            default:
-                ip.isTextPresentByXPATH(driver, xpv.getTokenValue("phoneNumberXPATH"),
-                        xpv.getTokenValue(program + role + "PhoneNumber"));
-        }
-
+        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("phoneNumberXPATH"),
+                xpv.getTokenValue(program + role + "PhoneNumber"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("mondayXPATH"),
                 xpv.getTokenValue(program + role + "MondayTimes"));
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("tuesdayXPATH"),
@@ -66,6 +57,7 @@ public class Support extends BaseClass {
             case "gu-msn":
             case "unc-mba":
             case "usc-msw":
+            case "corp-son":
                 ip.isElementClickableByXpath(driver, xpv.getTokenValue("expressUploadFAQXPATH"), 60);
                 urlFAQ = driver.findElement(By.xpath(xpv.getTokenValue("expressUploadFAQXPATH"))).getAttribute("href");
                 break;
@@ -86,5 +78,5 @@ public class Support extends BaseClass {
         ip.isElementClickableByXpath(driver, xpv.getTokenValue("androidAppXPATH"), 60);
         String android = driver.findElement(By.xpath(xpv.getTokenValue("androidAppXPATH"))).getAttribute("href");
         Assert.assertEquals(android, xpv.getTokenValue(program + "AndroidAppUrl"));
-    }    
+    }
 }

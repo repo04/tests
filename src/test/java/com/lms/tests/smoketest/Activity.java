@@ -121,8 +121,17 @@ public class Activity extends BaseClass {
         createActivity(this.name, this.intro);
         driver.findElement(By.xpath("//div[3]/fieldset/span/input")).click();
         driver.findElement(By.xpath("//div[4]/fieldset/span/input")).click();
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select"))).selectByValue("31");
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[2]", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[2]"))).selectByVisibleText("December");
         ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[3]", 60);
         new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[3]"))).selectByValue("2014");
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[4]", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[4]"))).selectByValue("14");
+        ip.isElementClickableByXpath(driver, "//div[4]/fieldset/select[5]", 60);
+        new Select(driver.findElement(By.xpath("//div[4]/fieldset/select[5]"))).selectByValue("55");
+
         String lateSubmission = new Select(driver.findElement(By.xpath("//select[@id='id_preventlate']"))).getFirstSelectedOption().getText();
         if (!lateSubmission.equalsIgnoreCase("No")) {
             Utility.illegalStateException("All in one assignment's prevent late submission value differs, "
@@ -448,18 +457,22 @@ public class Activity extends BaseClass {
         int x = locateElement(quizActivityName);
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[2]", "(100%)");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/div", "(100%)");
+        driver.findElement(By.xpath("//tr[" + x + "]/td[3]/div[2]/a")).click();
+        ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div", "Grade");
+        ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div[2]", "1 / 1");
     }
 
     /**
      *
      */
     public void uploadFileAndSendAllInOneForReview() {
+        //ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div/div[2]", "Due date: Tue Dec 31 2013 19:55");
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         String file = null;
         try {
             file = directory.getCanonicalPath() + java.io.File.separator + "data"
-                    + java.io.File.separator + "Review_4Mb.pptx";
+                    + java.io.File.separator + "Review_2Mb.pptx";
         } catch (IOException ex) {
             Logger.getLogger(File.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -468,17 +481,17 @@ public class Activity extends BaseClass {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", elm);
         elm.sendKeys(file);
         driver.findElement(By.xpath("//form/button")).click();
-        ip.isElementPresentByLINK(driver, "Review_4Mb.pptx");
+        ip.isElementPresentByLINK(driver, "Review_2Mb.pptx");
 
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.
-                xpath("//div[2]/span/table/tbody/tr[2]/td/table/tbody/tr/td[2]/a/span")));
+                xpath("//td[2]/a/span")));
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector("button[title=\"Click to start upload.\"]")));
 
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         assignmentText = "reviewFile" + dateFormat.format(now);
-        Utility.typeInContentEditableIframe(driver, 2, assignmentText);
+        Utility.typeInContentEditableIframe(driver, 1, assignmentText);
         ip.isElementClickableByXpath(driver, "//button[2]", 60);
         driver.findElement(By.xpath("//button[2]")).click();
         ip.isTextPresentByCSS(driver, "#confirmBox > p",
@@ -501,21 +514,13 @@ public class Activity extends BaseClass {
         driver.findElement(By.linkText("Submissions")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div[2]",
                 "Sent for Review");
-        ip.isTextPresentByXPATH(driver, "//td/a", "Review_4Mb.pptx");
-        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-        System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
-        }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), reviewAssignmentText);
-        driver.switchTo().defaultContent();
+        ip.isTextPresentByXPATH(driver, "//td/a", "Review_2Mb.pptx");
+        ip.isTextPresentByXPATH(driver, "//div[2]/p", reviewAssignmentText);
 
         String file = null;
         try {
             file = directory.getCanonicalPath() + java.io.File.separator + "data"
-                    + java.io.File.separator + "Feedback_4Mb.pptx";
+                    + java.io.File.separator + "Feedback_2Mb.pptx";
         } catch (IOException ex) {
             Logger.getLogger(File.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -525,14 +530,13 @@ public class Activity extends BaseClass {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; arguments[0].style.width = '1px'; arguments[0].style.opacity = 1", elment);
         elment.sendKeys(file);
         driver.findElement(By.xpath("//div[4]/div/div[2]/div/div/form/button")).click();
-        ip.isElementPresentByLINK(driver, "Feedback_4Mb.pptx");
-        driver.navigate().refresh();
-        ip.isElementPresentByLINK(driver, "Submissions");
-        driver.findElement(By.linkText("Submissions")).click();
+        ip.isElementPresentByLINK(driver, "Feedback_2Mb.pptx");
+        new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.
+                xpath("//td[2]/a/span")));
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         assignmentText = "feedbackByTeacher" + dateFormat.format(now);
-        Utility.typeInContentEditableIframe(driver, 2, assignmentText);
+        Utility.typeInContentEditableIframe(driver, 1, assignmentText);
         driver.findElement(By.xpath("//div[5]/div/button")).click();
         ip.isTextPresentByCSS(driver, "#confirmBox > p",
                 "Are you sure you want to submit feedback for this assignment submission?");
@@ -543,7 +547,7 @@ public class Activity extends BaseClass {
         driver.navigate().refresh();
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
-        String text = Utility.getTextFromContentEditableIframe(driver, 2);
+        String text = Utility.getTextFromContentEditableIframe(driver, 1);
         Assert.assertEquals(text, assignmentText);
     }
 
@@ -555,29 +559,18 @@ public class Activity extends BaseClass {
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div/div", "Your submission has feedback");
-        ip.isTextPresentByXPATH(driver, "//td/a", "Feedback_4Mb.pptx");
-        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-        System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
-        }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), feedbackAssignmentText);
-        driver.switchTo().defaultContent();
+        ip.isTextPresentByXPATH(driver, "//td/a", "Feedback_2Mb.pptx");
+        ip.isTextPresentByXPATH(driver, "//div[2]/p", feedbackAssignmentText);
 
-        //'Send for Marking' button with onclick attribute is not clicked by Selenium CLICK command for Chrome Browser
-        //Robot code provides the work around to perform the operation. 
-        //Hence Exception is thrown incase button is not clicked after multiple (5) tries
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(By.
-                xpath("//div[2]/span/table/tbody/tr[2]/td/table/tbody/tr/td[2]/a/span")));
+                xpath("//td[2]/a/span")));
         new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector("button[title=\"Click to start upload.\"]")));
         String HandleBefore = driver.getWindowHandle();
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
         assignmentText = "asgnmntSbmttdFrGrdngBsdOnFdbck" + dateFormat.format(now);
-        Utility.typeInContentEditableIframe(driver, 2, assignmentText);
+        Utility.typeInContentEditableIframe(driver, 1, assignmentText);
         ip.isElementClickableByXpath(driver, "//button[3]", 60);
         driver.findElement(By.xpath("//button[3]")).click();
         ip.isTextPresentByCSS(driver, "#confirmBox > p",
@@ -586,8 +579,7 @@ public class Activity extends BaseClass {
         ip.isTextPresentByCSS(driver, "#confirmBox > p",
                 "Your assignment has been submitted for grading.");
         driver.findElement(By.cssSelector("a.button.green")).click();
-        String text = Utility.getTextFromContentEditableIframe(driver, 2);
-        Assert.assertEquals(text, assignmentText);
+        ip.isTextPresentByXPATH(driver, "//div[2]/div/div/div/p", assignmentText);
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div[2]",
                 "Submitted for Grading");
         boolean wndwFnd;
@@ -646,12 +638,11 @@ public class Activity extends BaseClass {
         ip.isElementClickableByXpath(driver, "//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input", 60);
         driver.findElement(By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[4]/div/span/a")).click();
         ip.isTextPresentByXPATH(driver, "//td/div/div/div/div", "Submitted for Grading");
-        String text = Utility.getTextFromContentEditableIframe(driver, 1);
-        Assert.assertEquals(text, studentAssignmentGradingText);
+        ip.isTextPresentByXPATH(driver, "//div[2]/p", studentAssignmentGradingText);
         driver.findElement(By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input")).clear();
         driver.findElement(By.xpath("//tr[" + y + "]/td/div/table/tbody/tr[2]/td[3]/div/div/input")).sendKeys("62");
         driver.findElement(By.xpath("//div[2]/span/a")).click();
-        ip.isTextPresentByXPATH(driver, "//div/li/a", "Feedback_4Mb.pptx");
+        ip.isTextPresentByXPATH(driver, "//div/li/a", "Feedback_2Mb.pptx");
         ip.isElementClickableByXpath(driver, "//td[2]/div[2]/a", 60);
         DateFormat dateFormat;
         dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
@@ -689,28 +680,15 @@ public class Activity extends BaseClass {
         driver.findElement(By.xpath("//tr[" + x + "]/td[3]/div[2]/a")).click();
         ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div", "Grade");
         ip.isTextPresentByXPATH(driver, "//td/div/div/div/div/div/div[2]", "62 / 100");
-        ip.isTextPresentByXPATH(driver, "//div[3]/div/table/tbody/tr/td/a", "Feedback_4Mb.pptx");
-        new WebDriverWait(driver, 60).until(
-                ExpectedConditions.elementToBeClickable(By.cssSelector("span.mceIcon.mce_insertunorderedlist")));
-        String text = Utility.getTextFromContentEditableIframe(driver, 1);
-        Assert.assertEquals(text, assignmentGradedText);
+        ip.isTextPresentByXPATH(driver, "//div[3]/div/table/tbody/tr/td/a", "Feedback_2Mb.pptx");
+        ip.isTextPresentByXPATH(driver, "//div[2]/p", assignmentGradedText);
         driver.findElement(By.linkText(allInOneAssignmentActivityName)).click();
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div/div", "Your submission has been graded");
         ip.isTextPresentByXPATH(driver, "//div[2]/div/div/div[2]/div/div/div[2]", "62 / 100");
-        ip.isTextPresentByXPATH(driver, "//td/a", "Feedback_4Mb.pptx");
-        new WebDriverWait(driver, 60).until(
-                ExpectedConditions.elementToBeClickable(By.cssSelector("span.mceIcon.mce_insertunorderedlist")));
-        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-        System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
-        }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), assignmentGradedText);
-        driver.switchTo().defaultContent();
+        ip.isTextPresentByXPATH(driver, "//td/a", "Feedback_2Mb.pptx");
+        ip.isTextPresentByXPATH(driver, "//div[2]/p", assignmentGradedText);
     }
 
     /**
@@ -739,7 +717,7 @@ public class Activity extends BaseClass {
                         "File successfully deleted.");
                 driver.findElement(By.xpath("//td/table/tbody/tr[2]/td[2]")).click();
                 new WebDriverWait(driver, 60).until(ExpectedConditions.
-                        invisibilityOfElementLocated(By.linkText("Feedback_4Mb.pptx")));
+                        invisibilityOfElementLocated(By.linkText("Feedback_2Mb.pptx")));
             }
             DateFormat dateFormat;
             dateFormat = new SimpleDateFormat("ddMMMyyHHmm");
@@ -774,8 +752,8 @@ public class Activity extends BaseClass {
                 ((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", elm);
                 elm.click();
                 try {
-                    ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"),
-                            "Do you want to allow " + studentUserName + " to resubmit this assignment?", 30);
+                    ip.isTextPresentByCSS(driver, "#confirmBox > p",
+                            "Do you want to allow " + studentUserName + " to resubmit this assignment?");
                     break loop;
                 } catch (TimeoutException e) {
                     z++;
@@ -787,9 +765,14 @@ public class Activity extends BaseClass {
                 Utility.illegalStateException("Selenium Chrome Browser limitation: Unable to click on Image button after multiple tries also, works fine for FF");
             }
         }
-        driver.findElement(By.xpath(xpv.getTokenValue("btnCrfrmAlwResbmtAsgntXPATH"))).click();
-        ip.isTextPresentByXPATH(driver, xpv.getTokenValue("txtAlrtAlwResbmtAsgntXPATH"), "Allowed Resubmit to " + studentUserName + " and mail sent.");
-        driver.findElement(By.xpath(xpv.getTokenValue("btnResbmtdAsgntXPATH"))).click();
+        driver.findElement(By.cssSelector("a.button.green")).click();
+        ip.isTextPresentByCSS(driver, "#confirmBox > p", "Allowed Resubmit to " + studentUserName + " and mail sent.");
+        driver.findElement(By.cssSelector("a.button.green")).click();
+        try {
+            ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "0 of 1", 10);
+        } catch (TimeoutException e) {
+            // Do Nothing
+        }
         driver.findElement(By.xpath(xpv.getTokenValue("lnkLftPnlGradeXPATH"))).click();
         ip.isTextPresentByCSS(driver, xpv.getTokenValue("hdngGradeXPATH"), "Grades");
         ip.isTextPresentByXPATH(driver, "//tr[" + x + "]/td[3]/span", "0 of 1");
@@ -804,19 +787,11 @@ public class Activity extends BaseClass {
         ip.isElementPresentByLINK(driver, "Submissions");
         driver.findElement(By.linkText("Submissions")).click();
         ip.isTextPresentByXPATH(driver, "//div[4]/div/div/div/div[2]/div/div/div", "Your submission has feedback");
-        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-        System.out.println("iframes count:" + iframes.size());
-        for (WebElement frame : iframes) {
-            driver.switchTo().frame(frame.getAttribute("id"));
-            break;
-        }
-        WebElement editableTxtArea = driver.switchTo().activeElement();
-        Assert.assertEquals(editableTxtArea.getText(), resubmissionText);
-        driver.switchTo().defaultContent();
-        ip.isElementPresentByLINK(driver, "Review_4Mb.pptx");
+        ip.isElementPresentByLINK(driver, "Review_2Mb.pptx");
         driver.findElement(By.xpath("//td/button")).click();
         new WebDriverWait(driver, 60).until(ExpectedConditions.
-                invisibilityOfElementLocated(By.linkText("Review_4Mb.pptx")));
+                invisibilityOfElementLocated(By.linkText("Review_2Mb.pptx")));
+        ip.isTextPresentByCSS(driver, "div.textbox.ng-binding", "Review Grade: 62 / 100 (62%)\n" + resubmissionText);
     }
 
     /**
@@ -918,14 +893,30 @@ public class Activity extends BaseClass {
      */
     public void readOnlyAccessToOfflineActivity(String offlineActivityName) {
         driver.findElement(By.xpath("//*[starts-with(text(),'" + offlineActivityName + "')]")).click();
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.presenceOfElementLocated(By.xpath(xpv.getTokenValue("btnSbmtAsgnmntXPATH")))));
+        ip.isTextPresentByXPATH(driver, "//h2", "Whizbang");
+        ip.isTextPresentByXPATH(driver, "//form/p", "Whizbang Inc. has developed an innovative new software"
+                + " product that will significantly impact the ability of your sales-force to drive sales "
+                + "via encouraging customers to switch service providers. In the next 5 years, should you "
+                + "agree to their terms, you will be the only provider in your sales area to whom they will"
+                + " license use of the product. After which time, they will license multiple users. They "
+                + "promise significant market share improvements which they can verify from the use of the "
+                + "product in other areas. Their marketing materials (below) show average sales increases "
+                + "seen by comparable firms. This is significant, because your sales have not grown in "
+                + "recent memory due to a reluctance of customers to switch providers. The up-front IT "
+                + "upgrades would cost your firm $1M (which will depreciate at a constant rate over 6 years). "
+                + "One element of the agreement you are unsure about, is they include a “profit-share” component "
+                + "on top of their one time license fee of $1.6M (after tax). If you pay the license fee up-front,"
+                + " the profit-share is 20%,. However, to help you mitigate your risk, they also will allow you to"
+                + " pay the license fee at the back-end which they will delay until the end of year 6. The draw-back"
+                + " is, they will require a 45% profit-share in exchange for these credit terms. Which option should"
+                + " you choose? Use 35% as your tax rate in the analysis.");
     }
 
     /**
-     * View Reveal Password button for All In One Assignment 
+     * View Reveal Password button for All In One Assignment
      */
     public void viewRevealPasswordButtonForAllInOneAssignemnt() {
-        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"));
+        ip.isElementClickableByXpath(driver, xpv.getTokenValue("revealDocumentPasswordButtonXPATH"), 60);
         driver.findElement(By.xpath(xpv.getTokenValue("revealDocumentPasswordButtonXPATH"))).click();
         ip.isTextPresentByCSS(driver, "#confirmBox > p", xpv.getTokenValue("revealDocumentPasswordConfirmationText"));
         driver.findElement(By.cssSelector(xpv.getTokenValue("revealDocumentPasswordConfirmationButtonXPATH"))).click();
@@ -1030,7 +1021,7 @@ public class Activity extends BaseClass {
                 By.cssSelector(xpv.getTokenValue("courseUnitCalendarBackwardButtonCSS"))));
         if (yearDifference > 0) {
             int x = yearDifference * 12;
-            for (int i = 0; i < x; i++) {                
+            for (int i = 0; i < x; i++) {
                 driver.findElement(By.cssSelector(xpv.getTokenValue("courseUnitCalendarForwardButtonCSS"))).click();
             }
         } else if (yearDifference < 0) {
@@ -1071,8 +1062,8 @@ public class Activity extends BaseClass {
         }
         driver.findElement(By.xpath(xpv.getTokenValue("btnSbmt"))).click();
         ip.isTextPresentByXPATH(driver, xpv.getTokenValue("showHideContentsXPATH"), "Show Contents");
-        new WebDriverWait(driver, 60).until(ExpectedConditions.not(ExpectedConditions.
-                presenceOfElementLocated(By.xpath(xpv.getTokenValue("assignmentRowUnderShowContentsXPATH")))));
+        driver.findElement(By.xpath(xpv.getTokenValue("showHideContentsXPATH"))).click();
+        ip.isElementPresentByXPATH(driver, xpv.getTokenValue("assignmentRowUnderShowContentsXPATH"));
     }
 
     /**
