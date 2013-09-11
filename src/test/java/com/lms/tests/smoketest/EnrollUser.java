@@ -142,7 +142,7 @@ public class EnrollUser extends BaseClass {
         driver.findElement(By.xpath(xpv.getTokenValue("lnkCrsPrsntXPATH"))).click();
 
         String roleXpath, groupCourseXpath;
-        if ("4".equals(userRole) && test.equals("regressionTests")) {
+        if ("4".equals(userRole)) {
             roleXpath = "//tr[3]/td[2]/a";
             groupCourseXpath = "//tr[4]/td[2]/a";
         } else {
