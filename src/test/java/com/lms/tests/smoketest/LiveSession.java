@@ -38,8 +38,8 @@ public class LiveSession extends BaseClass {
                 break;
             default:
                 if (test.equalsIgnoreCase("RegressionTests")) {
-                    liveSsnNm = "SmokeTestLiveSession " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
-                    liveSsnDesc = "SmokeTestLiveSessionDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnNm = "RegressionTestLiveSession " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
+                    liveSsnDesc = "RegressionTestLiveSessionDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                 } else if (test.equalsIgnoreCase("SmokeTests")) {
                     liveSsnNm = "SmokeTestLiveSession " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
                     liveSsnDesc = "SmokeTestLiveSessionDesc " + DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT).format(now);
